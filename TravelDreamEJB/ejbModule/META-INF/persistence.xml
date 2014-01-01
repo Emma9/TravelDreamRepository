@@ -11,7 +11,7 @@
 <class>it.polimi.traveldream.entities.Cliente</class>
 <class>it.polimi.traveldream.entities.Amico</class>
 		<properties>
-			<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+			<property name="hibernate.hbm2ddl.auto" value="create-drop"/>
 		</properties>
 	</persistence-unit>
 </persistence>
