@@ -15,7 +15,7 @@ import java.util.List;
 @Table(name="gruppi")
 @NamedQuery(name="Gruppo.findAll", query="SELECT g FROM Gruppo g")
 public class Gruppo implements Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 101L;
 	
 	@Id
 	private String idGruppo;

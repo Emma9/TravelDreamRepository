@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class Impiegato implements Serializable {
 
 	/**Version number */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 105L;
 	
 	/**Attributi */
 	@Id

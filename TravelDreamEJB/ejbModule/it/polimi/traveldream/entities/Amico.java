@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class Amico implements Serializable {
 
 	/**Version number */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 102L;
 	
 	/**Attributi */
 	@Id

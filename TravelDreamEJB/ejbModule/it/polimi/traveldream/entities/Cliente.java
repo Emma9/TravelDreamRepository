@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class Cliente implements Serializable {
 
 	/**Version number */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 103L;
 	   
 	/**Attributi */
 	@Id
