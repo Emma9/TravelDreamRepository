@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class Invito implements Serializable {
 
 	/**Version number */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 106L;
 	   
 	/**Attributi */
 	@Id
