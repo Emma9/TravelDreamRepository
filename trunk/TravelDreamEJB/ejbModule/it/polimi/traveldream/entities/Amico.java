@@ -18,12 +18,25 @@ public class Amico implements Serializable {
 	
 	/**Attributi */
 	@Id
+	@GeneratedValue
+	private Long idAmico;
 	private String email;
 	
 	/**Costruttore */
 	public Amico() {
 		super();
 	}
+	
+	/**@return idAmico*/
+	public Long getIdAmico() {
+		return this.idAmico;
+	}
+
+	/**@param idAmico idAmico to set
+	public void setIdAmico(Long idAmico) {
+		this.idAmico = idAmico;
+	}*/
+	
 	
 	/**@return email*/
 	public String getEmail() {

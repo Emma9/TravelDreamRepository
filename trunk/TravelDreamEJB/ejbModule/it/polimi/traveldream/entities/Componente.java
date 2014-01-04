@@ -3,6 +3,7 @@ package it.polimi.traveldream.entities;
 import java.io.Serializable;
 import java.lang.Long;
 import java.lang.String;
+
 import javax.persistence.*;
 
 /**
@@ -19,6 +20,7 @@ public class Componente implements Serializable {
 	   
 	/**Attributi */
 	@Id
+	@GeneratedValue
 	private Long codiceComponente;
 	private String tipologia;
 	private String descrizione;
@@ -33,10 +35,10 @@ public class Componente implements Serializable {
 		return this.codiceComponente;
 	}
 
-	/**@param codiceComponente codiceComponente to set*/
+	/**@param codiceComponente codiceComponente to set
 	public void setCodiceComponente(Long codiceComponente) {
 		this.codiceComponente = codiceComponente;
-	}  
+	}*/
 	
 	/**@return tipologia*/
 	public String getTipologia() {

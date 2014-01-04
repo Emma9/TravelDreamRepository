@@ -2,6 +2,7 @@ package it.polimi.traveldream.entities;
 
 import java.io.Serializable;
 import java.lang.String;
+
 import javax.persistence.*;
 
 /**
@@ -18,6 +19,8 @@ public class Cliente implements Serializable {
 	   
 	/**Attributi */
 	@Id
+	@GeneratedValue
+	private Long idCliente;
 	private String email;
 	private String password;
 	private String codiceFiscale;
@@ -28,6 +31,16 @@ public class Cliente implements Serializable {
 	public Cliente() {
 		super();
 	}   
+	
+	/**@return idCliente*/
+	public Long getIdCliente() {
+		return this.idCliente;
+	}
+
+	/**@param idCliente idCliente to set
+	public void setIdCliente(Long idCliente) {
+		this.idCliente = idCliente;
+	}*/
 	
 	/**@return email*/
 	public String getEmail() {

@@ -3,6 +3,7 @@ package it.polimi.traveldream.entities;
 import java.io.Serializable;
 import java.lang.Long;
 import java.lang.String;
+
 import javax.persistence.*;
 
 /**
@@ -19,6 +20,7 @@ public class Impiegato implements Serializable {
 	
 	/**Attributi */
 	@Id
+	@GeneratedValue
 	private Long idImpiegato;
 	private String codiceImpiegato;
 	private String codiceFiscale;
@@ -35,10 +37,10 @@ public class Impiegato implements Serializable {
 		return this.idImpiegato;
 	}
 
-	/**@param idImpiegato idImpiegato to set*/
+	/**@param idImpiegato idImpiegato to set
 	public void setIdImpiegato(Long idImpiegato) {
 		this.idImpiegato = idImpiegato;
-	}  
+	}*/
 	
 	/**@return codiceImpiegato*/
 	public String getCodiceImpiegato() {
