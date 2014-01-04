@@ -3,6 +3,8 @@ package it.polimi.traveldream.entities;
 import java.io.Serializable;
 import java.lang.Long;
 import java.lang.String;
+import java.util.ArrayList;
+
 import javax.persistence.*;
 
 /**
@@ -19,10 +21,12 @@ public class Pacchetto implements Serializable {
 	   
 	/**Attributi */
 	@Id
+	@GeneratedValue
 	private Long idPacchetto;
 	private String destinazione;
 	private String etichetta;
 	private String descrizione;
+	private ArrayList<Long> listaComponenti;
 	
 	/**Costruttore */
 	public Pacchetto() {
@@ -34,10 +38,10 @@ public class Pacchetto implements Serializable {
 		return this.idPacchetto;
 	}
 
-	/**@param idPacchetto idPacchetto to set*/
+	/**@param idPacchetto idPacchetto to set
 	public void setIdPacchetto(Long idPacchetto) {
 		this.idPacchetto = idPacchetto;
-	}
+	}*/
 	
 	/**@return destinazione*/
 	public String getDestinazione() {
@@ -67,6 +71,16 @@ public class Pacchetto implements Serializable {
 	/**@param descrizione descrizione to set*/
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
+	}
+	
+	/**@return listaComponenti*/
+	public ArrayList<Long> getListaComponenti() {
+		return this.listaComponenti;
+	}
+
+	/**@param listaComponenti listaComponenti to set*/
+	public void setListaComponenti(ArrayList<Long> listaComponenti) {
+		this.listaComponenti = listaComponenti;
 	}
    
 }
