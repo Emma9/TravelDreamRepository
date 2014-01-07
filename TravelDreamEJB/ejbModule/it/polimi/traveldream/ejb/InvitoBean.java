@@ -30,7 +30,7 @@ public class InvitoBean implements InvitoBeanLocal {
 	}
 	
 	/**@param idInvito*/
-	public void removeInvito(Long idInvito) {
+	public void removeInvito(String email) {
 	}
 
 	/**@param idInvito
@@ -42,6 +42,12 @@ public class InvitoBean implements InvitoBeanLocal {
 	public void updateInvito(Long idInvito,String emailMittente,String emailDestinatario,String idPacchettoPersonalizzato,String data,String stato) {
 	}
 
+	/**@param email
+	 * @return ArrayList<idPacchettoPersonalizzato>*/
+	public ArrayList<Long> findByEmail(String email) {
+		return null;
+	}	
+	
 	/**@return ArrayList<idInvito>*/
 	public ArrayList<Long> findAll() {
 		return null;

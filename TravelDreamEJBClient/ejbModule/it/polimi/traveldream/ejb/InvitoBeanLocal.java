@@ -16,7 +16,7 @@ public interface InvitoBeanLocal {
 	public Long createInvito(String emailMittente,String emailDestinatario,String idPacchettoPersonalizzato,String data,String stato);
 	
 	/**@param idInvito*/
-	public void removeInvito(Long idInvito);
+	public void removeInvito(String email);
 
 	/**@param idInvito
 	 * @param emailMittente
@@ -26,6 +26,10 @@ public interface InvitoBeanLocal {
 	 * @param stato*/
 	public void updateInvito(Long idInvito,String emailMittente,String emailDestinatario,String idPacchettoPersonalizzato,String data,String stato);
 
+	/**@param email
+	 * @return ArrayList<idPacchettoPersonalizzato>*/
+	public ArrayList<Long> findByEmail(String email);	
+	
 	/**@return ArrayList<idInvito>*/
 	public ArrayList<Long> findAll();
 	

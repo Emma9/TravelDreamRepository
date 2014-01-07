@@ -22,6 +22,7 @@ public class PacchettoPersonalizzato extends Pacchetto {
 	@GeneratedValue
 	private Long idPacchettoPersonalizzato;
 	private String stato;
+	private Long idCliente;
 	
 	/**Costruttore */
 	public PacchettoPersonalizzato() {
@@ -46,6 +47,16 @@ public class PacchettoPersonalizzato extends Pacchetto {
 	/**@param stato stato to set*/
 	public void setStato(String stato) {
 		this.stato = stato;
+	}
+	
+	/**@return idCliente*/
+	public Long getIdCliente() {
+		return this.idCliente;
+	}
+
+	/**@param idCliente idCliente to set*/
+	public void setIdCliente(Long idCliente) {
+		this.idCliente = idCliente;
 	}
    
 }
