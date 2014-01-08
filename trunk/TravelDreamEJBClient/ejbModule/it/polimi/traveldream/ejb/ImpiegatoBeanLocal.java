@@ -1,5 +1,7 @@
 package it.polimi.traveldream.ejb;
 
+import it.polimi.traveldream.entities.Impiegato;
+
 import java.util.ArrayList;
 
 import javax.ejb.Local;
@@ -24,6 +26,10 @@ public interface ImpiegatoBeanLocal {
 	 * @param cognome*/
 	public void updateImpiegato(Long idImpiegato,String codiceImpiegato,String codiceFiscale,String nome,String cognome);
 
+	/**@param idImpiegato
+	 * @return Impiegato*/
+	public Impiegato findByIdImpiegato(Long idImpiegato);
+	
 	/**@return ArrayList<idImpiegato>*/
 	public ArrayList<Long> findAll();
 
