@@ -1,6 +1,7 @@
 package it.polimi.traveldream.ejb;
 
 import it.polimi.traveldream.entities.Amico;
+import it.polimi.traveldream.entities.Cliente;
 
 import java.util.*;
 
@@ -96,7 +97,20 @@ if(verificaCredenziali(email)){
 
 	/**@return ArrayList<idAmico>*/
 	public ArrayList<Long> findAll() {
-		return null;
+		
+		Query q=manager.createQuery("FROM Amico a");
+	       
+		@SuppressWarnings("unchecked")
+		ArrayList<Amico> amici=(ArrayList<Amico>) q.getResultList();
+		
+		ArrayList<Long> lista=new ArrayList<Long>();
+		
+		for(int i=0; i<=amici.size(); i++){
+			
+			lista.set(i, amici.get(i).getIdAmico());
+		}
+		
+		return lista;
 	}
 	
 	/**Metodi private*/
