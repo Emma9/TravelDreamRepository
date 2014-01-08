@@ -131,6 +131,8 @@ public class ClienteBean implements ClienteBeanLocal {
 
 	/**Metodi private*/
 
+	/**@param email
+	 * @return true if email is not present in DB, otherwise false*/
 	private boolean verificaCredenziali(String email,String codiceFiscale){
     	try{
     		Query q=manager.createQuery("FROM Cliente c WHERE c.email=:new_email AND c.codiceFiscale=:new_codiceFiscale");
@@ -153,6 +155,8 @@ public class ClienteBean implements ClienteBeanLocal {
     	}
     }
 
+	/**@param idCliente
+	 * @return true if idCliente is not present in DB, otherwise false*/
 	private boolean verificaPresenzaCliente(Long idCliente){
     	try{
     		Query q=manager.createQuery("FROM Cliente c WHERE c.idCliente=:new_idCliente");
