@@ -1,11 +1,13 @@
 package it.polimi.traveldream.ejb;
 
+import it.polimi.traveldream.entities.Amico;
+
 import java.util.ArrayList;
 
 import javax.ejb.Local;
 
 @Local
-public interface AmicoBeanLocal {
+public interface AmicoBeanLocal<Amico> {
 	
 	/**@param email
 	 * @return idAmico*/
@@ -18,6 +20,10 @@ public interface AmicoBeanLocal {
 	 * @param email*/
 	public void updateAmico(Long idAmico,String email);
 
+	/**@param idAmico
+	 * @return Amico*/
+	public Amico findByIdAmico(Long idAmico);
+	
 	/**@return ArrayList<idAmico>*/
 	public ArrayList<Long> findAll();
 
