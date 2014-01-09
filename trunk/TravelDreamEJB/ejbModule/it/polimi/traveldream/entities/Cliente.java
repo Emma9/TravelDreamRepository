@@ -2,6 +2,7 @@ package it.polimi.traveldream.entities;
 
 import java.io.Serializable;
 import java.lang.String;
+import java.util.ArrayList;
 
 import javax.persistence.*;
 
@@ -22,6 +23,8 @@ public class Cliente implements Serializable {
 	private String codiceFiscale;
 	private String nome;
 	private String cognome;
+	private ArrayList<PacchettoPersonalizzato> pacchettiCliente = new ArrayList<PacchettoPersonalizzato>();
+	private ArrayList<PacchettoPersonalizzato> giftList = new ArrayList<PacchettoPersonalizzato>();
 
 	/**Costruttore*/
 	public Cliente() {
@@ -102,6 +105,34 @@ public class Cliente implements Serializable {
 	public void setCognome(String cognome) {
 		
 		this.cognome = cognome;
+		
+	}
+	
+	/**@return ArrayList<PacchettoPersonalizzato>*/
+	public ArrayList<PacchettoPersonalizzato> getPacchettiCliente() {
+		
+		return this.pacchettiCliente;
+		
+	}
+
+	/**@param pacchettiCliente paccettiCliente to set*/
+	public void setPacchettiCliente(ArrayList<PacchettoPersonalizzato> pacchettiCliente ) {
+		
+		this.pacchettiCliente = pacchettiCliente;
+		
+	}
+	
+	/**@return ArrayList<PacchettoPersonalizzato>*/
+	public ArrayList<PacchettoPersonalizzato> getGiftList() {
+		
+		return this.giftList;
+		
+	}
+
+	/**@param giftList giftList to set*/
+	public void setGiftList(ArrayList<PacchettoPersonalizzato> giftList ) {
+		
+		this.giftList = giftList;
 		
 	}
 }
