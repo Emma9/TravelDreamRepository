@@ -1,5 +1,7 @@
 package it.polimi.traveldream.ejb;
 
+import it.polimi.traveldream.entities.Invito;
+
 import java.util.ArrayList;
 
 import javax.ejb.Local;
@@ -26,9 +28,13 @@ public interface InvitoBeanLocal {
 	 * @param stato*/
 	public void updateInvito(Long idInvito,String emailMittente,String emailDestinatario,String idPacchettoPersonalizzato,String data,String stato);
 
-	/**@param email
+	/**@param idInvito
 	 * @return ArrayList<idPacchettoPersonalizzato>*/
-	public ArrayList<Long> findByEmail(String email);	
+	public Invito findByIdInvito(Long idInvito);
+	
+	/**@param emailMittente
+	 * @return ArrayList<idPacchettoPersonalizzato>*/
+	public ArrayList<Invito> findByEmailMittente(String emailMittente);	
 	
 	/**@return ArrayList<idInvito>*/
 	public ArrayList<Long> findAll();

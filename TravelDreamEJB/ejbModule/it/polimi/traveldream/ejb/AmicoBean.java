@@ -1,7 +1,6 @@
 package it.polimi.traveldream.ejb;
 
 import it.polimi.traveldream.entities.Amico;
-import it.polimi.traveldream.entities.Cliente;
 
 import java.util.*;
 

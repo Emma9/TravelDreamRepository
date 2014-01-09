@@ -1,14 +1,24 @@
 package it.polimi.traveldream.ejb;
 
+import it.polimi.traveldream.entities.Etichetta;
+import it.polimi.traveldream.entities.Pacchetto;
+import it.polimi.traveldream.entities.PacchettoPersonalizzato;
+
 import java.util.ArrayList;
 
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  * Session Bean implementation class PacchettoPersonalizzatoBean
  */
 @Stateless
 public class PacchettoPersonalizzatoBean implements PacchettoPersonalizzatoBeanLocal {
+	
+	@PersistenceContext(unitName="travelDream_project") private 
+	EntityManager manager;
 
     /**
      * Default constructor. 
@@ -19,54 +29,167 @@ public class PacchettoPersonalizzatoBean implements PacchettoPersonalizzatoBeanL
 
     /**Altri metodi */
 
-    /**@param destinazione
-	 * @param etichetta
-	 * @param descrizione
-	 * @param listaComponenti
-	 * @param idPacchetto
-	 * @param stato
+    /**@param stato
 	 * @param idCliente
 	 * @return idPacchettoPersonalizzato*/
-	public Long createPacchettoPersonalizzato(String destinazione,String etichetta,String descrizione,ArrayList<Long> listaComponenti,Long idPacchetto,String stato,Long idCliente) {
-		return null;
+	public Long createPacchettoPersonalizzato(String stato,Long idCliente) {
+
+		PacchettoPersonalizzato pacchettoPersonalizzato=new PacchettoPersonalizzato();
+		
+		pacchettoPersonalizzato.setStato(stato);
+		pacchettoPersonalizzato.setIdCliente(idCliente);
+		
+		return pacchettoPersonalizzato.getIdPacchettoPersonalizzato();
+		
 	}
 	
 	/**@param idCliente*/
 	public void removePacchettoPersonalizzato(Long idCliente) {
+		
+		ArrayList<PacchettoPersonalizzato> pacchetti = findByIdCliente(idCliente);
+		
+		for(int i=0;i<=pacchetti.size();i++){
+		
+		 	manager.remove(pacchetti.get(i));
+
+			}
 	}
 
 	/**@param idPacchettoPersonalizzato
 	 * @param stato
-	 * @param idCliente
-	 * @param idPacchetto
-	 * @param destinazione
-	 * @param etichetta
-	 * @param descrizione
 	 * @param listaComponenti*/
-	public void updatePacchettoPersonalizzato(Long idPacchettoPersonalizzato,String stato,Long idCliente,Long idPacchetto,String destinazione,String etichetta,String descrzione,ArrayList<Long> listaComponenti) {
+	public void updatePacchettoPersonalizzato(Long idPacchettoPersonalizzato,String stato,ArrayList<Long> listaComponenti) {
+	
+			if (verificaPresenzaPacchettoPersonalizzato(idPacchettoPersonalizzato)){
+			
+			PacchettoPersonalizzato pacchettoPersonalizzato = findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato);
+			
+			pacchettoPersonalizzato.setStato(stato);
+			pacchettoPersonalizzato.setListaComponenti(listaComponenti);
+			
+			manager.merge(pacchettoPersonalizzato);
+		}	
+		
 	}
 	
 	/**@param destinazione
 	 * @return ArrayList<idPacchettoPersonalizzato>*/
 	public ArrayList<Long> findByDestinazione(String destinazione) {
-		return null;
+		
+		Query q=manager.createQuery("FROM PacchettoPersonalizzato p WHERE p.destinazione=:new_destinazione");
+		
+		q.setParameter("new_destinazione", destinazione);
+	    
+		ArrayList<Long> pacchetti=new ArrayList<Long>();
+		@SuppressWarnings("unchecked")
+		ArrayList<PacchettoPersonalizzato> risultati= (ArrayList<PacchettoPersonalizzato>) q.getResultList();
+		
+		for(int i=0; i<=risultati.size(); i++){
+			
+			pacchetti.set(i,risultati.get(i).getIdPacchettoPersonalizzato());
+		}
+    	return pacchetti;
 	}
 	
 	/**@param etichetta
 	 * @return ArrayList<idPacchettoPersonalizzato>*/
-	public ArrayList<Long> findByEtichetta(String etichetta) {
-		return null;
-	}	
+	public ArrayList<Long> findByEtichetta(Etichetta etichetta) {
+		
+		Query q=manager.createQuery("FROM PacchettoPersonalizzato p");
+	    
+		ArrayList<PacchettoPersonalizzato> pacchetti= new ArrayList<PacchettoPersonalizzato>();
+		ArrayList<Long> idPacchetti= new ArrayList<Long>();
+		@SuppressWarnings("unchecked")
+		ArrayList<PacchettoPersonalizzato> risultati= (ArrayList<PacchettoPersonalizzato>) q.getResultList();
+		
+		for(int i=0; i<=risultati.size(); i++){
+			
+			if(risultati.get(i).getEtichette().contains(etichetta)){
+			
+				pacchetti.set(i,risultati.get(i));
+				
+			}
+		}
+		
+		for(int j=0; j<=pacchetti.size(); j++){
+			
+			if(pacchetti.get(j).equals(null)){
+			}
+			else {
+				idPacchetti.set(j,pacchetti.get(j).getIdPacchettoPersonalizzato());
+			}
+					
+		}
+		return idPacchetti;
+	}
+	
+	/**@param idPacchettoPersonalizzato
+	 * @return PacchettoPersonalizzato*/
+	public PacchettoPersonalizzato findByIdPacchettoPersonalizzato(Long idPacchettoPersonalizzato) {
+					
+		Query q=manager.createQuery("FROM PacchettoPersonalizzato p WHERE p.idPacchettoPersonalizzato=:new_idPacchettoPersonalizzato");
+    	
+		q.setParameter("new_idPacchettoPersonalizzato", idPacchettoPersonalizzato);
+        
+		PacchettoPersonalizzato pacchettoPersonalizzato=(PacchettoPersonalizzato) q.getSingleResult();
+			
+		return pacchettoPersonalizzato;
+	}
 	
 	/**@param idCliente
-	 * @return ArrayList<idPacchettoPersonalizzato>*/
-	public ArrayList<Long> findByIdCliente(Long idCliente) {
-		return null;
-	}	
-
+	 * @return ArrayList<PacchettoPersonalizzato>*/
+	public ArrayList<PacchettoPersonalizzato> findByIdCliente(Long idCliente) {
+					
+		Query q=manager.createQuery("FROM PacchettoPersonalizzato p WHERE p.idCliente=:new_idCliente");
+    	
+		q.setParameter("new_idCliente", idCliente);
+        
+		@SuppressWarnings("unchecked")
+		ArrayList<PacchettoPersonalizzato> pacchettiPersonalizzati=(ArrayList<PacchettoPersonalizzato>) q.getResultList();
+			
+		return pacchettiPersonalizzati;
+	}
+	
 	/**@return ArrayList<idPacchettoPersonalizzato>*/
 	public ArrayList<Long> findAll() {
-		return null;
+		
+		Query q=manager.createQuery("FROM PacchettoPersonalizzato p");
+	       
+		@SuppressWarnings("unchecked")
+		ArrayList<PacchettoPersonalizzato> pacchetti=(ArrayList<PacchettoPersonalizzato>) q.getResultList();
+		
+		ArrayList<Long> lista=new ArrayList<Long>();
+		
+		for(int i=0; i<=pacchetti.size(); i++){
+			
+			lista.set(i, pacchetti.get(i).getIdPacchetto());
+		}
+		
+		return lista;
 	}
-
+	
+	/**Metodi private*/
+	
+	/**@param idPacchettoPersonalizzato
+	 * @return true if idPacchettoPersonalizzato is not present in DB, otherwise false*/
+	private boolean verificaPresenzaPacchettoPersonalizzato(Long idPacchettoPersonalizzato){
+    	try{
+    		Query q=manager.createQuery("FROM PacchettoPersonalizzato p WHERE p.idPacchettoPersonalizzato=:new_idPacchettoPersonalizzato");
+	    	
+    		q.setParameter("new_idPacchettoPersonalizzato", idPacchettoPersonalizzato);
+	    		    	
+	    	@SuppressWarnings("unchecked")
+			ArrayList<PacchettoPersonalizzato> pacchetti=(ArrayList<PacchettoPersonalizzato>) q.getResultList();
+	    	
+	    	if(pacchetti.size()==0){
+	    		return true;
+	    	
+	    	}else{
+	    		return false;	
+	    	
+	    	}
+    	}catch(NullPointerException e){
+    		return true;
+    	}
+	}
 }

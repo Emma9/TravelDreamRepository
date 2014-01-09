@@ -24,7 +24,7 @@ public class Pacchetto implements Serializable {
 	@GeneratedValue
 	private Long idPacchetto;
 	private String destinazione;
-	private String etichetta;
+	private ArrayList<Etichetta> etichette = new ArrayList<>();
 	private String descrizione;
 	private ArrayList<Long> listaComponenti;
 	
@@ -53,16 +53,25 @@ public class Pacchetto implements Serializable {
 		this.destinazione = destinazione;
 	} 
 	
-	/**@return etichetta*/
-	public String getEtichetta() {
-		return this.etichetta;
-	}
-
-	/**@param etichetta etichetta to set*/
-	public void setEtichetta(String etichetta) {
-		this.etichetta = etichetta;
-	}
+	/**@return etichette*/
+	public ArrayList<Etichetta> getEtichette() {
+		
+		return this.etichette;
+			
+		}
+		
 	
+	/**@param etichette etichette to set*/
+	public void setEtichette(ArrayList<Etichetta> et) {
+		
+		for(int i=0;i<=et.size();i++){
+			
+			this.etichette.set(i, et.get(i));
+			
+		}
+		
+	}
+		
 	/**@return descrizione*/
 	public String getDescrizione() {
 		return this.descrizione;
