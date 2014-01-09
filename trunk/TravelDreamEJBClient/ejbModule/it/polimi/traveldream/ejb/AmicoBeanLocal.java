@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import javax.ejb.Local;
 
 @Local
-public interface AmicoBeanLocal<Amico> {
+public interface AmicoBeanLocal {
 	
 	/**@param email
 	 * @return idAmico*/

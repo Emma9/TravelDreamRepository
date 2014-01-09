@@ -16,8 +16,7 @@ import javax.persistence.Query;
 @Stateless
 public class ComponenteBean implements ComponenteBeanLocal {
 	
-	@PersistenceContext(unitName="travelDream_project") private 
-	EntityManager manager;
+	@PersistenceContext(unitName="travelDream_project") private EntityManager manager;
 
     /**
      * Default constructor. 

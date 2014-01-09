@@ -15,8 +15,7 @@ import javax.persistence.Query;
 @Stateless
 public class InvitoBean implements InvitoBeanLocal {
 
-	@PersistenceContext(unitName="travelDream_project") private 
-	EntityManager manager;
+	@PersistenceContext(unitName="travelDream_project") private EntityManager manager;
 	
     /**
      * Default constructor. 

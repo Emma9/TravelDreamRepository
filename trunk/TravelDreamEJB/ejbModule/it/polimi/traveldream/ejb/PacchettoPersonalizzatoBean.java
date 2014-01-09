@@ -1,7 +1,6 @@
 package it.polimi.traveldream.ejb;
 
 import it.polimi.traveldream.entities.Etichetta;
-import it.polimi.traveldream.entities.Pacchetto;
 import it.polimi.traveldream.entities.PacchettoPersonalizzato;
 
 import java.util.ArrayList;
@@ -17,8 +16,7 @@ import javax.persistence.Query;
 @Stateless
 public class PacchettoPersonalizzatoBean implements PacchettoPersonalizzatoBeanLocal {
 	
-	@PersistenceContext(unitName="travelDream_project") private 
-	EntityManager manager;
+	@PersistenceContext(unitName="travelDream_project") private EntityManager manager;
 
     /**
      * Default constructor. 

@@ -15,8 +15,7 @@ import javax.ejb.Stateless;
 @Stateless
 public class ClienteBean implements ClienteBeanLocal {
 
-	@PersistenceContext(unitName="travelDream_project") private 
-	EntityManager manager;
+	@PersistenceContext(unitName="travelDream_project") private EntityManager manager;
 	
 	/**
      * Default constructor. 
