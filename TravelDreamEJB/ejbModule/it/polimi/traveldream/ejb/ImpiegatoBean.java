@@ -15,8 +15,7 @@ import javax.persistence.Query;
 @Stateless
 public class ImpiegatoBean implements ImpiegatoBeanLocal {
 	
-	@PersistenceContext(unitName="travelDream_project") private 
-	EntityManager manager;
+	@PersistenceContext(unitName="travelDream_project") private EntityManager manager;
 
     /**
      * Default constructor. 

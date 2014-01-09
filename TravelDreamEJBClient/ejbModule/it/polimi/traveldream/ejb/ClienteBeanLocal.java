@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import javax.ejb.Local;
 
 @Local
-public interface ClienteBeanLocal<Cliente> {
+public interface ClienteBeanLocal {
 	
 	/**@param email
 	 * @param password
