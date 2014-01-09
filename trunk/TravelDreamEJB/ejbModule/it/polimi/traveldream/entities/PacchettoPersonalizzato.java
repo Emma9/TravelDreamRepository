@@ -57,6 +57,5 @@ public class PacchettoPersonalizzato extends Pacchetto {
 	/**@param idCliente idCliente to set*/
 	public void setIdCliente(Long idCliente) {
 		this.idCliente = idCliente;
-	}
-   
+	}	  
 }

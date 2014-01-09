@@ -1,13 +1,10 @@
 package it.polimi.traveldream.ejb;
 
-import it.polimi.traveldream.entities.Cliente;
 import it.polimi.traveldream.entities.Impiegato;
 
 import java.util.ArrayList;
 
 import javax.ejb.Stateless;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -60,17 +57,9 @@ public class ImpiegatoBean implements ImpiegatoBeanLocal {
 	/**@param idImpiegato*/
 	public void removeImpiegato(Long idImpiegato) {
 		
-		InitialContext ctx;
-		try {
-			ctx = new InitialContext();
-	    	Impiegato i=findByIdImpiegato(idImpiegato);
+			Impiegato i=findByIdImpiegato(idImpiegato);
 	    	manager.remove(i);
-	    	
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+	    		
 	}
 
 	/**@param idImpiegato

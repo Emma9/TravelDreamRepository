@@ -3,6 +3,7 @@ package it.polimi.traveldream.entities;
 import java.io.Serializable;
 import java.lang.Long;
 import java.lang.String;
+import java.util.ArrayList;
 
 import javax.persistence.*;
 
@@ -22,7 +23,7 @@ public class Componente implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long codiceComponente;
-	private String tipologia;
+	private Tipologia tipologia;
 	private String descrizione;
 	
 	/**Costruttore */
@@ -40,16 +41,13 @@ public class Componente implements Serializable {
 		this.codiceComponente = codiceComponente;
 	}*/
 	
-	/**@return tipologia*/
-	public String getTipologia() {
-		return this.tipologia;
-	}
-
 	/**@param tipologia tipologia to set*/
-	public void setTipologia(String tipologia) {
-		this.tipologia = tipologia;
+	public void setTipologia(Tipologia tipo) {
+				
+				this.tipologia=tipo;
+				
 	}
-	
+			
 	/**@return descrizione*/
 	public String getDescrizione() {
 		return this.descrizione;
