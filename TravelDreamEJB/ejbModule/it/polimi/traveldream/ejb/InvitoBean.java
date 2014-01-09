@@ -9,52 +9,45 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-/**
- * Session Bean implementation class InvitoBean
- */
+/**Session Bean implementation class InvitoBean*/
 @Stateless
 public class InvitoBean implements InvitoBeanLocal {
 
-	@PersistenceContext(unitName="travelDream_project") private EntityManager manager;
-	
-    /**
-     * Default constructor. 
-     */
-    public InvitoBean() {
-        // TODO Auto-generated constructor stub
-    }
+	@PersistenceContext(unitName = "travelDream_project") private EntityManager manager;
 
-    /**Altri metodi */
+	/**Default constructor*/
+	public InvitoBean() {
+		// TODO Auto-generated constructor stub
+	}
 
-    /**@param emailMittente
+	/**@param emailMittente
 	 * @param emailDestinatario
 	 * @param idPacchettoPersonalizzato
 	 * @param data
 	 * @param stato
 	 * @return idInvito*/
-	public Long createInvito(String emailMittente,String emailDestinatario,String idPacchettoPersonalizzato,String data,String stato) {
+	public Long createInvito(String emailMittente, String emailDestinatario,String idPacchettoPersonalizzato, String data, String stato) {
 
-		Invito invito=new Invito();
-		
+		Invito invito = new Invito();
+
 		invito.setEmailMittente(emailMittente);
 		invito.setEmailDestinatario(emailDestinatario);
 		invito.setIdPacchettoPersonalizzato(idPacchettoPersonalizzato);
 		invito.setData(data);
 		invito.setStato(stato);
-				
+
 		return invito.getIdInvito();
-		
 	}
-	
+
 	/**@param idInvito*/
 	public void removeInvito(String emailMittente) {
-		
+
 		ArrayList<Invito> inviti = findByEmailMittente(emailMittente);
-		
-		for(int i=0;i<=inviti.size();i++){
-	
+
+		for (int i = 0; i <= inviti.size(); i++) {
+
 			manager.remove(inviti.get(i));
-			}	  	
+		}
 	}
 
 	/**@param idInvito
@@ -63,85 +56,84 @@ public class InvitoBean implements InvitoBeanLocal {
 	 * @param idPacchettoPersonalizzato
 	 * @param data
 	 * @param stato*/
-	public void updateInvito(Long idInvito,String emailMittente,String emailDestinatario,String idPacchettoPersonalizzato,String data,String stato) {
-	
-		if (verificaPresenzaInvito(idInvito)){
-			
-		Invito invito = findByIdInvito(idInvito);
-		
-		invito.setEmailMittente(emailMittente);
-		invito.setEmailDestinatario(emailDestinatario);
-		invito.setIdPacchettoPersonalizzato(idPacchettoPersonalizzato);
-		invito.setData(data);
-		
-		manager.merge(invito);
-	}	
-		
+	public void updateInvito(Long idInvito, String emailMittente,String emailDestinatario, String idPacchettoPersonalizzato,String data, String stato) {
+
+		if (verificaPresenzaInvito(idInvito)) {
+
+			Invito invito = findByIdInvito(idInvito);
+
+			invito.setEmailMittente(emailMittente);
+			invito.setEmailDestinatario(emailDestinatario);
+			invito.setIdPacchettoPersonalizzato(idPacchettoPersonalizzato);
+			invito.setData(data);
+
+			manager.merge(invito);
+		}
+
 	}
 
 	/**@param idInvito
-	 * @return ArrayList<idPacchettoPersonalizzato>*/
+	 * @return invito*/
 	public Invito findByIdInvito(Long idInvito) {
-		
-		Query q=manager.createQuery("FROM Invito i WHERE i.idInvito=:new_idInvito");
-		
+
+		Query q = manager.createQuery("FROM Invito i WHERE i.idInvito=:new_idInvito");
+
 		q.setParameter("new_idInvito", idInvito);
-	    
-		Invito invito=(Invito) q.getSingleResult();
-							
-		return invito;	
-		
-	}	
-	
+
+		Invito invito = (Invito) q.getSingleResult();
+
+		return invito;
+	}
+
 	/**@param email
-	 * @return ArrayList<idPacchettoPersonalizzato>*/
+	 * @return ArrayList<Invito>*/
 	public ArrayList<Invito> findByEmailMittente(String emailMittente) {
-		
-		Query q=manager.createQuery("FROM Invito i WHERE i.emailMittente=:new_emailMittente");
-		
+
+		Query q = manager.createQuery("FROM Invito i WHERE i.emailMittente=:new_emailMittente");
+
 		q.setParameter("new_emailMittente", emailMittente);
-	    
-		ArrayList<Invito> inviti=new ArrayList<Invito>();
+
+		ArrayList<Invito> inviti = new ArrayList<Invito>();
 		@SuppressWarnings("unchecked")
-		ArrayList<Invito> risultati= (ArrayList<Invito>) q.getResultList();
-		
-		for(int i=0; i<=risultati.size(); i++){
+		ArrayList<Invito> risultati = (ArrayList<Invito>) q.getResultList();
+
+		for (int i = 0; i <= risultati.size(); i++) {
+
+			inviti.set(i, risultati.get(i));
 			
-			inviti.set(i,risultati.get(i));
 		}
-			
-		return inviti;	
-		
-	}	
-	
+		return inviti;
+	}
+
 	/**@return ArrayList<idInvito>*/
 	public ArrayList<Long> findAll() {
 		return null;
 	}
-	
-	/**Metodi private*/
-	
+
+	/** Metodi private */
+
 	/**@param idInvito
-	 * @return true if idInvito is not present in DB, otherwise false*/
-	private boolean verificaPresenzaInvito(Long idInvito){
-    	try{
-    		Query q=manager.createQuery("FROM Invito i WHERE i.idInvito=:new_idInvito");
-	    	
-    		q.setParameter("new_idInvito", idInvito);
-	    		    	
-	    	@SuppressWarnings("unchecked")
-			ArrayList<Invito> inviti=(ArrayList<Invito>) q.getResultList();
-	    	
-	    	if(inviti.size()==0){
-	    		return true;
-	    	
-	    	}else{
-	    		return false;	
-	    	
-	    	}
-    	}catch(NullPointerException e){
-    		return true;
-    	}
-    }
-	
+	 * @return true if idInvito is not present in the DB, otherwise false*/
+	private boolean verificaPresenzaInvito(Long idInvito) {
+		try {
+			Query q = manager.createQuery("FROM Invito i WHERE i.idInvito=:new_idInvito");
+
+			q.setParameter("new_idInvito", idInvito);
+
+			@SuppressWarnings("unchecked")
+			ArrayList<Invito> inviti = (ArrayList<Invito>) q.getResultList();
+
+			if (inviti.size() == 0) {
+				
+				return true;
+
+			} else {
+				
+				return false;
+
+			}
+		} catch (NullPointerException e) {
+			return true;
+		}
 	}
+}

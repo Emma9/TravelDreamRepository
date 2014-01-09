@@ -3,59 +3,61 @@ package it.polimi.traveldream.entities;
 import java.io.Serializable;
 import java.lang.Long;
 import java.lang.String;
-import java.util.ArrayList;
 
 import javax.persistence.*;
 
-/**
- * Componente di TravelDream
- *
- */
+/**Componente di TravelDream*/
 
 @Entity
-
 public class Componente implements Serializable {
 
-	/**Version number */
+	/**Version number*/
 	private static final long serialVersionUID = 104L;
-	   
-	/**Attributi */
+
+	/**Attributi*/
 	@Id
 	@GeneratedValue
 	private Long codiceComponente;
 	private Tipologia tipologia;
 	private String descrizione;
-	
-	/**Costruttore */
+
+	/**Costruttore*/
 	public Componente() {
 		super();
-	} 
-	
-	/**@return codiceComponente*/
-	public Long getCodiceComponente() {
-		return this.codiceComponente;
 	}
 
-	/**@param codiceComponente codiceComponente to set
-	public void setCodiceComponente(Long codiceComponente) {
-		this.codiceComponente = codiceComponente;
-	}*/
+	/**@return codiceComponente*/
+	public Long getCodiceComponente() {
+		
+		return this.codiceComponente;
+		
+	}
+
+	/**@return tipologia*/
+	public Tipologia getTipologia() {
+
+		return this.tipologia;
+
+	}
 	
 	/**@param tipologia tipologia to set*/
-	public void setTipologia(Tipologia tipo) {
-				
-				this.tipologia=tipo;
-				
+	public void setTipologia(Tipologia tipologia) {
+
+		this.tipologia = tipologia;
+
 	}
-			
+
 	/**@return descrizione*/
 	public String getDescrizione() {
+		
 		return this.descrizione;
+		
 	}
 
 	/**@param descrizione descrizione to set*/
 	public void setDescrizione(String descrizione) {
+		
 		this.descrizione = descrizione;
+		
 	}
-   
 }
