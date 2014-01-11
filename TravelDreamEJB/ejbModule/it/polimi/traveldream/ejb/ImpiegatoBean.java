@@ -11,7 +11,7 @@ import javax.persistence.Query;
 
 /**Session Bean implementation class ImpiegatoBean*/
 @Stateless
-public class ImpiegatoBean implements ImpiegatoBeanRemote {
+public class ImpiegatoBean implements ImpiegatoBeanRemote,ImpiegatoBeanLocal {
 
 	@PersistenceContext(unitName = "travelDream_project") private EntityManager manager;
 

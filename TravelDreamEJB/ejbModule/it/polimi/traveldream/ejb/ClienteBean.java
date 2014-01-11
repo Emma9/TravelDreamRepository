@@ -11,7 +11,7 @@ import javax.ejb.Stateless;
 
 /**Session Bean implementation class ClienteBean*/
 @Stateless
-public class ClienteBean implements ClienteBeanRemote {
+public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 
 	@PersistenceContext(unitName = "travelDream_project") private EntityManager manager;
 

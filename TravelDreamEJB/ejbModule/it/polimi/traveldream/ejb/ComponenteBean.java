@@ -12,7 +12,7 @@ import javax.persistence.Query;
 
 /**Session Bean implementation class ComponenteBean*/
 @Stateless
-public class ComponenteBean implements ComponenteBeanRemote {
+public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal {
 
 	@PersistenceContext(unitName = "travelDream_project") private EntityManager manager;
 
