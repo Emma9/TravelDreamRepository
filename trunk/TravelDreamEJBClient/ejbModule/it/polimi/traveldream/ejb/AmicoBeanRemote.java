@@ -4,10 +4,10 @@ import it.polimi.traveldream.entities.Amico;
 
 import java.util.ArrayList;
 
-import javax.ejb.Local;
+import javax.ejb.Remote;
 
-@Local
-public interface AmicoBeanLocal {
+@Remote
+public interface AmicoBeanRemote {
 
 	/**@param email
 	 * @return idAmico*/

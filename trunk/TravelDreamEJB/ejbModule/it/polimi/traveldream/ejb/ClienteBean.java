@@ -11,7 +11,7 @@ import javax.ejb.Stateless;
 
 /**Session Bean implementation class ClienteBean*/
 @Stateless
-public class ClienteBean implements ClienteBeanLocal {
+public class ClienteBean implements ClienteBeanRemote {
 
 	@PersistenceContext(unitName = "travelDream_project") private EntityManager manager;
 
@@ -52,8 +52,8 @@ public class ClienteBean implements ClienteBeanLocal {
 		InitialContext ctx;
 		try {
 			ctx = new InitialContext();
-			PacchettoPersonalizzatoBeanLocal pacchettoPersonalizzatoLocal = (PacchettoPersonalizzatoBeanLocal) ctx.lookup("PacchettoPersonalizzatoBean/local");
-			InvitoBeanLocal invitoLocal = (InvitoBeanLocal) ctx.lookup("InvitoBean/local");
+			PacchettoPersonalizzatoBeanRemote pacchettoPersonalizzatoLocal = (PacchettoPersonalizzatoBeanRemote) ctx.lookup("PacchettoPersonalizzatoBean/local");
+			InvitoBeanRemote invitoLocal = (InvitoBeanRemote) ctx.lookup("InvitoBean/local");
 			// ELIMINARE GIFTLIST CLIENTE
 
 			pacchettoPersonalizzatoLocal.removePacchettoPersonalizzato(idCliente);

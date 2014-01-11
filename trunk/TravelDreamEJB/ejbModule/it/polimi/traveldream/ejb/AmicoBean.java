@@ -11,7 +11,7 @@ import javax.ejb.Stateless;
 
 /**Session Bean implementation class AmicoBean*/
 @Stateless
-public class AmicoBean implements AmicoBeanLocal {
+public class AmicoBean implements AmicoBeanLocal, AmicoBeanRemote {
 
 	@PersistenceContext(unitName = "travelDream_project") private EntityManager manager;
 
@@ -45,7 +45,7 @@ public class AmicoBean implements AmicoBeanLocal {
 		InitialContext ctx;
 		try {
 			ctx = new InitialContext();
-			InvitoBeanLocal invitoLocal = (InvitoBeanLocal) ctx.lookup("InvitoBean/local");
+			InvitoBeanRemote invitoLocal = (InvitoBeanRemote) ctx.lookup("InvitoBean/local");
 
 			invitoLocal.removeInvito(daIdAEmail(idAmico));
 

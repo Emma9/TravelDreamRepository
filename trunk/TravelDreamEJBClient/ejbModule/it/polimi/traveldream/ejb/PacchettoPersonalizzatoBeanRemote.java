@@ -5,10 +5,10 @@ import it.polimi.traveldream.entities.PacchettoPersonalizzato;
 
 import java.util.ArrayList;
 
-import javax.ejb.Local;
+import javax.ejb.Remote;
 
-@Local
-public interface PacchettoPersonalizzatoBeanLocal {
+@Remote
+public interface PacchettoPersonalizzatoBeanRemote {
 
 	/**@param stato
 	 * @param idCliente

@@ -4,10 +4,10 @@ import it.polimi.traveldream.entities.Cliente;
 
 import java.util.ArrayList;
 
-import javax.ejb.Local;
+import javax.ejb.Remote;
 
-@Local
-public interface ClienteBeanLocal {
+@Remote
+public interface ClienteBeanRemote {
 
 	/**@param email
 	 * @param password
