@@ -14,47 +14,47 @@ public class TabellaPacchettiBean implements Serializable{
 		 */
 		private static final long serialVersionUID = 1L;
 
-		private List<PacchettoBeanLocal> listaPacchettiLastMinute;
+		private List<PacchettoBeanRemote> listaPacchettiLastMinute;
 
-	    private List<PacchettoBeanLocal> listaPacchettiOfferte; 
+	    private List<PacchettoBeanRemote> listaPacchettiOfferte; 
 
-	    private List<PacchettoBeanLocal> listaPacchettiMare; 
+	    private List<PacchettoBeanRemote> listaPacchettiMare; 
 
-	    private List<PacchettoBeanLocal> listaPacchettiMontagna; 
+	    private List<PacchettoBeanRemote> listaPacchettiMontagna; 
 	    
-	    private PacchettoBeanLocal pacchettoLastMinuteSelezionato;
+	    private PacchettoBeanRemote pacchettoLastMinuteSelezionato;
 	    
 	  
 	    public TabellaPacchettiBean() {  
-	    	listaPacchettiLastMinute = new ArrayList<PacchettoBeanLocal>();  
-	    	listaPacchettiOfferte = new ArrayList<PacchettoBeanLocal>(); 
-	    	listaPacchettiMare = new ArrayList<PacchettoBeanLocal>();  
-	    	listaPacchettiMontagna = new ArrayList<PacchettoBeanLocal>(); 
+	    	listaPacchettiLastMinute = new ArrayList<PacchettoBeanRemote>();  
+	    	listaPacchettiOfferte = new ArrayList<PacchettoBeanRemote>(); 
+	    	listaPacchettiMare = new ArrayList<PacchettoBeanRemote>();  
+	    	listaPacchettiMontagna = new ArrayList<PacchettoBeanRemote>(); 
 	  
 	        popolaPacchettiLastMinute(listaPacchettiLastMinute);  
 	    }  
 	  
-	    private void popolaPacchettiLastMinute(List<PacchettoBeanLocal> listaPacchettiLastMinute) { 
-	        	listaPacchettiLastMinute.add(new PacchettoBeanLocal());  
+	    private void popolaPacchettiLastMinute(List<PacchettoBeanRemote> listaPacchettiLastMinute) { 
+	        	listaPacchettiLastMinute.add(new PacchettoBeanRemote());  
 	    }  
 	  
-	    public List<PacchettoBeanLocal> getlistaPacchettiLastMinute() {  
+	    public List<PacchettoBeanRemote> getlistaPacchettiLastMinute() {  
 	        return listaPacchettiLastMinute;  
 	    }  
-	    public List<PacchettoBeanLocal> getlistaPacchettiOfferte() {  
+	    public List<PacchettoBeanRemote> getlistaPacchettiOfferte() {  
 	        return listaPacchettiOfferte;  
 	    } 
-	    public List<PacchettoBeanLocal> getlistaPacchettiMare() {  
+	    public List<PacchettoBeanRemote> getlistaPacchettiMare() {  
 	        return listaPacchettiMare;  
 	    } 
-	    public List<PacchettoBeanLocal> getlistaPacchettiMontagna() {  
+	    public List<PacchettoBeanRemote> getlistaPacchettiMontagna() {  
 	        return listaPacchettiMontagna;  
 	    } 
-	    public PacchettoBeanLocal getPacchettoLastMinuteSelezionato() {  
+	    public PacchettoBeanRemote getPacchettoLastMinuteSelezionato() {  
 	        return pacchettoLastMinuteSelezionato;  
 	    }  
 	  
-	    public void setPacchettoLastMinuteSelezionato(PacchettoBeanLocal pacchettoLastMinuteSelezionato) {  
+	    public void setPacchettoLastMinuteSelezionato(PacchettoBeanRemote pacchettoLastMinuteSelezionato) {  
 	        this.pacchettoLastMinuteSelezionato = pacchettoLastMinuteSelezionato;  
 	    } 
 	   

@@ -4,10 +4,10 @@ import it.polimi.traveldream.entities.Invito;
 
 import java.util.ArrayList;
 
-import javax.ejb.Local;
+import javax.ejb.Remote;
 
-@Local
-public interface InvitoBeanLocal {
+@Remote
+public interface InvitoBeanRemote {
 
 	/**@param emailMittente
 	 * @param emailDestinatario

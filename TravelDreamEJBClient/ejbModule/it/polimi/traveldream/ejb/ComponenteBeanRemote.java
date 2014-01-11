@@ -5,10 +5,10 @@ import it.polimi.traveldream.entities.Tipologia;
 
 import java.util.ArrayList;
 
-import javax.ejb.Local;
+import javax.ejb.Remote;
 
-@Local
-public interface ComponenteBeanLocal {
+@Remote
+public interface ComponenteBeanRemote {
 
 	/**@param tipologia
 	 * @param descrizione

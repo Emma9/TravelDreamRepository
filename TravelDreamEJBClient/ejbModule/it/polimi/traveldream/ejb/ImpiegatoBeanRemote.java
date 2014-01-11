@@ -4,10 +4,10 @@ import it.polimi.traveldream.entities.Impiegato;
 
 import java.util.ArrayList;
 
-import javax.ejb.Local;
+import javax.ejb.Remote;
 
-@Local
-public interface ImpiegatoBeanLocal {
+@Remote
+public interface ImpiegatoBeanRemote {
 
 	/**@param codiceImpiegato
 	 * @param codiceFiscale
