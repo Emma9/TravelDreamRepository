@@ -166,6 +166,14 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 	
 	/** Metodi private */
 	
+	public ArrayList<PacchettoPersonalizzato> elencoPacchettiCliente (long id){
+		Cliente c = findByIdCliente(id);
+		
+		ArrayList<PacchettoPersonalizzato> elencoPacchettiCliente = c.getPacchettiCliente();
+		
+		return elencoPacchettiCliente;
+	}
+
 	/**@param email
 	 * @return true if email is not present in the DB, otherwise false*/
 	private boolean verificaPresenzaClienteRegistrazione(String email, String codiceFiscale) {
@@ -223,17 +231,6 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 		
 		Cliente c = findByIdCliente(idCliente);
 		return c.getEmail();
-	}
-
-
-	
-	
-	public ArrayList<PacchettoPersonalizzato> elencoPacchettiCliente (long id){
-		Cliente c = findByIdCliente(id);
-		
-		ArrayList<PacchettoPersonalizzato> elencoPacchettiCliente = c.getPacchettiCliente();
-		
-		return elencoPacchettiCliente;
 	}
 	
 	
