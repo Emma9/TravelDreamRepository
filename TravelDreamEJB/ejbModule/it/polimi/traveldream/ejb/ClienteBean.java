@@ -90,6 +90,19 @@ public class ClienteBean implements ClienteBeanRemote {
 			manager.merge(cliente);
 		}
 	}
+	
+	/**@param email
+	 * @return Cliente*/
+	public Cliente findByEmailCliente(String email) {
+
+		Query q = manager.createQuery("FROM Cliente c WHERE c.email=:new_email");
+
+		q.setParameter("new_email", email);
+
+		Cliente cliente = (Cliente) q.getSingleResult();
+
+		return cliente;
+	}
 
 	/**@param idCliente
 	 * @return Cliente*/
