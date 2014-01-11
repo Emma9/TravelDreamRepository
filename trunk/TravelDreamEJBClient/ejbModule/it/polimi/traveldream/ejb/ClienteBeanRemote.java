@@ -28,6 +28,10 @@ public interface ClienteBeanRemote {
 	 * @param cognome*/
 	public void updateCliente(Long idCliente, String email, String password,String codiceFiscale, String nome, String cognome);
 
+	/**@param email
+	 * @return Cliente*/
+	public Cliente findByEmailCliente(String email);
+	
 	/**@param idCliente
 	 * @return Cliente*/
 	public Cliente findByIdCliente(Long idCliente);
