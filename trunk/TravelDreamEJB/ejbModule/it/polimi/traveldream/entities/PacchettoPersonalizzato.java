@@ -1,8 +1,6 @@
 package it.polimi.traveldream.entities;
 
 import java.lang.Long;
-import java.lang.String;
-
 import javax.persistence.*;
 
 /**PacchettoPersonalizzato di TravelDream*/
@@ -17,7 +15,7 @@ public class PacchettoPersonalizzato extends Pacchetto {
 
 	@GeneratedValue
 	private Long idPacchettoPersonalizzato;
-	private String stato;
+	private Stato stato;
 	private Long idCliente;
 
 	/**Costruttore*/
@@ -32,15 +30,15 @@ public class PacchettoPersonalizzato extends Pacchetto {
 		
 	}
 
-	/**@return stato*/
-	public String getStato() {
+	/**@return Stato*/
+	public Stato getStato() {
 		
 		return this.stato;
 		
 	}
 
 	/**@param stato stato to set*/
-	public void setStato(String stato) {
+	public void setStato(Stato stato) {
 		
 		this.stato = stato;
 

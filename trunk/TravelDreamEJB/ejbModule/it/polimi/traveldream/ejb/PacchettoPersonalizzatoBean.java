@@ -165,6 +165,13 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 
 	/** Metodi private */
 
+	@Override
+	public void eliminaTuttiPacchettiPersonalizzati(long idCliente) {
+		// TODO Auto-generated method stub
+		//da implementare!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		
+	}
+
 	/**@param idPacchettoPersonalizzato
 	 * @return true if idPacchettoPersonalizzato is not present in the DB, otherwise false*/
 	private boolean verificaPresenzaPacchettoPersonalizzato(Long idPacchettoPersonalizzato) {

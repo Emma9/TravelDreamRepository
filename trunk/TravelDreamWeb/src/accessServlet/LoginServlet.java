@@ -71,7 +71,9 @@ public class LoginServlet extends HttpServlet {
 				
 				ArrayList<PacchettoPersonalizzato> elencoPacchettiCliente = clienteRemoto.elencoPacchettiCliente(id);
 				
-				
+				request.getSession().setAttribute("ElencoPacchettiCliente", elencoPacchettiCliente);
+				response.sendRedirect("login.xhtml");
+
 				
 			}
 
