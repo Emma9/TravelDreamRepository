@@ -38,5 +38,10 @@ public interface ClienteBeanRemote {
 
 	/**@return ArrayList<idCliente>*/
 	public ArrayList<Long> findAll();
+	
+	/**@param email
+	 * @param password
+	 * @return long*/
+	public long verificaPresenzaClienteLogin(String email, String password);
 
 }
