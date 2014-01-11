@@ -24,7 +24,7 @@ public class AmicoBean implements AmicoBeanLocal {
 	 * @return idAmico*/
 	public Long createAmico(String email) {
 
-		if (verificaCredenziali(email)) {
+		if (verificaPresenzaAmicoEm(email)) {
 
 			Amico amico = new Amico();
 
@@ -47,7 +47,7 @@ public class AmicoBean implements AmicoBeanLocal {
 			ctx = new InitialContext();
 			InvitoBeanLocal invitoLocal = (InvitoBeanLocal) ctx.lookup("InvitoBean/local");
 
-			invitoLocal.removeInvito(daIdaEmail(idAmico));
+			invitoLocal.removeInvito(daIdAEmail(idAmico));
 
 			Amico a = findByIdAmico(idAmico);
 			manager.remove(a);
@@ -63,7 +63,7 @@ public class AmicoBean implements AmicoBeanLocal {
 	 * @param email*/
 	public void updateAmico(Long idAmico, String email) {
 
-		if (verificaPresenzaAmico(idAmico)) {
+		if (verificaPresenzaAmicoId(idAmico)) {
 
 			Amico amico = findByIdAmico(idAmico);
 
@@ -108,7 +108,7 @@ public class AmicoBean implements AmicoBeanLocal {
 
 	/**@param email
 	 * @return true if email is not present in the DB, otherwise false*/
-	private boolean verificaCredenziali(String email) {
+	private boolean verificaPresenzaAmicoEm(String email) {
 		try {
 			Query q = manager
 					.createQuery("FROM Amico a WHERE a.email=:new_email");
@@ -132,7 +132,7 @@ public class AmicoBean implements AmicoBeanLocal {
 
 	/**@param idAmico
 	 * @return true if idAmico is not present in the DB, otherwise false*/
-	private boolean verificaPresenzaAmico(Long idAmico) {
+	private boolean verificaPresenzaAmicoId(Long idAmico) {
 		try {
 			Query q = manager.createQuery("FROM Amico a WHERE a.idAmico=:new_idAmico");
 
@@ -155,7 +155,7 @@ public class AmicoBean implements AmicoBeanLocal {
 
 	/**@param idAmico
 	 * @return email*/
-	private String daIdaEmail(Long idAmico) {
+	private String daIdAEmail(Long idAmico) {
 		Amico a = findByIdAmico(idAmico);
 		return a.getEmail();
 	}
