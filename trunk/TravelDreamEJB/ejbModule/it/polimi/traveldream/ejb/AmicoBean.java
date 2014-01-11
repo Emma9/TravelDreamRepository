@@ -11,7 +11,7 @@ import javax.ejb.Stateless;
 
 /**Session Bean implementation class AmicoBean*/
 @Stateless
-public class AmicoBean implements AmicoBeanLocal, AmicoBeanRemote {
+public class AmicoBean implements AmicoBeanRemote, AmicoBeanLocal {
 
 	@PersistenceContext(unitName = "travelDream_project") private EntityManager manager;
 

@@ -11,7 +11,7 @@ import javax.persistence.Query;
 
 /**Session Bean implementation class InvitoBean*/
 @Stateless
-public class InvitoBean implements InvitoBeanRemote {
+public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 
 	@PersistenceContext(unitName = "travelDream_project") private EntityManager manager;
 

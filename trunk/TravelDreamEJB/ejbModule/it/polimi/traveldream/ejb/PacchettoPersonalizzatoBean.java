@@ -12,8 +12,7 @@ import javax.persistence.Query;
 
 /**Session Bean implementation class PacchettoPersonalizzatoBean*/
 @Stateless
-public class PacchettoPersonalizzatoBean implements
-		PacchettoPersonalizzatoBeanRemote {
+public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanRemote, PacchettoPersonalizzatoBeanLocal {
 
 	@PersistenceContext(unitName = "travelDream_project") private EntityManager manager;
 
