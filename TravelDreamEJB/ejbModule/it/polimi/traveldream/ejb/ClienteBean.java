@@ -225,19 +225,15 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 		return c.getEmail();
 	}
 
-	public ArrayList<PacchettoPersonalizzato> getElencoPacchettiCliente (long id){
-		try{
-			InitialContext ctx= new InitialContext();
-			ClienteBeanLocal cliente= (ClienteBeanLocal) ctx.lookup("ClienteBean/Local");
-			
-			ArrayList<PacchettoPersonalizzato> elencoPacchettiCliente = cliente
-			
-			
-			
-			
-		}catch (NamingException e){
-			
-		}
+
+	
+	
+	public ArrayList<PacchettoPersonalizzato> elencoPacchettiCliente (long id){
+		Cliente c = findByIdCliente(id);
+		
+		ArrayList<PacchettoPersonalizzato> elencoPacchettiCliente = c.getPacchettiCliente();
+		
+		return elencoPacchettiCliente;
 	}
 	
 	

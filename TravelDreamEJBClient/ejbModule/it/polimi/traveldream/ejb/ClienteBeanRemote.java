@@ -1,6 +1,7 @@
 package it.polimi.traveldream.ejb;
 
 import it.polimi.traveldream.entities.Cliente;
+import it.polimi.traveldream.entities.PacchettoPersonalizzato;
 
 import java.util.ArrayList;
 
@@ -44,4 +45,7 @@ public interface ClienteBeanRemote {
 	 * @return long*/
 	public long verificaPresenzaClienteLogin(String email, String password);
 
+	
+	public ArrayList<PacchettoPersonalizzato> elencoPacchettiCliente (long id);
+	
 }

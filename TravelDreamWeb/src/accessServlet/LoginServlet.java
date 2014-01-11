@@ -69,7 +69,8 @@ public class LoginServlet extends HttpServlet {
 				request.getSession().setAttribute("idCliente", clienteRemoto.findByEmailCliente(mail).getIdCliente());
 				request.getSession().setAttribute("Cliente", clienteRemoto.findByEmailCliente(mail));
 				
-				ArrayList<PacchettoPersonalizzato> elencoPacchettiCliente = clienteRemoto
+				ArrayList<PacchettoPersonalizzato> elencoPacchettiCliente = clienteRemoto.elencoPacchettiCliente(id);
+				
 				
 				
 			}
