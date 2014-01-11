@@ -27,7 +27,7 @@ public class ImpiegatoBean implements ImpiegatoBeanLocal {
 	 * @return idImpiegato*/
 	public Long createImpiegato(String codiceImpiegato, String codiceFiscale,String nome, String cognome) {
 
-		if (verificaCredenziali(codiceFiscale)) {
+		if (verificaPresenzaImpiegatoCf(codiceFiscale)) {
 
 			Impiegato impiegato = new Impiegato();
 
@@ -62,7 +62,7 @@ public class ImpiegatoBean implements ImpiegatoBeanLocal {
 	 * @param cognome*/
 	public void updateImpiegato(Long idImpiegato, String codiceImpiegato,String codiceFiscale, String nome, String cognome) {
 
-		if (verificaPresenzaImpiegato(idImpiegato)) {
+		if (verificaPresenzaImpiegatoId(idImpiegato)) {
 
 			Impiegato impiegato = findByIdImpiegato(idImpiegato);
 
@@ -110,7 +110,7 @@ public class ImpiegatoBean implements ImpiegatoBeanLocal {
 
 	/**@param codiceFiscale
 	 * @return true if codiceFiscale is not present in the DB, otherwise false*/
-	private boolean verificaCredenziali(String codiceFiscale) {
+	private boolean verificaPresenzaImpiegatoCf(String codiceFiscale) {
 		try {
 			Query q = manager.createQuery("FROM Impiegato i WHERE i.codiceFiscale=:new_codiceFiscale");
 
@@ -134,8 +134,8 @@ public class ImpiegatoBean implements ImpiegatoBeanLocal {
 	}
 
 	/**@param idImpiegato
-	 * @return true if idImpiegato is not present in DB, otherwise false*/
-	private boolean verificaPresenzaImpiegato(Long idImpiegato) {
+	 * @return true if idImpiegato is not present in the DB, otherwise false*/
+	private boolean verificaPresenzaImpiegatoId(Long idImpiegato) {
 		try {
 			Query q = manager.createQuery("FROM Impiegato i WHERE i.idImpiegato=:new_idImpiegato");
 
