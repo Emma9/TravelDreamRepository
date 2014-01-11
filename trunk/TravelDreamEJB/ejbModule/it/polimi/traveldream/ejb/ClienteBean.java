@@ -1,6 +1,7 @@
 package it.polimi.traveldream.ejb;
 
 import it.polimi.traveldream.entities.Cliente;
+import it.polimi.traveldream.entities.PacchettoPersonalizzato;
 
 import java.util.*;
 
@@ -28,7 +29,7 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 	 * @return idCliente*/
 	public Long createCliente(String email, String password,String codiceFiscale, String nome, String cognome) {
 
-		if (verificaPresenzaClienteEmCf(email, codiceFiscale)) {
+		if (verificaPresenzaClienteRegistrazione(email, codiceFiscale)) {
 
 			Cliente cliente = new Cliente();
 
@@ -135,11 +136,39 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 		return lista;
 	}
 
-	/** Metodi private */
+	
 
 	/**@param email
+	 * @param password
+	 * @return long*/
+	public long verificaPresenzaClienteLogin(String email, String password) {
+		try {
+			Query q = manager
+					.createQuery("FROM Cliente c WHERE c.email=:new_email");
+	
+			q.setParameter("new_email", email);
+	
+			Cliente cliente =  (Cliente) q.getSingleResult();
+	
+			if (cliente.getPassword()== password) {
+				return cliente.getIdCliente();
+	
+			} else {
+				return -1;
+	
+			}
+		} catch (NullPointerException e) {
+			return -1;
+		}
+	}
+
+	
+	
+	/** Metodi private */
+	
+	/**@param email
 	 * @return true if email is not present in the DB, otherwise false*/
-	private boolean verificaPresenzaClienteEmCf(String email, String codiceFiscale) {
+	private boolean verificaPresenzaClienteRegistrazione(String email, String codiceFiscale) {
 		try {
 			Query q = manager
 					.createQuery("FROM Cliente c WHERE c.email=:new_email AND c.codiceFiscale=:new_codiceFiscale");
@@ -196,4 +225,20 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 		return c.getEmail();
 	}
 
+	public ArrayList<PacchettoPersonalizzato> getElencoPacchettiCliente (long id){
+		try{
+			InitialContext ctx= new InitialContext();
+			ClienteBeanLocal cliente= (ClienteBeanLocal) ctx.lookup("ClienteBean/Local");
+			
+			ArrayList<PacchettoPersonalizzato> elencoPacchettiCliente = cliente
+			
+			
+			
+			
+		}catch (NamingException e){
+			
+		}
+	}
+	
+	
 }
