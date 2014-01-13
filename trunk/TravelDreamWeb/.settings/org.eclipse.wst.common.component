@@ -2,6 +2,9 @@
     <wb-module deploy-name="TravelDreamWeb">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <dependent-module archiveName="TravelDreamEJBClient.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/TravelDreamEJBClient/TravelDreamEJBClient">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="TravelDreamWeb"/>
         <property name="java-output-path" value="/TravelDreamWeb/build/classes"/>
     </wb-module>

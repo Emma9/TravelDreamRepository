@@ -15,7 +15,8 @@ import javax.persistence.Query;
 @Stateless
 public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanRemote, PacchettoPersonalizzatoBeanLocal {
 
-	@PersistenceContext(unitName = "travelDream_project") private EntityManager manager;
+	@PersistenceContext(unitName = "travelDream_project") 
+	private EntityManager manager;
 
 	/**Default constructor*/
 	public PacchettoPersonalizzatoBean() {
