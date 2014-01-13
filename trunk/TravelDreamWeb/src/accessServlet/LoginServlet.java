@@ -10,11 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.persistence.*;
-
-import it.polimi.traveldream.*;
 import it.polimi.traveldream.ejb.ClienteBeanRemote;
 import it.polimi.traveldream.entities.PacchettoPersonalizzato;
 /**
