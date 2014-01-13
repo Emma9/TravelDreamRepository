@@ -1,13 +1,14 @@
 package accessServlet;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import javax.naming.Context;
+import javax.naming.NamingException;
 
 /**
  * Servlet implementation class LogoutServlet
@@ -40,11 +41,17 @@ public class LogoutServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Context ctx = (Context) request.getSession().getAttribute("context");
-		request.getSession().removeAttribute("context");
-		request.getSession().invalidate();
 
-		response.sendRedirect("homepage.xhtml");
+		//Context ctx = (Context) request.getSession().getAttribute("context");
+
+		if (request.getSession().getAttribute("idUser") != null) {
+
+				request.getSession().removeAttribute("context");
+				request.getSession().invalidate();
+				response.sendRedirect("homepage.xhtml");
+			
+
+		}
 
 	}
 
