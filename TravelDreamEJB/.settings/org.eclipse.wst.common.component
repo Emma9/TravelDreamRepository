@@ -2,5 +2,7 @@
     <wb-module deploy-name="TravelDreamEJB">
         <wb-resource deploy-path="/" source-path="/ejbModule" tag="defaultRootSource"/>
         <property name="java-output-path" value="/TravelDreamEJB/build/classes"/>
+        <property name="ClientProject" value="TravelDreamEJBClient"/>
+        <property name="ClientJARURI" value="TravelDreamEJBClient.jar"/>
     </wb-module>
 </project-modules>
