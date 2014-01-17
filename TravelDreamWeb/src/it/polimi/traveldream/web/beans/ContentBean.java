@@ -1,12 +1,14 @@
 package it.polimi.traveldream.web.beans;
 
 
-import it.polimi.traveldream.ejb.*;
+import javax.annotation.ManagedBean;
+import javax.enterprise.context.RequestScoped;
 
 
 @ManagedBean
 @RequestScoped
 public class ContentBean {
+	/*
 	@EJB
 	private Content content;
 	
@@ -20,5 +22,5 @@ public class ContentBean {
 	
 	public String getClienteContent(){
 		return content.getClienteContent();
-	}
+	}*/
 }

@@ -2,6 +2,15 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="travelDream_project" transaction-type="JTA">
 		<jta-data-source>jdbc/MySQLConnPool</jta-data-source>
+		<class>it.polimi.traveldream.entities.Amico</class>
+		<class>it.polimi.traveldream.entities.Cliente</class>
+		<class>it.polimi.traveldream.entities.Componente</class>
+		<class>it.polimi.traveldream.entities.Gruppo</class>
+		<class>it.polimi.traveldream.entities.Impiegato</class>
+		<class>it.polimi.traveldream.entities.Invito</class>
+		<class>it.polimi.traveldream.entities.Pacchetto</class>
+		<class>it.polimi.traveldream.entities.PacchettoPersonalizzato</class>
+		<class>it.polimi.traveldream.entities.Utente</class>
 		<properties>
 			<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
 		</properties>

@@ -1,17 +1,28 @@
 package it.polimi.traveldream.web.beans;
 
+import it.polimi.traveldream.ejb.ClienteBean;
+import it.polimi.traveldream.ejb.client.ClienteBeanRemote;
+
+import java.io.Serializable;
+
 import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
-import org.primefaces.context.RequestContext;
+public class LoginBean implements Login,Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-public class LoginBean {
 	private String email;  
 
+    private String password; 
+    
+  //  private String codiceFiscale;
+    
     private String nome;
     
-    private String password;  
+    private String cognome;
       
     public String getEmail() {  
         return email;  
@@ -19,6 +30,10 @@ public class LoginBean {
     
     public String getNome() {  
         return nome;  
+    }
+    
+    public String getCognome() {  
+        return cognome;  
     }
   
     public void setEmail(String email) {  
@@ -33,20 +48,28 @@ public class LoginBean {
         this.password = password;  
     }  
   
-    public void login(ActionEvent actionEvent) {  
-        RequestContext context = RequestContext.getCurrentInstance();  
-        FacesMessage msg = null;  
-        boolean loggedIn = false;  
-          
-        if(email != null  && email.equals("admin") && password != null  && password.equals("admin")) {  
-            loggedIn = true;  
-            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", nome);  
-        } else {  
-            loggedIn = false;  
-            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "Invalid credentials");  
-        }  
-          
-        FacesContext.getCurrentInstance().addMessage(null, msg);  
-        context.addCallbackParam("loggedIn", loggedIn);  
-    } 
+	public void login(ActionEvent actionEvent, String email, String password) {
+		
+		// immagino qui sia context.getInitizialContext() o qualche cosa del genere
+		//Context context =Context getInitialContext();
+		
+		
+		FacesMessage msg = null;
+		boolean loggedIn = false;
+
+		if (email != null && password != null) {
+			ClienteBeanRemote cliente = new ClienteBean();
+			cliente.createCliente(email, password, null, null, null);
+			long id = cliente.verificaPresenzaClienteLogin(email, password);
+			if (id != -1) {
+				loggedIn = true;
+				msg = new FacesMessage("Benvenuto "+ email);
+			}
+
+		} else if (loggedIn==false){
+			msg = new FacesMessage("Credenziali non valide");
+		}
+
+	//	FacesContext.getCurrentInstance().addMessage("homepage", msg); ((RequestContext) context).addCallbackParam("loggedIn", loggedIn);
+	}
 }

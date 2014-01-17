@@ -1,5 +1,7 @@
 package it.polimi.traveldream.ejb;
 
+import it.polimi.traveldream.ejb.client.InvitoBeanLocal;
+import it.polimi.traveldream.ejb.client.InvitoBeanRemote;
 import it.polimi.traveldream.entities.Invito;
 
 import java.util.ArrayList;
@@ -135,5 +137,11 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 		} catch (NullPointerException e) {
 			return true;
 		}
+	}
+
+	@Override
+	public void eliminaTuttiInviti(long idCliente) {
+		// TODO Auto-generated method stub
+		
 	}
 }

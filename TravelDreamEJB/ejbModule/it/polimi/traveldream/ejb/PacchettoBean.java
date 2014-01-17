@@ -1,5 +1,7 @@
 package it.polimi.traveldream.ejb;
 
+import it.polimi.traveldream.ejb.client.PacchettoBeanLocal;
+import it.polimi.traveldream.ejb.client.PacchettoBeanRemote;
 import it.polimi.traveldream.entities.Etichetta;
 import it.polimi.traveldream.entities.Pacchetto;
 
