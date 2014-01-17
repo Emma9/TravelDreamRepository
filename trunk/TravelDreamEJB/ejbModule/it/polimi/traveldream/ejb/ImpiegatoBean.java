@@ -1,5 +1,7 @@
 package it.polimi.traveldream.ejb;
 
+import it.polimi.traveldream.ejb.client.ImpiegatoBeanLocal;
+import it.polimi.traveldream.ejb.client.ImpiegatoBeanRemote;
 import it.polimi.traveldream.entities.Impiegato;
 
 import java.util.ArrayList;

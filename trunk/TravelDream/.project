@@ -5,7 +5,6 @@
 	<projects>
 		<project>TravelDreamWeb</project>
 		<project>TravelDreamEJB</project>
-		<project>TravelDreamEJBClient</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

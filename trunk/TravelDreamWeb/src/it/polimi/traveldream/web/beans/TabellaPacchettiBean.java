@@ -1,10 +1,10 @@
 package it.polimi.traveldream.web.beans;
 
-	import java.io.Serializable;  
-	import java.util.ArrayList;  
-	import java.util.List;  
-	import java.util.UUID;  
-	import it.polimi.traveldream.ejb.*;
+	import it.polimi.traveldream.ejb.client.PacchettoBeanRemote;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 	//import org.primefaces.examples.domain.Car;
 public class TabellaPacchettiBean implements Serializable{ 
 	 
@@ -34,8 +34,10 @@ public class TabellaPacchettiBean implements Serializable{
 	        popolaPacchettiLastMinute(listaPacchettiLastMinute);  
 	    }  
 	  
+	    
+	    // pacchetto bean remote è un interfaccia non una classe1
 	    private void popolaPacchettiLastMinute(List<PacchettoBeanRemote> listaPacchettiLastMinute) { 
-	        	listaPacchettiLastMinute.add(new PacchettoBeanRemote());  
+	     //   	listaPacchettiLastMinute.add(new PacchettoBeanRemote());  
 	    }  
 	  
 	    public List<PacchettoBeanRemote> getlistaPacchettiLastMinute() {  

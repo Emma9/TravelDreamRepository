@@ -1,6 +1,6 @@
 package accessServlet;
 
-import it.polimi.traveldream.ejb.ClienteBeanRemote;
+import it.polimi.traveldream.ejb.client.ClienteBeanRemote;
 import it.polimi.traveldream.entities.PacchettoPersonalizzato;
 
 import java.io.IOException;

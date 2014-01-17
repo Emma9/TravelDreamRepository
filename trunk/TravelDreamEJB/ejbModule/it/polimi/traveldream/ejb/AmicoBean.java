@@ -1,5 +1,8 @@
 package it.polimi.traveldream.ejb;
 
+import it.polimi.traveldream.ejb.client.AmicoBeanLocal;
+import it.polimi.traveldream.ejb.client.AmicoBeanRemote;
+import it.polimi.traveldream.ejb.client.InvitoBeanRemote;
 import it.polimi.traveldream.entities.Amico;
 
 import java.util.*;

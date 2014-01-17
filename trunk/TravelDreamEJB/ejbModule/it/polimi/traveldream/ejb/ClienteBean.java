@@ -1,5 +1,9 @@
 package it.polimi.traveldream.ejb;
 
+import it.polimi.traveldream.ejb.client.ClienteBeanLocal;
+import it.polimi.traveldream.ejb.client.ClienteBeanRemote;
+import it.polimi.traveldream.ejb.client.InvitoBeanRemote;
+import it.polimi.traveldream.ejb.client.PacchettoPersonalizzatoBeanRemote;
 import it.polimi.traveldream.entities.Cliente;
 import it.polimi.traveldream.entities.PacchettoPersonalizzato;
 
@@ -140,7 +144,7 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 
 	/**@param email
 	 * @param password
-	 * @return long*/
+	 * @return idCliente*/
 	public long verificaPresenzaClienteLogin(String email, String password) {
 		try {
 			Query q = manager

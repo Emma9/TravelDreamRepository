@@ -1,5 +1,7 @@
 package it.polimi.traveldream.ejb;
 
+import it.polimi.traveldream.ejb.client.ComponenteBeanLocal;
+import it.polimi.traveldream.ejb.client.ComponenteBeanRemote;
 import it.polimi.traveldream.entities.Componente;
 import it.polimi.traveldream.entities.Tipologia;
 
