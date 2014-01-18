@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+	
+<h:form id="form">  
+    <h:outputLink id="loginLink" value="javascript:void(0)"  title="login"></h:outputLink>  
+  
+    <p:growl id="growl" showDetail="true" life="3000" />  
+  
+    <p:dialog id="dialog" header="LOGIN IMPIEGATO" widgetVar="dlg" resizable="false">  
+  
+        <h:panelGrid columns="2" cellpadding="5">  
+            <h:outputLabel for="idImpiegato" value="ID Impiegato:" />  
+            <p:inputText value="#{ContentBean.idImpiegato}"   
+                    id="idimpiegato" required="true" label="idimpiegato" />  
+              
+            <h:outputLabel for="codiceImpiegato" value="Codice Impiegato:" />  
+            <h:inputSecret value="#{ContentBean.codiceImpiegato}"   
+                    id="codiceImpiegato" required="true" label="codiceImpiegato" />  
+              
+            <f:facet name="footer">  
+                <p:commandButton id="loginButton" value="Login" update="growl"   
+                    actionListener="#{ContentBean.login}"
+                    oncomplete="handleLoginRequest(xhr, status, args)"/>  
+            </f:facet>  
+        </h:panelGrid>  
+          
+    </p:dialog>  
+</h:form> 
+</html>
