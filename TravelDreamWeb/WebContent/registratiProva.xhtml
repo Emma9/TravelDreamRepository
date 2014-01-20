@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+ <h2>FORM DI REGISTRAZIONE</h2>
+ <h:form>
+  <p:fieldset legend="Registration Form" widgetVar="regWidget" style="width: 600px;">
+   <h:panelGrid columns="3" width="550" border="0">
+   
+    <h:outputLabel value="Nome" />
+    <p:inputText value="#{registrazioneBean.registrazioneForm.nome}"
+       id="nome"
+        required="true"
+        requiredMessage="Devi inseriere il nome"
+        validatorMessage="Il nome  deve avere una lunghezza da 1 a 15 caratteri"
+        >
+     <f:validateLength minimum="1" maximum="11" for="nome"></f:validateLength>
+    </p:inputText>
+    <p:message for="nome"/>
+    
+    <h:outputLabel value="Cognome" />
+    <p:inputText value="#{registrazioneBean.registrazioneForm.cognome}"
+       id="cognome"
+       required="true"
+       requiredMessage="Devi inserire il cognome"
+       validatorMessage="Il cognome deve avere una lunghezza da 1 a 15 caratteri"
+       >
+      <f:validateLength minimum="1" maximum="15" for="cognome"></f:validateLength>
+    </p:inputText>
+    <p:message for="cognome" />
+    
+    <h:outputLabel value="CodiceFiscale" />
+    <p:inputText value="#{registrazioneBean.registrazioneForm.codiceFiscale}"
+       id="codiceFiscale"
+       	validatorMessage="Il codice fiscale inserito non è valido"><!-- messa io -->
+       	<f:validateRegex pattern="^[A-Z]{6}[A-Z0-9]{2}[A-Z][A-Z0-9]{2}[A-Z][A-Z0-9]{3}[A-Z]$"></f:validateRegex><!-- messa io -->
+      <!--  required="true"
+       
+       requiredMessage="Devi inserire il codice fiscale"
+       validatorMessage="Il codice fiscale deve avere una lunghezza di 16 caratteri"
+       >
+      <f:validateLength minimum="16" maximum="16" for="codiceFiscale"></f:validateLength>-->
+    </p:inputText>
+    <p:message for="codiceFiscale" />
+    
+    <h:outputLabel value="Email" />
+    <p:inputText value="#{registrazioneBean.registrazioneForm.email}"
+       id="email"
+       validatorMessage="L'email inserita non è valida">
+     <f:validateRegex pattern="[a-zA-Z0-9]+@[a-zA-Z]+.[a-zA-Z]{2,3}"></f:validateRegex>
+     <!--  <f:validateRegex pattern="(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*
+  |  (?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]
+      |  \\[\x01-\x09\x0b\x0c\x0e-\x7f])*)
+@ (?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?
+  |  \[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}
+       (?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:
+          (?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]
+          |  \\[\x01-\x09\x0b\x0c\x0e-\x7f])+)
+     \])"></f:validateRegex>-->
+    </p:inputText>
+    <p:message for="email" />
+    
+    <h:outputLabel value="Password" />
+    <p:password value="#{registrazioneBean.registrazioneForm.password}"
+       id="password"
+       required="true"
+       requiredMessage="Devi inserire una password"
+       validatorMessage="La password inserita deve avere una lunghezza da 8 a 15 caratteri"
+       >
+      <f:validateLength minimum="8" maximum="15" for="password"></f:validateLength>
+    </p:password>
+    <p:message for="password" />
+    
+    
+    
+    
+    <!--  
+    
+    <h:outputLabel value="Phone" />
+    <p:inputText value="#{registrationBean.registrationForm.phone}"
+       id="phone"></p:inputText>
+    <p:message for="phone" />
+    <h:outputLabel value="DOB" />
+    <p:calendar value="#{registrationBean.registrationForm.dob}"
+       id="dob"
+       converterMessage="Invalid Date"
+       pattern="dd-MM-yyyy">
+    </p:calendar>
+    <p:message for="dob" />
+    <h:outputLabel value="Gender" />
+    <h:selectOneRadio id="gender"
+          value="#{registrationBean.registrationForm.gender}" >
+     <f:selectItems value="#{registrationBean.genders}"
+         var="gOp"
+         itemLabel="#{gOp}"
+         itemValue="#{gOp}"/>
+    </h:selectOneRadio>
+    <p:message for="gender" />
+    <h:outputLabel value="Interests" />
+    <p:selectManyCheckbox id="interests"
+           value="#{registrationBean.registrationForm.interests}"
+           layout="pageDirection">
+     <f:selectItems value="#{registrationBean.interests}" var="intrOp"></f:selectItems>
+    </p:selectManyCheckbox>
+    <p:message for="interests" />
+    
+    -->
+    
+    <p:commandButton value="Crea Account" action="#{registrazioneBean.register}" ajax="false"></p:commandButton>
+   </h:panelGrid>
+  </p:fieldset>
+  
+ </h:form>
+</h:body>
+</html>
