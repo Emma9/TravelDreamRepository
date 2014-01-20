@@ -4,6 +4,8 @@ import it.polimi.traveldream.ejb.client.ImpiegatoBeanLocal;
 import it.polimi.traveldream.ejb.client.ImpiegatoBeanRemote;
 import it.polimi.traveldream.entities.Impiegato;
 
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 
 import javax.ejb.Stateless;
@@ -17,6 +19,8 @@ public class ImpiegatoBean implements ImpiegatoBeanRemote,ImpiegatoBeanLocal {
 
 	@PersistenceContext(unitName = "travelDream_project") private EntityManager manager;
 
+	private SecureRandom random = new SecureRandom();
+	
 	/**Default constructor*/
 	public ImpiegatoBean() {
 		// TODO Auto-generated constructor stub
@@ -31,7 +35,11 @@ public class ImpiegatoBean implements ImpiegatoBeanRemote,ImpiegatoBeanLocal {
 		if (verificaPresenzaImpiegatoCf(codiceFiscale)) {
 
 			Impiegato impiegato = new Impiegato();
-
+			
+			BigInteger bi = new BigInteger(130, random);
+			String codice = bi.toString(8);
+			
+			impiegato.setCodiceImpiegato(codice);
 			impiegato.setCodiceFiscale(codiceFiscale);
 			impiegato.setNome(nome);
 			impiegato.setCognome(cognome);
