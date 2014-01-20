@@ -1,12 +1,11 @@
 package it.polimi.traveldream.web.beans;
 
-import it.polimi.traveldream.ejb.ClienteBean;
-import it.polimi.traveldream.ejb.client.ClienteBeanRemote;
-
 import java.io.Serializable;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.event.ActionEvent;
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 
 public class LoginBean implements Login,Serializable{
 	/**
@@ -18,58 +17,49 @@ public class LoginBean implements Login,Serializable{
 
     private String password; 
     
-  //  private String codiceFiscale;
-    
-    private String nome;
-    
-    private String cognome;
       
-    public String getEmail() {  
-        return email;  
-    }  
-    
-    public String getNome() {  
-        return nome;  
-    }
-    
-    public String getCognome() {  
-        return cognome;  
-    }
-  
-    public void setEmail(String email) {  
-        this.email = email;  
-    }  
-  
-    public String getPassword() {  
-        return password;  
-    }  
-  
-    public void setPassword(String password) {  
-        this.password = password;  
-    }  
-  
-	public void login(ActionEvent actionEvent, String email, String password) {
-		
-		// immagino qui sia context.getInitizialContext() o qualche cosa del genere
-		//Context context =Context getInitialContext();
-		
-		
-		FacesMessage msg = null;
-		boolean loggedIn = false;
+    public String getEmail() {
+	    return this.email;
+	  }
 
-		if (email != null && password != null) {
-			ClienteBeanRemote cliente = new ClienteBean();
-			cliente.createCliente(email, password, null, null, null);
-			long id = cliente.verificaPresenzaClienteLogin(email, password);
-			if (id != -1) {
-				loggedIn = true;
-				msg = new FacesMessage("Benvenuto "+ email);
-			}
+	  public void setEmail(String email) {
+	    this.email = email;
+	  }
 
-		} else if (loggedIn==false){
-			msg = new FacesMessage("Credenziali non valide");
-		}
+	  public String getPassword() {
+	    return this.password;
+	  }
 
-	//	FacesContext.getCurrentInstance().addMessage("homepage", msg); ((RequestContext) context).addCallbackParam("loggedIn", loggedIn);
-	}
+	  public void setPassword(String password) {
+	    this.password = password;
+	  }
+
+
+
+	  public String login () {
+	    FacesContext context = FacesContext.getCurrentInstance();
+	    HttpServletRequest request = (HttpServletRequest) 
+	        context.getExternalContext().getRequest();
+	    try {
+	      request.login(this.email, this.password);
+	    } catch (ServletException e) {
+
+	      context.addMessage(null, new FacesMessage("Login fallito."));
+	      return "errore";
+	    }
+	    return "index"; //homepage personalizzata del cliente
+	  }
+
+	  public void logout() {
+	    FacesContext context = FacesContext.getCurrentInstance();
+	    HttpServletRequest request = (HttpServletRequest) 
+	        context.getExternalContext().getRequest();
+	    try {
+	      request.logout();
+	    } catch (ServletException e) {
+
+	      context.addMessage(null, new FacesMessage("Logout fallito."));
+	    }
+	  }
+
 }
