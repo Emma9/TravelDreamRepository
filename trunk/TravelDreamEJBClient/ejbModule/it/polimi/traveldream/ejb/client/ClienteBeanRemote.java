@@ -44,7 +44,16 @@ public interface ClienteBeanRemote {
 	 * @param password
 	 * @return long*/
 	public long verificaPresenzaClienteLogin(String email, String password);
-
+	
+	/**@param email
+	 * @return true if email is not present in the DB, otherwise false*/
+	public boolean verificaPresenzaClienteRegistrazione(String email, String codiceFiscale);
+	
+	/**
+	 * @param idCliente
+	 * @return true if idCliente is not present in the DB, otherwise false
+	 */
+	public boolean verificaPresenzaClienteId(Long idCliente);
 	
 	public ArrayList<PacchettoPersonalizzato> elencoPacchettiCliente (long id);
 	

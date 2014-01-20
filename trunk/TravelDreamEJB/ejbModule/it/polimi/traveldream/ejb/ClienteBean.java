@@ -168,19 +168,9 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 
 	
 	
-	/** Metodi private */
-	
-	public ArrayList<PacchettoPersonalizzato> elencoPacchettiCliente (long id){
-		Cliente c = findByIdCliente(id);
-		
-		ArrayList<PacchettoPersonalizzato> elencoPacchettiCliente = c.getPacchettiCliente();
-		
-		return elencoPacchettiCliente;
-	}
-
 	/**@param email
 	 * @return true if email is not present in the DB, otherwise false*/
-	private boolean verificaPresenzaClienteRegistrazione(String email, String codiceFiscale) {
+	public boolean verificaPresenzaClienteRegistrazione(String email, String codiceFiscale) {
 		try {
 			Query q = manager
 					.createQuery("FROM Cliente c WHERE c.email=:new_email AND c.codiceFiscale=:new_codiceFiscale");
@@ -207,7 +197,7 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 	 * @param idCliente
 	 * @return true if idCliente is not present in the DB, otherwise false
 	 */
-	private boolean verificaPresenzaClienteId(Long idCliente) {
+	public boolean verificaPresenzaClienteId(Long idCliente) {
 		try {
 			Query q = manager
 					.createQuery("FROM Cliente c WHERE c.idCliente=:new_idCliente");
@@ -227,6 +217,14 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 		} catch (NullPointerException e) {
 			return true;
 		}
+	}
+	
+	public ArrayList<PacchettoPersonalizzato> elencoPacchettiCliente (long id){
+		Cliente c = findByIdCliente(id);
+		
+		ArrayList<PacchettoPersonalizzato> elencoPacchettiCliente = c.getPacchettiCliente();
+		
+		return elencoPacchettiCliente;
 	}
 
 	/**@param idCliente
