@@ -9,22 +9,20 @@ import javax.ejb.Remote;
 @Remote
 public interface ImpiegatoBeanRemote {
 
-	/**@param codiceImpiegato
-	 * @param codiceFiscale
+	/**@param codiceFiscale
 	 * @param nome
 	 * @param cognome
 	 * @return idImpiegato*/
-	public Long createImpiegato(String codiceImpiegato, String codiceFiscale,String nome, String cognome);
+	public Long createImpiegato(String codiceFiscale,String nome, String cognome);
 
 	/**@param idImpiegato*/
 	public void removeImpiegato(Long idImpiegato);
 
 	/**@param idImpiegato
-	 * @param codiceImpiegato
 	 * @param codiceFiscale
 	 * @param nome
 	 * @param cognome*/
-	public void updateImpiegato(Long idImpiegato, String codiceImpiegato,String codiceFiscale, String nome, String cognome);
+	public void updateImpiegato(Long idImpiegato,String codiceFiscale, String nome, String cognome);
 
 	/**@param idImpiegato
 	 * @return Impiegato*/
