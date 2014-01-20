@@ -22,18 +22,16 @@ public class ImpiegatoBean implements ImpiegatoBeanRemote,ImpiegatoBeanLocal {
 		// TODO Auto-generated constructor stub
 	}
 
-	/**@param codiceImpiegato
-	 * @param codiceFiscale
+	/**@param codiceFiscale
 	 * @param nome
 	 * @param cognome
 	 * @return idImpiegato*/
-	public Long createImpiegato(String codiceImpiegato, String codiceFiscale,String nome, String cognome) {
+	public Long createImpiegato(String codiceFiscale,String nome, String cognome) {
 
 		if (verificaPresenzaImpiegatoCf(codiceFiscale)) {
 
 			Impiegato impiegato = new Impiegato();
 
-			impiegato.setCodiceImpiegato(codiceImpiegato);
 			impiegato.setCodiceFiscale(codiceFiscale);
 			impiegato.setNome(nome);
 			impiegato.setCognome(cognome);
@@ -58,17 +56,15 @@ public class ImpiegatoBean implements ImpiegatoBeanRemote,ImpiegatoBeanLocal {
 	}
 
 	/**@param idImpiegato
-	 * @param codiceImpiegato
 	 * @param codiceFiscale
 	 * @param nome
 	 * @param cognome*/
-	public void updateImpiegato(Long idImpiegato, String codiceImpiegato,String codiceFiscale, String nome, String cognome) {
+	public void updateImpiegato(Long idImpiegato,String codiceFiscale, String nome, String cognome) {
 
 		if (verificaPresenzaImpiegatoId(idImpiegato)) {
 
 			Impiegato impiegato = findByIdImpiegato(idImpiegato);
 
-			impiegato.setCodiceImpiegato(codiceImpiegato);
 			impiegato.setCodiceFiscale(codiceFiscale);
 			impiegato.setNome(nome);
 			impiegato.setCognome(cognome);

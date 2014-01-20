@@ -18,6 +18,7 @@ public class Impiegato implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long idImpiegato;
+	@GeneratedValue
 	private String codiceImpiegato;
 	private String codiceFiscale;
 	private String nome;
@@ -42,13 +43,15 @@ public class Impiegato implements Serializable {
 		
 	}
 
-	/**@param codiceImpiegato codiceImpiegato to set*/
+	/*
+	/**@param codiceImpiegato codiceImpiegato to set
 	public void setCodiceImpiegato(String codiceImpiegato) {
 		
 		this.codiceImpiegato = codiceImpiegato;
 		
 	}
-
+	*/
+	
 	/**@return codiceFiscale*/
 	public String getCodiceFiscale() {
 		
