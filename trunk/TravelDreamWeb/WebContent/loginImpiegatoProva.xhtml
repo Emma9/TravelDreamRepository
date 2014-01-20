@@ -18,10 +18,7 @@
     <p:password value="#{loginBean.registrationForm.idImpiegato}"
        id="idImpiegato"
        required="true"
-       requiredMessage="Devi inserire l'id"
-       validatorMessage="Password should be of length from 5 to 15 chars"
-       >
-      <f:validateLength minimum="5" maximum="15" for="idImpiegato"></f:validateLength>
+       requiredMessage="Devi inserire l'id">
     </p:password>
     <p:message for="idImpiegato" />
     
@@ -30,9 +27,7 @@
     <p:inputText value="#{loginBean.registrationForm.codiceSegreto}"
        id="codiceSegreto"
        required="true"
-       requiredMessage="Devi inserire il codice segreto"
-       validatorMessage="Il codice segreto inserito non è valido">
-     <!-- <f:validateRegex pattern="[a-zA-Z0-9]+@[a-zA-Z]+.[a-zA-Z]{2,3}"></f:validateRegex>   -->
+       requiredMessage="Devi inserire il codice segreto">
     </p:inputText>
     <p:message for="codiceSegreto" />
     

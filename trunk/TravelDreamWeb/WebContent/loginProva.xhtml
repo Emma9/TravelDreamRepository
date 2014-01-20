@@ -16,9 +16,7 @@
     <p:inputText value="#{loginBean.registrationForm.email}"
        id="email"
        required="true"
-       requiredMessage="Devi inserire l'email"
-       validatorMessage="L'email inserita non è valida">
-     <f:validateRegex pattern="[a-zA-Z0-9]+@[a-zA-Z]+.[a-zA-Z]{2,3}"></f:validateRegex>  
+       requiredMessage="Devi inserire l'email">  
     </p:inputText>
     <p:message for="email" />
     
@@ -27,10 +25,8 @@
     <p:password value="#{loginBean.registrationForm.password}"
        id="password"
        required="true"
-       requiredMessage="Password is required"
-       validatorMessage="Password should be of length from 5 to 15 chars"
+       requiredMessage="Devi inserire una password"
        >
-      <f:validateLength minimum="5" maximum="15" for="password"></f:validateLength>
     </p:password>
     <p:message for="password" />
     

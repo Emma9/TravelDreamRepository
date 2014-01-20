@@ -10,19 +10,22 @@
 
 <p:layout fullPage="true">  
   
-    <p:layoutUnit position="north" size="100" header="TRAVELDREAM" resizable="false" closable="false" collapsible="false">  
-           	<div align="right">
-	           	<h:button outcome="loginImpiegatoProva" value="Area Riservata"/>
-	        	<h:button outcome="registrazioneProva" value="Registrati"/>
-	         	<h:button outcome="loginProva" value="Login"/><br /> 
-         	</div>
-    </p:layoutUnit>  
-  
-    <p:layoutUnit position="south" size="100" header="Bottom" resizable="false" closable="false" collapsible="true">  
+  <div align="center">
+	  <p:layoutUnit position="north" size="80"  header="TRAVELDREAM" resizable="false" closable="false" collapsible="false">  
+	           	<div align="right">
+		           	<h:button outcome="loginImpiegatoProva" value="Area Riservata"/>
+		        	<h:button outcome="registrazioneProva" value="Registrati"/>
+		         	<h:button outcome="loginProva" value="Login"/><br /> 
+	         	</div>
+	    </p:layoutUnit>
+  </div>
+      
+  <!-- <p:layoutUnit position="south" size="100" header="Bottom" resizable="false" closable="false" collapsible="true">  
         <h:outputText value="South unit content." />  
-    </p:layoutUnit>  
+    </p:layoutUnit> -->
+      
   
-    <p:layoutUnit position="west" size="200" header="RICERCA VELOCE" resizable="false" closable="false" collapsible="false">  
+    <p:layoutUnit position="west" size="300" header="RICERCA VELOCE" resizable="false" closable="false" collapsible="false">  
         <br/> 
 		<h:form id="form">  
 		              
@@ -31,8 +34,10 @@
 		    <br/>
 		    <br/>
 		    <h:outputText value="Data di Partenza: " />  
+		    
 		    <p:calendar value="#{calendarBean.date1}" id="popupA" />  
-		     
+		     <br/>
+		    <br/>
 		    <h:outputText value="Data di Arrivo: " />   
 		    <p:calendar value="#{calendarBean.date2}" id="popupR" /> 
 		    <br/>
@@ -47,12 +52,13 @@
 		            <f:selectItem itemLabel="3" itemValue="3" />
 		            <f:selectItem itemLabel="4" itemValue="4" />  
 		            <f:selectItem itemLabel="5" itemValue="5" />
-		            <f:selectItem itemLabel="6" itemValue="8" />  
-		            <f:selectItem itemLabel="7" itemValue="7" />      
+		            <f:selectItem itemLabel="6" itemValue="6" />  
+		            <f:selectItem itemLabel="7" itemValue="7" /> 
+		            <f:selectItem itemLabel="8" itemValue="8" />       
 		        </p:selectOneMenu>  
 		    
 		    </h:panelGrid>
-		    <p:commandButton value="Submit" update="display" oncomplete="PF('dialog').show()" />
+		    <p:commandButton value="Ricerca" update="display" oncomplete="PF('dialog').show()" />
 		    <p:dialog header="Selected Dates" widgetVar="dialog"   
 		            showEffect="fade" hideEffect="fade">
 		        <h:panelGrid id="display" columns="2" cellpadding="5">                         
@@ -74,11 +80,11 @@
   
   
   
-  
-  
-    <p:layoutUnit position="east" size="200" header="Right" resizable="false" closable="false" collapsible="true" effect="drop">  
+  <!-- <p:layoutUnit position="east" size="200" header="Right" resizable="false" closable="false" collapsible="true" effect="drop">  
         <h:outputText value="Right unit content." />  
-    </p:layoutUnit>  
+    </p:layoutUnit> -->
+  
+      
   
     <p:layoutUnit position="center">  
         <h:form id="tabellapacchtti">
@@ -86,13 +92,12 @@
 			  
 			    <p:tab id="tab1" title="LAST-MINUTE">  
 			        <h:panelGrid columns="2" cellpadding="10">  
-			            <p:graphicImage id="tab1Img" value="/immagini/homepage/lastminute.jpg" />  
+			            <p:graphicImage id="tab1Img" value="/immagini/homepage/lastminute.jpg" />
+			              
 			            <h:outputText id="tab1Text" value="LISTA DEI PACCHETTI LASTMINUTE"/>
-			            <h:outputText value="SELEZIONA UN PACCHETTO PER VEDERE I DETTAGLI"/><br /> 
-			              
-			              
-			              
-			              
+			           
+			           
+			            <!-- <h:outputText value="SELEZIONA UN PACCHETTO PER VEDERE I DETTAGLI"/><br /> 
 			              
 						    <p:fieldset legend="Pacchetti Disponibili">  
 						        <p:dataTable id="pacchettiDisponibiliLastMinut" var="pacchettiLastMinute" value="#{TabellaPacchettiBean.listaPacchettiLastMinute}"
@@ -120,11 +125,70 @@
 						    
 						    
 						        </p:dataTable>  
-						    </p:fieldset>
+						    </p:fieldset> -->
 								        
 								        
 								        
 								        
+								        
+								        
+								        
+					<h:form id="form">  
+						  
+						    <p:growl id="growl" showDetail="true"/>  
+						  
+						    <p:dataTable id="cars" var="car" value="#{tableBean.mediumCarsModel}" paginator="true" rows="10"  
+						                 selection="#{tableBean.selectedCar}" selectionMode="single">  
+						  
+						        <p:ajax event="rowSelect" listener="#{tableBean.onRowSelect}"   
+						                    update=":form:display :form:growl" oncomplete="PF('carDialog').show()" />  
+						        <p:ajax event="rowUnselect" listener="#{tableBean.onRowUnselect}" update=":form:growl"/>  
+						  
+						        <f:facet name="header">  
+						            Selezionare un pacchetto per visualizzare i dettagli 
+						        </f:facet>  
+						  
+						        <p:column headerText="Model">  
+						            #{car.model}  
+						        </p:column>  
+						    </p:dataTable>  
+						  
+						    <p:dialog id="dialog" header="Car Detail" widgetVar="carDialog" resizable="false"  
+						                showEffect="fade" hideEffect="explode">  
+						  
+						        <h:panelGrid id="display" columns="2" cellpadding="4">  
+						  
+						            <f:facet name="header">  
+						                <p:graphicImage value="/images/cars/#{tableBean.selectedCar.manufacturer}.jpg"/>  
+						            </f:facet>  
+						  
+						            <h:outputText value="Model:" />  
+						            <h:outputText value="#{tableBean.selectedCar.model}" />  
+						  
+						            <h:outputText value="Year:" />  
+						            <h:outputText value="#{tableBean.selectedCar.year}" />  
+						  
+						            <h:outputText value="Manufacturer:" />  
+						            <h:outputText value="#{tableBean.selectedCar.manufacturer}" />  
+						  
+						            <h:outputText value="Color:" />  
+						            <h:outputText value="#{tableBean.selectedCar.color}" />  
+						        </h:panelGrid>  
+						    </p:dialog>  
+						  
+						</h:form>
+								        
+								  
+								  
+								  
+								  
+								  
+								 
+								 
+								 
+								  
+								  
+								  
 								        
 								        	
 						</h:panelGrid>		        	
