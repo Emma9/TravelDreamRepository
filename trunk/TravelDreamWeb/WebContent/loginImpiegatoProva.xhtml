@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+ <h2>FORM DI LOGIN IMPIEGATO</h2>
+ <h:form>
+  <p:fieldset legend="Login Form" widgetVar="regWidget" style="width: 600px;">
+   <h:panelGrid columns="3" width="550" border="0">
+    
+    
+     
+    <h:outputLabel value="IdImpiegato" />
+    <p:password value="#{registrationBean.registrationForm.idImpiegato}"
+       id="idImpiegato"
+       required="true"
+       requiredMessage="Devi inserire l'id"
+       validatorMessage="Password should be of length from 5 to 15 chars"
+       >
+      <f:validateLength minimum="5" maximum="15" for="idImpiegato"></f:validateLength>
+    </p:password>
+    <p:message for="idImpiegato" />
+    
+    
+    <h:outputLabel value="CodiceSegretoImpiegato" />
+    <p:inputText value="#{loginBean.registrationForm.codiceSegretoImpiegato}"
+       id="codiceSegretoImpiegato"
+       required="true"
+       requiredMessage="Devi inserire il codice segreto"
+       validatorMessage="Il codice segreto inserito non è valido">
+     <!-- <f:validateRegex pattern="[a-zA-Z0-9]+@[a-zA-Z]+.[a-zA-Z]{2,3}"></f:validateRegex>   -->
+    </p:inputText>
+    <p:message for="codiceImpiegato" />
+    
+   
+    
+    
+    <p:commandButton value="Accedi" action="#{loginBean.login}" ajax="false"></p:commandButton>
+   </h:panelGrid>
+  </p:fieldset>
+ </h:form>
+</h:body>
+</html>
