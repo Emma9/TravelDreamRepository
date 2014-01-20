@@ -18,7 +18,7 @@ public class Impiegato implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long idImpiegato;
-	@GeneratedValue
+	//@GeneratedValue
 	private String codiceImpiegato;
 	private String codiceFiscale;
 	private String nome;
