@@ -14,8 +14,8 @@
     
     
      
-    <h:outputLabel value="IdImpiegato" />
-    <p:password value="#{registrationBean.registrationForm.idImpiegato}"
+    <h:outputLabel value="Identificativo Impiegato" />
+    <p:password value="#{loginBean.registrationForm.idImpiegato}"
        id="idImpiegato"
        required="true"
        requiredMessage="Devi inserire l'id"
@@ -26,15 +26,15 @@
     <p:message for="idImpiegato" />
     
     
-    <h:outputLabel value="CodiceSegretoImpiegato" />
-    <p:inputText value="#{loginBean.registrationForm.codiceSegretoImpiegato}"
-       id="codiceSegretoImpiegato"
+    <h:outputLabel value="Codice Segreto" />
+    <p:inputText value="#{loginBean.registrationForm.codiceSegreto}"
+       id="codiceSegreto"
        required="true"
        requiredMessage="Devi inserire il codice segreto"
        validatorMessage="Il codice segreto inserito non è valido">
      <!-- <f:validateRegex pattern="[a-zA-Z0-9]+@[a-zA-Z]+.[a-zA-Z]{2,3}"></f:validateRegex>   -->
     </p:inputText>
-    <p:message for="codiceImpiegato" />
+    <p:message for="codiceSegreto" />
     
    
     
