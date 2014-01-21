@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import it.polimi.traveldream.ejb.client.ClienteBeanRemote;
 
-public class RegistrazioneBeanP implements RegistrazioneP, Serializable{
+public class RegistrazioneBean implements Registrazione, Serializable{
 
 	/**
 	 * 
@@ -20,7 +20,10 @@ public class RegistrazioneBeanP implements RegistrazioneP, Serializable{
 	// Session bean i cui metodi sono utilizzati nel codice
 	@EJB
 	private ClienteBeanRemote clienteremoto;
-
+	
+	
+	
+	/*
 	// Attributi utili per il passaggio di informazioni con il session bean
 	private String nome;
 	private String cognome;
@@ -30,7 +33,7 @@ public class RegistrazioneBeanP implements RegistrazioneP, Serializable{
 
 	// Metodi
 
-	/*
+	
 	public String registrazione(String nome, String cognome,
 			String codiceFiscale, String email, String password) {
 
@@ -74,14 +77,14 @@ public class RegistrazioneBeanP implements RegistrazioneP, Serializable{
 
 		      context.addMessage(null, new FacesMessage("Cliente già registrato"));
 		      
-		      return "registrazioneProva";//pagina di errore
+		      return "registrazioneProva";//pagina di registrazione
 		    
 		    }
 		    }catch (ServletException e) {
 		    	
-		    	context.addMessage(null, new FacesMessage("Registrazione fallita"));
+		    	context.addMessage(null, new FacesMessage("ERRORE: Registrazione fallita"));
 			      
-			      return "errore";//pagina di errore
+			      return "registrazioneProva";//pagina di registrazione
 		    	
 		    }
 		    
