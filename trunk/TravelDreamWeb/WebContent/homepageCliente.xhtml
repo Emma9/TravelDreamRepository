@@ -10,37 +10,44 @@
 
 <p:layout fullPage="true">  
   
-    <p:layoutUnit position="north" size="100" header="TRAVELDREAM" resizable="false" closable="false" collapsible="false">  
-           	<div align="right">  
-         		<h:button outcome="homepage" value="Logout" /><br />
-           	</div>
-         	<p:selectOneMenu value="#{buttonBean.number}">  
-		            <f:selectItem itemLabel="pacchettopersonalizzato1" itemValue="1" />  
-		            <f:selectItem itemLabel="pacchettopersonalizzato2" itemValue="2" />  
-		            <f:selectItem itemLabel="pacchettopersonalizzato3" itemValue="3" />
-		            <f:selectItem itemLabel="pacchettopersonalizzato4" itemValue="4" />  
-		            <f:selectItem itemLabel="pacchettopersonalizzato5" itemValue="5" />
-		            <f:selectItem itemLabel="pacchettopersonalizzato6" itemValue="8" />  
-		            <f:selectItem itemLabel="pacchettopersonalizzato7" itemValue="7" />      
-		        </p:selectOneMenu> 
-		        
-		        <p:selectOneMenu value="#{buttonBean.number}">  
-		            <f:selectItem itemLabel="giftlist1" itemValue="1" />  
-		            <f:selectItem itemLabel="giftlist2" itemValue="2" />  
-		            <f:selectItem itemLabel="giftlist3" itemValue="3" />
-		            <f:selectItem itemLabel="giftlist4" itemValue="4" />  
-		            <f:selectItem itemLabel="giftlist5" itemValue="5" />
-		            <f:selectItem itemLabel="giftlist6" itemValue="8" />  
-		            <f:selectItem itemLabel="giftlist7" itemValue="7" />      
-		        </p:selectOneMenu> 
-         	 
-    </p:layoutUnit>  
-  
-    <p:layoutUnit position="south" size="100" header="Bottom" resizable="false" closable="false" collapsible="true">  
+  <div align="center">
+	  <p:layoutUnit position="north" size="85"  header="TRAVELDREAM" resizable="false" closable="false" collapsible="false">  
+	        		<div style="float: left">
+				         	<p:selectOneMenu value="#{buttonBean.number}">  
+						            <f:selectItem itemLabel="pacchettopersonalizzato1" itemValue="1" />  
+						            <f:selectItem itemLabel="pacchettopersonalizzato2" itemValue="2" />  
+						            <f:selectItem itemLabel="pacchettopersonalizzato3" itemValue="3" />
+						            <f:selectItem itemLabel="pacchettopersonalizzato4" itemValue="4" />  
+						            <f:selectItem itemLabel="pacchettopersonalizzato5" itemValue="5" />
+						            <f:selectItem itemLabel="pacchettopersonalizzato6" itemValue="8" />  
+						            <f:selectItem itemLabel="pacchettopersonalizzato7" itemValue="7" />      
+						        </p:selectOneMenu> 
+						        <p:selectOneMenu value="#{buttonBean.number}">  
+						            <f:selectItem itemLabel="giftlist1" itemValue="1" />  
+						            <f:selectItem itemLabel="giftlist2" itemValue="2" />  
+						            <f:selectItem itemLabel="giftlist3" itemValue="3" />
+						            <f:selectItem itemLabel="giftlist4" itemValue="4" />  
+						            <f:selectItem itemLabel="giftlist5" itemValue="5" />
+						            <f:selectItem itemLabel="giftlist6" itemValue="8" />  
+						            <f:selectItem itemLabel="giftlist7" itemValue="7" />      
+						        </p:selectOneMenu>
+		           	</div>  
+		           	<div style="display: inline;">
+						<div style="float: right">  
+						     <h:outputText value="BENVENUTO: " /><h:outputText value=" Richiamo il nome del cliente connesso " />
+						  
+						     <h:button outcome="homepage" value="Logout" />	
+						</div>
+		   			</div>
+	    </p:layoutUnit>
+  </div>
+      
+  <!-- <p:layoutUnit position="south" size="100" header="Bottom" resizable="false" closable="false" collapsible="true">  
         <h:outputText value="South unit content." />  
-    </p:layoutUnit>  
+    </p:layoutUnit> -->
+      
   
-    <p:layoutUnit position="west" size="200" header="RICERCA VELOCE" resizable="false" closable="false" collapsible="false">  
+    <p:layoutUnit position="west" size="300" header="RICERCA VELOCE" resizable="false" closable="false" collapsible="false">  
         <br/> 
 		<h:form id="form">  
 		              
@@ -49,8 +56,10 @@
 		    <br/>
 		    <br/>
 		    <h:outputText value="Data di Partenza: " />  
+		    
 		    <p:calendar value="#{calendarBean.date1}" id="popupA" />  
-		     
+		     <br/>
+		    <br/>
 		    <h:outputText value="Data di Arrivo: " />   
 		    <p:calendar value="#{calendarBean.date2}" id="popupR" /> 
 		    <br/>
@@ -60,17 +69,18 @@
 		        <h:outputText value="Numero di Partecipanti: " />
 		        <br/>
 		        <p:selectOneMenu value="#{buttonBean.number}">  
-		            <f:selectItem itemLabel="1" itemValue="1" />  
+		            <f:selectItem itemLabel="1" itemValue="" />  
 		            <f:selectItem itemLabel="2" itemValue="2" />  
 		            <f:selectItem itemLabel="3" itemValue="3" />
 		            <f:selectItem itemLabel="4" itemValue="4" />  
 		            <f:selectItem itemLabel="5" itemValue="5" />
-		            <f:selectItem itemLabel="6" itemValue="8" />  
-		            <f:selectItem itemLabel="7" itemValue="7" />      
+		            <f:selectItem itemLabel="6" itemValue="6" />  
+		            <f:selectItem itemLabel="7" itemValue="7" /> 
+		            <f:selectItem itemLabel="8" itemValue="8" />       
 		        </p:selectOneMenu>  
 		    
 		    </h:panelGrid>
-		    <p:commandButton value="Submit" update="display" oncomplete="PF('dialog').show()" />
+		    <p:commandButton value="Ricerca" update="display" oncomplete="PF('dialog').show()" />
 		    <p:dialog header="Selected Dates" widgetVar="dialog"   
 		            showEffect="fade" hideEffect="fade">
 		        <h:panelGrid id="display" columns="2" cellpadding="5">                         
@@ -92,11 +102,11 @@
   
   
   
-  
-  
-    <p:layoutUnit position="east" size="200" header="Right" resizable="false" closable="false" collapsible="true" effect="drop">  
+  <!-- <p:layoutUnit position="east" size="200" header="Right" resizable="false" closable="false" collapsible="true" effect="drop">  
         <h:outputText value="Right unit content." />  
-    </p:layoutUnit>  
+    </p:layoutUnit> -->
+  
+      
   
     <p:layoutUnit position="center">  
         <h:form id="tabellapacchtti">
@@ -104,45 +114,107 @@
 			  
 			    <p:tab id="tab1" title="LAST-MINUTE">  
 			        <h:panelGrid columns="2" cellpadding="10">  
-			            <p:graphicImage id="tab1Img" value="/immagini/homepage/lastminute.jpg" />  
-			            <h:outputText id="tab1Text" value="LISTA DEI PACCHETTI LASTMINUTE"/>
-			            <h:outputText value="SELEZIONA UN PACCHETTO PER VEDERE I DETTAGLI"/><br /> 
+			            <p:graphicImage id="tab1Img" value="/immagini/homepage/lastminute.jpg" />
 			              
-			              
-			              
-			              
-			              
-						    <p:fieldset legend="Pacchetti Disponibili">  
-						        <p:dataTable id="pacchettiDisponibiliLastMinut" var="pacchettiLastMinute" value="#{TabellaPacchettiBean.listaPacchettiLastMinute}"
-						         rowKey="#{PacchettoBeanLocal.id}" selection="#{TabellaPacchettiBean.pacchettoLastMinuteSelezionato}" selectionMode="single">  
-						            
-						 			 <f:facet name="header">  
-            								Clicca "Dettagli" dopo avere selezionato una riga.  
-       								 </f:facet>
+			            <h:outputText id="tab1Text" value="RICERCA DEI PACCHETTI LASTMINUTE"/>
+			           
+			           
+			            <h:outputText value="Data di Partenza: " />  
+		    			<br/>
+					    <p:calendar value="#{calendarBean.date1}" id="popupALM" />  
+					    <br/>
+					    <h:outputText value="Data di Arrivo: " /> 
+					    <br/>  
+					    <p:calendar value="#{calendarBean.date2}" id="popupRLM" /> 
+					    <br/>
+						<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">  
+					        <h:outputText value="Numero di Partecipanti: " />
+					        <br/>
+					        <p:selectOneMenu value="#{buttonBean.number}">  
+					            <f:selectItem itemLabel="1" itemValue="" />  
+					            <f:selectItem itemLabel="2" itemValue="2" />  
+					            <f:selectItem itemLabel="3" itemValue="3" />
+					            <f:selectItem itemLabel="4" itemValue="4" />  
+					            <f:selectItem itemLabel="5" itemValue="5" />
+					            <f:selectItem itemLabel="6" itemValue="6" />  
+					            <f:selectItem itemLabel="7" itemValue="7" /> 
+					            <f:selectItem itemLabel="8" itemValue="8" />       
+					        </p:selectOneMenu>  
+					    
+					    </h:panelGrid><br />       
+						<p:commandButton value="Ricerca" update="displayLM" oncomplete="PF('dialog').show()" />
+					    <p:dialog header="Selected Dates" widgetVar="dialog"   
+					            showEffect="fade" hideEffect="fade">
+					        <h:panelGrid id="displayLM" columns="2" cellpadding="5">                         
+					            <h:outputText value="Popup Date:" />  
+					            <h:outputText value="#{calendarBean.date1}" id="popupDateLM">  
+					                <f:convertDateTime pattern="d/M/yyyy"/>  
+					            </h:outputText>  
+					              
+					        </h:panelGrid>  
+					          
+					    </p:dialog> 			        
+											        
+											        
+								        
+					<!-- 			        
+								        
+					<h:form id="form">  
 						  
-						            <p:column headerText="ID Pacchetto">   
-						                <h:outputLink value="#{PacchettoBeanLocal.id}" />  
-						            </p:column>  
-						    		
-						    		<p:column headerText="Destinazione">   
-						                <h:outputLink value="#{PacchettoBeanLocal.destinazione}" />  
-						            </p:column> 
-						    		
-						    		<f:facet name="footer">  
-							            <p:button id="dettagliPacchetto" value="Dettagli"/>  
-							        </f:facet>
-						    		<f:metadata>  
-    									<f:viewParam name="dettaglioPacchetto" value="{#pacchetto}" />  
-									</f:metadata>
-						    
-						    
-						    
-						        </p:dataTable>  
-						    </p:fieldset>
+						    <p:growl id="growl" showDetail="true"/>  
+						  
+						    <p:dataTable id="cars" var="car" value="#{tableBean.mediumCarsModel}" paginator="true" rows="10"  
+						                 selection="#{tableBean.selectedCar}" selectionMode="single">  
+						  
+						        <p:ajax event="rowSelect" listener="#{tableBean.onRowSelect}"   
+						                    update=":form:display :form:growl" oncomplete="PF('carDialog').show()" />  
+						        <p:ajax event="rowUnselect" listener="#{tableBean.onRowUnselect}" update=":form:growl"/>  
+						  
+						        <f:facet name="header">  
+						            Selezionare un pacchetto per visualizzare i dettagli 
+						        </f:facet>  
+						  
+						        <p:column headerText="Model">  
+						            #{car.model}  
+						        </p:column>  
+						    </p:dataTable>  
+						  
+						    <p:dialog id="dialog" header="Car Detail" widgetVar="carDialog" resizable="false"  
+						                showEffect="fade" hideEffect="explode">  
+						  
+						        <h:panelGrid id="display" columns="2" cellpadding="4">  
+						  
+						            <f:facet name="header">  
+						                <p:graphicImage value="/images/cars/#{tableBean.selectedCar.manufacturer}.jpg"/>  
+						            </f:facet>  
+						  
+						            <h:outputText value="Model:" />  
+						            <h:outputText value="#{tableBean.selectedCar.model}" />  
+						  
+						            <h:outputText value="Year:" />  
+						            <h:outputText value="#{tableBean.selectedCar.year}" />  
+						  
+						            <h:outputText value="Manufacturer:" />  
+						            <h:outputText value="#{tableBean.selectedCar.manufacturer}" />  
+						  
+						            <h:outputText value="Color:" />  
+						            <h:outputText value="#{tableBean.selectedCar.color}" />  
+						        </h:panelGrid>  
+						    </p:dialog>  
+						  
+						</h:form>
 								        
-								        
-								        
-								        
+								  
+								  
+								 -->  
+								  
+								  
+								 
+								 
+								 
+								  
+								  
+								  
 								        
 								        	
 						</h:panelGrid>		        	
@@ -152,21 +224,126 @@
 			    <p:tab id="tab2" title="OFFERTE">  
 			        <h:panelGrid columns="2" cellpadding="10">  
 			            <p:graphicImage id="tab2Img" value="/immagini/homepage/offerte.jpg" />  
-			            <h:outputText id="tab2Text" value="LISTA DEI PACCHETTI OFFERTE"/>  
+			            <h:outputText id="tab2Text" value="RICERCA DEI PACCHETTI OFFERTE"/>
+			            	<h:outputText value="Data di Partenza: " />  
+		    			<br/>
+					    <p:calendar value="#{calendarBean.date1}" id="popupAO" />  
+					    <br/>
+					    <h:outputText value="Data di Arrivo: " /> 
+					    <br/>  
+					    <p:calendar value="#{calendarBean.date2}" id="popupRO" /> 
+					    <br/>
+						<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">  
+					        <h:outputText value="Numero di Partecipanti: " />
+					        <br/>
+					        <p:selectOneMenu value="#{buttonBean.number}">  
+					            <f:selectItem itemLabel="1" itemValue="" />  
+					            <f:selectItem itemLabel="2" itemValue="2" />  
+					            <f:selectItem itemLabel="3" itemValue="3" />
+					            <f:selectItem itemLabel="4" itemValue="4" />  
+					            <f:selectItem itemLabel="5" itemValue="5" />
+					            <f:selectItem itemLabel="6" itemValue="6" />  
+					            <f:selectItem itemLabel="7" itemValue="7" /> 
+					            <f:selectItem itemLabel="8" itemValue="8" />       
+					        </p:selectOneMenu>  
+					    
+					    </h:panelGrid><br />       
+						<p:commandButton value="Ricerca" update="displayO" oncomplete="PF('dialog').show()" />
+					    <p:dialog header="Selected Dates" widgetVar="dialog"   
+					            showEffect="fade" hideEffect="fade">
+					        <h:panelGrid id="displayO" columns="2" cellpadding="5">                         
+					            <h:outputText value="Popup Date:" />  
+					            <h:outputText value="#{calendarBean.date1}" id="popupDateO">  
+					                <f:convertDateTime pattern="d/M/yyyy"/>  
+					            </h:outputText>  
+					              
+					        </h:panelGrid>  
+					          
+					    </p:dialog> 
 			        </h:panelGrid>  
 			    </p:tab>  
 			  
 			    <p:tab id="tab3" title="MARE">  
 			        <h:panelGrid columns="2" cellpadding="10">  
 			            <p:graphicImage id="tab3Img" value="/immagini/homepage/mare.jpg" />  
-			            <h:outputText id="tab3Text" value="LISTA DEI PACCHETTI MARE"/>  
+			            <h:outputText id="tab3Text" value="RICERCA DEI PACCHETTI MARE"/>
+			            	<h:outputText value="Data di Partenza: " />  
+		    			<br/>
+					    <p:calendar value="#{calendarBean.date1}" id="popupAM" />  
+					    <br/>
+					    <h:outputText value="Data di Arrivo: " /> 
+					    <br/>  
+					    <p:calendar value="#{calendarBean.date2}" id="popupRM" /> 
+					    <br/>
+						<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">  
+					        <h:outputText value="Numero di Partecipanti: " />
+					        <br/>
+					        <p:selectOneMenu value="#{buttonBean.number}">  
+					            <f:selectItem itemLabel="1" itemValue="" />  
+					            <f:selectItem itemLabel="2" itemValue="2" />  
+					            <f:selectItem itemLabel="3" itemValue="3" />
+					            <f:selectItem itemLabel="4" itemValue="4" />  
+					            <f:selectItem itemLabel="5" itemValue="5" />
+					            <f:selectItem itemLabel="6" itemValue="6" />  
+					            <f:selectItem itemLabel="7" itemValue="7" /> 
+					            <f:selectItem itemLabel="8" itemValue="8" />       
+					        </p:selectOneMenu>  
+					    
+					    </h:panelGrid><br />       
+						<p:commandButton value="Ricerca" update="displayM" oncomplete="PF('dialog').show()" />
+					    <p:dialog header="Selected Dates" widgetVar="dialog"   
+					            showEffect="fade" hideEffect="fade">
+					        <h:panelGrid id="displayM" columns="2" cellpadding="5">                         
+					            <h:outputText value="Popup Date:" />  
+					            <h:outputText value="#{calendarBean.date1}" id="popupDateM">  
+					                <f:convertDateTime pattern="d/M/yyyy"/>  
+					            </h:outputText>  
+					              
+					        </h:panelGrid>  
+					          
+					    </p:dialog>   
 			        </h:panelGrid>  
 			    </p:tab>  
 			  
 			  	<p:tab id="tab4" title="MONTAGNA">  
 			        <h:panelGrid columns="2" cellpadding="10">  
 			            <p:graphicImage id="tab4Img" value="/immagini/homepage/montagna.jpg" />  
-			            <h:outputText id="tab4Text" value="LISTA DEI PACCHETTI MONTAGNA"/>  
+			            <h:outputText id="tab4Text" value="RICERCA DEI PACCHETTI MONTAGNA"/>
+			            	<h:outputText value="Data di Partenza: " />  
+		    			<br/>
+					    <p:calendar value="#{calendarBean.date1}" id="popupAMON" />  
+					    <br/>
+					    <h:outputText value="Data di Arrivo: " /> 
+					    <br/>  
+					    <p:calendar value="#{calendarBean.date2}" id="popupRMON" /> 
+					    <br/>
+						<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">  
+					        <h:outputText value="Numero di Partecipanti: " />
+					        <br/>
+					        <p:selectOneMenu value="#{buttonBean.number}">  
+					            <f:selectItem itemLabel="1" itemValue="" />  
+					            <f:selectItem itemLabel="2" itemValue="2" />  
+					            <f:selectItem itemLabel="3" itemValue="3" />
+					            <f:selectItem itemLabel="4" itemValue="4" />  
+					            <f:selectItem itemLabel="5" itemValue="5" />
+					            <f:selectItem itemLabel="6" itemValue="6" />  
+					            <f:selectItem itemLabel="7" itemValue="7" /> 
+					            <f:selectItem itemLabel="8" itemValue="8" />       
+					        </p:selectOneMenu>  
+					    
+					    </h:panelGrid><br />       
+						<p:commandButton value="Ricerca" update="displayMON" oncomplete="PF('dialog').show()" />
+					    <p:dialog header="Selected Dates" widgetVar="dialog"   
+					            showEffect="fade" hideEffect="fade">
+					        <h:panelGrid id="displayMON" columns="2" cellpadding="5">                         
+					            <h:outputText value="Popup Date:" />  
+					            <h:outputText value="#{calendarBean.date1}" id="popupDateMON">  
+					                <f:convertDateTime pattern="d/M/yyyy"/>  
+					            </h:outputText>  
+					              
+					        </h:panelGrid>  
+					          
+					    </p:dialog> 
 			        </h:panelGrid>  
 			    </p:tab> 
 			  
