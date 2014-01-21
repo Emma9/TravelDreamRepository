@@ -1,5 +1,5 @@
 package it.polimi.traveldream.web.beans;
 
-public interface Login {
+public interface LoginCliente {
 	
 }

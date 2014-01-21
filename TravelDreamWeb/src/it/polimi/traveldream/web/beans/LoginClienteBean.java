@@ -7,7 +7,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
-public class LoginBean implements Login,Serializable{
+public class LoginClienteBean implements LoginCliente,Serializable{
 	/**
 	 * 
 	 */
