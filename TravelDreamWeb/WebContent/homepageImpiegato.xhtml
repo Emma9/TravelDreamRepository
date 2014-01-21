@@ -11,9 +11,12 @@
 <p:layout fullPage="true">  
   
   <div align="center">
-	  <p:layoutUnit position="north" size="80"  header="TRAVELDREAM" resizable="false" closable="false" collapsible="false">  
-	           	<div align="right">
-		           	<h:button outcome="loginImpiegatoProva" value="Logout"/><br /> <!-- METTERE IMPIEGATOBEANLOGOUT -->
+	  <p:layoutUnit position="north" size="80"  header="TRAVELDREAM" resizable="false" closable="false" collapsible="false"> 
+	  			<div style="display: inline;">
+		           	<div style="float: right;">
+		           		<h:outputText value="BENVENUTO: " /><h:outputText value=" Richiamo l'id dell'impiegato connesso " />
+			           	<h:button outcome="loginImpiegatoProva" value="Logout"/><br /> <!-- METTERE IMPIEGATOBEANLOGOUT -->
+		         	</div>
 	         	</div>
 	    </p:layoutUnit>
   </div>
