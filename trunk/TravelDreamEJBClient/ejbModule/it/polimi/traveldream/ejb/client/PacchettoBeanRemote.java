@@ -4,6 +4,7 @@ import it.polimi.traveldream.entities.Etichetta;
 import it.polimi.traveldream.entities.Pacchetto;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.ejb.Remote;
 
@@ -15,7 +16,7 @@ public interface PacchettoBeanRemote {
 	 * @param descrizione
 	 * @param listaComponenti
 	 * @return idPacchetto*/
-	public Long createPacchetto(String destinazione,ArrayList<Etichetta> etichette, String descrizione,ArrayList<Long> listaComponenti);
+	public Long createPacchetto(String destinazione, Date dataPartenza, Date dataRitorno, int disponibilita, ArrayList<Etichetta> etichette, String descrizione,ArrayList<Long> listaComponenti);
 
 	/**@param idPacchetto*/
 	public void removePacchetto(Long idPacchetto);
@@ -25,7 +26,7 @@ public interface PacchettoBeanRemote {
 	 * @param etichette
 	 * @param descrizione
 	 * @param listaComponenti*/
-	public void updatePacchetto(Long idPacchetto, String destinazione,ArrayList<Etichetta> etichette, String descrizione,ArrayList<Long> listaComponenti);
+	public void updatePacchetto(Long idPacchetto, String destinazione, Date dataPartenza, Date dataRitorno, int disponibilita, ArrayList<Etichetta> etichette, String descrizione,ArrayList<Long> listaComponenti);
 
 	/**@param destinazione
 	 * @return ArrayList<idPacchetto>*/
