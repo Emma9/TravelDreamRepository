@@ -14,7 +14,7 @@ import it.polimi.traveldream.ejb.client.ClienteBeanRemote;
 
 @ManagedBean()
 @SessionScoped
-public class RegistrazioneBean implements Registrazione, Serializable{
+public class RegistrazioneBean implements Serializable{
 
 	/**
 	 * 
