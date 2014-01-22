@@ -17,6 +17,12 @@ public class RegistrazioneBean implements Registrazione, Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	// Session bean i cui metodi sono utilizzati nel codice
+	@EJB
+	private ClienteBeanRemote clienteremoto;
+	
+	
+
 	private String nome;
 	
 	private String cognome;
@@ -107,12 +113,7 @@ public class RegistrazioneBean implements Registrazione, Serializable{
 	}
 
 
-	// Session bean i cui metodi sono utilizzati nel codice
-	@EJB
-	private ClienteBeanRemote clienteremoto;
-	
-	
-	public String registrazione(String nome, String cognome,String codiceFiscale, String email, String password) {
+	public String registrazione() {
 		
 		    FacesContext context = FacesContext.getCurrentInstance();
 		    HttpServletRequest request = (HttpServletRequest) 
