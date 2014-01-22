@@ -22,39 +22,6 @@ public class RegistrazioneBean implements Registrazione, Serializable{
 	private ClienteBeanRemote clienteremoto;
 	
 	
-	
-	/*
-	// Attributi utili per il passaggio di informazioni con il session bean
-	private String nome;
-	private String cognome;
-	private String codiceFiscale;
-	private String email;
-	private String password;
-
-	// Metodi
-
-	
-	public String registrazione(String nome, String cognome,
-			String codiceFiscale, String email, String password) {
-
-		if (clienteremoto.verificaPresenzaClienteRegistrazione(email,codiceFiscale)) {
-
-			clienteremoto.createCliente(email, password, codiceFiscale, nome,cognome);
-
-			return "Registrazione avvenuta con successo";
-
-		} else {
-
-			return "Cliente già registrato";
-
-		}
-
-	}
-	
-	*/
-	
-	//NB: CLIENTE REGISTRATO E' LOGGATO, QUINDI DEVO INCLUDERE ANCHE IL LOGIN
-	
 	public String registrazione(String nome, String cognome,String codiceFiscale, String email, String password) {
 		
 		    FacesContext context = FacesContext.getCurrentInstance();
@@ -71,7 +38,7 @@ public class RegistrazioneBean implements Registrazione, Serializable{
 					
 					context.addMessage(null, new FacesMessage("Registrazione avvenuta con successo"));
 					
-					return "index"; //homepage personalizzata del cliente
+					return "homepageCliente"; //homepage personalizzata del cliente
 		    	
 		    	} else {
 
