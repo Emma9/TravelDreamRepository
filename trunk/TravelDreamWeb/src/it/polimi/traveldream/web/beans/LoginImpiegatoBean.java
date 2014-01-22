@@ -47,7 +47,7 @@ public class LoginImpiegatoBean implements Serializable {
 			
 		} catch (ServletException e) {
 
-			context.addMessage(null, new FacesMessage("Login fallito."));
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Login fallito", ""));
 			
 			return "loginImpiegato";    // pagina di login dell'impiegato
 		}
@@ -66,7 +66,7 @@ public class LoginImpiegatoBean implements Serializable {
 			
 		} catch (ServletException e) {
 
-			context.addMessage(null, new FacesMessage("Logout fallito."));
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Logout fallito", ""));
 			
 			return "homepageImpiegato"; // home page personalizzata dell'impiegato
 			
