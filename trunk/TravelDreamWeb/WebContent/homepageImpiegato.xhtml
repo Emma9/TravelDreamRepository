@@ -14,7 +14,7 @@
 	  <p:layoutUnit position="north" size="80"  header="TRAVELDREAM" resizable="false" closable="false" collapsible="false"> 
 	  			<div style="display: inline;">
 		           	<div style="float: right;">
-		           		<h:outputText value="BENVENUTO: " /><h:outputText value=" Richiamo l'id dell'impiegato connesso " />
+		           		<h:outputText value="BENVENUTO: " /><h:outputText value="#{loginImpiegatoBean.idImpiegato}" />
 			           	<h:button outcome="#{loginImpiegatoBean.logout()}" value="Logout"/><br /> <!-- METTERE IMPIEGATOBEANLOGOUT -->
 		         	</div>
 	         	</div>

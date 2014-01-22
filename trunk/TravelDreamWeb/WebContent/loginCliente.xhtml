@@ -30,8 +30,8 @@
     </p:password>
     <p:message for="password" />
     
+    <p:commandButton value="Accedi" action="#{loginClienteBean.login()}" actionListener="#{loginClienteBean.login()}" ajax="false"></p:commandButton>
     
-    <p:commandButton value="Accedi" action="#{loginClienteBean.login()}" ajax="false"></p:commandButton>
    </h:panelGrid>
   </p:fieldset>
  </h:form>
