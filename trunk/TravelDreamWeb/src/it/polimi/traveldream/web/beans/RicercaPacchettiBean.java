@@ -91,6 +91,7 @@ public class RicercaPacchettiBean implements Serializable {
 		this.disponibilita = disponibilita;
 	}
 
+	/*
 	public String ricercaPacchetti() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
@@ -103,4 +104,5 @@ public class RicercaPacchettiBean implements Serializable {
 		}
 
 	}
+	*/
 }

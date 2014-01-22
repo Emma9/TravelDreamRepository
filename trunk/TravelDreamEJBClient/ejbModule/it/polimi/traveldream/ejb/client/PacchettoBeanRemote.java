@@ -42,5 +42,10 @@ public interface PacchettoBeanRemote {
 
 	/**@return ArrayList<idPacchetto>*/
 	public ArrayList<Long> findAll();
+	
+	/**@param dataPartenza
+	 * @param dataRitorno
+	 * @return true if dataPartenza comes before dataRitorno, otherwise false*/
+	public boolean verificaConsistenzaDate (Date dataPartenza, Date dataRitorno);
 
 }
