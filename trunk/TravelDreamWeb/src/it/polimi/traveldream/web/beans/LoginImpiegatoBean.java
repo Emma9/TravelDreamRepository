@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean()
 @SessionScoped
-public class LoginImpiegatoBean implements LoginImpiegato, Serializable {
+public class LoginImpiegatoBean implements Serializable {
 
 	/**
 	 * 

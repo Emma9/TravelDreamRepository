@@ -30,7 +30,9 @@
     </p:password>
     <p:message for="password" />
     
-    <p:commandButton value="Accedi" action="#{loginClienteBean.login()}" actionListener="#{loginClienteBean.login()}" ajax="false"></p:commandButton>
+    
+    <p:growl id="messages" showDetail="true" />
+    <p:commandButton value="Accedi" actionListener="#{loginClienteBean.login()}" ajax="false"></p:commandButton>
     
    </h:panelGrid>
   </p:fieldset>
