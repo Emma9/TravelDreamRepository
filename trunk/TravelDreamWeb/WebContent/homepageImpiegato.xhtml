@@ -1,143 +1,100 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 </h:head>
 
 
-<p:layout fullPage="true">  
-  
-  <div align="center">
-	  <p:layoutUnit position="north" size="80"  header="TRAVELDREAM" resizable="false" closable="false" collapsible="false"> 
-	  			<div style="display: inline;">
-		           	<div style="float: right;">
-		           		<h:outputText value="BENVENUTO: " /><h:outputText value="#{loginImpiegatoBean.idImpiegato}" />
-			           	<h:button outcome="#{loginImpiegatoBean.logout()}" value="Logout"/><br /> <!-- METTERE IMPIEGATOBEANLOGOUT -->
-		         	</div>
-	         	</div>
-	    </p:layoutUnit>
-  </div>
-  
-  <p:layoutUnit position="west" size="550">  
-        <h:form id="ricercaPacchetto">
-			<p:tabView id="ricercaView">  
-			  
-			    <p:tab id="ricerca1" title="RICERCA PACCHETTO">
-			      
-			        <h:panelGrid columns="2" cellpadding="10">  
-			            <!--  <p:graphicImage id="tab1Img" value="/immagini/homepage/lastminute.jpg" />
-			              
-			            <h:outputText id="tab1Text" value="LISTA DEI PACCHETTI LASTMINUTE"/>
-			            -->
-			            
-			      	<div align="left">
-			      			<br />
-			      			<div align="left">
-			            	<h:outputText value="Destinazione: "/>
-			            	</div>
-						    <h:inputText value="" autocomplete="true"/>
-						    <br/>
-						    <h:outputText value="Data di Partenza: " />  
-						    <br/>
-						    <p:calendar value="#{calendarBean.date1}" id="popupA" />  
-						    <br/>
-						    <h:outputText value="Data di Arrivo: " /> 
-						    <br/>  
-						    <p:calendar value="#{calendarBean.date2}" id="popupR" /> 
-						    <br/>
-						    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">  
-						        <h:outputText value="Numero di Partecipanti: " />
-						        <br/>
-						        <p:selectOneMenu value="#{buttonBean.number}">  
-						            <f:selectItem itemLabel="1" itemValue="" />  
-						            <f:selectItem itemLabel="2" itemValue="2" />  
-						            <f:selectItem itemLabel="3" itemValue="3" />
-						            <f:selectItem itemLabel="4" itemValue="4" />  
-						            <f:selectItem itemLabel="5" itemValue="5" />
-						            <f:selectItem itemLabel="6" itemValue="6" />  
-						            <f:selectItem itemLabel="7" itemValue="7" /> 
-						            <f:selectItem itemLabel="8" itemValue="8" />       
-						        </p:selectOneMenu>  
-						    </h:panelGrid><br />
-						    <p:commandButton value="Ricerca" update="display" oncomplete="PF('dialog').show()" />
-						    <p:dialog header="Selected Dates" widgetVar="dialog"   
-						            showEffect="fade" hideEffect="fade">
-						        <h:panelGrid id="display" columns="2" cellpadding="5">                         
-						            <h:outputText value="Popup Date:" />  
-						            <h:outputText value="#{calendarBean.date1}" id="popupDate">  
-						                <f:convertDateTime pattern="d/M/yyyy"/>  
-						            </h:outputText>  
-						        </h:panelGrid>  
-						    </p:dialog> 
-			            </div>
-			         </h:panelGrid>		        	
-					  
-			    </p:tab>   
-			  
-			    <p:tab id="ricerca2" title="RICERCA COMPONENTE">  
-			        <h:panelGrid columns="2" cellpadding="10"> 
-			        <!--  
-			            <p:graphicImage id="tab2Img" value="/immagini/homepage/offerte.jpg" />  
-			            <h:outputText id="tab2Text" value="LISTA DEI PACCHETTI OFFERTE"/> 
-			         --> 
-			         
-			         
-			         <h:outputLabel value="DA SETTARE" />
-			         
-			         
-			         
-			        </h:panelGrid>  
-			    </p:tab>  
-  
-  </p:tabView> 
-        </h:form>  
-    </p:layoutUnit>  
-  
-  
-  
-  
-  <p:layoutUnit position="center">  
-        <h:form id="tabellapacchtti">
-			<p:tabView id="tabView">  
-			  
-			    <p:tab id="tab1" title="LAST-MINUTE">  
-			        <h:panelGrid columns="2" cellpadding="10">  
-			            <p:graphicImage id="tab1Img" value="/immagini/homepage/lastminute.jpg" />
-			              
-			            <h:outputText id="tab1Text" value="LISTA DEI PACCHETTI LASTMINUTE"/>
-			            
-			            </h:panelGrid>		        	
-					  
-			    </p:tab>   
-			  
-			    <p:tab id="tab2" title="OFFERTE">  
-			        <h:panelGrid columns="2" cellpadding="10">  
-			            <p:graphicImage id="tab2Img" value="/immagini/homepage/offerte.jpg" />  
-			            <h:outputText id="tab2Text" value="LISTA DEI PACCHETTI OFFERTE"/>  
-			        </h:panelGrid>  
-			    </p:tab>  
-			  
-			    <p:tab id="tab3" title="MARE">  
-			        <h:panelGrid columns="2" cellpadding="10">  
-			            <p:graphicImage id="tab3Img" value="/immagini/homepage/mare.jpg" />  
-			            <h:outputText id="tab3Text" value="LISTA DEI PACCHETTI MARE"/>  
-			        </h:panelGrid>  
-			    </p:tab>  
-			  
-			  	<p:tab id="tab4" title="MONTAGNA">  
-			        <h:panelGrid columns="2" cellpadding="10">  
-			            <p:graphicImage id="tab4Img" value="/immagini/homepage/montagna.jpg" />  
-			            <h:outputText id="tab4Text" value="LISTA DEI PACCHETTI MONTAGNA"/>  
-			        </h:panelGrid>  
-			    </p:tab> 
-			  
-			</p:tabView> 
-        </h:form>  
-    </p:layoutUnit>  
-  
-</p:layout> 
+<p:layout fullPage="true">
+
+	<div align="center">
+		<p:layoutUnit position="north" size="80" header="TRAVELDREAM"
+			resizable="false" closable="false" collapsible="false">
+			<div style="display: inline;">
+			
+				<div style="float: left;">
+					<h:button outcome="#{loginImpiegatoBean.logout()}" value="Crea Pacchetto" />
+					<h:button outcome="#{loginImpiegatoBean.logout()}" value="Aggiungi Componente" />
+					<br />
+					<!-- METTERE IMPIEGATOBEANLOGOUT -->
+				</div>
+			
+			
+				<div style="float: right;">
+					<h:outputText value="BENVENUTO: " />
+					<h:outputText value="#{loginImpiegatoBean.idImpiegato}" />
+					<h:button outcome="#{loginImpiegatoBean.logout()}" value="Logout" />
+					<br />
+					<!-- METTERE IMPIEGATOBEANLOGOUT -->
+				</div>
+			</div>
+		</p:layoutUnit>
+	</div>
+
+	<p:layoutUnit position="center" size="550">
+		<h:form id="ricercaPacchetto">
+			<p:tabView id="ricercaView">
+
+				<p:tab id="ricerca1" title="RICERCA COMPONENTE">
+					<h:panelGrid columns="2" cellpadding="30">
+						<div style="float: left">
+							<h:panelGrid columns="2" cellpadding="10" cellspacing="10">
+								<h:outputText value="Ricerca Componente Tramite Codice:" />
+								<br />
+								<div style="display: inline;">
+									<h:inputText value="" autocomplete="true" />
+									<p:commandButton value="Ricerca" update="ricerca1" />
+								</div>
+							</h:panelGrid>
+						</div>
+						<div style="float: left">
+							<h:panelGrid columns="2" cellpadding="10" cellspacing="10">
+								<h:outputText value="Ricerca Componente Tramite Termine:" />
+								<br />
+								<div style="display: inline;">
+									<h:inputText value="" autocomplete="true" />
+									<p:commandButton value="Ricerca" update="ricerca1" />
+								</div>
+							</h:panelGrid>
+						</div>
+					</h:panelGrid>
+				</p:tab>
+				<p:tab id="ricerca2" title="RICERCA PACCHETTO">
+					<h:panelGrid columns="2" cellpadding="30">
+						<div style="float: left">
+							<h:panelGrid columns="2" cellpadding="10" cellspacing="10">
+								<h:outputText value="Ricerca Pacchetto Tramite Codice:" />
+								<br />
+								<div style="display: inline;">
+									<h:inputText value="" autocomplete="true" />
+									<p:commandButton value="Ricerca" update="ricerca1" />
+								</div>
+							</h:panelGrid>
+						</div>
+						<div style="float: left">
+							<h:panelGrid columns="2" cellpadding="10" cellspacing="10">
+								<h:outputText value="Ricerca Pacchetto Tramite Termine:" />
+								<br />
+								<div style="display: inline;">
+									<h:inputText value="" autocomplete="true" />
+									<p:commandButton value="Ricerca" update="ricerca1" />
+								</div>
+							</h:panelGrid>
+						</div>
+					</h:panelGrid>
+				</p:tab>
+
+			</p:tabView>
+		</h:form>
+	</p:layoutUnit>
+
+
+
+
+
+</p:layout>
 
 </html>
