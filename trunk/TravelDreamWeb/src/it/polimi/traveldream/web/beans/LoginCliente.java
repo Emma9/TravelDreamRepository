@@ -4,6 +4,6 @@ public interface LoginCliente {
 
 	public String login();
 
-	public void logout();
+	public String logout();
 
 }

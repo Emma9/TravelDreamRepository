@@ -44,14 +44,14 @@ public class RegistrazioneBean implements Registrazione, Serializable{
 
 		      context.addMessage(null, new FacesMessage("Cliente già registrato"));
 		      
-		      return "registrazioneProva";//pagina di registrazione
+		      return "registrazione";//pagina di registrazione
 		    
 		    }
 		    }catch (ServletException e) {
 		    	
 		    	context.addMessage(null, new FacesMessage("ERRORE: Registrazione fallita"));
 			      
-			      return "registrazioneProva";//pagina di registrazione
+			      return "registrazione";//pagina di registrazione
 		    	
 		    }
 		    

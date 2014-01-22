@@ -4,6 +4,6 @@ public interface LoginImpiegato {
 
 	public String login();
 
-	public void logout();
+	public String logout();
 
 }
