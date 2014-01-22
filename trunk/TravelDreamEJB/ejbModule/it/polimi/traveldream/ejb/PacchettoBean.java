@@ -25,17 +25,20 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	}
 
 	/**@param destinazione
+	 * @param dataInizioValidita
+	 * @param dataFineValidita
+	 * @param disponibilita
 	 * @param etichette
 	 * @param descrizione
 	 * @param listaComponenti
 	 * @return idPacchetto*/
-	public Long createPacchetto(String destinazione, Date dataPartenza, Date dataRitorno, int disponibilita, ArrayList<Etichetta> etichette, String descrizione,ArrayList<Long> listaComponenti) {
+	public Long createPacchetto(String destinazione, Date dataInizioValidita, Date dataFineValidita, int disponibilita, ArrayList<Etichetta> etichette, String descrizione,ArrayList<Long> listaComponenti) {
 
 		Pacchetto pacchetto = new Pacchetto();
 
 		pacchetto.setDestinazione(destinazione);
-		pacchetto.setDataPartenza(dataPartenza);
-		pacchetto.setDataRitorno(dataRitorno);
+		pacchetto.setDataInizioValidita(dataInizioValidita);
+		pacchetto.setDataFineValidita(dataFineValidita);
 		pacchetto.setDisponibilita(disponibilita);
 		pacchetto.setEtichette(etichette);
 		pacchetto.setDescrizione(descrizione);
@@ -56,18 +59,21 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 
 	/**@param idPacchetto
 	 * @param destinazione
+	 * @param dataInizioValidita
+	 * @param dataFineValidita
+	 * @param disponibilita
 	 * @param etichette
 	 * @param descrizione
 	 * @param listaComponenti*/
-	public void updatePacchetto(Long idPacchetto, String destinazione, Date dataPartenza, Date dataRitorno, int disponibilita, ArrayList<Etichetta> etichette, String descrizione,ArrayList<Long> listaComponenti) {
+	public void updatePacchetto(Long idPacchetto, String destinazione, Date dataInizioValidita, Date dataFineValidita, int disponibilita, ArrayList<Etichetta> etichette, String descrizione,ArrayList<Long> listaComponenti) {
 
 		if (verificaPresenzaPacchetto(idPacchetto)) {
 
 			Pacchetto pacchetto = findByIdPacchetto(idPacchetto);
 
 			pacchetto.setDestinazione(destinazione);
-			pacchetto.setDataPartenza(dataPartenza);
-			pacchetto.setDataRitorno(dataRitorno);
+			pacchetto.setDataInizioValidita(dataInizioValidita);
+			pacchetto.setDataFineValidita(dataFineValidita);
 			pacchetto.setDisponibilita(disponibilita);
 			pacchetto.setEtichette(etichette);
 			pacchetto.setDescrizione(descrizione);
@@ -143,26 +149,6 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 		return pacchetto;
 	}
 	
-	
-	/**@param destinazione
-	 * @return ArrayList<idPacchetto>*/
-	public ArrayList<Pacchetto> ricercaLibera(String destinazione, Date dataPartenza, Date dataRitorno, int nPartecipanti) {
-
-		Query q = manager.createQuery("FROM Pacchetto p WHERE p.destinazione=:new_destinazione AND p.dataPartenza");
-
-		q.setParameter("new_destinazione", destinazione);
-
-		ArrayList<Pacchetto> pacchetti = new ArrayList<Pacchetto>();
-		@SuppressWarnings("unchecked")
-		ArrayList<Pacchetto> risultati = (ArrayList<Pacchetto>) q.getResultList();
-
-		for (int i = 0; i <= risultati.size(); i++) {
-
-			pacchetti.set(i, risultati.get(i).getIdPacchetto());
-			
-		}
-		return pacchetti;
-	}
 
 	/** @return ArrayList<idPacchetto> */
 	public ArrayList<Long> findAll() {
@@ -180,8 +166,27 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 		}
 		return lista;
 	}
-
-	/** Metodi private */
+	
+	/**@param dataPartenza
+	 * @param dataRitorno
+	 * @return true if dataPartenza comes before dataRitorno, otherwise false*/
+	public boolean verificaConsistenzaDate (Date dataPartenza, Date dataRitorno){
+		
+		if(dataPartenza.before(dataRitorno)){
+			
+			return true;
+			
+		}
+		
+		else{
+			
+			return false;
+			
+		}
+		
+	}
+	
+	
 
 	/**@param idPacchetto
 	 * @return true if idPacchetto is not present in the DB, otherwise false*/
