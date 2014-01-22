@@ -20,6 +20,8 @@ public class LoginClienteBean implements LoginCliente, Serializable {
 	private String email;
 
 	private String password;
+	
+	private boolean logged;
 
 	public String getEmail() {
 		return this.email;
@@ -37,6 +39,14 @@ public class LoginClienteBean implements LoginCliente, Serializable {
 		this.password = password;
 	}
 
+	public boolean isLogged(){
+		if(logged==true){
+			return true;
+		}
+		return false;
+	}
+	
+	
 	public String login() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
@@ -45,11 +55,20 @@ public class LoginClienteBean implements LoginCliente, Serializable {
 			
 			request.login(this.email, this.password);
 			
+			if(request.getRemoteUser()!=null){
+				logged=true;
+			}
+			
 		} catch (ServletException e) {
 
-			context.addMessage(null, new FacesMessage("Login fallito."));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Login fallito."));
 			
 			return "loginCliente";  // pagina login cliente
+		}
+		
+		if(logged==false){
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Login fallito."));
+			return "loginCliente";
 		}
 		
 		return "homepageCliente"; // homepage personalizzata del cliente
