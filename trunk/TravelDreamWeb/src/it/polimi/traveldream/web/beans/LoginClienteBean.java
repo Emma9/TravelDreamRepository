@@ -6,6 +6,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
@@ -47,7 +48,7 @@ public class LoginClienteBean implements Serializable {
 	}
 	
 	
-	public String login() {
+	public String login(ActionEvent actionEvent) {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
 				.getExternalContext().getRequest();
@@ -61,13 +62,13 @@ public class LoginClienteBean implements Serializable {
 			
 		} catch (ServletException e) {
 
-			context.addMessage(null, new FacesMessage("Login fallito."));
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Login fallito", ""));
 			
 			return "loginCliente";  // pagina login cliente
 		}
 		
 		if(logged==false){
-			context.addMessage(null, new FacesMessage("Login fallito."));
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Login fallito", ""));
 			return "loginCliente";
 		}
 		
@@ -84,7 +85,7 @@ public class LoginClienteBean implements Serializable {
 			
 		} catch (ServletException e) {
 
-			context.addMessage(null, new FacesMessage("Logout fallito."));
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Logout fallito", ""));
 			
 			return "homepageCliente"; // home page personalizzata del cliente
 			
