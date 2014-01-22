@@ -15,7 +15,7 @@
 	  			<div style="display: inline;">
 		           	<div style="float: right;">
 		           		<h:outputText value="BENVENUTO: " /><h:outputText value=" Richiamo l'id dell'impiegato connesso " />
-			           	<h:button outcome="loginImpiegatoProva" value="Logout"/><br /> <!-- METTERE IMPIEGATOBEANLOGOUT -->
+			           	<h:button outcome="#{loginImpiegatoBean.logout()}" value="Logout"/><br /> <!-- METTERE IMPIEGATOBEANLOGOUT -->
 		         	</div>
 	         	</div>
 	    </p:layoutUnit>
