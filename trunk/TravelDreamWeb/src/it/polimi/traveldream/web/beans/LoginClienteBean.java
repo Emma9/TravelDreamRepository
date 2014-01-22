@@ -6,6 +6,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
@@ -47,7 +48,7 @@ public class LoginClienteBean implements LoginCliente, Serializable {
 	}
 	
 	
-	public String login() {
+	public String login(ActionEvent actionEvent) {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
 				.getExternalContext().getRequest();
@@ -90,6 +91,12 @@ public class LoginClienteBean implements LoginCliente, Serializable {
 			
 		}
 		return "homepage"; //homepage del sito web
+	}
+
+	@Override
+	public String login() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
