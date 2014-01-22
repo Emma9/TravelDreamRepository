@@ -6,6 +6,7 @@ import it.polimi.traveldream.entities.Etichetta;
 import it.polimi.traveldream.entities.Pacchetto;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -28,11 +29,14 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 * @param descrizione
 	 * @param listaComponenti
 	 * @return idPacchetto*/
-	public Long createPacchetto(String destinazione,ArrayList<Etichetta> etichette, String descrizione,ArrayList<Long> listaComponenti) {
+	public Long createPacchetto(String destinazione, Date dataPartenza, Date dataRitorno, int disponibilita, ArrayList<Etichetta> etichette, String descrizione,ArrayList<Long> listaComponenti) {
 
 		Pacchetto pacchetto = new Pacchetto();
 
 		pacchetto.setDestinazione(destinazione);
+		pacchetto.setDataPartenza(dataPartenza);
+		pacchetto.setDataRitorno(dataRitorno);
+		pacchetto.setDisponibilita(disponibilita);
 		pacchetto.setEtichette(etichette);
 		pacchetto.setDescrizione(descrizione);
 		pacchetto.setListaComponenti(listaComponenti);
@@ -55,13 +59,16 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 * @param etichette
 	 * @param descrizione
 	 * @param listaComponenti*/
-	public void updatePacchetto(Long idPacchetto, String destinazione,ArrayList<Etichetta> etichette, String descrizione,ArrayList<Long> listaComponenti) {
+	public void updatePacchetto(Long idPacchetto, String destinazione, Date dataPartenza, Date dataRitorno, int disponibilita, ArrayList<Etichetta> etichette, String descrizione,ArrayList<Long> listaComponenti) {
 
 		if (verificaPresenzaPacchetto(idPacchetto)) {
 
 			Pacchetto pacchetto = findByIdPacchetto(idPacchetto);
 
 			pacchetto.setDestinazione(destinazione);
+			pacchetto.setDataPartenza(dataPartenza);
+			pacchetto.setDataRitorno(dataRitorno);
+			pacchetto.setDisponibilita(disponibilita);
 			pacchetto.setEtichette(etichette);
 			pacchetto.setDescrizione(descrizione);
 			pacchetto.setListaComponenti(listaComponenti);
@@ -134,6 +141,27 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 		Pacchetto pacchetto = (Pacchetto) q.getSingleResult();
 
 		return pacchetto;
+	}
+	
+	
+	/**@param destinazione
+	 * @return ArrayList<idPacchetto>*/
+	public ArrayList<Pacchetto> ricercaLibera(String destinazione, Date dataPartenza, Date dataRitorno, int nPartecipanti) {
+
+		Query q = manager.createQuery("FROM Pacchetto p WHERE p.destinazione=:new_destinazione AND p.dataPartenza");
+
+		q.setParameter("new_destinazione", destinazione);
+
+		ArrayList<Pacchetto> pacchetti = new ArrayList<Pacchetto>();
+		@SuppressWarnings("unchecked")
+		ArrayList<Pacchetto> risultati = (ArrayList<Pacchetto>) q.getResultList();
+
+		for (int i = 0; i <= risultati.size(); i++) {
+
+			pacchetti.set(i, risultati.get(i).getIdPacchetto());
+			
+		}
+		return pacchetti;
 	}
 
 	/** @return ArrayList<idPacchetto> */
