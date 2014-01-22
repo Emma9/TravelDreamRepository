@@ -7,59 +7,62 @@ import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
-public class LoginClienteBean implements LoginCliente,Serializable{
+public class LoginClienteBean implements LoginCliente, Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private String email;  
+	private String email;
 
-    private String password; 
-    
-      
-    public String getEmail() {
-	    return this.email;
-	  }
+	private String password;
 
-	  public void setEmail(String email) {
-	    this.email = email;
-	  }
+	public String getEmail() {
+		return this.email;
+	}
 
-	  public String getPassword() {
-	    return this.password;
-	  }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-	  public void setPassword(String password) {
-	    this.password = password;
-	  }
+	public String getPassword() {
+		return this.password;
+	}
 
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
+	public String login() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+		try {
+			
+			request.login(this.email, this.password);
+			
+		} catch (ServletException e) {
 
-	  public String login () {
-	    FacesContext context = FacesContext.getCurrentInstance();
-	    HttpServletRequest request = (HttpServletRequest) 
-	        context.getExternalContext().getRequest();
-	    try {
-	      request.login(this.email, this.password);
-	    } catch (ServletException e) {
+			context.addMessage(null, new FacesMessage("Login fallito."));
+			
+			return "loginProva";  // pagina login cliente
+		}
+		
+		return "homepageCliente"; // homepage personalizzata del cliente
+	}
 
-	      context.addMessage(null, new FacesMessage("Login fallito."));
-	      return "errore";
-	    }
-	    return "index"; //homepage personalizzata del cliente
-	  }
+	public void logout() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+		try {
+			
+			request.logout();
+			
+		} catch (ServletException e) {
 
-	  public void logout() {
-	    FacesContext context = FacesContext.getCurrentInstance();
-	    HttpServletRequest request = (HttpServletRequest) 
-	        context.getExternalContext().getRequest();
-	    try {
-	      request.logout();
-	    } catch (ServletException e) {
-
-	      context.addMessage(null, new FacesMessage("Logout fallito."));
-	    }
-	  }
+			context.addMessage(null, new FacesMessage("Logout fallito."));
+		}
+	}
 
 }

@@ -7,59 +7,60 @@ import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
-public class LoginImpiegatoBean implements LoginImpiegato,Serializable{
+public class LoginImpiegatoBean implements LoginImpiegato, Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private String idImpiegato;  
+	private String idImpiegato;
 
-    private String codiceImpiegato; 
-    
-      
-    public String getidImpiegato() {
-	    return this.idImpiegato;
-	  }
+	private String codiceImpiegato;
 
-	  public void setIdImpiegato(String idImpiegato) {
-	    this.idImpiegato = idImpiegato;
-	  }
+	public String getidImpiegato() {
+		return this.idImpiegato;
+	}
 
-	  public String getCodiceImpiegato() {
-	    return this.codiceImpiegato;
-	  }
+	public void setIdImpiegato(String idImpiegato) {
+		this.idImpiegato = idImpiegato;
+	}
 
-	  public void setCodiceImpiegato(String codiceImpiegato) {
-	    this.codiceImpiegato = codiceImpiegato;
-	  }
+	public String getCodiceImpiegato() {
+		return this.codiceImpiegato;
+	}
 
+	public void setCodiceImpiegato(String codiceImpiegato) {
+		this.codiceImpiegato = codiceImpiegato;
+	}
 
+	public String login() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+		try {
+			request.login(this.idImpiegato, this.codiceImpiegato);
+			
+		} catch (ServletException e) {
 
-	  public String login () {
-	    FacesContext context = FacesContext.getCurrentInstance();
-	    HttpServletRequest request = (HttpServletRequest) 
-	        context.getExternalContext().getRequest();
-	    try {
-	      request.login(this.idImpiegato, this.codiceImpiegato);
-	    } catch (ServletException e) {
+			context.addMessage(null, new FacesMessage("Login fallito."));
+			
+			return "errore";        // pagina di login dell'impiegato
+		}
+		
+		return "homepageImpiegato"; // homepage personalizzata dell'impiegato
+	
+	}
 
-	      context.addMessage(null, new FacesMessage("Login fallito."));
-	      return "errore";
-	    }
-	    return "index"; //homepage personalizzata dell'impiegato
-	  }
+	public void logout() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+		try {
+			request.logout();
+		} catch (ServletException e) {
 
-	  public void logout() {
-	    FacesContext context = FacesContext.getCurrentInstance();
-	    HttpServletRequest request = (HttpServletRequest) 
-	        context.getExternalContext().getRequest();
-	    try {
-	      request.logout();
-	    } catch (ServletException e) {
-
-	      context.addMessage(null, new FacesMessage("Logout fallito."));
-	    }
-	  }
+			context.addMessage(null, new FacesMessage("Logout fallito."));
+		}
+	}
 }
