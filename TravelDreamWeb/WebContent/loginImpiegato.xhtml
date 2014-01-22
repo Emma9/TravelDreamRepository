@@ -15,26 +15,29 @@
     
      
     <h:outputLabel value="Identificativo Impiegato" />
-    <p:password value="#{loginImpiegatoBean.idImpiegato}"
+    <p:inputText value="#{loginImpiegatoBean.idImpiegato}"
        id="idImpiegato"
        required="true"
        requiredMessage="Devi inserire l'id">
-    </p:password>
+    </p:inputText>
     <p:message for="idImpiegato" />
     
     
     <h:outputLabel value="Codice Segreto" />
-    <p:inputText value="#{loginImpiegatoBean.codiceImpiegato}"
+    <p:password value="#{loginImpiegatoBean.codiceImpiegato}"
        id="codiceSegreto"
        required="true"
        requiredMessage="Devi inserire il codice segreto">
-    </p:inputText>
+    </p:password>
     <p:message for="codiceSegreto" />
     
    
     
     
-    <p:commandButton value="Accedi" action="#{loginImpiegatoBean.login()}" ajax="false"></p:commandButton>
+    <p:commandButton value="Accedi" actionListener="#{loginImpiegatoBean.login}"></p:commandButton>
+    <p:messages id="message" showSummary="true" showDetail="false" autoUpdate="true" closable="true"/>
+    
+    
    </h:panelGrid>
   </p:fieldset>
  </h:form>
