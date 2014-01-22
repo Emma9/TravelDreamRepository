@@ -61,13 +61,13 @@ public class LoginClienteBean implements LoginCliente, Serializable {
 			
 		} catch (ServletException e) {
 
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Login fallito."));
+			context.addMessage(null, new FacesMessage("Login fallito."));
 			
 			return "loginCliente";  // pagina login cliente
 		}
 		
 		if(logged==false){
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Login fallito."));
+			context.addMessage(null, new FacesMessage("Login fallito."));
 			return "loginCliente";
 		}
 		
