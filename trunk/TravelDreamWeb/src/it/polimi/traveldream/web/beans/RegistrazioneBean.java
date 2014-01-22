@@ -4,12 +4,16 @@ import java.io.Serializable;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 import it.polimi.traveldream.ejb.client.ClienteBeanRemote;
 
+@ManagedBean()
+@SessionScoped
 public class RegistrazioneBean implements Registrazione, Serializable{
 
 	/**

@@ -7,31 +7,34 @@
 <h:head>
 </h:head>
 <h:body>
- <h2>FORM DI LOGIN CLIENTE</h2>
+ <h2>FORM DI LOGIN IMPIEGATO</h2>
  <h:form>
   <p:fieldset legend="Login Form" widgetVar="regWidget" style="width: 600px;">
    <h:panelGrid columns="3" width="550" border="0">
     
-    <h:outputLabel value="Email" />
-    <p:inputText value="#{loginBean.registrationForm.email}"
-       id="email"
-       required="true"
-       requiredMessage="Devi inserire l'email">  
-    </p:inputText>
-    <p:message for="email" />
     
-    
-    <h:outputLabel value="Password" />
-    <p:password value="#{loginBean.registrationForm.password}"
-       id="password"
+     
+    <h:outputLabel value="Identificativo Impiegato" />
+    <p:password value="#{loginImpiegatoBean.idImpiegato}"
+       id="idImpiegato"
        required="true"
-       requiredMessage="Devi inserire una password"
-       >
+       requiredMessage="Devi inserire l'id">
     </p:password>
-    <p:message for="password" />
+    <p:message for="idImpiegato" />
     
     
-    <p:commandButton value="Accedi" action="#{loginBean.login}" ajax="false"></p:commandButton>
+    <h:outputLabel value="Codice Segreto" />
+    <p:inputText value="#{loginImpiegatoBean.codiceImpiegato}"
+       id="codiceSegreto"
+       required="true"
+       requiredMessage="Devi inserire il codice segreto">
+    </p:inputText>
+    <p:message for="codiceSegreto" />
+    
+   
+    
+    
+    <p:commandButton value="Accedi" action="#{loginImpiegatoBean.login()}" ajax="false"></p:commandButton>
    </h:panelGrid>
   </p:fieldset>
  </h:form>

@@ -13,7 +13,7 @@
    <h:panelGrid columns="3" width="550" border="0">
    
     <h:outputLabel value="Nome" />
-    <p:inputText value="#{registrazioneBean.registrazioneForm.nome}"
+    <p:inputText value="#{registrazioneBean.nome}"
        id="nome"
         required="true"
         requiredMessage="Devi inseriere il nome"
@@ -24,7 +24,7 @@
     <p:message for="nome"/>
     
     <h:outputLabel value="Cognome" />
-    <p:inputText value="#{registrazioneBean.registrazioneForm.cognome}"
+    <p:inputText value="#{registrazioneBean.cognome}"
        id="cognome"
        required="true"
        requiredMessage="Devi inserire il cognome"
@@ -35,7 +35,7 @@
     <p:message for="cognome" />
     
     <h:outputLabel value="Codice Fiscale" />
-    <p:inputText value="#{registrazioneBean.registrazioneForm.codiceFiscale}"
+    <p:inputText value="#{registrazioneBean.codiceFiscale}"
        id="codiceFiscale"
        required="true"
        requiredMessage="Devi inserire il codice fiscale"
@@ -51,7 +51,7 @@
     <p:message for="codiceFiscale" />
     
     <h:outputLabel value="Email" />
-    <p:inputText value="#{registrazioneBean.registrazioneForm.email}"
+    <p:inputText value="#{registrazioneBean.email}"
        id="email"
        required="true"
        requiredMessage="Devi inserire l'email"
@@ -71,7 +71,7 @@
     <p:message for="email" />
     
     <h:outputLabel value="Password" />
-    <p:password value="#{registrazioneBean.registrazioneForm.password}"
+    <p:password value="#{registrazioneBean.password}"
        id="password"
        required="true"
        requiredMessage="Devi inserire una password"
@@ -116,7 +116,7 @@
     
     -->
     
-    <p:commandButton value="Crea Account" action="#{registrazioneBean.register}" ajax="false"></p:commandButton>
+    <p:commandButton value="Crea Account" action="#{registrazioneBean.registrazione()}" ajax="false"></p:commandButton>
    </h:panelGrid>
   </p:fieldset>
   
