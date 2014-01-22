@@ -45,22 +45,29 @@ public class LoginImpiegatoBean implements LoginImpiegato, Serializable {
 
 			context.addMessage(null, new FacesMessage("Login fallito."));
 			
-			return "errore";        // pagina di login dell'impiegato
+			return "loginImpiegato";    // pagina di login dell'impiegato
 		}
 		
 		return "homepageImpiegato"; // homepage personalizzata dell'impiegato
 	
 	}
 
-	public void logout() {
+	public String logout() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
 				.getExternalContext().getRequest();
 		try {
+			
 			request.logout();
+			
 		} catch (ServletException e) {
 
 			context.addMessage(null, new FacesMessage("Logout fallito."));
+			
+			return "homepageImpiegato"; // home page personalizzata dell'impiegato
+			
 		}
+		
+		return "homepage"; //homepage del sito web
 	}
 }

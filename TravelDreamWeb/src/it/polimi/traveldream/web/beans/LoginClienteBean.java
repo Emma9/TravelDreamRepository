@@ -45,13 +45,13 @@ public class LoginClienteBean implements LoginCliente, Serializable {
 
 			context.addMessage(null, new FacesMessage("Login fallito."));
 			
-			return "loginProva";  // pagina login cliente
+			return "loginCliente";  // pagina login cliente
 		}
 		
 		return "homepageCliente"; // homepage personalizzata del cliente
 	}
 
-	public void logout() {
+	public String logout() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
 				.getExternalContext().getRequest();
@@ -62,7 +62,11 @@ public class LoginClienteBean implements LoginCliente, Serializable {
 		} catch (ServletException e) {
 
 			context.addMessage(null, new FacesMessage("Logout fallito."));
+			
+			return "homepageCliente"; // home page personalizzata del cliente
+			
 		}
+		return "homepage"; //homepage del sito web
 	}
 
 }
