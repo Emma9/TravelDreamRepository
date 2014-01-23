@@ -2,16 +2,17 @@ package it.polimi.traveldream.ejb;
 
 import it.polimi.traveldream.ejb.client.ImpiegatoBeanLocal;
 import it.polimi.traveldream.ejb.client.ImpiegatoBeanRemote;
-import it.polimi.traveldream.entities.Impiegato;
+import it.polimi.traveldream.entities.ImpiegatoDTO;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**Session Bean implementation class ImpiegatoBean*/
 @Stateless
@@ -34,7 +35,7 @@ public class ImpiegatoBean implements ImpiegatoBeanRemote,ImpiegatoBeanLocal {
 
 		if (verificaPresenzaImpiegatoCf(codiceFiscale)) {
 
-			Impiegato impiegato = new Impiegato();
+			ImpiegatoDTO impiegato = new ImpiegatoDTO();
 			
 			BigInteger bi = new BigInteger(130, random);
 			String codice = bi.toString(8);
@@ -57,7 +58,7 @@ public class ImpiegatoBean implements ImpiegatoBeanRemote,ImpiegatoBeanLocal {
 	/**@param idImpiegato*/
 	public void removeImpiegato(Long idImpiegato) {
 
-		Impiegato i = findByIdImpiegato(idImpiegato);
+		ImpiegatoDTO i = findByIdImpiegato(idImpiegato);
 		
 		manager.remove(i);
 
@@ -71,7 +72,7 @@ public class ImpiegatoBean implements ImpiegatoBeanRemote,ImpiegatoBeanLocal {
 
 		if (verificaPresenzaImpiegatoId(idImpiegato)) {
 
-			Impiegato impiegato = findByIdImpiegato(idImpiegato);
+			ImpiegatoDTO impiegato = findByIdImpiegato(idImpiegato);
 
 			impiegato.setCodiceFiscale(codiceFiscale);
 			impiegato.setNome(nome);
@@ -83,13 +84,13 @@ public class ImpiegatoBean implements ImpiegatoBeanRemote,ImpiegatoBeanLocal {
 
 	/**@param idImpiegato
 	 * @return Impiegato*/
-	public Impiegato findByIdImpiegato(Long idImpiegato) {
+	public ImpiegatoDTO findByIdImpiegato(Long idImpiegato) {
 
-		Query q = manager.createQuery("FROM Impiegato i WHERE i.idImpiegato=:new_idImpiegato");
+		TypedQuery<ImpiegatoDTO> q = manager.createQuery("FROM Impiegato i WHERE i.idImpiegato=:new_idImpiegato", ImpiegatoDTO.class);
 
 		q.setParameter("new_idImpiegato", idImpiegato);
 
-		Impiegato impiegato = (Impiegato) q.getSingleResult();
+		ImpiegatoDTO impiegato = q.getSingleResult();
 
 		return impiegato;
 	}
@@ -97,10 +98,9 @@ public class ImpiegatoBean implements ImpiegatoBeanRemote,ImpiegatoBeanLocal {
 	/**@return ArrayList<idImpiegato>*/
 	public ArrayList<Long> findAll() {
 
-		Query q = manager.createQuery("FROM Impiegato i");
+		TypedQuery<ImpiegatoDTO> q = manager.createQuery("FROM Impiegato i", ImpiegatoDTO.class);
 
-		@SuppressWarnings("unchecked")
-		ArrayList<Impiegato> impiegati = (ArrayList<Impiegato>) q.getResultList();
+		List<ImpiegatoDTO> impiegati = q.getResultList();
 
 		ArrayList<Long> lista = new ArrayList<Long>();
 
@@ -118,12 +118,11 @@ public class ImpiegatoBean implements ImpiegatoBeanRemote,ImpiegatoBeanLocal {
 	 * @return true if codiceFiscale is not present in the DB, otherwise false*/
 	private boolean verificaPresenzaImpiegatoCf(String codiceFiscale) {
 		try {
-			Query q = manager.createQuery("FROM Impiegato i WHERE i.codiceFiscale=:new_codiceFiscale");
+			TypedQuery<ImpiegatoDTO> q = manager.createQuery("FROM Impiegato i WHERE i.codiceFiscale=:new_codiceFiscale", ImpiegatoDTO.class);
 
 			q.setParameter("new_codiceFiscale", codiceFiscale);
 
-			@SuppressWarnings("unchecked")
-			ArrayList<Impiegato> impiegati = (ArrayList<Impiegato>) q.getResultList();
+			List<ImpiegatoDTO> impiegati = q.getResultList();
 
 			if (impiegati.size() == 0) {
 				
@@ -143,12 +142,11 @@ public class ImpiegatoBean implements ImpiegatoBeanRemote,ImpiegatoBeanLocal {
 	 * @return true if idImpiegato is not present in the DB, otherwise false*/
 	private boolean verificaPresenzaImpiegatoId(Long idImpiegato) {
 		try {
-			Query q = manager.createQuery("FROM Impiegato i WHERE i.idImpiegato=:new_idImpiegato");
+			TypedQuery<ImpiegatoDTO> q = manager.createQuery("FROM Impiegato i WHERE i.idImpiegato=:new_idImpiegato", ImpiegatoDTO.class);
 
 			q.setParameter("new_idImpiegato", idImpiegato);
 
-			@SuppressWarnings("unchecked")
-			ArrayList<Impiegato> impiegati = (ArrayList<Impiegato>) q.getResultList();
+			List<ImpiegatoDTO> impiegati = q.getResultList();
 
 			if (impiegati.size() == 0) {
 				

@@ -1,6 +1,6 @@
 package it.polimi.traveldream.ejb.client;
 
-import it.polimi.traveldream.entities.Impiegato;
+import it.polimi.traveldream.entities.ImpiegatoDTO;
 
 import java.util.ArrayList;
 
@@ -26,7 +26,7 @@ public interface ImpiegatoBeanRemote {
 
 	/**@param idImpiegato
 	 * @return Impiegato*/
-	public Impiegato findByIdImpiegato(Long idImpiegato);
+	public ImpiegatoDTO findByIdImpiegato(Long idImpiegato);
 
 	/**@return ArrayList<idImpiegato>*/
 	public ArrayList<Long> findAll();

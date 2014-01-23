@@ -1,7 +1,7 @@
 package it.polimi.traveldream.ejb.client;
 
-import it.polimi.traveldream.entities.Componente;
-import it.polimi.traveldream.entities.Tipologia;
+import it.polimi.traveldream.entities.ComponenteDTO;
+import it.polimi.traveldream.entities.TipologiaDTO;
 
 import java.util.ArrayList;
 
@@ -13,7 +13,7 @@ public interface ComponenteBeanRemote {
 	/**@param tipologia
 	 * @param descrizione
 	 * @return codiceComponente*/
-	public Long createComponente(Tipologia tipologia, String descrizione);
+	public Long createComponente(TipologiaDTO tipologia, String descrizione);
 
 	/**@param codiceComponente*/
 	public void removeComponente(Long codiceComponente);
@@ -21,11 +21,11 @@ public interface ComponenteBeanRemote {
 	/**@param codiceComponente
 	 * @param tipologia
 	 * @param descrizione*/
-	public void updateComponente(Long codiceComponente, Tipologia tipologia,String descrizione);
+	public void updateComponente(Long codiceComponente, TipologiaDTO tipologia,String descrizione);
 
 	/**@param codiceComponente
 	 * @return Componente*/
-	public Componente findByCodiceComponente(Long codiceCompoente);
+	public ComponenteDTO findByCodiceComponente(Long codiceCompoente);
 
 	/**@return ArrayList<codiceComponente>*/
 	public ArrayList<Long> findAll();

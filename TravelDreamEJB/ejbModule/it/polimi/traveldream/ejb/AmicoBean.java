@@ -4,6 +4,7 @@ import it.polimi.traveldream.ejb.client.AmicoBeanLocal;
 import it.polimi.traveldream.ejb.client.AmicoBeanRemote;
 import it.polimi.traveldream.ejb.client.InvitoBeanRemote;
 import it.polimi.traveldream.entities.Amico;
+import it.polimi.traveldream.entities.AmicoDTO;
 
 import java.util.*;
 
@@ -53,7 +54,7 @@ public class AmicoBean implements AmicoBeanRemote, AmicoBeanLocal {
 
 			invitoLocal.removeInvito(daIdAEmail(idAmico));
 
-			Amico a = findByIdAmico(idAmico);
+			AmicoDTO a = findByIdAmico(idAmico);
 			manager.remove(a);
 
 		} catch (NamingException e) {
@@ -69,7 +70,7 @@ public class AmicoBean implements AmicoBeanRemote, AmicoBeanLocal {
 
 		if (verificaPresenzaAmicoId(idAmico)) {
 
-			Amico amico = findByIdAmico(idAmico);
+			AmicoDTO amico = findByIdAmico(idAmico);
 
 			amico.setEmail(email);
 
@@ -79,13 +80,13 @@ public class AmicoBean implements AmicoBeanRemote, AmicoBeanLocal {
 
 	/**@param idAmico
 	 * @return Amico*/
-	public Amico findByIdAmico(Long idAmico) {
+	public AmicoDTO findByIdAmico(Long idAmico) {
 
-		Query q = manager.createQuery("FROM Amico a WHERE a.idAmico=:new_idAmico");
+		TypedQuery<AmicoDTO> q = manager.createQuery("FROM Amico a WHERE a.idAmico=:new_idAmico", AmicoDTO.class);
 
 		q.setParameter("new_idAmico", idAmico);
 
-		Amico amico = (Amico) q.getSingleResult();
+		AmicoDTO amico = q.getSingleResult();
 
 		return amico;
 	}
@@ -93,10 +94,9 @@ public class AmicoBean implements AmicoBeanRemote, AmicoBeanLocal {
 	/**@return ArrayList<idAmico>*/
 	public ArrayList<Long> findAll() {
 
-		Query q = manager.createQuery("FROM Amico a");
+		TypedQuery<AmicoDTO> q = manager.createQuery("FROM Amico a", AmicoDTO.class);
 
-		@SuppressWarnings("unchecked")
-		ArrayList<Amico> amici = (ArrayList<Amico>) q.getResultList();
+		List<AmicoDTO> amici = q.getResultList();
 
 		ArrayList<Long> lista = new ArrayList<Long>();
 
@@ -114,13 +114,12 @@ public class AmicoBean implements AmicoBeanRemote, AmicoBeanLocal {
 	 * @return true if email is not present in the DB, otherwise false*/
 	private boolean verificaPresenzaAmicoEm(String email) {
 		try {
-			Query q = manager
-					.createQuery("FROM Amico a WHERE a.email=:new_email");
+			TypedQuery<AmicoDTO> q = manager
+					.createQuery("FROM Amico a WHERE a.email=:new_email", AmicoDTO.class);
 
 			q.setParameter("new_email", email);
 
-			@SuppressWarnings("unchecked")
-			ArrayList<Amico> amici = (ArrayList<Amico>) q.getResultList();
+			List<AmicoDTO> amici = q.getResultList();
 
 			if (amici.size() == 0) {
 				return true;
@@ -138,12 +137,11 @@ public class AmicoBean implements AmicoBeanRemote, AmicoBeanLocal {
 	 * @return true if idAmico is not present in the DB, otherwise false*/
 	private boolean verificaPresenzaAmicoId(Long idAmico) {
 		try {
-			Query q = manager.createQuery("FROM Amico a WHERE a.idAmico=:new_idAmico");
+			TypedQuery<AmicoDTO> q = manager.createQuery("FROM Amico a WHERE a.idAmico=:new_idAmico", AmicoDTO.class);
 
 			q.setParameter("new_idAmico", idAmico);
 
-			@SuppressWarnings("unchecked")
-			ArrayList<Amico> amici = (ArrayList<Amico>) q.getResultList();
+			List<AmicoDTO> amici = q.getResultList();
 
 			if (amici.size() == 0) {
 				return true;
@@ -160,7 +158,7 @@ public class AmicoBean implements AmicoBeanRemote, AmicoBeanLocal {
 	/**@param idAmico
 	 * @return email*/
 	private String daIdAEmail(Long idAmico) {
-		Amico a = findByIdAmico(idAmico);
+		AmicoDTO a = findByIdAmico(idAmico);
 		return a.getEmail();
 	}
 }

@@ -2,16 +2,17 @@ package it.polimi.traveldream.ejb;
 
 import it.polimi.traveldream.ejb.client.PacchettoBeanLocal;
 import it.polimi.traveldream.ejb.client.PacchettoBeanRemote;
-import it.polimi.traveldream.entities.Etichetta;
-import it.polimi.traveldream.entities.Pacchetto;
+import it.polimi.traveldream.entities.EtichettaDTO;
+import it.polimi.traveldream.entities.PacchettoDTO;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**Session Bean implementation class PacchettoBean*/
 @Stateless
@@ -32,9 +33,9 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 * @param descrizione
 	 * @param listaComponenti
 	 * @return idPacchetto*/
-	public Long createPacchetto(String destinazione, Date dataInizioValidita, Date dataFineValidita, int disponibilita, ArrayList<Etichetta> etichette, String descrizione,ArrayList<Long> listaComponenti) {
+	public Long createPacchetto(String destinazione, Date dataInizioValidita, Date dataFineValidita, int disponibilita, ArrayList<EtichettaDTO> etichette, String descrizione,ArrayList<Long> listaComponenti) {
 
-		Pacchetto pacchetto = new Pacchetto();
+		PacchettoDTO pacchetto = new PacchettoDTO();
 
 		pacchetto.setDestinazione(destinazione);
 		pacchetto.setDataInizioValidita(dataInizioValidita);
@@ -51,7 +52,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	/**@param idPacchetto*/
 	public void removePacchetto(Long idPacchetto) {
 
-		Pacchetto p = findByIdPacchetto(idPacchetto);
+		PacchettoDTO p = findByIdPacchetto(idPacchetto);
 		
 		manager.remove(p);
 
@@ -65,11 +66,11 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 * @param etichette
 	 * @param descrizione
 	 * @param listaComponenti*/
-	public void updatePacchetto(Long idPacchetto, String destinazione, Date dataInizioValidita, Date dataFineValidita, int disponibilita, ArrayList<Etichetta> etichette, String descrizione,ArrayList<Long> listaComponenti) {
+	public void updatePacchetto(Long idPacchetto, String destinazione, Date dataInizioValidita, Date dataFineValidita, int disponibilita, ArrayList<EtichettaDTO> etichette, String descrizione,ArrayList<Long> listaComponenti) {
 
 		if (verificaPresenzaPacchetto(idPacchetto)) {
 
-			Pacchetto pacchetto = findByIdPacchetto(idPacchetto);
+			PacchettoDTO pacchetto = findByIdPacchetto(idPacchetto);
 
 			pacchetto.setDestinazione(destinazione);
 			pacchetto.setDataInizioValidita(dataInizioValidita);
@@ -87,13 +88,12 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 * @return ArrayList<idPacchetto>*/
 	public ArrayList<Long> findByDestinazione(String destinazione) {
 
-		Query q = manager.createQuery("FROM Pacchetto p WHERE p.destinazione=:new_destinazione");
+		TypedQuery<PacchettoDTO> q = manager.createQuery("FROM Pacchetto p WHERE p.destinazione=:new_destinazione", PacchettoDTO.class);
 
 		q.setParameter("new_destinazione", destinazione);
 
 		ArrayList<Long> pacchetti = new ArrayList<Long>();
-		@SuppressWarnings("unchecked")
-		ArrayList<Pacchetto> risultati = (ArrayList<Pacchetto>) q.getResultList();
+		List<PacchettoDTO> risultati = q.getResultList();
 
 		for (int i = 0; i <= risultati.size(); i++) {
 
@@ -105,14 +105,13 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 
 	/**@param etichetta
 	 * @return ArrayList<idPacchetto>*/
-	public ArrayList<Long> findByEtichetta(Etichetta etichetta) {
+	public ArrayList<Long> findByEtichetta(EtichettaDTO etichetta) {
 
-		Query q = manager.createQuery("FROM Pacchetto p");
+		TypedQuery<PacchettoDTO> q = manager.createQuery("FROM Pacchetto p", PacchettoDTO.class);
 
-		ArrayList<Pacchetto> pacchetti = new ArrayList<Pacchetto>();
+		ArrayList<PacchettoDTO> pacchetti = new ArrayList<PacchettoDTO>();
 		ArrayList<Long> idPacchetti = new ArrayList<Long>();
-		@SuppressWarnings("unchecked")
-		ArrayList<Pacchetto> risultati = (ArrayList<Pacchetto>) q.getResultList();
+		List<PacchettoDTO> risultati = q.getResultList();
 
 		for (int i = 0; i <= risultati.size(); i++) {
 
@@ -138,13 +137,13 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 
 	/**@param idPacchetto
 	 * @return Pacchetto*/
-	public Pacchetto findByIdPacchetto(Long idPacchetto) {
+	public PacchettoDTO findByIdPacchetto(Long idPacchetto) {
 
-		Query q = manager.createQuery("FROM Pacchetto p WHERE p.idPacchetto=:new_idPacchetto");
+		TypedQuery<PacchettoDTO> q = manager.createQuery("FROM Pacchetto p WHERE p.idPacchetto=:new_idPacchetto", PacchettoDTO.class);
 
 		q.setParameter("new_idPacchetto", idPacchetto);
 
-		Pacchetto pacchetto = (Pacchetto) q.getSingleResult();
+		PacchettoDTO pacchetto = q.getSingleResult();
 
 		return pacchetto;
 	}
@@ -153,10 +152,9 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	/** @return ArrayList<idPacchetto> */
 	public ArrayList<Long> findAll() {
 
-		Query q = manager.createQuery("FROM Pacchetto p");
+		TypedQuery<PacchettoDTO> q = manager.createQuery("FROM Pacchetto p", PacchettoDTO.class);
 
-		@SuppressWarnings("unchecked")
-		ArrayList<Pacchetto> pacchetti = (ArrayList<Pacchetto>) q.getResultList();
+		List<PacchettoDTO> pacchetti = q.getResultList();
 
 		ArrayList<Long> lista = new ArrayList<Long>();
 
@@ -192,12 +190,11 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 * @return true if idPacchetto is not present in the DB, otherwise false*/
 	private boolean verificaPresenzaPacchetto(Long idPacchetto) {
 		try {
-			Query q = manager.createQuery("FROM Pacchetto p WHERE p.idPacchetto=:new_idPacchetto");
+			TypedQuery<PacchettoDTO> q = manager.createQuery("FROM Pacchetto p WHERE p.idPacchetto=:new_idPacchetto", PacchettoDTO.class);
 
 			q.setParameter("new_idPacchetto", idPacchetto);
 
-			@SuppressWarnings("unchecked")
-			ArrayList<Pacchetto> pacchetti = (ArrayList<Pacchetto>) q.getResultList();
+			List<PacchettoDTO> pacchetti = q.getResultList();
 
 			if (pacchetti.size() == 0) {
 				return true;

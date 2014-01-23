@@ -2,15 +2,16 @@ package it.polimi.traveldream.ejb;
 
 import it.polimi.traveldream.ejb.client.ComponenteBeanLocal;
 import it.polimi.traveldream.ejb.client.ComponenteBeanRemote;
-import it.polimi.traveldream.entities.Componente;
-import it.polimi.traveldream.entities.Tipologia;
+import it.polimi.traveldream.entities.ComponenteDTO;
+import it.polimi.traveldream.entities.TipologiaDTO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**Session Bean implementation class ComponenteBean*/
 @Stateless
@@ -26,9 +27,9 @@ public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal
 	/**@param tipologia
 	 * @param descrizione
 	 * @return codiceComponente*/
-	public Long createComponente(Tipologia tipologia, String descrizione) {
+	public Long createComponente(TipologiaDTO tipologia, String descrizione) {
 
-		Componente componente = new Componente();
+		ComponenteDTO componente = new ComponenteDTO();
 
 		componente.setTipologia(tipologia);
 		componente.setDescrizione(descrizione);
@@ -40,7 +41,7 @@ public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal
 	/**@param codiceComponente*/
 	public void removeComponente(Long codiceComponente) {
 
-		Componente c = findByCodiceComponente(codiceComponente);
+		ComponenteDTO c = findByCodiceComponente(codiceComponente);
 		
 		manager.remove(c);
 
@@ -49,11 +50,11 @@ public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal
 	/**@param codiceComponente
 	 * @param tipologia
 	 * @param descrizione*/
-	public void updateComponente(Long codiceComponente, Tipologia tipologia,String descrizione) {
+	public void updateComponente(Long codiceComponente, TipologiaDTO tipologia,String descrizione) {
 
 		if (verificaPresenzaComponente(codiceComponente)) {
 
-			Componente componente = findByCodiceComponente(codiceComponente);
+			ComponenteDTO componente = findByCodiceComponente(codiceComponente);
 
 			componente.setTipologia(tipologia);
 			componente.setDescrizione(descrizione);
@@ -65,13 +66,13 @@ public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal
 
 	/**@param codiceComponente
 	 * @return Componente*/
-	public Componente findByCodiceComponente(Long codiceCompoente) {
+	public ComponenteDTO findByCodiceComponente(Long codiceCompoente) {
 
-		Query q = manager.createQuery("FROM Componente c WHERE c.codiceComponente=:new_codiceComponente");
+		TypedQuery<ComponenteDTO> q = manager.createQuery("FROM Componente c WHERE c.codiceComponente=:new_codiceComponente", ComponenteDTO.class);
 
 		q.setParameter("new_codiceComponente", codiceCompoente);
 
-		Componente componente = (Componente) q.getSingleResult();
+		ComponenteDTO componente = q.getSingleResult();
 
 		return componente;
 	}
@@ -79,10 +80,9 @@ public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal
 	/**@return ArrayList<codiceComponente>*/
 	public ArrayList<Long> findAll() {
 
-		Query q = manager.createQuery("FROM Componente c");
+		TypedQuery<ComponenteDTO> q = manager.createQuery("FROM Componente c", ComponenteDTO.class);
 
-		@SuppressWarnings("unchecked")
-		ArrayList<Componente> componenti = (ArrayList<Componente>) q.getResultList();
+		List<ComponenteDTO> componenti = q.getResultList();
 
 		ArrayList<Long> lista = new ArrayList<Long>();
 
@@ -100,12 +100,11 @@ public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal
 	 * @return true if codiceComponente is not present in the DB, otherwise false*/
 	private boolean verificaPresenzaComponente(Long codiceComponente) {
 		try {
-			Query q = manager.createQuery("FROM Componente c WHERE c.codiceComponente=:new_codiceComponente");
+			TypedQuery<ComponenteDTO> q = manager.createQuery("FROM Componente c WHERE c.codiceComponente=:new_codiceComponente", ComponenteDTO.class);
 
 			q.setParameter("new_codiceComponente", codiceComponente);
 
-			@SuppressWarnings("unchecked")
-			ArrayList<Componente> componenti = (ArrayList<Componente>) q.getResultList();
+			List<ComponenteDTO> componenti = q.getResultList();
 
 			if (componenti.size() == 0) {
 				return true;
