@@ -1,7 +1,7 @@
 package it.polimi.traveldream.ejb.client;
 
-import it.polimi.traveldream.entities.Cliente;
-import it.polimi.traveldream.entities.PacchettoPersonalizzato;
+import it.polimi.traveldream.entities.ClienteDTO;
+import it.polimi.traveldream.entities.PacchettoPersonalizzatoDTO;
 
 import java.util.ArrayList;
 
@@ -31,11 +31,11 @@ public interface ClienteBeanRemote {
 
 	/**@param email
 	 * @return Cliente*/
-	public Cliente findByEmailCliente(String email);
+	public ClienteDTO findByEmailCliente(String email);
 	
 	/**@param idCliente
 	 * @return Cliente*/
-	public Cliente findByIdCliente(Long idCliente);
+	public ClienteDTO findByIdCliente(Long idCliente);
 
 	/**@return ArrayList<idCliente>*/
 	public ArrayList<Long> findAll();
@@ -55,6 +55,6 @@ public interface ClienteBeanRemote {
 	 */
 	public boolean verificaPresenzaClienteId(Long idCliente);
 	
-	public ArrayList<PacchettoPersonalizzato> elencoPacchettiCliente (long id);
+	public ArrayList<PacchettoPersonalizzatoDTO> elencoPacchettiCliente (long id);
 	
 }

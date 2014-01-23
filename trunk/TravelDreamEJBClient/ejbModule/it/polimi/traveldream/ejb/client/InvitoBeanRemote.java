@@ -1,6 +1,7 @@
 package it.polimi.traveldream.ejb.client;
 
-import it.polimi.traveldream.entities.Invito;
+import it.polimi.traveldream.entities.InvitoDTO;
+import it.polimi.traveldream.entities.StatoDTO;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,7 @@ public interface InvitoBeanRemote {
 	 * @param data
 	 * @param stato
 	 * @return idInvito*/
-	public Long createInvito(String emailMittente, String emailDestinatario,String idPacchettoPersonalizzato, String data, String stato);
+	public Long createInvito(String emailMittente, String emailDestinatario,String idPacchettoPersonalizzato, String data, StatoDTO stato);
 
 	/**@param idInvito*/
 	public void removeInvito(String email);
@@ -26,15 +27,15 @@ public interface InvitoBeanRemote {
 	 * @param idPacchettoPersonalizzato
 	 * @param data
 	 * @param stato*/
-	public void updateInvito(Long idInvito, String emailMittente,String emailDestinatario, String idPacchettoPersonalizzato,String data, String stato);
+	public void updateInvito(Long idInvito, String emailMittente,String emailDestinatario, String idPacchettoPersonalizzato,String data, StatoDTO stato);
 
 	/**@param idInvito
 	 * @return ArrayList<idPacchettoPersonalizzato>*/
-	public Invito findByIdInvito(Long idInvito);
+	public InvitoDTO findByIdInvito(Long idInvito);
 
 	/**@param emailMittente
 	 * @return ArrayList<idPacchettoPersonalizzato>*/
-	public ArrayList<Invito> findByEmailMittente(String emailMittente);
+	public ArrayList<InvitoDTO> findByEmailMittente(String emailMittente);
 
 	/**@return ArrayList<idInvito>*/
 	public ArrayList<Long> findAll();

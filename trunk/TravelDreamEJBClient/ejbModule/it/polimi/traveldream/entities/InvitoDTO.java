@@ -1,31 +1,24 @@
 package it.polimi.traveldream.entities;
 
 import java.io.Serializable;
-import java.lang.Long;
-import java.lang.String;
 
-import javax.persistence.*;
-
-/**Invito di TravelDream*/
-
-@Entity
-public class Invito implements Serializable {
-
-	/**Version number*/
-	private static final long serialVersionUID = 106L;
-
-	/**Attributi*/
-	@Id
-	@GeneratedValue
+public class InvitoDTO implements Serializable{
+	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private Long idInvito;
 	private String emailMittente;
 	private String emailDestinatario;
 	private String idPacchettoPersonalizzato;
 	private String data;
-	private Stato stato;
+	private StatoDTO stato;
 
 	/**Costruttore*/
-	public Invito() {
+	public InvitoDTO() {
 		super();
 	}
 
@@ -93,16 +86,17 @@ public class Invito implements Serializable {
 	}
 
 	/**@return stato*/
-	public Stato getStato() {
+	public StatoDTO getStato() {
 		
 		return this.stato;
 		
 	}
 
 	/**@param stato stato to set*/
-	public void setStato(Stato stato) {
+	public void setStato(StatoDTO stato) {
 		
 		this.stato = stato;
 		
 	}
+
 }

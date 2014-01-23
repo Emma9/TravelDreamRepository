@@ -4,8 +4,8 @@ import it.polimi.traveldream.ejb.client.ClienteBeanLocal;
 import it.polimi.traveldream.ejb.client.ClienteBeanRemote;
 import it.polimi.traveldream.ejb.client.InvitoBeanRemote;
 import it.polimi.traveldream.ejb.client.PacchettoPersonalizzatoBeanRemote;
-import it.polimi.traveldream.entities.Cliente;
-import it.polimi.traveldream.entities.PacchettoPersonalizzato;
+import it.polimi.traveldream.entities.ClienteDTO;
+import it.polimi.traveldream.entities.PacchettoPersonalizzatoDTO;
 
 import java.util.*;
 
@@ -35,7 +35,7 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 
 		if (verificaPresenzaClienteRegistrazione(email, codiceFiscale)) {
 
-			Cliente cliente = new Cliente();
+			ClienteDTO cliente = new ClienteDTO();
 
 			cliente.setEmail(email);
 			cliente.setPassword(password);
@@ -64,7 +64,7 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 			pacchettoPersonalizzatoLocal.removePacchettoPersonalizzato(idCliente);
 			invitoLocal.removeInvito(daIdAEmail(idCliente));
 
-			Cliente c = findByIdCliente(idCliente);
+			ClienteDTO c = findByIdCliente(idCliente);
 			manager.remove(c);
 
 		} catch (NamingException e) {
@@ -84,7 +84,7 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 
 		if (verificaPresenzaClienteId(idCliente)) {
 
-			Cliente cliente = findByIdCliente(idCliente);
+			ClienteDTO cliente = findByIdCliente(idCliente);
 
 			cliente.setEmail(email);
 			cliente.setPassword(password);
@@ -98,26 +98,26 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 	
 	/**@param email
 	 * @return Cliente*/
-	public Cliente findByEmailCliente(String email) {
+	public ClienteDTO findByEmailCliente(String email) {
 
-		Query q = manager.createQuery("FROM Cliente c WHERE c.email=:new_email");
+		TypedQuery<ClienteDTO> q = manager.createQuery("FROM Cliente c WHERE c.email=:new_email", ClienteDTO.class);
 
 		q.setParameter("new_email", email);
 
-		Cliente cliente = (Cliente) q.getSingleResult();
+		ClienteDTO cliente = q.getSingleResult();
 
 		return cliente;
 	}
 
 	/**@param idCliente
 	 * @return Cliente*/
-	public Cliente findByIdCliente(Long idCliente) {
+	public ClienteDTO findByIdCliente(Long idCliente) {
 
-		Query q = manager.createQuery("FROM Cliente c WHERE c.idCliente=:new_idCliente");
+		TypedQuery<ClienteDTO> q = manager.createQuery("FROM Cliente c WHERE c.idCliente=:new_idCliente", ClienteDTO.class);
 
 		q.setParameter("new_idCliente", idCliente);
 
-		Cliente cliente = (Cliente) q.getSingleResult();
+		ClienteDTO cliente = q.getSingleResult();
 
 		return cliente;
 	}
@@ -128,7 +128,7 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 		Query q = manager.createQuery("FROM Cliente c");
 
 		@SuppressWarnings("unchecked")
-		ArrayList<Cliente> clienti = (ArrayList<Cliente>) q.getResultList();
+		ArrayList<ClienteDTO> clienti = (ArrayList<ClienteDTO>) q.getResultList();
 
 		ArrayList<Long> lista = new ArrayList<Long>();
 
@@ -152,7 +152,7 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 	
 			q.setParameter("new_email", email);
 	
-			Cliente cliente =  (Cliente) q.getSingleResult();
+			ClienteDTO cliente = (ClienteDTO) q.getSingleResult();
 	
 			if (cliente.getPassword()== password) {
 				return cliente.getIdCliente();
@@ -172,14 +172,13 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 	 * @return true if email is not present in the DB, otherwise false*/
 	public boolean verificaPresenzaClienteRegistrazione(String email, String codiceFiscale) {
 		try {
-			Query q = manager
-					.createQuery("FROM Cliente c WHERE c.email=:new_email AND c.codiceFiscale=:new_codiceFiscale");
+			TypedQuery<ClienteDTO> q = manager
+					.createQuery("FROM Cliente c WHERE c.email=:new_email AND c.codiceFiscale=:new_codiceFiscale", ClienteDTO.class);
 
 			q.setParameter("new_email", email);
 			q.setParameter("new_codiceFiscale", codiceFiscale);
 
-			@SuppressWarnings("unchecked")
-			ArrayList<Cliente> clienti = (ArrayList<Cliente>) q.getResultList();
+			List<ClienteDTO> clienti = q.getResultList();
 
 			if (clienti.size() == 0) {
 				return true;
@@ -199,13 +198,12 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 	 */
 	public boolean verificaPresenzaClienteId(Long idCliente) {
 		try {
-			Query q = manager
-					.createQuery("FROM Cliente c WHERE c.idCliente=:new_idCliente");
+			TypedQuery<ClienteDTO> q = manager
+					.createQuery("FROM Cliente c WHERE c.idCliente=:new_idCliente", ClienteDTO.class);
 
 			q.setParameter("new_idCliente", idCliente);
 
-			@SuppressWarnings("unchecked")
-			ArrayList<Cliente> clienti = (ArrayList<Cliente>) q.getResultList();
+			List<ClienteDTO> clienti = q.getResultList();
 
 			if (clienti.size() == 0) {
 				return true;
@@ -219,10 +217,10 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 		}
 	}
 	
-	public ArrayList<PacchettoPersonalizzato> elencoPacchettiCliente (long id){
-		Cliente c = findByIdCliente(id);
+	public ArrayList<PacchettoPersonalizzatoDTO> elencoPacchettiCliente (long id){
+		ClienteDTO c = findByIdCliente(id);
 		
-		ArrayList<PacchettoPersonalizzato> elencoPacchettiCliente = c.getPacchettiCliente();
+		ArrayList<PacchettoPersonalizzatoDTO> elencoPacchettiCliente = c.getPacchettiCliente();
 		
 		return elencoPacchettiCliente;
 	}
@@ -231,9 +229,9 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 	 * @return email*/
 	private String daIdAEmail(Long idCliente) {
 		
-		Cliente c = findByIdCliente(idCliente);
+		ClienteDTO c = findByIdCliente(idCliente);
 		return c.getEmail();
 	}
 	
-	
+
 }

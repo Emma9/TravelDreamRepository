@@ -2,14 +2,16 @@ package it.polimi.traveldream.ejb;
 
 import it.polimi.traveldream.ejb.client.InvitoBeanLocal;
 import it.polimi.traveldream.ejb.client.InvitoBeanRemote;
-import it.polimi.traveldream.entities.Invito;
+import it.polimi.traveldream.entities.InvitoDTO;
+import it.polimi.traveldream.entities.StatoDTO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**Session Bean implementation class InvitoBean*/
 @Stateless
@@ -28,9 +30,9 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 	 * @param data
 	 * @param stato
 	 * @return idInvito*/
-	public Long createInvito(String emailMittente, String emailDestinatario,String idPacchettoPersonalizzato, String data, String stato) {
+	public Long createInvito(String emailMittente, String emailDestinatario,String idPacchettoPersonalizzato, String data, StatoDTO stato) {
 
-		Invito invito = new Invito();
+		InvitoDTO invito = new InvitoDTO();
 
 		invito.setEmailMittente(emailMittente);
 		invito.setEmailDestinatario(emailDestinatario);
@@ -44,7 +46,7 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 	/**@param idInvito*/
 	public void removeInvito(String emailMittente) {
 
-		ArrayList<Invito> inviti = findByEmailMittente(emailMittente);
+		ArrayList<InvitoDTO> inviti = findByEmailMittente(emailMittente);
 
 		for (int i = 0; i <= inviti.size(); i++) {
 
@@ -58,11 +60,11 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 	 * @param idPacchettoPersonalizzato
 	 * @param data
 	 * @param stato*/
-	public void updateInvito(Long idInvito, String emailMittente,String emailDestinatario, String idPacchettoPersonalizzato,String data, String stato) {
+	public void updateInvito(Long idInvito, String emailMittente,String emailDestinatario, String idPacchettoPersonalizzato,String data, StatoDTO stato) {
 
 		if (verificaPresenzaInvito(idInvito)) {
 
-			Invito invito = findByIdInvito(idInvito);
+			InvitoDTO invito = findByIdInvito(idInvito);
 
 			invito.setEmailMittente(emailMittente);
 			invito.setEmailDestinatario(emailDestinatario);
@@ -76,28 +78,27 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 
 	/**@param idInvito
 	 * @return invito*/
-	public Invito findByIdInvito(Long idInvito) {
+	public InvitoDTO findByIdInvito(Long idInvito) {
 
-		Query q = manager.createQuery("FROM Invito i WHERE i.idInvito=:new_idInvito");
+		TypedQuery<InvitoDTO> q = manager.createQuery("FROM Invito i WHERE i.idInvito=:new_idInvito", InvitoDTO.class);
 
 		q.setParameter("new_idInvito", idInvito);
 
-		Invito invito = (Invito) q.getSingleResult();
+		InvitoDTO invito = q.getSingleResult();
 
 		return invito;
 	}
 
 	/**@param email
 	 * @return ArrayList<Invito>*/
-	public ArrayList<Invito> findByEmailMittente(String emailMittente) {
+	public ArrayList<InvitoDTO> findByEmailMittente(String emailMittente) {
 
-		Query q = manager.createQuery("FROM Invito i WHERE i.emailMittente=:new_emailMittente");
+		TypedQuery<InvitoDTO> q = manager.createQuery("FROM Invito i WHERE i.emailMittente=:new_emailMittente", InvitoDTO.class);
 
 		q.setParameter("new_emailMittente", emailMittente);
 
-		ArrayList<Invito> inviti = new ArrayList<Invito>();
-		@SuppressWarnings("unchecked")
-		ArrayList<Invito> risultati = (ArrayList<Invito>) q.getResultList();
+		ArrayList<InvitoDTO> inviti = new ArrayList<InvitoDTO>();
+		List<InvitoDTO> risultati = q.getResultList();
 
 		for (int i = 0; i <= risultati.size(); i++) {
 
@@ -118,12 +119,11 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 	 * @return true if idInvito is not present in the DB, otherwise false*/
 	private boolean verificaPresenzaInvito(Long idInvito) {
 		try {
-			Query q = manager.createQuery("FROM Invito i WHERE i.idInvito=:new_idInvito");
+			TypedQuery<InvitoDTO> q = manager.createQuery("FROM Invito i WHERE i.idInvito=:new_idInvito", InvitoDTO.class);
 
 			q.setParameter("new_idInvito", idInvito);
 
-			@SuppressWarnings("unchecked")
-			ArrayList<Invito> inviti = (ArrayList<Invito>) q.getResultList();
+			List<InvitoDTO> inviti = q.getResultList();
 
 			if (inviti.size() == 0) {
 				

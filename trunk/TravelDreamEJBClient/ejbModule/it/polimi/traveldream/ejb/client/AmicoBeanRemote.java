@@ -1,8 +1,6 @@
 package it.polimi.traveldream.ejb.client;
 
-import it.polimi.traveldream.entities.Amico;
-
-
+import it.polimi.traveldream.entities.AmicoDTO;
 
 import java.util.ArrayList;
 
@@ -24,7 +22,7 @@ public interface AmicoBeanRemote {
 
 	/**@param idAmico
 	 * @return Amico*/
-	public Amico findByIdAmico(Long idAmico);
+	public AmicoDTO findByIdAmico(Long idAmico);
 
 	/**@return ArrayList<idAmico>*/
 	public ArrayList<Long> findAll();

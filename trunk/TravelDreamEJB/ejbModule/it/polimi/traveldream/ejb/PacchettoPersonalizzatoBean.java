@@ -2,16 +2,17 @@ package it.polimi.traveldream.ejb;
 
 import it.polimi.traveldream.ejb.client.PacchettoPersonalizzatoBeanLocal;
 import it.polimi.traveldream.ejb.client.PacchettoPersonalizzatoBeanRemote;
-import it.polimi.traveldream.entities.Etichetta;
-import it.polimi.traveldream.entities.PacchettoPersonalizzato;
-import it.polimi.traveldream.entities.Stato;
+import it.polimi.traveldream.entities.EtichettaDTO;
+import it.polimi.traveldream.entities.PacchettoPersonalizzatoDTO;
+import it.polimi.traveldream.entities.StatoDTO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**Session Bean implementation class PacchettoPersonalizzatoBean*/
 @Stateless
@@ -28,9 +29,9 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
     /**@param stato
 	 * @param idCliente
 	 * @return idPacchettoPersonalizzato*/
-	public Long createPacchettoPersonalizzato(Stato stato, Long idCliente) {
+	public Long createPacchettoPersonalizzato(StatoDTO stato, Long idCliente) {
 
-		PacchettoPersonalizzato pacchettoPersonalizzato = new PacchettoPersonalizzato();
+		PacchettoPersonalizzatoDTO pacchettoPersonalizzato = new PacchettoPersonalizzatoDTO();
 
 		pacchettoPersonalizzato.setStato(stato);
 		pacchettoPersonalizzato.setIdCliente(idCliente);
@@ -42,7 +43,7 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 	/**@param idCliente*/
 	public void removePacchettoPersonalizzato(Long idCliente) {
 
-		ArrayList<PacchettoPersonalizzato> pacchetti = findByIdCliente(idCliente);
+		ArrayList<PacchettoPersonalizzatoDTO> pacchetti = findByIdCliente(idCliente);
 
 		for (int i = 0; i <= pacchetti.size(); i++) {
 
@@ -54,11 +55,11 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 	/**@param idPacchettoPersonalizzato
 	 * @param stato
 	 * @param listaComponenti*/
-	public void updatePacchettoPersonalizzato(Long idPacchettoPersonalizzato,Stato stato, ArrayList<Long> listaComponenti) {
+	public void updatePacchettoPersonalizzato(Long idPacchettoPersonalizzato,StatoDTO stato, ArrayList<Long> listaComponenti) {
 
 		if (verificaPresenzaPacchettoPersonalizzato(idPacchettoPersonalizzato)) {
 
-			PacchettoPersonalizzato pacchettoPersonalizzato = findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato);
+			PacchettoPersonalizzatoDTO pacchettoPersonalizzato = findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato);
 
 			pacchettoPersonalizzato.setStato(stato);
 			pacchettoPersonalizzato.setListaComponenti(listaComponenti);
@@ -72,13 +73,12 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 	 * @return ArrayList<idPacchettoPersonalizzato>*/
 	public ArrayList<Long> findByDestinazione(String destinazione) {
 
-		Query q = manager.createQuery("FROM PacchettoPersonalizzato p WHERE p.destinazione=:new_destinazione");
+		TypedQuery<PacchettoPersonalizzatoDTO> q = manager.createQuery("FROM PacchettoPersonalizzato p WHERE p.destinazione=:new_destinazione", PacchettoPersonalizzatoDTO.class);
 
 		q.setParameter("new_destinazione", destinazione);
 
 		ArrayList<Long> pacchetti = new ArrayList<Long>();
-		@SuppressWarnings("unchecked")
-		ArrayList<PacchettoPersonalizzato> risultati = (ArrayList<PacchettoPersonalizzato>) q.getResultList();
+		List<PacchettoPersonalizzatoDTO> risultati = q.getResultList();
 
 		for (int i = 0; i <= risultati.size(); i++) {
 
@@ -90,14 +90,13 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 
 	/**@param etichetta
 	 * @return ArrayList<idPacchettoPersonalizzato>*/
-	public ArrayList<Long> findByEtichetta(Etichetta etichetta) {
+	public ArrayList<Long> findByEtichetta(EtichettaDTO etichetta) {
 
-		Query q = manager.createQuery("FROM PacchettoPersonalizzato p");
+		TypedQuery<PacchettoPersonalizzatoDTO> q = manager.createQuery("FROM PacchettoPersonalizzato p", PacchettoPersonalizzatoDTO.class);
 
-		ArrayList<PacchettoPersonalizzato> pacchetti = new ArrayList<PacchettoPersonalizzato>();
+		ArrayList<PacchettoPersonalizzatoDTO> pacchetti = new ArrayList<PacchettoPersonalizzatoDTO>();
 		ArrayList<Long> idPacchetti = new ArrayList<Long>();
-		@SuppressWarnings("unchecked")
-		ArrayList<PacchettoPersonalizzato> risultati = (ArrayList<PacchettoPersonalizzato>) q.getResultList();
+		List<PacchettoPersonalizzatoDTO> risultati = q.getResultList();
 
 		for (int i = 0; i <= risultati.size(); i++) {
 
@@ -121,29 +120,29 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 
 	/**@param idPacchettoPersonalizzato
 	 * @return PacchettoPersonalizzato*/
-	public PacchettoPersonalizzato findByIdPacchettoPersonalizzato(Long idPacchettoPersonalizzato) {
+	public PacchettoPersonalizzatoDTO findByIdPacchettoPersonalizzato(Long idPacchettoPersonalizzato) {
 
-		Query q = manager
-				.createQuery("FROM PacchettoPersonalizzato p WHERE p.idPacchettoPersonalizzato=:new_idPacchettoPersonalizzato");
+		TypedQuery<PacchettoPersonalizzatoDTO> q = manager
+				.createQuery("FROM PacchettoPersonalizzato p WHERE p.idPacchettoPersonalizzato=:new_idPacchettoPersonalizzato", PacchettoPersonalizzatoDTO.class);
 
 		q.setParameter("new_idPacchettoPersonalizzato",idPacchettoPersonalizzato);
 
-		PacchettoPersonalizzato pacchettoPersonalizzato = (PacchettoPersonalizzato) q.getSingleResult();
+		PacchettoPersonalizzatoDTO pacchettoPersonalizzato = q.getSingleResult();
 
 		return pacchettoPersonalizzato;
 	}
 
 	/**@param idCliente
 	 * @return ArrayList<PacchettoPersonalizzato>*/
-	public ArrayList<PacchettoPersonalizzato> findByIdCliente(Long idCliente) {
+	public ArrayList<PacchettoPersonalizzatoDTO> findByIdCliente(Long idCliente) {
 
-		Query q = manager.createQuery("FROM PacchettoPersonalizzato p WHERE p.idCliente=:new_idCliente");
+		TypedQuery<PacchettoPersonalizzatoDTO> q = manager.createQuery("FROM PacchettoPersonalizzato p WHERE p.idCliente=:new_idCliente", PacchettoPersonalizzatoDTO.class);
 
 		q.setParameter("new_idCliente", idCliente);
 
-		@SuppressWarnings("unchecked")
-		ArrayList<PacchettoPersonalizzato> pacchettiPersonalizzati = (ArrayList<PacchettoPersonalizzato>) q.getResultList();
+		List<PacchettoPersonalizzatoDTO> pacchettiPersonalizzatiList = q.getResultList();
 
+		ArrayList<PacchettoPersonalizzatoDTO> pacchettiPersonalizzati= new ArrayList<>(pacchettiPersonalizzatiList);
 		return pacchettiPersonalizzati;
 		
 	}
@@ -151,10 +150,9 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 	/**@return ArrayList<idPacchettoPersonalizzato>*/
 	public ArrayList<Long> findAll() {
 
-		Query q = manager.createQuery("FROM PacchettoPersonalizzato p");
+		TypedQuery<PacchettoPersonalizzatoDTO> q = manager.createQuery("FROM PacchettoPersonalizzato p", PacchettoPersonalizzatoDTO.class);
 
-		@SuppressWarnings("unchecked")
-		ArrayList<PacchettoPersonalizzato> pacchetti = (ArrayList<PacchettoPersonalizzato>) q.getResultList();
+		List<PacchettoPersonalizzatoDTO> pacchetti = q.getResultList();
 
 		ArrayList<Long> lista = new ArrayList<Long>();
 
@@ -181,12 +179,11 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 	 * @return true if idPacchettoPersonalizzato is not present in the DB, otherwise false*/
 	private boolean verificaPresenzaPacchettoPersonalizzato(Long idPacchettoPersonalizzato) {
 		try {
-			Query q = manager.createQuery("FROM PacchettoPersonalizzato p WHERE p.idPacchettoPersonalizzato=:new_idPacchettoPersonalizzato");
+			TypedQuery<PacchettoPersonalizzatoDTO> q = manager.createQuery("FROM PacchettoPersonalizzato p WHERE p.idPacchettoPersonalizzato=:new_idPacchettoPersonalizzato", PacchettoPersonalizzatoDTO.class);
 
 			q.setParameter("new_idPacchettoPersonalizzato",idPacchettoPersonalizzato);
 
-			@SuppressWarnings("unchecked")
-			ArrayList<PacchettoPersonalizzato> pacchetti = (ArrayList<PacchettoPersonalizzato>) q.getResultList();
+			List<PacchettoPersonalizzatoDTO> pacchetti = q.getResultList();
 
 			if (pacchetti.size() == 0) {
 				return true;
