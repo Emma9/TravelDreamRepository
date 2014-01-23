@@ -1,7 +1,9 @@
 package it.polimi.traveldream.ejb;
 
+import it.polimi.traveldream.ejb.client.ComponenteBeanRemote;
 import it.polimi.traveldream.ejb.client.PacchettoBeanLocal;
 import it.polimi.traveldream.ejb.client.PacchettoBeanRemote;
+import it.polimi.traveldream.entities.ComponenteDTO;
 import it.polimi.traveldream.entities.EtichettaDTO;
 import it.polimi.traveldream.entities.PacchettoDTO;
 
@@ -12,6 +14,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**Session Bean implementation class PacchettoBean*/
@@ -28,25 +31,30 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	/**@param destinazione
 	 * @param dataInizioValidita
 	 * @param dataFineValidita
-	 * @param disponibilita
 	 * @param etichette
 	 * @param descrizione
 	 * @param listaComponenti
 	 * @return idPacchetto*/
-	public Long createPacchetto(String destinazione, Date dataInizioValidita, Date dataFineValidita, int disponibilita, ArrayList<EtichettaDTO> etichette, String descrizione,ArrayList<Long> listaComponenti) {
+	public Long createPacchetto(String destinazione, Date dataInizioValidita, Date dataFineValidita, ArrayList<EtichettaDTO> etichette, String descrizione,ArrayList<Long> listaComponenti) {
 
+		
+		if(verificaListaComponenti(listaComponenti)){
+		
 		PacchettoDTO pacchetto = new PacchettoDTO();
 
 		pacchetto.setDestinazione(destinazione);
 		pacchetto.setDataInizioValidita(dataInizioValidita);
 		pacchetto.setDataFineValidita(dataFineValidita);
-		pacchetto.setDisponibilita(disponibilita);
 		pacchetto.setEtichette(etichette);
 		pacchetto.setDescrizione(descrizione);
 		pacchetto.setListaComponenti(listaComponenti);
 
 		return pacchetto.getIdPacchetto();
 
+		}else{
+			return (long) -1;
+		}
+		
 	}
 
 	/**@param idPacchetto*/
@@ -62,20 +70,18 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 * @param destinazione
 	 * @param dataInizioValidita
 	 * @param dataFineValidita
-	 * @param disponibilita
 	 * @param etichette
 	 * @param descrizione
 	 * @param listaComponenti*/
-	public void updatePacchetto(Long idPacchetto, String destinazione, Date dataInizioValidita, Date dataFineValidita, int disponibilita, ArrayList<EtichettaDTO> etichette, String descrizione,ArrayList<Long> listaComponenti) {
+	public void updatePacchetto(Long idPacchetto, String destinazione, Date dataInizioValidita, Date dataFineValidita, ArrayList<EtichettaDTO> etichette, String descrizione,ArrayList<Long> listaComponenti) {
 
-		if (verificaPresenzaPacchetto(idPacchetto)) {
-
+		if ((verificaPresenzaPacchetto(idPacchetto))&&(verificaListaComponenti(listaComponenti))) {
+			
 			PacchettoDTO pacchetto = findByIdPacchetto(idPacchetto);
 
 			pacchetto.setDestinazione(destinazione);
 			pacchetto.setDataInizioValidita(dataInizioValidita);
 			pacchetto.setDataFineValidita(dataFineValidita);
-			pacchetto.setDisponibilita(disponibilita);
 			pacchetto.setEtichette(etichette);
 			pacchetto.setDescrizione(descrizione);
 			pacchetto.setListaComponenti(listaComponenti);
@@ -172,15 +178,37 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 		
 		if(dataPartenza.before(dataRitorno)){
 			
-			return true;
+			return true;	
+		}
+		return false;
+	}
+	
+	
+	/**@param dataPartenza
+	 * @param dataRitorno
+	 * @param disponibilita
+	 * @param listaComponenti
+	 * @return true if , otherwise false*/
+	public boolean verificaDisponibilitaComponenti (Date dataPartenza, Date dataRitorno, int disponibilita, ArrayList<Long> listaComponenti){
+		
+		ComponenteBeanRemote componenteRemoto = new ComponenteBean();		
+		
+		for(int i=0; i<=listaComponenti.size(); i++){
 			
+			componenteRemoto.findByCodiceComponente(listaComponenti.get(i));
+			
+			if(componenteRemoto.verificaValiditaComponente(dataPartenza, dataRitorno, listaComponenti.get(i))){
+				
+				//componenti validi
+				
+				if(componenteRemoto.verificaDisponibilitaComponente(disponibilita, listaComponenti.get(i))){
+					
+					return true;
+				}
+			}	
 		}
 		
-		else{
-			
-			return false;
-			
-		}
+		return false;
 		
 	}
 	
@@ -188,7 +216,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 
 	/**@param idPacchetto
 	 * @return true if idPacchetto is not present in the DB, otherwise false*/
-	private boolean verificaPresenzaPacchetto(Long idPacchetto) {
+	public boolean verificaPresenzaPacchetto(Long idPacchetto) {
 		try {
 			TypedQuery<PacchettoDTO> q = manager.createQuery("FROM Pacchetto p WHERE p.idPacchetto=:new_idPacchetto", PacchettoDTO.class);
 
@@ -208,4 +236,94 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 			return true;
 		}
 	}
+	
+	
+	/**@param listaComponenti
+	 * @return true if listaComponenti contains more than two elements
+	 *  and at least three of them are of a different type, otherwise false
+	 */
+	public boolean verificaListaComponenti (ArrayList<Long> listaComponenti){
+		
+		if(listaComponenti.size()>2){
+				
+			ComponenteBeanRemote componenteRemoto = new ComponenteBean();
+			
+			boolean flagHotel=false;
+			boolean flagVolo=false;
+			boolean flagEscursione=false;
+			
+			for(int i=0; i<=listaComponenti.size(); i++){
+				
+				ComponenteDTO componente = componenteRemoto.findByCodiceComponente(listaComponenti.get(i));
+				
+				switch (componente.getTipologia()){
+				
+				case HOTEL:flagHotel=true;
+									break;
+					
+				case VOLO:flagVolo=true;
+									break;
+					
+				case ESCURSIONE:flagEscursione=true;
+									break;	
+				
+				}
+				
+			}			
+			
+			if((flagHotel==true)&&(flagVolo==true)&&(flagEscursione==true)){
+				
+				return true;
+			}	
+			
+		}
+		return false;
+	}
+
+	/**@param destinazione
+	 * @param dataPartenza
+	 * @param dataRitorno
+	 * @return ArrayList<Pacchetto>
+	 */
+	public ArrayList<PacchettoDTO> ricercaPacchetti (String destinazione, Date dataPartenza, Date dataRitorno){
+		
+		try {
+			
+			//DESTINAZIONE
+			Query q1 = manager.createQuery("FROM Pacchetto p WHERE p.destinazione=:new_destinazione");
+
+			q1.setParameter("new_destinazione", destinazione);
+			
+			//DATE
+			Query q2 = manager.createQuery("FROM Pacchetto p WHERE p.dataInizioValidita<=new_dataPartenza AND p.dataInizioValidita<=new_dataRitorno AND p.dataFineValidita>=new_dataPartenza AND p.dataFineValidita>=new_dataRitorno");
+
+			q2.setParameter("new_dataPartenza", dataPartenza);
+			q2.setParameter("new_dataRitorno", dataRitorno);
+			
+			//INNER JOIN
+			Query q3 = manager.createQuery("q1 INNER JOIN q2");
+
+			q3.setParameter("q1", q1);
+			q3.setParameter("q2", q2);			
+			
+			@SuppressWarnings("unchecked")
+			ArrayList<PacchettoDTO> pacchetti = (ArrayList<PacchettoDTO>) q3.getResultList();
+			
+			return pacchetti;
+
+			} catch (NullPointerException e) {
+				
+			return null;
+			
+		}
+
+		
+	}
+
+	
 }
+
+	
+	
+
+

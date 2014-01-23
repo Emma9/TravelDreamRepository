@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 public class PacchettoDTO implements Serializable{
 
 	/**
@@ -13,9 +16,10 @@ public class PacchettoDTO implements Serializable{
 	
 	private Long idPacchetto;
 	private String destinazione;
+	//@Temporal(TemporalType.TIME)
 	private Date dataInizioValidita;
+	//@Temporal(TemporalType.TIME)
 	private Date dataFineValidita;
-	private int disponibilita;
 	private ArrayList<EtichettaDTO> etichette = new ArrayList<>();
 	private String descrizione;
 	private ArrayList<Long> listaComponenti;
@@ -40,10 +44,6 @@ public class PacchettoDTO implements Serializable{
 		this.destinazione = destinazione;
 	}
 
-	
-	
-	
-	
 	
 	/**
 	 * @return the dataInizioValidita
@@ -80,19 +80,7 @@ public class PacchettoDTO implements Serializable{
 		this.idPacchetto = idPacchetto;
 	}
 
-	/**
-	 * @return the disponibilita
-	 */
-	public int getDisponibilita() {
-		return disponibilita;
-	}
-
-	/**
-	 * @param disponibilita the disponibilita to set
-	 */
-	public void setDisponibilita(int disponibilita) {
-		this.disponibilita = disponibilita;
-	}
+	
 
 	/**@return etichette*/
 	public ArrayList<EtichettaDTO> getEtichette() {
@@ -138,9 +126,4 @@ public class PacchettoDTO implements Serializable{
 		this.listaComponenti = listaComponenti;
 		
 	}
-	
-	
-	
-	
-
 }

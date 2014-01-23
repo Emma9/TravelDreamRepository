@@ -1,5 +1,6 @@
 package it.polimi.traveldream.ejb;
 
+
 import it.polimi.traveldream.ejb.client.ClienteBeanLocal;
 import it.polimi.traveldream.ejb.client.ClienteBeanRemote;
 import it.polimi.traveldream.ejb.client.InvitoBeanRemote;
@@ -13,7 +14,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.persistence.*;
 import javax.ejb.Stateless;
-
 /**Session Bean implementation class ClienteBean*/
 @Stateless
 public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
@@ -125,10 +125,9 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 	/** @return ArrayList<idCliente> */
 	public ArrayList<Long> findAll() {
 
-		Query q = manager.createQuery("FROM Cliente c");
+		TypedQuery<ClienteDTO> q = manager.createQuery("FROM Cliente c", ClienteDTO.class);
 
-		@SuppressWarnings("unchecked")
-		ArrayList<ClienteDTO> clienti = (ArrayList<ClienteDTO>) q.getResultList();
+		List<ClienteDTO> clienti = q.getResultList();
 
 		ArrayList<Long> lista = new ArrayList<Long>();
 
@@ -147,12 +146,12 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 	 * @return idCliente*/
 	public long verificaPresenzaClienteLogin(String email, String password) {
 		try {
-			Query q = manager
-					.createQuery("FROM Cliente c WHERE c.email=:new_email");
+			TypedQuery<ClienteDTO> q = manager
+					.createQuery("FROM Cliente c WHERE c.email=:new_email", ClienteDTO.class);
 	
 			q.setParameter("new_email", email);
 	
-			ClienteDTO cliente = (ClienteDTO) q.getSingleResult();
+			ClienteDTO cliente = q.getSingleResult();
 	
 			if (cliente.getPassword()== password) {
 				return cliente.getIdCliente();
@@ -225,9 +224,21 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 		return elencoPacchettiCliente;
 	}
 
+	
+	/**@param idCliente
+	 */
+	public void eliminaTuttiPacchettiPersonalizzati(long idCliente) {
+
+		ClienteDTO cliente = findByIdCliente(idCliente);
+		cliente.getPacchettiCliente().clear();
+		
+	}
+	
+	
+	
 	/**@param idCliente
 	 * @return email*/
-	private String daIdAEmail(Long idCliente) {
+	public String daIdAEmail(Long idCliente) {
 		
 		ClienteDTO c = findByIdCliente(idCliente);
 		return c.getEmail();
