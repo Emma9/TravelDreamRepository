@@ -8,6 +8,7 @@ import java.util.Hashtable;
 
 
 
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -20,6 +21,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import it.polimi.traveldream.ejb.client.ClienteBeanRemote;
+//import it.polimi.traveldream.ejb.client.ClienteBeanRemote;
 import it.polimi.traveldream.entities.PacchettoPersonalizzato;
 /**
  * Servlet implementation class LoginServlet

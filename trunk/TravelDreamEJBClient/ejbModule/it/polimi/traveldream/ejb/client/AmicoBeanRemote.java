@@ -1,7 +1,8 @@
 package it.polimi.traveldream.ejb.client;
 
-
 import it.polimi.traveldream.entities.Amico;
+
+
 
 import java.util.ArrayList;
 
