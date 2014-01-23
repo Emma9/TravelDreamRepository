@@ -30,11 +30,11 @@ public interface ClienteBeanRemote {
 	public void updateCliente(Long idCliente, String email, String password,String codiceFiscale, String nome, String cognome);
 
 	/**@param email
-	 * @return Cliente*/
+	 * @return ClienteDTO*/
 	public ClienteDTO findByEmailCliente(String email);
 	
 	/**@param idCliente
-	 * @return Cliente*/
+	 * @return ClienteDTO*/
 	public ClienteDTO findByIdCliente(Long idCliente);
 
 	/**@return ArrayList<idCliente>*/
@@ -55,6 +55,18 @@ public interface ClienteBeanRemote {
 	 */
 	public boolean verificaPresenzaClienteId(Long idCliente);
 	
+	/**
+	 * @param id
+	 * @return ArrayList<PacchettoPersonalizzato>
+	 */
 	public ArrayList<PacchettoPersonalizzatoDTO> elencoPacchettiCliente (long id);
+	
+	/**@param idCliente
+	 */
+	public void eliminaTuttiPacchettiPersonalizzati(long idCliente);
+	
+	/**@param idCliente
+	 * @return email*/
+	public String daIdAEmail(Long idCliente);
 	
 }

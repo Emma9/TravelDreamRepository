@@ -164,20 +164,10 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 
 		return lista;
 	}
-@Override
-	public void eliminaTuttiPacchettiPersonalizzati(long idCliente) {
-		// TODO Auto-generated method stub
-		//da implementare!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		
-	}
-
-
-
-	/** Metodi private */	
-
+	
 	/**@param idPacchettoPersonalizzato
 	 * @return true if idPacchettoPersonalizzato is not present in the DB, otherwise false*/
-	private boolean verificaPresenzaPacchettoPersonalizzato(Long idPacchettoPersonalizzato) {
+	public boolean verificaPresenzaPacchettoPersonalizzato(Long idPacchettoPersonalizzato) {
 		try {
 			TypedQuery<PacchettoPersonalizzatoDTO> q = manager.createQuery("FROM PacchettoPersonalizzato p WHERE p.idPacchettoPersonalizzato=:new_idPacchettoPersonalizzato", PacchettoPersonalizzatoDTO.class);
 
@@ -196,4 +186,5 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 			return true;
 		}
 	}
+
 }

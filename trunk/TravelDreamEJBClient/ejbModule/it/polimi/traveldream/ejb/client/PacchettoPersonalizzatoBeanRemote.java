@@ -42,5 +42,11 @@ public interface PacchettoPersonalizzatoBeanRemote {
 
 	/**@return ArrayList<idPacchettoPersonalizzato>*/
 	public ArrayList<Long> findAll();
+	
+	/**@param idPacchettoPersonalizzato
+	 * @return true if idPacchettoPersonalizzato is not present in the DB, otherwise false*/
+	public boolean verificaPresenzaPacchettoPersonalizzato(Long idPacchettoPersonalizzato);
+	
+	
 
 }

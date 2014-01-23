@@ -1,14 +1,18 @@
 package it.polimi.traveldream.web.beans;
 
 import it.polimi.traveldream.ejb.client.PacchettoBeanRemote;
+import it.polimi.traveldream.entities.PacchettoDTO;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean()
 @SessionScoped
@@ -23,10 +27,8 @@ public class RicercaPacchettiBean implements Serializable {
 	private PacchettoBeanRemote pacchettoRemoto;
 
 	private String destinazione;
-
 	private Date dataPartenza;
 	private Date dataRitorno;
-
 	private int disponibilita;
 
 	/**
@@ -89,18 +91,61 @@ public class RicercaPacchettiBean implements Serializable {
 		this.disponibilita = disponibilita;
 	}
 
-	/*
-	public String ricercaPacchetti() {
+
+	public ArrayList<PacchettoDTO> ricercaPacchetti() {
+		
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
 				.getExternalContext().getRequest();
+		
+		ArrayList<PacchettoDTO> pacchetti = new ArrayList<PacchettoDTO>();
+		ArrayList<PacchettoDTO> pacchettiRicercati = new ArrayList<PacchettoDTO>();
 
-		try {
+		//try {
+			
+			if(this.pacchettoRemoto.verificaConsistenzaDate(this.dataPartenza, this.dataRitorno)){
+				//LE DATE INSERITE SONO VALIDE
+			
+			pacchetti = pacchettoRemoto.ricercaPacchetti(this.destinazione, this.dataPartenza, this.dataRitorno);
+				//RITORNA LA LISTA DEI PACCHETTI CON DESTINAZIONE DESIDERATA E DISPONIBILI NEL PERIODO RICHIESTO
+			
+			for(int i=0;i<=pacchetti.size();i++){
+				//PER OGNI PACCHETTO VERIFICA CHE TUTTI I SUOI COMPONENTI SIANO DISPONIBILI
+				
+				if(pacchettoRemoto.verificaDisponibilitaComponenti(this.dataPartenza, this.dataRitorno, this.disponibilita, pacchetti.get(i).getListaComponenti())){
+				//SE TUTTI I COMPONENTI SONO DISPONIBILI NON RIMUOVE IL PACCHETTO DALLA LISTA
+					
+				}else{
+					pacchetti.set(i, null);
+				//SE CI SONO DEI COMPONENTI NON DISPONIBILI ANNULLA IL PACCHETTO CHE LI CONTIENE	
+					
+				}
+				
+			}				
+			
+			for(int j=0;j<=pacchetti.size();j++){
+				//SCORRE LA LISTA DEI PACCHETTI
+			
+			if(pacchetti.get(j)==null){
+				//SE PACCHETTO == NULL PASSA AL PROSSIMO PACCHETTO
+				
+			}else{
+				//SE PACCHETTO != NULL LO COPIA IN PACCHETTIRICERCATI
+				pacchettiRicercati.set(j, pacchetti.get(j));
+			}
+				
+			}
+				
+			}
+			
 
-		} catch (ServletException e) {
+		/*} catch (ServletException e) {
+			
+			return null;
 
-		}
+		}*/
+		
+		return pacchettiRicercati;
 
 	}
-	*/
 }

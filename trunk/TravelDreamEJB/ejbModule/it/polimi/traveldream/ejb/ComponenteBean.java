@@ -6,6 +6,7 @@ import it.polimi.traveldream.entities.ComponenteDTO;
 import it.polimi.traveldream.entities.TipologiaDTO;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -26,13 +27,19 @@ public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal
 
 	/**@param tipologia
 	 * @param descrizione
+	 * @param dataInizioValidita
+	 * @param dataFineValidita
+	 * @param disponibilita
 	 * @return codiceComponente*/
-	public Long createComponente(TipologiaDTO tipologia, String descrizione) {
+	public Long createComponente(TipologiaDTO tipologia, String descrizione, Date dataInizioValidita, Date dataFineValidita, int disponibilita) {
 
 		ComponenteDTO componente = new ComponenteDTO();
 
 		componente.setTipologia(tipologia);
 		componente.setDescrizione(descrizione);
+		componente.setDataInizioValidita(dataInizioValidita);
+		componente.setDataFineValidita(dataFineValidita);
+		componente.setDisponibilita(disponibilita);
 
 		return componente.getCodiceComponente();
 
@@ -49,8 +56,12 @@ public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal
 
 	/**@param codiceComponente
 	 * @param tipologia
-	 * @param descrizione*/
-	public void updateComponente(Long codiceComponente, TipologiaDTO tipologia,String descrizione) {
+	 * @param descrizione
+	 * @param dataInizioValidita
+	 * @param dataFineValidita
+	 * @param disponibilita
+	 */
+	public void updateComponente(Long codiceComponente, TipologiaDTO tipologia, String descrizione, Date dataInizioValidita, Date dataFineValidita, int disponibilita) {
 
 		if (verificaPresenzaComponente(codiceComponente)) {
 
@@ -58,6 +69,9 @@ public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal
 
 			componente.setTipologia(tipologia);
 			componente.setDescrizione(descrizione);
+			componente.setDataInizioValidita(dataInizioValidita);
+			componente.setDataFineValidita(dataFineValidita);
+			componente.setDisponibilita(disponibilita);			
 
 			manager.merge(componente);
 		}
@@ -65,7 +79,7 @@ public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal
 	}
 
 	/**@param codiceComponente
-	 * @return Componente*/
+	 * @return ComponenteDTO*/
 	public ComponenteDTO findByCodiceComponente(Long codiceCompoente) {
 
 		TypedQuery<ComponenteDTO> q = manager.createQuery("FROM Componente c WHERE c.codiceComponente=:new_codiceComponente", ComponenteDTO.class);
@@ -94,11 +108,64 @@ public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal
 		return lista;
 	}
 
-	/** Metodi private */
+	
+	/**@param dataPartenza
+	 * @param dataRitorno
+	 * @param codiceComponente
+	 * @return true if componente is valid, otherwise false
+	 */
+	public boolean verificaValiditaComponente (Date dataPartenza, Date dataRitorno, Long codiceComponente){
+		
+		ComponenteDTO componente = findByCodiceComponente(codiceComponente);
+				
+		
+		if((!dataPartenza.before(componente.getDataInizioValidita())) && (!dataPartenza.after(componente.getDataFineValidita())) && (!dataRitorno.before(componente.getDataInizioValidita())) && (!dataRitorno.after(componente.getDataFineValidita()))){
+			
+			return true;
+			
+		}else{
+		
+			return false;
+			
+		}
+					
+		
+	}
+	
+	
+	
+	//!!!!!!!!!!!!!!!!!!!!!!!!!! disponibilità in una data!?!?!
+
+	/**@param disponibilita
+	 * @param codiceComponente
+	 * @return true if componente is available, otherwise false	
+	 */
+public boolean verificaDisponibilitaComponente (int disponibilita, Long codiceComponente){
+		
+		ComponenteDTO componente = findByCodiceComponente(codiceComponente); 
+		
+		if(componente.getDisponibilita()<disponibilita){
+			
+			return false;
+						
+		}else{
+			
+			return true;
+			
+		}
+				
+		
+	}
+	
+	
+	
+	
+	
+
 
 	/**@param codiceComponente
 	 * @return true if codiceComponente is not present in the DB, otherwise false*/
-	private boolean verificaPresenzaComponente(Long codiceComponente) {
+	public boolean verificaPresenzaComponente(Long codiceComponente) {
 		try {
 			TypedQuery<ComponenteDTO> q = manager.createQuery("FROM Componente c WHERE c.codiceComponente=:new_codiceComponente", ComponenteDTO.class);
 

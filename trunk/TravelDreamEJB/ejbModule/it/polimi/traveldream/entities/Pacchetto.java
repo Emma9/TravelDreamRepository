@@ -21,11 +21,10 @@ public class Pacchetto implements Serializable {
 	@GeneratedValue
 	private Long idPacchetto;
 	private String destinazione;
-	@Temporal(TemporalType.DATE)
-	private java.util.Date dataInizioValidita;
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIME)
+	private Date dataInizioValidita;
+	@Temporal(TemporalType.TIME)
 	private Date dataFineValidita;
-	private int disponibilita;
 	private ArrayList<Etichetta> etichette = new ArrayList<>();
 	private String descrizione;
 	private ArrayList<Long> listaComponenti;
@@ -50,10 +49,6 @@ public class Pacchetto implements Serializable {
 		this.destinazione = destinazione;
 	}
 
-	
-	
-	
-	
 	
 	/**
 	 * @return the dataInizioValidita
@@ -90,19 +85,7 @@ public class Pacchetto implements Serializable {
 		this.idPacchetto = idPacchetto;
 	}
 
-	/**
-	 * @return the disponibilita
-	 */
-	public int getDisponibilita() {
-		return disponibilita;
-	}
-
-	/**
-	 * @param disponibilita the disponibilita to set
-	 */
-	public void setDisponibilita(int disponibilita) {
-		this.disponibilita = disponibilita;
-	}
+	
 
 	/**@return etichette*/
 	public ArrayList<Etichetta> getEtichette() {
