@@ -21,7 +21,9 @@ public class Pacchetto implements Serializable {
 	@GeneratedValue
 	private Long idPacchetto;
 	private String destinazione;
-	private Date dataInizioValidita;
+	@Temporal(TemporalType.DATE)
+	private java.util.Date dataInizioValidita;
+	@Temporal(TemporalType.DATE)
 	private Date dataFineValidita;
 	private int disponibilita;
 	private ArrayList<Etichetta> etichette = new ArrayList<>();
