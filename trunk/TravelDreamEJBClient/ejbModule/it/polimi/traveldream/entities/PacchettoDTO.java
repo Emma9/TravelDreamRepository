@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 public class PacchettoDTO implements Serializable{
 
@@ -16,9 +14,7 @@ public class PacchettoDTO implements Serializable{
 	
 	private Long idPacchetto;
 	private String destinazione;
-	//@Temporal(TemporalType.TIME)
 	private Date dataInizioValidita;
-	//@Temporal(TemporalType.TIME)
 	private Date dataFineValidita;
 	private ArrayList<EtichettaDTO> etichette = new ArrayList<>();
 	private String descrizione;
