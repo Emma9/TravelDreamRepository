@@ -202,6 +202,7 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 
 			q.setParameter("new_idCliente", idCliente);
 
+			
 			List<ClienteDTO> clienti = q.getResultList();
 
 			if (clienti.size() == 0) {
