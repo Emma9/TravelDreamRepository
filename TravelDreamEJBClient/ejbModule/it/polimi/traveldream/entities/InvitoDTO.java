@@ -15,7 +15,7 @@ public class InvitoDTO implements Serializable{
 	private String emailDestinatario;
 	private String idPacchettoPersonalizzato;
 	private String data;
-	private String stato;
+	private boolean stato;
 
 	/**Costruttore*/
 	public InvitoDTO() {
@@ -86,14 +86,14 @@ public class InvitoDTO implements Serializable{
 	}
 
 	/**@return stato*/
-	public String getStato() {
+	public boolean getStato() {
 		
 		return this.stato;
 		
 	}
 
 	/**@param stato stato to set*/
-	public void setStato(String stato) {
+	public void setStato(boolean stato) {
 		
 		this.stato = stato;
 		
