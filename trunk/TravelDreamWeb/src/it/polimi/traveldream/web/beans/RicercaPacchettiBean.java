@@ -32,7 +32,7 @@ public class RicercaPacchettiBean implements Serializable {
 
 	private String destinazione;
 	private Date dataPartenza;
-	private Date dataArrivo;
+	private Date dataRitorno;
 	private int numPartecipanti;
 	
 	//PACCHETTO SELEZIONATO
@@ -72,18 +72,18 @@ public class RicercaPacchettiBean implements Serializable {
 	}
 
 	/**
-	 * @return the dataArrivo
+	 * @return the dataRitorno
 	 */
-	public Date getDataArrivo() {
-		return dataArrivo;
+	public Date getDataRitorno() {
+		return dataRitorno;
 	}
 
 	/**
-	 * @param dataArrivo
-	 *            the dataArrivo to set
+	 * @param dataRitorno
+	 *            the dataRitorno to set
 	 */
-	public void setDataArrivo(Date dataArrivo) {
-		this.dataArrivo = dataArrivo;
+	public void setDataRitorno(Date dataRitorno) {
+		this.dataRitorno = dataRitorno;
 	}
 
 	/**
@@ -141,16 +141,16 @@ public class RicercaPacchettiBean implements Serializable {
 
 		//try {
 			
-			if(this.pacchettoRemoto.verificaConsistenzaDate(this.dataPartenza, this.dataArrivo)){
+			if(this.pacchettoRemoto.verificaConsistenzaDate(this.dataPartenza, this.dataRitorno)){
 				//LE DATE INSERITE SONO VALIDE
 			
-			pacchetti = pacchettoRemoto.ricercaPacchetti(this.destinazione, this.dataPartenza, this.dataArrivo);
+			pacchetti = pacchettoRemoto.ricercaPacchetti(this.destinazione, this.dataPartenza, this.dataRitorno);
 				//RITORNA LA LISTA DEI PACCHETTI CON DESTINAZIONE DESIDERATA E DISPONIBILI NEL PERIODO RICHIESTO
 			
 			for(int i=0;i<=pacchetti.size();i++){
 				//PER OGNI PACCHETTO VERIFICA CHE TUTTI I SUOI COMPONENTI SIANO DISPONIBILI
 				
-				if(pacchettoRemoto.verificaDisponibilitaComponenti(this.dataPartenza, this.dataArrivo, this.numPartecipanti, (ArrayList<Long>) pacchetti.get(i).getListaComponenti())){
+				if(pacchettoRemoto.verificaDisponibilitaComponenti(this.dataPartenza, this.dataRitorno, this.numPartecipanti, (ArrayList<Long>) pacchetti.get(i).getListaComponenti())){
 				//SE TUTTI I COMPONENTI SONO DISPONIBILI NON RIMUOVE IL PACCHETTO DALLA LISTA
 					
 				}else{
