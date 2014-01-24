@@ -12,7 +12,7 @@ public class ComponenteDTO implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private Long codiceComponente;
-	private TipologiaDTO tipologia;
+	private String tipologia;
 	private String descrizione;
 	private Date dataInizioValidita;
 	private Date dataFineValidita;
@@ -31,14 +31,14 @@ public class ComponenteDTO implements Serializable{
 	}
 
 	/**@return tipologia*/
-	public TipologiaDTO getTipologia() {
+	public String getTipologia() {
 
 		return this.tipologia;
 
 	}
 	
 	/**@param tipologia tipologia to set*/
-	public void setTipologia(TipologiaDTO tipologia) {
+	public void setTipologia(String tipologia) {
 
 		this.tipologia = tipologia;
 

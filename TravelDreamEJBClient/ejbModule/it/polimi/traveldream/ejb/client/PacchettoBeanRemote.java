@@ -1,6 +1,5 @@
 package it.polimi.traveldream.ejb.client;
 
-import it.polimi.traveldream.entities.EtichettaDTO;
 import it.polimi.traveldream.entities.PacchettoDTO;
 
 import java.util.ArrayList;
@@ -18,7 +17,7 @@ public interface PacchettoBeanRemote {
 	 * @param descrizione
 	 * @param listaComponenti
 	 * @return idPacchetto*/
-	public Long createPacchetto(String destinazione, Date dataInizioValidita, Date dataFineValidita, ArrayList<EtichettaDTO> etichette, String descrizione,ArrayList<Long> listaComponenti);
+	public Long createPacchetto(String destinazione, Date dataInizioValidita, Date dataFineValidita, String etichetta, String descrizione,ArrayList<Long> listaComponenti);
 
 	/**@param idPacchetto*/
 	public void removePacchetto(Long idPacchetto);
@@ -30,7 +29,7 @@ public interface PacchettoBeanRemote {
 	 * @param etichette
 	 * @param descrizione
 	 * @param listaComponenti*/
-	public void updatePacchetto(Long idPacchetto, String destinazione, Date dataInizioValidita, Date dataFineValidita, ArrayList<EtichettaDTO> etichette, String descrizione,ArrayList<Long> listaComponenti);
+	public void updatePacchetto(Long idPacchetto, String destinazione, Date dataInizioValidita, Date dataFineValidita, String etichetta, String descrizione,ArrayList<Long> listaComponenti);
 
 	/**@param destinazione
 	 * @return ArrayList<idPacchetto>*/
@@ -38,7 +37,7 @@ public interface PacchettoBeanRemote {
 
 	/**@param etichetta
 	 * @return ArrayList<idPacchetto>*/
-	public ArrayList<Long> findByEtichetta(EtichettaDTO etichetta);
+	public ArrayList<Long> findByEtichetta(String etichetta);
 
 	/**@param idPacchetto
 	 * @return Pacchetto*/
@@ -81,7 +80,7 @@ public interface PacchettoBeanRemote {
 	 * @param dataRitorno
 	 * @return ArrayList<Pacchetto>
 	 */
-	public ArrayList<PacchettoDTO> ricercaPerEtichetta (EtichettaDTO etichetta, Date dataPartenza, Date dataRitorno);
+	public ArrayList<PacchettoDTO> ricercaPerEtichetta (String etichetta, Date dataPartenza, Date dataRitorno);
 	
 	
 	

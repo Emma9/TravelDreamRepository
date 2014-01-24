@@ -1,8 +1,6 @@
 package it.polimi.traveldream.ejb.client;
 
-import it.polimi.traveldream.entities.EtichettaDTO;
 import it.polimi.traveldream.entities.PacchettoPersonalizzatoDTO;
-import it.polimi.traveldream.entities.StatoDTO;
 
 import java.util.ArrayList;
 
@@ -14,7 +12,7 @@ public interface PacchettoPersonalizzatoBeanRemote {
 	/**@param stato
 	 * @param idCliente
 	 * @return idPacchettoPersonalizzato*/
-	public Long createPacchettoPersonalizzato(StatoDTO stato, Long idCliente);
+	public Long createPacchettoPersonalizzato(String stato, Long idCliente);
 
 	/**@param idPacchettoPersonalizzato*/
 	public void removePacchettoPersonalizzato(Long idPacchettoPersonalizzato);
@@ -22,7 +20,7 @@ public interface PacchettoPersonalizzatoBeanRemote {
 	/**@param idPacchettoPersonalizzato
 	 * @param stato
 	 * @param listaComponenti*/
-	public void updatePacchettoPersonalizzato(Long idPacchettoPersonalizzato,StatoDTO stato, ArrayList<Long> listaComponenti);
+	public void updatePacchettoPersonalizzato(Long idPacchettoPersonalizzato,String stato, ArrayList<Long> listaComponenti);
 
 	/**@param destinazione
 	 * @return ArrayList<idPacchettoPersonalizzato>*/
@@ -30,7 +28,7 @@ public interface PacchettoPersonalizzatoBeanRemote {
 
 	/**@param etichetta
 	 * @return ArrayList<idPacchettoPersonalizzato>*/
-	public ArrayList<Long> findByEtichetta(EtichettaDTO etichetta);
+	public ArrayList<Long> findByEtichetta(String etichetta);
 
 	/**@param idPacchettoPersonalizzato
 	 * @return PacchettoPersonalizzato*/

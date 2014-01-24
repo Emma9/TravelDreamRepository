@@ -1,7 +1,6 @@
 package it.polimi.traveldream.web.beans;
 
 import it.polimi.traveldream.ejb.client.PacchettoBeanRemote;
-import it.polimi.traveldream.entities.EtichettaDTO;
 import it.polimi.traveldream.entities.PacchettoDTO;
 
 import java.io.Serializable;
@@ -26,7 +25,7 @@ public class RicercaPerEtichettaBean implements Serializable {
 	@EJB
 	private PacchettoBeanRemote pacchettoRemoto;
 	
-	private EtichettaDTO etichetta;
+	private String etichetta;
 	private Date dataPartenza;
 	private Date dataRitorno;
 	private int numPartecipanti;
@@ -41,13 +40,13 @@ public class RicercaPerEtichettaBean implements Serializable {
 	/**
 	 * @return the etichetta
 	 */
-	public EtichettaDTO getEtichetta() {
+	public String getEtichetta() {
 		return etichetta;
 	}
 	/**
 	 * @param etichetta the etichetta to set
 	 */
-	public void setEtichetta(EtichettaDTO etichetta) {
+	public void setEtichetta(String etichetta) {
 		this.etichetta = etichetta;
 	}
 	/**

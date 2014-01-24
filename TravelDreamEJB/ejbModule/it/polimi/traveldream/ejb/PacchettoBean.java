@@ -4,8 +4,6 @@ import it.polimi.traveldream.ejb.client.ComponenteBeanRemote;
 import it.polimi.traveldream.ejb.client.PacchettoBeanLocal;
 import it.polimi.traveldream.ejb.client.PacchettoBeanRemote;
 import it.polimi.traveldream.entities.ComponenteDTO;
-import it.polimi.traveldream.entities.Etichetta;
-import it.polimi.traveldream.entities.EtichettaDTO;
 import it.polimi.traveldream.entities.PacchettoDTO;
 
 import java.util.ArrayList;
@@ -36,7 +34,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 * @param descrizione
 	 * @param listaComponenti
 	 * @return idPacchetto*/
-	public Long createPacchetto(String destinazione, Date dataInizioValidita, Date dataFineValidita, ArrayList<EtichettaDTO> etichette, String descrizione,ArrayList<Long> listaComponenti) {
+	public Long createPacchetto(String destinazione, Date dataInizioValidita, Date dataFineValidita, String etichetta, String descrizione,ArrayList<Long> listaComponenti) {
 
 		
 		if(verificaListaComponenti(listaComponenti)){
@@ -46,7 +44,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 		pacchetto.setDestinazione(destinazione);
 		pacchetto.setDataInizioValidita(dataInizioValidita);
 		pacchetto.setDataFineValidita(dataFineValidita);
-		pacchetto.setEtichette(etichette);
+		pacchetto.setEtichetta(etichetta);
 		pacchetto.setDescrizione(descrizione);
 		pacchetto.setListaComponenti(listaComponenti);
 
@@ -74,7 +72,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 * @param etichette
 	 * @param descrizione
 	 * @param listaComponenti*/
-	public void updatePacchetto(Long idPacchetto, String destinazione, Date dataInizioValidita, Date dataFineValidita, ArrayList<EtichettaDTO> etichette, String descrizione,ArrayList<Long> listaComponenti) {
+	public void updatePacchetto(Long idPacchetto, String destinazione, Date dataInizioValidita, Date dataFineValidita, String etichetta, String descrizione,ArrayList<Long> listaComponenti) {
 
 		if ((verificaPresenzaPacchetto(idPacchetto))&&(verificaListaComponenti(listaComponenti))) {
 			
@@ -83,7 +81,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 			pacchetto.setDestinazione(destinazione);
 			pacchetto.setDataInizioValidita(dataInizioValidita);
 			pacchetto.setDataFineValidita(dataFineValidita);
-			pacchetto.setEtichette(etichette);
+			pacchetto.setEtichetta(etichetta);
 			pacchetto.setDescrizione(descrizione);
 			pacchetto.setListaComponenti(listaComponenti);
 
@@ -112,7 +110,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 
 	/**@param etichetta
 	 * @return ArrayList<idPacchetto>*/
-	public ArrayList<Long> findByEtichetta(EtichettaDTO etichetta) {
+	public ArrayList<Long> findByEtichetta(String etichetta) {
 
 		TypedQuery<PacchettoDTO> q = manager.createQuery("FROM Pacchetto p", PacchettoDTO.class);
 
@@ -122,7 +120,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 
 		for (int i = 0; i <= risultati.size(); i++) {
 
-			if (risultati.get(i).getEtichette().contains(etichetta)) {
+			if (risultati.get(i).getEtichetta().contains(etichetta)) {
 
 				pacchetti.set(i, risultati.get(i));
 
@@ -259,13 +257,13 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 				
 				switch (componente.getTipologia()){
 				
-				case HOTEL:flagHotel=true;
+				case "HOTEL":flagHotel=true;
 									break;
 					
-				case VOLO:flagVolo=true;
+				case "VOLO":flagVolo=true;
 									break;
 					
-				case ESCURSIONE:flagEscursione=true;
+				case "ESCURSIONE":flagEscursione=true;
 									break;	
 				
 				}
@@ -326,7 +324,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 * @param dataRitorno
 	 * @return ArrayList<Pacchetto>
 	 */
-	public ArrayList<PacchettoDTO> ricercaPerEtichetta (EtichettaDTO etichetta, Date dataPartenza, Date dataRitorno){
+	public ArrayList<PacchettoDTO> ricercaPerEtichetta (String etichetta, Date dataPartenza, Date dataRitorno){
 		
 		try {
 			
