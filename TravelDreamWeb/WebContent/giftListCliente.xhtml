@@ -14,8 +14,8 @@
 		
 		<p:growl id="growl" showDetail="true" />
 
-			<p:dataTable id="giftList" var="pacchettoPersonalizzato" value="#{ricercaPacchettiBean.pacchettiRicercati}"
-				paginator="true" rows="10" selection="#{ricercaPacchettiBeanBean.pacchettoSelezionato}"
+			<p:dataTable id="giftList" var="pacchettoGiftList" value="#{mostraGiftListBean.pacchettiPersonalizzatiRicercati}"
+				paginator="true" rows="10" selection="#{mostraGiftListBean.pacchettoPersonalizzatoSelezionato}"
 				selectionMode="single">       
 
 				<!-- <p:ajax event="rowSelect" listener="#{ricercaPacchettiBean.onRowSelect}" update=":form:display :form:growl" oncomplete="dettgliPacchettoPersonalizzato" /> 
@@ -29,15 +29,15 @@
 		
 								
 						<p:column headerText="Destinazione">  
-		            #{ricercaPacchettiBean.destinazione}  
+		            #{mostraGiftListBean.pacchettoPersonalizzatoSelezionato.destinazione}  
 		        </p:column>
 		
 						<p:column headerText="Data di Partenza">  
-		            #{ricercaPacchettiBean.dataPartenza}  
+		            #{mostraPacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.dataInizioValidita}  
 		        </p:column>
 		
 						<p:column headerText="Data di Ritorno">  
-		            #{ricercaPacchettiBean.dataRitorno}  
+		            #{mostraPacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.dataFineValidita}  
 		        </p:column>
 		        
 			</p:dataTable>
