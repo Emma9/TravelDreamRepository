@@ -4,6 +4,7 @@ import it.polimi.traveldream.ejb.client.ComponenteBeanRemote;
 import it.polimi.traveldream.ejb.client.PacchettoBeanLocal;
 import it.polimi.traveldream.ejb.client.PacchettoBeanRemote;
 import it.polimi.traveldream.entities.ComponenteDTO;
+import it.polimi.traveldream.entities.Etichetta;
 import it.polimi.traveldream.entities.EtichettaDTO;
 import it.polimi.traveldream.entities.PacchettoDTO;
 
@@ -293,6 +294,48 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 			Query q1 = manager.createQuery("FROM Pacchetto p WHERE p.destinazione=:new_destinazione");
 
 			q1.setParameter("new_destinazione", destinazione);
+			
+			//DATE
+			Query q2 = manager.createQuery("FROM Pacchetto p WHERE p.dataInizioValidita<=new_dataPartenza AND p.dataInizioValidita<=new_dataRitorno AND p.dataFineValidita>=new_dataPartenza AND p.dataFineValidita>=new_dataRitorno");
+
+			q2.setParameter("new_dataPartenza", dataPartenza);
+			q2.setParameter("new_dataRitorno", dataRitorno);
+			
+			//INNER JOIN
+			Query q3 = manager.createQuery("q1 INNER JOIN q2");
+
+			q3.setParameter("q1", q1);
+			q3.setParameter("q2", q2);			
+			
+			@SuppressWarnings("unchecked")
+			ArrayList<PacchettoDTO> pacchetti = (ArrayList<PacchettoDTO>) q3.getResultList();
+			
+			return pacchetti;
+
+			} catch (NullPointerException e) {
+				
+			return null;
+			
+		}
+
+		
+	}
+	
+	/**@param etichetta
+	 * @param dataPartenza
+	 * @param dataRitorno
+	 * @return ArrayList<Pacchetto>
+	 */
+	public ArrayList<PacchettoDTO> ricercaPerEtichetta (EtichettaDTO etichetta, Date dataPartenza, Date dataRitorno){
+		
+		try {
+			
+			
+			
+			//DESTINAZIONE
+			Query q1 = manager.createQuery("FROM Pacchetto p WHERE p.etichette=:new_etichetta");
+
+			q1.setParameter("new_etichetta", etichetta);
 			
 			//DATE
 			Query q2 = manager.createQuery("FROM Pacchetto p WHERE p.dataInizioValidita<=new_dataPartenza AND p.dataInizioValidita<=new_dataRitorno AND p.dataFineValidita>=new_dataPartenza AND p.dataFineValidita>=new_dataRitorno");

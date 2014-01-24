@@ -32,8 +32,8 @@ public class RicercaPacchettiBean implements Serializable {
 
 	private String destinazione;
 	private Date dataPartenza;
-	private Date dataRitorno;
-	private int disponibilita;
+	private Date dataArrivo;
+	private int numPartecipanti;
 	
 	//PACCHETTO SELEZIONATO
 	private PacchettoDTO pacchettoSelezionato;
@@ -72,33 +72,33 @@ public class RicercaPacchettiBean implements Serializable {
 	}
 
 	/**
-	 * @return the dataRitorno
+	 * @return the dataArrivo
 	 */
-	public Date getDataRitorno() {
-		return dataRitorno;
+	public Date getDataArrivo() {
+		return dataArrivo;
 	}
 
 	/**
-	 * @param dataRitorno
-	 *            the dataRitorno to set
+	 * @param dataArrivo
+	 *            the dataArrivo to set
 	 */
-	public void setDataRitorno(Date dataRitorno) {
-		this.dataRitorno = dataRitorno;
+	public void setDataArrivo(Date dataArrivo) {
+		this.dataArrivo = dataArrivo;
 	}
 
 	/**
-	 * @return the disponibilita
+	 * @return the numPartecipanti
 	 */
-	public int getDisponibilita() {
-		return disponibilita;
+	public int getNumPartecipanti() {
+		return numPartecipanti;
 	}
 
 	/**
-	 * @param disponibilita
-	 *            the disponibilita to set
+	 * @param numPartecipanti
+	 *            the numPartecipanti to set
 	 */
-	public void setDisponibilita(int disponibilita) {
-		this.disponibilita = disponibilita;
+	public void setNumPartecipanti(int numPartecipanti) {
+		this.numPartecipanti = numPartecipanti;
 	}
 
 
@@ -141,16 +141,16 @@ public class RicercaPacchettiBean implements Serializable {
 
 		//try {
 			
-			if(this.pacchettoRemoto.verificaConsistenzaDate(this.dataPartenza, this.dataRitorno)){
+			if(this.pacchettoRemoto.verificaConsistenzaDate(this.dataPartenza, this.dataArrivo)){
 				//LE DATE INSERITE SONO VALIDE
 			
-			pacchetti = pacchettoRemoto.ricercaPacchetti(this.destinazione, this.dataPartenza, this.dataRitorno);
+			pacchetti = pacchettoRemoto.ricercaPacchetti(this.destinazione, this.dataPartenza, this.dataArrivo);
 				//RITORNA LA LISTA DEI PACCHETTI CON DESTINAZIONE DESIDERATA E DISPONIBILI NEL PERIODO RICHIESTO
 			
 			for(int i=0;i<=pacchetti.size();i++){
 				//PER OGNI PACCHETTO VERIFICA CHE TUTTI I SUOI COMPONENTI SIANO DISPONIBILI
 				
-				if(pacchettoRemoto.verificaDisponibilitaComponenti(this.dataPartenza, this.dataRitorno, this.disponibilita, pacchetti.get(i).getListaComponenti())){
+				if(pacchettoRemoto.verificaDisponibilitaComponenti(this.dataPartenza, this.dataArrivo, this.numPartecipanti, pacchetti.get(i).getListaComponenti())){
 				//SE TUTTI I COMPONENTI SONO DISPONIBILI NON RIMUOVE IL PACCHETTO DALLA LISTA
 					
 				}else{
