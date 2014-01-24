@@ -168,7 +168,7 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 	
 	
 	/**@param email
-	 * @return true if email is not present in the DB, otherwise false*/
+	 * @return true if email is present in the DB, otherwise false*/
 	public boolean verificaPresenzaClienteRegistrazione(String email, String codiceFiscale) {
 		try {
 			TypedQuery<ClienteDTO> q = manager
@@ -180,20 +180,20 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 			List<ClienteDTO> clienti = q.getResultList();
 
 			if (clienti.size() == 0) {
-				return true;
+				return false;
 
 			} else {
-				return false;
+				return true;
 
 			}
 		} catch (NullPointerException e) {
-			return true;
+			return false;
 		}
 	}
 
 	/**
 	 * @param idCliente
-	 * @return true if idCliente is not present in the DB, otherwise false
+	 * @return true if idCliente is present in the DB, otherwise false
 	 */
 	public boolean verificaPresenzaClienteId(Long idCliente) {
 		try {
@@ -206,14 +206,14 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 			List<ClienteDTO> clienti = q.getResultList();
 
 			if (clienti.size() == 0) {
-				return true;
+				return false;
 
 			} else {
-				return false;
+				return true;
 
 			}
 		} catch (NullPointerException e) {
-			return true;
+			return false;
 		}
 	}
 	

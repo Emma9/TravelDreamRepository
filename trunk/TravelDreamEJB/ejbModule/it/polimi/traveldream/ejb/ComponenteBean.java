@@ -163,7 +163,7 @@ public boolean verificaDisponibilitaComponente (int disponibilita, Long codiceCo
 	}
 	
 	/**@param codiceComponente
-	 * @return true if codiceComponente is not present in the DB, otherwise false*/
+	 * @return true if codiceComponente is present in the DB, otherwise false*/
 	public boolean verificaPresenzaComponente(Long codiceComponente) {
 		try {
 			TypedQuery<ComponenteDTO> q = manager.createQuery("FROM Componente c WHERE c.codiceComponente=:new_codiceComponente", ComponenteDTO.class);
@@ -173,16 +173,19 @@ public boolean verificaDisponibilitaComponente (int disponibilita, Long codiceCo
 			List<ComponenteDTO> componenti = q.getResultList();
 
 			if (componenti.size() == 0) {
-				return true;
+				return false;
 
 			} else {
-				return false;
+				return true;
 
 			}
 		} catch (NullPointerException e) {
-			return true;
+			return false;
 		}
 	}
+	
+	
+	
 	
 public boolean verificaTipologia (String tipologia) {
 		

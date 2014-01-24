@@ -111,8 +111,8 @@ public class AmicoBean implements AmicoBeanRemote, AmicoBeanLocal {
 	/** Metodi private */
 
 	/**@param email
-	 * @return true if email is not present in the DB, otherwise false*/
-	private boolean verificaPresenzaAmicoEm(String email) {
+	 * @return true if email is present in the DB, otherwise false*/
+	public boolean verificaPresenzaAmicoEm(String email) {
 		try {
 			TypedQuery<AmicoDTO> q = manager
 					.createQuery("FROM Amico a WHERE a.email=:new_email", AmicoDTO.class);
@@ -122,20 +122,20 @@ public class AmicoBean implements AmicoBeanRemote, AmicoBeanLocal {
 			List<AmicoDTO> amici = q.getResultList();
 
 			if (amici.size() == 0) {
-				return true;
+				return false;
 
 			} else {
-				return false;
+				return true;
 
 			}
 		} catch (NullPointerException e) {
-			return true;
+			return false;
 		}
 	}
 
 	/**@param idAmico
 	 * @return true if idAmico is not present in the DB, otherwise false*/
-	private boolean verificaPresenzaAmicoId(Long idAmico) {
+	public boolean verificaPresenzaAmicoId(Long idAmico) {
 		try {
 			TypedQuery<AmicoDTO> q = manager.createQuery("FROM Amico a WHERE a.idAmico=:new_idAmico", AmicoDTO.class);
 
@@ -157,7 +157,7 @@ public class AmicoBean implements AmicoBeanRemote, AmicoBeanLocal {
 
 	/**@param idAmico
 	 * @return email*/
-	private String daIdAEmail(Long idAmico) {
+	public String daIdAEmail(Long idAmico) {
 		AmicoDTO a = findByIdAmico(idAmico);
 		return a.getEmail();
 	}

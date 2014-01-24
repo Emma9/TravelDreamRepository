@@ -174,7 +174,7 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 	}
 	
 	/**@param idPacchettoPersonalizzato
-	 * @return true if idPacchettoPersonalizzato is not present in the DB, otherwise false*/
+	 * @return true if idPacchettoPersonalizzato is present in the DB, otherwise false*/
 	public boolean verificaPresenzaPacchettoPersonalizzato(Long idPacchettoPersonalizzato) {
 		try {
 			TypedQuery<PacchettoPersonalizzatoDTO> q = manager.createQuery("FROM PacchettoPersonalizzato p WHERE p.idPacchettoPersonalizzato=:new_idPacchettoPersonalizzato", PacchettoPersonalizzatoDTO.class);
@@ -184,14 +184,14 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 			List<PacchettoPersonalizzatoDTO> pacchetti = q.getResultList();
 
 			if (pacchetti.size() == 0) {
-				return true;
+				return false;
 
 			} else {
-				return false;
+				return true;
 
 			}
 		} catch (NullPointerException e) {
-			return true;
+			return false;
 		}
 	}
 	
