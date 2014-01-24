@@ -3,6 +3,7 @@ package it.polimi.traveldream.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 public class PacchettoDTO implements Serializable{
@@ -16,9 +17,9 @@ public class PacchettoDTO implements Serializable{
 	private String destinazione;
 	private Date dataInizioValidita;
 	private Date dataFineValidita;
-	private ArrayList<EtichettaDTO> etichette = new ArrayList<>();
+	private List<EtichettaDTO> etichette = new ArrayList<EtichettaDTO>(0);
 	private String descrizione;
-	private ArrayList<Long> listaComponenti;
+	private List<Long> listaComponenti= new ArrayList<Long>(0);
 
 	/**Costruttore*/
 	public PacchettoDTO() {
@@ -76,50 +77,47 @@ public class PacchettoDTO implements Serializable{
 		this.idPacchetto = idPacchetto;
 	}
 
-	
-
-	/**@return etichette*/
-	public ArrayList<EtichettaDTO> getEtichette() {
-	
-		return this.etichette;
-	
+	/**
+	 * @return the etichette
+	 */
+	public List<EtichettaDTO> getEtichette() {
+		return etichette;
 	}
 
-	/**@param etichette etichette to set*/
-	public void setEtichette(ArrayList<EtichettaDTO> et) {
-	
-		for (int i = 0; i <= et.size(); i++) {
-	
-			this.etichette.set(i, et.get(i));
-	
-		}
+	/**
+	 * @param etichette the etichette to set
+	 */
+	public void setEtichette(List<EtichettaDTO> etichette) {
+		this.etichette = etichette;
 	}
 
-	/**@return descrizione*/
+	/**
+	 * @return the descrizione
+	 */
 	public String getDescrizione() {
-		
-		return this.descrizione;
-		
+		return descrizione;
 	}
 
-	/**@param descrizione descrizione to set*/
+	/**
+	 * @param descrizione the descrizione to set
+	 */
 	public void setDescrizione(String descrizione) {
-		
 		this.descrizione = descrizione;
-	
 	}
 
-	/**@return listaComponenti*/
-	public ArrayList<Long> getListaComponenti() {
-		
-		return this.listaComponenti;
-		
+	/**
+	 * @return the listaComponenti
+	 */
+	public List<Long> getListaComponenti() {
+		return listaComponenti;
 	}
 
-	/**@param listaComponenti listaComponenti to set*/
-	public void setListaComponenti(ArrayList<Long> listaComponenti) {
-		
+	/**
+	 * @param listaComponenti the listaComponenti to set
+	 */
+	public void setListaComponenti(List<Long> listaComponenti) {
 		this.listaComponenti = listaComponenti;
-		
 	}
+
+	
 }

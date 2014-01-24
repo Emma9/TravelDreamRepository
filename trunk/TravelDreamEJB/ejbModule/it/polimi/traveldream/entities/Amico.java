@@ -2,6 +2,7 @@ package it.polimi.traveldream.entities;
 
 import java.io.Serializable;
 import java.lang.String;
+
 import javax.persistence.*;
 
 /**Amico di TravelDream*/
@@ -16,6 +17,7 @@ public class Amico implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long idAmico;
+	@Column(unique = true)
 	private String email;
 
 	/**Costruttore*/

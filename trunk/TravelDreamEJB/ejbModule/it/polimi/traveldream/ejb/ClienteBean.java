@@ -224,7 +224,7 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 	public ArrayList<PacchettoPersonalizzatoDTO> elencoPacchettiCliente (long id){
 		ClienteDTO c = findByIdCliente(id);
 		
-		ArrayList<PacchettoPersonalizzatoDTO> elencoPacchettiCliente = c.getPacchettiCliente();
+		ArrayList<PacchettoPersonalizzatoDTO> elencoPacchettiCliente = (ArrayList<PacchettoPersonalizzatoDTO>) c.getPacchettiCliente();
 		
 		return elencoPacchettiCliente;
 	}
@@ -236,7 +236,7 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 	public ArrayList<PacchettoPersonalizzatoDTO> giftListCliente (long id){
 		ClienteDTO c = findByIdCliente(id);
 		
-		ArrayList<PacchettoPersonalizzatoDTO> elencoPacchettiCliente = c.getGiftList();
+		ArrayList<PacchettoPersonalizzatoDTO> elencoPacchettiCliente = (ArrayList<PacchettoPersonalizzatoDTO>) c.getGiftList();
 		
 		return elencoPacchettiCliente;
 	}
