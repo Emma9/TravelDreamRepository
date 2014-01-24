@@ -3,7 +3,7 @@ package it.polimi.traveldream.ejb;
 import it.polimi.traveldream.ejb.client.InvitoBeanLocal;
 import it.polimi.traveldream.ejb.client.InvitoBeanRemote;
 import it.polimi.traveldream.entities.InvitoDTO;
-import it.polimi.traveldream.entities.StatoDTO;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,7 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 	 * @param data
 	 * @param stato
 	 * @return idInvito*/
-	public Long createInvito(String emailMittente, String emailDestinatario,String idPacchettoPersonalizzato, String data, StatoDTO stato) {
+	public Long createInvito(String emailMittente, String emailDestinatario,String idPacchettoPersonalizzato, String data, String stato) {
 
 		InvitoDTO invito = new InvitoDTO();
 
@@ -60,7 +60,7 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 	 * @param idPacchettoPersonalizzato
 	 * @param data
 	 * @param stato*/
-	public void updateInvito(Long idInvito, String emailMittente,String emailDestinatario, String idPacchettoPersonalizzato,String data, StatoDTO stato) {
+	public void updateInvito(Long idInvito, String emailMittente,String emailDestinatario, String idPacchettoPersonalizzato,String data, String stato) {
 
 		if (verificaPresenzaInvito(idInvito)) {
 

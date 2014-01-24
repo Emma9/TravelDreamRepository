@@ -1,7 +1,7 @@
 package it.polimi.traveldream.ejb.client;
 
 import it.polimi.traveldream.entities.ComponenteDTO;
-import it.polimi.traveldream.entities.TipologiaDTO;
+
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,7 +17,7 @@ public interface ComponenteBeanRemote {
 	 * @param dataFineValidita
 	 * @param disponibilita
 	 * @return codiceComponente*/
-	public Long createComponente(TipologiaDTO tipologia, String descrizione, Date dataInizioValidita, Date dataFineValidita, int disponibilita);
+	public Long createComponente(String tipologia, String descrizione, Date dataInizioValidita, Date dataFineValidita, int disponibilita);
 	
 	
 	/**@param codiceComponente*/
@@ -30,7 +30,7 @@ public interface ComponenteBeanRemote {
 	 * @param dataFineValidita
 	 * @param disponibilita
 	 */
-	public void updateComponente(Long codiceComponente, TipologiaDTO tipologia, String descrizione, Date dataInizioValidita, Date dataFineValidita, int disponibilita);
+	public void updateComponente(Long codiceComponente, String tipologia, String descrizione, Date dataInizioValidita, Date dataFineValidita, int disponibilita);
 	/**@param codiceComponente
 	 * @return Componente*/
 	public ComponenteDTO findByCodiceComponente(Long codiceCompoente);

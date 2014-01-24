@@ -19,7 +19,7 @@ public class Componente implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long codiceComponente;
-	private Tipologia tipologia;
+	private String tipologia;
 	private String descrizione;
 	@Temporal(TemporalType.TIME)
 	private Date dataInizioValidita;
@@ -40,14 +40,14 @@ public class Componente implements Serializable {
 	}
 
 	/**@return tipologia*/
-	public Tipologia getTipologia() {
+	public String getTipologia() {
 
 		return this.tipologia;
 
 	}
 	
 	/**@param tipologia tipologia to set*/
-	public void setTipologia(Tipologia tipologia) {
+	public void setTipologia(String tipologia) {
 
 		this.tipologia = tipologia;
 

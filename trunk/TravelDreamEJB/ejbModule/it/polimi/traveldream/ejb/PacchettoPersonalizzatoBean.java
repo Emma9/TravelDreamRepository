@@ -2,9 +2,7 @@ package it.polimi.traveldream.ejb;
 
 import it.polimi.traveldream.ejb.client.PacchettoPersonalizzatoBeanLocal;
 import it.polimi.traveldream.ejb.client.PacchettoPersonalizzatoBeanRemote;
-import it.polimi.traveldream.entities.EtichettaDTO;
 import it.polimi.traveldream.entities.PacchettoPersonalizzatoDTO;
-import it.polimi.traveldream.entities.StatoDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +27,7 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
     /**@param stato
 	 * @param idCliente
 	 * @return idPacchettoPersonalizzato*/
-	public Long createPacchettoPersonalizzato(StatoDTO stato, Long idCliente) {
+	public Long createPacchettoPersonalizzato(String stato, Long idCliente) {
 
 		PacchettoPersonalizzatoDTO pacchettoPersonalizzato = new PacchettoPersonalizzatoDTO();
 
@@ -55,7 +53,7 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 	/**@param idPacchettoPersonalizzato
 	 * @param stato
 	 * @param listaComponenti*/
-	public void updatePacchettoPersonalizzato(Long idPacchettoPersonalizzato,StatoDTO stato, ArrayList<Long> listaComponenti) {
+	public void updatePacchettoPersonalizzato(Long idPacchettoPersonalizzato,String stato, ArrayList<Long> listaComponenti) {
 
 		if (verificaPresenzaPacchettoPersonalizzato(idPacchettoPersonalizzato)) {
 
@@ -90,7 +88,7 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 
 	/**@param etichetta
 	 * @return ArrayList<idPacchettoPersonalizzato>*/
-	public ArrayList<Long> findByEtichetta(EtichettaDTO etichetta) {
+	public ArrayList<Long> findByEtichetta(String etichetta) {
 
 		TypedQuery<PacchettoPersonalizzatoDTO> q = manager.createQuery("FROM PacchettoPersonalizzato p", PacchettoPersonalizzatoDTO.class);
 
@@ -100,7 +98,7 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 
 		for (int i = 0; i <= risultati.size(); i++) {
 
-			if (risultati.get(i).getEtichette().contains(etichetta)) {
+			if (risultati.get(i).getEtichetta().contains(etichetta)) {
 
 				pacchetti.set(i, risultati.get(i));
 

@@ -17,7 +17,7 @@ public class PacchettoDTO implements Serializable{
 	private String destinazione;
 	private Date dataInizioValidita;
 	private Date dataFineValidita;
-	private List<EtichettaDTO> etichette = new ArrayList<EtichettaDTO>(0);
+	private String etichetta;
 	private String descrizione;
 	private List<Long> listaComponenti= new ArrayList<Long>(0);
 
@@ -78,17 +78,17 @@ public class PacchettoDTO implements Serializable{
 	}
 
 	/**
-	 * @return the etichette
+	 * @return the etichetta
 	 */
-	public List<EtichettaDTO> getEtichette() {
-		return etichette;
+	public String getEtichetta() {
+		return etichetta;
 	}
 
 	/**
-	 * @param etichette the etichette to set
+	 * @param etichette the etichetta to set
 	 */
-	public void setEtichette(List<EtichettaDTO> etichette) {
-		this.etichette = etichette;
+	public void setEtichetta(String etichetta) {
+		this.etichetta = etichetta;
 	}
 
 	/**

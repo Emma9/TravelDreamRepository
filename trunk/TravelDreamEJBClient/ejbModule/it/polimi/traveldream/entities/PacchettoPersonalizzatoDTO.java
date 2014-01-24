@@ -10,7 +10,7 @@ public class PacchettoPersonalizzatoDTO extends PacchettoDTO implements Serializ
 	private static final long serialVersionUID = 1L;
 	
 	private Long idPacchettoPersonalizzato;
-	private StatoDTO stato;
+	private String stato;
 	private Long idCliente;
 
 	/**Costruttore*/
@@ -26,14 +26,14 @@ public class PacchettoPersonalizzatoDTO extends PacchettoDTO implements Serializ
 	}
 
 	/**@return Stato*/
-	public StatoDTO getStato() {
+	public String getStato() {
 		
 		return this.stato;
 		
 	}
 
 	/**@param stato stato to set*/
-	public void setStato(StatoDTO stato) {
+	public void setStato(String stato) {
 		
 		this.stato = stato;
 

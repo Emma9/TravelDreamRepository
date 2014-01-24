@@ -22,7 +22,7 @@ public class Invito implements Serializable {
 	private String emailDestinatario;
 	private String idPacchettoPersonalizzato;
 	private String data;
-	private Stato stato;
+	private String stato;
 
 	/**Costruttore*/
 	public Invito() {
@@ -93,14 +93,14 @@ public class Invito implements Serializable {
 	}
 
 	/**@return stato*/
-	public Stato getStato() {
+	public String getStato() {
 		
 		return this.stato;
 		
 	}
 
 	/**@param stato stato to set*/
-	public void setStato(Stato stato) {
+	public void setStato(String stato) {
 		
 		this.stato = stato;
 		

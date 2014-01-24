@@ -26,7 +26,7 @@ public class Pacchetto implements Serializable {
 	private Date dataInizioValidita;
 	@Temporal(TemporalType.TIME)
 	private Date dataFineValidita;
-	private List<Etichetta> etichette = new ArrayList<Etichetta>(0);
+	private String etichetta;
 	private String descrizione;
 	private List<Long> listaComponenti= new ArrayList<Long>(0);
 
@@ -87,17 +87,17 @@ public class Pacchetto implements Serializable {
 	}
 
 	/**
-	 * @return the etichette
+	 * @return the etichetta
 	 */
-	public List<Etichetta> getEtichette() {
-		return etichette;
+	public String getEtichetta() {
+		return etichetta;
 	}
 
 	/**
-	 * @param etichette the etichette to set
+	 * @param etichette the etichetta to set
 	 */
-	public void setEtichette(List<Etichetta> etichette) {
-		this.etichette = etichette;
+	public void setEtichetta(String etichetta) {
+		this.etichetta = etichetta;
 	}
 
 	/**
