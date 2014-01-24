@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -82,9 +83,16 @@ public class MostraGiftListBean implements Serializable {
 			HttpServletRequest request = (HttpServletRequest) context
 					.getExternalContext().getRequest();
 
+			try{
+				
 			Long idCliente = clienteRemoto.daEmailAId(this.email);
 			
-			pacchettiPersonalizzatiRicercati = clienteRemoto.giftListCliente(idCliente);			
+			pacchettiPersonalizzatiRicercati = clienteRemoto.giftListCliente(idCliente);
+			}catch(EJBException e){
+				
+				return "giftListCliente";
+				
+			}
 			return "giftListCliente";
 			
 		}
