@@ -8,11 +8,15 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+
+import org.primefaces.event.SelectEvent;
+import org.primefaces.event.UnselectEvent;
 
 @ManagedBean()
 @SessionScoped
@@ -30,6 +34,12 @@ public class RicercaPacchettiBean implements Serializable {
 	private Date dataPartenza;
 	private Date dataRitorno;
 	private int disponibilita;
+	
+	//PACCHETTO SELEZIONATO
+	private PacchettoDTO pacchettoSelezionato;
+	
+	//LISTA PACCHETTI INVIATA ALLA PAGINA WEB
+	private ArrayList<PacchettoDTO> pacchettiRicercati = new ArrayList<PacchettoDTO>();
 
 	/**
 	 * @return the destinazione
@@ -92,14 +102,42 @@ public class RicercaPacchettiBean implements Serializable {
 	}
 
 
-	public ArrayList<PacchettoDTO> ricercaPacchetti() {
+	/**
+	 * @return the pacchettoSelezionato
+	 */
+	public PacchettoDTO getPacchettoSelezionato() {
+		return pacchettoSelezionato;
+	}
+
+	/**
+	 * @param pacchettoSelezionato the pacchettoSelezionato to set
+	 */
+	public void setPacchettoSelezionato(PacchettoDTO pacchettoSelezionato) {
+		this.pacchettoSelezionato = pacchettoSelezionato;
+	}
+
+	/**
+	 * @return the pacchettiRicercati
+	 */
+	public ArrayList<PacchettoDTO> getPacchettiRicercati() {
+		return pacchettiRicercati;
+	}
+
+	/**
+	 * @param pacchettiRicercati the pacchettiRicercati to set
+	 */
+	public void setPacchettiRicercati(ArrayList<PacchettoDTO> pacchettiRicercati) {
+		this.pacchettiRicercati = pacchettiRicercati;
+	}
+
+	public void ricercaPacchetti() {
 		
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
 				.getExternalContext().getRequest();
 		
 		ArrayList<PacchettoDTO> pacchetti = new ArrayList<PacchettoDTO>();
-		ArrayList<PacchettoDTO> pacchettiRicercati = new ArrayList<PacchettoDTO>();
+	
 
 		//try {
 			
@@ -145,7 +183,10 @@ public class RicercaPacchettiBean implements Serializable {
 
 		}*/
 		
-		return pacchettiRicercati;
+		//return pacchettiRicercati;
 
 	}
+	
+	
+	
 }
