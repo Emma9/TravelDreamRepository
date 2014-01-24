@@ -23,17 +23,20 @@
             
   
             <h:outputText value="Destinazione Viaggio:" />  
-            <h:outputText value="#{ricercaPacchettiBean.pacchettoSelezionato.destinazione}" />  
+            <h:outputText value="#{mostraPacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.destinazione}" />  
   
             <h:outputText value="Data di Partenza:" />  
-            <h:outputText value="#{ricercaPacchettiBean.pacchettoSelezionato.dataInizioValidita}" />  
+            <h:outputText value="#{mostraPacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.dataInizioValidita}" />  
   
             <h:outputText value="Data di Ritorno:" />  
-            <h:outputText value="#{ricercaPacchettiBean.pacchettoSelezionato.dataFineValidita}" />  
+            <h:outputText value="#{mostraPacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.dataFineValidita}" />  
   
             <h:outputText value="Descrizione:" />  
-            <h:outputText value="#{ricercaPacchettiBean.pacchettoSelezionato.descrizione}" /> 
-        <h:commandButton id="salva" actionListener="Salva Pacchetto" /> <!--RENDERE INVISIBILE IL BOTTONE AL CLICK..... mostra la lista dei suoi pacchetti aggiornata-->
+            <h:outputText value="#{mostraPacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.descrizione}" /> 
+        
+        	<p:commandButton id="blocca" value="Blocca Pacchetto" /> <!--RENDERE INVISIBILE IL BOTTONE AL CLICK..... mostra la lista dei suoi pacchetti aggiornata-->
+            <p:commandButton id="rimuovi" value="Rimuovi Pacchetto" /> <!--RENDERE INVISIBILE IL BOTTONE AL CLICK..... mostra la lista dei suoi pacchetti aggiornata-->
+            <p:commandButton id="inviti" value="Gestione Inviti" /> <!--RENDERE INVISIBILE IL BOTTONE AL CLICK..... mostra la lista dei suoi pacchetti aggiornata-->
             
         </h:panelGrid>
 		

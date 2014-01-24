@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+	<h2>INVIA INVITO AD UN AMICO</h2>
+	<h:form>
+		<p:fieldset legend="Invio Invito" widgetVar="regWidget" style="width: 600px;">
+  	
+  		
+    <h:outputLabel value="Email dell'amico" />
+    <p:inputText value="#{registrazioneBean.email}"
+       id="email"
+       required="true"
+       requiredMessage="Devi inserire l'email"
+       validatorMessage="L'email inserita non è valida">
+     <f:validateRegex pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$"></f:validateRegex>
+  	
+    </p:inputText>
+    <p:message for="email" />
+  		<p:commandButton id="invita" value="Invita Amico"/> <!--RENDERE INVISIBILE IL BOTTONE AL CLICK..... mostra la lista dei suoi pacchetti aggiornata-->
+  	</p:fieldset>
+
+        
+</h:form>
+</h:body>
+</html>

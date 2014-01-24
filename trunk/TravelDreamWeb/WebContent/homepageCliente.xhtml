@@ -10,24 +10,41 @@
 
 <p:layout fullPage="true">
 
+		    
 	<div align="center">
 		<p:layoutUnit position="north" size="90" header="TRAVELDREAM"
 			resizable="false" closable="false" collapsible="false">
-			<div style="float: left">
-				<h:commandButton id="bottoneListaMieiPacchetti" value="Mia Lista Pacchetti" actionListener="#{mostraPacchettiPersonalizzatiBean.mostraPacchettiPersonalizzati}">
-				 <f:setPropertyActionListener target="#{mostraPacchettiPersonalizzatiBean.email}" value="#{loginClienteBean.email}" />
-				</h:commandButton>
-				<h:commandButton id="bottoneMiaGiftList"  value="Mia Gift List" actionListener="#{mostraGiftListBean.mostraGiftList}" >
-					<f:setPropertyActionListener target="#{mostraGiftListBean.email}" value="#{loginClienteBean.email}" />
-				</h:commandButton> 
-			</div>
 			<div style="display: inline;">
-				<div style="float: right">
-					<h:outputText value="BENVENUTO: " />
-					<h:outputText value="#{loginClienteBean.email}" />
-
-					<h:commandButton actionListener="#{loginClienteBean.logout}"
-						value="Logout" />
+				<div style="float: left">
+					<h:form id="pacc">
+						<p:commandButton id="bottoneListaMieiPacchetti" value="Lista dei miei Pacchetti" update="pacc" action="#{mostraPacchettiPersonalizzatiBean.mostraPacchettiPersonalizzati}">
+							 <f:setPropertyActionListener target="#{mostraPacchettiPersonalizzatiBean.email}" value="#{loginClienteBean.email}" />
+						</p:commandButton>
+						
+					</h:form>
+				</div>
+				<div style="float: left">
+				<h:form id="gift">
+					<p:commandButton id="bottoneMiaGiftList" value="La mia GiftList" update="gift" action="#{mostraGiftListBean.mostraGiftList}">
+						 <f:setPropertyActionListener target="#{mostraPacchettiPersonalizzatiBean.email}" value="#{loginClienteBean.email}" />
+						 
+					</p:commandButton>
+				</h:form>
+				</div>
+			</div>
+			<div align="right">
+				<div style="display: inline;">
+					<div style="float: right">
+						<h:form>
+							<h:outputText value="BENVENUTO: " />
+							<h:outputText value="#{loginClienteBean.email}" />
+						</h:form>
+					</div>
+					<div style="float: right: ;">
+						<h:form id="logout">
+							<p:commandButton actionListener="#{loginClienteBean.logout}" update="logout" value="Logout" />
+						</h:form>
+					</div>
 				</div>
 			</div>
 		</p:layoutUnit>
@@ -43,6 +60,7 @@
 		<br />
 		<h:form id="form">
 
+			<p:messages id="message" showSummary="true" showDetail="false" autoUpdate="true" closable="true" />
 			<h:outputLabel value="Destinazione: " />
 		    <p:inputText value="#{ricercaPacchettiBean.destinazione}"
 		       id="destinazione"
@@ -53,22 +71,20 @@
 		    </p:inputText>
 		    <p:message for="destinazione"/>
 
-			<h:outputLabel value="Data di Arrivo: " />
+			<h:outputLabel value="Data di Partenza: " />
 			<p:calendar value="#{ricercaPacchettiBean.dataPartenza}" id="dataDiPartenza" required="true" requiredMessage="Devi inserire una data di Partenza"/>
 			<p:message for="dataDiPartenza"/>
 			<br />
-			<br />
 			
-			<h:outputText value="Data di Arrivo: " />
-			<p:calendar value="#{ricercaPacchettiBean.dataArrivo}" id="dataDiRitorno" required="true" requiredMessage="Devi inserire una data di Ritorno"/>
+			<h:outputText value="Data di Ritono " />
+			<p:calendar value="#{ricercaPacchettiBean.dataRitorno}" id="dataDiRitorno" required="true" requiredMessage="Devi inserire una data di Ritorno"/>
 			<p:message for="dataDiRitorno"/>
-			<br />
 			<br />
 
 			<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
 				<h:outputText value="Numero di Partecipanti: " />
 				<br />
-				<p:selectOneMenu value="#{buttonBean.number}" >
+				<p:selectOneMenu value="#{ricercaPacchettiBean.numPartecipanti}" >
 					<f:selectItem itemLabel="1" itemValue="1" />
 					<f:selectItem itemLabel="2" itemValue="2" />
 					<f:selectItem itemLabel="3" itemValue="3" />
@@ -80,11 +96,12 @@
 				</p:selectOneMenu>
 
 			</h:panelGrid>
-		    <p:commandButton value="Ricerca" actionListener="#{ricercaPacchettiBean.ricercaPacchetti}" ajax="false">
+		    <p:commandButton id="bottoneRicerca" value="Ricerca" actionListener="#{ricercaPacchettiBean.ricercaPacchetti}">
 		    </p:commandButton>
 
 
 		</h:form>
+		
 	</p:layoutUnit>
 
 
@@ -115,7 +132,7 @@
 						<br />
 						<p:calendar value="#{calendarBean.date1}" id="popupALM" />
 						<br />
-						<h:outputText value="Data di Arrivo: " />
+						<h:outputText value="Data di Ritorno: " />
 						<br />
 						<p:calendar value="#{calendarBean.date2}" id="popupRLM" />
 						<br />
@@ -136,7 +153,7 @@
 
 						</h:panelGrid>
 						<br />
-						<p:commandButton value="Ricerca" update="displayLM"
+						<p:commandButton id="bottoneLM" value="Ricerca" update="displayLM"
 							oncomplete="PF('dialog').show()" />
 						<p:dialog header="Selected Dates" widgetVar="dialog"
 							showEffect="fade" hideEffect="fade">
@@ -246,7 +263,7 @@
 
 						</h:panelGrid>
 						<br />
-						<p:commandButton value="Ricerca" update="displayO"
+						<p:commandButton id="bottoneO" value="Ricerca" update="displayO"
 							oncomplete="PF('dialog').show()" />
 						<p:dialog header="Selected Dates" widgetVar="dialog"
 							showEffect="fade" hideEffect="fade">
@@ -291,7 +308,7 @@
 
 						</h:panelGrid>
 						<br />
-						<p:commandButton value="Ricerca" update="displayM"
+						<p:commandButton id="bottoneM" value="Ricerca" update="displayM"
 							oncomplete="PF('dialog').show()" />
 						<p:dialog header="Selected Dates" widgetVar="dialog"
 							showEffect="fade" hideEffect="fade">
@@ -337,7 +354,7 @@
 
 						</h:panelGrid>
 						<br />
-						<p:commandButton value="Ricerca" update="displayMON"
+						<p:commandButton id="bottoneMON" value="Ricerca" update="displayMON"
 							oncomplete="PF('dialog').show()" />
 						<p:dialog header="Selected Dates" widgetVar="dialog"
 							showEffect="fade" hideEffect="fade">
