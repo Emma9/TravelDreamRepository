@@ -214,7 +214,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	
 
 	/**@param idPacchetto
-	 * @return true if idPacchetto is not present in the DB, otherwise false*/
+	 * @return true if idPacchetto is present in the DB, otherwise false*/
 	public boolean verificaPresenzaPacchetto(Long idPacchetto) {
 		try {
 			TypedQuery<PacchettoDTO> q = manager.createQuery("FROM Pacchetto p WHERE p.idPacchetto=:new_idPacchetto", PacchettoDTO.class);
@@ -224,15 +224,15 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 			List<PacchettoDTO> pacchetti = q.getResultList();
 
 			if (pacchetti.size() == 0) {
-				return true;
+				return false;
 
 			} else {
 				
-				return false;
+				return true;
 
 			}
 		} catch (NullPointerException e) {
-			return true;
+			return false;
 		}
 	}
 	

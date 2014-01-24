@@ -82,7 +82,7 @@ public interface PacchettoBeanRemote {
 	 */
 	public ArrayList<PacchettoDTO> ricercaPerEtichetta (String etichetta, Date dataPartenza, Date dataRitorno);
 	
-	
+	public boolean verificaEtichetta (String etichetta);
 	
 
 }

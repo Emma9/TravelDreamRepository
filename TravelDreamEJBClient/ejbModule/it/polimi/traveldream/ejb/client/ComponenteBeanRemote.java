@@ -3,6 +3,7 @@ package it.polimi.traveldream.ejb.client;
 import it.polimi.traveldream.entities.ComponenteDTO;
 
 
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -55,7 +56,7 @@ public interface ComponenteBeanRemote {
 	 * @return true if codiceComponente is not present in the DB, otherwise false*/
 	public boolean verificaPresenzaComponente(Long codiceComponente); 
 	
-	
+	public boolean verificaTipologia (String tipologia);
 	
 	
 

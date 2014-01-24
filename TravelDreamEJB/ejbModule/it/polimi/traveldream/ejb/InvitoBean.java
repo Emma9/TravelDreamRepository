@@ -116,7 +116,7 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 	/** Metodi private */
 
 	/**@param idInvito
-	 * @return true if idInvito is not present in the DB, otherwise false*/
+	 * @return true if idInvito is present in the DB, otherwise false*/
 	public boolean verificaPresenzaInvito(Long idInvito) {
 		try {
 			TypedQuery<InvitoDTO> q = manager.createQuery("FROM Invito i WHERE i.idInvito=:new_idInvito", InvitoDTO.class);
@@ -127,15 +127,15 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 
 			if (inviti.size() == 0) {
 				
-				return true;
+				return false;
 
 			} else {
 				
-				return false;
+				return true;
 
 			}
 		} catch (NullPointerException e) {
-			return true;
+			return false;
 		}
 	}
 

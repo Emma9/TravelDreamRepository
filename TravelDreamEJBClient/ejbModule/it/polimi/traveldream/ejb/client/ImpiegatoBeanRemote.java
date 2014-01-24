@@ -30,5 +30,20 @@ public interface ImpiegatoBeanRemote {
 
 	/**@return ArrayList<idImpiegato>*/
 	public ArrayList<Long> findAll();
+	
+	/**@param codiceFiscale
+	 * @return true if codiceFiscale is present in the DB, otherwise false*/
+	public boolean verificaPresenzaImpiegatoCf(String codiceFiscale);
+	
+	/**@param idImpiegato
+	 * @return true if idImpiegato is present in the DB, otherwise false*/
+	public boolean verificaPresenzaImpiegatoId(Long idImpiegato);
+	
+	
+	
+	
+	
+	
+	
 
 }

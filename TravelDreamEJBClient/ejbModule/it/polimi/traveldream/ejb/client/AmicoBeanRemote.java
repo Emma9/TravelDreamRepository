@@ -26,5 +26,15 @@ public interface AmicoBeanRemote {
 
 	/**@return ArrayList<idAmico>*/
 	public ArrayList<Long> findAll();
+	
+	public boolean verificaPresenzaAmicoEm(String email);
+	
+	public boolean verificaPresenzaAmicoId(Long idAmico);
+	
+	/**@param idAmico
+	 * @return email*/
+	public String daIdAEmail(Long idAmico);
+	
+	
 
 }

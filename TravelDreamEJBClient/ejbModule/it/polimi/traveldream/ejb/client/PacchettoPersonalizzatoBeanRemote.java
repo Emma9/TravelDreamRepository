@@ -45,6 +45,6 @@ public interface PacchettoPersonalizzatoBeanRemote {
 	 * @return true if idPacchettoPersonalizzato is not present in the DB, otherwise false*/
 	public boolean verificaPresenzaPacchettoPersonalizzato(Long idPacchettoPersonalizzato);
 	
-	
+	public boolean verificaStato (String stato);
 
 }

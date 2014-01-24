@@ -115,8 +115,8 @@ public class ImpiegatoBean implements ImpiegatoBeanRemote,ImpiegatoBeanLocal {
 	/** Metodi private */
 
 	/**@param codiceFiscale
-	 * @return true if codiceFiscale is not present in the DB, otherwise false*/
-	private boolean verificaPresenzaImpiegatoCf(String codiceFiscale) {
+	 * @return true if codiceFiscale is present in the DB, otherwise false*/
+	public boolean verificaPresenzaImpiegatoCf(String codiceFiscale) {
 		try {
 			TypedQuery<ImpiegatoDTO> q = manager.createQuery("FROM Impiegato i WHERE i.codiceFiscale=:new_codiceFiscale", ImpiegatoDTO.class);
 
@@ -126,21 +126,21 @@ public class ImpiegatoBean implements ImpiegatoBeanRemote,ImpiegatoBeanLocal {
 
 			if (impiegati.size() == 0) {
 				
-				return true;
+				return false;
 
 			} else {
 				
-				return false;
+				return true;
 
 			}
 		} catch (NullPointerException e) {
-			return true;
+			return false;
 		}
 	}
 
 	/**@param idImpiegato
-	 * @return true if idImpiegato is not present in the DB, otherwise false*/
-	private boolean verificaPresenzaImpiegatoId(Long idImpiegato) {
+	 * @return true if idImpiegato is present in the DB, otherwise false*/
+	public boolean verificaPresenzaImpiegatoId(Long idImpiegato) {
 		try {
 			TypedQuery<ImpiegatoDTO> q = manager.createQuery("FROM Impiegato i WHERE i.idImpiegato=:new_idImpiegato", ImpiegatoDTO.class);
 
@@ -150,15 +150,15 @@ public class ImpiegatoBean implements ImpiegatoBeanRemote,ImpiegatoBeanLocal {
 
 			if (impiegati.size() == 0) {
 				
-				return true;
+				return false;
 
 			} else {
 				
-				return false;
+				return true;
 
 			}
 		} catch (NullPointerException e) {
-			return true;
+			return false;
 		}
 	}
 }
