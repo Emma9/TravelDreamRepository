@@ -16,8 +16,8 @@
 			<div style="display: inline;">
 			
 				<div style="float: left;">
-					<h:button outcome="#{loginImpiegatoBean.logout()}" value="Crea Pacchetto" />
-					<h:button outcome="#{loginImpiegatoBean.logout()}" value="Aggiungi Componente" />
+					<h:button outcome="creazionePacchettoPredefinito" value="Crea Pacchetto" />
+					<h:button outcome="creazioneComponente" value="Aggiungi Componente" />
 					<br />
 					<!-- METTERE IMPIEGATOBEANLOGOUT -->
 				</div>
@@ -26,7 +26,7 @@
 				<div style="float: right;">
 					<h:outputText value="BENVENUTO: " />
 					<h:outputText value="#{loginImpiegatoBean.idImpiegato}" />
-					<h:button outcome="#{loginImpiegatoBean.logout()}" value="Logout" />
+					<h:button outcome="#{loginImpiegatoBean.logout}" value="Logout" />
 					<br />
 					<!-- METTERE IMPIEGATOBEANLOGOUT -->
 				</div>

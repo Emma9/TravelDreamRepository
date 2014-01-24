@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+	<h2>DETTAGLI DEL PACCHETTO PREDEFINITO SELEZIONATO</h2>
+	<h:form>
+		<p:fieldset legend="Ecco I Dettagli del pacchetto predefinito selezionato" widgetVar="regWidget" style="width: 600px;">
+		
+		
+		<h:panelGrid id="dettagliPacchetto" columns="2" cellpadding="4">  
+  
+            <!-- <f:facet name="immagine">  
+                <p:graphicImage value="/images/cars/#{tableBean.selectedCar.manufacturer}.jpg"/>
+            
+            </f:facet> -->
+            
+            
+  
+            <h:outputText value="Destinazione Viaggio:" />  
+            <h:outputText value="#{ricercaPacchettiBean.pacchettoSelezionato.destinazione}" />  
+  
+            <h:outputText value="Data di Partenza:" />  
+            <h:outputText value="#{ricercaPacchettiBean.pacchettoSelezionato.dataInizioValidita}" />  
+  
+            <h:outputText value="Data di Ritorno:" />  
+            <h:outputText value="#{ricercaPacchettiBean.pacchettoSelezionato.dataFineValidita}" />  
+  
+            <h:outputText value="Descrizione:" />  
+            <h:outputText value="#{ricercaPacchettiBean.pacchettoSelezionato.descrizione}" /> 
+        <h:commandButton id="salva" actionListener="Salva Pacchetto" /> <!--RENDERE INVISIBILE IL BOTTONE AL CLICK..... mostra la lista dei suoi pacchetti aggiornata-->
+            
+        </h:panelGrid>
+		
+		
+		
+		
+  	</p:fieldset>
+
+		
+     
+</h:form>
+</h:body>
+</html>
