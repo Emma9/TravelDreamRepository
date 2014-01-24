@@ -117,7 +117,7 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 
 	/**@param idInvito
 	 * @return true if idInvito is not present in the DB, otherwise false*/
-	private boolean verificaPresenzaInvito(Long idInvito) {
+	public boolean verificaPresenzaInvito(Long idInvito) {
 		try {
 			TypedQuery<InvitoDTO> q = manager.createQuery("FROM Invito i WHERE i.idInvito=:new_idInvito", InvitoDTO.class);
 

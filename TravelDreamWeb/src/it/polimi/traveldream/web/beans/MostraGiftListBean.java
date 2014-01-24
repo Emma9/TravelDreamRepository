@@ -82,7 +82,7 @@ public class MostraGiftListBean implements Serializable {
 			HttpServletRequest request = (HttpServletRequest) context
 					.getExternalContext().getRequest();
 
-			Long idCliente = clienteRemoto.daEmailAId(email);
+			Long idCliente = clienteRemoto.daEmailAId(this.email);
 			
 			pacchettiPersonalizzatiRicercati = clienteRemoto.giftListCliente(idCliente);			
 			return "giftListCliente";

@@ -39,5 +39,9 @@ public interface InvitoBeanRemote {
 
 	/**@return ArrayList<idInvito>*/
 	public ArrayList<Long> findAll();
+	
+	/**@param idInvito
+	 * @return true if idInvito is not present in the DB, otherwise false*/
+	public boolean verificaPresenzaInvito(Long idInvito);
 
 }
