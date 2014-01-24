@@ -5,6 +5,7 @@ import java.lang.Long;
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -25,9 +26,9 @@ public class Pacchetto implements Serializable {
 	private Date dataInizioValidita;
 	@Temporal(TemporalType.TIME)
 	private Date dataFineValidita;
-	private ArrayList<Etichetta> etichette = new ArrayList<>();
+	private List<Etichetta> etichette = new ArrayList<Etichetta>(0);
 	private String descrizione;
-	private ArrayList<Long> listaComponenti;
+	private List<Long> listaComponenti= new ArrayList<Long>(0);
 
 	/**Costruttore*/
 	public Pacchetto() {
@@ -85,50 +86,47 @@ public class Pacchetto implements Serializable {
 		this.idPacchetto = idPacchetto;
 	}
 
-	
-
-	/**@return etichette*/
-	public ArrayList<Etichetta> getEtichette() {
-	
-		return this.etichette;
-	
+	/**
+	 * @return the etichette
+	 */
+	public List<Etichetta> getEtichette() {
+		return etichette;
 	}
 
-	/**@param etichette etichette to set*/
-	public void setEtichette(ArrayList<Etichetta> et) {
-	
-		for (int i = 0; i <= et.size(); i++) {
-	
-			this.etichette.set(i, et.get(i));
-	
-		}
+	/**
+	 * @param etichette the etichette to set
+	 */
+	public void setEtichette(List<Etichetta> etichette) {
+		this.etichette = etichette;
 	}
 
-	/**@return descrizione*/
+	/**
+	 * @return the descrizione
+	 */
 	public String getDescrizione() {
-		
-		return this.descrizione;
-		
+		return descrizione;
 	}
 
-	/**@param descrizione descrizione to set*/
+	/**
+	 * @param descrizione the descrizione to set
+	 */
 	public void setDescrizione(String descrizione) {
-		
 		this.descrizione = descrizione;
-	
 	}
 
-	/**@return listaComponenti*/
-	public ArrayList<Long> getListaComponenti() {
-		
-		return this.listaComponenti;
-		
+	/**
+	 * @return the listaComponenti
+	 */
+	public List<Long> getListaComponenti() {
+		return listaComponenti;
 	}
 
-	/**@param listaComponenti listaComponenti to set*/
-	public void setListaComponenti(ArrayList<Long> listaComponenti) {
-		
+	/**
+	 * @param listaComponenti the listaComponenti to set
+	 */
+	public void setListaComponenti(List<Long> listaComponenti) {
 		this.listaComponenti = listaComponenti;
-		
 	}
+
+	
 }

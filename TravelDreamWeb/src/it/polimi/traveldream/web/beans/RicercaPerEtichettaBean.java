@@ -134,7 +134,7 @@ public class RicercaPerEtichettaBean implements Serializable {
 		for(int i=0;i<=pacchetti.size();i++){
 			//PER OGNI PACCHETTO VERIFICA CHE TUTTI I SUOI COMPONENTI SIANO DISPONIBILI
 			
-			if(pacchettoRemoto.verificaDisponibilitaComponenti(this.dataPartenza, this.dataArrivo, this.numPartecipanti, pacchetti.get(i).getListaComponenti())){
+			if(pacchettoRemoto.verificaDisponibilitaComponenti(this.dataPartenza, this.dataArrivo, this.numPartecipanti, (ArrayList<Long>) pacchetti.get(i).getListaComponenti())){
 			//SE TUTTI I COMPONENTI SONO DISPONIBILI NON RIMUOVE IL PACCHETTO DALLA LISTA
 				
 			}else{

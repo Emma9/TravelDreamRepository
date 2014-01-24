@@ -2,6 +2,7 @@ package it.polimi.traveldream.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ClienteDTO implements Serializable{
 
@@ -16,8 +17,8 @@ public class ClienteDTO implements Serializable{
 	private String codiceFiscale;
 	private String nome;
 	private String cognome;
-	private ArrayList<PacchettoPersonalizzatoDTO> pacchettiCliente = new ArrayList<PacchettoPersonalizzatoDTO>();
-	private ArrayList<PacchettoPersonalizzatoDTO> giftList = new ArrayList<PacchettoPersonalizzatoDTO>();
+	private List<PacchettoPersonalizzatoDTO> pacchettiCliente = new ArrayList<PacchettoPersonalizzatoDTO>(0);
+	private List<PacchettoPersonalizzatoDTO> giftList = new ArrayList<PacchettoPersonalizzatoDTO>(0);
 
 	/**Costruttore*/
 	public ClienteDTO() {
@@ -100,34 +101,36 @@ public class ClienteDTO implements Serializable{
 		this.cognome = cognome;
 		
 	}
-	
-	/**@return ArrayList<PacchettoPersonalizzatoDTO>*/
-	public ArrayList<PacchettoPersonalizzatoDTO> getPacchettiCliente() {
-		
-		return this.pacchettiCliente;
-		
+
+	/**
+	 * @return the pacchettiCliente
+	 */
+	public List<PacchettoPersonalizzatoDTO> getPacchettiCliente() {
+		return pacchettiCliente;
 	}
 
-	/**@param pacchettiCliente paccettiCliente to set*/
-	public void setPacchettiCliente(ArrayList<PacchettoPersonalizzatoDTO> pacchettiCliente ) {
-		
+	/**
+	 * @param pacchettiCliente the pacchettiCliente to set
+	 */
+	public void setPacchettiCliente(List<PacchettoPersonalizzatoDTO> pacchettiCliente) {
 		this.pacchettiCliente = pacchettiCliente;
-		
-	}
-	
-	/**@return ArrayList<PacchettoPersonalizzatoDTO>*/
-	public ArrayList<PacchettoPersonalizzatoDTO> getGiftList() {
-		
-		return this.giftList;
-		
 	}
 
-	/**@param giftList giftList to set*/
-	public void setGiftList(ArrayList<PacchettoPersonalizzatoDTO> giftList ) {
-		
+	/**
+	 * @return the giftList
+	 */
+	public List<PacchettoPersonalizzatoDTO> getGiftList() {
+		return giftList;
+	}
+
+	/**
+	 * @param giftList the giftList to set
+	 */
+	public void setGiftList(List<PacchettoPersonalizzatoDTO> giftList) {
 		this.giftList = giftList;
-		
 	}
 	
-
 }
+	
+	
+	

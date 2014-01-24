@@ -3,6 +3,7 @@ package it.polimi.traveldream.entities;
 import java.io.Serializable;
 import java.lang.String;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -18,13 +19,14 @@ public class Cliente implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long idCliente;
+	@Column(unique = true)
 	private String email;
 	private String password;
 	private String codiceFiscale;
 	private String nome;
 	private String cognome;
-	private ArrayList<PacchettoPersonalizzato> pacchettiCliente = new ArrayList<PacchettoPersonalizzato>();
-	private ArrayList<PacchettoPersonalizzato> giftList = new ArrayList<PacchettoPersonalizzato>();
+	private List<PacchettoPersonalizzato> pacchettiCliente = new ArrayList<PacchettoPersonalizzato>(0);
+	private List<PacchettoPersonalizzato> giftList = new ArrayList<PacchettoPersonalizzato>(0);
 
 	/**Costruttore*/
 	public Cliente() {
@@ -107,32 +109,38 @@ public class Cliente implements Serializable {
 		this.cognome = cognome;
 		
 	}
-	
-	/**@return ArrayList<PacchettoPersonalizzato>*/
-	public ArrayList<PacchettoPersonalizzato> getPacchettiCliente() {
-		
-		return this.pacchettiCliente;
-		
+
+	/**
+	 * @return the pacchettiCliente
+	 */
+	public List<PacchettoPersonalizzato> getPacchettiCliente() {
+		return pacchettiCliente;
 	}
 
-	/**@param pacchettiCliente paccettiCliente to set*/
-	public void setPacchettiCliente(ArrayList<PacchettoPersonalizzato> pacchettiCliente ) {
-		
+	/**
+	 * @param pacchettiCliente the pacchettiCliente to set
+	 */
+	public void setPacchettiCliente(List<PacchettoPersonalizzato> pacchettiCliente) {
 		this.pacchettiCliente = pacchettiCliente;
-		
-	}
-	
-	/**@return ArrayList<PacchettoPersonalizzato>*/
-	public ArrayList<PacchettoPersonalizzato> getGiftList() {
-		
-		return this.giftList;
-		
 	}
 
-	/**@param giftList giftList to set*/
-	public void setGiftList(ArrayList<PacchettoPersonalizzato> giftList ) {
-		
-		this.giftList = giftList;
-		
+	/**
+	 * @return the giftList
+	 */
+	public List<PacchettoPersonalizzato> getGiftList() {
+		return giftList;
 	}
+
+	/**
+	 * @param giftList the giftList to set
+	 */
+	public void setGiftList(List<PacchettoPersonalizzato> giftList) {
+		this.giftList = giftList;
+	}
+	
+	
+	
+	
+	
+	
 }
