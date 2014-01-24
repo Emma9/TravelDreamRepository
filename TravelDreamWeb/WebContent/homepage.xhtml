@@ -25,7 +25,7 @@
     </p:layoutUnit> -->
       
   
-    <p:layoutUnit position="west" size="300" header="RICERCA VELOCE" resizable="false" closable="false" collapsible="false">  
+    <p:layoutUnit position="west" size="300" header="RICERCA PER DESTINAZIONE" resizable="false" closable="false" collapsible="false">  
         <br/> 
 		<h:form id="form">  
 		              
@@ -58,18 +58,8 @@
 		        </p:selectOneMenu>  
 		    
 		    </h:panelGrid>
-		    <p:commandButton value="Ricerca" update="display" oncomplete="PF('dialog').show()" />
-		    <p:dialog header="Selected Dates" widgetVar="dialog"   
-		            showEffect="fade" hideEffect="fade">
-		        <h:panelGrid id="display" columns="2" cellpadding="5">                         
-		            <h:outputText value="Popup Date:" />  
-		            <h:outputText value="#{calendarBean.date1}" id="popupDate">  
-		                <f:convertDateTime pattern="d/M/yyyy"/>  
-		            </h:outputText>  
-		              
-		        </h:panelGrid>  
-		          
-		    </p:dialog> 
+		    <p:button value="Ricerca" outcome="listaRicercaPacchettiPredefiniti" />
+		    
 		     
 		      
 		</h:form> 	        

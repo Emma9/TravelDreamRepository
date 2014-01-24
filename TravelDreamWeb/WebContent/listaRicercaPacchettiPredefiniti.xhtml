@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+	<h2>LISTA DEI PACCHETTI RICERCATI</h2>
+	<h:form>
+		<p:fieldset legend="Ecco i possibili pacchetti predefiniti inerenti alla ricerca effettuata" widgetVar="regWidget" style="width: 600px;">
+		
+		
+		<p:growl id="growl" showDetail="true" />
+
+			<p:dataTable id="listaPacchettiPredefiniti" var="pacchettoPredefinito" value="#{ricercaPacchettiBean.pacchettiRicercati}"
+				paginator="true" rows="10" selection="#{ricercaPacchettiBeanBean.pacchettoSelezionato}"
+				selectionMode="single">       
+
+				<!-- <p:ajax event="rowSelect" listener="#{ricercaPacchettiBean.onRowSelect}" update=":form:display :form:growl" oncomplete="dettgliPacchettoPredefinitoRicercato" /> 
+					
+					
+				<p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->													
+
+				<f:facet name="header">  
+            	Seleziona un pacchetto per visualizzare i dettagli  
+		        </f:facet>
+		
+								
+						<p:column headerText="Destinazione">  
+		            #{ricercaPacchettiBean.destinazione}  
+		        </p:column>
+		
+						<p:column headerText="Data di Partenza">  
+		            #{ricercaPacchettiBean.dataPartenza}  
+		        </p:column>
+		
+						<p:column headerText="Data di Ritorno">  
+		            #{ricercaPacchettiBean.dataRitorno}  
+		        </p:column>
+		        
+			</p:dataTable>
+		
+		
+  	</p:fieldset>
+
+	
+	
+	
+	
+	
+	
+
+        
+</h:form>
+</h:body>
+</html>
