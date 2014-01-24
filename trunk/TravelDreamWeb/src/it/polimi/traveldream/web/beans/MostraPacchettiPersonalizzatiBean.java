@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -84,10 +85,16 @@ public class MostraPacchettiPersonalizzatiBean implements Serializable {
 			HttpServletRequest request = (HttpServletRequest) context
 					.getExternalContext().getRequest();
 
-			Long idCliente = clienteRemoto.daEmailAId(this.email);
+			try{
+				Long idCliente = clienteRemoto.daEmailAId(this.email);
 			
 			pacchettiPersonalizzatiRicercati = clienteRemoto.elencoPacchettiCliente(idCliente);
-			
+			}
+			catch(EJBException e){
+				
+				return "listaPacchettiPersonalizzatiCliente"; 
+				
+			}
 			return "listaPacchettiPersonalizzatiCliente";
 			
 		}
