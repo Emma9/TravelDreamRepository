@@ -217,6 +217,10 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 		}
 	}
 	
+	/**
+	 * @param id
+	 * @return ArrayList<PacchettoPersonalizzato>
+	 */
 	public ArrayList<PacchettoPersonalizzatoDTO> elencoPacchettiCliente (long id){
 		ClienteDTO c = findByIdCliente(id);
 		
@@ -225,6 +229,18 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 		return elencoPacchettiCliente;
 	}
 
+	/**
+	 * @param id
+	 * @return ArrayList<PacchettoPersonalizzato>
+	 */
+	public ArrayList<PacchettoPersonalizzatoDTO> giftListCliente (long id){
+		ClienteDTO c = findByIdCliente(id);
+		
+		ArrayList<PacchettoPersonalizzatoDTO> elencoPacchettiCliente = c.getGiftList();
+		
+		return elencoPacchettiCliente;
+	}
+	
 	
 	/**@param idCliente
 	 */
@@ -243,6 +259,14 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 		
 		ClienteDTO c = findByIdCliente(idCliente);
 		return c.getEmail();
+	}
+	
+	/**@param email
+	 * @return idCliente*/
+	public Long daEmailAId(String email) {
+		
+		ClienteDTO c = findByEmailCliente(email);
+		return c.getIdCliente();
 	}
 	
 

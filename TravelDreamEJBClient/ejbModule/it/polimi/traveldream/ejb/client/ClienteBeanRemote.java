@@ -61,6 +61,12 @@ public interface ClienteBeanRemote {
 	 */
 	public ArrayList<PacchettoPersonalizzatoDTO> elencoPacchettiCliente (long id);
 	
+	/**
+	 * @param id
+	 * @return ArrayList<PacchettoPersonalizzato>
+	 */
+	public ArrayList<PacchettoPersonalizzatoDTO> giftListCliente (long id);
+	
 	/**@param idCliente
 	 */
 	public void eliminaTuttiPacchettiPersonalizzati(long idCliente);
@@ -68,5 +74,9 @@ public interface ClienteBeanRemote {
 	/**@param idCliente
 	 * @return email*/
 	public String daIdAEmail(Long idCliente);
+	
+	/**@param email
+	 * @return idCliente*/
+	public Long daEmailAId(String email);
 	
 }
