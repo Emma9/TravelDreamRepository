@@ -15,7 +15,7 @@ public interface InvitoBeanRemote {
 	 * @param data
 	 * @param stato
 	 * @return idInvito*/
-	public Long createInvito(String emailMittente, String emailDestinatario,String idPacchettoPersonalizzato, String data, String stato);
+	public Long createInvito(String emailMittente, String emailDestinatario,String idPacchettoPersonalizzato, String data, boolean stato);
 
 	/**@param idInvito*/
 	public void removeInvito(String email);
@@ -26,7 +26,7 @@ public interface InvitoBeanRemote {
 	 * @param idPacchettoPersonalizzato
 	 * @param data
 	 * @param stato*/
-	public void updateInvito(Long idInvito, String emailMittente,String emailDestinatario, String idPacchettoPersonalizzato,String data, String stato);
+	public void updateInvito(Long idInvito, String emailMittente,String emailDestinatario, String idPacchettoPersonalizzato,String data, boolean stato);
 
 	/**@param idInvito
 	 * @return ArrayList<idPacchettoPersonalizzato>*/

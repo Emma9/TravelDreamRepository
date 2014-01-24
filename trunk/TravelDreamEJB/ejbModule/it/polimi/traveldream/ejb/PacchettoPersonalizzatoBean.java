@@ -29,12 +29,22 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 	 * @return idPacchettoPersonalizzato*/
 	public Long createPacchettoPersonalizzato(String stato, Long idCliente) {
 
-		PacchettoPersonalizzatoDTO pacchettoPersonalizzato = new PacchettoPersonalizzatoDTO();
+		if(verificaStato(stato)){
+			
+			PacchettoPersonalizzatoDTO pacchettoPersonalizzato = new PacchettoPersonalizzatoDTO();
 
-		pacchettoPersonalizzato.setStato(stato);
-		pacchettoPersonalizzato.setIdCliente(idCliente);
+			pacchettoPersonalizzato.setStato(stato);
+			pacchettoPersonalizzato.setIdCliente(idCliente);
 
-		return pacchettoPersonalizzato.getIdPacchettoPersonalizzato();
+			return pacchettoPersonalizzato.getIdPacchettoPersonalizzato();
+			
+		}else{
+			
+			return (long) -1;
+			
+			
+		}
+		
 
 	}
 
@@ -55,7 +65,7 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 	 * @param listaComponenti*/
 	public void updatePacchettoPersonalizzato(Long idPacchettoPersonalizzato,String stato, ArrayList<Long> listaComponenti) {
 
-		if (verificaPresenzaPacchettoPersonalizzato(idPacchettoPersonalizzato)) {
+		if ((verificaPresenzaPacchettoPersonalizzato(idPacchettoPersonalizzato))&&(verificaStato(stato))) {
 
 			PacchettoPersonalizzatoDTO pacchettoPersonalizzato = findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato);
 
@@ -98,7 +108,7 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 
 		for (int i = 0; i <= risultati.size(); i++) {
 
-			if (risultati.get(i).getEtichetta().contains(etichetta)) {
+			if (risultati.get(i).getEtichetta().equals(etichetta)) {
 
 				pacchetti.set(i, risultati.get(i));
 
@@ -183,6 +193,28 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 		} catch (NullPointerException e) {
 			return true;
 		}
+	}
+	
+public boolean verificaStato (String stato) {
+		
+		switch (stato){
+		
+		case "CONFERMATO":return true;
+						
+			
+		case "SALVATO":return true;
+						
+			
+		case "BLOCCATO":return true;
+							
+		
+		case "ACCETTATO":return true;
+							
+		
+		}
+		
+		return false;
+		
 	}
 
 }

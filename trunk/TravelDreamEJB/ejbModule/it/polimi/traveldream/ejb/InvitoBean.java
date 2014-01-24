@@ -30,7 +30,7 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 	 * @param data
 	 * @param stato
 	 * @return idInvito*/
-	public Long createInvito(String emailMittente, String emailDestinatario,String idPacchettoPersonalizzato, String data, String stato) {
+	public Long createInvito(String emailMittente, String emailDestinatario,String idPacchettoPersonalizzato, String data, boolean stato) {
 
 		InvitoDTO invito = new InvitoDTO();
 
@@ -60,7 +60,7 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 	 * @param idPacchettoPersonalizzato
 	 * @param data
 	 * @param stato*/
-	public void updateInvito(Long idInvito, String emailMittente,String emailDestinatario, String idPacchettoPersonalizzato,String data, String stato) {
+	public void updateInvito(Long idInvito, String emailMittente,String emailDestinatario, String idPacchettoPersonalizzato,String data, boolean stato) {
 
 		if (verificaPresenzaInvito(idInvito)) {
 
@@ -144,4 +144,5 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 		// TODO Auto-generated method stub
 		
 	}
+	
 }

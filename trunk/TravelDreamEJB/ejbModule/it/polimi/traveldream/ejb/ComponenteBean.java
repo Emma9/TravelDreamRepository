@@ -32,15 +32,21 @@ public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal
 	 * @return codiceComponente*/
 	public Long createComponente(String tipologia, String descrizione, Date dataInizioValidita, Date dataFineValidita, int disponibilita) {
 
-		ComponenteDTO componente = new ComponenteDTO();
+		if(verificaTipologia(tipologia)){
+		
+			ComponenteDTO componente = new ComponenteDTO();
 
-		componente.setTipologia(tipologia);
-		componente.setDescrizione(descrizione);
-		componente.setDataInizioValidita(dataInizioValidita);
-		componente.setDataFineValidita(dataFineValidita);
-		componente.setDisponibilita(disponibilita);
+			componente.setTipologia(tipologia);
+			componente.setDescrizione(descrizione);
+			componente.setDataInizioValidita(dataInizioValidita);
+			componente.setDataFineValidita(dataFineValidita);
+			componente.setDisponibilita(disponibilita);
 
-		return componente.getCodiceComponente();
+			return componente.getCodiceComponente();
+			
+		}
+		
+		return (long) -1;
 
 	}
 
@@ -62,7 +68,7 @@ public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal
 	 */
 	public void updateComponente(Long codiceComponente, String tipologia, String descrizione, Date dataInizioValidita, Date dataFineValidita, int disponibilita) {
 
-		if (verificaPresenzaComponente(codiceComponente)) {
+		if ((verificaPresenzaComponente(codiceComponente))&&(verificaTipologia(tipologia))) {
 
 			ComponenteDTO componente = findByCodiceComponente(codiceComponente);
 
@@ -156,12 +162,6 @@ public boolean verificaDisponibilitaComponente (int disponibilita, Long codiceCo
 		
 	}
 	
-	
-	
-	
-	
-
-
 	/**@param codiceComponente
 	 * @return true if codiceComponente is not present in the DB, otherwise false*/
 	public boolean verificaPresenzaComponente(Long codiceComponente) {
@@ -183,4 +183,24 @@ public boolean verificaDisponibilitaComponente (int disponibilita, Long codiceCo
 			return true;
 		}
 	}
+	
+public boolean verificaTipologia (String tipologia) {
+		
+		switch (tipologia){
+		
+		case "HOTEL":return true;
+						
+			
+		case "VOLO":return true;
+						
+			
+		case "ESCURSIONE":return true;
+						
+		
+		}
+		
+		return false;
+		
+	}
+	
 }

@@ -37,7 +37,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	public Long createPacchetto(String destinazione, Date dataInizioValidita, Date dataFineValidita, String etichetta, String descrizione,ArrayList<Long> listaComponenti) {
 
 		
-		if(verificaListaComponenti(listaComponenti)){
+		if((verificaListaComponenti(listaComponenti))&&(verificaEtichetta(etichetta))){
 		
 		PacchettoDTO pacchetto = new PacchettoDTO();
 
@@ -74,7 +74,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 * @param listaComponenti*/
 	public void updatePacchetto(Long idPacchetto, String destinazione, Date dataInizioValidita, Date dataFineValidita, String etichetta, String descrizione,ArrayList<Long> listaComponenti) {
 
-		if ((verificaPresenzaPacchetto(idPacchetto))&&(verificaListaComponenti(listaComponenti))) {
+		if ((verificaPresenzaPacchetto(idPacchetto))&&(verificaListaComponenti(listaComponenti))&&(verificaEtichetta(etichetta))) {
 			
 			PacchettoDTO pacchetto = findByIdPacchetto(idPacchetto);
 
@@ -120,7 +120,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 
 		for (int i = 0; i <= risultati.size(); i++) {
 
-			if (risultati.get(i).getEtichetta().contains(etichetta)) {
+			if (risultati.get(i).getEtichetta().equals(etichetta)) {
 
 				pacchetti.set(i, risultati.get(i));
 
@@ -330,7 +330,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 			
 			
 			
-			//DESTINAZIONE
+			//ETICHETTA
 			Query q1 = manager.createQuery("FROM Pacchetto p WHERE p.etichette=:new_etichetta");
 
 			q1.setParameter("new_etichetta", etichetta);
@@ -361,6 +361,27 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 		
 	}
 
+public boolean verificaEtichetta (String etichetta) {
+		
+		switch (etichetta){
+		
+		case "LASTMINUTE":return true;
+						
+			
+		case "OFFERTA":return true;
+						
+			
+		case "MARE":return true;
+							
+		
+		case "MONTAGNA":return true;
+							
+		
+		}
+		
+		return false;
+		
+	}
 	
 }
 
