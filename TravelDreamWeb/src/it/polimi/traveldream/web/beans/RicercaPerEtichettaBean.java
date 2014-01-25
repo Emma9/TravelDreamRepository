@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -121,7 +122,7 @@ public class RicercaPerEtichettaBean implements Serializable {
 		
 		ArrayList<PacchettoDTO> pacchetti = new ArrayList<PacchettoDTO>();
 		
-		//try {
+		try {
 		
 		
 		if(this.pacchettoRemoto.verificaConsistenzaDate(this.dataPartenza, this.dataRitorno)){
@@ -160,11 +161,11 @@ public class RicercaPerEtichettaBean implements Serializable {
 		}
 		
 
-	/*} catch (ServletException e) {
+	} catch (EJBException e) {
 		
-		return null;
+		//return null;
 
-	}*/
+	}
 	
 	//return pacchettiRicercati;
 		

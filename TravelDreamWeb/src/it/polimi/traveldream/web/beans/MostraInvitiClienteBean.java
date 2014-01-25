@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean()
 @SessionScoped
-public class MostraInvitiCliente implements Serializable {
+public class MostraInvitiClienteBean implements Serializable {
 
 	/**
 	 * 
