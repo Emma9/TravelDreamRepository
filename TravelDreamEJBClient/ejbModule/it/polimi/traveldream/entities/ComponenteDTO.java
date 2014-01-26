@@ -19,12 +19,13 @@ public class ComponenteDTO implements Serializable{
 	private Long codiceComponente;
 	private String tipologia;
 	private String descrizione;
+	private int costo;
 	private Date dataInizioValidita;
 	private Date dataFineValidita;
-	//private List<DisponibilitaPerData> disponibilitaPerData = new ArrayList<DisponibilitaPerData>(0);
-	private List<Long> disponibilitaPerData= new ArrayList<Long>(0);
+	private List<DisponibilitaPerDataDTO> disponibilitaPerData = new ArrayList<DisponibilitaPerDataDTO>(0);
 	
-
+	
+	
 
 	/**Costruttore*/
 	public ComponenteDTO() {
@@ -65,6 +66,21 @@ public class ComponenteDTO implements Serializable{
 		this.descrizione = descrizione;
 		
 	}
+	
+	
+	/**
+	 * @return the costo
+	 */
+	public int getCosto() {
+		return costo;
+	}
+
+	/**
+	 * @param costo the costo to set
+	 */
+	public void setCosto(int costo) {
+		this.costo = costo;
+	}
 
 	/**
 	 * @return the dataInizioValidita
@@ -97,23 +113,19 @@ public class ComponenteDTO implements Serializable{
 	/**
 	 * @return the disponibilitaPerData
 	 */
-	public List<Long> getDisponibilitaPerData() {
+	public List<DisponibilitaPerDataDTO> getDisponibilitaPerData() {
 		return disponibilitaPerData;
 	}
 
 	/**
 	 * @param disponibilitaPerData the disponibilitaPerData to set
 	 */
-	public void setDisponibilitaPerData(List<Long> disponibilitaPerData) {
+	public void setDisponibilitaPerData(
+			List<DisponibilitaPerDataDTO> disponibilitaPerData) {
 		this.disponibilitaPerData = disponibilitaPerData;
 	}
 
-	/**
-	 * @return the disponibilitaPerData
-	 */
-
-	
-	
-	
 		
+	
+	
 }

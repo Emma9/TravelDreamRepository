@@ -3,7 +3,6 @@ package it.polimi.traveldream.ejb;
 import it.polimi.traveldream.ejb.client.ComponenteBeanLocal;
 import it.polimi.traveldream.ejb.client.ComponenteBeanRemote;
 import it.polimi.traveldream.entities.ComponenteDTO;
-import it.polimi.traveldream.entities.DisponibilitaPerData;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -118,7 +117,6 @@ public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal
 	 */
 	public boolean verificaValiditaComponente (Date dataPartenza, Date dataRitorno, ComponenteDTO componente){
 		
-		//ComponenteDTO componente = findByCodiceComponente(codiceComponente);
 				
 		
 		if((!dataPartenza.before(componente.getDataInizioValidita())) && (!dataPartenza.after(componente.getDataFineValidita())) && (!dataRitorno.before(componente.getDataInizioValidita())) && (!dataRitorno.after(componente.getDataFineValidita()))){
@@ -135,6 +133,21 @@ public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal
 	}
 	
 	
+	public int disponibilitaInData (ComponenteDTO componente, Date data){
+		
+		for(int i=0; i<componente.getDisponibilitaPerData().size(); i++)
+		if(componente.getDisponibilitaPerData().get(i).getData().equals(data)){
+			return componente.getDisponibilitaPerData().get(i).getDisponibilita();
+		}
+		
+		return -1;
+	}
+	
+	
+	
+	
+	
+	
 	
 	//!!!!!!!!!!!!!!!!!!!!!!!!!! disponibilità in una data!?!?!
 
@@ -142,26 +155,18 @@ public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal
 	 * @param codiceComponente
 	 * @return true if componente is available, otherwise false	
 	 */
-public boolean verificaDisponibilitaComponente (int disponibilita, ComponenteDTO componente){
+	public boolean verificaDisponibilitaComponente (int disponibilitaRichiesta, Date data, ComponenteDTO componente){
 		
-		//ComponenteDTO componente = findByCodiceComponente(codiceComponente); 
-		
-		///////DA MODIFICARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		
-		
-		
-		//if(componente.getDisponibilitaPerData().get(index)){
-			
-			return false;
-						
-		//}else{
-			
-		//	return true;
-			
-		//}
-				
-		
+	
+	if(disponibilitaInData(componente, data)>= disponibilitaRichiesta){
+		return true;
 	}
+	
+	return false;
+	
+	}
+		
+
 	
 	/**@param codiceComponente
 	 * @return true if codiceComponente is present in the DB, otherwise false*/
@@ -206,5 +211,7 @@ public boolean verificaTipologia (String tipologia) {
 		return false;
 		
 	}
+
+
 	
 }

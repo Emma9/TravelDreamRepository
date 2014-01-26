@@ -1,7 +1,6 @@
 package it.polimi.traveldream.entities;
 
 import java.io.Serializable;
-import java.lang.Long;
 import java.util.Date;
 import javax.persistence.*;
 
@@ -37,5 +36,7 @@ public class DisponibilitaPerData implements Serializable {
 	public void setDisponibilita(int disponibilita) {
 		this.disponibilita = disponibilita;
 	}
+
+	
    
 }

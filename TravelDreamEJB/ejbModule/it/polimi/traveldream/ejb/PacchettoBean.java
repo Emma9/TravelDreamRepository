@@ -200,10 +200,10 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 				
 				//componenti validi
 				
-				if(componenteRemoto.verificaDisponibilitaComponente(disponibilita, listaComponenti.get(i))){
+				//if(componenteRemoto.verificaDisponibilitaComponente(disponibilita, listaComponenti.get(i))){
 					
-					return true;
-				}
+					//return true;
+				//}
 			}	
 		}
 		

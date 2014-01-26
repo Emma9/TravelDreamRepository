@@ -23,6 +23,7 @@ public class Componente implements Serializable {
 	private Long codiceComponente;
 	private String tipologia;
 	private String descrizione;
+	private int costo;
 	@Temporal(TemporalType.TIME)
 	private Date dataInizioValidita;
 	@Temporal(TemporalType.TIME)
@@ -70,6 +71,21 @@ public class Componente implements Serializable {
 		
 		this.descrizione = descrizione;
 		
+	}
+	
+	
+	/**
+	 * @return the costo
+	 */
+	public int getCosto() {
+		return costo;
+	}
+
+	/**
+	 * @param costo the costo to set
+	 */
+	public void setCosto(int costo) {
+		this.costo = costo;
 	}
 
 	/**
