@@ -33,7 +33,7 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 	 * @return idCliente*/
 	public Long createCliente(String email, String password,String codiceFiscale, String nome, String cognome) {
 
-		if (verificaPresenzaClienteRegistrazione(email, codiceFiscale)) {
+		if (!(verificaPresenzaClienteRegistrazione(email, codiceFiscale))) {
 
 			ClienteDTO cliente = new ClienteDTO();
 

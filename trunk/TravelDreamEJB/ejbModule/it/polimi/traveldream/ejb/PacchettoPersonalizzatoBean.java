@@ -37,6 +37,8 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 			pacchettoPersonalizzato.setStato(stato);
 			pacchettoPersonalizzato.setIdCliente(idCliente);
 
+			manager.persist(pacchettoPersonalizzato);
+			
 			return pacchettoPersonalizzato.getIdPacchettoPersonalizzato();
 			
 		}else{
@@ -195,7 +197,11 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 			return false;
 		}
 	}
+
 	
+	/**@param stato
+	 * @return true if stato is valid, otherwise false
+	 */
 public boolean verificaStato (String stato) {
 		
 		switch (stato){

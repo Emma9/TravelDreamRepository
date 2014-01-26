@@ -5,6 +5,7 @@ import it.polimi.traveldream.ejb.client.InvitoBeanRemote;
 import it.polimi.traveldream.entities.InvitoDTO;
 
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +41,8 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 		invito.setData(data);
 		invito.setStato(stato);
 
+		manager.persist(invito);
+		
 		return invito.getIdInvito();
 	}
 
@@ -90,7 +93,7 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 	}
 
 	/**@param email
-	 * @return ArrayList<Invito>*/
+	 * @return ArrayList<InvitoDTO>*/
 	public ArrayList<InvitoDTO> findByEmailMittente(String emailMittente) {
 
 		TypedQuery<InvitoDTO> q = manager.createQuery("FROM Invito i WHERE i.emailMittente=:new_emailMittente", InvitoDTO.class);
@@ -108,12 +111,23 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 		return inviti;
 	}
 
-	/**@return ArrayList<idInvito>*/
-	public ArrayList<Long> findAll() {
-		return null;
+	/**@return ArrayList<InvitoDTO>*/
+	public ArrayList<InvitoDTO> findAll() {
+		
+		TypedQuery<InvitoDTO> q = manager.createQuery("FROM Invito i", InvitoDTO.class);
+
+		List<InvitoDTO> inviti = q.getResultList();
+
+		ArrayList<InvitoDTO> lista = new ArrayList<InvitoDTO>();
+
+		for (int i = 0; i <= inviti.size(); i++) {
+
+			lista.set(i, inviti.get(i));
+			
+		}
+		return lista;
 	}
 
-	/** Metodi private */
 
 	/**@param idInvito
 	 * @return true if idInvito is present in the DB, otherwise false*/
@@ -135,14 +149,9 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 
 			}
 		} catch (NullPointerException e) {
+			
 			return false;
+			
 		}
 	}
-
-	@Override
-	public void eliminaTuttiInviti(long idCliente) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 }

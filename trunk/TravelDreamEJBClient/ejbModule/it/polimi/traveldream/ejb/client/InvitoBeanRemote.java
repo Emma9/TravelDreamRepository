@@ -36,8 +36,8 @@ public interface InvitoBeanRemote {
 	 * @return ArrayList<idPacchettoPersonalizzato>*/
 	public ArrayList<InvitoDTO> findByEmailMittente(String emailMittente);
 
-	/**@return ArrayList<idInvito>*/
-	public ArrayList<Long> findAll();
+	/**@return ArrayList<InvitoDTO>*/
+	public ArrayList<InvitoDTO> findAll(); 
 	
 	/**@param idInvito
 	 * @return true if idInvito is not present in the DB, otherwise false*/
