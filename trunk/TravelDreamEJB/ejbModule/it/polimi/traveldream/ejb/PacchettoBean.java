@@ -34,7 +34,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 * @param descrizione
 	 * @param listaComponenti
 	 * @return idPacchetto*/
-	public Long createPacchetto(String destinazione, Date dataInizioValidita, Date dataFineValidita, String etichetta, String descrizione,ArrayList<Long> listaComponenti) {
+	public Long createPacchetto(String destinazione, Date dataInizioValidita, Date dataFineValidita, String etichetta, String descrizione, List<ComponenteDTO> listaComponenti) {
 
 		
 		if((verificaListaComponenti(listaComponenti))&&(verificaEtichetta(etichetta))){
@@ -72,7 +72,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 * @param etichette
 	 * @param descrizione
 	 * @param listaComponenti*/
-	public void updatePacchetto(Long idPacchetto, String destinazione, Date dataInizioValidita, Date dataFineValidita, String etichetta, String descrizione,ArrayList<Long> listaComponenti) {
+	public void updatePacchetto(Long idPacchetto, String destinazione, Date dataInizioValidita, Date dataFineValidita, String etichetta, String descrizione, List<ComponenteDTO> listaComponenti) {
 
 		if ((verificaPresenzaPacchetto(idPacchetto))&&(verificaListaComponenti(listaComponenti))&&(verificaEtichetta(etichetta))) {
 			
@@ -188,13 +188,13 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 * @param disponibilita
 	 * @param listaComponenti
 	 * @return true if , otherwise false*/
-	public boolean verificaDisponibilitaComponenti (Date dataPartenza, Date dataRitorno, int disponibilita, ArrayList<Long> listaComponenti){
+	public boolean verificaDisponibilitaComponenti (Date dataPartenza, Date dataRitorno, int disponibilita, List<ComponenteDTO> listaComponenti){
 		
 		ComponenteBeanRemote componenteRemoto = new ComponenteBean();		
 		
 		for(int i=0; i<=listaComponenti.size(); i++){
 			
-			componenteRemoto.findByCodiceComponente(listaComponenti.get(i));
+			componenteRemoto.findByCodiceComponente(listaComponenti.get(i).getCodiceComponente());
 			
 			if(componenteRemoto.verificaValiditaComponente(dataPartenza, dataRitorno, listaComponenti.get(i))){
 				
@@ -241,11 +241,10 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 * @return true if listaComponenti contains more than two elements
 	 *  and at least three of them are of a different type, otherwise false
 	 */
-	public boolean verificaListaComponenti (ArrayList<Long> listaComponenti){
+	public boolean verificaListaComponenti (List<ComponenteDTO> listaComponenti){
 		
 		if(listaComponenti.size()>2){
 				
-			ComponenteBeanRemote componenteRemoto = new ComponenteBean();
 			
 			boolean flagHotel=false;
 			boolean flagVolo=false;
@@ -253,7 +252,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 			
 			for(int i=0; i<=listaComponenti.size(); i++){
 				
-				ComponenteDTO componente = componenteRemoto.findByCodiceComponente(listaComponenti.get(i));
+				ComponenteDTO componente = listaComponenti.get(i);
 				
 				switch (componente.getTipologia()){
 				

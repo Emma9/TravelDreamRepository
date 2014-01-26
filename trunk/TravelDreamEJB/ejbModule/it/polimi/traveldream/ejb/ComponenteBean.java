@@ -3,6 +3,7 @@ package it.polimi.traveldream.ejb;
 import it.polimi.traveldream.ejb.client.ComponenteBeanLocal;
 import it.polimi.traveldream.ejb.client.ComponenteBeanRemote;
 import it.polimi.traveldream.entities.ComponenteDTO;
+import it.polimi.traveldream.entities.DisponibilitaPerData;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,9 +29,8 @@ public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal
 	 * @param descrizione
 	 * @param dataInizioValidita
 	 * @param dataFineValidita
-	 * @param disponibilita
 	 * @return codiceComponente*/
-	public Long createComponente(String tipologia, String descrizione, Date dataInizioValidita, Date dataFineValidita, int disponibilita) {
+	public Long createComponente(String tipologia, String descrizione, Date dataInizioValidita, Date dataFineValidita, int disponibilitaDaSettare) {
 
 		if(verificaTipologia(tipologia)){
 		
@@ -40,7 +40,6 @@ public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal
 			componente.setDescrizione(descrizione);
 			componente.setDataInizioValidita(dataInizioValidita);
 			componente.setDataFineValidita(dataFineValidita);
-			componente.setDisponibilita(disponibilita);
 
 			return componente.getCodiceComponente();
 			
@@ -64,9 +63,8 @@ public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal
 	 * @param descrizione
 	 * @param dataInizioValidita
 	 * @param dataFineValidita
-	 * @param disponibilita
 	 */
-	public void updateComponente(Long codiceComponente, String tipologia, String descrizione, Date dataInizioValidita, Date dataFineValidita, int disponibilita) {
+	public void updateComponente(Long codiceComponente, String tipologia, String descrizione, Date dataInizioValidita, Date dataFineValidita, int disponibilitaDaSettare) {
 
 		if ((verificaPresenzaComponente(codiceComponente))&&(verificaTipologia(tipologia))) {
 
@@ -75,8 +73,7 @@ public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal
 			componente.setTipologia(tipologia);
 			componente.setDescrizione(descrizione);
 			componente.setDataInizioValidita(dataInizioValidita);
-			componente.setDataFineValidita(dataFineValidita);
-			componente.setDisponibilita(disponibilita);			
+			componente.setDataFineValidita(dataFineValidita);	
 
 			manager.merge(componente);
 		}
@@ -85,11 +82,11 @@ public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal
 
 	/**@param codiceComponente
 	 * @return ComponenteDTO*/
-	public ComponenteDTO findByCodiceComponente(Long codiceCompoente) {
+	public ComponenteDTO findByCodiceComponente(Long codiceComponente) {
 
 		TypedQuery<ComponenteDTO> q = manager.createQuery("FROM Componente c WHERE c.codiceComponente=:new_codiceComponente", ComponenteDTO.class);
 
-		q.setParameter("new_codiceComponente", codiceCompoente);
+		q.setParameter("new_codiceComponente", codiceComponente);
 
 		ComponenteDTO componente = q.getSingleResult();
 
@@ -119,9 +116,9 @@ public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal
 	 * @param codiceComponente
 	 * @return true if componente is valid, otherwise false
 	 */
-	public boolean verificaValiditaComponente (Date dataPartenza, Date dataRitorno, Long codiceComponente){
+	public boolean verificaValiditaComponente (Date dataPartenza, Date dataRitorno, ComponenteDTO componente){
 		
-		ComponenteDTO componente = findByCodiceComponente(codiceComponente);
+		//ComponenteDTO componente = findByCodiceComponente(codiceComponente);
 				
 		
 		if((!dataPartenza.before(componente.getDataInizioValidita())) && (!dataPartenza.after(componente.getDataFineValidita())) && (!dataRitorno.before(componente.getDataInizioValidita())) && (!dataRitorno.after(componente.getDataFineValidita()))){
@@ -145,19 +142,23 @@ public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal
 	 * @param codiceComponente
 	 * @return true if componente is available, otherwise false	
 	 */
-public boolean verificaDisponibilitaComponente (int disponibilita, Long codiceComponente){
+public boolean verificaDisponibilitaComponente (int disponibilita, ComponenteDTO componente){
 		
-		ComponenteDTO componente = findByCodiceComponente(codiceComponente); 
+		//ComponenteDTO componente = findByCodiceComponente(codiceComponente); 
 		
-		if(componente.getDisponibilita()<disponibilita){
+		///////DA MODIFICARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		
+		
+		
+		//if(componente.getDisponibilitaPerData().get(index)){
 			
 			return false;
 						
-		}else{
+		//}else{
 			
-			return true;
+		//	return true;
 			
-		}
+		//}
 				
 		
 	}

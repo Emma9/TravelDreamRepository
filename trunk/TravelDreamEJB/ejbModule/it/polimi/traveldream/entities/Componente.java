@@ -3,7 +3,9 @@ package it.polimi.traveldream.entities;
 import java.io.Serializable;
 import java.lang.Long;
 import java.lang.String;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -25,7 +27,10 @@ public class Componente implements Serializable {
 	private Date dataInizioValidita;
 	@Temporal(TemporalType.TIME)
 	private Date dataFineValidita;
-	private int disponibilita;
+	private List<DisponibilitaPerData> disponibilitaPerData = new ArrayList<DisponibilitaPerData>(0);
+	
+	
+	
 
 	/**Costruttore*/
 	public Componente() {
@@ -96,22 +101,21 @@ public class Componente implements Serializable {
 	}
 
 	/**
-	 * @return the disponibilita
+	 * @return the disponibilitaPerData
 	 */
-	public int getDisponibilita() {
-		return disponibilita;
+	public List<DisponibilitaPerData> getDisponibilitaPerData() {
+		return disponibilitaPerData;
 	}
 
 	/**
-	 * @param disponibilita the disponibilita to set
+	 * @param disponibilitaPerData the disponibilitaPerData to set
 	 */
-	public void setDisponibilita(int disponibilita) {
-		this.disponibilita = disponibilita;
+	public void setDisponibilitaPerData(
+			List<DisponibilitaPerData> disponibilitaPerData) {
+		this.disponibilitaPerData = disponibilitaPerData;
 	}
-	
-	
-	
-	
+
+		
 	
 	
 }

@@ -1,8 +1,10 @@
 package it.polimi.traveldream.ejb.client;
 
+import it.polimi.traveldream.entities.ComponenteDTO;
 import it.polimi.traveldream.entities.PacchettoPersonalizzatoDTO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.Remote;
 
@@ -20,7 +22,7 @@ public interface PacchettoPersonalizzatoBeanRemote {
 	/**@param idPacchettoPersonalizzato
 	 * @param stato
 	 * @param listaComponenti*/
-	public void updatePacchettoPersonalizzato(Long idPacchettoPersonalizzato,String stato, ArrayList<Long> listaComponenti);
+	public void updatePacchettoPersonalizzato(Long idPacchettoPersonalizzato,String stato, List<ComponenteDTO> listaComponenti);
 
 	/**@param destinazione
 	 * @return ArrayList<idPacchettoPersonalizzato>*/

@@ -19,7 +19,7 @@ public class PacchettoDTO implements Serializable{
 	private Date dataFineValidita;
 	private String etichetta;
 	private String descrizione;
-	private List<Long> listaComponenti= new ArrayList<Long>(0);
+	private List<ComponenteDTO> listaComponenti= new ArrayList<ComponenteDTO>(0);
 
 	/**Costruttore*/
 	public PacchettoDTO() {
@@ -108,16 +108,18 @@ public class PacchettoDTO implements Serializable{
 	/**
 	 * @return the listaComponenti
 	 */
-	public List<Long> getListaComponenti() {
+	public List<ComponenteDTO> getListaComponenti() {
 		return listaComponenti;
 	}
 
 	/**
 	 * @param listaComponenti the listaComponenti to set
 	 */
-	public void setListaComponenti(List<Long> listaComponenti) {
+	public void setListaComponenti(List<ComponenteDTO> listaComponenti) {
 		this.listaComponenti = listaComponenti;
 	}
+
+	
 
 	
 }
