@@ -13,6 +13,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+
 /**Session Bean implementation class ComponenteBean*/
 @Stateless
 public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal {
@@ -40,6 +43,8 @@ public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal
 			componente.setDataInizioValidita(dataInizioValidita);
 			componente.setDataFineValidita(dataFineValidita);
 
+			manager.persist(componente);
+			
 			return componente.getCodiceComponente();
 			
 		}
@@ -148,14 +153,12 @@ public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal
 	
 	
 	
-	
-	//!!!!!!!!!!!!!!!!!!!!!!!!!! disponibilità in una data!?!?!
 
 	/**@param disponibilita
 	 * @param codiceComponente
 	 * @return true if componente is available, otherwise false	
 	 */
-	public boolean verificaDisponibilitaComponente (int disponibilitaRichiesta, Date data, ComponenteDTO componente){
+	public boolean verificaDisponibilitaComponenteInUnaData (int disponibilitaRichiesta, Date data, ComponenteDTO componente){
 		
 	
 	if(disponibilitaInData(componente, data)>= disponibilitaRichiesta){
@@ -165,6 +168,33 @@ public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal
 	return false;
 	
 	}
+	
+	
+	
+	public boolean verificaDisponibilitaComponenteInPeriodo (int disponibilitaRichiesta, Date dataPartenza, Date dataRitorno, ComponenteDTO componente){
+		
+		
+		int giorniIntervallo= Days.daysBetween(new DateTime(dataPartenza), new DateTime(dataRitorno)).getDays();
+		
+		
+		
+		for (int i=0; i<giorniIntervallo; i++){
+			
+			DateTime dataDaVerificareJ= new DateTime();
+			dataDaVerificareJ= dataDaVerificareJ.plusDays(i);
+			Date dataDaVerificare= dataDaVerificareJ.toDate();
+			
+			if(verificaDisponibilitaComponenteInUnaData(disponibilitaRichiesta, dataDaVerificare, componente)==false){
+				return false;
+			}
+			
+		}
+		
+		return true;
+		
+	}
+	
+	
 		
 
 	
