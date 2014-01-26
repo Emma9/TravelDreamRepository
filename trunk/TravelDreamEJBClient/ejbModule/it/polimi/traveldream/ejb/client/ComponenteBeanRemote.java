@@ -48,11 +48,15 @@ public interface ComponenteBeanRemote {
 	 */
 	public boolean verificaValiditaComponente (Date dataPartenza, Date dataRitorno, ComponenteDTO componenteDTO);
 	
-	/**@param disponibilita
-	 * @param componenteDTO
-	 * @return true if componente is available, otherwise false	
-	 */
-	public boolean verificaDisponibilitaComponente (int disponibilita, ComponenteDTO componenteDTO);
+	
+	
+	public int disponibilitaInData (ComponenteDTO componente, Date data);
+	
+	
+	
+	public boolean verificaDisponibilitaComponente (int disponibilitaRichiesta, Date data, ComponenteDTO componente);
+	
+	
 	
 	/**@param codiceComponente
 	 * @return true if codiceComponente is not present in the DB, otherwise false*/
