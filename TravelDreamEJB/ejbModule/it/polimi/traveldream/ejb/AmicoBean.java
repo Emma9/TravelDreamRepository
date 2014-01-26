@@ -29,7 +29,7 @@ public class AmicoBean implements AmicoBeanRemote, AmicoBeanLocal {
 	 * @return idAmico*/
 	public Long createAmico(String email) {
 
-		if (verificaPresenzaAmicoEm(email)) {
+		if (!(verificaPresenzaAmicoEm(email))) {
 
 			Amico amico = new Amico();
 
@@ -55,6 +55,7 @@ public class AmicoBean implements AmicoBeanRemote, AmicoBeanLocal {
 			invitoLocal.removeInvito(daIdAEmail(idAmico));
 
 			AmicoDTO a = findByIdAmico(idAmico);
+			
 			manager.remove(a);
 
 		} catch (NamingException e) {

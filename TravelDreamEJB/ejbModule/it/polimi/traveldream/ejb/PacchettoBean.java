@@ -48,6 +48,8 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 		pacchetto.setDescrizione(descrizione);
 		pacchetto.setListaComponenti(listaComponenti);
 
+		manager.persist(pacchetto);
+		
 		return pacchetto.getIdPacchetto();
 
 		}else{

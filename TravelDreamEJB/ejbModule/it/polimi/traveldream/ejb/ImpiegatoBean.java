@@ -33,7 +33,7 @@ public class ImpiegatoBean implements ImpiegatoBeanRemote,ImpiegatoBeanLocal {
 	 * @return idImpiegato*/
 	public Long createImpiegato(String codiceFiscale,String nome, String cognome) {
 
-		if (verificaPresenzaImpiegatoCf(codiceFiscale)) {
+		if (!(verificaPresenzaImpiegatoCf(codiceFiscale))) {
 
 			ImpiegatoDTO impiegato = new ImpiegatoDTO();
 			
@@ -112,8 +112,6 @@ public class ImpiegatoBean implements ImpiegatoBeanRemote,ImpiegatoBeanLocal {
 		return lista;
 	}
 
-	/** Metodi private */
-
 	/**@param codiceFiscale
 	 * @return true if codiceFiscale is present in the DB, otherwise false*/
 	public boolean verificaPresenzaImpiegatoCf(String codiceFiscale) {
@@ -134,7 +132,9 @@ public class ImpiegatoBean implements ImpiegatoBeanRemote,ImpiegatoBeanLocal {
 
 			}
 		} catch (NullPointerException e) {
+			
 			return false;
+		
 		}
 	}
 
@@ -158,7 +158,9 @@ public class ImpiegatoBean implements ImpiegatoBeanRemote,ImpiegatoBeanLocal {
 
 			}
 		} catch (NullPointerException e) {
+			
 			return false;
+		
 		}
 	}
 }
