@@ -1,8 +1,9 @@
 package it.polimi.traveldream.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class DisponibilitaPerDataDTO {
+public class DisponibilitaPerDataDTO implements Serializable{
 	private Date data;
 	private int disponibilita;
 	private static final long serialVersionUID = 1L;
