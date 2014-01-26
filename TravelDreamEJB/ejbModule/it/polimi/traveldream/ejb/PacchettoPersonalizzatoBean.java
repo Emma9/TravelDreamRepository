@@ -2,6 +2,7 @@ package it.polimi.traveldream.ejb;
 
 import it.polimi.traveldream.ejb.client.PacchettoPersonalizzatoBeanLocal;
 import it.polimi.traveldream.ejb.client.PacchettoPersonalizzatoBeanRemote;
+import it.polimi.traveldream.entities.ComponenteDTO;
 import it.polimi.traveldream.entities.PacchettoPersonalizzatoDTO;
 
 import java.util.ArrayList;
@@ -63,7 +64,7 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 	/**@param idPacchettoPersonalizzato
 	 * @param stato
 	 * @param listaComponenti*/
-	public void updatePacchettoPersonalizzato(Long idPacchettoPersonalizzato,String stato, ArrayList<Long> listaComponenti) {
+	public void updatePacchettoPersonalizzato(Long idPacchettoPersonalizzato,String stato, List<ComponenteDTO> listaComponenti) {
 
 		if ((verificaPresenzaPacchettoPersonalizzato(idPacchettoPersonalizzato))&&(verificaStato(stato))) {
 

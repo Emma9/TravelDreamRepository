@@ -1,9 +1,11 @@
 package it.polimi.traveldream.ejb.client;
 
+import it.polimi.traveldream.entities.ComponenteDTO;
 import it.polimi.traveldream.entities.PacchettoDTO;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.ejb.Remote;
 
@@ -17,7 +19,7 @@ public interface PacchettoBeanRemote {
 	 * @param descrizione
 	 * @param listaComponenti
 	 * @return idPacchetto*/
-	public Long createPacchetto(String destinazione, Date dataInizioValidita, Date dataFineValidita, String etichetta, String descrizione,ArrayList<Long> listaComponenti);
+	public Long createPacchetto(String destinazione, Date dataInizioValidita, Date dataFineValidita, String etichetta, String descrizione, List<ComponenteDTO> listaComponenti);
 
 	/**@param idPacchetto*/
 	public void removePacchetto(Long idPacchetto);
@@ -29,7 +31,7 @@ public interface PacchettoBeanRemote {
 	 * @param etichette
 	 * @param descrizione
 	 * @param listaComponenti*/
-	public void updatePacchetto(Long idPacchetto, String destinazione, Date dataInizioValidita, Date dataFineValidita, String etichetta, String descrizione,ArrayList<Long> listaComponenti);
+	public void updatePacchetto(Long idPacchetto, String destinazione, Date dataInizioValidita, Date dataFineValidita, String etichetta, String descrizione, List<ComponenteDTO> listaComponenti);
 
 	/**@param destinazione
 	 * @return ArrayList<idPacchetto>*/
@@ -56,8 +58,7 @@ public interface PacchettoBeanRemote {
 	 * @param disponibilita
 	 * @param listaComponenti
 	 * @return true if , otherwise false*/
-	public boolean verificaDisponibilitaComponenti (Date dataPartenza, Date dataRitorno, int disponibilita, ArrayList<Long> listaComponenti);
-	
+	public boolean verificaDisponibilitaComponenti (Date dataPartenza, Date dataRitorno, int disponibilita, List<ComponenteDTO> listaComponenti);
 	/**@param idPacchetto
 	 * @return true if idPacchetto is not present in the DB, otherwise false*/
 	public boolean verificaPresenzaPacchetto(Long idPacchetto);
@@ -66,8 +67,8 @@ public interface PacchettoBeanRemote {
 	 * @return true if listaComponenti contains more than two elements
 	 *  and at least three of them are of a different type, otherwise false
 	 */
-	public boolean verificaListaComponenti (ArrayList<Long> listaComponenti);
-	
+	public boolean verificaListaComponenti (List<ComponenteDTO> listaComponenti);
+		
 	/**@param destinazione
 	 * @param dataPartenza
 	 * @param dataRitorno

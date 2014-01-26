@@ -4,6 +4,10 @@ import it.polimi.traveldream.entities.ComponenteDTO;
 
 
 
+
+
+
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -16,9 +20,8 @@ public interface ComponenteBeanRemote {
 	 * @param descrizione
 	 * @param dataInizioValidita
 	 * @param dataFineValidita
-	 * @param disponibilita
 	 * @return codiceComponente*/
-	public Long createComponente(String tipologia, String descrizione, Date dataInizioValidita, Date dataFineValidita, int disponibilita);
+	public Long createComponente(String tipologia, String descrizione, Date dataInizioValidita, Date dataFineValidita, int disponibilitaDaSettare);
 	
 	
 	/**@param codiceComponente*/
@@ -29,29 +32,28 @@ public interface ComponenteBeanRemote {
 	 * @param descrizione
 	 * @param dataInizioValidita
 	 * @param dataFineValidita
-	 * @param disponibilita
 	 */
-	public void updateComponente(Long codiceComponente, String tipologia, String descrizione, Date dataInizioValidita, Date dataFineValidita, int disponibilita);
+	public void updateComponente(Long codiceComponente, String tipologia, String descrizione, Date dataInizioValidita, Date dataFineValidita, int disponibilitaDaSettare);
 	/**@param codiceComponente
-	 * @return Componente*/
-	public ComponenteDTO findByCodiceComponente(Long codiceCompoente);
-
+	 * @return ComponenteDTO*/
+	public ComponenteDTO findByCodiceComponente(Long codiceComponente);
+	
 	/**@return ArrayList<codiceComponente>*/
 	public ArrayList<Long> findAll();
 	
 	/**@param dataPartenza
 	 * @param dataRitorno
-	 * @param codiceComponente
+	 * @param componenteDTO
 	 * @return true if componente is valid, otherwise false
 	 */
-	public boolean verificaValiditaComponente (Date dataPartenza, Date dataRitorno, Long codiceComponente);
+	public boolean verificaValiditaComponente (Date dataPartenza, Date dataRitorno, ComponenteDTO componenteDTO);
 	
 	/**@param disponibilita
-	 * @param codiceComponente
+	 * @param componenteDTO
 	 * @return true if componente is available, otherwise false	
 	 */
-	public boolean verificaDisponibilitaComponente (int disponibilita, Long codiceComponente);
-
+	public boolean verificaDisponibilitaComponente (int disponibilita, ComponenteDTO componenteDTO);
+	
 	/**@param codiceComponente
 	 * @return true if codiceComponente is not present in the DB, otherwise false*/
 	public boolean verificaPresenzaComponente(Long codiceComponente); 

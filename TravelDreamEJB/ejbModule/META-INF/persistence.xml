@@ -11,6 +11,7 @@
 		<class>it.polimi.traveldream.entities.Pacchetto</class>
 		<class>it.polimi.traveldream.entities.PacchettoPersonalizzato</class>
 		<class>it.polimi.traveldream.entities.Utente</class>
+		<class>it.polimi.traveldream.entities.DisponibilitaPerData</class>
 		<properties>
 			<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
 		</properties>

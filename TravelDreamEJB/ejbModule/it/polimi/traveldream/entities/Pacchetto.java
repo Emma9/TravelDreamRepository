@@ -28,7 +28,7 @@ public class Pacchetto implements Serializable {
 	private Date dataFineValidita;
 	private String etichetta;
 	private String descrizione;
-	private List<Long> listaComponenti= new ArrayList<Long>(0);
+	private List<Componente> listaComponenti= new ArrayList<Componente>(0);
 
 	/**Costruttore*/
 	public Pacchetto() {
@@ -117,16 +117,18 @@ public class Pacchetto implements Serializable {
 	/**
 	 * @return the listaComponenti
 	 */
-	public List<Long> getListaComponenti() {
+	public List<Componente> getListaComponenti() {
 		return listaComponenti;
 	}
 
 	/**
 	 * @param listaComponenti the listaComponenti to set
 	 */
-	public void setListaComponenti(List<Long> listaComponenti) {
+	public void setListaComponenti(List<Componente> listaComponenti) {
 		this.listaComponenti = listaComponenti;
 	}
+
+	
 
 	
 }

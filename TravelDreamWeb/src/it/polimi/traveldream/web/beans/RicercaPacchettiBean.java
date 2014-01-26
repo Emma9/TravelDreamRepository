@@ -1,11 +1,13 @@
 package it.polimi.traveldream.web.beans;
 
 import it.polimi.traveldream.ejb.client.PacchettoBeanRemote;
+import it.polimi.traveldream.entities.ComponenteDTO;
 import it.polimi.traveldream.entities.PacchettoDTO;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -136,7 +138,7 @@ public class RicercaPacchettiBean implements Serializable {
 		HttpServletRequest request = (HttpServletRequest) context
 				.getExternalContext().getRequest();
 		
-		ArrayList<PacchettoDTO> pacchetti = new ArrayList<PacchettoDTO>();
+		List<PacchettoDTO> pacchetti = new ArrayList<PacchettoDTO>();
 	
 
 		//try {
@@ -150,7 +152,7 @@ public class RicercaPacchettiBean implements Serializable {
 			for(int i=0;i<=pacchetti.size();i++){
 				//PER OGNI PACCHETTO VERIFICA CHE TUTTI I SUOI COMPONENTI SIANO DISPONIBILI
 				
-				if(pacchettoRemoto.verificaDisponibilitaComponenti(this.dataPartenza, this.dataRitorno, this.numPartecipanti, (ArrayList<Long>) pacchetti.get(i).getListaComponenti())){
+				if(pacchettoRemoto.verificaDisponibilitaComponenti(this.dataPartenza, this.dataRitorno, this.numPartecipanti, (List<ComponenteDTO>)pacchetti.get(i).getListaComponenti())){
 				//SE TUTTI I COMPONENTI SONO DISPONIBILI NON RIMUOVE IL PACCHETTO DALLA LISTA
 					
 				}else{
