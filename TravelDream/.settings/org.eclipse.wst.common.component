@@ -12,5 +12,14 @@
         <dependent-module archiveName="TravelDreamEJBClient.jar" deploy-path="/" handle="module:/resource/TravelDreamEJBClient/TravelDreamEJBClient">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="joda-time-2.3-javadoc.jar" deploy-path="lib" handle="module:/classpath/lib/EarContent/lib/joda-time-2.3-javadoc.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="joda-time-2.3-sources.jar" deploy-path="lib" handle="module:/classpath/lib/EarContent/lib/joda-time-2.3-sources.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="joda-time-2.3.jar" deploy-path="lib" handle="module:/classpath/lib/EarContent/lib/joda-time-2.3.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     </wb-module>
 </project-modules>
