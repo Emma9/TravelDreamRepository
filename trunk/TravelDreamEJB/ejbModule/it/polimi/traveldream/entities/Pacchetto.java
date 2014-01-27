@@ -39,6 +39,9 @@ public class Pacchetto implements Serializable {
 	}
 	
 	
+	/**
+	 * @return clone
+	 */
 	public Pacchetto getClone() {
 		
 		Pacchetto clone= new Pacchetto();
