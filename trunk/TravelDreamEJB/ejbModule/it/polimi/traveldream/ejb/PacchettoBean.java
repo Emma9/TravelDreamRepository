@@ -185,62 +185,48 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	}
 	
 	
-	/**@param dataPartenza
+	/**
+	 * @param dataPartenza
 	 * @param dataRitorno
 	 * @param disponibilitaRichiesta
 	 * @param listaComponenti
-	 * @return true if all componente are available, otherwise false*/
-	public boolean verificaDisponibilitaComponenti (Date dataPartenza, Date dataRitorno, int disponibilitaRichiesta, List<ComponenteDTO> listaComponenti){
-		
-		ComponenteBeanRemote componenteRemoto = new ComponenteBean();	
-		
+	 * @return true if all componente are available, otherwise false
+	 */
+	public boolean verificaDisponibilitaComponenti(Date dataPartenza,
+			Date dataRitorno, int disponibilitaRichiesta,
+			List<ComponenteDTO> listaComponentiSelezionati) {
+
+		ComponenteBeanRemote componenteRemoto = new ComponenteBean();
+
 		ComponenteDTO componente = new ComponenteDTO();
-		
-		for(int i=0; i<=listaComponenti.size(); i++){
-			
-			//ciclo sui componenti della lista
-			
-			componente = listaComponenti.get(i);
-			
-			if(componenteRemoto.verificaValiditaComponente(dataPartenza, dataRitorno, componente)){
-				
-				//componente valido nel periodo richiesto
-				
-				for(/*ciclo sul periodo richiesto*/){
-					
-					//ciclo sul periodo richiesto
-					
-				Date data= new Date();
-				
-				if(componenteRemoto.verificaDisponibilitaComponenteInUnaData(disponibilitaRichiesta, data, componente)){
-					
-					//componente disponibile in una data nel periodo di validità
-						
-				}else{
-					
-					//componente non disponibile in una data
-					
-					return false;
-				}
-				
-				}
-				
-				//un componente valido disponibile in tutto il periodo richiesto
-				
-			}else{
-				
-				//un componente non valido
+
+		for (int i = 0; i <= listaComponentiSelezionati.size(); i++) {
+
+			// ciclo sui componenti della lista
+
+			componente = listaComponentiSelezionati.get(i);
+
+			if(!componenteRemoto.verificaValiditaComponente(dataPartenza, dataRitorno, componente)){
 				return false;
-				
 			}
 			
-			
+			if (componenteRemoto.verificaValiditaComponente(dataPartenza,
+					dataRitorno, componente)) {
+				if (!componenteRemoto.verificaDisponibilitaComponenteInPeriodo(
+						disponibilitaRichiesta, dataPartenza, dataRitorno,
+						componente)) {
+					return false;
+				}
+
+				// un componente valido disponibile in tutto il periodo
+				// richiesto
+
+			}
 		}
-		
-		//tutti i componenti della lista sono validi e disponibili
-		
+
+		// un componente non valido
 		return true;
-		
+
 	}
 	
 	
@@ -416,5 +402,59 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 
 		
 	}
+	
+	
+	
+	public boolean verificaComponentiSelezionatiInComponenti(List<ComponenteDTO> listaComponenti, List<ComponenteDTO> listaComponentiSelezionati){
+		
+		for(int i=0; i<listaComponentiSelezionati.size(); i++){
+			
+			if(!listaComponenti.contains(listaComponentiSelezionati.get(i))){
+				return false;
+				
+				
+			}
+			
+		}
+		
+		return true;
+		
+	}
+	
+	
+	public boolean verificaTreComponentiSelezionati(List<ComponenteDTO> listaComponentiSelezionati){
+		
+		
+		if(verificaListaComponenti(listaComponentiSelezionati)){
+			if(listaComponentiSelezionati.size()==3){
+				return true;
+			}
+		}
+		return false;
+		
+	}
+	
+	
+	public List<ComponenteDTO> modificaListaComponentiSelezionati (List<ComponenteDTO> listaComponentiSelezionati, ComponenteDTO componenteDaInserire){
+		
+		ArrayList<ComponenteDTO> listaComponentiModificata= new ArrayList<ComponenteDTO>();
+		listaComponentiModificata=(ArrayList<ComponenteDTO>) listaComponentiSelezionati;
+		
+		for(int i=0; i<listaComponentiModificata.size(); i++){
+			if(listaComponentiModificata.get(i).getTipologia()==componenteDaInserire.getTipologia()){
+				listaComponentiModificata.remove(i);
+			}
+		}
+		
+		listaComponentiModificata.add(componenteDaInserire);
+		
+		return listaComponentiModificata;
+		
+		
+		
+		
+	}
+	
+	
 	
 }

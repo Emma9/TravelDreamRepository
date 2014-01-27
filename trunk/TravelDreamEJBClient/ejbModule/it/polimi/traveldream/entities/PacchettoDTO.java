@@ -5,43 +5,62 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
-public class PacchettoDTO implements Serializable{
+public class PacchettoDTO implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private Long idPacchetto;
 	private String destinazione;
 	private Date dataInizioValidita;
 	private Date dataFineValidita;
 	private String etichetta;
 	private String descrizione;
-	private List<ComponenteDTO> listaComponenti= new ArrayList<ComponenteDTO>(0);
+	private List<ComponenteDTO> listaComponenti = new ArrayList<ComponenteDTO>(
+			0);
+	private List<ComponenteDTO> listaComponentiSelezionati = new ArrayList<ComponenteDTO>(
+			0);
 
-	/**Costruttore*/
+	/** Costruttore */
 	public PacchettoDTO() {
 		super();
 	}
 
-	/**@return idPacchetto*/
+	public PacchettoDTO getClone() {
+
+		PacchettoDTO clone = new PacchettoDTO();
+		try {
+
+			clone = (PacchettoDTO) this.clone();
+
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return clone;
+	}
+
+	/** @return idPacchetto */
 	public Long getIdPacchetto() {
 		return this.idPacchetto;
 	}
 
-	/**@return destinazione*/
+	/** @return destinazione */
 	public String getDestinazione() {
 		return this.destinazione;
 	}
 
-	/**@param destinazione destinazione to set*/
+	/**
+	 * @param destinazione
+	 *            destinazione to set
+	 */
 	public void setDestinazione(String destinazione) {
 		this.destinazione = destinazione;
 	}
 
-	
 	/**
 	 * @return the dataInizioValidita
 	 */
@@ -50,7 +69,8 @@ public class PacchettoDTO implements Serializable{
 	}
 
 	/**
-	 * @param dataInizioValidita the dataInizioValidita to set
+	 * @param dataInizioValidita
+	 *            the dataInizioValidita to set
 	 */
 	public void setDataInizioValidita(Date dataInizioValidita) {
 		this.dataInizioValidita = dataInizioValidita;
@@ -64,14 +84,16 @@ public class PacchettoDTO implements Serializable{
 	}
 
 	/**
-	 * @param dataFineValidita the dataFineValidita to set
+	 * @param dataFineValidita
+	 *            the dataFineValidita to set
 	 */
 	public void setDataFineValidita(Date dataFineValidita) {
 		this.dataFineValidita = dataFineValidita;
 	}
 
 	/**
-	 * @param idPacchetto the idPacchetto to set
+	 * @param idPacchetto
+	 *            the idPacchetto to set
 	 */
 	public void setIdPacchetto(Long idPacchetto) {
 		this.idPacchetto = idPacchetto;
@@ -85,7 +107,8 @@ public class PacchettoDTO implements Serializable{
 	}
 
 	/**
-	 * @param etichette the etichetta to set
+	 * @param etichette
+	 *            the etichetta to set
 	 */
 	public void setEtichetta(String etichetta) {
 		this.etichetta = etichetta;
@@ -99,7 +122,8 @@ public class PacchettoDTO implements Serializable{
 	}
 
 	/**
-	 * @param descrizione the descrizione to set
+	 * @param descrizione
+	 *            the descrizione to set
 	 */
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
@@ -113,13 +137,27 @@ public class PacchettoDTO implements Serializable{
 	}
 
 	/**
-	 * @param listaComponenti the listaComponenti to set
+	 * @param listaComponenti
+	 *            the listaComponenti to set
 	 */
 	public void setListaComponenti(List<ComponenteDTO> listaComponenti) {
 		this.listaComponenti = listaComponenti;
 	}
 
-	
+	/**
+	 * @return the listaComponentiSelezionati
+	 */
+	public List<ComponenteDTO> getListaComponentiSelezionati() {
+		return listaComponentiSelezionati;
+	}
 
-	
+	/**
+	 * @param listaComponentiSelezionati
+	 *            the listaComponentiSelezionati to set
+	 */
+	public void setListaComponentiSelezionati(
+			List<ComponenteDTO> listaComponentiSelezionati) {
+		this.listaComponentiSelezionati = listaComponentiSelezionati;
+	}
+
 }

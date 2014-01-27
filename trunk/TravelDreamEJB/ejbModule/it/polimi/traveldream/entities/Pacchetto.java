@@ -29,10 +29,27 @@ public class Pacchetto implements Serializable {
 	private String etichetta;
 	private String descrizione;
 	private List<Componente> listaComponenti= new ArrayList<Componente>(0);
+	private List<Componente> listaComponentiSelezionati= new ArrayList<Componente>(0);
 
 	/**Costruttore*/
 	public Pacchetto() {
 		super();
+	}
+	
+	
+	public Pacchetto getClone() {
+		
+		Pacchetto clone= new Pacchetto();
+		try {
+	
+			clone=(Pacchetto) this.clone();
+			
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return clone;
 	}
 
 	/**@return idPacchetto*/
@@ -128,7 +145,20 @@ public class Pacchetto implements Serializable {
 		this.listaComponenti = listaComponenti;
 	}
 
-	
+	/**
+	 * @return the listaComponentiSelezionati
+	 */
+	public List<Componente> getListaComponentiSelezionati() {
+		return listaComponentiSelezionati;
+	}
+
+	/**
+	 * @param listaComponentiSelezionati the listaComponentiSelezionati to set
+	 */
+	public void setListaComponentiSelezionati(
+			List<Componente> listaComponentiSelezionati) {
+		this.listaComponentiSelezionati = listaComponentiSelezionati;
+	}
 
 	
 }
