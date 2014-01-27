@@ -9,6 +9,7 @@ import it.polimi.traveldream.entities.PacchettoDTO;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -307,28 +308,49 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 		return false;
 	}
 
+	
+	public String[] splitEtichetta(String etichetta) 
+    {
+     StringTokenizer StrTkn = new StringTokenizer(etichetta, ",");
+     ArrayList<String> ArrLis = new ArrayList<String>(0);
+     while(StrTkn.hasMoreTokens())
+     {
+       ArrLis.add(StrTkn.nextToken());
+     }
+     return ArrLis.toArray(new String[0]);
+    }
+	
+	
 	/**@param etichetta
 	 * @return true if etichetta is valid, otherwise false	
 	 */
-	public boolean verificaEtichetta (String etichetta) {
-		
-		switch (etichetta){
-		
-		case "LASTMINUTE":return true;
-						
-			
-		case "OFFERTA":return true;
-						
-			
-		case "MARE":return true;
-							
-		
-		case "MONTAGNA":return true;
-							
-		
+	public boolean verificaEtichetta(String etichetta) {
+
+		String[] etichette = splitEtichetta(etichetta);
+		for (int i = 0; i < etichette.length; i++) {
+
+			switch (etichette[i]) {
+
+			case "LASTMINUTE":
+				break;
+
+			case "OFFERTA":
+				break;
+
+			case "MARE":
+				break;
+
+			case "MONTAGNA":
+				break;
+				
+			default:
+				return false;
+
+			}
+
 		}
-		
-		return false;
+
+		return true;
 		
 	}
 
@@ -381,29 +403,43 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 		
 		try {
 			
-			
+			ArrayList<PacchettoDTO> listaPacchettiRicercati= new ArrayList<PacchettoDTO>();
 			
 			//ETICHETTA
-			Query q1 = manager.createQuery("FROM Pacchetto p WHERE p.etichette=:new_etichetta");
+			//Query q1 = manager.createQuery("FROM Pacchetto p WHERE p.etichetta=:new_etichetta");
 
-			q1.setParameter("new_etichetta", etichetta);
+			//q1.setParameter("new_etichetta", etichetta);
 			
 			//DATE
-			Query q2 = manager.createQuery("FROM Pacchetto p WHERE p.dataInizioValidita<=new_dataPartenza AND p.dataInizioValidita<=new_dataRitorno AND p.dataFineValidita>=new_dataPartenza AND p.dataFineValidita>=new_dataRitorno");
+			TypedQuery<PacchettoDTO> q = manager.createQuery("FROM Pacchetto p WHERE p.dataInizioValidita<=new_dataPartenza AND p.dataInizioValidita<=new_dataRitorno AND p.dataFineValidita>=new_dataPartenza AND p.dataFineValidita>=new_dataRitorno", PacchettoDTO.class);
 
-			q2.setParameter("new_dataPartenza", dataPartenza);
-			q2.setParameter("new_dataRitorno", dataRitorno);
+			q.setParameter("new_dataPartenza", dataPartenza);
+			q.setParameter("new_dataRitorno", dataRitorno);
 			
 			//INNER JOIN
-			Query q3 = manager.createQuery("q1 INNER JOIN q2");
+			//Query q3 = manager.createQuery("q1 INNER JOIN q2");
 
-			q3.setParameter("q1", q1);
-			q3.setParameter("q2", q2);			
+			//q3.setParameter("q1", q1);
+			//q3.setParameter("q2", q2);			
 			
-			@SuppressWarnings("unchecked")
-			ArrayList<PacchettoDTO> pacchetti = (ArrayList<PacchettoDTO>) q3.getResultList();
 			
-			return pacchetti;
+			ArrayList<PacchettoDTO> pacchetti = (ArrayList<PacchettoDTO>) q.getResultList();
+			
+			for (int i=0; i<pacchetti.size(); i++){
+				
+				String[] etichette=splitEtichetta(pacchetti.get(i).getEtichetta()); 
+				for(int j=0; i<etichette.length;j++){
+					
+					if(etichette[j].equals(etichetta)){
+						listaPacchettiRicercati.add(pacchetti.get(i));
+					}
+					
+					
+				}
+				
+			}
+			
+			return listaPacchettiRicercati;
 
 			} catch (NullPointerException e) {
 				
