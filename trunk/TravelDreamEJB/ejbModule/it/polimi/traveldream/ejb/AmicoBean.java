@@ -101,7 +101,7 @@ public class AmicoBean implements AmicoBeanRemote, AmicoBeanLocal {
 
 		ArrayList<Long> lista = new ArrayList<Long>();
 
-		for (int i = 0; i <= amici.size(); i++) {
+		for (int i = 0; i < amici.size(); i++) {
 
 			lista.set(i, amici.get(i).getIdAmico());
 		}

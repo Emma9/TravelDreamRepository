@@ -89,7 +89,7 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 		ArrayList<Long> pacchetti = new ArrayList<Long>();
 		List<PacchettoPersonalizzatoDTO> risultati = q.getResultList();
 
-		for (int i = 0; i <= risultati.size(); i++) {
+		for (int i = 0; i < risultati.size(); i++) {
 
 			pacchetti.set(i, risultati.get(i).getIdPacchettoPersonalizzato());
 			
@@ -107,7 +107,7 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 		ArrayList<Long> idPacchetti = new ArrayList<Long>();
 		List<PacchettoPersonalizzatoDTO> risultati = q.getResultList();
 
-		for (int i = 0; i <= risultati.size(); i++) {
+		for (int i = 0; i < risultati.size(); i++) {
 
 			if (risultati.get(i).getEtichetta().equals(etichetta)) {
 
@@ -116,7 +116,7 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 			}
 		}
 
-		for (int j = 0; j <= pacchetti.size(); j++) {
+		for (int j = 0; j < pacchetti.size(); j++) {
 
 			if (pacchetti.get(j).equals(null)) {
 			} else {
@@ -165,7 +165,7 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 
 		ArrayList<Long> lista = new ArrayList<Long>();
 
-		for (int i = 0; i <= pacchetti.size(); i++) {
+		for (int i = 0; i < pacchetti.size(); i++) {
 
 			lista.set(i, pacchetti.get(i).getIdPacchetto());
 			

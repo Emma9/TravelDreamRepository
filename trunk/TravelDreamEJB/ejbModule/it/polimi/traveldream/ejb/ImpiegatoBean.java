@@ -104,7 +104,7 @@ public class ImpiegatoBean implements ImpiegatoBeanRemote,ImpiegatoBeanLocal {
 
 		ArrayList<Long> lista = new ArrayList<Long>();
 
-		for (int i = 0; i <= impiegati.size(); i++) {
+		for (int i = 0; i < impiegati.size(); i++) {
 
 			lista.set(i, impiegati.get(i).getIdImpiegato());
 			

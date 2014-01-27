@@ -57,7 +57,7 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 
 		ArrayList<InvitoDTO> inviti = findByEmailMittente(emailMittente);
 
-		for (int i = 0; i <= inviti.size(); i++) {
+		for (int i = 0; i < inviti.size(); i++) {
 
 			manager.remove(inviti.get(i));
 		}
@@ -109,7 +109,7 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 		ArrayList<InvitoDTO> inviti = new ArrayList<InvitoDTO>();
 		List<InvitoDTO> risultati = q.getResultList();
 
-		for (int i = 0; i <= risultati.size(); i++) {
+		for (int i = 0; i < risultati.size(); i++) {
 
 			inviti.set(i, risultati.get(i));
 			
@@ -126,7 +126,7 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 
 		ArrayList<InvitoDTO> lista = new ArrayList<InvitoDTO>();
 
-		for (int i = 0; i <= inviti.size(); i++) {
+		for (int i = 0; i < inviti.size(); i++) {
 
 			lista.set(i, inviti.get(i));
 			
