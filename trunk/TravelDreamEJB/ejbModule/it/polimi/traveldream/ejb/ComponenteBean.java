@@ -3,8 +3,6 @@ package it.polimi.traveldream.ejb;
 import it.polimi.traveldream.ejb.client.ComponenteBeanLocal;
 import it.polimi.traveldream.ejb.client.ComponenteBeanRemote;
 import it.polimi.traveldream.entities.ComponenteDTO;
-import it.polimi.traveldream.entities.DisponibilitaPerData;
-import it.polimi.traveldream.entities.DisponibilitaPerDataDTO;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,27 +16,33 @@ import javax.persistence.TypedQuery;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 
-/**Session Bean implementation class ComponenteBean*/
+/** Session Bean implementation class ComponenteBean */
 @Stateless
-public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal {
+public class ComponenteBean implements ComponenteBeanRemote,
+		ComponenteBeanLocal {
 
-	@PersistenceContext(unitName = "travelDream_project") private EntityManager manager;
+	@PersistenceContext(unitName = "travelDream_project")
+	private EntityManager manager;
 
-	/**Default constructor*/
+	/** Default constructor */
 	public ComponenteBean() {
 		// TODO Auto-generated constructor stub
 	}
 
-	/**@param tipologia
+	/**
+	 * @param tipologia
 	 * @param descrizione
 	 * @param costo
 	 * @param dataInizioValidita
 	 * @param dataFineValidita
-	 * @return codiceComponente*/
-	public Long createComponente(String tipologia, String descrizione,int costo, Date dataInizioValidita, Date dataFineValidita, int disponibilitaDaSettare) {
+	 * @return codiceComponente
+	 */
+	public Long createComponente(String tipologia, String descrizione,
+			int costo, Date dataInizioValidita, Date dataFineValidita,
+			int disponibilitaDaSettare) {
 
-		if(verificaTipologia(tipologia)){
-		
+		if (verificaTipologia(tipologia)) {
+
 			ComponenteDTO componente = new ComponenteDTO();
 
 			componente.setTipologia(tipologia);
@@ -46,56 +50,71 @@ public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal
 			componente.setCosto(costo);
 			componente.setDataInizioValidita(dataInizioValidita);
 			componente.setDataFineValidita(dataFineValidita);
-			
-			//disponibilitaPerData=;
-			componente.setDisponibilitaPerData(disponibilitaPerData);
+
+			// disponibilitaPerData=;
+			creaListaDisponibilitaPerData(componente, dataInizioValidita,
+					dataFineValidita, disponibilitaDaSettare);
 
 			manager.persist(componente);
-			
+
 			return componente.getCodiceComponente();
-			
+
 		}
-		
+
 		return (long) -1;
 
 	}
 
-	/**@param codiceComponente*/
+	/** @param codiceComponente */
 	public void removeComponente(Long codiceComponente) {
 
 		ComponenteDTO c = findByCodiceComponente(codiceComponente);
-		
+
 		manager.remove(c);
 
 	}
 
-	/**@param codiceComponente
+	/**
+	 * @param codiceComponente
 	 * @param tipologia
 	 * @param descrizione
 	 * @param dataInizioValidita
 	 * @param dataFineValidita
 	 */
-	public void updateComponente(Long codiceComponente, String tipologia, String descrizione, Date dataInizioValidita, Date dataFineValidita, int disponibilitaDaSettare) {
+	public void updateComponente(Long codiceComponente, String tipologia,
+			String descrizione, int costo, Date dataInizioValidita, Date dataFineValidita,
+			int disponibilitaDaSettare) {
 
-		if ((verificaPresenzaComponente(codiceComponente))&&(verificaTipologia(tipologia))) {
+		if ((verificaPresenzaComponente(codiceComponente))
+				&& (verificaTipologia(tipologia))) {
 
 			ComponenteDTO componente = findByCodiceComponente(codiceComponente);
 
 			componente.setTipologia(tipologia);
 			componente.setDescrizione(descrizione);
+			componente.setCosto(costo);
 			componente.setDataInizioValidita(dataInizioValidita);
-			componente.setDataFineValidita(dataFineValidita);	
+			componente.setDataFineValidita(dataFineValidita);
+			
+			// disponibilitaPerData=;
+			creaListaDisponibilitaPerData(componente, dataInizioValidita,
+								dataFineValidita, disponibilitaDaSettare);
 
 			manager.merge(componente);
 		}
 
 	}
 
-	/**@param codiceComponente
-	 * @return ComponenteDTO*/
+	/**
+	 * @param codiceComponente
+	 * @return ComponenteDTO
+	 */
 	public ComponenteDTO findByCodiceComponente(Long codiceComponente) {
 
-		TypedQuery<ComponenteDTO> q = manager.createQuery("FROM Componente c WHERE c.codiceComponente=:new_codiceComponente", ComponenteDTO.class);
+		TypedQuery<ComponenteDTO> q = manager
+				.createQuery(
+						"FROM Componente c WHERE c.codiceComponente=:new_codiceComponente",
+						ComponenteDTO.class);
 
 		q.setParameter("new_codiceComponente", codiceComponente);
 
@@ -104,10 +123,11 @@ public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal
 		return componente;
 	}
 
-	/**@return ArrayList<codiceComponente>*/
+	/** @return ArrayList<codiceComponente> */
 	public ArrayList<Long> findAll() {
 
-		TypedQuery<ComponenteDTO> q = manager.createQuery("FROM Componente c", ComponenteDTO.class);
+		TypedQuery<ComponenteDTO> q = manager.createQuery("FROM Componente c",
+				ComponenteDTO.class);
 
 		List<ComponenteDTO> componenti = q.getResultList();
 
@@ -116,100 +136,110 @@ public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal
 		for (int i = 0; i <= componenti.size(); i++) {
 
 			lista.set(i, componenti.get(i).getCodiceComponente());
-			
+
 		}
 		return lista;
 	}
 
-	
-	/**@param dataPartenza
+	/**
+	 * @param dataPartenza
 	 * @param dataRitorno
 	 * @param codiceComponente
 	 * @return true if componente is valid, otherwise false
 	 */
-	public boolean verificaValiditaComponente (Date dataPartenza, Date dataRitorno, ComponenteDTO componente){
-		
-				
-		
-		if((!dataPartenza.before(componente.getDataInizioValidita())) && (!dataPartenza.after(componente.getDataFineValidita())) && (!dataRitorno.before(componente.getDataInizioValidita())) && (!dataRitorno.after(componente.getDataFineValidita()))){
-			
+	public boolean verificaValiditaComponente(Date dataPartenza,
+			Date dataRitorno, ComponenteDTO componente) {
+
+		if ((!dataPartenza.before(componente.getDataInizioValidita()))
+				&& (!dataPartenza.after(componente.getDataFineValidita()))
+				&& (!dataRitorno.before(componente.getDataInizioValidita()))
+				&& (!dataRitorno.after(componente.getDataFineValidita()))) {
+
 			return true;
-			
-		}else{
-		
+
+		} else {
+
 			return false;
-			
+
 		}
-					
-		
+
 	}
-	
-	
-	public int disponibilitaInData (ComponenteDTO componente, Date data){
-		
-		for(int i=0; i<componente.getDisponibilitaPerData().size(); i++)
-		if(componente.getDisponibilitaPerData().get(i).getData().equals(data)){
-			return componente.getDisponibilitaPerData().get(i).getDisponibilita();
-		}
-		
+
+	public int disponibilitaInData(ComponenteDTO componente, Date data) {
+
+		for (int i = 0; i < componente.getDisponibilitaPerData().size(); i++)
+			if (componente.getDisponibilitaPerData().get(i).getData()
+					.equals(data)) {
+				return componente.getDisponibilitaPerData().get(i)
+						.getDisponibilita();
+			}
+
 		return -1;
 	}
-	
-	
-	
-	
-	
-	
 
-	/**@param disponibilita
+	public void setDisponibilitaInData(ComponenteDTO componente, Date data,
+			int disponibilita) {
+
+		for (int i = 0; i < componente.getDisponibilitaPerData().size(); i++) {
+			if (componente.getDisponibilitaPerData().get(i).getData()
+					.equals(data)) {
+				componente.getDisponibilitaPerData().get(i)
+						.setDisponibilita(disponibilita);
+			}
+
+		}
+	}
+
+	/**
+	 * @param disponibilita
 	 * @param codiceComponente
-	 * @return true if componente is available, otherwise false	
+	 * @return true if componente is available, otherwise false
 	 */
-	public boolean verificaDisponibilitaComponenteInUnaData (int disponibilitaRichiesta, Date data, ComponenteDTO componente){
-		
-	
-	if(disponibilitaInData(componente, data)>= disponibilitaRichiesta){
-		return true;
+	public boolean verificaDisponibilitaComponenteInUnaData(
+			int disponibilitaRichiesta, Date data, ComponenteDTO componente) {
+
+		if (disponibilitaInData(componente, data) >= disponibilitaRichiesta) {
+			return true;
+		}
+
+		return false;
+
 	}
-	
-	return false;
-	
-	}
-	
-	
-	
-	public boolean verificaDisponibilitaComponenteInPeriodo (int disponibilitaRichiesta, Date dataPartenza, Date dataRitorno, ComponenteDTO componente){
-		
-		
-		int giorniIntervallo= Days.daysBetween(new DateTime(dataPartenza), new DateTime(dataRitorno)).getDays();
-		
-		
-		
-		for (int i=0; i<giorniIntervallo; i++){
-			
-			DateTime dataDaVerificareJ= new DateTime();
-			dataDaVerificareJ= dataDaVerificareJ.plusDays(i);
-			Date dataDaVerificare= dataDaVerificareJ.toDate();
-			
-			if(verificaDisponibilitaComponenteInUnaData(disponibilitaRichiesta, dataDaVerificare, componente)==false){
+
+	public boolean verificaDisponibilitaComponenteInPeriodo(
+			int disponibilitaRichiesta, Date dataPartenza, Date dataRitorno,
+			ComponenteDTO componente) {
+
+		int giorniIntervallo = Days.daysBetween(new DateTime(dataPartenza),
+				new DateTime(dataRitorno)).getDays();
+
+		for (int i = 0; i < giorniIntervallo; i++) {
+
+			DateTime dataDaVerificareJ = new DateTime();
+			dataDaVerificareJ = dataDaVerificareJ.plusDays(i);
+			Date dataDaVerificare = dataDaVerificareJ.toDate();
+
+			if (verificaDisponibilitaComponenteInUnaData(
+					disponibilitaRichiesta, dataDaVerificare, componente) == false) {
 				return false;
 			}
-			
-		}
-		
-		return true;
-		
-	}
-	
-	
-		
 
-	
-	/**@param codiceComponente
-	 * @return true if codiceComponente is present in the DB, otherwise false*/
+		}
+
+		return true;
+
+	}
+
+	/**
+	 * @param codiceComponente
+	 * @return true if codiceComponente is present in the DB, otherwise false
+	 */
 	public boolean verificaPresenzaComponente(Long codiceComponente) {
 		try {
-			TypedQuery<ComponenteDTO> q = manager.createQuery("FROM Componente c WHERE c.codiceComponente=:new_codiceComponente", ComponenteDTO.class);
+			TypedQuery<ComponenteDTO> q = manager
+					.createQuery(
+							"FROM Componente c WHERE c.codiceComponente=:new_codiceComponente",
+							ComponenteDTO.class);
 
 			q.setParameter("new_codiceComponente", codiceComponente);
 
@@ -226,37 +256,44 @@ public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal
 			return false;
 		}
 	}
-	
-	
-	
-	
-public boolean verificaTipologia (String tipologia) {
-		
-		switch (tipologia){
-		
-		case "HOTEL":return true;
-						
-			
-		case "VOLO":return true;
-						
-			
-		case "ESCURSIONE":return true;
-						
-		
+
+	public boolean verificaTipologia(String tipologia) {
+
+		switch (tipologia) {
+
+		case "HOTEL":
+			return true;
+
+		case "VOLO":
+			return true;
+
+		case "ESCURSIONE":
+			return true;
+
 		}
-		
+
 		return false;
-		
+
 	}
 
-public List<DisponibilitaPerDataDTO> creaListaDisponibilitaPerData (Date dataInizioValidita, Date dataFineValidita, int disponibilitaDaSettare){
-	
-	List<DisponibilitaPerData> disponibilitaPerData = new ArrayList<DisponibilitaPerData>(0);
-	
-	//int intervallo=Days.daysBetween(arg0, arg1)
-	
-	//for(int i=0;i<=disponibilitaPerData.size())
-	
-}
-	
+	public void creaListaDisponibilitaPerData(ComponenteDTO componente,
+			Date dataInizioValidita, Date dataFineValidita,
+			int disponibilitaDaSettare) {
+
+		int giorniIntervallo = Days.daysBetween(
+				new DateTime(dataInizioValidita),
+				new DateTime(dataFineValidita)).getDays();
+
+		for (int i = 0; i < giorniIntervallo; i++) {
+			DateTime dataDaSettareJ = new DateTime();
+			dataDaSettareJ = dataDaSettareJ.plusDays(i);
+			Date dataDaSettare = dataDaSettareJ.toDate();
+
+			setDisponibilitaInData(componente, dataDaSettare,
+					disponibilitaDaSettare);
+
+		}
+
+	}
+
 }
