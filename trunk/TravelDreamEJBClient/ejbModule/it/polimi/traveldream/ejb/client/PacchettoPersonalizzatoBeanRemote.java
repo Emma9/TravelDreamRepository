@@ -16,9 +16,8 @@ public interface PacchettoPersonalizzatoBeanRemote {
 	 * @return idPacchettoPersonalizzato*/
 	public Long createPacchettoPersonalizzato(String stato, Long idCliente);
 
-	/**@param idCliente
-	 * @param idPacchettoPersonalizzato*/
-	public void removePacchettoPersonalizzato(Long idCliente, Long idPacchettoPersonalizzato);
+	public void removePacchettoPersonalizzato(Long idPacchettoPersonalizzato);
+	
 	
 	/**@param idPacchettoPersonalizzato
 	 * @param stato

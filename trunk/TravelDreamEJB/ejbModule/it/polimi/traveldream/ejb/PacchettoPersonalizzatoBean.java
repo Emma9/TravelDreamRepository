@@ -51,22 +51,15 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 
 	}
 
-	/**@param idCliente
-	 * @param idPacchettoPersonalizzato*/
-	public void removePacchettoPersonalizzato(Long idCliente, Long idPacchettoPersonalizzato) {
-
-		ArrayList<PacchettoPersonalizzatoDTO> pacchetti = findByIdCliente(idCliente);
-
-		for (int i = 0; i <= pacchetti.size(); i++) {
-			
-			if(pacchetti.get(i).getIdPacchettoPersonalizzato().equals(idPacchettoPersonalizzato)){
-				
-				manager.remove(pacchetti.get(i));
-				
-			}
-
-		}
+	
+	public void removePacchettoPersonalizzato(Long idPacchettoPersonalizzato) {
+		PacchettoPersonalizzatoDTO pacchetto= findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato);
+		manager.remove(pacchetto);
 	}
+
+	
+	
+	
 
 	/**@param idPacchettoPersonalizzato
 	 * @param stato
