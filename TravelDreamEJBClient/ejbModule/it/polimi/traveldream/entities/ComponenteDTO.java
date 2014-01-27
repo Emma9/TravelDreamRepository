@@ -12,7 +12,7 @@ public class ComponenteDTO implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 205L;
 	private Long codiceComponente;
 	private String tipologia;
 	private String descrizione;

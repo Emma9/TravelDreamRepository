@@ -7,7 +7,7 @@ public class AmicoDTO implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 207L;
 	
 	private Long idAmico;
 	private String email;

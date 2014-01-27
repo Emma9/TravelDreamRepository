@@ -7,7 +7,7 @@ public class ImpiegatoDTO implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 203L;
 
 	private Long idImpiegato;
 	private String codiceImpiegato;
@@ -82,8 +82,5 @@ public class ImpiegatoDTO implements Serializable{
 		this.cognome = cognome;
 		
 	}
-	
-	
-	
-	
+		
 }
