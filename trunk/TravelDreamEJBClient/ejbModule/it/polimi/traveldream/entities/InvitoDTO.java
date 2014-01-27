@@ -8,7 +8,7 @@ public class InvitoDTO implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 202L;
 	
 	private Long idInvito;
 	private String emailMittente;

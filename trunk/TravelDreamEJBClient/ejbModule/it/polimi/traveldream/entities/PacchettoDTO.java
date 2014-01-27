@@ -10,7 +10,7 @@ public class PacchettoDTO implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 201L;
 
 	private Long idPacchetto;
 	private String destinazione;
@@ -30,6 +30,9 @@ public class PacchettoDTO implements Serializable {
 		super();
 	}
 
+	/**
+	 * @return clone
+	 */
 	public PacchettoDTO getClone() {
 
 		PacchettoDTO clone = new PacchettoDTO();
@@ -188,8 +191,6 @@ public class PacchettoDTO implements Serializable {
 	 */
 	public void setSconto(int sconto) {
 		this.sconto = sconto;
-	}
-	
-	
+	}	
 
 }
