@@ -3,6 +3,8 @@ package it.polimi.traveldream.ejb;
 import it.polimi.traveldream.ejb.client.ComponenteBeanLocal;
 import it.polimi.traveldream.ejb.client.ComponenteBeanRemote;
 import it.polimi.traveldream.entities.ComponenteDTO;
+import it.polimi.traveldream.entities.DisponibilitaPerData;
+import it.polimi.traveldream.entities.DisponibilitaPerDataDTO;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,10 +31,11 @@ public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal
 
 	/**@param tipologia
 	 * @param descrizione
+	 * @param costo
 	 * @param dataInizioValidita
 	 * @param dataFineValidita
 	 * @return codiceComponente*/
-	public Long createComponente(String tipologia, String descrizione, Date dataInizioValidita, Date dataFineValidita, int disponibilitaDaSettare) {
+	public Long createComponente(String tipologia, String descrizione,int costo, Date dataInizioValidita, Date dataFineValidita, int disponibilitaDaSettare) {
 
 		if(verificaTipologia(tipologia)){
 		
@@ -40,8 +43,12 @@ public class ComponenteBean implements ComponenteBeanRemote, ComponenteBeanLocal
 
 			componente.setTipologia(tipologia);
 			componente.setDescrizione(descrizione);
+			componente.setCosto(costo);
 			componente.setDataInizioValidita(dataInizioValidita);
 			componente.setDataFineValidita(dataFineValidita);
+			
+			//disponibilitaPerData=;
+			componente.setDisponibilitaPerData(disponibilitaPerData);
 
 			manager.persist(componente);
 			
@@ -242,6 +249,14 @@ public boolean verificaTipologia (String tipologia) {
 		
 	}
 
-
+public List<DisponibilitaPerDataDTO> creaListaDisponibilitaPerData (Date dataInizioValidita, Date dataFineValidita, int disponibilitaDaSettare){
+	
+	List<DisponibilitaPerData> disponibilitaPerData = new ArrayList<DisponibilitaPerData>(0);
+	
+	//int intervallo=Days.daysBetween(arg0, arg1)
+	
+	//for(int i=0;i<=disponibilitaPerData.size())
+	
+}
 	
 }
