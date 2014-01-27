@@ -33,8 +33,9 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 * @param etichette
 	 * @param descrizione
 	 * @param listaComponenti
+	 * @param sconto
 	 * @return idPacchetto*/
-	public Long createPacchetto(String destinazione, Date dataInizioValidita, Date dataFineValidita, String etichetta, String descrizione, List<ComponenteDTO> listaComponenti) {
+	public Long createPacchetto(String destinazione, Date dataInizioValidita, Date dataFineValidita, String etichetta, String descrizione, List<ComponenteDTO> listaComponenti, int sconto) {
 
 		
 		if((verificaListaComponenti(listaComponenti))&&(verificaEtichetta(etichetta))){
@@ -47,6 +48,10 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 		pacchetto.setEtichetta(etichetta);
 		pacchetto.setDescrizione(descrizione);
 		pacchetto.setListaComponenti(listaComponenti);
+		pacchetto.setSconto(sconto);
+		
+		int costoPacchetto=calcolaCostoPacchetto(listaComponenti, sconto);
+		pacchetto.setCosto(costoPacchetto);
 
 		manager.persist(pacchetto);
 		
@@ -73,8 +78,10 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 * @param dataFineValidita
 	 * @param etichette
 	 * @param descrizione
-	 * @param listaComponenti*/
-	public void updatePacchetto(Long idPacchetto, String destinazione, Date dataInizioValidita, Date dataFineValidita, String etichetta, String descrizione, List<ComponenteDTO> listaComponenti) {
+	 * @param listaComponenti
+	 * @param sconto
+	 */
+	public void updatePacchetto(Long idPacchetto, String destinazione, Date dataInizioValidita, Date dataFineValidita, String etichetta, String descrizione, List<ComponenteDTO> listaComponenti, int sconto) {
 
 		if ((verificaPresenzaPacchetto(idPacchetto))&&(verificaListaComponenti(listaComponenti))&&(verificaEtichetta(etichetta))) {
 			
@@ -86,6 +93,10 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 			pacchetto.setEtichetta(etichetta);
 			pacchetto.setDescrizione(descrizione);
 			pacchetto.setListaComponenti(listaComponenti);
+			pacchetto.setSconto(sconto);
+			
+			int costoPacchetto=calcolaCostoPacchetto(listaComponenti, sconto);
+			pacchetto.setCosto(costoPacchetto);
 
 			manager.merge(pacchetto);
 		}
@@ -450,11 +461,21 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 		
 		return listaComponentiModificata;
 		
-		
-		
-		
 	}
 	
-	
+	public int calcolaCostoPacchetto (List<ComponenteDTO> listaComponenti, int sconto){
+		
+		int costoTotale=0;
+		
+		for (int i=0;i<=listaComponenti.size();i++){
+			
+			costoTotale = costoTotale + listaComponenti.get(i).getCosto();
+			
+		}
+				
+		costoTotale = costoTotale - (costoTotale*(sconto/100));
+		
+		return costoTotale;
+	}
 	
 }

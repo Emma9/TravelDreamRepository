@@ -30,6 +30,8 @@ public class Pacchetto implements Serializable {
 	private String descrizione;
 	private List<Componente> listaComponenti= new ArrayList<Componente>(0);
 	private List<Componente> listaComponentiSelezionati= new ArrayList<Componente>(0);
+	private int costo;
+	private int sconto;
 
 	/**Costruttore*/
 	public Pacchetto() {
@@ -160,5 +162,37 @@ public class Pacchetto implements Serializable {
 		this.listaComponentiSelezionati = listaComponentiSelezionati;
 	}
 
-	
+
+	/**
+	 * @return the costo
+	 */
+	public int getCosto() {
+		return costo;
+	}
+
+
+	/**
+	 * @param costo the costo to set
+	 */
+	public void setCosto(int costo) {
+		this.costo = costo;
+	}
+
+
+	/**
+	 * @return the sconto
+	 */
+	public int getSconto() {
+		return sconto;
+	}
+
+
+	/**
+	 * @param sconto the sconto to set
+	 */
+	public void setSconto(int sconto) {
+		this.sconto = sconto;
+	}
+
+		
 }
