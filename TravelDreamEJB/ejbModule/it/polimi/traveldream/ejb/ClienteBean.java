@@ -61,7 +61,7 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 			InvitoBeanRemote invitoLocal = (InvitoBeanRemote) ctx.lookup("InvitoBean/local");
 			// ELIMINARE GIFTLIST CLIENTE
 
-			pacchettoPersonalizzatoLocal.removePacchettoPersonalizzato(idCliente);
+			//pacchettoPersonalizzatoLocal.removePacchettoPersonalizzato(idCliente);
 			invitoLocal.removeInvito(daIdAEmail(idCliente));
 
 			ClienteDTO c = findByIdCliente(idCliente);

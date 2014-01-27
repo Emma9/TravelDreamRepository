@@ -88,5 +88,14 @@ public interface PacchettoBeanRemote {
 	 */
 	public ArrayList<PacchettoDTO> ricercaPerEtichetta (String etichetta, Date dataPartenza, Date dataRitorno);
 	
-
+	public boolean verificaComponentiSelezionatiInComponenti(List<ComponenteDTO> listaComponenti, List<ComponenteDTO> listaComponentiSelezionati);
+	
+	public boolean verificaTreComponentiSelezionati(List<ComponenteDTO> listaComponentiSelezionati);
+	
+	public List<ComponenteDTO> modificaListaComponentiSelezionati (List<ComponenteDTO> listaComponentiSelezionati, ComponenteDTO componenteDaInserire);
+	
+	
+	
+	
+	
 }
