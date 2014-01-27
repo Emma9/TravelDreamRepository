@@ -133,7 +133,7 @@ public class ComponenteBean implements ComponenteBeanRemote,
 
 		ArrayList<Long> lista = new ArrayList<Long>();
 
-		for (int i = 0; i <= componenti.size(); i++) {
+		for (int i = 0; i < componenti.size(); i++) {
 
 			lista.set(i, componenti.get(i).getCodiceComponente());
 

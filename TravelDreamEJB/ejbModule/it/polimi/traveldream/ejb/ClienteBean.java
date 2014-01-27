@@ -124,7 +124,7 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 
 		ArrayList<Long> lista = new ArrayList<Long>();
 
-		for (int i = 0; i <= clienti.size(); i++) {
+		for (int i = 0; i < clienti.size(); i++) {
 
 			lista.set(i, clienti.get(i).getIdCliente());
 		}

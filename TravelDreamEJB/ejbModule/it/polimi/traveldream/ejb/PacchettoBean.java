@@ -114,7 +114,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 		ArrayList<Long> pacchetti = new ArrayList<Long>();
 		List<PacchettoDTO> risultati = q.getResultList();
 
-		for (int i = 0; i <= risultati.size(); i++) {
+		for (int i = 0; i < risultati.size(); i++) {
 
 			pacchetti.set(i, risultati.get(i).getIdPacchetto());
 			
@@ -132,7 +132,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 		ArrayList<Long> idPacchetti = new ArrayList<Long>();
 		List<PacchettoDTO> risultati = q.getResultList();
 
-		for (int i = 0; i <= risultati.size(); i++) {
+		for (int i = 0; i < risultati.size(); i++) {
 
 			if (risultati.get(i).getEtichetta().equals(etichetta)) {
 
@@ -141,7 +141,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 			}
 		}
 
-		for (int j = 0; j <= pacchetti.size(); j++) {
+		for (int j = 0; j < pacchetti.size(); j++) {
 
 			if (pacchetti.get(j).equals(null)) {
 				
@@ -177,7 +177,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 
 		ArrayList<Long> lista = new ArrayList<Long>();
 
-		for (int i = 0; i <= pacchetti.size(); i++) {
+		for (int i = 0; i < pacchetti.size(); i++) {
 
 			lista.set(i, pacchetti.get(i).getIdPacchetto());
 		}
@@ -212,7 +212,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 
 		ComponenteDTO componente = new ComponenteDTO();
 
-		for (int i = 0; i <= listaComponentiSelezionati.size(); i++) {
+		for (int i = 0; i < listaComponentiSelezionati.size(); i++) {
 
 			// ciclo sui componenti della lista
 
@@ -280,7 +280,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 			boolean flagVolo=false;
 			boolean flagEscursione=false;
 			
-			for(int i=0; i<=listaComponenti.size(); i++){
+			for(int i=0; i<listaComponenti.size(); i++){
 				
 				ComponenteDTO componente = listaComponenti.get(i);
 				
@@ -503,7 +503,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 		
 		int costoTotale=0;
 		
-		for (int i=0;i<=listaComponenti.size();i++){
+		for (int i=0;i<listaComponenti.size();i++){
 			
 			costoTotale = costoTotale + listaComponenti.get(i).getCosto();
 			

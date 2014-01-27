@@ -132,7 +132,7 @@ public class RicercaPerEtichettaBean implements Serializable {
 		pacchetti = pacchettoRemoto.ricercaPerEtichetta(this.etichetta, this.dataPartenza, this.dataRitorno);
 			//RITORNA LA LISTA DEI PACCHETTI CON DESTINAZIONE DESIDERATA E DISPONIBILI NEL PERIODO RICHIESTO
 		
-		for(int i=0;i<=pacchetti.size();i++){
+		for(int i=0;i<pacchetti.size();i++){
 			//PER OGNI PACCHETTO VERIFICA CHE TUTTI I SUOI COMPONENTI SIANO DISPONIBILI
 			
 			if(pacchettoRemoto.verificaDisponibilitaComponenti(this.dataPartenza, this.dataRitorno, this.numPartecipanti, (ArrayList<ComponenteDTO>) pacchetti.get(i).getListaComponentiSelezionati())){
@@ -146,7 +146,7 @@ public class RicercaPerEtichettaBean implements Serializable {
 			
 		}				
 		
-		for(int j=0;j<=pacchetti.size();j++){
+		for(int j=0;j<pacchetti.size();j++){
 			//SCORRE LA LISTA DEI PACCHETTI
 		
 		if(pacchetti.get(j)==null){
