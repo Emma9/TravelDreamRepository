@@ -18,8 +18,9 @@ public interface PacchettoBeanRemote {
 	 * @param etichette
 	 * @param descrizione
 	 * @param listaComponenti
+	 * @param sconto
 	 * @return idPacchetto*/
-	public Long createPacchetto(String destinazione, Date dataInizioValidita, Date dataFineValidita, String etichetta, String descrizione, List<ComponenteDTO> listaComponenti);
+	public Long createPacchetto(String destinazione, Date dataInizioValidita, Date dataFineValidita, String etichetta, String descrizione, List<ComponenteDTO> listaComponenti, int sconto);
 
 	/**@param idPacchetto*/
 	public void removePacchetto(Long idPacchetto);
@@ -30,8 +31,10 @@ public interface PacchettoBeanRemote {
 	 * @param dataFineValidita
 	 * @param etichette
 	 * @param descrizione
-	 * @param listaComponenti*/
-	public void updatePacchetto(Long idPacchetto, String destinazione, Date dataInizioValidita, Date dataFineValidita, String etichetta, String descrizione, List<ComponenteDTO> listaComponenti);
+	 * @param listaComponenti
+	 * @param sconto
+	 */
+	public void updatePacchetto(Long idPacchetto, String destinazione, Date dataInizioValidita, Date dataFineValidita, String etichetta, String descrizione, List<ComponenteDTO> listaComponenti, int sconto);
 
 	/**@param destinazione
 	 * @return ArrayList<idPacchetto>*/
@@ -94,7 +97,7 @@ public interface PacchettoBeanRemote {
 	
 	public List<ComponenteDTO> modificaListaComponentiSelezionati (List<ComponenteDTO> listaComponentiSelezionati, ComponenteDTO componenteDaInserire);
 	
-	
+	public int calcolaCostoPacchetto (List<ComponenteDTO> listaComponenti, int sconto);
 	
 	
 	
