@@ -37,6 +37,9 @@ public class Utente implements Serializable {
 	public Utente() {
 	}
 
+	/**
+	 * @return password
+	 */
 	public String getPassword() {
 		return this.password;
 	}

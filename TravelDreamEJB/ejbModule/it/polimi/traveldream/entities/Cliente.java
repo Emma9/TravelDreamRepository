@@ -138,9 +138,4 @@ public class Cliente implements Serializable {
 		this.giftList = giftList;
 	}
 	
-	
-	
-	
-	
-	
 }
