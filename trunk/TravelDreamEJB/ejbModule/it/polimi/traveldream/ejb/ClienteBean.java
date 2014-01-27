@@ -165,7 +165,7 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 	public boolean verificaPresenzaClienteRegistrazione(String email, String codiceFiscale) {
 		try {
 			TypedQuery<ClienteDTO> q = manager
-					.createQuery("FROM Cliente c WHERE c.email=:new_email AND c.codiceFiscale=:new_codiceFiscale", ClienteDTO.class);
+					.createQuery("FROM Cliente c WHERE c.email=:new_email OR c.codiceFiscale=:new_codiceFiscale", ClienteDTO.class);
 
 			q.setParameter("new_email", email);
 			q.setParameter("new_codiceFiscale", codiceFiscale);

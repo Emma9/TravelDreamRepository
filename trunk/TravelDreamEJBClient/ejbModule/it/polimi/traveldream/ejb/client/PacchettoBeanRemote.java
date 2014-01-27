@@ -72,6 +72,9 @@ public interface PacchettoBeanRemote {
 	 */
 	public boolean verificaListaComponenti (List<ComponenteDTO> listaComponenti);
 	
+	
+	public String[] splitEtichetta(String etichetta);
+	
 	/**@param etichetta
 	 * @return true if etichetta is valid, otherwise false	
 	 */
