@@ -8,12 +8,10 @@
 <h:head>
 </h:head>
 <h:body>
-	<h2>DETTAGLI DEL COMPONENTE ALTERNATIVO</h2>
+	<h2>DETTAGLI DEL COMPONENTE SELEZIONATO</h2>
 	<h:form>
-		<p:fieldset legend="Ecco I Dettagli del componente" widgetVar="regWidget" style="width: 600px;">
-  	</p:fieldset>
-
-	<h:panelGrid id="dettagli" columns="2" cellpadding="4">  
+		<p:fieldset legend="Ecco I Dettagli del componente della proposta regalo" widgetVar="regWidget" style="width: 600px;">
+		<h:panelGrid id="dettagli" columns="2" cellpadding="4">  
   
             <!-- <f:facet name="immagine">  
                 <p:graphicImage value="/images/cars/#{tableBean.selectedCar.manufacturer}.jpg"/>  
@@ -25,10 +23,20 @@
   
             <h:outputText value="Descrizione:" />  
             <h:outputText value="#{ricercaComponenteBean.pacchettoSelezionato.descrizione}" />  
+        
+        	
+            <h:outputText value="Costo:" />  
+            <h:outputText value="#{ricercaComponenteBean.pacchettoSelezionato.descrizione}" /> 
+        
         </h:panelGrid>
-        
-        <h:commandButton action="" value="Scegli" /> <!-- visualizza i dettagli del pacchetto aggiornato-->
-        
+        <div style="float: left;">
+	        	<h:panelGrid id="accettaRegalo">
+        		<h:commandButton  value="Regala" actionListener="loginORegistrazione"/> <!--RENDERE INVISIBILE IL BOTTONE AL CLICK..... mostra form login o registrazione-->
+        </h:panelGrid>
+        </div>
+  	</p:fieldset>
+
+	
         </h:form>
         </h:body>
         </html>

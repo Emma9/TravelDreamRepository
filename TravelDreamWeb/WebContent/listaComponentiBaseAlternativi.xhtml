@@ -11,6 +11,39 @@
 	<h2>COMPONENTI BASE ALTERNATIVI</h2>
 	<h:form>
 		<p:fieldset legend="Ecco i possibili Componenti di base Alternativi" widgetVar="regWidget" style="width: 600px;">
+		
+		<p:growl id="growl" showDetail="true" />
+
+			<p:dataTable id="listaComponentiBaseAlternativi" var="componenteBase" value="#{mostraPacchettiPersonalizzatiBean.pacchettiPersonalizzatiRicercati}"
+				paginator="true" rows="10" selection="#{mostraPacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato}"
+				selectionMode="single">       
+
+				<!-- <p:ajax event="rowSelect" listener="#{ricercaPacchettiBean.onRowSelect}" update=":form:display :form:growl" oncomplete="dettgliPacchettoPredefinitoRicercato" />
+						
+					
+					
+				<p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->													
+
+				<f:facet name="header">  
+            	Seleziona un pacchetto per visualizzare i dettagli  
+		        </f:facet>
+		
+								
+						<p:column headerText="Tipologia">  
+		            #{pacchettoPersonalizzato.destinazione}  
+		        </p:column>
+		
+						<p:column headerText="Descrizione">  
+		            #{pacchettoPersonalizzato.dataInizioValidita}  
+		        </p:column>
+		
+						<p:column headerText="Costo">  
+		            #{pacchettoPersonalizzato.dataFineValidita}  
+		        </p:column>
+		        
+			</p:dataTable>
+		
+		
   	</p:fieldset>
 
 	<!-- COME LISTA PACCHETTIPERSONALIZZATICLIENTE... RITORNO I DETTAGLI DEL COMPONENTE ALTERNATIVO FACENDO oncomplete="dettgliComponeteAlternativo" DEL ROWSELECT -->

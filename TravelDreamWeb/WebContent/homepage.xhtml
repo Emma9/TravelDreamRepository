@@ -26,43 +26,49 @@
       
   
     <p:layoutUnit position="west" size="300" header="RICERCA PER DESTINAZIONE" resizable="false" closable="false" collapsible="false">  
-        <br/> 
-		<h:form id="form">  
-		              
-		    <h:outputText value="Destinazione: " />
-		    <h:inputText value="" autocomplete="true"/>
-		    <br/>
-		    <br/>
-		    <h:outputText value="Data di Partenza: " />  
-		    
-		    <p:calendar value="#{calendarBean.date1}" id="popupA" />  
-		     <br/>
-		    <br/>
-		    <h:outputText value="Data di Arrivo: " />   
-		    <p:calendar value="#{calendarBean.date2}" id="popupR" /> 
-		    <br/>
-		    <br/>
-		    
-		    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">  
-		        <h:outputText value="Numero di Partecipanti: " />
-		        <br/>
-		        <p:selectOneMenu value="#{buttonBean.number}">  
-		            <f:selectItem itemLabel="1" itemValue="" />  
-		            <f:selectItem itemLabel="2" itemValue="2" />  
-		            <f:selectItem itemLabel="3" itemValue="3" />
-		            <f:selectItem itemLabel="4" itemValue="4" />  
-		            <f:selectItem itemLabel="5" itemValue="5" />
-		            <f:selectItem itemLabel="6" itemValue="6" />  
-		            <f:selectItem itemLabel="7" itemValue="7" /> 
-		            <f:selectItem itemLabel="8" itemValue="8" />       
-		        </p:selectOneMenu>  
-		    
-		    </h:panelGrid>
-		    <p:button value="Ricerca" outcome="listaRicercaPacchettiPredefiniti" />
-		    
-		     
-		      
-		</h:form> 	        
+        <h:form id="form">
+
+			<p:messages id="message" showSummary="true" showDetail="false" autoUpdate="true" closable="true" />
+			<h:outputLabel value="Destinazione: " />
+		    <p:inputText value="#{ricercaPacchettiBean.destinazione}"
+		       id="destinazione"
+		        required="true"
+		        requiredMessage="Devi inseriere una destinazione"
+		        validatorMessage="Il nome  deve avere una lunghezza da 1 a 15 caratteri"
+		        >
+		    </p:inputText>
+		    <p:message for="destinazione"/>
+
+			<h:outputLabel value="Data di Partenza: " />
+			<p:calendar value="#{ricercaPacchettiBean.dataPartenza}" id="dataDiPartenza" required="true" requiredMessage="Devi inserire una data di Partenza"/>
+			<p:message for="dataDiPartenza"/>
+			<br />
+			
+			<h:outputText value="Data di Ritorno: " />
+			<p:calendar value="#{ricercaPacchettiBean.dataRitorno}" id="dataDiRitorno" required="true" requiredMessage="Devi inserire una data di Ritorno"/>
+			<p:message for="dataDiRitorno"/>
+			<br />
+
+			<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+				<h:outputText value="Numero di Partecipanti: " />
+				<br />
+				<p:selectOneMenu value="#{ricercaPacchettiBean.numPartecipanti}" >
+					<f:selectItem itemLabel="1" itemValue="1" />
+					<f:selectItem itemLabel="2" itemValue="2" />
+					<f:selectItem itemLabel="3" itemValue="3" />
+					<f:selectItem itemLabel="4" itemValue="4" />
+					<f:selectItem itemLabel="5" itemValue="5" />
+					<f:selectItem itemLabel="6" itemValue="6" />
+					<f:selectItem itemLabel="7" itemValue="7" />
+					<f:selectItem itemLabel="8" itemValue="8" />
+				</p:selectOneMenu>
+
+			</h:panelGrid>
+		    <p:commandButton id="bottoneRicerca" value="Ricerca" actionListener="#{ricercaPacchettiBean.ricercaPacchetti}" immediate="true" ajax="false">
+		    </p:commandButton>
+
+
+		</h:form>
 	</p:layoutUnit>  
   
   
@@ -76,139 +82,210 @@
   
       
   
-    <p:layoutUnit position="center">  
-        <h:form id="tabellapacchtti">
-			<p:tabView id="tabView">  
-			  
-			    <p:tab id="tab1" title="LAST-MINUTE">  
+   <p:layoutUnit position="center">
+		<h:form id="tabellapacchtti">
+			<p:tabView id="tabView">
+
+				
+						<p:tab id="tab1" title="LAST-MINUTE">  
 			        <h:panelGrid columns="2" cellpadding="10">  
 			            <p:graphicImage id="tab1Img" value="/immagini/homepage/lastminute.jpg" />
 			              
-			            <h:outputText id="tab1Text" value="LISTA DEI PACCHETTI LASTMINUTE"/>
+			            <div align="center"><h:outputText id="tab1Text" value="LISTA DEI PACCHETTI LASTMINUTE"/></div>
 			           
 			           
-			            <!-- <h:outputText value="SELEZIONA UN PACCHETTO PER VEDERE I DETTAGLI"/><br /> 
-			              
-						    <p:fieldset legend="Pacchetti Disponibili">  
-						        <p:dataTable id="pacchettiDisponibiliLastMinut" var="pacchettiLastMinute" value="#{TabellaPacchettiBean.listaPacchettiLastMinute}"
-						         rowKey="#{PacchettoBeanLocal.id}" selection="#{TabellaPacchettiBean.pacchettoLastMinuteSelezionato}" selectionMode="single">  
-						            
-						 			 <f:facet name="header">  
-            								Clicca "Dettagli" dopo avere selezionato una riga.  
-       								 </f:facet>
-						  
-						            <p:column headerText="ID Pacchetto">   
-						                <h:outputLink value="#{PacchettoBeanLocal.id}" />  
-						            </p:column>  
-						    		
-						    		<p:column headerText="Destinazione">   
-						                <h:outputLink value="#{PacchettoBeanLocal.destinazione}" />  
-						            </p:column> 
-						    		
-						    		<f:facet name="footer">  
-							            <p:button id="dettagliPacchetto" value="Dettagli"/>  
+			           <p:fieldset legend="Ecco i possibili pacchetti predefiniti inerenti alla ricerca effettuata" widgetVar="regWidget" style="width: 600px;">
+		
+		
+							<p:growl id="growl1" showDetail="true" />
+					
+								<p:dataTable id="listaPacchettiPredefinitiLM" var="pacchettoPredefinito" value="#{ricercaPerEtichettaBean.pacchettiRicercati}"
+									paginator="true" rows="10" selection="#{ricercaPerEtichettaBean.pacchettoSelezionato}"
+									selectionMode="single">       
+					
+									<!-- <p:ajax event="rowSelect" listener="#{ricercaPacchettiBean.onRowSelect}" update=":form:display :form:growl" oncomplete="dettgliPacchettoPredefinitoRicercato" /> 
+										
+										
+									<p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->													
+					
+									<f:facet name="header">  
+					            	Seleziona un pacchetto per visualizzare i dettagli  
 							        </f:facet>
-						    		<f:metadata>  
-    									<f:viewParam name="dettaglioPacchetto" value="{#pacchetto}" />  
-									</f:metadata>
-						    
-						    
-						    
-						        </p:dataTable>  
-						    </p:fieldset> -->
-								        
-								        
-								        
-								        
-								        
-								        
-								        
-					<h:form id="form">  
-						  
-						    <p:growl id="growl" showDetail="true"/>  
-						  
-						    <p:dataTable id="cars" var="car" value="#{tableBean.mediumCarsModel}" paginator="true" rows="10"  
-						                 selection="#{tableBean.selectedCar}" selectionMode="single">  
-						  
-						        <p:ajax event="rowSelect" listener="#{tableBean.onRowSelect}"   
-						                    update=":form:display :form:growl" oncomplete="PF('carDialog').show()" />  
-						        <p:ajax event="rowUnselect" listener="#{tableBean.onRowUnselect}" update=":form:growl"/>  
-						  
-						        <f:facet name="header">  
-						            Selezionare un pacchetto per visualizzare i dettagli 
-						        </f:facet>  
-						  
-						        <p:column headerText="Model">  
-						            #{car.model}  
-						        </p:column>  
-						    </p:dataTable>  
-						  
-						    <p:dialog id="dialog" header="Car Detail" widgetVar="carDialog" resizable="false"  
-						                showEffect="fade" hideEffect="explode">  
-						  
-						        <h:panelGrid id="display" columns="2" cellpadding="4">  
-						  
-						            <f:facet name="header">  
-						                <p:graphicImage value="/images/cars/#{tableBean.selectedCar.manufacturer}.jpg"/>  
-						            </f:facet>  
-						  
-						            <h:outputText value="Model:" />  
-						            <h:outputText value="#{tableBean.selectedCar.model}" />  
-						  
-						            <h:outputText value="Year:" />  
-						            <h:outputText value="#{tableBean.selectedCar.year}" />  
-						  
-						            <h:outputText value="Manufacturer:" />  
-						            <h:outputText value="#{tableBean.selectedCar.manufacturer}" />  
-						  
-						            <h:outputText value="Color:" />  
-						            <h:outputText value="#{tableBean.selectedCar.color}" />  
-						        </h:panelGrid>  
-						    </p:dialog>  
-						  
-						</h:form>
-								        
-								  
-								  
-								  
-								  
-								  
-								 
-								 
-								 
-								  
-								  
-								  
-								        
-								        	
-						</h:panelGrid>		        	
+							
+													
+											<p:column headerText="Destinazione">  
+							            #{pacchettoPredefinito.destinazione}  
+							        </p:column>
+							
+											<p:column headerText="Data di Partenza">  
+							            #{pacchettoPredefinito.dataInizioValidita}  
+							        </p:column>
+							
+											<p:column headerText="Data di Ritorno">  
+							            #{pacchettoPredefinito.dataFineValidita}  
+							        </p:column>
+							        
+								</p:dataTable>
+							
+							
+					  	</p:fieldset>
+
+					</h:panelGrid>		        	
 					  
-			    </p:tab>   
-			  
-			    <p:tab id="tab2" title="OFFERTE">  
-			        <h:panelGrid columns="2" cellpadding="10">  
-			            <p:graphicImage id="tab2Img" value="/immagini/homepage/offerte.jpg" />  
-			            <h:outputText id="tab2Text" value="LISTA DEI PACCHETTI OFFERTE"/>  
-			        </h:panelGrid>  
 			    </p:tab>  
-			  
-			    <p:tab id="tab3" title="MARE">  
-			        <h:panelGrid columns="2" cellpadding="10">  
-			            <p:graphicImage id="tab3Img" value="/immagini/homepage/mare.jpg" />  
-			            <h:outputText id="tab3Text" value="LISTA DEI PACCHETTI MARE"/>  
-			        </h:panelGrid>  
-			    </p:tab>  
-			  
-			  	<p:tab id="tab4" title="MONTAGNA">  
-			        <h:panelGrid columns="2" cellpadding="10">  
-			            <p:graphicImage id="tab4Img" value="/immagini/homepage/montagna.jpg" />  
-			            <h:outputText id="tab4Text" value="LISTA DEI PACCHETTI MONTAGNA"/>  
-			        </h:panelGrid>  
-			    </p:tab> 
-			  
-			</p:tabView> 
-        </h:form>  
-    </p:layoutUnit>  
+
+				
+				<p:tab id="tab2" title="OFFERTE">
+					<h:panelGrid columns="2" cellpadding="10">
+						<p:graphicImage id="tab2Img" value="/immagini/homepage/offerte.jpg" />
+						<div align="center"><h:outputText id="tab2Text" value="RICERCA DEI PACCHETTI OFFERTE" /></div>
+						
+						
+						
+						<p:fieldset legend="Ecco i possibili pacchetti predefiniti inerenti alla ricerca effettuata" widgetVar="regWidget" style="width: 600px;">
+		
+		
+							<p:growl id="growl2" showDetail="true" />
+					
+								<p:dataTable id="listaPacchettiPredefinitiO" var="pacchettoPredefinito" value="#{ricercaPerEtichettaBean.pacchettiRicercati}"
+									paginator="true" rows="10" selection="#{ricercaPerEtichettaBean.pacchettoSelezionato}"
+									selectionMode="single">       
+					
+									<!-- <p:ajax event="rowSelect" listener="#{ricercaPacchettiBean.onRowSelect}" update=":form:display :form:growl" oncomplete="dettgliPacchettoPredefinitoRicercato" /> 
+										
+										
+									<p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->													
+					
+									<f:facet name="header">  
+					            	Seleziona un pacchetto per visualizzare i dettagli  
+							        </f:facet>
+							
+													
+											<p:column headerText="Destinazione">  
+							            #{pacchettoPredefinito.destinazione}  
+							        </p:column>
+							
+											<p:column headerText="Data di Partenza">  
+							            #{pacchettoPredefinito.dataInizioValidita}  
+							        </p:column>
+							
+											<p:column headerText="Data di Ritorno">  
+							            #{pacchettoPredefinito.dataFineValidita}  
+							        </p:column>
+							        
+								</p:dataTable>
+							
+							
+					  	</p:fieldset>
+						
+						
+						
+					</h:panelGrid>
+				</p:tab>
+				
+				
+				
+
+				<p:tab id="tab3" title="MARE">
+					<h:panelGrid columns="2" cellpadding="10">
+						<p:graphicImage id="tab3Img" value="/immagini/homepage/mare.jpg" />
+						<div align="center"><h:outputText id="tab3Text" value="RICERCA DEI PACCHETTI MARE" /></div>
+						
+						
+						
+						<p:fieldset legend="Ecco i possibili pacchetti predefiniti inerenti alla ricerca effettuata" widgetVar="regWidget" style="width: 600px;">
+		
+		
+							<p:growl id="growl3" showDetail="true" />
+					
+								<p:dataTable id="listaPacchettiPredefinitiM" var="pacchettoPredefinito" value="#{ricercaPerEtichettaBean.pacchettiRicercati}"
+									paginator="true" rows="10" selection="#{ricercaPerEtichettaBean.pacchettoSelezionato}"
+									selectionMode="single">       
+					
+									<!-- <p:ajax event="rowSelect" listener="#{ricercaPacchettiBean.onRowSelect}" update=":form:display :form:growl" oncomplete="dettgliPacchettoPredefinitoRicercato" /> 
+										
+										
+									<p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->													
+					
+									<f:facet name="header">  
+					            	Seleziona un pacchetto per visualizzare i dettagli  
+							        </f:facet>
+							
+													
+											<p:column headerText="Destinazione">  
+							            #{pacchettoPredefinito.destinazione}  
+							        </p:column>
+							
+											<p:column headerText="Data di Partenza">  
+							            #{pacchettoPredefinito.dataInizioValidita}  
+							        </p:column>
+							
+											<p:column headerText="Data di Ritorno">  
+							            #{pacchettoPredefinito.dataFineValidita}  
+							        </p:column>
+							        
+								</p:dataTable>
+							
+							
+					  	</p:fieldset>
+						
+						
+						
+					</h:panelGrid>
+				</p:tab>
+
+				<p:tab id="tab4" title="MONTAGNA">
+					<h:panelGrid columns="2" cellpadding="10">
+						<p:graphicImage id="tab4Img"
+							value="/immagini/homepage/montagna.jpg" />
+						<div align="center"><h:outputText id="tab4Text" value="RICERCA DEI PACCHETTI MONTAGNA" /></div>
+						
+						
+						<p:fieldset legend="Ecco i possibili pacchetti predefiniti inerenti alla ricerca effettuata" widgetVar="regWidget" style="width: 600px;">
+		
+		
+							<p:growl id="growl4" showDetail="true" />
+					
+								<p:dataTable id="listaPacchettiPredefinitiMON" var="pacchettoPredefinito" value="#{ricercaPerEtichettaBean.pacchettiRicercati}"
+									paginator="true" rows="10" selection="#{ricercaPerEtichettaBean.pacchettoSelezionato}"
+									selectionMode="single">       
+					
+									<!-- <p:ajax event="rowSelect" listener="#{ricercaPacchettiBean.onRowSelect}" update=":form:display :form:growl" oncomplete="dettgliPacchettoPredefinitoRicercato" /> 
+										
+										
+									<p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->													
+					
+									<f:facet name="header">  
+					            	Seleziona un pacchetto per visualizzare i dettagli  
+							        </f:facet>
+							
+													
+											<p:column headerText="Destinazione">  
+							            #{pacchettoPredefinito.destinazione}  
+							        </p:column>
+							
+											<p:column headerText="Data di Partenza">  
+							            #{pacchettoPredefinito.dataInizioValidita}  
+							        </p:column>
+							
+											<p:column headerText="Data di Ritorno">  
+							            #{pacchettoPredefinito.dataFineValidita}  
+							        </p:column>
+							        
+								</p:dataTable>
+							
+							
+					  	</p:fieldset>
+						
+						
+						
+						
+					</h:panelGrid>
+				</p:tab>
+
+			</p:tabView>
+		</h:form>
+	</p:layoutUnit>
   
 </p:layout> 
 
