@@ -68,7 +68,12 @@ public interface PacchettoBeanRemote {
 	 *  and at least three of them are of a different type, otherwise false
 	 */
 	public boolean verificaListaComponenti (List<ComponenteDTO> listaComponenti);
-		
+	
+	/**@param etichetta
+	 * @return true if etichetta is valid, otherwise false	
+	 */
+	public boolean verificaEtichetta (String etichetta);
+
 	/**@param destinazione
 	 * @param dataPartenza
 	 * @param dataRitorno
@@ -82,8 +87,6 @@ public interface PacchettoBeanRemote {
 	 * @return ArrayList<Pacchetto>
 	 */
 	public ArrayList<PacchettoDTO> ricercaPerEtichetta (String etichetta, Date dataPartenza, Date dataRitorno);
-	
-	public boolean verificaEtichetta (String etichetta);
 	
 
 }
