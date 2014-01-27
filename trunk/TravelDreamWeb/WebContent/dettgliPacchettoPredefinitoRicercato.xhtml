@@ -32,10 +32,14 @@
             <h:outputText value="#{ricercaPacchettiBean.pacchettoSelezionato.dataFineValidita}" />  
   
             <h:outputText value="Descrizione:" />  
-            <h:outputText value="#{ricercaPacchettiBean.pacchettoSelezionato.descrizione}" /> <br />
-        
-        <h:commandButton id="salva" actionListener="Salva Pacchetto" /> <!--RENDERE INVISIBILE IL BOTTONE AL CLICK..... mostra la lista dei suoi pacchetti aggiornata-->
+            <h:outputText value="#{ricercaPacchettiBean.pacchettoSelezionato.descrizione}" />
             
+            <h:outputText value="Lista Componenti del pacchetto:" />
+            <h:outputText value="#{mostraPacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.listaComponenti}" />
+            <h:commandButton id="seleziona" value="Seleziona"/><br /><!-- accanto ad ogni componente va a dettagli componente selezionato -->
+        
+        <h:commandButton id="Salva" value="Salva Pacchetto"/>  <!--RENDERE INVISIBILE IL BOTTONE AL CLICK..... mostra la lista dei suoi pacchetti aggiornata-->
+        
         </h:panelGrid>
 		
 		

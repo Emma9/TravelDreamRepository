@@ -9,10 +9,46 @@
 </h:head>
 <h:body>
 	<h2>GESTIONE DEGLI INVITI</h2>
-	<h:form>
-		<p:fieldset legend="Ecco I Dettagli dei tuoi inviti" widgetVar="regWidget" style="width: 600px;">
-  	
-  		<p:commandButton id="invita" value="Invita Amico" action="formInvitoAmico"/> <!--RENDERE INVISIBILE IL BOTTONE AL CLICK..... mostra la lista dei suoi pacchetti aggiornata-->
+	<h:form id="invita">
+		<p:fieldset legend="Ecco la lista dei tuoi inviti" widgetVar="regWidget" style="width: 600px;">
+  		
+  		
+  		<p:growl id="growl" showDetail="true" />
+
+			<p:dataTable id="listaInviti" var="invito" value="#{mostraInvitiClienteBean.invitiRicercati}"
+				paginator="true" rows="10" selection="#{mostraInvitiClienteBean.invitoSelezionato}"
+				selectionMode="single">       
+
+				<!-- <p:ajax event="rowSelect" listener="#{ricercaPacchettiBean.onRowSelect}" update=":form:display :form:growl" oncomplete="dettgliPacchettoPredefinitoRicercato" />
+						
+					
+					
+				<p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->													
+
+				<f:facet name="header">  
+            	Seleziona un pacchetto per visualizzare i dettagli  
+		        </f:facet>
+		
+								
+						<p:column headerText="Destinatario Invito">  
+		            #{invito.emailDestinatario}  
+		        </p:column>
+		
+						<p:column headerText="Data di Invito">  
+		            #{invito.data}  
+		        </p:column>
+		
+						<p:column headerText="Stato Invito">  
+		            #{invito.stato}  
+		        </p:column>
+		        
+			</p:dataTable>
+		
+			<br />
+
+		  	<p:commandButton id="bottoneInvita" value="Invita Amico" update="invita" actionListener="formInvitoAmico">
+								 <f:setPropertyActionListener target="#{mostraInvitiClienteBean.email}" value="#{loginClienteBean.email}" />
+			</p:commandButton>
   	</p:fieldset>
 
         

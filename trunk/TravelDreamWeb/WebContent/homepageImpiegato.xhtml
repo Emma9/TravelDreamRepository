@@ -11,24 +11,33 @@
 <p:layout fullPage="true">
 
 	<div align="center">
-		<p:layoutUnit position="north" size="80" header="TRAVELDREAM"
+		<p:layoutUnit position="north" size="90" header="TRAVELDREAM"
 			resizable="false" closable="false" collapsible="false">
 			<div style="display: inline;">
-			
-				<div style="float: left;">
-					<h:button outcome="creazionePacchettoPredefinito" value="Crea Pacchetto" />
-					<h:button outcome="creazioneComponente" value="Aggiungi Componente" />
-					<br />
-					<!-- METTERE IMPIEGATOBEANLOGOUT -->
+				<div style="float: left">
+					<h:form id="pacc">
+						<p:commandButton id="bottoneCreaPacchetto" actionListener="creazionePacchettoPredefinito" value="Crea Pacchetto" immediate="true" ajax="false"/>
+					</h:form>
 				</div>
-			
-			
-				<div style="float: right;">
+				<div style="float: left">
+					<h:form id="comp">
+						<p:commandButton id="bottoneCreaComponente" actionListener="creazioneComponente" value="Aggiungi Componente" immediate="true" ajax="false"/>
+					</h:form>
+					
+				</div>
+			</div>
+			<div align="right">
+				<div style="display: inline;">
+					<div style="float: right">
 					<h:outputText value="BENVENUTO: " />
 					<h:outputText value="#{loginImpiegatoBean.idImpiegato}" />
-					<h:button outcome="#{loginImpiegatoBean.logout}" value="Logout" />
-					<br />
-					<!-- METTERE IMPIEGATOBEANLOGOUT -->
+					
+					</div>
+					<div style="float: right: ;">
+					<h:form id="logout">
+						<p:commandButton actionListener="#{loginImpiegatoBean.logout}" value="Logout" immediate="true" ajax="false" />
+					</h:form>
+					</div>
 				</div>
 			</div>
 		</p:layoutUnit>
@@ -38,7 +47,7 @@
 		<h:form id="ricercaPacchetto">
 			<p:tabView id="ricercaView">
 
-				<p:tab id="ricerca1" title="RICERCA COMPONENTE">
+				<p:tab id="ricercaComponente" title="RICERCA COMPONENTE">
 					<h:panelGrid columns="2" cellpadding="30">
 						<div style="float: left">
 							<h:panelGrid columns="2" cellpadding="10" cellspacing="10">
@@ -46,7 +55,9 @@
 								<br />
 								<div style="display: inline;">
 									<h:inputText value="" autocomplete="true" />
-									<p:commandButton value="Ricerca" update="ricerca1" />
+									<h:panelGrid id="ricerca1">
+										<p:commandButton value="Ricerca" update="ricerca1"  actionListener="#{ricercaPacchettiBean.ricercaPacchetti}" immediate="true" ajax="false"/>
+									</h:panelGrid>
 								</div>
 							</h:panelGrid>
 						</div>
@@ -56,13 +67,15 @@
 								<br />
 								<div style="display: inline;">
 									<h:inputText value="" autocomplete="true" />
-									<p:commandButton value="Ricerca" update="ricerca1" />
+									<h:panelGrid id="ricerca2">
+									<p:commandButton value="Ricerca" update="ricerca2" actionListener="#{ricercaPacchettiBean.ricercaPacchetti}" immediate="true" ajax="false" />
+									</h:panelGrid>
 								</div>
 							</h:panelGrid>
 						</div>
 					</h:panelGrid>
 				</p:tab>
-				<p:tab id="ricerca2" title="RICERCA PACCHETTO">
+				<p:tab id="ricercaPacchetto" title="RICERCA PACCHETTO">
 					<h:panelGrid columns="2" cellpadding="30">
 						<div style="float: left">
 							<h:panelGrid columns="2" cellpadding="10" cellspacing="10">
@@ -70,7 +83,9 @@
 								<br />
 								<div style="display: inline;">
 									<h:inputText value="" autocomplete="true" />
-									<p:commandButton value="Ricerca" update="ricerca1" />
+									<h:panelGrid id="ricerca3">
+									<p:commandButton value="Ricerca" update="ricerca3" actionListener="#{ricercaPacchettiBean.ricercaPacchetti}" immediate="true" ajax="false"/>
+									</h:panelGrid>
 								</div>
 							</h:panelGrid>
 						</div>
@@ -80,7 +95,9 @@
 								<br />
 								<div style="display: inline;">
 									<h:inputText value="" autocomplete="true" />
-									<p:commandButton value="Ricerca" update="ricerca1" />
+									<h:panelGrid id="ricerca4">
+									<p:commandButton value="Ricerca" update="ricerca4" actionListener="#{ricercaPacchettiBean.ricercaPacchetti}" immediate="true" ajax="false"/>
+									</h:panelGrid>
 								</div>
 							</h:panelGrid>
 						</div>
