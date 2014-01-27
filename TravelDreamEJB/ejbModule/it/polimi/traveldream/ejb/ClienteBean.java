@@ -4,14 +4,9 @@ package it.polimi.traveldream.ejb;
 import it.polimi.traveldream.ejb.client.ClienteBeanLocal;
 import it.polimi.traveldream.ejb.client.ClienteBeanRemote;
 import it.polimi.traveldream.ejb.client.InvitoBeanRemote;
-import it.polimi.traveldream.ejb.client.PacchettoPersonalizzatoBeanRemote;
 import it.polimi.traveldream.entities.ClienteDTO;
 import it.polimi.traveldream.entities.PacchettoPersonalizzatoDTO;
-
 import java.util.*;
-
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.persistence.*;
 import javax.ejb.Stateless;
 /**Session Bean implementation class ClienteBean*/
@@ -54,23 +49,21 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 
 	/**@param idCliente*/
 	public void removeCliente(Long idCliente) {
-		InitialContext ctx;
-		try {
-			ctx = new InitialContext();
-			PacchettoPersonalizzatoBeanRemote pacchettoPersonalizzatoLocal = (PacchettoPersonalizzatoBeanRemote) ctx.lookup("PacchettoPersonalizzatoBean/local");
-			InvitoBeanRemote invitoLocal = (InvitoBeanRemote) ctx.lookup("InvitoBean/local");
-			// ELIMINARE GIFTLIST CLIENTE
-
-			//pacchettoPersonalizzatoLocal.removePacchettoPersonalizzato(idCliente);
-			invitoLocal.removeInvito(daIdAEmail(idCliente));
-
+		
+		
 			ClienteDTO c = findByIdCliente(idCliente);
+			InvitoBeanRemote i= new InvitoBean();
+			
+			
+			c.getPacchettiCliente().clear();
+			c.getGiftList().clear();
+			
+			i.removeInvitiCliente(c.getEmail());
+
+			
 			manager.remove(c);
 
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 	}
 
 	/**@param idCliente

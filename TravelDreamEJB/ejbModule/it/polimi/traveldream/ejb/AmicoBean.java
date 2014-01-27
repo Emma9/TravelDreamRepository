@@ -52,7 +52,7 @@ public class AmicoBean implements AmicoBeanRemote, AmicoBeanLocal {
 			ctx = new InitialContext();
 			InvitoBeanRemote invitoLocal = (InvitoBeanRemote) ctx.lookup("InvitoBean/local");
 
-			invitoLocal.removeInvito(daIdAEmail(idAmico));
+			invitoLocal.removeInvitiCliente(daIdAEmail(idAmico));
 
 			AmicoDTO a = findByIdAmico(idAmico);
 			

@@ -46,8 +46,14 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 		return invito.getIdInvito();
 	}
 
-	/**@param idInvito*/
-	public void removeInvito(String emailMittente) {
+
+	public void removeInvito(Long idInvito) {
+		InvitoDTO invito= findByIdInvito(idInvito);
+		manager.remove(invito);
+	}
+	
+	
+	public void removeInvitiCliente(String emailMittente) {
 
 		ArrayList<InvitoDTO> inviti = findByEmailMittente(emailMittente);
 

@@ -17,8 +17,10 @@ public interface InvitoBeanRemote {
 	 * @return idInvito*/
 	public Long createInvito(String emailMittente, String emailDestinatario,String idPacchettoPersonalizzato, String data, boolean stato);
 
+	public void removeInvito(Long idInvito);
+	
 	/**@param idInvito*/
-	public void removeInvito(String email);
+	public void removeInvitiCliente(String email);
 
 	/**@param idInvito
 	 * @param emailMittente
