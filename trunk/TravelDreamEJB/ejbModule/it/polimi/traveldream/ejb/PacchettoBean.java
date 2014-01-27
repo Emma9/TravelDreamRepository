@@ -187,29 +187,59 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	
 	/**@param dataPartenza
 	 * @param dataRitorno
-	 * @param disponibilita
+	 * @param disponibilitaRichiesta
 	 * @param listaComponenti
-	 * @return true if , otherwise false*/
-	public boolean verificaDisponibilitaComponenti (Date dataPartenza, Date dataRitorno, int disponibilita, List<ComponenteDTO> listaComponenti){
+	 * @return true if all componente are available, otherwise false*/
+	public boolean verificaDisponibilitaComponenti (Date dataPartenza, Date dataRitorno, int disponibilitaRichiesta, List<ComponenteDTO> listaComponenti){
 		
-		ComponenteBeanRemote componenteRemoto = new ComponenteBean();		
+		ComponenteBeanRemote componenteRemoto = new ComponenteBean();	
+		
+		ComponenteDTO componente = new ComponenteDTO();
 		
 		for(int i=0; i<=listaComponenti.size(); i++){
 			
-			componenteRemoto.findByCodiceComponente(listaComponenti.get(i).getCodiceComponente());
+			//ciclo sui componenti della lista
 			
-			if(componenteRemoto.verificaValiditaComponente(dataPartenza, dataRitorno, listaComponenti.get(i))){
+			componente = listaComponenti.get(i);
+			
+			if(componenteRemoto.verificaValiditaComponente(dataPartenza, dataRitorno, componente)){
 				
-				//componenti validi
+				//componente valido nel periodo richiesto
 				
-				//if(componenteRemoto.verificaDisponibilitaComponente(disponibilita, listaComponenti.get(i))){
+				for(/*ciclo sul periodo richiesto*/){
 					
-					//return true;
-				//}
-			}	
+					//ciclo sul periodo richiesto
+					
+				Date data= new Date();
+				
+				if(componenteRemoto.verificaDisponibilitaComponenteInUnaData(disponibilitaRichiesta, data, componente)){
+					
+					//componente disponibile in una data nel periodo di validità
+						
+				}else{
+					
+					//componente non disponibile in una data
+					
+					return false;
+				}
+				
+				}
+				
+				//un componente valido disponibile in tutto il periodo richiesto
+				
+			}else{
+				
+				//un componente non valido
+				return false;
+				
+			}
+			
+			
 		}
 		
-		return false;
+		//tutti i componenti della lista sono validi e disponibili
+		
+		return true;
 		
 	}
 	
@@ -278,6 +308,31 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 			
 		}
 		return false;
+	}
+
+	/**@param etichetta
+	 * @return true if etichetta is valid, otherwise false	
+	 */
+	public boolean verificaEtichetta (String etichetta) {
+		
+		switch (etichetta){
+		
+		case "LASTMINUTE":return true;
+						
+			
+		case "OFFERTA":return true;
+						
+			
+		case "MARE":return true;
+							
+		
+		case "MONTAGNA":return true;
+							
+		
+		}
+		
+		return false;
+		
 	}
 
 	/**@param destinazione
@@ -361,32 +416,5 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 
 		
 	}
-
-public boolean verificaEtichetta (String etichetta) {
-		
-		switch (etichetta){
-		
-		case "LASTMINUTE":return true;
-						
-			
-		case "OFFERTA":return true;
-						
-			
-		case "MARE":return true;
-							
-		
-		case "MONTAGNA":return true;
-							
-		
-		}
-		
-		return false;
-		
-	}
 	
 }
-
-	
-	
-
-
