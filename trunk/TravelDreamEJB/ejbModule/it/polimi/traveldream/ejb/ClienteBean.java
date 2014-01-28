@@ -4,9 +4,12 @@ package it.polimi.traveldream.ejb;
 import it.polimi.traveldream.ejb.client.ClienteBeanLocal;
 import it.polimi.traveldream.ejb.client.ClienteBeanRemote;
 import it.polimi.traveldream.ejb.client.InvitoBeanRemote;
+import it.polimi.traveldream.entities.Cliente;
 import it.polimi.traveldream.entities.ClienteDTO;
 import it.polimi.traveldream.entities.PacchettoPersonalizzatoDTO;
+
 import java.util.*;
+
 import javax.persistence.*;
 import javax.ejb.Stateless;
 /**Session Bean implementation class ClienteBean*/
@@ -30,8 +33,9 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 
 		if (!(verificaPresenzaClienteRegistrazione(email, codiceFiscale))) {
 
-			ClienteDTO cliente = new ClienteDTO();
+			Cliente cliente = new Cliente();
 
+			
 			cliente.setEmail(email);
 			cliente.setPassword(password);
 			cliente.setCodiceFiscale(codiceFiscale);

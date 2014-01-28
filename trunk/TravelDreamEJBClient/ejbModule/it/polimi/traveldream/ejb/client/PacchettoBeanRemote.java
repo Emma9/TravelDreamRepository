@@ -85,7 +85,7 @@ public interface PacchettoBeanRemote {
 	 * @param dataRitorno
 	 * @return ArrayList<Pacchetto>
 	 */
-	public ArrayList<PacchettoDTO> ricercaPacchetti (String destinazione, Date dataPartenza, Date dataRitorno);
+	public List<PacchettoDTO> ricercaPacchetti (String destinazione, Date dataPartenza, Date dataRitorno);
 	
 	/**@param etichetta
 	 * @param dataPartenza

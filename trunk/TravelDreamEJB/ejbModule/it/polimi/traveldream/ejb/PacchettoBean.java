@@ -14,7 +14,6 @@ import java.util.StringTokenizer;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**Session Bean implementation class PacchettoBean*/
@@ -359,29 +358,31 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 * @param dataRitorno
 	 * @return ArrayList<Pacchetto>
 	 */
-	public ArrayList<PacchettoDTO> ricercaPacchetti (String destinazione, Date dataPartenza, Date dataRitorno){
+	public List<PacchettoDTO> ricercaPacchetti (String destinazione, Date dataPartenza, Date dataRitorno){
 		
 		try {
 			
 			//DESTINAZIONE
-			Query q1 = manager.createQuery("FROM Pacchetto p WHERE p.destinazione=:new_destinazione");
+			//TypedQuery<PacchettoDTO> q1 = manager.createQuery("FROM Pacchetto p WHERE p.destinazione=:new_destinazione", PacchettoDTO.class);
 
-			q1.setParameter("new_destinazione", destinazione);
+			
 			
 			//DATE
-			Query q2 = manager.createQuery("FROM Pacchetto p WHERE p.dataInizioValidita<=new_dataPartenza AND p.dataInizioValidita<=new_dataRitorno AND p.dataFineValidita>=new_dataPartenza AND p.dataFineValidita>=new_dataRitorno");
+			//TypedQuery<PacchettoDTO> q2 = manager.createQuery("FROM Pacchetto p WHERE p.dataInizioValidita<=:new_dataPartenza AND p.dataInizioValidita<=:new_dataRitorno AND p.dataFineValidita>=:new_dataPartenza AND p.dataFineValidita>=:new_dataRitorno", PacchettoDTO.class);
 
-			q2.setParameter("new_dataPartenza", dataPartenza);
-			q2.setParameter("new_dataRitorno", dataRitorno);
 			
-			//INNER JOIN
-			Query q3 = manager.createQuery("q1 INNER JOIN q2");
-
-			q3.setParameter("q1", q1);
-			q3.setParameter("q2", q2);			
 			
-			@SuppressWarnings("unchecked")
-			ArrayList<PacchettoDTO> pacchetti = (ArrayList<PacchettoDTO>) q3.getResultList();
+			//q2.setParameter("new_dataPartenza", dataPartenza);
+			
+			
+			
+			TypedQuery<PacchettoDTO> q = manager.createQuery("FROM Pacchetto p WHERE p IN (SELECT p FROM Pacchetto p WHERE p.destinazione=:new_destinazione) AND p IN (SELECT p FROM Pacchetto p WHERE p.dataInizioValidita<=:new_dataPartenza AND p.dataInizioValidita<=:new_dataRitorno AND p.dataFineValidita>=:new_dataPartenza AND p.dataFineValidita>=:new_dataRitorno)", PacchettoDTO.class);
+			q.setParameter("new_destinazione", destinazione);
+			q.setParameter("new_dataPartenza", dataRitorno);
+			q.setParameter("new_dataRitorno", dataRitorno);
+					
+			
+			List<PacchettoDTO> pacchetti = q.getResultList();
 			
 			return pacchetti;
 

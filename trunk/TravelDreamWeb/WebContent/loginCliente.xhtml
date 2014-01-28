@@ -32,7 +32,7 @@
     
     
 	
-    <p:commandButton id="bottoneAccedi" value="Accedi" actionListener="#{loginClienteBean.login}"/>
+    <p:commandButton value="Accedi" action="#{loginClienteBean.login()}" ajax="false"/>
     <p:messages id="message" showSummary="true" showDetail="false" autoUpdate="true" closable="true" /> 
       
 
