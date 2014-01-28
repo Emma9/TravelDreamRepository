@@ -74,7 +74,8 @@
     <p:message for="password" />
     
     
-    <p:commandButton id="bottoneRegistrati" value="Crea Account" actionListener="#{registrazioneBean.registrazione}"/>
+    <p:commandButton value="Crea Account" action="#{registrazioneBean.registrazione()}" ajax="false" > </p:commandButton>
+
     <p:messages id="message" showSummary="true" showDetail="false" autoUpdate="true" closable="true" />
    </h:panelGrid>
   </p:fieldset>

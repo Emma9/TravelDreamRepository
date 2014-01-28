@@ -115,7 +115,7 @@ public class RicercaPerEtichettaBean implements Serializable {
 	
 	
 	
-	public void ricercaPerEtichetta(){
+	public String ricercaPerEtichetta(){
 		
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
@@ -164,11 +164,11 @@ public class RicercaPerEtichettaBean implements Serializable {
 
 	} catch (EJBException e) {
 		
-		//return null;
+		return null;
 
 	}
 	
-	//return pacchettiRicercati;
+	return "listaRicercaPacchettiPredefiniti";
 		
 	}
 	

@@ -10,7 +10,7 @@ import javax.faces.event.ActionEvent;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
-@ManagedBean()
+@ManagedBean(name= "loginClienteBean")
 @SessionScoped
 public class LoginClienteBean implements Serializable {
 	/**
@@ -48,7 +48,7 @@ public class LoginClienteBean implements Serializable {
 	}
 	
 	
-	public String login(ActionEvent actionEvent) {
+	public String login() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
 				.getExternalContext().getRequest();

@@ -17,7 +17,7 @@ public class Cliente implements Serializable {
 
 	/**Attributi*/
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO) // o IDENTITY???????
 	private Long idCliente;
 	@Column(unique = true)
 	private String email;
@@ -32,6 +32,8 @@ public class Cliente implements Serializable {
 	public Cliente() {
 		super();
 	}
+	
+	
 
 	/**@return idCliente*/
 	public Long getIdCliente() {
@@ -39,6 +41,9 @@ public class Cliente implements Serializable {
 		return this.idCliente;
 		
 	}
+	
+	
+	
 
 	/**@return email*/
 	public String getEmail() {

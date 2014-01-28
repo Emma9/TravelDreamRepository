@@ -125,10 +125,14 @@ public class RegistrazioneBean implements Serializable{
 		    	
 		    try{
 		    
-		    if (clienteremoto.verificaPresenzaClienteRegistrazione(this.email,this.codiceFiscale)) {
+		    if (!clienteremoto.verificaPresenzaClienteRegistrazione(this.email,this.codiceFiscale)) {
 
-					clienteremoto.createCliente(this.email, this.password, this.codiceFiscale, this.nome,this.cognome);
+					Long idCliente=clienteremoto.createCliente(this.email, this.password, this.codiceFiscale, this.nome,this.cognome);
 					
+					if(idCliente.equals(null)){
+						context.addMessage(null, new FacesMessage("Registrazione fallita"));
+						//return "registrazione";
+					}
 					request.login(this.email, this.password);
 					
 					context.addMessage(null, new FacesMessage("Registrazione avvenuta con successo"));

@@ -126,70 +126,61 @@ public class RicercaPacchettiBean implements Serializable {
 	}
 
 	/**
-	 * @param pacchettiRicercati the pacchettiRicercati to set
+	 * @param pacchettiRicercati
+	 *            the pacchettiRicercati to set
 	 */
 	public void setPacchettiRicercati(ArrayList<PacchettoDTO> pacchettiRicercati) {
 		this.pacchettiRicercati = pacchettiRicercati;
 	}
 
 	public String ricercaPacchetti() {
-		
+
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
 				.getExternalContext().getRequest();
-		
+
 		List<PacchettoDTO> pacchetti = new ArrayList<PacchettoDTO>();
-	
 
-		//try {
+		// try {
+
+		if (this.pacchettoRemoto.verificaConsistenzaDate(this.dataPartenza,
+				this.dataRitorno)) {
+			// LE DATE INSERITE SONO VALIDE
+
+			pacchetti = pacchettoRemoto.ricercaPacchetti(this.destinazione,
+					this.dataPartenza, this.dataRitorno);
+			// RITORNA LA LISTA DEI PACCHETTI CON DESTINAZIONE DESIDERATA E
+			// DISPONIBILI NEL PERIODO RICHIESTO
+
+			for (int i = 0; i < pacchetti.size(); i++) {
+				// PER OGNI PACCHETTO VERIFICA CHE TUTTI I SUOI COMPONENTI SIANO
+				// DISPONIBILI
+
+				if (pacchettoRemoto.verificaDisponibilitaComponenti(
+						this.dataPartenza, this.dataRitorno,
+						this.numPartecipanti, (List<ComponenteDTO>) pacchetti
+								.get(i).getListaComponentiSelezionati())) {
+					// SE TUTTI I COMPONENTI SONO DISPONIBILI AGGIUNGE IL PACCHETTO NELLA LISTA PACCHETTI RICERCATI
+					pacchettiRicercati.add(pacchetti.get(i));
 			
-			if(this.pacchettoRemoto.verificaConsistenzaDate(this.dataPartenza, this.dataRitorno)){
-				//LE DATE INSERITE SONO VALIDE
-			
-			pacchetti = pacchettoRemoto.ricercaPacchetti(this.destinazione, this.dataPartenza, this.dataRitorno);
-				//RITORNA LA LISTA DEI PACCHETTI CON DESTINAZIONE DESIDERATA E DISPONIBILI NEL PERIODO RICHIESTO
-			
-			for(int i=0;i<pacchetti.size();i++){
-				//PER OGNI PACCHETTO VERIFICA CHE TUTTI I SUOI COMPONENTI SIANO DISPONIBILI
-				
-				if(pacchettoRemoto.verificaDisponibilitaComponenti(this.dataPartenza, this.dataRitorno, this.numPartecipanti, (List<ComponenteDTO>)pacchetti.get(i).getListaComponenti())){
-				//SE TUTTI I COMPONENTI SONO DISPONIBILI NON RIMUOVE IL PACCHETTO DALLA LISTA
-					
-				}else{
-					pacchetti.set(i, null);
-				//SE CI SONO DEI COMPONENTI NON DISPONIBILI ANNULLA IL PACCHETTO CHE LI CONTIENE	
-					
+
 				}
-				
-			}				
-			
-			for(int j=0;j<pacchetti.size();j++){
-				//SCORRE LA LISTA DEI PACCHETTI
-			
-			if(pacchetti.get(j)==null){
-				//SE PACCHETTO == NULL PASSA AL PROSSIMO PACCHETTO
-				
-			}else{
-				//SE PACCHETTO != NULL LO COPIA IN PACCHETTIRICERCATI
-				pacchettiRicercati.set(j, pacchetti.get(j));
 			}
-				
-			}
-				
-			}
-			return "listaRicercaPacchettiPredefiniti";
 			
-
-		/*} catch (ServletException e) {
-			
-			return null;
-
-		}*/
+		}
+	
+		return "listaRicercaPacchettiPredefiniti";
 		
-		//return pacchettiRicercati;
+
+		/*
+		 * } catch (ServletException e) {
+		 * 
+		 * return null;
+		 * 
+		 * }
+		 */
 
 	}
-	
 	
 	
 }
