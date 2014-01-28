@@ -19,7 +19,7 @@
                 <p:graphicImage value="/images/cars/#{tableBean.selectedCar.manufacturer}.jpg"/>
             
             </f:facet> -->
-            
+            <div style="float: left;">
 		            <h:outputText value="Destinazione Viaggio:" />  
 		            <h:outputText value="#{mostraPacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.destinazione}" />  
 	  			
@@ -33,8 +33,45 @@
 	            <h:outputText value="#{mostraPacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.descrizione}" />
         	
         		<h:outputText value="Lista Componenti del pacchetto:" />
-            	<h:outputText value="#{mostraPacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.listaComponenti}" />
-            	<h:commandButton id="seleziona" value="Seleziona"/><br /><!--accanto ad ogni componente va a dettagli componente selezionato-->
+            </div>
+            	
+				<p:dataTable id="listaComponentiBaseAlternativi" var="componenteBase" value="#{mostraPacchettiPersonalizzatiBean.pacchettiPersonalizzatiRicercati}"
+				paginator="true" rows="10" selection="#{mostraPacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato}"
+				selectionMode="single">       
+
+				<!-- <p:ajax event="rowSelect" listener="#{ricercaPacchettiBean.onRowSelect}" update=":form:display :form:growl" oncomplete="dettgliPacchettoPredefinitoRicercato" />
+						
+					
+					
+				<p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->													
+
+				<f:facet name="header">  
+            	Cliccare il pulsante Seleziona del componente correlato che si vuole modificare
+		        </f:facet>
+		
+								
+						<p:column headerText="Tipologia">  
+		            #{pacchettoPersonalizzato.destinazione}  
+		        </p:column>
+		
+						<p:column headerText="Descrizione">  
+		            #{pacchettoPersonalizzato.dataInizioValidita}  
+		        </p:column>
+		
+						<p:column headerText="Costo">  
+		            #{pacchettoPersonalizzato.dataFineValidita}  
+		        </p:column>
+		        
+		        <p:column headerText="Seleziona">  
+		            <h:commandButton id="seleziona" value="Seleziona"/><br /><!--accanto ad ogni componente va a dettagli componente selezionato-->  
+		        </p:column>
+		        
+			</p:dataTable>
+
+
+
+
+            	
         	
           	
         	<div style="float: left;">

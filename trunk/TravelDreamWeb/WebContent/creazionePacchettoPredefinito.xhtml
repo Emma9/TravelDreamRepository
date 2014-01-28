@@ -12,12 +12,39 @@
 	<h:form>
 		<p:fieldset legend="Ecco i parametri da settare per un nuovo pacchetto predefinito" widgetVar="regWidget" style="width: 600px;">
   		
-		<p:inputText value="Hotel" required="true"/>
-		<p:commandButton value="Inserisci" /><br />
-  		<p:inputText value="Volo" required="true"/>
-		<p:commandButton value="Inserisci" /><br />
-		<p:inputText value="Escurione" required="true"/>
-		<p:commandButton value="Inserisci" /><br />
+		
+  	
+  	
+  		<p:focus context="destinazione" />
+	    <h:outputText value="ID Pacchetto: " />
+	    <h:outputText value="#{componenteBeans.id}" />
+	   <br />
+	   
+	   <p:message for="descrizione" />
+	    <h:outputLabel value="Destinazione: " />
+	    <p:inputText value="#{componenteBeans.descrizione}" id="destinazione" required="true" requiredMessage="Devi inserire la descrizione"/>
+	    <p:message for="destinazione" /><br />
+	   
+	     
+	    
+	    <p:message for="descrizione" />
+	    <h:outputLabel value="Descrizione: " />
+	    <p:inputText value="#{componenteBeans.descrizione}" id="descrizione" required="true" requiredMessage="Devi inserire la descrizione"/>
+  		 <p:message for="descrizione" /><br />
+  		 
+  		<p:inputTextarea rows="1" cols="33" required="true" disabled="true"/>
+		<p:commandButton value="Inserisci Hotel" /><br /><br /> <!-- manda all'homepage per fare la ricerca tramite id o filtro -->
+  		<p:inputTextarea rows="1" cols="33" required="true" disabled="true"/>
+		<p:commandButton value="Inserisci Volo" /><br /><br /> <!-- manda all'homepage per fare la ricerca tramite id o filtro -->
+		<p:inputTextarea rows="1" cols="33" required="true" disabled="true"/>
+		<p:commandButton value="Inserisci Escursione" /><br /> <!-- manda all'homepage per fare la ricerca tramite id o filtro -->
+  	
+  	
+  		<div align="left">
+		    <p:commandButton id="bottoneConferma" value="Conferma" actionListener="#{loginClienteBean.login}"/>
+	    <!-- visualizza i homeimpiegato con mess. notifica creazione -->
+		    <p:messages id="message" showSummary="true" showDetail="false" autoUpdate="true" closable="true" /> 
+     	</div>
   	
   	</p:fieldset>
 

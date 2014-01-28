@@ -8,7 +8,7 @@
 <h:head>
 </h:head>
 <h:body>
-	<h2>DETTAGLI DEL PACCHETTO PREDEFINITO SELEZIONATO</h2>
+	<h2>IMPIEGATO: DETTAGLI DEL PACCHETTO PREDEFINITO SELEZIONATO</h2>
 	<h:form>
 		<p:fieldset legend="Ecco I Dettagli del pacchetto predefinito selezionato" widgetVar="regWidget" style="width: 600px;">
 		
@@ -63,15 +63,23 @@
 		            #{pacchettoPersonalizzato.dataFineValidita}  
 		        </p:column>
 		        
-		        <p:column headerText="Seleziona">  
-		            <h:commandButton id="seleziona" value="Seleziona"/><br /><!--accanto ad ogni componente va a dettagli componente selezionato-->  
+		        <p:column headerText="Modifica">  
+		            <h:commandButton id="seleziona" value="Modifica"/><br /><!-- va a formmodificacomponentebaseimpiegato-->  
+		        </p:column>
+		        <p:column headerText="Rimuovi">  
+		            <h:commandButton id="rimuovi" value="Rimuovi"/><br /><!-- va a dettaglicomponenteSelezionatoimpiegato-->  
 		        </p:column>
 		        
 			</p:dataTable>
 
 
         <br />
-        <h:commandButton id="Salva" value="Salva Pacchetto"/>  <!--RENDERE INVISIBILE IL BOTTONE AL CLICK..... mostra la lista dei suoi pacchetti aggiornata-->
+        <h:commandButton id="bottoneConferma" value="Conferma"/>  <!--RENDERE INVISIBILE IL BOTTONE AL CLICK.... visualizza dettaglipacchettoselezionatoimpiegato aggiornata-->
+        <br />
+        <h:commandButton id="bottoneRimuovi" value="Rimuovi Pacchetto"/>  <!--RENDERE INVISIBILE IL BOTTONE AL CLICK.... visualizza listapacchettiricercaimpiegato aggiornata-->
+        
+        <br />
+        <h:commandButton id="bottoneAggiungi" value="Aggiungi Componente"/>  <!--RENDERE INVISIBILE IL BOTTONE AL CLICK.... visualizza homepage impiegato di ricerca componente-->
         
         </h:panelGrid>
 		

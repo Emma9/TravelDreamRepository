@@ -11,10 +11,38 @@
 	<h2>CREAZIONE DI UN NUOVO COMPONENTE</h2>
 	<h:form>
 		<p:fieldset legend="Ecco i parametri da settare per un nuovo componente" widgetVar="regWidget" style="width: 600px;">
+			<div style="float: center">
+				<div style="display: inline;">
+				<p:selectOneRadio id="tipologia" value="#{formBean.number}">  
+				            <f:selectItem itemLabel="Volo" itemValue="1" />  
+				            <f:selectItem itemLabel="Hotel" itemValue="2" />  
+				            <f:selectItem itemLabel="Escursione" itemValue="3" />    
+				</p:selectOneRadio> 
+				
+				<p:outputLabel value="Descrizione: "/>
+				<p:inputText value="#{loginClienteBean.email}"
+			       id="descrizione"
+			       required="true"
+			       requiredMessage="Devi inserire una descrizione del componente">  
+			    </p:inputText>
+			    <p:message for="descrizione" />
+				
+				
+				
+				<p:outputLabel value="Costo: "/>
+				<p:inputText value="#{loginClienteBean.email}"
+			       id="costo"
+			       required="true"
+			       requiredMessage="Devi inserire il costo del componente">  
+			    </p:inputText>
+			    <p:message for="costo" />
+				
+				</div>
+				</div>
+   		 <p:commandButton value="Conferma" actionListener="#{mostraGiftListBean}" /> <!-- messaggio avvenimento ritorno home page impiegato -->
   	</p:fieldset>
 
         
-    <p:commandButton value="Conferma" actionListener="" /> <!-- messaggio avvenimento ritono home page impiegato -->
         
 </h:form>
 </h:body>
