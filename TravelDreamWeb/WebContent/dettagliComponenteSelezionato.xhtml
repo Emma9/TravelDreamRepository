@@ -11,7 +11,6 @@
 	<h2>DETTAGLI DEL COMPONENTE SELEZIONATO</h2>
 	<h:form>
 		<p:fieldset legend="Ecco I Dettagli del componente" widgetVar="regWidget" style="width: 600px;">
-  	</p:fieldset>
 
 	<h:panelGrid id="dettagli" columns="2" cellpadding="4">  
   
@@ -24,11 +23,17 @@
             <h:outputText value="#{ricercaComponenteBean.pacchettoSelezionato.tipologia}" />  
   
             <h:outputText value="Descrizione:" />  
-            <h:outputText value="#{ricercaComponenteBean.pacchettoSelezionato.descrizione}" />  
+            <h:outputText value="#{ricercaComponenteBean.pacchettoSelezionato.descrizione}" /> 
+            
+            
+            <h:outputText value="Costo:" />  
+            <h:outputText value="#{ricercaComponenteBean.pacchettoSelezionato.costo}" /> 
+             
         </h:panelGrid>
         
-        <h:commandButton action="" value="Modifica" /> <!-- visualizza la lista componenti base alternativi-->
+        <h:commandButton action="#{ricercaComponenteBean.pacchettoSelezionato.descrizione}" value="Modifica" /> <!-- visualizza la lista componenti base alternativi-->
         
+  	</p:fieldset>
         </h:form>
         </h:body>
         </html>
