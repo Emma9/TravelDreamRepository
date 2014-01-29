@@ -34,7 +34,7 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 		if (!(verificaPresenzaClienteRegistrazione(email, codiceFiscale))) {
 
 			Cliente cliente = new Cliente();
-
+			
 			
 			cliente.setEmail(email);
 			cliente.setPassword(password);
@@ -43,7 +43,6 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 			cliente.setCognome(cognome);
 
 			manager.persist(cliente);
-
 			return cliente.getIdCliente();
 
 		} else {

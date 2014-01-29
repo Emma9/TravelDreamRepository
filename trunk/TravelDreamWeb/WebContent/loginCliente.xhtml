@@ -13,23 +13,23 @@
    <h:panelGrid id="panel" columns="3" width="550" border="0">
     <p:focus context="panel" />
     <h:outputLabel value="Email" />
-    <p:inputText value="#{loginClienteBean.email}"
+    <h:inputText value="#{loginClienteBean.cliente.email}"
        id="email"
        required="true"
        requiredMessage="Devi inserire l'email">  
-    </p:inputText>
+    </h:inputText>
     <p:message for="email" />
     
     
-    <h:outputLabel value="Password" />
-    <p:password value="#{loginClienteBean.password}"
-       id="password"
+    <h:outputLabel value="Password"/>
+    <p:password value="#{loginClienteBean.cliente.password}"
+       id="password" 
        required="true"
-       requiredMessage="Devi inserire una password"
-       >
-    </p:password>
-    <p:message for="password" />
+       requiredMessage="Devi inserire una password">
+       
     
+    <p:message for="password" />
+    </p:password>
     
 	
     <p:commandButton value="Accedi" action="#{loginClienteBean.login()}" ajax="false"/>
@@ -38,7 +38,16 @@
 
     
    </h:panelGrid>
-  </p:fieldset>
+  </p:fieldset> 
+  
+  
+  
+  
+  
+  
+  
+  
+  
  </h:form>
 </h:body>
 </html>
