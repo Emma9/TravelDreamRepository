@@ -1,6 +1,9 @@
 package it.polimi.traveldream.web.beans;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -117,7 +120,7 @@ public class RegistrazioneBean implements Serializable{
 	}
 
 
-	public String registrazione() {
+	public String registrazione() throws UnsupportedEncodingException, NoSuchAlgorithmException {
 		
 		    FacesContext context = FacesContext.getCurrentInstance();
 		    HttpServletRequest request = (HttpServletRequest) 
@@ -129,11 +132,24 @@ public class RegistrazioneBean implements Serializable{
 
 					Long idCliente=clienteremoto.createCliente(this.email, this.password, this.codiceFiscale, this.nome,this.cognome);
 					
-					if(idCliente.equals(null)){
+					
+		    	
+					if(clienteremoto.verificaPresenzaClienteId(idCliente)){
+						context.addMessage(null, new FacesMessage("Registrazione ok"));
+					}
+					if(!clienteremoto.verificaPresenzaClienteId(idCliente)){
 						context.addMessage(null, new FacesMessage("Registrazione fallita"));
 						//return "registrazione";
 					}
-					request.login(this.email, this.password);
+					
+					byte[] bytesPassword = password.getBytes("UTF-8");
+
+					MessageDigest md = MessageDigest.getInstance("MD5");
+					byte[] thedigest = md.digest(bytesPassword);
+					
+					request.login(email, thedigest.toString());
+					
+					request.login(email, password);
 					
 					context.addMessage(null, new FacesMessage("Registrazione avvenuta con successo"));
 					
