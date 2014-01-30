@@ -94,7 +94,7 @@
 
 			</h:panelGrid>
 			<h:form id="ricercaVeloce">
-			    <p:commandButton value="RicercaPacchetto" action="#{ricercaPacchettiBean.ricercaPacchetti()}" ajax="false">
+			    <p:commandButton value="RicercaPacchetto" action="#{ricercaPacchettiBean.ricercaPacchetti}" ajax="false">
 			    </p:commandButton>
 			</h:form>
 
@@ -151,7 +151,7 @@
 				
 							</h:panelGrid><br />
 							<h:panelGrid id="ricercaEtichetta1">
-							    <p:commandButton id="Ricerca1" value="Ricerca" update="ricercaEtichetta1" actionListener="#{ricercaPerEtichettaBean.ricercaPerEtichetta}" immediate="true" ajax="false">
+							    <p:commandButton id="Ricerca1" value="Ricerca" update="ricercaEtichetta1" actionListener="#{ricercaPerEtichettaBean.ricercaPerEtichettaClienteLastMinute}" immediate="true" ajax="false">
 							    </p:commandButton>
 							</h:panelGrid>
 
@@ -191,7 +191,7 @@
 				
 							</h:panelGrid><br />
 							<h:panelGrid id="ricercaEtichetta2">
-							    <p:commandButton id="Ricerca2" value="Ricerca" update="ricercaEtichetta2" actionListener="#{ricercaPerEtichettaBean.ricercaPerEtichetta}" immediate="true" ajax="false">
+							    <p:commandButton id="Ricerca2" value="Ricerca" update="ricercaEtichetta2" actionListener="#{ricercaPerEtichettaBean.ricercaPerEtichettaClienteOfferte}" immediate="true" ajax="false">
 							    </p:commandButton>
 							</h:panelGrid>
 							
@@ -238,7 +238,7 @@
 				
 							</h:panelGrid><br />
 							<h:panelGrid id="ricercaEtichetta3">
-							    <p:commandButton id="Ricerca3" value="Ricerca" update="ricercaEtichetta3" actionListener="#{ricercaPerEtichettaBean.ricercaPerEtichetta}" immediate="true" ajax="false">
+							    <p:commandButton id="Ricerca3" value="Ricerca" update="ricercaEtichetta3" actionListener="#{ricercaPerEtichettaBean.ricercaPerEtichettaClienteMare}" immediate="true" ajax="false">
 							    </p:commandButton>
 							</h:panelGrid>
 						
@@ -282,7 +282,7 @@
 				
 							</h:panelGrid><br />
 							<h:panelGrid id="ricercaEtichetta4">
-							    <p:commandButton id="Ricerca4" value="Ricerca" update="ricercaEtichetta4" actionListener="#{ricercaPerEtichettaBean.ricercaPerEtichetta}" immediate="true" ajax="false">
+							    <p:commandButton id="Ricerca4" value="Ricerca" update="ricercaEtichetta4" actionListener="#{ricercaPerEtichettaBean.ricercaPerEtichettaClienteMontagna}" immediate="true" ajax="false">
 							    </p:commandButton>
 							</h:panelGrid>
 						

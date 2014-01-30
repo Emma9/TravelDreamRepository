@@ -19,11 +19,11 @@
 				paginator="true" rows="10" selection="#{mostraPacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato}"
 				selectionMode="single">       
 
-				<!-- <p:ajax event="rowSelect" listener="#{ricercaPacchettiBean.onRowSelect}" update=":form:display :form:growl" oncomplete="dettgliPacchettoPredefinitoRicercato" />
+				<p:ajax event="rowSelect" listener="#{ricercaPacchettiBean.onRowSelect}" oncomplete="dettgliPacchettoPersonalizzato" />
 						
 					
 					
-				<p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->													
+				<!-- <p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->													
 
 				<f:facet name="header">  
             	Seleziona un pacchetto per visualizzare i dettagli  

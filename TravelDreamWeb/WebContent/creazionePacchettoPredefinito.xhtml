@@ -20,9 +20,14 @@
 	    <h:outputText value="#{componenteBeans.id}" />
 	   <br />
 	   
+	   <p:message for="etichetta" />
+	    <h:outputLabel value="Etichetta " />
+	    <p:inputText value="#{componenteBeans.etichetta}" id="etichetta" required="true" requiredMessage="Devi inserire l'etichetta del pacchetto"/>
+	    <p:message for="etichetta" /><br />
+	   
 	   <p:message for="destinazione" />
 	    <h:outputLabel value="Destinazione: " />
-	    <p:inputText value="#{componenteBeans.descrizione}" id="destinazione" required="true" requiredMessage="Devi inserire la descrizione"/>
+	    <p:inputText value="#{componenteBeans.destinazione}" id="destinazione" required="true" requiredMessage="Devi inserire la destinazione"/>
 	    <p:message for="destinazione" /><br />
 	   
 	     

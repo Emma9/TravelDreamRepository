@@ -13,16 +13,16 @@
 		<p:fieldset legend="Ecco il risultato della ricerca di componenti" widgetVar="regWidget" style="width: 600px;">
 		
 		<p:growl id="growl" showDetail="true" />
-
-			<p:dataTable id="listaComponentiImpiegato" var="componenteBaseImpiegato" value="#{mostraPacchettiPersonalizzatiBean.pacchettiPersonalizzatiRicercati}"
-				paginator="true" rows="10" selection="#{mostraPacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato}"
+																													<!-- c'è anche componentericercato cm fare? altro form?? -->
+			<p:dataTable id="listaComponentiImpiegato" var="componenteBaseImpiegato" value="#{ricercaComponentiImpiegatoBean.componentiRicercati}"
+				paginator="true" rows="10" selection="#{ricercaComponentiImpiegatoBean.componenteSelezionato}"
 				selectionMode="single">       
 
-				<!-- <p:ajax event="rowSelect" listener="#{ricercaPacchettiBean.onRowSelect}" update=":form:display :form:growl" oncomplete="dettgliPacchettoPredefinitoRicercato" />
+				<p:ajax event="rowSelect" listener="#{ricercaComponentiImpiegatoBean.onRowSelect}" oncomplete="dettgliComponeteSelezionatoImpiegato" />
 						
 					
 					
-				<p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->													
+				<!-- <p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->													
 
 				<f:facet name="header">  
             	Seleziona un componente per visualizzare i dettagli  
@@ -30,15 +30,15 @@
 		
 								
 						<p:column headerText="Tipologia">  
-		            #{pacchettoPersonalizzato.destinazione}  
+		            #{componenteBaseImpiegato.tipologia}  
 		        </p:column>
 		
 						<p:column headerText="Descrizione">  
-		            #{pacchettoPersonalizzato.dataInizioValidita}  
+		            #{componenteBaseImpiegato.descrizione}  
 		        </p:column>
 		
 						<p:column headerText="Costo">  
-		            #{pacchettoPersonalizzato.dataFineValidita}  
+		            #{componenteBaseImpiegato.costo}  
 		        </p:column>
 		        
 			</p:dataTable>
