@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean()
 @SessionScoped
-public class FormInvitaAmicoBean implements Serializable {
+public class InvitaAmicoBean implements Serializable {
 
 	/**
 	 * 
