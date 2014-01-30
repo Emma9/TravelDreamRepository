@@ -2,6 +2,7 @@ package it.polimi.traveldream.ejb;
 
 import it.polimi.traveldream.ejb.client.ComponenteBeanLocal;
 import it.polimi.traveldream.ejb.client.ComponenteBeanRemote;
+import it.polimi.traveldream.entities.Componente;
 import it.polimi.traveldream.entities.ComponenteDTO;
 
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class ComponenteBean implements ComponenteBeanRemote,
 	 * @param costo
 	 * @param dataInizioValidita
 	 * @param dataFineValidita
+	 * @param disponibilitaDaSettare
 	 * @return codiceComponente
 	 */
 	public Long createComponente(String tipologia, String descrizione,
@@ -43,7 +45,7 @@ public class ComponenteBean implements ComponenteBeanRemote,
 
 		if (verificaTipologia(tipologia)) {
 
-			ComponenteDTO componente = new ComponenteDTO();
+			Componente componente = new Componente();
 
 			componente.setTipologia(tipologia);
 			componente.setDescrizione(descrizione);
@@ -52,7 +54,7 @@ public class ComponenteBean implements ComponenteBeanRemote,
 			componente.setDataFineValidita(dataFineValidita);
 
 			// disponibilitaPerData=;
-			creaListaDisponibilitaPerData(componente, dataInizioValidita,
+			creaListaDisponibilitaPerDataENT(componente, dataInizioValidita,
 					dataFineValidita, disponibilitaDaSettare);
 
 			manager.persist(componente);
@@ -68,8 +70,10 @@ public class ComponenteBean implements ComponenteBeanRemote,
 	/** @param codiceComponente */
 	public void removeComponente(Long codiceComponente) {
 
-		ComponenteDTO c = findByCodiceComponente(codiceComponente);
+		//ComponenteDTO c = findByCodiceComponente(codiceComponente);
 
+		Componente c = manager.find(Componente.class, codiceComponente);
+		
 		manager.remove(c);
 
 	}
@@ -78,8 +82,10 @@ public class ComponenteBean implements ComponenteBeanRemote,
 	 * @param codiceComponente
 	 * @param tipologia
 	 * @param descrizione
+	 * @param costo
 	 * @param dataInizioValidita
 	 * @param dataFineValidita
+	 * @param disponibilitaDaSettare
 	 */
 	public void updateComponente(Long codiceComponente, String tipologia,
 			String descrizione, int costo, Date dataInizioValidita, Date dataFineValidita,
@@ -88,7 +94,7 @@ public class ComponenteBean implements ComponenteBeanRemote,
 		if ((verificaPresenzaComponente(codiceComponente))
 				&& (verificaTipologia(tipologia))) {
 
-			ComponenteDTO componente = findByCodiceComponente(codiceComponente);
+			Componente componente = manager.find(Componente.class, codiceComponente);
 
 			componente.setTipologia(tipologia);
 			componente.setDescrizione(descrizione);
@@ -97,7 +103,7 @@ public class ComponenteBean implements ComponenteBeanRemote,
 			componente.setDataFineValidita(dataFineValidita);
 			
 			// disponibilitaPerData=;
-			creaListaDisponibilitaPerData(componente, dataInizioValidita,
+			creaListaDisponibilitaPerDataENT(componente, dataInizioValidita,
 								dataFineValidita, disponibilitaDaSettare);
 
 			manager.merge(componente);
@@ -144,7 +150,7 @@ public class ComponenteBean implements ComponenteBeanRemote,
 	/**
 	 * @param dataPartenza
 	 * @param dataRitorno
-	 * @param codiceComponente
+	 * @param componente
 	 * @return true if componente is valid, otherwise false
 	 */
 	public boolean verificaValiditaComponente(Date dataPartenza,
@@ -165,6 +171,10 @@ public class ComponenteBean implements ComponenteBeanRemote,
 
 	}
 
+	/**@param componente
+	 * @param data
+	 * @return int
+	 */
 	public int disponibilitaInData(ComponenteDTO componente, Date data) {
 
 		for (int i = 0; i < componente.getDisponibilitaPerData().size(); i++)
@@ -177,7 +187,28 @@ public class ComponenteBean implements ComponenteBeanRemote,
 		return -1;
 	}
 
+	/**@param componente
+	 * @param data
+	 * @param disponibilita
+	 */
 	public void setDisponibilitaInData(ComponenteDTO componente, Date data,
+			int disponibilita) {
+
+		for (int i = 0; i < componente.getDisponibilitaPerData().size(); i++) {
+			if (componente.getDisponibilitaPerData().get(i).getData()
+					.equals(data)) {
+				componente.getDisponibilitaPerData().get(i)
+						.setDisponibilita(disponibilita);
+			}
+
+		}
+	}
+	
+	/** @param componente
+	 * @param data
+	 * @param disponibilita
+	 */
+	public void setDisponibilitaInDataENT(Componente componente, Date data,
 			int disponibilita) {
 
 		for (int i = 0; i < componente.getDisponibilitaPerData().size(); i++) {
@@ -192,7 +223,8 @@ public class ComponenteBean implements ComponenteBeanRemote,
 
 	/**
 	 * @param disponibilita
-	 * @param codiceComponente
+	 * @param data
+	 * @param componente
 	 * @return true if componente is available, otherwise false
 	 */
 	public boolean verificaDisponibilitaComponenteInUnaData(
@@ -206,6 +238,12 @@ public class ComponenteBean implements ComponenteBeanRemote,
 
 	}
 
+	/**@param disponibilitaRichiesta
+	 * @param dataPartenza
+	 * @param dataRitorno
+	 * @param componente
+	 * @return true if componente is available in the requested period, otherwise false
+	 */
 	public boolean verificaDisponibilitaComponenteInPeriodo(
 			int disponibilitaRichiesta, Date dataPartenza, Date dataRitorno,
 			ComponenteDTO componente) {
@@ -257,6 +295,9 @@ public class ComponenteBean implements ComponenteBeanRemote,
 		}
 	}
 
+	/**@param tipologia
+	 * @return true if tipologia is valid, otherwise false
+	 */
 	public boolean verificaTipologia(String tipologia) {
 
 		switch (tipologia) {
@@ -276,6 +317,12 @@ public class ComponenteBean implements ComponenteBeanRemote,
 
 	}
 
+	/**
+	 * @param componente
+	 * @param dataInizioValidita
+	 * @param dataFineValidita
+	 * @param disponibilitaDaSettare
+	 */
 	public void creaListaDisponibilitaPerData(ComponenteDTO componente,
 			Date dataInizioValidita, Date dataFineValidita,
 			int disponibilitaDaSettare) {
@@ -290,6 +337,32 @@ public class ComponenteBean implements ComponenteBeanRemote,
 			Date dataDaSettare = dataDaSettareJ.toDate();
 
 			setDisponibilitaInData(componente, dataDaSettare,
+					disponibilitaDaSettare);
+
+		}
+
+	}
+	
+	/** 
+	 * @param componente
+	 * @param dataInizioValidita
+	 * @param dataFineValidita
+	 * @param disponibilitaDaSettare
+	 */
+	public void creaListaDisponibilitaPerDataENT(Componente componente,
+			Date dataInizioValidita, Date dataFineValidita,
+			int disponibilitaDaSettare) {
+
+		int giorniIntervallo = Days.daysBetween(
+				new DateTime(dataInizioValidita),
+				new DateTime(dataFineValidita)).getDays();
+
+		for (int i = 0; i < giorniIntervallo; i++) {
+			DateTime dataDaSettareJ = new DateTime();
+			dataDaSettareJ = dataDaSettareJ.plusDays(i);
+			Date dataDaSettare = dataDaSettareJ.toDate();
+
+			setDisponibilitaInDataENT(componente, dataDaSettare,
 					disponibilitaDaSettare);
 
 		}

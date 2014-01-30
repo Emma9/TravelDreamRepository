@@ -1,6 +1,10 @@
 package it.polimi.traveldream.ejb.client;
 
+import it.polimi.traveldream.entities.Componente;
 import it.polimi.traveldream.entities.ComponenteDTO;
+
+
+
 
 
 
@@ -62,29 +66,75 @@ public interface ComponenteBeanRemote {
 	 */
 	public boolean verificaValiditaComponente (Date dataPartenza, Date dataRitorno, ComponenteDTO componenteDTO);
 	
+	/**@param componente
+	 * @param data
+	 * @return int
+	 */
+	public int disponibilitaInData(ComponenteDTO componente, Date data);
 	
-	
-	public int disponibilitaInData (ComponenteDTO componente, Date data);
-	
+	/**@param componente
+	 * @param data
+	 * @param disponibilita
+	 */
 	public void setDisponibilitaInData(ComponenteDTO componente, Date data,
 			int disponibilita);
 	
-	public boolean verificaDisponibilitaComponenteInUnaData (int disponibilitaRichiesta, Date data, ComponenteDTO componente);
+	/** @param componente
+	 * @param data
+	 * @param disponibilita
+	 */
+	public void setDisponibilitaInDataENT(Componente componente, Date data,
+			int disponibilita) ;
+	
+	/**
+	 * @param disponibilita
+	 * @param data
+	 * @param componente
+	 * @return true if componente is available, otherwise false
+	 */
+	public boolean verificaDisponibilitaComponenteInUnaData(
+			int disponibilitaRichiesta, Date data, ComponenteDTO componente);
+	
+	/**@param disponibilitaRichiesta
+	 * @param dataPartenza
+	 * @param dataRitorno
+	 * @param componente
+	 * @return true if componente is available in the requested period, otherwise false
+	 */
+	public boolean verificaDisponibilitaComponenteInPeriodo(
+			int disponibilitaRichiesta, Date dataPartenza, Date dataRitorno,
+			ComponenteDTO componente);
 	
 	
-	public boolean verificaDisponibilitaComponenteInPeriodo (int disponibilitaRichiesta, Date dataPartenza, Date dataRitorno, ComponenteDTO componente);
+	/**
+	 * @param codiceComponente
+	 * @return true if codiceComponente is present in the DB, otherwise false
+	 */
+	public boolean verificaPresenzaComponente(Long codiceComponente) ; 
 	
+	/**@param tipologia
+	 * @return true if tipologia is valid, otherwise false
+	 */
+	public boolean verificaTipologia(String tipologia);
 	
-	/**@param codiceComponente
-	 * @return true if codiceComponente is not present in the DB, otherwise false*/
-	public boolean verificaPresenzaComponente(Long codiceComponente); 
-	
-	public boolean verificaTipologia (String tipologia);
-	
+	/**
+	 * @param componente
+	 * @param dataInizioValidita
+	 * @param dataFineValidita
+	 * @param disponibilitaDaSettare
+	 */
 	public void creaListaDisponibilitaPerData(ComponenteDTO componente,
 			Date dataInizioValidita, Date dataFineValidita,
+			int disponibilitaDaSettare) ;
+	
+	/** 
+	 * @param componente
+	 * @param dataInizioValidita
+	 * @param dataFineValidita
+	 * @param disponibilitaDaSettare
+	 */
+	public void creaListaDisponibilitaPerDataENT(Componente componente,
+			Date dataInizioValidita, Date dataFineValidita,
 			int disponibilitaDaSettare);
-	
-	
 
 }

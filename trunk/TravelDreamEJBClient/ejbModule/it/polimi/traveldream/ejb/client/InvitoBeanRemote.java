@@ -1,5 +1,6 @@
 package it.polimi.traveldream.ejb.client;
 
+import it.polimi.traveldream.entities.Invito;
 import it.polimi.traveldream.entities.InvitoDTO;
 
 import java.util.ArrayList;
@@ -17,9 +18,11 @@ public interface InvitoBeanRemote {
 	 * @return idInvito*/
 	public Long createInvito(String emailMittente, String emailDestinatario,String idPacchettoPersonalizzato, String data, boolean stato);
 
+	/**@param idInvito
+	 */
 	public void removeInvito(Long idInvito);
 	
-	/**@param idInvito*/
+	/**@param email*/
 	public void removeInvitiCliente(String email);
 
 	/**@param idInvito
@@ -31,18 +34,22 @@ public interface InvitoBeanRemote {
 	public void updateInvito(Long idInvito, String emailMittente,String emailDestinatario, String idPacchettoPersonalizzato,String data, boolean stato);
 
 	/**@param idInvito
-	 * @return ArrayList<idPacchettoPersonalizzato>*/
+	 * @return InvitoDTO*/
 	public InvitoDTO findByIdInvito(Long idInvito);
+	
+	/**@param emailMittente
+	 * @return ArrayList<Invito>*/
+	public ArrayList<Invito> findByEmailMittenteENT(String emailMittente);
 
 	/**@param emailMittente
-	 * @return ArrayList<idPacchettoPersonalizzato>*/
+	 * @return ArrayList<InvitoDTO>*/
 	public ArrayList<InvitoDTO> findByEmailMittente(String emailMittente);
 
 	/**@return ArrayList<InvitoDTO>*/
 	public ArrayList<InvitoDTO> findAll(); 
 	
 	/**@param idInvito
-	 * @return true if idInvito is not present in the DB, otherwise false*/
+	 * @return true if idInvito is present in the DB, otherwise false*/
 	public boolean verificaPresenzaInvito(Long idInvito);
 
 }

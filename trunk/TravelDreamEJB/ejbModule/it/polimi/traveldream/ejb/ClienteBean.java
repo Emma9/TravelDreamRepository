@@ -2,6 +2,7 @@ package it.polimi.traveldream.ejb;
 
 
 import it.polimi.traveldream.ejb.client.ClienteBeanLocal;
+
 import it.polimi.traveldream.ejb.client.ClienteBeanRemote;
 import it.polimi.traveldream.ejb.client.InvitoBeanRemote;
 import it.polimi.traveldream.entities.Cliente;
@@ -54,7 +55,10 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 	public void removeCliente(Long idCliente) {
 		
 		
-			ClienteDTO c = findByIdCliente(idCliente);
+			//ClienteDTO c = findByIdCliente(idCliente);
+			
+			Cliente c = manager.find(Cliente.class, idCliente);
+			
 			InvitoBeanRemote i= new InvitoBean();
 			
 			
@@ -80,7 +84,7 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 
 		if (verificaPresenzaClienteId(idCliente)) {
 
-			ClienteDTO cliente = findByIdCliente(idCliente);
+			Cliente cliente = manager.find(Cliente.class, idCliente);
 
 			cliente.setEmail(email);
 			cliente.setPassword(password);
@@ -93,7 +97,7 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 	}
 	
 	/**@param email
-	 * @return Cliente*/
+	 * @return ClienteDTO*/
 	public ClienteDTO findByEmailCliente(String email) {
 
 		TypedQuery<ClienteDTO> q = manager.createQuery("FROM Cliente c WHERE c.email=:new_email", ClienteDTO.class);
@@ -106,7 +110,7 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 	}
 
 	/**@param idCliente
-	 * @return Cliente*/
+	 * @return ClienteDTO*/
 	public ClienteDTO findByIdCliente(Long idCliente) {
 
 		TypedQuery<ClienteDTO> q = manager.createQuery("FROM Cliente c WHERE c.idCliente=:new_idCliente", ClienteDTO.class);
@@ -135,7 +139,6 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 		return lista;
 	}
 
-	
 
 	/**@param email
 	 * @param password
@@ -164,6 +167,7 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 	
 	
 	/**@param email
+	 * @param codiceFiscale
 	 * @return true if email is present in the DB, otherwise false*/
 	public boolean verificaPresenzaClienteRegistrazione(String email, String codiceFiscale) {
 		try {
@@ -215,7 +219,7 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 	
 	/**
 	 * @param id
-	 * @return ArrayList<PacchettoPersonalizzato>
+	 * @return ArrayList<PacchettoPersonalizzatoDTO>
 	 */
 	public ArrayList<PacchettoPersonalizzatoDTO> elencoPacchettiCliente (long id){
 		ClienteDTO c = findByIdCliente(id);
@@ -227,7 +231,7 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 
 	/**
 	 * @param id
-	 * @return ArrayList<PacchettoPersonalizzato>
+	 * @return ArrayList<PacchettoPersonalizzatoDTO>
 	 */
 	public ArrayList<PacchettoPersonalizzatoDTO> giftListCliente (long id){
 		ClienteDTO c = findByIdCliente(id);
@@ -246,7 +250,6 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 		cliente.getPacchettiCliente().clear();
 		
 	}
-	
 	
 	
 	/**@param idCliente

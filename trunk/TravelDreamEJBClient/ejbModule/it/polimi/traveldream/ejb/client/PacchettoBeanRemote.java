@@ -56,14 +56,19 @@ public interface PacchettoBeanRemote {
 	 * @return true if dataPartenza comes before dataRitorno, otherwise false*/
 	public boolean verificaConsistenzaDate (Date dataPartenza, Date dataRitorno);
 	
-	/**@param dataPartenza
+	/**
+	 * @param dataPartenza
 	 * @param dataRitorno
-	 * @param disponibilita
+	 * @param disponibilitaRichiesta
 	 * @param listaComponenti
-	 * @return true if , otherwise false*/
-	public boolean verificaDisponibilitaComponenti (Date dataPartenza, Date dataRitorno, int disponibilita, List<ComponenteDTO> listaComponenti);
+	 * @return true if all componente are available, otherwise false
+	 */
+	public boolean verificaDisponibilitaComponenti(Date dataPartenza,
+			Date dataRitorno, int disponibilitaRichiesta,
+			List<ComponenteDTO> listaComponentiSelezionati);
+	
 	/**@param idPacchetto
-	 * @return true if idPacchetto is not present in the DB, otherwise false*/
+	 * @return true if idPacchetto is present in the DB, otherwise false*/
 	public boolean verificaPresenzaPacchetto(Long idPacchetto);
 	
 	/**@param listaComponenti
@@ -72,8 +77,10 @@ public interface PacchettoBeanRemote {
 	 */
 	public boolean verificaListaComponenti (List<ComponenteDTO> listaComponenti);
 	
-	
-	public String[] splitEtichetta(String etichetta);
+	/**@param etichetta
+	 * @return String[]
+	 */
+	public String[] splitEtichetta(String etichetta) ;
 	
 	/**@param etichetta
 	 * @return true if etichetta is valid, otherwise false	
@@ -94,14 +101,27 @@ public interface PacchettoBeanRemote {
 	 */
 	public ArrayList<PacchettoDTO> ricercaPerEtichetta (String etichetta, Date dataPartenza, Date dataRitorno);
 	
+	/**@param listaComponenti
+	 * @param listaComponentiSelezionati
+	 * @return true if listaComponenti contains listaComponentiSelezionati, otherwise false
+	 */
 	public boolean verificaComponentiSelezionatiInComponenti(List<ComponenteDTO> listaComponenti, List<ComponenteDTO> listaComponentiSelezionati);
-	
+		
+	/**@param listaComponentiSelezionati
+	 * @return true if listaComponentiSelezionati contains 3 elements, otherwise false
+	 */
 	public boolean verificaTreComponentiSelezionati(List<ComponenteDTO> listaComponentiSelezionati);
 	
+	/**@param listaComponentiselzionati
+	 * @param componenteDaInserire
+	 * @return List<ComponenteDTO>
+	 */
 	public List<ComponenteDTO> modificaListaComponentiSelezionati (List<ComponenteDTO> listaComponentiSelezionati, ComponenteDTO componenteDaInserire);
 	
-	public int calcolaCostoPacchetto (List<ComponenteDTO> listaComponenti, int sconto);
-	
-	
+	/**@param listaComponenti
+	 * @param sconto
+	 * @return costoTotale
+	 */
+	public int calcolaCostoPacchetto (List<ComponenteDTO> listaComponenti, int sconto);	
 	
 }

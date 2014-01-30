@@ -2,6 +2,7 @@ package it.polimi.traveldream.ejb;
 
 import it.polimi.traveldream.ejb.client.ImpiegatoBeanLocal;
 import it.polimi.traveldream.ejb.client.ImpiegatoBeanRemote;
+import it.polimi.traveldream.entities.Impiegato;
 import it.polimi.traveldream.entities.ImpiegatoDTO;
 
 import java.math.BigInteger;
@@ -35,7 +36,7 @@ public class ImpiegatoBean implements ImpiegatoBeanRemote,ImpiegatoBeanLocal {
 
 		if (!(verificaPresenzaImpiegatoCf(codiceFiscale))) {
 
-			ImpiegatoDTO impiegato = new ImpiegatoDTO();
+			Impiegato impiegato = new Impiegato();
 			
 			BigInteger bi = new BigInteger(130, random);
 			String codice = bi.toString(8);
@@ -58,7 +59,9 @@ public class ImpiegatoBean implements ImpiegatoBeanRemote,ImpiegatoBeanLocal {
 	/**@param idImpiegato*/
 	public void removeImpiegato(Long idImpiegato) {
 
-		ImpiegatoDTO i = findByIdImpiegato(idImpiegato);
+		//ImpiegatoDTO i = findByIdImpiegato(idImpiegato);
+		
+		Impiegato i = manager.find(Impiegato.class, idImpiegato);
 		
 		manager.remove(i);
 
@@ -72,7 +75,7 @@ public class ImpiegatoBean implements ImpiegatoBeanRemote,ImpiegatoBeanLocal {
 
 		if (verificaPresenzaImpiegatoId(idImpiegato)) {
 
-			ImpiegatoDTO impiegato = findByIdImpiegato(idImpiegato);
+			Impiegato impiegato = manager.find(Impiegato.class, idImpiegato);
 
 			impiegato.setCodiceFiscale(codiceFiscale);
 			impiegato.setNome(nome);
@@ -83,7 +86,7 @@ public class ImpiegatoBean implements ImpiegatoBeanRemote,ImpiegatoBeanLocal {
 	}
 
 	/**@param idImpiegato
-	 * @return Impiegato*/
+	 * @return ImpiegatoDTO*/
 	public ImpiegatoDTO findByIdImpiegato(Long idImpiegato) {
 
 		TypedQuery<ImpiegatoDTO> q = manager.createQuery("FROM Impiegato i WHERE i.idImpiegato=:new_idImpiegato", ImpiegatoDTO.class);

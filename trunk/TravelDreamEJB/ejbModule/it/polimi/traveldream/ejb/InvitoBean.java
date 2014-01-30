@@ -2,7 +2,9 @@ package it.polimi.traveldream.ejb;
 
 import it.polimi.traveldream.ejb.client.InvitoBeanLocal;
 import it.polimi.traveldream.ejb.client.InvitoBeanRemote;
+import it.polimi.traveldream.entities.Invito;
 import it.polimi.traveldream.entities.InvitoDTO;
+
 
 
 
@@ -33,7 +35,7 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 	 * @return idInvito*/
 	public Long createInvito(String emailMittente, String emailDestinatario,String idPacchettoPersonalizzato, String data, boolean stato) {
 
-		InvitoDTO invito = new InvitoDTO();
+		Invito invito = new Invito();
 
 		invito.setEmailMittente(emailMittente);
 		invito.setEmailDestinatario(emailDestinatario);
@@ -46,17 +48,24 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 		return invito.getIdInvito();
 	}
 
-
+	/**@param idInvito
+	 */
 	public void removeInvito(Long idInvito) {
-		InvitoDTO invito= findByIdInvito(idInvito);
+		
+		//InvitoDTO invito= findByIdInvito(idInvito);
+		
+		Invito invito = manager.find(Invito.class, idInvito);
+		
 		manager.remove(invito);
 	}
 	
-	
+	/**@param emailMittente*/
 	public void removeInvitiCliente(String emailMittente) {
 
-		ArrayList<InvitoDTO> inviti = findByEmailMittente(emailMittente);
+		//ArrayList<InvitoDTO> inviti = findByEmailMittente(emailMittente);
 
+		ArrayList<Invito> inviti = findByEmailMittenteENT(emailMittente);
+		
 		for (int i = 0; i < inviti.size(); i++) {
 
 			manager.remove(inviti.get(i));
@@ -73,8 +82,10 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 
 		if (verificaPresenzaInvito(idInvito)) {
 
-			InvitoDTO invito = findByIdInvito(idInvito);
+			//InvitoDTO invito = findByIdInvito(idInvito);
 
+			Invito invito = manager.find(Invito.class, idInvito);
+			
 			invito.setEmailMittente(emailMittente);
 			invito.setEmailDestinatario(emailDestinatario);
 			invito.setIdPacchettoPersonalizzato(idPacchettoPersonalizzato);
@@ -86,7 +97,7 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 	}
 
 	/**@param idInvito
-	 * @return invito*/
+	 * @return InvitoDTO*/
 	public InvitoDTO findByIdInvito(Long idInvito) {
 
 		TypedQuery<InvitoDTO> q = manager.createQuery("FROM Invito i WHERE i.idInvito=:new_idInvito", InvitoDTO.class);
@@ -98,7 +109,7 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 		return invito;
 	}
 
-	/**@param email
+	/**@param emailMittente
 	 * @return ArrayList<InvitoDTO>*/
 	public ArrayList<InvitoDTO> findByEmailMittente(String emailMittente) {
 
@@ -116,6 +127,26 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 		}
 		return inviti;
 	}
+	
+	/**@param emailMittente
+	 * @return ArrayList<Invito>*/
+	public ArrayList<Invito> findByEmailMittenteENT(String emailMittente) {
+
+		TypedQuery<Invito> q = manager.createQuery("FROM Invito i WHERE i.emailMittente=:new_emailMittente", Invito.class);
+
+		q.setParameter("new_emailMittente", emailMittente);
+
+		ArrayList<Invito> inviti = new ArrayList<Invito>();
+		List<Invito> risultati = q.getResultList();
+
+		for (int i = 0; i < risultati.size(); i++) {
+
+			inviti.set(i, risultati.get(i));
+			
+		}
+		return inviti;
+	}
+	
 
 	/**@return ArrayList<InvitoDTO>*/
 	public ArrayList<InvitoDTO> findAll() {
