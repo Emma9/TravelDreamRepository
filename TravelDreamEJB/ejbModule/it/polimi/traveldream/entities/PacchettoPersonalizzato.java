@@ -1,6 +1,8 @@
 package it.polimi.traveldream.entities;
 
 import java.lang.Long;
+import java.util.Date;
+
 import javax.persistence.*;
 
 /**PacchettoPersonalizzato di TravelDream*/
@@ -17,6 +19,10 @@ public class PacchettoPersonalizzato extends Pacchetto {
 	private Long idPacchettoPersonalizzato;
 	private String stato;
 	private Long idCliente;
+	@Temporal(TemporalType.TIME)
+	private Date dataDiPartenza;
+	@Temporal(TemporalType.TIME)
+	private Date dataDiRitorno;
 
 	/**Costruttore*/
 	public PacchettoPersonalizzato() {
@@ -66,4 +72,38 @@ public class PacchettoPersonalizzato extends Pacchetto {
 		this.idCliente = idCliente;
 		
 	}
+
+	/**
+	 * @return the dataDiPartenza
+	 */
+	public Date getDataDiPartenza() {
+		return dataDiPartenza;
+	}
+
+	/**
+	 * @param dataDiPartenza the dataDiPartenza to set
+	 */
+	public void setDataDiPartenza(Date dataDiPartenza) {
+		this.dataDiPartenza = dataDiPartenza;
+	}
+
+	/**
+	 * @return the dataDiRitorno
+	 */
+	public Date getDataDiRitorno() {
+		return dataDiRitorno;
+	}
+
+	/**
+	 * @param dataDiRitorno the dataDiRitorno to set
+	 */
+	public void setDataDiRitorno(Date dataDiRitorno) {
+		this.dataDiRitorno = dataDiRitorno;
+	}
+	
+	
+	
+	
+	
+	
 }
