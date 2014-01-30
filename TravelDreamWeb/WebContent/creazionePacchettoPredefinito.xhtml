@@ -17,24 +17,24 @@
   	
   		<p:focus context="destinazione" />
 	    <h:outputText value="ID Pacchetto: " />
-	    <h:outputText value="#{componenteBeans.id}" />
+	    <h:outputText value="#{creazionePacchettoPredefinitoBean.id}" />
 	   <br />
 	   
 	   <p:message for="etichetta" />
 	    <h:outputLabel value="Etichetta " />
-	    <p:inputText value="#{componenteBeans.etichetta}" id="etichetta" required="true" requiredMessage="Devi inserire l'etichetta del pacchetto"/>
+	    <p:inputText value="#{creazionePacchettoPredefinitoBean.etichetta}" id="etichetta" required="true" requiredMessage="Devi inserire l'etichetta del pacchetto"/>
 	    <p:message for="etichetta" /><br />
 	   
 	   <p:message for="destinazione" />
 	    <h:outputLabel value="Destinazione: " />
-	    <p:inputText value="#{componenteBeans.destinazione}" id="destinazione" required="true" requiredMessage="Devi inserire la destinazione"/>
+	    <p:inputText value="#{creazionePacchettoPredefinitoBean.destinazione}" id="destinazione" required="true" requiredMessage="Devi inserire la destinazione"/>
 	    <p:message for="destinazione" /><br />
 	   
 	     
 	    
 	    <p:message for="descrizione" />
 	    <h:outputLabel value="Descrizione: " />
-	    <p:inputTextarea value="#{componenteBeans.descrizione}" id="descrizione" required="true" requiredMessage="Devi inserire la descrizione"/>
+	    <p:inputTextarea value="#{creazionePacchettoPredefinitoBean.descrizione}" id="descrizione" required="true" requiredMessage="Devi inserire la descrizione"/>
   		 <p:message for="descrizione" /><br />
   		 
   		<p:inputTextarea rows="10" cols="33" required="true" disabled="true"/>
@@ -58,8 +58,8 @@
   	
   		<p:message for="sconto" />
 	    <h:outputLabel value="Sconto da applicare al pacchetto: " />
-	    <p:inputTextarea value="#{componenteBeans.descrizione}" id="sconto" required="true" requiredMessage="Devi inserire per forza un numero per identificare lo sconto"/>
-  		 <p:message for="descrizione" /><br />
+	    <p:inputTextarea value="#{creazionePacchettoPredefinitoBean.sconto}" id="sconto" required="true" requiredMessage="Devi inserire per forza un numero per identificare lo sconto"/>
+  		 <p:message for="sconto" /><br />
   	
   	
   	
@@ -67,7 +67,7 @@
   	
   	
   		<div align="left">
-		    <p:commandButton id="bottoneConferma" value="Conferma" actionListener="#{loginClienteBean.login}"/>
+		    <p:commandButton id="bottoneConferma" value="Conferma" actionListener="#{creazionePacchettoPredefinitoBean.creazionePacchetto}"/>
 	    <!-- visualizza i homeimpiegato con mess. notifica creazione -->
 		    <p:messages id="message" showSummary="true" showDetail="false" autoUpdate="true" closable="true" /> 
      	</div>

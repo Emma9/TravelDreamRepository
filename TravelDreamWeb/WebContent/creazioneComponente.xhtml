@@ -13,14 +13,14 @@
 		<p:fieldset legend="Ecco i parametri da settare per un nuovo componente" widgetVar="regWidget" style="width: 600px;">
 			<div style="float: center">
 				<div style="display: inline;">
-				<p:selectOneRadio id="tipologia" value="#{formBean.number}">  
+				<p:selectOneRadio id="tipologia" value="#{creazioneComponenteBean.tipologia}">  
 				            <f:selectItem itemLabel="Volo" itemValue="volo" />  
 				            <f:selectItem itemLabel="Hotel" itemValue="hotel" />  
 				            <f:selectItem itemLabel="Escursione" itemValue="escursione" />    
 				</p:selectOneRadio> 
 				
 				<p:outputLabel value="Descrizione: "/><br />
-				<p:inputTextarea rows="10" cols="33" value="#{ricercaPacchettiBean.dataPartenza}"
+				<p:inputTextarea rows="10" cols="33" value="#{creazioneComponenteBean.descrizione}"
 			       id="descrizione"
 			       required="true"
 			       requiredMessage="Devi inserire una descrizione del componente">  
@@ -30,7 +30,7 @@
 				
 				
 				<p:outputLabel value="Costo: "/>
-				<p:inputText value="#{ricercaPacchettiBean.dataRitorno}"
+				<p:inputText value="#{creazioneComponenteBean.costo}"
 			       id="costo"
 			       required="true"
 			       requiredMessage="Devi inserire il costo del componente">  
@@ -38,17 +38,17 @@
 			    <p:message for="costo" />
 			    
 			    <p:outputLabel value="Data Inizio Validità: "/>
-				<p:calendar value="#{ricercaPacchettiBean.dataPartenza}" id="dataInizio" required="true" requiredMessage="Devi inserire una data di inizio validità del componente"/>
+				<p:calendar value="#{creazioneComponenteBean.dataInizioValidita}" id="dataInizio" required="true" requiredMessage="Devi inserire una data di inizio validità del componente"/>
 				<p:message for="dataInizio"/>
 				<br />
 			
 				<h:outputText value="Data Fine Validità: " />
-				<p:calendar value="#{ricercaPacchettiBean.dataRitorno}" id="dataFine" required="true" requiredMessage="Devi inserire una data di fine validità del componente"/>
+				<p:calendar value="#{creazioneComponenteBean.dataFineValidita}" id="dataFine" required="true" requiredMessage="Devi inserire una data di fine validità del componente"/>
 				<p:message for="dataFine"/>
 				<br />
 				
 				<p:outputLabel value="Disponibilità Posti: "/>
-				<p:inputText value="#{ricercaPacchettiBean.dataRitorno}"
+				<p:inputText value="#{creazioneComponenteBean.disponibilita}"
 			       id="posti"
 			       required="true"
 			       requiredMessage="Devi inserire la disponibilità dei posti">  
@@ -57,7 +57,7 @@
 				
 				</div>
 				</div>
-   		 <p:commandButton value="Conferma" actionListener="#{mostraGiftListBean}" /> <!-- messaggio avvenimento ritorno home page impiegato -->
+   		 <p:commandButton value="Conferma" actionListener="#{creazioneComponenteBean.creazioneComponente}" /> <!-- messaggio avvenimento ritorno home page impiegato -->
   	</p:fieldset>
 
         
