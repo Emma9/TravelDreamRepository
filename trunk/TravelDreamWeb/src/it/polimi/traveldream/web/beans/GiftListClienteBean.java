@@ -6,7 +6,6 @@ import it.polimi.traveldream.entities.PacchettoPersonalizzatoDTO;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
@@ -17,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean()
 @SessionScoped
-public class giftListCliente implements Serializable {
+public class GiftListClienteBean implements Serializable {
 
 	/**
 	 * 
