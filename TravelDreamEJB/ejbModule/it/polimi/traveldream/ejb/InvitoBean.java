@@ -8,7 +8,9 @@ import it.polimi.traveldream.entities.InvitoDTO;
 
 
 
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -33,7 +35,7 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 	 * @param data
 	 * @param stato
 	 * @return idInvito*/
-	public Long createInvito(String emailMittente, String emailDestinatario,String idPacchettoPersonalizzato, String data, boolean stato) {
+	public Long createInvito(String emailMittente, String emailDestinatario,String idPacchettoPersonalizzato, Date data, boolean stato) {
 
 		Invito invito = new Invito();
 
@@ -78,7 +80,7 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 	 * @param idPacchettoPersonalizzato
 	 * @param data
 	 * @param stato*/
-	public void updateInvito(Long idInvito, String emailMittente,String emailDestinatario, String idPacchettoPersonalizzato,String data, boolean stato) {
+	public void updateInvito(Long idInvito, String emailMittente,String emailDestinatario, String idPacchettoPersonalizzato,Date data, boolean stato) {
 
 		if (verificaPresenzaInvito(idInvito)) {
 

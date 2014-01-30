@@ -3,6 +3,7 @@ package it.polimi.traveldream.entities;
 import java.io.Serializable;
 import java.lang.Long;
 import java.lang.String;
+import java.util.Date;
 
 import javax.persistence.*;
 
@@ -21,8 +22,9 @@ public class Invito implements Serializable {
 	private String emailMittente;
 	private String emailDestinatario;
 	private String idPacchettoPersonalizzato;
-	private String data;
-	private boolean stato;
+	@Temporal(TemporalType.TIME)
+	private Date data;
+	private boolean stato; //TRUE=>ACCETTATO
 
 	/**Costruttore*/
 	public Invito() {
@@ -79,14 +81,14 @@ public class Invito implements Serializable {
 	}
 
 	/**@return data*/
-	public String getData() {
+	public Date getData() {
 		
 		return this.data;
 		
 	}
 
 	/**@param data data to set*/
-	public void setData(String data) {
+	public void setData(Date data) {
 		
 		this.data = data;
 		

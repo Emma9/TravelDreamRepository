@@ -22,7 +22,7 @@ public class RegistrazioneBean implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 333L;
 	
 	// Session bean i cui metodi sono utilizzati nel codice
 	@EJB

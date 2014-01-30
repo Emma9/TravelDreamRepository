@@ -22,7 +22,7 @@ public class RicercaPerEtichettaBean implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 315L;
 	
 	@EJB
 	private PacchettoBeanRemote pacchettoRemoto;
@@ -33,12 +33,11 @@ public class RicercaPerEtichettaBean implements Serializable {
 	private int numPartecipanti;
 	
 	//PACCHETTO SELEZIONATO
-		private PacchettoDTO pacchettoSelezionato;
+	private PacchettoDTO pacchettoSelezionato;
 		
-		//LISTA PACCHETTI INVIATA ALLA PAGINA WEB
-		private ArrayList<PacchettoDTO> pacchettiRicercati = new ArrayList<PacchettoDTO>();
-	
-	
+	//LISTA PACCHETTI INVIATA ALLA PAGINA WEB
+	private ArrayList<PacchettoDTO> pacchettiRicercati = new ArrayList<PacchettoDTO>();
+		
 	/**
 	 * @return the etichetta
 	 */
@@ -115,7 +114,87 @@ public class RicercaPerEtichettaBean implements Serializable {
 	
 	
 	
-	public String ricercaPerEtichetta(){
+	public String ricercaPerEtichettaLastMinute(){
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+		
+		try {
+				
+			pacchettiRicercati = pacchettoRemoto.findByEtichettaOGG("LASTMINUTE");
+	
+		}catch (EJBException e) {
+		
+		return null;
+
+	}
+	
+	return "homepage";
+		
+	}
+	
+public String ricercaPerEtichettaOfferte(){
+		
+	FacesContext context = FacesContext.getCurrentInstance();
+	HttpServletRequest request = (HttpServletRequest) context
+			.getExternalContext().getRequest();
+	
+	try {
+			
+		pacchettiRicercati = pacchettoRemoto.findByEtichettaOGG("OFFERTA");
+
+	}catch (EJBException e) {
+	
+	return null;
+
+}
+
+return "homepage";		
+	}
+
+
+public String ricercaPerEtichettaMare(){
+	
+	FacesContext context = FacesContext.getCurrentInstance();
+	HttpServletRequest request = (HttpServletRequest) context
+			.getExternalContext().getRequest();
+	
+	try {
+			
+		pacchettiRicercati = pacchettoRemoto.findByEtichettaOGG("MARE");
+
+	}catch (EJBException e) {
+	
+	return null;
+
+}
+
+return "homepage";	
+}
+
+
+public String ricercaPerEtichettaMontagna(){
+	
+	FacesContext context = FacesContext.getCurrentInstance();
+	HttpServletRequest request = (HttpServletRequest) context
+			.getExternalContext().getRequest();
+	
+	try {
+			
+		pacchettiRicercati = pacchettoRemoto.findByEtichettaOGG("MONTAGNA");
+
+	}catch (EJBException e) {
+	
+	return null;
+
+}
+
+return "homepage";	
+}
+	
+	
+	public String ricercaPerEtichettaClienteLastMinute(){
 		
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
@@ -123,13 +202,14 @@ public class RicercaPerEtichettaBean implements Serializable {
 		
 		ArrayList<PacchettoDTO> pacchetti = new ArrayList<PacchettoDTO>();
 		
+		
 		try {
 		
 		
 		if(this.pacchettoRemoto.verificaConsistenzaDate(this.dataPartenza, this.dataRitorno)){
 			//LE DATE INSERITE SONO VALIDE
 		
-		pacchetti = pacchettoRemoto.ricercaPerEtichetta(this.etichetta, this.dataPartenza, this.dataRitorno);
+		pacchetti = pacchettoRemoto.ricercaPerEtichetta("LASTMINUTE", this.dataPartenza, this.dataRitorno);
 			//RITORNA LA LISTA DEI PACCHETTI CON DESTINAZIONE DESIDERATA E DISPONIBILI NEL PERIODO RICHIESTO
 		
 		for(int i=0;i<pacchetti.size();i++){
@@ -168,7 +248,181 @@ public class RicercaPerEtichettaBean implements Serializable {
 
 	}
 	
-	return "listaRicercaPacchettiPredefiniti";
+	return "homePageCliente";
+		
+	}
+	
+	public String ricercaPerEtichettaClienteOfferte(){
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+		
+		ArrayList<PacchettoDTO> pacchetti = new ArrayList<PacchettoDTO>();
+		
+		
+		try {
+		
+		
+		if(this.pacchettoRemoto.verificaConsistenzaDate(this.dataPartenza, this.dataRitorno)){
+			//LE DATE INSERITE SONO VALIDE
+		
+		pacchetti = pacchettoRemoto.ricercaPerEtichetta("OFFERTA", this.dataPartenza, this.dataRitorno);
+			//RITORNA LA LISTA DEI PACCHETTI CON DESTINAZIONE DESIDERATA E DISPONIBILI NEL PERIODO RICHIESTO
+		
+		for(int i=0;i<pacchetti.size();i++){
+			//PER OGNI PACCHETTO VERIFICA CHE TUTTI I SUOI COMPONENTI SIANO DISPONIBILI
+			
+			if(pacchettoRemoto.verificaDisponibilitaComponenti(this.dataPartenza, this.dataRitorno, this.numPartecipanti, (ArrayList<ComponenteDTO>) pacchetti.get(i).getListaComponentiSelezionati())){
+			//SE TUTTI I COMPONENTI SONO DISPONIBILI NON RIMUOVE IL PACCHETTO DALLA LISTA
+				
+			}else{
+				pacchetti.set(i, null);
+			//SE CI SONO DEI COMPONENTI NON DISPONIBILI ANNULLA IL PACCHETTO CHE LI CONTIENE	
+				
+			}
+			
+		}				
+		
+		for(int j=0;j<pacchetti.size();j++){
+			//SCORRE LA LISTA DEI PACCHETTI
+		
+		if(pacchetti.get(j)==null){
+			//SE PACCHETTO == NULL PASSA AL PROSSIMO PACCHETTO
+			
+		}else{
+			//SE PACCHETTO != NULL LO COPIA IN PACCHETTIRICERCATI
+			pacchettiRicercati.set(j, pacchetti.get(j));
+		}
+			
+		}
+			
+		}
+		
+
+	} catch (EJBException e) {
+		
+		return null;
+
+	}
+	
+	return "homePageCliente";
+		
+	}
+
+	public String ricercaPerEtichettaClienteMare(){
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+		
+		ArrayList<PacchettoDTO> pacchetti = new ArrayList<PacchettoDTO>();
+		
+		
+		try {
+		
+		
+		if(this.pacchettoRemoto.verificaConsistenzaDate(this.dataPartenza, this.dataRitorno)){
+			//LE DATE INSERITE SONO VALIDE
+		
+		pacchetti = pacchettoRemoto.ricercaPerEtichetta("MARE", this.dataPartenza, this.dataRitorno);
+			//RITORNA LA LISTA DEI PACCHETTI CON DESTINAZIONE DESIDERATA E DISPONIBILI NEL PERIODO RICHIESTO
+		
+		for(int i=0;i<pacchetti.size();i++){
+			//PER OGNI PACCHETTO VERIFICA CHE TUTTI I SUOI COMPONENTI SIANO DISPONIBILI
+			
+			if(pacchettoRemoto.verificaDisponibilitaComponenti(this.dataPartenza, this.dataRitorno, this.numPartecipanti, (ArrayList<ComponenteDTO>) pacchetti.get(i).getListaComponentiSelezionati())){
+			//SE TUTTI I COMPONENTI SONO DISPONIBILI NON RIMUOVE IL PACCHETTO DALLA LISTA
+				
+			}else{
+				pacchetti.set(i, null);
+			//SE CI SONO DEI COMPONENTI NON DISPONIBILI ANNULLA IL PACCHETTO CHE LI CONTIENE	
+				
+			}
+			
+		}				
+		
+		for(int j=0;j<pacchetti.size();j++){
+			//SCORRE LA LISTA DEI PACCHETTI
+		
+		if(pacchetti.get(j)==null){
+			//SE PACCHETTO == NULL PASSA AL PROSSIMO PACCHETTO
+			
+		}else{
+			//SE PACCHETTO != NULL LO COPIA IN PACCHETTIRICERCATI
+			pacchettiRicercati.set(j, pacchetti.get(j));
+		}
+			
+		}
+			
+		}
+		
+
+	} catch (EJBException e) {
+		
+		return null;
+
+	}
+	
+	return "homePageCliente";
+		
+	}
+	
+	public String ricercaPerEtichettaClienteMontagna(){
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+		
+		ArrayList<PacchettoDTO> pacchetti = new ArrayList<PacchettoDTO>();
+		
+		
+		try {
+		
+		
+		if(this.pacchettoRemoto.verificaConsistenzaDate(this.dataPartenza, this.dataRitorno)){
+			//LE DATE INSERITE SONO VALIDE
+		
+		pacchetti = pacchettoRemoto.ricercaPerEtichetta("MONTAGNA", this.dataPartenza, this.dataRitorno);
+			//RITORNA LA LISTA DEI PACCHETTI CON DESTINAZIONE DESIDERATA E DISPONIBILI NEL PERIODO RICHIESTO
+		
+		for(int i=0;i<pacchetti.size();i++){
+			//PER OGNI PACCHETTO VERIFICA CHE TUTTI I SUOI COMPONENTI SIANO DISPONIBILI
+			
+			if(pacchettoRemoto.verificaDisponibilitaComponenti(this.dataPartenza, this.dataRitorno, this.numPartecipanti, (ArrayList<ComponenteDTO>) pacchetti.get(i).getListaComponentiSelezionati())){
+			//SE TUTTI I COMPONENTI SONO DISPONIBILI NON RIMUOVE IL PACCHETTO DALLA LISTA
+				
+			}else{
+				pacchetti.set(i, null);
+			//SE CI SONO DEI COMPONENTI NON DISPONIBILI ANNULLA IL PACCHETTO CHE LI CONTIENE	
+				
+			}
+			
+		}				
+		
+		for(int j=0;j<pacchetti.size();j++){
+			//SCORRE LA LISTA DEI PACCHETTI
+		
+		if(pacchetti.get(j)==null){
+			//SE PACCHETTO == NULL PASSA AL PROSSIMO PACCHETTO
+			
+		}else{
+			//SE PACCHETTO != NULL LO COPIA IN PACCHETTIRICERCATI
+			pacchettiRicercati.set(j, pacchetti.get(j));
+		}
+			
+		}
+			
+		}
+		
+
+	} catch (EJBException e) {
+		
+		return null;
+
+	}
+	
+	return "homePageCliente";
 		
 	}
 	

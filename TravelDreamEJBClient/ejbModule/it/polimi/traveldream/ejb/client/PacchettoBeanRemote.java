@@ -44,6 +44,10 @@ public interface PacchettoBeanRemote {
 	 * @return ArrayList<idPacchetto>*/
 	public ArrayList<Long> findByEtichetta(String etichetta);
 
+	/**@param etichetta
+	 * @return ArrayList<PacchettoDTO>*/
+	public ArrayList<PacchettoDTO> findByEtichettaOGG(String etichetta) ;
+	
 	/**@param idPacchetto
 	 * @return Pacchetto*/
 	public PacchettoDTO findByIdPacchetto(Long idPacchetto);
