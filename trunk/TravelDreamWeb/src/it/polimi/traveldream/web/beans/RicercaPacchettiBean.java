@@ -27,7 +27,7 @@ public class RicercaPacchettiBean implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 198L;
 
 	@EJB
 	private PacchettoBeanRemote pacchettoRemoto;
