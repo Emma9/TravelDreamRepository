@@ -130,6 +130,44 @@ public class ComponenteBean implements ComponenteBeanRemote,
 
 		return componente;
 	}
+	
+	/**
+	 * @param termine
+	 * @return ArrayList<ComponenteDTO>
+	 */
+	public ArrayList<ComponenteDTO> findByTermine(String termine) {
+
+		
+		ArrayList<ComponenteDTO> listaComponenti = new ArrayList<ComponenteDTO>();
+
+		ArrayList<ComponenteDTO> listaCOM = new ArrayList<ComponenteDTO>();
+		
+		ComponenteDTO componente = new ComponenteDTO();
+		
+		ArrayList<Long> listaCOD = findAll();
+			
+		
+		for(int i=0; i<listaCOD.size();i++){
+			
+			componente = findByCodiceComponente(listaCOD.get(i));
+			
+			listaCOM.add(componente);
+			
+		}
+		
+		for(int j=0; j<listaCOM.size();j++){
+			
+			if (listaCOM.get(j).getDescrizione().contains(termine)){
+				
+				listaComponenti.add(listaCOM.get(j));
+				
+			}
+			
+		}
+
+		return listaComponenti;
+	}
+	
 
 	/** @return ArrayList<codiceComponente> */
 	public ArrayList<Long> findAll() {

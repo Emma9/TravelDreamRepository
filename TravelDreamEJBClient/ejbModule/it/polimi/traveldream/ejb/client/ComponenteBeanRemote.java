@@ -13,6 +13,7 @@ import it.polimi.traveldream.entities.ComponenteDTO;
 
 
 
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -54,6 +55,12 @@ public interface ComponenteBeanRemote {
 	/**@param codiceComponente
 	 * @return ComponenteDTO*/
 	public ComponenteDTO findByCodiceComponente(Long codiceComponente);
+	
+	/**
+	 * @param termine
+	 * @return ArrayList<ComponenteDTO>
+	 */
+	public ArrayList<ComponenteDTO> findByTermine(String termine);
 	
 	/**@return ArrayList<codiceComponente>*/
 	public ArrayList<Long> findAll();
