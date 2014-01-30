@@ -154,6 +154,29 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 		}
 		return idPacchetti;
 	}
+	
+	
+	/**@param etichetta
+	 * @return ArrayList<PacchettoDTO>*/
+	public ArrayList<PacchettoDTO> findByEtichettaOGG(String etichetta) {
+
+		TypedQuery<PacchettoDTO> q = manager.createQuery("FROM Pacchetto p", PacchettoDTO.class);
+
+		ArrayList<PacchettoDTO> pacchetti = new ArrayList<PacchettoDTO>();
+		//ArrayList<Long> idPacchetti = new ArrayList<Long>();
+		List<PacchettoDTO> risultati = q.getResultList();
+
+		for (int i = 0; i < risultati.size(); i++) {
+
+			if (risultati.get(i).getEtichetta().equals(etichetta)) {
+
+				pacchetti.add(risultati.get(i));
+
+			}
+		}
+
+		return pacchetti;
+	}
 
 	/**@param idPacchetto
 	 * @return PacchettoDTO*/
