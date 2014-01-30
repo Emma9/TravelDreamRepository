@@ -1,6 +1,5 @@
 package it.polimi.traveldream.ejb.client;
 
-import it.polimi.traveldream.entities.Componente;
 import it.polimi.traveldream.entities.ComponenteDTO;
 
 
@@ -79,13 +78,7 @@ public interface ComponenteBeanRemote {
 	public void setDisponibilitaInData(ComponenteDTO componente, Date data,
 			int disponibilita);
 	
-	/** @param componente
-	 * @param data
-	 * @param disponibilita
-	 */
-	public void setDisponibilitaInDataENT(Componente componente, Date data,
-			int disponibilita) ;
-	
+
 	/**
 	 * @param disponibilita
 	 * @param data
@@ -127,14 +120,4 @@ public interface ComponenteBeanRemote {
 			Date dataInizioValidita, Date dataFineValidita,
 			int disponibilitaDaSettare) ;
 	
-	/** 
-	 * @param componente
-	 * @param dataInizioValidita
-	 * @param dataFineValidita
-	 * @param disponibilitaDaSettare
-	 */
-	public void creaListaDisponibilitaPerDataENT(Componente componente,
-			Date dataInizioValidita, Date dataFineValidita,
-			int disponibilitaDaSettare);
-
 }

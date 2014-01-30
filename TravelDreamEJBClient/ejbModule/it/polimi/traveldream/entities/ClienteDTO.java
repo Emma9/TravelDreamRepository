@@ -31,6 +31,14 @@ public class ClienteDTO implements Serializable{
 		return this.idCliente;
 		
 	}
+	
+
+	/**
+	 * @param idCliente the idCliente to set
+	 */
+	public void setIdCliente(Long idCliente) {
+		this.idCliente = idCliente;
+	}
 
 	/**@return email*/
 	public String getEmail() {

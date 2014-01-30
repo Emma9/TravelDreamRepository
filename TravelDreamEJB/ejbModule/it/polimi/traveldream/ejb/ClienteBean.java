@@ -2,7 +2,6 @@ package it.polimi.traveldream.ejb;
 
 
 import it.polimi.traveldream.ejb.client.ClienteBeanLocal;
-
 import it.polimi.traveldream.ejb.client.ClienteBeanRemote;
 import it.polimi.traveldream.ejb.client.InvitoBeanRemote;
 import it.polimi.traveldream.entities.Cliente;
@@ -55,7 +54,6 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 	public void removeCliente(Long idCliente) {
 		
 		
-			//ClienteDTO c = findByIdCliente(idCliente);
 			
 			Cliente c = manager.find(Cliente.class, idCliente);
 			
@@ -100,11 +98,11 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 	 * @return ClienteDTO*/
 	public ClienteDTO findByEmailCliente(String email) {
 
-		TypedQuery<ClienteDTO> q = manager.createQuery("FROM Cliente c WHERE c.email=:new_email", ClienteDTO.class);
+		TypedQuery<Cliente> q = manager.createQuery("FROM Cliente c WHERE c.email=:new_email", Cliente.class);
 
 		q.setParameter("new_email", email);
 
-		ClienteDTO cliente = q.getSingleResult();
+		ClienteDTO cliente = clienteToDTO(q.getSingleResult());
 
 		return cliente;
 	}
@@ -113,11 +111,11 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 	 * @return ClienteDTO*/
 	public ClienteDTO findByIdCliente(Long idCliente) {
 
-		TypedQuery<ClienteDTO> q = manager.createQuery("FROM Cliente c WHERE c.idCliente=:new_idCliente", ClienteDTO.class);
+		TypedQuery<Cliente> q = manager.createQuery("FROM Cliente c WHERE c.idCliente=:new_idCliente", Cliente.class);
 
 		q.setParameter("new_idCliente", idCliente);
 
-		ClienteDTO cliente = q.getSingleResult();
+		ClienteDTO cliente = clienteToDTO(q.getSingleResult());
 
 		return cliente;
 	}
@@ -125,15 +123,11 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 	/** @return ArrayList<idCliente> */
 	public ArrayList<Long> findAll() {
 
-		TypedQuery<ClienteDTO> q = manager.createQuery("FROM Cliente c", ClienteDTO.class);
-
-		List<ClienteDTO> clienti = q.getResultList();
-
+		TypedQuery<Cliente> q = manager.createQuery("FROM Cliente c", Cliente.class);
 		ArrayList<Long> lista = new ArrayList<Long>();
-
-		for (int i = 0; i < clienti.size(); i++) {
-
-			lista.set(i, clienti.get(i).getIdCliente());
+		
+		for(int i=0; i<q.getResultList().size();i++){
+			lista.add(q.getResultList().get(i).getIdCliente());
 		}
 
 		return lista;
@@ -145,12 +139,12 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 	 * @return idCliente*/
 	public long verificaPresenzaClienteLogin(String email, String password) {
 		try {
-			TypedQuery<ClienteDTO> q = manager
-					.createQuery("FROM Cliente c WHERE c.email=:new_email", ClienteDTO.class);
+			TypedQuery<Cliente> q = manager
+					.createQuery("FROM Cliente c WHERE c.email=:new_email", Cliente.class);
 	
 			q.setParameter("new_email", email);
 	
-			ClienteDTO cliente = q.getSingleResult();
+			ClienteDTO cliente = clienteToDTO(q.getSingleResult());
 	
 			if (cliente.getPassword()== password) {
 				return cliente.getIdCliente();
@@ -171,21 +165,17 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 	 * @return true if email is present in the DB, otherwise false*/
 	public boolean verificaPresenzaClienteRegistrazione(String email, String codiceFiscale) {
 		try {
-			TypedQuery<ClienteDTO> q = manager
-					.createQuery("FROM Cliente c WHERE c.email=:new_email OR c.codiceFiscale=:new_codiceFiscale", ClienteDTO.class);
+			TypedQuery<Cliente> q = manager
+					.createQuery("FROM Cliente c WHERE c.email=:new_email OR c.codiceFiscale=:new_codiceFiscale", Cliente.class);
 
 			q.setParameter("new_email", email);
 			q.setParameter("new_codiceFiscale", codiceFiscale);
 
-			List<ClienteDTO> clienti = q.getResultList();
-
-			if (clienti.size() == 0) {
+			if(q.getResultList().isEmpty()){
 				return false;
-
-			} else {
-				return true;
-
 			}
+			return true;
+			
 		} catch (NullPointerException e) {
 			return false;
 		}
@@ -197,21 +187,18 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 	 */
 	public boolean verificaPresenzaClienteId(Long idCliente) {
 		try {
-			TypedQuery<ClienteDTO> q = manager
-					.createQuery("FROM Cliente c WHERE c.idCliente=:new_idCliente", ClienteDTO.class);
+			TypedQuery<Cliente> q = manager
+					.createQuery("FROM Cliente c WHERE c.idCliente=:new_idCliente", Cliente.class);
 
 			q.setParameter("new_idCliente", idCliente);
 
 			
-			List<ClienteDTO> clienti = q.getResultList();
-
-			if (clienti.size() == 0) {
+			if(q.getResultList().isEmpty()){
 				return false;
-
-			} else {
-				return true;
-
 			}
+			return true;
+
+			
 		} catch (NullPointerException e) {
 			return false;
 		}
@@ -246,7 +233,7 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 	 */
 	public void eliminaTuttiPacchettiPersonalizzati(long idCliente) {
 
-		ClienteDTO cliente = findByIdCliente(idCliente);
+		Cliente cliente = manager.find(Cliente.class, idCliente);
 		cliente.getPacchettiCliente().clear();
 		
 	}
@@ -269,4 +256,20 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 	}
 	
 
+	
+	public ClienteDTO clienteToDTO (Cliente cliente){
+		
+		ClienteDTO clienteDTO= new ClienteDTO();
+		clienteDTO.setIdCliente(cliente.getIdCliente());
+		clienteDTO.setEmail(cliente.getEmail());	
+		clienteDTO.setPassword(cliente.getPassword());
+		clienteDTO.setNome(cliente.getNome());
+		clienteDTO.setCognome(cliente.getCognome());
+		clienteDTO.setCodiceFiscale(cliente.getCodiceFiscale());
+		
+		return clienteDTO;
+		
+		
+	}
+	
 }

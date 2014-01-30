@@ -26,6 +26,14 @@ public class ImpiegatoDTO implements Serializable{
 		return this.idImpiegato;
 		
 	}
+	
+
+	/**
+	 * @param idImpiegato the idImpiegato to set
+	 */
+	public void setIdImpiegato(Long idImpiegato) {
+		this.idImpiegato = idImpiegato;
+	}
 
 	/**@return codiceImpiegato*/
 	public String getCodiceImpiegato() {

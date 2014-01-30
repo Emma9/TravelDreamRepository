@@ -62,6 +62,16 @@ public class Pacchetto implements Serializable {
 		return this.idPacchetto;
 	}
 
+	
+	
+	/**
+	 * @param idPacchetto the idPacchetto to set
+	 */
+	public void setIdPacchetto(Long idPacchetto) {
+		this.idPacchetto = idPacchetto;
+	}
+
+
 	/**@return destinazione*/
 	public String getDestinazione() {
 		return this.destinazione;
@@ -99,13 +109,6 @@ public class Pacchetto implements Serializable {
 	 */
 	public void setDataFineValidita(Date dataFineValidita) {
 		this.dataFineValidita = dataFineValidita;
-	}
-
-	/**
-	 * @param idPacchetto the idPacchetto to set
-	 */
-	public void setIdPacchetto(Long idPacchetto) {
-		this.idPacchetto = idPacchetto;
 	}
 
 	/**

@@ -24,6 +24,15 @@ public class PacchettoPersonalizzatoDTO extends PacchettoDTO implements Serializ
 		return this.idPacchettoPersonalizzato;
 		
 	}
+	
+
+	/**
+	 * @param idPacchettoPersonalizzato the idPacchettoPersonalizzato to set
+	 */
+	public void setIdPacchettoPersonalizzato(Long idPacchettoPersonalizzato) {
+		this.idPacchettoPersonalizzato = idPacchettoPersonalizzato;
+	}
+
 
 	/**@return Stato*/
 	public String getStato() {

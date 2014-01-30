@@ -80,4 +80,5 @@ public interface ClienteBeanRemote {
 	 * @return idCliente*/
 	public Long daEmailAId(String email);
 	
+	
 }
