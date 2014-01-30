@@ -1,6 +1,8 @@
 package it.polimi.traveldream.entities;
 
 import java.io.Serializable;
+import java.util.Date;
+
 
 public class PacchettoPersonalizzatoDTO extends PacchettoDTO implements Serializable{
 	
@@ -12,6 +14,8 @@ public class PacchettoPersonalizzatoDTO extends PacchettoDTO implements Serializ
 	private Long idPacchettoPersonalizzato;
 	private String stato;
 	private Long idCliente;
+	private Date dataDiPartenza;
+	private Date dataDiRitorno;
 
 	/**Costruttore*/
 	public PacchettoPersonalizzatoDTO() {
@@ -25,6 +29,7 @@ public class PacchettoPersonalizzatoDTO extends PacchettoDTO implements Serializ
 		
 	}
 	
+	
 
 	/**
 	 * @param idPacchettoPersonalizzato the idPacchettoPersonalizzato to set
@@ -32,7 +37,6 @@ public class PacchettoPersonalizzatoDTO extends PacchettoDTO implements Serializ
 	public void setIdPacchettoPersonalizzato(Long idPacchettoPersonalizzato) {
 		this.idPacchettoPersonalizzato = idPacchettoPersonalizzato;
 	}
-
 
 	/**@return Stato*/
 	public String getStato() {
@@ -62,4 +66,34 @@ public class PacchettoPersonalizzatoDTO extends PacchettoDTO implements Serializ
 		
 	}
 
+	/**
+	 * @return the dataDiPartenza
+	 */
+	public Date getDataDiPartenza() {
+		return dataDiPartenza;
+	}
+
+	/**
+	 * @param dataDiPartenza the dataDiPartenza to set
+	 */
+	public void setDataDiPartenza(Date dataDiPartenza) {
+		this.dataDiPartenza = dataDiPartenza;
+	}
+
+	/**
+	 * @return the dataDiRitorno
+	 */
+	public Date getDataDiRitorno() {
+		return dataDiRitorno;
+	}
+
+	/**
+	 * @param dataDiRitorno the dataDiRitorno to set
+	 */
+	public void setDataDiRitorno(Date dataDiRitorno) {
+		this.dataDiRitorno = dataDiRitorno;
+	}
+	
+	
+	
 }
