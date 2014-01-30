@@ -199,6 +199,44 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 		return pacchetto;
 	}
 	
+	
+	/**
+	 * @param termine
+	 * @return ArrayList<PacchettoDTO>
+	 */
+	public ArrayList<PacchettoDTO> findByTermine(String termine) {
+
+		
+		ArrayList<PacchettoDTO> listaPacchetti = new ArrayList<PacchettoDTO>();
+
+		ArrayList<PacchettoDTO> listaPAC = new ArrayList<PacchettoDTO>();
+		
+		PacchettoDTO pacchetto = new PacchettoDTO();
+		
+		ArrayList<Long> listaID = findAll();
+			
+		
+		for(int i=0; i<listaID.size();i++){
+			
+			pacchetto = findByIdPacchetto(listaID.get(i));
+			
+			listaPAC.add(pacchetto);
+			
+		}
+		
+		for(int j=0; j<listaPAC.size();j++){
+			
+			if (listaPAC.get(j).getDescrizione().contains(termine)){
+				
+				listaPacchetti.add(listaPAC.get(j));
+				
+			}
+			
+		}
+
+		return listaPacchetti;
+	}
+	
 
 	/** @return ArrayList<idPacchetto> */
 	public ArrayList<Long> findAll() {

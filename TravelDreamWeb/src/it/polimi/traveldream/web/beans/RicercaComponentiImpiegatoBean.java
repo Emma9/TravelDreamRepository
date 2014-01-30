@@ -1,13 +1,10 @@
 package it.polimi.traveldream.web.beans;
 
 import it.polimi.traveldream.ejb.client.ComponenteBeanRemote;
-import it.polimi.traveldream.ejb.client.ImpiegatoBeanRemote;
 import it.polimi.traveldream.entities.ComponenteDTO;
-import it.polimi.traveldream.entities.PacchettoPersonalizzatoDTO;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
@@ -18,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean()
 @SessionScoped
-public class RicercaComponentiImpiegato implements Serializable {
+public class RicercaComponentiImpiegatoBean implements Serializable {
 
 	/**
 	 * 

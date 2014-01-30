@@ -52,6 +52,13 @@ public interface PacchettoBeanRemote {
 	 * @return Pacchetto*/
 	public PacchettoDTO findByIdPacchetto(Long idPacchetto);
 
+	
+	/**
+	 * @param termine
+	 * @return ArrayList<PacchettoDTO>
+	 */
+	public ArrayList<PacchettoDTO> findByTermine(String termine);
+	
 	/** @return ArrayList<idPacchetto> */
 	public ArrayList<Long> findAll();
 	
