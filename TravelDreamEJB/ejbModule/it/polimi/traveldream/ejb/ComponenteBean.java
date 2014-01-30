@@ -346,6 +346,29 @@ public class ComponenteBean implements ComponenteBeanRemote,
 
 	}
 
+	public Componente componenteDTOToComponente(ComponenteDTO componenteDTO) {
+
+		Componente componente = new Componente();
+
+		componente.setCodiceComponente(componenteDTO.getCodiceComponente());
+		componente.setCosto(componenteDTO.getCosto());
+		componente.setDataFineValidita(componenteDTO.getDataFineValidita());
+		componente.setDataInizioValidita(componenteDTO.getDataInizioValidita());
+		componente.setDescrizione(componenteDTO.getDescrizione());
+		componente.setTipologia(componenteDTO.getTipologia());
+		List<DisponibilitaPerData> lista = new ArrayList<DisponibilitaPerData>();
+
+		for (int i = 0; i < componenteDTO.getDisponibilitaPerData().size(); i++) {
+			lista.add(disponibilitaPerDataDTOToDisponibilitaPerData(componenteDTO.getDisponibilitaPerData().get(i)));
+
+		}
+		componente.setDisponibilitaPerData(lista);
+		
+		return componente;
+
+	}
+	
+	
 	public DisponibilitaPerDataDTO disponibilitaPerDataToDTO(
 			DisponibilitaPerData disponibilitaPerData) {
 
@@ -358,5 +381,17 @@ public class ComponenteBean implements ComponenteBeanRemote,
 
 	}
 
+	public DisponibilitaPerData disponibilitaPerDataDTOToDisponibilitaPerData(
+			DisponibilitaPerDataDTO disponibilitaPerDataDTO) {
+
+		DisponibilitaPerData disponibilitaPerData = new DisponibilitaPerData();
+		disponibilitaPerData.setData(disponibilitaPerDataDTO.getData());
+		disponibilitaPerData.setDisponibilita(disponibilitaPerDataDTO
+				.getDisponibilita());
+
+		return disponibilitaPerData;
+
+	}
+	
 
 }

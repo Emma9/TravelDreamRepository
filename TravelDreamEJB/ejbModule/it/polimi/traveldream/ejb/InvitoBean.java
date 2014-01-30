@@ -9,6 +9,7 @@ import it.polimi.traveldream.entities.InvitoDTO;
 
 
 
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -64,9 +65,9 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 	/**@param emailMittente*/
 	public void removeInvitiCliente(String emailMittente) {
 
-		//ArrayList<InvitoDTO> inviti = findByEmailMittente(emailMittente);
-
-		ArrayList<Invito> inviti = findByEmailMittenteENT(emailMittente);
+		List<InvitoDTO> inviti = new ArrayList<InvitoDTO>();
+				
+		inviti= findByEmailMittente(emailMittente);
 		
 		for (int i = 0; i < inviti.size(); i++) {
 
@@ -102,11 +103,11 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 	 * @return InvitoDTO*/
 	public InvitoDTO findByIdInvito(Long idInvito) {
 
-		TypedQuery<InvitoDTO> q = manager.createQuery("FROM Invito i WHERE i.idInvito=:new_idInvito", InvitoDTO.class);
+		TypedQuery<Invito> q = manager.createQuery("FROM Invito i WHERE i.idInvito=:new_idInvito", Invito.class);
 
 		q.setParameter("new_idInvito", idInvito);
 
-		InvitoDTO invito = q.getSingleResult();
+		InvitoDTO invito = invitoToDTO(q.getSingleResult());
 
 		return invito;
 	}
@@ -115,53 +116,32 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 	 * @return ArrayList<InvitoDTO>*/
 	public ArrayList<InvitoDTO> findByEmailMittente(String emailMittente) {
 
-		TypedQuery<InvitoDTO> q = manager.createQuery("FROM Invito i WHERE i.emailMittente=:new_emailMittente", InvitoDTO.class);
-
-		q.setParameter("new_emailMittente", emailMittente);
-
-		ArrayList<InvitoDTO> inviti = new ArrayList<InvitoDTO>();
-		List<InvitoDTO> risultati = q.getResultList();
-
-		for (int i = 0; i < risultati.size(); i++) {
-
-			inviti.set(i, risultati.get(i));
-			
-		}
-		return inviti;
-	}
-	
-	/**@param emailMittente
-	 * @return ArrayList<Invito>*/
-	public ArrayList<Invito> findByEmailMittenteENT(String emailMittente) {
-
 		TypedQuery<Invito> q = manager.createQuery("FROM Invito i WHERE i.emailMittente=:new_emailMittente", Invito.class);
 
 		q.setParameter("new_emailMittente", emailMittente);
 
-		ArrayList<Invito> inviti = new ArrayList<Invito>();
-		List<Invito> risultati = q.getResultList();
+		ArrayList<InvitoDTO> inviti = new ArrayList<InvitoDTO>();
+		
+		for (int i = 0; i < q.getResultList().size(); i++) {
 
-		for (int i = 0; i < risultati.size(); i++) {
-
-			inviti.set(i, risultati.get(i));
+			inviti.add(invitoToDTO(q.getResultList().get(i)));
 			
 		}
 		return inviti;
 	}
 	
 
+
 	/**@return ArrayList<InvitoDTO>*/
 	public ArrayList<InvitoDTO> findAll() {
 		
-		TypedQuery<InvitoDTO> q = manager.createQuery("FROM Invito i", InvitoDTO.class);
-
-		List<InvitoDTO> inviti = q.getResultList();
+		TypedQuery<Invito> q = manager.createQuery("FROM Invito i", Invito.class);
 
 		ArrayList<InvitoDTO> lista = new ArrayList<InvitoDTO>();
 
-		for (int i = 0; i < inviti.size(); i++) {
+		for (int i = 0; i < q.getResultList().size(); i++) {
 
-			lista.set(i, inviti.get(i));
+			lista.add(invitoToDTO(q.getResultList().get(i)));
 			
 		}
 		return lista;
@@ -172,25 +152,39 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 	 * @return true if idInvito is present in the DB, otherwise false*/
 	public boolean verificaPresenzaInvito(Long idInvito) {
 		try {
-			TypedQuery<InvitoDTO> q = manager.createQuery("FROM Invito i WHERE i.idInvito=:new_idInvito", InvitoDTO.class);
+			TypedQuery<Invito> q = manager.createQuery("FROM Invito i WHERE i.idInvito=:new_idInvito", Invito.class);
 
 			q.setParameter("new_idInvito", idInvito);
 
-			List<InvitoDTO> inviti = q.getResultList();
-
-			if (inviti.size() == 0) {
+			if (q.getResultList().isEmpty()) {
 				
 				return false;
 
-			} else {
-				
-				return true;
-
 			}
+				
+			return true;
+
+			
 		} catch (NullPointerException e) {
 			
 			return false;
 			
 		}
 	}
+	
+	public InvitoDTO invitoToDTO (Invito invito){
+		
+		InvitoDTO invitoDTO = new InvitoDTO();
+		
+		invitoDTO.setIdInvito(invito.getIdInvito());
+		invitoDTO.setEmailMittente(invito.getEmailMittente());
+		invitoDTO.setEmailDestinatario(invito.getEmailDestinatario());
+		invitoDTO.setData(invito.getData());
+		invitoDTO.setIdPacchettoPersonalizzato(invito.getIdPacchettoPersonalizzato());
+		invitoDTO.setStato(invito.getStato());
+		
+		return invitoDTO;
+	}
+
+	
 }

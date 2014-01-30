@@ -140,7 +140,6 @@ public class Componente implements Serializable {
 		this.disponibilitaPerData = disponibilitaPerData;
 	}
 
-		
 	
 	
 }
