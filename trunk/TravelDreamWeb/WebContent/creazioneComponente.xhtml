@@ -47,6 +47,14 @@
 				<p:message for="dataFine"/>
 				<br />
 				
+				<p:outputLabel value="Disponibilità Posti: "/>
+				<p:inputText value="#{ricercaPacchettiBean.dataRitorno}"
+			       id="posti"
+			       required="true"
+			       requiredMessage="Devi inserire la disponibilità dei posti">  
+			    </p:inputText>
+			    <p:message for="posti" />
+				
 				</div>
 				</div>
    		 <p:commandButton value="Conferma" actionListener="#{mostraGiftListBean}" /> <!-- messaggio avvenimento ritorno home page impiegato -->

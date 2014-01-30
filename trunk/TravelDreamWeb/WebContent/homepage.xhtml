@@ -92,7 +92,7 @@
 			            <p:graphicImage id="tab1Img" value="/immagini/homepage/lastminute.jpg" />
 			              
 			            <div align="center"><h:outputText id="tab1Text" value="LISTA DEI PACCHETTI LASTMINUTE"/></div>
-			           
+			           #{ricercaPerEtichettaBean.ricercaPerEtichettaLastMinute()}
 			           
 			           <p:fieldset legend="Ecco i possibili pacchetti predefiniti inerenti alla ricerca effettuata" widgetVar="regWidget" style="width: 600px;">
 		
@@ -103,10 +103,10 @@
 									paginator="true" rows="10" selection="#{ricercaPerEtichettaBean.pacchettoSelezionato}"
 									selectionMode="single">       
 					
-									<!-- <p:ajax event="rowSelect" listener="#{ricercaPacchettiBean.onRowSelect}" update=":form:display :form:growl" oncomplete="dettgliPacchettoPredefinitoRicercato" /> 
+									<p:ajax event="rowSelect" listener="#{ricercaPerEtichettaBean.onRowSelect}" oncomplete="dettgliPacchettoPredefinitoRicercato" /> 
 										
 										
-									<p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->													
+									<!-- <p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->													
 					
 									<f:facet name="header">  
 					            	Seleziona un pacchetto per visualizzare i dettagli  
@@ -140,21 +140,21 @@
 						<p:graphicImage id="tab2Img" value="/immagini/homepage/offerte.jpg" />
 						<div align="center"><h:outputText id="tab2Text" value="RICERCA DEI PACCHETTI OFFERTE" /></div>
 						
-						
+						#{ricercaPerEtichettaBean.ricercaPerEtichettaOfferte()}
 						
 						<p:fieldset legend="Ecco i possibili pacchetti predefiniti inerenti alla ricerca effettuata" widgetVar="regWidget" style="width: 600px;">
 		
 		
-							<p:growl id="growl2" showDetail="true" />
+							<p:growl id="growl2" showDetail="true"/>
 					
 								<p:dataTable id="listaPacchettiPredefinitiO" var="pacchettoPredefinito" value="#{ricercaPerEtichettaBean.pacchettiRicercati}"
 									paginator="true" rows="10" selection="#{ricercaPerEtichettaBean.pacchettoSelezionato}"
 									selectionMode="single">       
 					
-									<!-- <p:ajax event="rowSelect" listener="#{ricercaPacchettiBean.onRowSelect}" update=":form:display :form:growl" oncomplete="dettgliPacchettoPredefinitoRicercato" /> 
+									<p:ajax event="rowSelect" listener="#{ricercaPacchettiBean.onRowSelect}" oncomplete="dettgliPacchettoPredefinitoRicercato" /> 
 										
 										
-									<p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->													
+									<!-- <p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->													
 					
 									<f:facet name="header">  
 					            	Seleziona un pacchetto per visualizzare i dettagli  
@@ -191,7 +191,7 @@
 						<p:graphicImage id="tab3Img" value="/immagini/homepage/mare.jpg" />
 						<div align="center"><h:outputText id="tab3Text" value="RICERCA DEI PACCHETTI MARE" /></div>
 						
-						
+						#{ricercaPerEtichettaBean.ricercaPerEtichettaMare()}
 						
 						<p:fieldset legend="Ecco i possibili pacchetti predefiniti inerenti alla ricerca effettuata" widgetVar="regWidget" style="width: 600px;">
 		
@@ -202,10 +202,10 @@
 									paginator="true" rows="10" selection="#{ricercaPerEtichettaBean.pacchettoSelezionato}"
 									selectionMode="single">       
 					
-									<!-- <p:ajax event="rowSelect" listener="#{ricercaPacchettiBean.onRowSelect}" update=":form:display :form:growl" oncomplete="dettgliPacchettoPredefinitoRicercato" /> 
+									<p:ajax event="rowSelect" listener="#{ricercaPacchettiBean.onRowSelect}" oncomplete="dettgliPacchettoPredefinitoRicercato" /> 
 										
 										
-									<p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->													
+									<!-- <p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->													
 					
 									<f:facet name="header">  
 					            	Seleziona un pacchetto per visualizzare i dettagli  
@@ -240,7 +240,7 @@
 							value="/immagini/homepage/montagna.jpg" />
 						<div align="center"><h:outputText id="tab4Text" value="RICERCA DEI PACCHETTI MONTAGNA" /></div>
 						
-						
+						#{ricercaPerEtichettaBean.ricercaPerEtichettaMontagna()}
 						<p:fieldset legend="Ecco i possibili pacchetti predefiniti inerenti alla ricerca effettuata" widgetVar="regWidget" style="width: 600px;">
 		
 		
@@ -250,10 +250,10 @@
 									paginator="true" rows="10" selection="#{ricercaPerEtichettaBean.pacchettoSelezionato}"
 									selectionMode="single">       
 					
-									<!-- <p:ajax event="rowSelect" listener="#{ricercaPacchettiBean.onRowSelect}" update=":form:display :form:growl" oncomplete="dettgliPacchettoPredefinitoRicercato" /> 
+									<p:ajax event="rowSelect" listener="#{ricercaPacchettiBean.onRowSelect}" oncomplete="dettgliPacchettoPredefinitoRicercato" /> 
 										
 										
-									<p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->													
+									<!-- <p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->													
 					
 									<f:facet name="header">  
 					            	Seleziona un pacchetto per visualizzare i dettagli  
