@@ -33,6 +33,14 @@ public class InvitoDTO implements Serializable{
 		return this.idInvito;
 		
 	}
+	
+
+	/**
+	 * @param idInvito the idInvito to set
+	 */
+	public void setIdInvito(Long idInvito) {
+		this.idInvito = idInvito;
+	}
 
 	/**@return emailMittente*/
 	public String getEmailMittente() {

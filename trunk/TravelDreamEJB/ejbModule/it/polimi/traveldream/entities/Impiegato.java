@@ -35,6 +35,15 @@ public class Impiegato implements Serializable {
 		
 	}
 
+	
+	
+	/**
+	 * @param idImpiegato the idImpiegato to set
+	 */
+	public void setIdImpiegato(Long idImpiegato) {
+		this.idImpiegato = idImpiegato;
+	}
+
 	/**@return codiceImpiegato*/
 	public String getCodiceImpiegato() {
 		

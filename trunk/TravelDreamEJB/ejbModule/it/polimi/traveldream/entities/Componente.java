@@ -44,6 +44,15 @@ public class Componente implements Serializable {
 		return this.codiceComponente;
 		
 	}
+	
+	
+
+	/**
+	 * @param codiceComponente the codiceComponente to set
+	 */
+	public void setCodiceComponente(Long codiceComponente) {
+		this.codiceComponente = codiceComponente;
+	}
 
 	/**@return tipologia*/
 	public String getTipologia() {

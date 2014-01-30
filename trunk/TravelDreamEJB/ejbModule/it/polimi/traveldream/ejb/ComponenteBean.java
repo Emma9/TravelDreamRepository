@@ -4,6 +4,8 @@ import it.polimi.traveldream.ejb.client.ComponenteBeanLocal;
 import it.polimi.traveldream.ejb.client.ComponenteBeanRemote;
 import it.polimi.traveldream.entities.Componente;
 import it.polimi.traveldream.entities.ComponenteDTO;
+import it.polimi.traveldream.entities.DisponibilitaPerData;
+import it.polimi.traveldream.entities.DisponibilitaPerDataDTO;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -54,7 +56,7 @@ public class ComponenteBean implements ComponenteBeanRemote,
 			componente.setDataFineValidita(dataFineValidita);
 
 			// disponibilitaPerData=;
-			creaListaDisponibilitaPerDataENT(componente, dataInizioValidita,
+			creaListaDisponibilitaPerData(componenteToDTO(componente), dataInizioValidita,
 					dataFineValidita, disponibilitaDaSettare);
 
 			manager.persist(componente);
@@ -69,8 +71,6 @@ public class ComponenteBean implements ComponenteBeanRemote,
 
 	/** @param codiceComponente */
 	public void removeComponente(Long codiceComponente) {
-
-		//ComponenteDTO c = findByCodiceComponente(codiceComponente);
 
 		Componente c = manager.find(Componente.class, codiceComponente);
 		
@@ -103,7 +103,7 @@ public class ComponenteBean implements ComponenteBeanRemote,
 			componente.setDataFineValidita(dataFineValidita);
 			
 			// disponibilitaPerData=;
-			creaListaDisponibilitaPerDataENT(componente, dataInizioValidita,
+			creaListaDisponibilitaPerData(componenteToDTO(componente), dataInizioValidita,
 								dataFineValidita, disponibilitaDaSettare);
 
 			manager.merge(componente);
@@ -117,14 +117,16 @@ public class ComponenteBean implements ComponenteBeanRemote,
 	 */
 	public ComponenteDTO findByCodiceComponente(Long codiceComponente) {
 
-		TypedQuery<ComponenteDTO> q = manager
+		TypedQuery<Componente> q = manager
 				.createQuery(
 						"FROM Componente c WHERE c.codiceComponente=:new_codiceComponente",
-						ComponenteDTO.class);
+						Componente.class);
 
 		q.setParameter("new_codiceComponente", codiceComponente);
 
-		ComponenteDTO componente = q.getSingleResult();
+		ComponenteDTO componente = componenteToDTO(q.getSingleResult());
+		
+		
 
 		return componente;
 	}
@@ -132,16 +134,16 @@ public class ComponenteBean implements ComponenteBeanRemote,
 	/** @return ArrayList<codiceComponente> */
 	public ArrayList<Long> findAll() {
 
-		TypedQuery<ComponenteDTO> q = manager.createQuery("FROM Componente c",
-				ComponenteDTO.class);
+		TypedQuery<Componente> q = manager.createQuery("FROM Componente c",
+				Componente.class);
 
-		List<ComponenteDTO> componenti = q.getResultList();
+		
 
 		ArrayList<Long> lista = new ArrayList<Long>();
 
-		for (int i = 0; i < componenti.size(); i++) {
+		for (int i = 0; i < q.getResultList().size(); i++) {
 
-			lista.set(i, componenti.get(i).getCodiceComponente());
+			lista.add(q.getResultList().get(i).getCodiceComponente());
 
 		}
 		return lista;
@@ -204,22 +206,7 @@ public class ComponenteBean implements ComponenteBeanRemote,
 		}
 	}
 	
-	/** @param componente
-	 * @param data
-	 * @param disponibilita
-	 */
-	public void setDisponibilitaInDataENT(Componente componente, Date data,
-			int disponibilita) {
 
-		for (int i = 0; i < componente.getDisponibilitaPerData().size(); i++) {
-			if (componente.getDisponibilitaPerData().get(i).getData()
-					.equals(data)) {
-				componente.getDisponibilitaPerData().get(i)
-						.setDisponibilita(disponibilita);
-			}
-
-		}
-	}
 
 	/**
 	 * @param disponibilita
@@ -274,22 +261,13 @@ public class ComponenteBean implements ComponenteBeanRemote,
 	 */
 	public boolean verificaPresenzaComponente(Long codiceComponente) {
 		try {
-			TypedQuery<ComponenteDTO> q = manager
-					.createQuery(
-							"FROM Componente c WHERE c.codiceComponente=:new_codiceComponente",
-							ComponenteDTO.class);
-
-			q.setParameter("new_codiceComponente", codiceComponente);
-
-			List<ComponenteDTO> componenti = q.getResultList();
-
-			if (componenti.size() == 0) {
+			if(manager.find(Componente.class, codiceComponente).equals(null)){
 				return false;
 
-			} else {
-				return true;
-
 			}
+			return true;
+
+			
 		} catch (NullPointerException e) {
 			return false;
 		}
@@ -343,30 +321,42 @@ public class ComponenteBean implements ComponenteBeanRemote,
 
 	}
 	
-	/** 
-	 * @param componente
-	 * @param dataInizioValidita
-	 * @param dataFineValidita
-	 * @param disponibilitaDaSettare
-	 */
-	public void creaListaDisponibilitaPerDataENT(Componente componente,
-			Date dataInizioValidita, Date dataFineValidita,
-			int disponibilitaDaSettare) {
 
-		int giorniIntervallo = Days.daysBetween(
-				new DateTime(dataInizioValidita),
-				new DateTime(dataFineValidita)).getDays();
 
-		for (int i = 0; i < giorniIntervallo; i++) {
-			DateTime dataDaSettareJ = new DateTime();
-			dataDaSettareJ = dataDaSettareJ.plusDays(i);
-			Date dataDaSettare = dataDaSettareJ.toDate();
+	public ComponenteDTO componenteToDTO(Componente componente) {
 
-			setDisponibilitaInDataENT(componente, dataDaSettare,
-					disponibilitaDaSettare);
+		ComponenteDTO componenteDTO = new ComponenteDTO();
+
+		componenteDTO.setCodiceComponente(componente.getCodiceComponente());
+		componenteDTO.setCosto(componente.getCosto());
+		componenteDTO.setDataFineValidita(componente.getDataFineValidita());
+		componenteDTO.setDataInizioValidita(componente.getDataInizioValidita());
+		componenteDTO.setDescrizione(componente.getDescrizione());
+		componenteDTO.setTipologia(componente.getTipologia());
+		List<DisponibilitaPerDataDTO> lista = new ArrayList<DisponibilitaPerDataDTO>();
+
+		for (int i = 0; i < componente.getDisponibilitaPerData().size(); i++) {
+			lista.add(disponibilitaPerDataToDTO(componente
+					.getDisponibilitaPerData().get(i)));
 
 		}
+		componenteDTO.setDisponibilitaPerData(lista);
+		
+		return componenteDTO;
 
 	}
+
+	public DisponibilitaPerDataDTO disponibilitaPerDataToDTO(
+			DisponibilitaPerData disponibilitaPerData) {
+
+		DisponibilitaPerDataDTO disponibilitaPerDataDTO = new DisponibilitaPerDataDTO();
+		disponibilitaPerDataDTO.setData(disponibilitaPerData.getData());
+		disponibilitaPerDataDTO.setDisponibilita(disponibilitaPerData
+				.getDisponibilita());
+
+		return disponibilitaPerDataDTO;
+
+	}
+
 
 }

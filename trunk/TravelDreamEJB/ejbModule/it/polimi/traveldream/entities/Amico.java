@@ -31,6 +31,15 @@ public class Amico implements Serializable {
 		return this.idAmico;
 		
 	}
+	
+	
+
+	/**
+	 * @param idAmico the idAmico to set
+	 */
+	public void setIdAmico(Long idAmico) {
+		this.idAmico = idAmico;
+	}
 
 	/**@return email*/
 	public String getEmail() {

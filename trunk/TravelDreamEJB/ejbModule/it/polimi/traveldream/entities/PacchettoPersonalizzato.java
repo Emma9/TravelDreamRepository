@@ -29,6 +29,15 @@ public class PacchettoPersonalizzato extends Pacchetto {
 		return this.idPacchettoPersonalizzato;
 		
 	}
+	
+	
+
+	/**
+	 * @param idPacchettoPersonalizzato the idPacchettoPersonalizzato to set
+	 */
+	public void setIdPacchettoPersonalizzato(Long idPacchettoPersonalizzato) {
+		this.idPacchettoPersonalizzato = idPacchettoPersonalizzato;
+	}
 
 	/**@return Stato*/
 	public String getStato() {

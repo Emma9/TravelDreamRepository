@@ -8,7 +8,6 @@ import it.polimi.traveldream.entities.ImpiegatoDTO;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -89,27 +88,26 @@ public class ImpiegatoBean implements ImpiegatoBeanRemote,ImpiegatoBeanLocal {
 	 * @return ImpiegatoDTO*/
 	public ImpiegatoDTO findByIdImpiegato(Long idImpiegato) {
 
-		TypedQuery<ImpiegatoDTO> q = manager.createQuery("FROM Impiegato i WHERE i.idImpiegato=:new_idImpiegato", ImpiegatoDTO.class);
+		TypedQuery<Impiegato> q = manager.createQuery("FROM Impiegato i WHERE i.idImpiegato=:new_idImpiegato", Impiegato.class);
 
 		q.setParameter("new_idImpiegato", idImpiegato);
 
-		ImpiegatoDTO impiegato = q.getSingleResult();
+		ImpiegatoDTO impiegato = impiegatoToDTO(q.getSingleResult());
 
 		return impiegato;
 	}
+	
 
 	/**@return ArrayList<idImpiegato>*/
 	public ArrayList<Long> findAll() {
 
-		TypedQuery<ImpiegatoDTO> q = manager.createQuery("FROM Impiegato i", ImpiegatoDTO.class);
-
-		List<ImpiegatoDTO> impiegati = q.getResultList();
+		TypedQuery<Impiegato> q = manager.createQuery("FROM Impiegato i", Impiegato.class);
 
 		ArrayList<Long> lista = new ArrayList<Long>();
 
-		for (int i = 0; i < impiegati.size(); i++) {
+		for (int i = 0; i < q.getResultList().size(); i++) {
 
-			lista.set(i, impiegati.get(i).getIdImpiegato());
+			lista.add(q.getResultList().get(i).getIdImpiegato());
 			
 		}
 		return lista;
@@ -119,21 +117,19 @@ public class ImpiegatoBean implements ImpiegatoBeanRemote,ImpiegatoBeanLocal {
 	 * @return true if codiceFiscale is present in the DB, otherwise false*/
 	public boolean verificaPresenzaImpiegatoCf(String codiceFiscale) {
 		try {
-			TypedQuery<ImpiegatoDTO> q = manager.createQuery("FROM Impiegato i WHERE i.codiceFiscale=:new_codiceFiscale", ImpiegatoDTO.class);
+			TypedQuery<Impiegato> q = manager.createQuery("FROM Impiegato i WHERE i.codiceFiscale=:new_codiceFiscale", Impiegato.class);
 
 			q.setParameter("new_codiceFiscale", codiceFiscale);
 
-			List<ImpiegatoDTO> impiegati = q.getResultList();
-
-			if (impiegati.size() == 0) {
+			if(q.getResultList().isEmpty()){
 				
 				return false;
 
-			} else {
+			} 
 				
-				return true;
+			return true;
 
-			}
+			
 		} catch (NullPointerException e) {
 			
 			return false;
@@ -149,21 +145,34 @@ public class ImpiegatoBean implements ImpiegatoBeanRemote,ImpiegatoBeanLocal {
 
 			q.setParameter("new_idImpiegato", idImpiegato);
 
-			List<ImpiegatoDTO> impiegati = q.getResultList();
-
-			if (impiegati.size() == 0) {
+			if (q.getResultList().isEmpty()) {
 				
 				return false;
 
-			} else {
-				
-				return true;
-
 			}
+				
+			return true;
+
+			
 		} catch (NullPointerException e) {
 			
 			return false;
 		
 		}
 	}
+	
+	public ImpiegatoDTO impiegatoToDTO(Impiegato impiegato){
+		
+		ImpiegatoDTO impiegatoDTO= new ImpiegatoDTO();
+		
+		impiegatoDTO.setIdImpiegato(impiegato.getIdImpiegato());
+		impiegatoDTO.setCodiceImpiegato(impiegato.getCodiceImpiegato());
+		impiegatoDTO.setCodiceFiscale(impiegato.getCodiceFiscale());
+		impiegatoDTO.setNome(impiegato.getNome());
+		impiegatoDTO.setCognome(impiegato.getCognome());
+		
+		return impiegatoDTO;
+		
+	}
+	
 }
