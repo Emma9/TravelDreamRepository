@@ -90,7 +90,7 @@ public class GiftListClienteBean implements Serializable {
 
 		}catch (EJBException e) {
 		
-		return null;
+			return "giftListCliente";
 
 	}
 
