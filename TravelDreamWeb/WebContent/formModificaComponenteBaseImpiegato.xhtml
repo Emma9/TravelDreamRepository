@@ -14,7 +14,7 @@
      <div align="left">
    <h:panelGrid id="panel" columns="3" width="550" border="0">
     <p:focus context="panel" />
-	    <h:outputText value="ID Componente: " />
+	    <h:outputText value="Codice Componente: " />
 	    <h:outputText value="#{componenteBeans.id}" />
 	   <br />
 	    <h:outputText value="Tipologia: " />
@@ -22,7 +22,15 @@
 	    </p:inputText><p:message for="costo" /><h:outputLabel value="Costo: " /><p:inputText value="#{componenteBeans.costo}" id="costo" required="true" requiredMessage="Devi inserire il costo">  
 	    </p:inputText>
 	<br />
-	    
+	    <p:outputLabel value="Data Inizio Validità: "/>
+				<p:calendar value="#{ricercaPacchettiBean.dataPartenza}" id="dataInizio" required="true" requiredMessage="Devi inserire una data di inizio validità del componente"/>
+				<p:message for="dataInizio"/><h:outputText value="Data Fine Validità: " /><p:calendar value="#{ricercaPacchettiBean.dataRitorno}" id="dataFine" required="true" requiredMessage="Devi inserire una data di fine validità del componente" />
+				<br />
+			
+				
+				
+				<p:message for="dataFine"/>
+				<br />
 	    
     <br />
 	      
@@ -31,8 +39,8 @@
     
     <br/>
 	<div align="left">
-    <p:commandButton id="bottoneConferma" value="Conferma" actionListener="#{loginClienteBean.login}"/>
-    <p:messages id="message" showSummary="true" showDetail="false" autoUpdate="true" closable="true" /> 
+    
+    <p:messages id="message" showSummary="true" showDetail="false" autoUpdate="true" closable="true" /><p:commandButton id="bottoneConferma" value="Conferma" actionListener="#{loginClienteBean.login}" /> 
 	    <!-- visualizza i dettaglicomponenteselezionatoimpiegato aggiornata -->
       </div>
    </h:panelGrid>

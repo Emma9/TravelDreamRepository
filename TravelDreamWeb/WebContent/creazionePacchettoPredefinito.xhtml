@@ -20,7 +20,7 @@
 	    <h:outputText value="#{componenteBeans.id}" />
 	   <br />
 	   
-	   <p:message for="descrizione" />
+	   <p:message for="destinazione" />
 	    <h:outputLabel value="Destinazione: " />
 	    <p:inputText value="#{componenteBeans.descrizione}" id="destinazione" required="true" requiredMessage="Devi inserire la descrizione"/>
 	    <p:message for="destinazione" /><br />
@@ -29,15 +29,36 @@
 	    
 	    <p:message for="descrizione" />
 	    <h:outputLabel value="Descrizione: " />
-	    <p:inputText value="#{componenteBeans.descrizione}" id="descrizione" required="true" requiredMessage="Devi inserire la descrizione"/>
+	    <p:inputTextarea value="#{componenteBeans.descrizione}" id="descrizione" required="true" requiredMessage="Devi inserire la descrizione"/>
   		 <p:message for="descrizione" /><br />
   		 
-  		<p:inputTextarea rows="1" cols="33" required="true" disabled="true"/>
+  		<p:inputTextarea rows="10" cols="33" required="true" disabled="true"/>
 		<p:commandButton value="Inserisci Hotel" /><br /><br /> <!-- manda all'homepage per fare la ricerca tramite id o filtro -->
-  		<p:inputTextarea rows="1" cols="33" required="true" disabled="true"/>
+  		<p:inputTextarea rows="10" cols="33" required="true" disabled="true"/>
 		<p:commandButton value="Inserisci Volo" /><br /><br /> <!-- manda all'homepage per fare la ricerca tramite id o filtro -->
-		<p:inputTextarea rows="1" cols="33" required="true" disabled="true"/>
+		<p:inputTextarea rows="10" cols="33" required="true" disabled="true"/>
 		<p:commandButton value="Inserisci Escursione" /><br /> <!-- manda all'homepage per fare la ricerca tramite id o filtro -->
+  	<!-- cambiare con tre liste volo,hotel,escursione con i relativi bottoni e una colonna di radiootton per il predefinito -->
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  		<p:message for="sconto" />
+	    <h:outputLabel value="Sconto da applicare al pacchetto: " />
+	    <p:inputTextarea value="#{componenteBeans.descrizione}" id="sconto" required="true" requiredMessage="Devi inserire per forza un numero per identificare lo sconto"/>
+  		 <p:message for="descrizione" /><br />
+  	
+  	
+  	
+  	
   	
   	
   		<div align="left">

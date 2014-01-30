@@ -14,28 +14,38 @@
 			<div style="float: center">
 				<div style="display: inline;">
 				<p:selectOneRadio id="tipologia" value="#{formBean.number}">  
-				            <f:selectItem itemLabel="Volo" itemValue="1" />  
-				            <f:selectItem itemLabel="Hotel" itemValue="2" />  
-				            <f:selectItem itemLabel="Escursione" itemValue="3" />    
+				            <f:selectItem itemLabel="Volo" itemValue="volo" />  
+				            <f:selectItem itemLabel="Hotel" itemValue="hotel" />  
+				            <f:selectItem itemLabel="Escursione" itemValue="escursione" />    
 				</p:selectOneRadio> 
 				
-				<p:outputLabel value="Descrizione: "/>
-				<p:inputText value="#{loginClienteBean.email}"
+				<p:outputLabel value="Descrizione: "/><br />
+				<p:inputTextarea rows="10" cols="33" value="#{ricercaPacchettiBean.dataPartenza}"
 			       id="descrizione"
 			       required="true"
 			       requiredMessage="Devi inserire una descrizione del componente">  
-			    </p:inputText>
+			    </p:inputTextarea>
 			    <p:message for="descrizione" />
 				
 				
 				
 				<p:outputLabel value="Costo: "/>
-				<p:inputText value="#{loginClienteBean.email}"
+				<p:inputText value="#{ricercaPacchettiBean.dataRitorno}"
 			       id="costo"
 			       required="true"
 			       requiredMessage="Devi inserire il costo del componente">  
 			    </p:inputText>
 			    <p:message for="costo" />
+			    
+			    <p:outputLabel value="Data Inizio Validità: "/>
+				<p:calendar value="#{ricercaPacchettiBean.dataPartenza}" id="dataInizio" required="true" requiredMessage="Devi inserire una data di inizio validità del componente"/>
+				<p:message for="dataInizio"/>
+				<br />
+			
+				<h:outputText value="Data Fine Validità: " />
+				<p:calendar value="#{ricercaPacchettiBean.dataRitorno}" id="dataFine" required="true" requiredMessage="Devi inserire una data di fine validità del componente"/>
+				<p:message for="dataFine"/>
+				<br />
 				
 				</div>
 				</div>
