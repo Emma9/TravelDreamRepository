@@ -1,6 +1,5 @@
 package it.polimi.traveldream.ejb.client;
 
-import it.polimi.traveldream.entities.Invito;
 import it.polimi.traveldream.entities.InvitoDTO;
 
 import java.util.ArrayList;
@@ -38,10 +37,6 @@ public interface InvitoBeanRemote {
 	 * @return InvitoDTO*/
 	public InvitoDTO findByIdInvito(Long idInvito);
 	
-	/**@param emailMittente
-	 * @return ArrayList<Invito>*/
-	public ArrayList<Invito> findByEmailMittenteENT(String emailMittente);
-
 	/**@param emailMittente
 	 * @return ArrayList<InvitoDTO>*/
 	public ArrayList<InvitoDTO> findByEmailMittente(String emailMittente);

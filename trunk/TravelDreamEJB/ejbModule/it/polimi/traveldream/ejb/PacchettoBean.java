@@ -3,6 +3,7 @@ package it.polimi.traveldream.ejb;
 import it.polimi.traveldream.ejb.client.ComponenteBeanRemote;
 import it.polimi.traveldream.ejb.client.PacchettoBeanLocal;
 import it.polimi.traveldream.ejb.client.PacchettoBeanRemote;
+import it.polimi.traveldream.entities.Componente;
 import it.polimi.traveldream.entities.ComponenteDTO;
 import it.polimi.traveldream.entities.Pacchetto;
 import it.polimi.traveldream.entities.PacchettoDTO;
@@ -36,7 +37,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 * @param listaComponenti
 	 * @param sconto
 	 * @return idPacchetto*/
-	public Long createPacchetto(String destinazione, Date dataInizioValidita, Date dataFineValidita, String etichetta, String descrizione, List<ComponenteDTO> listaComponenti, int sconto) {
+	public Long createPacchetto(String destinazione, Date dataInizioValidita, Date dataFineValidita, String etichetta, String descrizione, List<ComponenteDTO> listaComponenti, List<ComponenteDTO> listaComponentiSelezionati, int sconto) {
 
 		if((verificaListaComponenti(listaComponenti))&&(verificaEtichetta(etichetta))){
 		
@@ -47,7 +48,19 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 		pacchetto.setDataFineValidita(dataFineValidita);
 		pacchetto.setEtichetta(etichetta);
 		pacchetto.setDescrizione(descrizione);
-		pacchetto.setListaComponenti(listaComponenti);
+		
+		List<Componente> listaComponentiEnt= new ArrayList<Componente>();
+		for (int i=0;i<listaComponenti.size();i++){
+			listaComponentiEnt.add(componenteDTOToComponenteInPacchetto(listaComponenti.get(i)));
+		}
+		pacchetto.setListaComponenti(listaComponentiEnt);
+		
+		List<Componente> listaComponentiSelezionatiEnt= new ArrayList<Componente>();
+		for (int i=0;i<listaComponentiSelezionati.size();i++){
+			listaComponentiSelezionatiEnt.add(componenteDTOToComponenteInPacchetto(listaComponentiSelezionati.get(i)));
+		}
+		pacchetto.setListaComponentiSelezionati(listaComponentiSelezionatiEnt);
+		
 		pacchetto.setSconto(sconto);
 		
 		int costoPacchetto=calcolaCostoPacchetto(listaComponenti, sconto);
@@ -66,7 +79,6 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	/**@param idPacchetto*/
 	public void removePacchetto(Long idPacchetto) {
 
-		//PacchettoDTO p = findByIdPacchetto(idPacchetto);
 		
 		Pacchetto p = manager.find(Pacchetto.class, idPacchetto);
 		
@@ -83,18 +95,31 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 * @param listaComponenti
 	 * @param sconto
 	 */
-	public void updatePacchetto(Long idPacchetto, String destinazione, Date dataInizioValidita, Date dataFineValidita, String etichetta, String descrizione, List<ComponenteDTO> listaComponenti, int sconto) {
+	public void updatePacchetto(Long idPacchetto, String destinazione, Date dataInizioValidita, Date dataFineValidita, String etichetta, String descrizione, List<ComponenteDTO> listaComponenti, List<ComponenteDTO> listaComponentiSelezionati, int sconto) {
 
 		if ((verificaPresenzaPacchetto(idPacchetto))&&(verificaListaComponenti(listaComponenti))&&(verificaEtichetta(etichetta))) {
 			
-			PacchettoDTO pacchetto = findByIdPacchetto(idPacchetto);
+			Pacchetto pacchetto = manager.find(Pacchetto.class, idPacchetto);
 
 			pacchetto.setDestinazione(destinazione);
 			pacchetto.setDataInizioValidita(dataInizioValidita);
 			pacchetto.setDataFineValidita(dataFineValidita);
 			pacchetto.setEtichetta(etichetta);
 			pacchetto.setDescrizione(descrizione);
-			pacchetto.setListaComponenti(listaComponenti);
+
+			List<Componente> listaComponentiEnt= new ArrayList<Componente>();
+			for (int i=0;i<listaComponenti.size();i++){
+				listaComponentiEnt.add(componenteDTOToComponenteInPacchetto(listaComponenti.get(i)));
+			}
+			pacchetto.setListaComponenti(listaComponentiEnt);
+			
+			List<Componente> listaComponentiSelezionatiEnt= new ArrayList<Componente>();
+			for (int i=0;i<listaComponentiSelezionati.size();i++){
+				listaComponentiSelezionatiEnt.add(componenteDTOToComponenteInPacchetto(listaComponentiSelezionati.get(i)));
+			}
+			pacchetto.setListaComponentiSelezionati(listaComponentiSelezionatiEnt);
+						
+			
 			pacchetto.setSconto(sconto);
 			
 			int costoPacchetto=calcolaCostoPacchetto(listaComponenti, sconto);
@@ -108,16 +133,15 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 * @return ArrayList<idPacchetto>*/
 	public ArrayList<Long> findByDestinazione(String destinazione) {
 
-		TypedQuery<PacchettoDTO> q = manager.createQuery("FROM Pacchetto p WHERE p.destinazione=:new_destinazione", PacchettoDTO.class);
+		TypedQuery<Pacchetto> q = manager.createQuery("FROM Pacchetto p WHERE p.destinazione=:new_destinazione", Pacchetto.class);
 
 		q.setParameter("new_destinazione", destinazione);
 
 		ArrayList<Long> pacchetti = new ArrayList<Long>();
-		List<PacchettoDTO> risultati = q.getResultList();
 
-		for (int i = 0; i < risultati.size(); i++) {
+		for (int i = 0; i < q.getResultList().size(); i++) {
 
-			pacchetti.set(i, risultati.get(i).getIdPacchetto());
+			pacchetti.add(q.getResultList().get(i).getIdPacchetto());
 			
 		}
 		return pacchetti;
@@ -127,32 +151,19 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 * @return ArrayList<idPacchetto>*/
 	public ArrayList<Long> findByEtichetta(String etichetta) {
 
-		TypedQuery<PacchettoDTO> q = manager.createQuery("FROM Pacchetto p", PacchettoDTO.class);
+		TypedQuery<Pacchetto> q = manager.createQuery("FROM Pacchetto p", Pacchetto.class);
 
-		ArrayList<PacchettoDTO> pacchetti = new ArrayList<PacchettoDTO>();
-		ArrayList<Long> idPacchetti = new ArrayList<Long>();
-		List<PacchettoDTO> risultati = q.getResultList();
+		ArrayList<Long> pacchetti = new ArrayList<Long>();
+		
 
-		for (int i = 0; i < risultati.size(); i++) {
+		for (int i = 0; i < q.getResultList().size(); i++) {
 
-			if (risultati.get(i).getEtichetta().equals(etichetta)) {
-
-				pacchetti.set(i, risultati.get(i));
-
+			if(q.getResultList().get(i).getEtichetta().contains(etichetta)){
+				pacchetti.add(q.getResultList().get(i).getIdPacchetto());
 			}
-		}
-
-		for (int j = 0; j < pacchetti.size(); j++) {
-
-			if (pacchetti.get(j).equals(null)) {
-				
-			} else {
-				
-				idPacchetti.set(j, pacchetti.get(j).getIdPacchetto());
 			
-			}
 		}
-		return idPacchetti;
+		return pacchetti;
 	}
 	
 	
@@ -160,19 +171,16 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 * @return ArrayList<PacchettoDTO>*/
 	public ArrayList<PacchettoDTO> findByEtichettaOGG(String etichetta) {
 
-		TypedQuery<PacchettoDTO> q = manager.createQuery("FROM Pacchetto p", PacchettoDTO.class);
+		TypedQuery<Pacchetto> q = manager.createQuery("FROM Pacchetto p", Pacchetto.class);
 
 		ArrayList<PacchettoDTO> pacchetti = new ArrayList<PacchettoDTO>();
-		//ArrayList<Long> idPacchetti = new ArrayList<Long>();
-		List<PacchettoDTO> risultati = q.getResultList();
 
-		for (int i = 0; i < risultati.size(); i++) {
+		for (int i = 0; i < q.getResultList().size(); i++) {
 
-			if (risultati.get(i).getEtichetta().equals(etichetta)) {
-
-				pacchetti.add(risultati.get(i));
-
+			if(q.getResultList().get(i).getEtichetta().contains(etichetta)){
+				pacchetti.add(pacchettoToDTO(q.getResultList().get(i)));
 			}
+			
 		}
 
 		return pacchetti;
@@ -182,11 +190,11 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 * @return PacchettoDTO*/
 	public PacchettoDTO findByIdPacchetto(Long idPacchetto) {
 
-		TypedQuery<PacchettoDTO> q = manager.createQuery("FROM Pacchetto p WHERE p.idPacchetto=:new_idPacchetto", PacchettoDTO.class);
+		TypedQuery<Pacchetto> q = manager.createQuery("FROM Pacchetto p WHERE p.idPacchetto=:new_idPacchetto", Pacchetto.class);
 
 		q.setParameter("new_idPacchetto", idPacchetto);
 
-		PacchettoDTO pacchetto = q.getSingleResult();
+		PacchettoDTO pacchetto = pacchettoToDTO(q.getSingleResult());
 
 		return pacchetto;
 	}
@@ -195,17 +203,16 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	/** @return ArrayList<idPacchetto> */
 	public ArrayList<Long> findAll() {
 
-		TypedQuery<PacchettoDTO> q = manager.createQuery("FROM Pacchetto p", PacchettoDTO.class);
+		TypedQuery<Pacchetto> q = manager.createQuery("FROM Pacchetto p", Pacchetto.class);
 
-		List<PacchettoDTO> pacchetti = q.getResultList();
 
-		ArrayList<Long> lista = new ArrayList<Long>();
+		ArrayList<Long> pacchetti = new ArrayList<Long>();
 
-		for (int i = 0; i < pacchetti.size(); i++) {
-
-			lista.set(i, pacchetti.get(i).getIdPacchetto());
+		for (int i = 0; i < q.getResultList().size(); i++) {
+				pacchetti.add(q.getResultList().get(i).getIdPacchetto());
 		}
-		return lista;
+		
+		return pacchetti;
 	}
 	
 	/**@param dataPartenza
@@ -271,20 +278,17 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 * @return true if idPacchetto is present in the DB, otherwise false*/
 	public boolean verificaPresenzaPacchetto(Long idPacchetto) {
 		try {
-			TypedQuery<PacchettoDTO> q = manager.createQuery("FROM Pacchetto p WHERE p.idPacchetto=:new_idPacchetto", PacchettoDTO.class);
+			TypedQuery<Pacchetto> q = manager.createQuery("FROM Pacchetto p WHERE p.idPacchetto=:new_idPacchetto", Pacchetto.class);
 
 			q.setParameter("new_idPacchetto", idPacchetto);
 
-			List<PacchettoDTO> pacchetti = q.getResultList();
-
-			if (pacchetti.size() == 0) {
+			if(q.getResultList().isEmpty()){
 				return false;
-
-			} else {
+			}
 				
 				return true;
 
-			}
+			
 		} catch (NullPointerException e) {
 			return false;
 		}
@@ -422,13 +426,17 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 			
 			
 			
-			TypedQuery<PacchettoDTO> q = manager.createQuery("FROM Pacchetto p WHERE p IN (SELECT p FROM Pacchetto p WHERE p.destinazione=:new_destinazione) AND p IN (SELECT p FROM Pacchetto p WHERE p.dataInizioValidita<=:new_dataPartenza AND p.dataInizioValidita<=:new_dataRitorno AND p.dataFineValidita>=:new_dataPartenza AND p.dataFineValidita>=:new_dataRitorno)", PacchettoDTO.class);
+			TypedQuery<Pacchetto> q = manager.createQuery("FROM Pacchetto p WHERE p IN (SELECT p FROM Pacchetto p WHERE p.destinazione=:new_destinazione) AND p IN (SELECT p FROM Pacchetto p WHERE p.dataInizioValidita<=:new_dataPartenza AND p.dataInizioValidita<=:new_dataRitorno AND p.dataFineValidita>=:new_dataPartenza AND p.dataFineValidita>=:new_dataRitorno)", Pacchetto.class);
 			q.setParameter("new_destinazione", destinazione);
 			q.setParameter("new_dataPartenza", dataRitorno);
 			q.setParameter("new_dataRitorno", dataRitorno);
-					
 			
-			List<PacchettoDTO> pacchetti = q.getResultList();
+			List<PacchettoDTO> pacchetti = new ArrayList<PacchettoDTO>();
+			for (int i = 0; i < q.getResultList().size(); i++) {
+
+				pacchetti.add(pacchettoToDTO(q.getResultList().get(i)));
+			}
+			
 			
 			return pacchetti;
 
@@ -458,7 +466,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 			//q1.setParameter("new_etichetta", etichetta);
 			
 			//DATE
-			TypedQuery<PacchettoDTO> q = manager.createQuery("FROM Pacchetto p WHERE p.dataInizioValidita<=new_dataPartenza AND p.dataInizioValidita<=new_dataRitorno AND p.dataFineValidita>=new_dataPartenza AND p.dataFineValidita>=new_dataRitorno", PacchettoDTO.class);
+			TypedQuery<Pacchetto> q = manager.createQuery("FROM Pacchetto p WHERE p.dataInizioValidita<=new_dataPartenza AND p.dataInizioValidita<=new_dataRitorno AND p.dataFineValidita>=new_dataPartenza AND p.dataFineValidita>=new_dataRitorno", Pacchetto.class);
 
 			q.setParameter("new_dataPartenza", dataPartenza);
 			q.setParameter("new_dataRitorno", dataRitorno);
@@ -470,11 +478,14 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 			//q3.setParameter("q2", q2);			
 			
 			
-			ArrayList<PacchettoDTO> pacchetti = (ArrayList<PacchettoDTO>) q.getResultList();
 			
-			for (int i=0; i<pacchetti.size(); i++){
+			for (int i=0; i<q.getResultList().size(); i++){
 				
-				String[] etichette=splitEtichetta(pacchetti.get(i).getEtichetta()); 
+				if(q.getResultList().get(i).getEtichetta().contains(etichetta)){
+					listaPacchettiRicercati.add(pacchettoToDTO(q.getResultList().get(i)));
+				}
+				
+				/*String[] etichette=splitEtichetta(pacchetti.get(i).getEtichetta()); 
 				for(int j=0; i<etichette.length;j++){
 					
 					if(etichette[j].equals(etichetta)){
@@ -482,7 +493,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 					}
 					
 					
-				}
+				}*/
 				
 			}
 			
@@ -502,6 +513,8 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 * @param componenteDaInserire
 	 * @return List<ComponenteDTO>
 	 */
+	/* è utile?????? c'è già l'update!
+	 * 
 	public List<ComponenteDTO> modificaListaComponentiSelezionati (List<ComponenteDTO> listaComponentiSelezionati, ComponenteDTO componenteDaInserire){
 		
 		ArrayList<ComponenteDTO> listaComponentiModificata= new ArrayList<ComponenteDTO>();
@@ -518,6 +531,8 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 		return listaComponentiModificata;
 		
 	}
+	
+	*/
 	
 	/**@param listaComponenti
 	 * @param sconto
@@ -550,6 +565,54 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	   ArrLis.add(StrTkn.nextToken());
 	 }
 	 return ArrLis.toArray(new String[0]);
+	}
+	
+	public PacchettoDTO pacchettoToDTO (Pacchetto pacchetto){
+		PacchettoDTO pacchettoDTO= new PacchettoDTO();
+		
+		pacchettoDTO.setIdPacchetto(pacchetto.getIdPacchetto());
+		pacchettoDTO.setCosto(pacchetto.getCosto());
+		pacchettoDTO.setDataFineValidita(pacchetto.getDataFineValidita());
+		pacchettoDTO.setDataInizioValidita(pacchetto.getDataInizioValidita());
+		pacchettoDTO.setDescrizione(pacchetto.getDescrizione());
+		pacchettoDTO.setDestinazione(pacchetto.getDestinazione());
+		pacchettoDTO.setEtichetta(pacchetto.getEtichetta());
+		pacchettoDTO.setSconto(pacchetto.getSconto());
+		
+		List<ComponenteDTO> listaComponenti= new ArrayList<ComponenteDTO>();
+		for (int i=0;i<pacchetto.getListaComponenti().size();i++){
+			listaComponenti.add(componenteToDTOInPacchetto(pacchetto.getListaComponenti().get(i)));
+			
+		}
+		
+		pacchettoDTO.setListaComponenti(listaComponenti);
+		
+		List<ComponenteDTO> listaComponentiSelezionati= new ArrayList<ComponenteDTO>();
+		for (int i=0;i<pacchetto.getListaComponentiSelezionati().size();i++){
+			listaComponentiSelezionati.add(componenteToDTOInPacchetto(pacchetto.getListaComponentiSelezionati().get(i)));
+			
+		}
+		
+		
+		pacchettoDTO.setListaComponentiSelezionati(listaComponentiSelezionati);
+		
+		return pacchettoDTO;
+		
+	}
+	
+	
+	public ComponenteDTO componenteToDTOInPacchetto (Componente componente){
+		
+		ComponenteBean componenteBean=new ComponenteBean();
+		ComponenteDTO componenteDTO=componenteBean.componenteToDTO(componente);
+		return componenteDTO;
+	}
+	
+public Componente componenteDTOToComponenteInPacchetto (ComponenteDTO componenteDTO){
+		
+		ComponenteBean componenteBean=new ComponenteBean();
+		Componente componente=componenteBean.componenteDTOToComponente(componenteDTO);
+		return componente;
 	}
 	
 }
