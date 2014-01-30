@@ -14,6 +14,9 @@ import it.polimi.traveldream.entities.ComponenteDTO;
 
 
 
+
+
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -25,14 +28,15 @@ public interface ComponenteBeanRemote {
 	
 	/**
 	 * @param tipologia
+	 * @param luogo
 	 * @param descrizione
 	 * @param costo
 	 * @param dataInizioValidita
 	 * @param dataFineValidita
 	 * @param disponibilitaDaSettare
-	 * @return
+	 * @return codiceComponente
 	 */
-	public Long createComponente(String tipologia, String descrizione,
+	public Long createComponente(String tipologia,String luogo, String descrizione,
 			int costo, Date dataInizioValidita, Date dataFineValidita,
 			int disponibilitaDaSettare);
 	
@@ -42,19 +46,27 @@ public interface ComponenteBeanRemote {
 	/**
 	 * @param codiceComponente
 	 * @param tipologia
+	 * @param luogo
 	 * @param descrizione
 	 * @param costo
 	 * @param dataInizioValidita
 	 * @param dataFineValidita
 	 * @param disponibilitaDaSettare
 	 */
-	public void updateComponente(Long codiceComponente, String tipologia,
+	public void updateComponente(Long codiceComponente, String tipologia, String luogo,
 			String descrizione, int costo, Date dataInizioValidita, Date dataFineValidita,
-			int disponibilitaDaSettare);
+			int disponibilitaDaSettare) ;
 	
 	/**@param codiceComponente
 	 * @return ComponenteDTO*/
 	public ComponenteDTO findByCodiceComponente(Long codiceComponente);
+	
+	/**
+	 * @param luogo
+	 * @return ArrayList<ComponenteDTO>
+	 */
+	public ArrayList<ComponenteDTO> findByLuogo(String luogo);
+	
 	
 	/**
 	 * @param termine

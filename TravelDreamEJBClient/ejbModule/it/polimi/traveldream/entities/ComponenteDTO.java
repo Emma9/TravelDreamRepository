@@ -14,6 +14,7 @@ public class ComponenteDTO implements Serializable{
 	 */
 	private static final long serialVersionUID = 205L;
 	private Long codiceComponente;
+	private String luogo;
 	private String tipologia;
 	private String descrizione;
 	private int costo;
@@ -36,7 +37,25 @@ public class ComponenteDTO implements Serializable{
 		
 	}
 	
+	
+	
+	
+	
 
+
+	/**
+	 * @return the luogo
+	 */
+	public String getLuogo() {
+		return luogo;
+	}
+
+	/**
+	 * @param luogo the luogo to set
+	 */
+	public void setLuogo(String luogo) {
+		this.luogo = luogo;
+	}
 
 	/**
 	 * @param codiceComponente the codiceComponente to set

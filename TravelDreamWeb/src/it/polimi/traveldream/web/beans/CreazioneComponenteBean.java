@@ -26,6 +26,7 @@ public class CreazioneComponenteBean implements Serializable {
 	private ComponenteBeanRemote componenteRemoto;
 	
 	private String tipologia;
+	private String luogo;
 	private String descrizione;
 	private int costo;
 	private Date dataInizioValidita;
@@ -44,6 +45,23 @@ public class CreazioneComponenteBean implements Serializable {
 	 */
 	public void setTipologia(String tipologia) {
 		this.tipologia = tipologia;
+	}
+	
+	
+	
+	
+	
+	/**
+	 * @return the luogo
+	 */
+	public String getLuogo() {
+		return luogo;
+	}
+	/**
+	 * @param luogo the luogo to set
+	 */
+	public void setLuogo(String luogo) {
+		this.luogo = luogo;
 	}
 	/**
 	 * @return the descrizione
@@ -116,7 +134,8 @@ public class CreazioneComponenteBean implements Serializable {
 		
 		try {
 			
-			componenteRemoto.createComponente(tipologia, descrizione, costo, dataInizioValidita, dataFineValidita, disponibilita);
+			componenteRemoto.createComponente(tipologia, luogo, descrizione, costo, dataInizioValidita, dataFineValidita, disponibilita);
+			
 			
 
 		}catch (EJBException e) {

@@ -21,6 +21,7 @@ public class Componente implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long codiceComponente;
+	private String luogo;
 	private String tipologia;
 	private String descrizione;
 	private int costo;
@@ -46,6 +47,24 @@ public class Componente implements Serializable {
 	}
 	
 	
+	
+	
+	
+	
+
+	/**
+	 * @return the luogo
+	 */
+	public String getLuogo() {
+		return luogo;
+	}
+
+	/**
+	 * @param luogo the luogo to set
+	 */
+	public void setLuogo(String luogo) {
+		this.luogo = luogo;
+	}
 
 	/**
 	 * @param codiceComponente the codiceComponente to set
