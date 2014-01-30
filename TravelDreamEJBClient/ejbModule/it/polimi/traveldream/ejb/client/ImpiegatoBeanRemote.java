@@ -25,7 +25,7 @@ public interface ImpiegatoBeanRemote {
 	public void updateImpiegato(Long idImpiegato,String codiceFiscale, String nome, String cognome);
 
 	/**@param idImpiegato
-	 * @return Impiegato*/
+	 * @return ImpiegatoDTO*/
 	public ImpiegatoDTO findByIdImpiegato(Long idImpiegato);
 
 	/**@return ArrayList<idImpiegato>*/
@@ -38,12 +38,6 @@ public interface ImpiegatoBeanRemote {
 	/**@param idImpiegato
 	 * @return true if idImpiegato is present in the DB, otherwise false*/
 	public boolean verificaPresenzaImpiegatoId(Long idImpiegato);
-	
-	
-	
-	
-	
-	
-	
+		
 
 }

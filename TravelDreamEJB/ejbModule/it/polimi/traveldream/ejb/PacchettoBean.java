@@ -4,6 +4,7 @@ import it.polimi.traveldream.ejb.client.ComponenteBeanRemote;
 import it.polimi.traveldream.ejb.client.PacchettoBeanLocal;
 import it.polimi.traveldream.ejb.client.PacchettoBeanRemote;
 import it.polimi.traveldream.entities.ComponenteDTO;
+import it.polimi.traveldream.entities.Pacchetto;
 import it.polimi.traveldream.entities.PacchettoDTO;
 
 import java.util.ArrayList;
@@ -30,17 +31,16 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	/**@param destinazione
 	 * @param dataInizioValidita
 	 * @param dataFineValidita
-	 * @param etichette
+	 * @param etichetta
 	 * @param descrizione
 	 * @param listaComponenti
 	 * @param sconto
 	 * @return idPacchetto*/
 	public Long createPacchetto(String destinazione, Date dataInizioValidita, Date dataFineValidita, String etichetta, String descrizione, List<ComponenteDTO> listaComponenti, int sconto) {
 
-		
 		if((verificaListaComponenti(listaComponenti))&&(verificaEtichetta(etichetta))){
 		
-		PacchettoDTO pacchetto = new PacchettoDTO();
+		Pacchetto pacchetto = new Pacchetto();
 
 		pacchetto.setDestinazione(destinazione);
 		pacchetto.setDataInizioValidita(dataInizioValidita);
@@ -66,7 +66,9 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	/**@param idPacchetto*/
 	public void removePacchetto(Long idPacchetto) {
 
-		PacchettoDTO p = findByIdPacchetto(idPacchetto);
+		//PacchettoDTO p = findByIdPacchetto(idPacchetto);
+		
+		Pacchetto p = manager.find(Pacchetto.class, idPacchetto);
 		
 		manager.remove(p);
 
@@ -76,7 +78,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 * @param destinazione
 	 * @param dataInizioValidita
 	 * @param dataFineValidita
-	 * @param etichette
+	 * @param etichetta
 	 * @param descrizione
 	 * @param listaComponenti
 	 * @param sconto
@@ -154,7 +156,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	}
 
 	/**@param idPacchetto
-	 * @return Pacchetto*/
+	 * @return PacchettoDTO*/
 	public PacchettoDTO findByIdPacchetto(Long idPacchetto) {
 
 		TypedQuery<PacchettoDTO> q = manager.createQuery("FROM Pacchetto p WHERE p.idPacchetto=:new_idPacchetto", PacchettoDTO.class);
@@ -264,8 +266,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 			return false;
 		}
 	}
-	
-	
+		
 	/**@param listaComponenti
 	 * @return true if listaComponenti contains more than two elements
 	 *  and at least three of them are of a different type, otherwise false
@@ -308,18 +309,6 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	}
 
 	
-	public String[] splitEtichetta(String etichetta) 
-    {
-     StringTokenizer StrTkn = new StringTokenizer(etichetta, ",");
-     ArrayList<String> ArrLis = new ArrayList<String>(0);
-     while(StrTkn.hasMoreTokens())
-     {
-       ArrLis.add(StrTkn.nextToken());
-     }
-     return ArrLis.toArray(new String[0]);
-    }
-	
-	
 	/**@param etichetta
 	 * @return true if etichetta is valid, otherwise false	
 	 */
@@ -353,10 +342,44 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 		
 	}
 
+	/**@param listaComponenti
+	 * @param listaComponentiSelezionati
+	 * @return true if listaComponenti contains listaComponentiSelezionati, otherwise false
+	 */
+	public boolean verificaComponentiSelezionatiInComponenti(List<ComponenteDTO> listaComponenti, List<ComponenteDTO> listaComponentiSelezionati){
+		
+		for(int i=0; i<listaComponentiSelezionati.size(); i++){
+			
+			if(!listaComponenti.contains(listaComponentiSelezionati.get(i))){
+				return false;	
+				
+			}
+			
+		}
+		
+		return true;
+		
+	}
+
+	/**@param listaComponentiSelezionati
+	 * @return true if listaComponentiSelezionati contains 3 elements, otherwise false
+	 */
+	public boolean verificaTreComponentiSelezionati(List<ComponenteDTO> listaComponentiSelezionati){
+		
+		
+		if(verificaListaComponenti(listaComponentiSelezionati)){
+			if(listaComponentiSelezionati.size()==3){
+				return true;
+			}
+		}
+		return false;
+		
+	}
+
 	/**@param destinazione
 	 * @param dataPartenza
 	 * @param dataRitorno
-	 * @return ArrayList<Pacchetto>
+	 * @return List<PacchettoDTO>
 	 */
 	public List<PacchettoDTO> ricercaPacchetti (String destinazione, Date dataPartenza, Date dataRitorno){
 		
@@ -452,37 +475,10 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	}
 	
 	
-	
-	public boolean verificaComponentiSelezionatiInComponenti(List<ComponenteDTO> listaComponenti, List<ComponenteDTO> listaComponentiSelezionati){
-		
-		for(int i=0; i<listaComponentiSelezionati.size(); i++){
-			
-			if(!listaComponenti.contains(listaComponentiSelezionati.get(i))){
-				return false;
-				
-				
-			}
-			
-		}
-		
-		return true;
-		
-	}
-	
-	
-	public boolean verificaTreComponentiSelezionati(List<ComponenteDTO> listaComponentiSelezionati){
-		
-		
-		if(verificaListaComponenti(listaComponentiSelezionati)){
-			if(listaComponentiSelezionati.size()==3){
-				return true;
-			}
-		}
-		return false;
-		
-	}
-	
-	
+	/**@param listaComponentiselzionati
+	 * @param componenteDaInserire
+	 * @return List<ComponenteDTO>
+	 */
 	public List<ComponenteDTO> modificaListaComponentiSelezionati (List<ComponenteDTO> listaComponentiSelezionati, ComponenteDTO componenteDaInserire){
 		
 		ArrayList<ComponenteDTO> listaComponentiModificata= new ArrayList<ComponenteDTO>();
@@ -500,6 +496,10 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 		
 	}
 	
+	/**@param listaComponenti
+	 * @param sconto
+	 * @return costoTotale
+	 */
 	public int calcolaCostoPacchetto (List<ComponenteDTO> listaComponenti, int sconto){
 		
 		int costoTotale=0;
@@ -513,6 +513,20 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 		costoTotale = costoTotale - (costoTotale*(sconto/100));
 		
 		return costoTotale;
+	}
+
+	/**@param etichetta
+	 * @return String[]
+	 */
+	public String[] splitEtichetta(String etichetta) 
+	{
+	 StringTokenizer StrTkn = new StringTokenizer(etichetta, ",");
+	 ArrayList<String> ArrLis = new ArrayList<String>(0);
+	 while(StrTkn.hasMoreTokens())
+	 {
+	   ArrLis.add(StrTkn.nextToken());
+	 }
+	 return ArrLis.toArray(new String[0]);
 	}
 	
 }

@@ -21,14 +21,18 @@ public interface AmicoBeanRemote {
 	public void updateAmico(Long idAmico, String email);
 
 	/**@param idAmico
-	 * @return Amico*/
+	 * @return AmicoDTO*/
 	public AmicoDTO findByIdAmico(Long idAmico);
 
 	/**@return ArrayList<idAmico>*/
 	public ArrayList<Long> findAll();
 	
+	/**@param email
+	 * @return true if email is present in the DB, otherwise false*/
 	public boolean verificaPresenzaAmicoEm(String email);
 	
+	/**@param idAmico
+	 * @return true if idAmico is not present in the DB, otherwise false*/
 	public boolean verificaPresenzaAmicoId(Long idAmico);
 	
 	/**@param idAmico

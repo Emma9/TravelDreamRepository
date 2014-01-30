@@ -3,6 +3,7 @@ package it.polimi.traveldream.ejb;
 import it.polimi.traveldream.ejb.client.PacchettoPersonalizzatoBeanLocal;
 import it.polimi.traveldream.ejb.client.PacchettoPersonalizzatoBeanRemote;
 import it.polimi.traveldream.entities.ComponenteDTO;
+import it.polimi.traveldream.entities.PacchettoPersonalizzato;
 import it.polimi.traveldream.entities.PacchettoPersonalizzatoDTO;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 
 		if(verificaStato(stato)){
 			
-			PacchettoPersonalizzatoDTO pacchettoPersonalizzato = new PacchettoPersonalizzatoDTO();
+			PacchettoPersonalizzato pacchettoPersonalizzato = new PacchettoPersonalizzato();
 
 			pacchettoPersonalizzato.setStato(stato);
 			pacchettoPersonalizzato.setIdCliente(idCliente);
@@ -52,14 +53,16 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 	}
 
 	
+	/**@param idPacchettoPersonalizzato*/
 	public void removePacchettoPersonalizzato(Long idPacchettoPersonalizzato) {
-		PacchettoPersonalizzatoDTO pacchetto= findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato);
+		
+		//PacchettoPersonalizzatoDTO pacchetto= findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato);
+		
+		PacchettoPersonalizzato pacchetto = manager.find(PacchettoPersonalizzato.class, idPacchettoPersonalizzato);
+		
 		manager.remove(pacchetto);
 	}
 
-	
-	
-	
 
 	/**@param idPacchettoPersonalizzato
 	 * @param stato
@@ -68,8 +71,10 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 
 		if ((verificaPresenzaPacchettoPersonalizzato(idPacchettoPersonalizzato))&&(verificaStato(stato))) {
 
-			PacchettoPersonalizzatoDTO pacchettoPersonalizzato = findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato);
+			//PacchettoPersonalizzatoDTO pacchettoPersonalizzato = findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato);
 
+			PacchettoPersonalizzato pacchettoPersonalizzato = manager.find(PacchettoPersonalizzato.class, idPacchettoPersonalizzato);
+			
 			pacchettoPersonalizzato.setStato(stato);
 			pacchettoPersonalizzato.setListaComponenti(listaComponenti);
 
@@ -128,7 +133,7 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 	}
 
 	/**@param idPacchettoPersonalizzato
-	 * @return PacchettoPersonalizzato*/
+	 * @return PacchettoPersonalizzatoDTO*/
 	public PacchettoPersonalizzatoDTO findByIdPacchettoPersonalizzato(Long idPacchettoPersonalizzato) {
 
 		TypedQuery<PacchettoPersonalizzatoDTO> q = manager
@@ -142,7 +147,7 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 	}
 
 	/**@param idCliente
-	 * @return ArrayList<PacchettoPersonalizzato>*/
+	 * @return ArrayList<PacchettoPersonalizzatoDTO>*/
 	public ArrayList<PacchettoPersonalizzatoDTO> findByIdCliente(Long idCliente) {
 
 		TypedQuery<PacchettoPersonalizzatoDTO> q = manager.createQuery("FROM PacchettoPersonalizzato p WHERE p.idCliente=:new_idCliente", PacchettoPersonalizzatoDTO.class);
@@ -200,7 +205,7 @@ public class PacchettoPersonalizzatoBean implements	PacchettoPersonalizzatoBeanR
 	/**@param stato
 	 * @return true if stato is valid, otherwise false
 	 */
-public boolean verificaStato (String stato) {
+	public boolean verificaStato (String stato) {
 		
 		switch (stato){
 		

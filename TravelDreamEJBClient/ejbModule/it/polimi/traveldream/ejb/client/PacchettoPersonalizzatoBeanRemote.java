@@ -16,8 +16,8 @@ public interface PacchettoPersonalizzatoBeanRemote {
 	 * @return idPacchettoPersonalizzato*/
 	public Long createPacchettoPersonalizzato(String stato, Long idCliente);
 
-	public void removePacchettoPersonalizzato(Long idPacchettoPersonalizzato);
-	
+	/**@param idPacchettoPersonalizzato*/
+	public void removePacchettoPersonalizzato(Long idPacchettoPersonalizzato);	
 	
 	/**@param idPacchettoPersonalizzato
 	 * @param stato
@@ -47,6 +47,9 @@ public interface PacchettoPersonalizzatoBeanRemote {
 	 * @return true if idPacchettoPersonalizzato is not present in the DB, otherwise false*/
 	public boolean verificaPresenzaPacchettoPersonalizzato(Long idPacchettoPersonalizzato);
 	
+	/**@param stato
+	 * @return true if stato is valid, otherwise false
+	 */
 	public boolean verificaStato (String stato);
 
 }

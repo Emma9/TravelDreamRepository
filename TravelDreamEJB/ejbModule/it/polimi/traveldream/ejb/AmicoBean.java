@@ -54,7 +54,9 @@ public class AmicoBean implements AmicoBeanRemote, AmicoBeanLocal {
 
 			invitoLocal.removeInvitiCliente(daIdAEmail(idAmico));
 
-			AmicoDTO a = findByIdAmico(idAmico);
+			//Amico a = findByIdAmico(idAmico);
+			
+			Amico a = manager.find(Amico.class, idAmico);
 			
 			manager.remove(a);
 
@@ -71,7 +73,9 @@ public class AmicoBean implements AmicoBeanRemote, AmicoBeanLocal {
 
 		if (verificaPresenzaAmicoId(idAmico)) {
 
-			AmicoDTO amico = findByIdAmico(idAmico);
+			//AmicoDTO amico = findByIdAmico(idAmico);
+			
+			Amico amico = manager.find(Amico.class, idAmico);
 
 			amico.setEmail(email);
 
@@ -109,7 +113,6 @@ public class AmicoBean implements AmicoBeanRemote, AmicoBeanLocal {
 		return lista;
 	}
 
-	/** Metodi private */
 
 	/**@param email
 	 * @return true if email is present in the DB, otherwise false*/
@@ -155,7 +158,7 @@ public class AmicoBean implements AmicoBeanRemote, AmicoBeanLocal {
 			return true;
 		}
 	}
-
+	
 	/**@param idAmico
 	 * @return email*/
 	public String daIdAEmail(Long idAmico) {
