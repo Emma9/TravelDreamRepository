@@ -34,6 +34,7 @@ public class ComponenteBean implements ComponenteBeanRemote,
 
 	/**
 	 * @param tipologia
+	 * @param luogo
 	 * @param descrizione
 	 * @param costo
 	 * @param dataInizioValidita
@@ -41,7 +42,7 @@ public class ComponenteBean implements ComponenteBeanRemote,
 	 * @param disponibilitaDaSettare
 	 * @return codiceComponente
 	 */
-	public Long createComponente(String tipologia, String descrizione,
+	public Long createComponente(String tipologia,String luogo, String descrizione,
 			int costo, Date dataInizioValidita, Date dataFineValidita,
 			int disponibilitaDaSettare) {
 
@@ -50,6 +51,7 @@ public class ComponenteBean implements ComponenteBeanRemote,
 			Componente componente = new Componente();
 
 			componente.setTipologia(tipologia);
+			componente.setLuogo(luogo);
 			componente.setDescrizione(descrizione);
 			componente.setCosto(costo);
 			componente.setDataInizioValidita(dataInizioValidita);
@@ -81,13 +83,14 @@ public class ComponenteBean implements ComponenteBeanRemote,
 	/**
 	 * @param codiceComponente
 	 * @param tipologia
+	 * @param luogo
 	 * @param descrizione
 	 * @param costo
 	 * @param dataInizioValidita
 	 * @param dataFineValidita
 	 * @param disponibilitaDaSettare
 	 */
-	public void updateComponente(Long codiceComponente, String tipologia,
+	public void updateComponente(Long codiceComponente, String tipologia, String luogo,
 			String descrizione, int costo, Date dataInizioValidita, Date dataFineValidita,
 			int disponibilitaDaSettare) {
 
@@ -97,6 +100,7 @@ public class ComponenteBean implements ComponenteBeanRemote,
 			Componente componente = manager.find(Componente.class, codiceComponente);
 
 			componente.setTipologia(tipologia);
+			componente.setLuogo(luogo);
 			componente.setDescrizione(descrizione);
 			componente.setCosto(costo);
 			componente.setDataInizioValidita(dataInizioValidita);
@@ -130,6 +134,35 @@ public class ComponenteBean implements ComponenteBeanRemote,
 
 		return componente;
 	}
+	
+	/**
+	 * @param luogo
+	 * @return ArrayList<ComponenteDTO>
+	 */
+	public ArrayList<ComponenteDTO> findByLuogo(String luogo) {
+
+		TypedQuery<Componente> q = manager
+				.createQuery(
+						"FROM Componente c WHERE c.luogo=:new_luogo",
+						Componente.class);
+
+		q.setParameter("new_luogo", luogo);
+		
+		ArrayList<ComponenteDTO> componenti = new ArrayList<ComponenteDTO>();
+		
+		ArrayList<Componente> lista = (ArrayList<Componente>) q.getResultList();
+		
+		for(int i=0;i<lista.size();i++){
+			
+
+		componenti.add(componenteToDTO(lista.get(i)));
+		
+		
+		}
+
+		return componenti;
+	}
+	
 	
 	/**
 	 * @param termine
