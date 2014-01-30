@@ -1,7 +1,6 @@
 package it.polimi.traveldream.web.beans;
 
 import it.polimi.traveldream.ejb.client.ClienteBeanRemote;
-import it.polimi.traveldream.entities.ClienteDTO;
 import it.polimi.traveldream.entities.PacchettoPersonalizzatoDTO;
 
 import java.io.Serializable;
