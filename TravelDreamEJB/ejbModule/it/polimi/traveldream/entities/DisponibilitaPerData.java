@@ -13,7 +13,7 @@ public class DisponibilitaPerData implements Serializable {
 
 	   
 	@Id
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.DATE)
 	private Date data;
 	private int disponibilita;
 	private static final long serialVersionUID = 1L;

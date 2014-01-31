@@ -22,9 +22,9 @@ public class Pacchetto implements Serializable {
 	@GeneratedValue
 	private Long idPacchetto;
 	private String destinazione;
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.DATE)
 	private Date dataInizioValidita;
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.DATE)
 	private Date dataFineValidita;
 	private String etichetta;
 	private String descrizione;

@@ -22,7 +22,7 @@ public class Invito implements Serializable {
 	private String emailMittente;
 	private String emailDestinatario;
 	private Long idPacchettoPersonalizzato;
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.DATE)
 	private Date data;
 	private boolean stato; //TRUE=>ACCETTATO
 

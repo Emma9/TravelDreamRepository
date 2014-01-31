@@ -33,7 +33,28 @@ public class Cliente implements Serializable {
 		super();
 	}
 	
-	
+	/*
+	public Cliente (ClienteDTO clienteDTO){
+		this.idCliente=clienteDTO.getIdCliente();
+		this.email=clienteDTO.getEmail();
+		this.password=clienteDTO.getPassword();
+		this.nome=clienteDTO.getNome();
+		this.cognome=clienteDTO.getCognome();
+		this.codiceFiscale=clienteDTO.getCodiceFiscale();
+		
+		List<PacchettoPersonalizzato> pacchetti= new ArrayList<PacchettoPersonalizzato>();
+		for(int i=0; i<clienteDTO.getPacchettiCliente().size();i++){
+			pacchetti.add(clienteDTO.getPacchettiCliente().get(i));
+		}
+		this.setPacchettiCliente(pacchetti);
+		
+		List<PacchettoPersonalizzatoDTO> pacchettiGiftList= new ArrayList<PacchettoPersonalizzatoDTO>();
+		for(int i=0; i<cliente.getGiftList().size();i++){
+			pacchettiGiftList.add(pacchettoPersonalizzatoToDTOInCliente(cliente.getGiftList().get(i)));
+		}
+		clienteDTO.setGiftList(pacchettiGiftList);
+		
+	}*/
 
 	/**@return idCliente*/
 	public Long getIdCliente() {

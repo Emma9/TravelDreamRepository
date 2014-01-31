@@ -19,9 +19,9 @@ public class PacchettoPersonalizzato extends Pacchetto {
 	private Long idPacchettoPersonalizzato;
 	private String stato;
 	private Long idCliente;
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.DATE)
 	private Date dataDiPartenza;
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.DATE)
 	private Date dataDiRitorno;
 
 	/**Costruttore*/
