@@ -13,9 +13,12 @@ import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
-import it.polimi.traveldream.ejb.client.ClienteBeanRemote;
+import org.apache.commons.codec.digest.DigestUtils;
 
-@ManagedBean()
+import it.polimi.traveldream.ejb.client.ClienteBeanRemote;
+import it.polimi.traveldream.entities.ClienteDTO;
+
+@ManagedBean(name="registrazioneBean")
 @SessionScoped
 public class RegistrazioneBean implements Serializable{
 
@@ -28,147 +31,117 @@ public class RegistrazioneBean implements Serializable{
 	@EJB
 	private ClienteBeanRemote clienteremoto;
 	
+	private ClienteDTO cliente= new ClienteDTO();
+
 	
-
-	private String nome;
 	
-	private String cognome;
-	
-	private String codiceFiscale;
-	
-	private String email;
-	
-	private String password;
-
 	/**
-	 * @return the nome
+	 * @return the clienteremoto
 	 */
-	public String getNome() {
-		return nome;
+	public ClienteBeanRemote getClienteremoto() {
+		return clienteremoto;
 	}
 
 
-	/**
-	 * @param nome the nome to set
-	 */
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
 
 
 	/**
-	 * @return the cognome
+	 * @param clienteremoto the clienteremoto to set
 	 */
-	public String getCognome() {
-		return cognome;
+	public void setClienteremoto(ClienteBeanRemote clienteremoto) {
+		this.clienteremoto = clienteremoto;
 	}
+
+
 
 
 	/**
-	 * @param cognome the cognome to set
+	 * @return the cliente
 	 */
-	public void setCognome(String cognome) {
-		this.cognome = cognome;
+	public ClienteDTO getCliente() {
+		return cliente;
 	}
+
+
 
 
 	/**
-	 * @return the codiceFiscale
+	 * @param cliente the cliente to set
 	 */
-	public String getCodiceFiscale() {
-		return codiceFiscale;
+	public void setCliente(ClienteDTO cliente) {
+		this.cliente = cliente;
 	}
 
 
-	/**
-	 * @param codiceFiscale the codiceFiscale to set
-	 */
-	public void setCodiceFiscale(String codiceFiscale) {
-		this.codiceFiscale = codiceFiscale;
+
+
+	public String registrazione() throws NoSuchAlgorithmException,
+			UnsupportedEncodingException {
+
+		/*
+		 * clienteremoto.createCliente(this.cliente.getEmail(),
+		 * this.cliente.getPassword(), this.cliente.getCodiceFiscale(),
+		 * this.cliente.getNome(), this.cliente.getCognome());
+		 * if(!clienteremoto.
+		 * findByEmailCliente(cliente.getEmail()).equals(null)){ return
+		 * "homepageCliente"; } return "formInvitoAmico";
+		 */
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+
+		try {
+
+			if (!clienteremoto.verificaPresenzaClienteRegistrazione(
+					this.cliente.getEmail(), this.cliente.getCodiceFiscale())) {
+
+				String hashPassword= DigestUtils.sha256Hex(this.cliente.getPassword());
+				Long idCliente = clienteremoto.createCliente(
+						this.cliente.getEmail(), hashPassword,
+						this.cliente.getCodiceFiscale(),
+						this.cliente.getNome(), this.cliente.getCognome());
+
+				if (clienteremoto.verificaPresenzaClienteId(idCliente)) {
+					context.addMessage(null, new FacesMessage(
+							"Registrazione ok"));
+				}
+				if (!clienteremoto.verificaPresenzaClienteId(idCliente)) {
+					context.addMessage(null, new FacesMessage(
+							"Registrazione fallita"));
+					// return "registrazione";
+				}
+
+				byte[] bytesPassword = cliente.getPassword().getBytes("UTF-8");
+
+				MessageDigest md = MessageDigest.getInstance("MD5");
+				byte[] thedigest = md.digest(bytesPassword);
+
+				request.login(cliente.getEmail(), thedigest.toString());
+
+				// request.login(cliente.getEmail(), cliente.getPassword());
+
+				context.addMessage(null, new FacesMessage(
+						"Registrazione avvenuta con successo"));
+
+				return "homepageCliente"; // homepage personalizzata del cliente
+
+			} else {
+
+				context.addMessage(null, new FacesMessage(
+						"Cliente già registrato"));
+
+				return "registrazione";// pagina di registrazione
+
+			}
+		} catch (ServletException e) {
+
+			context.addMessage(null, new FacesMessage(
+					"ERRORE: Registrazione fallita"));
+
+			return "registrazione";// pagina di registrazione
+
+		}
+
 	}
-
-
-	/**
-	 * @return the email
-	 */
-	public String getEmail() {
-		return email;
-	}
-
-
-	/**
-	 * @param email the email to set
-	 */
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-
-	/**
-	 * @return the password
-	 */
-	public String getPassword() {
-		return password;
-	}
-
-
-	/**
-	 * @param password the password to set
-	 */
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-
-	public String registrazione() throws UnsupportedEncodingException, NoSuchAlgorithmException {
-		
-		    FacesContext context = FacesContext.getCurrentInstance();
-		    HttpServletRequest request = (HttpServletRequest) 
-		        context.getExternalContext().getRequest();
-		    	
-		    try{
-		    
-		    if (!clienteremoto.verificaPresenzaClienteRegistrazione(this.email,this.codiceFiscale)) {
-
-					Long idCliente=clienteremoto.createCliente(this.email, this.password, this.codiceFiscale, this.nome,this.cognome);
-					
-					
-		    	
-					if(clienteremoto.verificaPresenzaClienteId(idCliente)){
-						context.addMessage(null, new FacesMessage("Registrazione ok"));
-					}
-					if(!clienteremoto.verificaPresenzaClienteId(idCliente)){
-						context.addMessage(null, new FacesMessage("Registrazione fallita"));
-						//return "registrazione";
-					}
-					
-					byte[] bytesPassword = password.getBytes("UTF-8");
-
-					MessageDigest md = MessageDigest.getInstance("MD5");
-					byte[] thedigest = md.digest(bytesPassword);
-					
-					request.login(email, thedigest.toString());
-					
-					request.login(email, password);
-					
-					context.addMessage(null, new FacesMessage("Registrazione avvenuta con successo"));
-					
-					return "homepageCliente"; //homepage personalizzata del cliente
-		    	
-		    	} else {
-
-		      context.addMessage(null, new FacesMessage("Cliente già registrato"));
-		      
-		      return "registrazione";//pagina di registrazione
-		    
-		    }
-		    }catch (ServletException e) {
-		    	
-		    	context.addMessage(null, new FacesMessage("ERRORE: Registrazione fallita"));
-			      
-			      return "registrazione";//pagina di registrazione
-		    	
-		    }
-		    
-		  }
 }

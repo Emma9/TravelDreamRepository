@@ -5,13 +5,12 @@
 		<class>it.polimi.traveldream.entities.Amico</class>
 		<class>it.polimi.traveldream.entities.Cliente</class>
 		<class>it.polimi.traveldream.entities.Componente</class>
-		<class>it.polimi.traveldream.entities.Gruppo</class>
 		<class>it.polimi.traveldream.entities.Impiegato</class>
 		<class>it.polimi.traveldream.entities.Invito</class>
 		<class>it.polimi.traveldream.entities.Pacchetto</class>
 		<class>it.polimi.traveldream.entities.PacchettoPersonalizzato</class>
-		<class>it.polimi.traveldream.entities.Utente</class>
 		<class>it.polimi.traveldream.entities.DisponibilitaPerData</class>
+		<class>it.polimi.traveldream.ejb.User</class>
 		<properties>
 			<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
 		</properties>

@@ -79,6 +79,7 @@ public class LoginClienteBean implements Serializable {
 		HttpServletRequest request = (HttpServletRequest) context
 				.getExternalContext().getRequest();
 		
+		
 		//if(request.getUserPrincipal()==null){
 		
 		try {
@@ -110,7 +111,13 @@ public class LoginClienteBean implements Serializable {
 	}
 
 	public String logout() {
-		FacesContext context = FacesContext.getCurrentInstance();
+		
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		
+		return "homepage?faces-redirect=true";
+		
+		
+		/*FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
 				.getExternalContext().getRequest();
 		try {
@@ -124,7 +131,7 @@ public class LoginClienteBean implements Serializable {
 			return "homepageCliente"; // home page personalizzata del cliente
 			
 		}
-		return "homepage"; //homepage del sito web
+		return "homepage"; //homepage del sito web*/
 	}
 
 	
