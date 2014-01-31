@@ -14,15 +14,15 @@
 		
 		<p:growl id="growl" showDetail="true" />
 
-			<p:dataTable id="listaComponentiBaseAlternativi" var="componenteBase" value="#{mostraPacchettiPersonalizzatiBean.pacchettiPersonalizzatiRicercati}"
-				paginator="true" rows="10" selection="#{mostraPacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato}"
+			<p:dataTable id="listaComponentiBaseAlternativi" var="componenteBase" value="#{listaComponentiAlternativiBean.componentiRicercati}"
+				paginator="true" rows="10" selection="#{listaComponentiAlternativiBean.componenteSelezionato}"
 				selectionMode="single">       
 
-				<!-- <p:ajax event="rowSelect" listener="#{ricercaPacchettiBean.onRowSelect}" update=":form:display :form:growl" oncomplete="dettgliPacchettoPredefinitoRicercato" />
+				<p:ajax event="rowSelect" listener="#{listaComponentiAlternativiBean.onRowSelect}" oncomplete="dettgliComponeteAlternativo" />
 						
 					
 					
-				<p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->													
+				<!-- <p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->													
 
 				<f:facet name="header">  
             	Seleziona un pacchetto per visualizzare i dettagli  
@@ -30,15 +30,15 @@
 		
 								
 						<p:column headerText="Tipologia">  
-		            #{pacchettoPersonalizzato.destinazione}  
+		            #{componenteBase.tipologia}  
 		        </p:column>
 		
 						<p:column headerText="Descrizione">  
-		            #{pacchettoPersonalizzato.dataInizioValidita}  
+		            #{componenteBase.descrizione}  
 		        </p:column>
 		
 						<p:column headerText="Costo">  
-		            #{pacchettoPersonalizzato.dataFineValidita}  
+		            #{componenteBase.costo}  
 		        </p:column>
 		        
 			</p:dataTable>

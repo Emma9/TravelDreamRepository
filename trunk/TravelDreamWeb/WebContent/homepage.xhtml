@@ -64,7 +64,7 @@
 				</p:selectOneMenu>
 
 			</h:panelGrid>
-		    <p:commandButton id="bottoneRicerca" value="Ricerca" actionListener="#{ricercaPacchettiBean.ricercaPacchetti}" immediate="true" ajax="false">
+		    <p:commandButton id="bottoneRicerca" value="Ricerca" action="#{ricercaPacchettiBean.ricercaPacchetti()}" immediate="true" ajax="false">
 		    </p:commandButton>
 
 
@@ -89,10 +89,9 @@
 				
 						<p:tab id="tab1" title="LAST-MINUTE">  
 			        <h:panelGrid columns="2" cellpadding="10">  
-			            <p:graphicImage id="tab1Img" value="/immagini/homepage/lastminute.jpg" />
+			            <p:graphicImage id="tab1Img" value="/immagini/homepage/lastminute.jpg" /><h:commandButton action="#{ricercaPerEtichettaBean.ricercaPerEtichettaLastMinute()}" value="Carica Pacchetti Last-Minute" />
 			              
 			            <div align="center"><h:outputText id="tab1Text" value="LISTA DEI PACCHETTI LASTMINUTE"/></div>
-			           #{ricercaPerEtichettaBean.ricercaPerEtichettaLastMinute()}
 			           
 			           <p:fieldset legend="Ecco i possibili pacchetti predefiniti inerenti alla ricerca effettuata" widgetVar="regWidget" style="width: 600px;">
 		
@@ -137,10 +136,9 @@
 				
 				<p:tab id="tab2" title="OFFERTE">
 					<h:panelGrid columns="2" cellpadding="10">
-						<p:graphicImage id="tab2Img" value="/immagini/homepage/offerte.jpg" />
+						<p:graphicImage id="tab2Img" value="/immagini/homepage/offerte.jpg" /><h:commandButton action="#{ricercaPerEtichettaBean.ricercaPerEtichettaOfferte()}" value="Carica Pacchetti Offerte" />
 						<div align="center"><h:outputText id="tab2Text" value="RICERCA DEI PACCHETTI OFFERTE" /></div>
 						
-						#{ricercaPerEtichettaBean.ricercaPerEtichettaOfferte()}
 						
 						<p:fieldset legend="Ecco i possibili pacchetti predefiniti inerenti alla ricerca effettuata" widgetVar="regWidget" style="width: 600px;">
 		
@@ -188,10 +186,9 @@
 
 				<p:tab id="tab3" title="MARE">
 					<h:panelGrid columns="2" cellpadding="10">
-						<p:graphicImage id="tab3Img" value="/immagini/homepage/mare.jpg" />
+						<p:graphicImage id="tab3Img" value="/immagini/homepage/mare.jpg" /><h:commandButton action="#{ricercaPerEtichettaBean.ricercaPerEtichettaMare()}" value="Carica Pacchetti Mare" />
 						<div align="center"><h:outputText id="tab3Text" value="RICERCA DEI PACCHETTI MARE" /></div>
 						
-						#{ricercaPerEtichettaBean.ricercaPerEtichettaMare()}
 						
 						<p:fieldset legend="Ecco i possibili pacchetti predefiniti inerenti alla ricerca effettuata" widgetVar="regWidget" style="width: 600px;">
 		
@@ -237,10 +234,9 @@
 				<p:tab id="tab4" title="MONTAGNA">
 					<h:panelGrid columns="2" cellpadding="10">
 						<p:graphicImage id="tab4Img"
-							value="/immagini/homepage/montagna.jpg" />
+							value="/immagini/homepage/montagna.jpg" /><h:commandButton action="#{ricercaPerEtichettaBean.ricercaPerEtichettaMontagna()}" value="Carica Pacchetti Montagna" />
 						<div align="center"><h:outputText id="tab4Text" value="RICERCA DEI PACCHETTI MONTAGNA" /></div>
 						
-						#{ricercaPerEtichettaBean.ricercaPerEtichettaMontagna()}
 						<p:fieldset legend="Ecco i possibili pacchetti predefiniti inerenti alla ricerca effettuata" widgetVar="regWidget" style="width: 600px;">
 		
 		
