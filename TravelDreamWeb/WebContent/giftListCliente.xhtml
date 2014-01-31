@@ -14,14 +14,14 @@
 		
 		<p:growl id="growl" showDetail="true" />
 
-			<p:dataTable id="giftList" var="pacchettoGiftList" value="#{mostraGiftListBean.pacchettiPersonalizzatiRicercati}"
-				paginator="true" rows="10" selection="#{mostraGiftListBean.pacchettoPersonalizzatoSelezionato}"
+			<p:dataTable id="giftList" var="pacchettoGiftList" value="#{giftListClienteBean.pacchettiRicercati}"
+				paginator="true" rows="10" selection="#{giftListClienteBean.pacchettoSelezionato}"
 				selectionMode="single">       
 
-				<!-- <p:ajax event="rowSelect" listener="#{ricercaPacchettiBean.onRowSelect}" update=":form:display :form:growl" oncomplete="dettgliPacchettoPersonalizzato" /> 
+				<p:ajax event="rowSelect" listener="#{giftListClienteBean.onRowSelect}" oncomplete="dettagliPacchettoPersonalizzato" /> 
 					
 					
-				<p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->													
+				<!-- <p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->													
 
 				<f:facet name="header">  
             	Seleziona un pacchetto per visualizzare i dettagli  
@@ -29,15 +29,15 @@
 		
 								
 						<p:column headerText="Destinazione">  
-		            #{mostraGiftListBean.pacchettoPersonalizzatoSelezionato.destinazione}  
+		            #{pacchettoGiftList.destinazione}  
 		        </p:column>
 		
 						<p:column headerText="Data di Partenza">  
-		            #{mostraPacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.dataInizioValidita}  
+		            #{pacchettoGiftList.dataInizioValidita}  
 		        </p:column>
 		
 						<p:column headerText="Data di Ritorno">  
-		            #{mostraPacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.dataFineValidita}  
+		            #{pacchettoGiftList.dataFineValidita}  
 		        </p:column>
 		        
 			</p:dataTable>

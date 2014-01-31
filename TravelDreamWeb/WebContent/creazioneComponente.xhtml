@@ -27,7 +27,13 @@
 			    </p:inputTextarea>
 			    <p:message for="descrizione" />
 				
-				
+				<p:outputLabel value="Lungo: "/>
+				<p:inputText value="#{creazioneComponenteBean.luogo}"
+			       id="luogo"
+			       required="true"
+			       requiredMessage="Devi inserire il luogo del componente">  
+			    </p:inputText>
+			    <p:message for="luogo" />
 				
 				<p:outputLabel value="Costo: "/>
 				<p:inputText value="#{creazioneComponenteBean.costo}"

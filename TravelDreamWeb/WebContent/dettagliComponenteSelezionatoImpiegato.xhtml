@@ -20,32 +20,36 @@
     
   
             <h:outputText value="Tipologia:" />  
-            <h:outputText value="#{ricercaComponenteBean.pacchettoSelezionato.tipologia}" />  
+            <h:outputText value="#{dettagliComponenteSelezionatoBean}" />  
   
             <h:outputText value="Descrizione:" />  
-            <h:outputText value="#{ricercaComponenteBean.pacchettoSelezionato.descrizione}" /> 
+            <h:outputText value="#{dettagliComponenteSelezionatoBean}" /> 
+            
+            
+            <h:outputText value="Luogo: " />  
+            <h:outputText value="#{dettagliComponenteSelezionatoBean}" />
             
             
             <h:outputText value="Costo:" />  
-            <h:outputText value="#{ricercaComponenteBean.pacchettoSelezionato.costo}" /> 
+            <h:outputText value="#{dettagliComponenteSelezionatoBean}" /> 
             
             <h:outputText value="Data Inizio Validità: " />  
-            <h:outputText value="#{ricercaComponenteBean.pacchettoSelezionato.costo}" /> 
+            <h:outputText value="#{dettagliComponenteSelezionatoBean}" /> 
             
             
             <h:outputText value="Data Fine Validità: " />  
-            <h:outputText value="#{ricercaComponenteBean.pacchettoSelezionato.costo}" /> 
+            <h:outputText value="#{dettagliComponenteSelezionatoBean}" /> 
              
         </h:panelGrid>
         
-        <h:commandButton action="#{ricercaComponenteBean.pacchettoSelezionato.descrizione}" value="Rimuovi" /> <!-- visualizza la lista componentiricercaimpiegato aggiornata-->
+        <h:commandButton action="#{ricercaComponentiImpiegatoBean}" value="Rimuovi" /> <!-- visualizza la lista componentiricercaimpiegato aggiornata-->
         <br/>
-         <h:commandButton action="#{ricercaComponenteBean.pacchettoSelezionato.descrizione}" value="Modifica" /> <!-- visualizza form modifica componente base impiegato-->
+         <h:commandButton action="#{formModificaComponenteBaseImpiegato}" value="Modifica" /> <!-- visualizza form modifica componente base impiegato-->
          <br />
-         <h:commandButton action="#{ricercaComponenteBean.pacchettoSelezionato.descrizione}" value="Conferma" /> <!-- visualizza creazionepacchettopredefinito aggiornata-->
+         <h:commandButton action="#{creazionepacchettopredefinito}" value="Conferma" /> <!-- visualizza creazionepacchettopredefinito aggiornata-->
         	
         <br />
-        <h:commandButton id="bottoneAggiungi" value="Aggiungi Componente"/>  <!--RENDERE INVISIBILE IL BOTTONE AL CLICK.... visualizza dettaglipacchettoselezionatoimpiegato aggiornata-->
+        <h:commandButton id="bottoneAggiungi" value="Aggiungi Componente" actionListener="#{dettagliPacchettoSelezionatoBean}"/>  <!--RENDERE INVISIBILE IL BOTTONE AL CLICK.... visualizza dettaglipacchettoselezionatoimpiegato aggiornata-->
         
         
         

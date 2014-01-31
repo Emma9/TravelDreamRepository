@@ -30,23 +30,27 @@
 					
 											
 									<p:column headerText="Tipologia">  
-					            #{pacchettoPersonalizzato.destinazione}  
+					            #{componenteInvito.destinazione}  
 					        </p:column>
 					
 									<p:column headerText="Descrizione">  
-					            #{pacchettoPersonalizzato.dataInizioValidita}  
+					            #{componenteInvito.dataInizioValidita}  
+					        </p:column>
+					
+							<p:column headerText="Luogo">  
+					            #{componenteInvito.dataInizioValidita}  
 					        </p:column>
 					
 									<p:column headerText="Costo">  
-					            #{pacchettoPersonalizzato.dataFineValidita}  
+					            #{componenteInvito.dataFineValidita}  
 					        </p:column>
 					        
 					        <p:column headerText="Data Inizio Validità">  
-					            #{pacchettoPersonalizzato.dataFineValidita}  
+					            #{componenteInvito.dataFineValidita}  
 					        </p:column>
 					         
             				<p:column headerText="Data Fine Validità">  
-					            #{pacchettoPersonalizzato.dataFineValidita}  
+					            #{componenteInvito.dataFineValidita}  
 					        </p:column>
 					        
 					        <p:column headerText="Seleziona">  
@@ -66,7 +70,7 @@
         </div>
         <div style="float: left;">
 	        	<h:panelGrid id="nonRegalo">
-        		<h:commandButton  value="Non Regalare" actionListener="#{ricercaPacchettiBean}"/> <!--notifica avvenuto inoltro-->
+        		<h:commandButton  value="Non Regalare" actionListener="homepage"/> <!--notifica avvenuto inoltro-->
         </h:panelGrid>
         </div>
   	</p:fieldset> 

@@ -20,26 +20,29 @@
     
   
             <h:outputText value="Tipologia:" />  
-            <h:outputText value="#{ricercaComponenteBean.pacchettoSelezionato.tipologia}" />  
+            <h:outputText value="#{dettagliComponenteSelezionatoBean}" />  
   
             <h:outputText value="Descrizione:" />  
-            <h:outputText value="#{ricercaComponenteBean.pacchettoSelezionato.descrizione}" /> 
+            <h:outputText value="#{dettagliComponenteSelezionatoBean}" /> 
+            
+            <h:outputText value="Luogo: " />  
+            <h:outputText value="#{dettagliComponenteSelezionatoBean}" />
             
             
             <h:outputText value="Costo: " />  
-            <h:outputText value="#{ricercaComponenteBean.pacchettoSelezionato.costo}" /> 
+            <h:outputText value="#{dettagliComponenteSelezionatoBean}" /> 
             
             
             <h:outputText value="Data Inizio Validità: " />  
-            <h:outputText value="#{ricercaComponenteBean.pacchettoSelezionato.costo}" /> 
+            <h:outputText value="#{dettagliComponenteSelezionatoBean}" /> 
             
             
             <h:outputText value="Data Fine Validità: " />  
-            <h:outputText value="#{ricercaComponenteBean.pacchettoSelezionato.costo}" />
+            <h:outputText value="#{dettagliComponenteSelezionatoBean}" />
             
         </h:panelGrid>
         
-        <h:commandButton value="Scegli" actionListener="#{loginClienteBean}"/> <!-- visualizza i dettagli del pacchetto aggiornato-->
+        <h:commandButton value="Scegli" actionListener="#{dettagliPacchettoSelezionatoBean.DettagliPacchettoSelezionato}"/> <!-- visualizza i dettagli del pacchetto aggiornato-->
         
   	</p:fieldset>
         </h:form>
