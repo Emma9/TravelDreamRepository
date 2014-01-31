@@ -76,6 +76,10 @@ public class InvitaAmicoBean implements Serializable {
 		
 		try {
 			
+			//idPacchettoPersonalizzato = request.getParameter(idpacc);
+			
+			emailDestinatario=request.getUserPrincipal().getName();
+			
 			Date dataCorrente = new Date();
 			
 			invitoremoto.createInvito(emailMittente, emailDestinatario, idPacchettoPersonalizzato, dataCorrente, false);
