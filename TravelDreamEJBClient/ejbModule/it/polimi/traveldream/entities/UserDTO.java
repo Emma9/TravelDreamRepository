@@ -1,18 +1,26 @@
 package it.polimi.traveldream.entities;
 
+
+
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-public class UtenteDTO {
-
-private String email;
+public class UserDTO {
+	public static final String FIND_ALL = "User.findAll";
+	   
+	@Id
+	private String email;
 	
     private String firstName;
       
@@ -23,19 +31,23 @@ private String email;
 	@Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date registeredOn;
 	
-	
-	private List<GruppoDTO> groups;
+	@ElementCollection(targetClass = GroupDTO.class)
+    @CollectionTable(name = "USERS_GROUPS",
+                    joinColumns = @JoinColumn(name = "email"))
+    @Enumerated(EnumType.STRING)
+    @Column(name="groupname")
+    private List<GroupDTO> groups;
 
-	public UtenteDTO() {
+	public UserDTO() {
 		super();
 	}
 	
-	public UtenteDTO(UtenteDTO utente){
+	public UserDTO(UserDTO user){
          
-        this.email        = utente.getEmail();
-        this.firstName    = utente.getFirstName();
-        this.lastName     = utente.getLastName();        
-        this.password     = DigestUtils.sha512Hex(utente.getPassword() );
+        this.email        = user.getEmail();
+        this.firstName    = user.getFirstName();
+        this.lastName     = user.getLastName();        
+        this.password     = DigestUtils.sha512Hex(user.getPassword() );
         this.registeredOn = new Date();
     }
 	
@@ -82,23 +94,18 @@ private String email;
         this.registeredOn = registeredOn;
     }
  
-    public List<GruppoDTO> getGroups() {
+    public List<GroupDTO> getGroups() {
         return groups;
     }
  
-    public void setGroups(List<GruppoDTO> groups) {
+    public void setGroups(List<GroupDTO> groups) {
         this.groups = groups;
     }
  
- 
+    @Override
     public String toString() {
         return "User [email=" + email + ", firstName=" + firstName
                 + ", lastName=" + lastName + ", password=" + password
-                + ", registeredOn=" + registeredOn + ", gruppi=" + groups + "]";
+                + ", registeredOn=" + registeredOn + ", groups=" + groups + "]";
     }
 }
-
-	
-	
-	
-
