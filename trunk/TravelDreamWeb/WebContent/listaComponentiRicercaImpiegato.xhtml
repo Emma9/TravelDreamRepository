@@ -14,7 +14,7 @@
 		
 		<p:growl id="growl" showDetail="true" />
 																													<!-- c'è anche componentericercato cm fare? altro form?? -->
-			<p:dataTable id="listaComponentiImpiegato" var="componenteBaseImpiegato" value="#{ricercaComponentiImpiegatoBean.componentiRicercati}"
+			<!--  <p:dataTable id="listaComponentiImpiegato" var="componenteBaseImpiegato" value="#{ricercaComponentiImpiegatoBean.componentiRicercati}"
 				paginator="true" rows="10" selection="#{ricercaComponentiImpiegatoBean.componenteSelezionato}"
 				selectionMode="single">       
 
@@ -22,9 +22,9 @@
 						
 					
 					
-				<!-- <p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->													
+				<p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->													
 
-				<f:facet name="header">  
+				<!--  <f:facet name="header">  
             	Seleziona un componente per visualizzare i dettagli  
 		        </f:facet>
 		
@@ -41,14 +41,53 @@
 		            #{componenteBaseImpiegato.costo}  
 		        </p:column>
 		        
-			</p:dataTable>
+			</p:dataTable>-->
+			
+			
+			
+		<p:dataTable id="componentiRicercati" var="componenti" value="#{ricercaComponentiImpiegatoBean.componentiRicercati}" rowKey="#{componenti.codiceComponente}"  
+                 selection="#{ricercaComponentiImpiegatoBean.componenteSelezionato}" selectionMode="single">  
+  
+        <f:facet name="header">  
+            Clicca il pulsante "Seleziona" dopo aver selezionato una singola riga per vederne i dettagli  
+        </f:facet>  
+  
+        <p:column headerText="Codice Componente">  
+            #{componente.codiceComponente}  
+        </p:column>  
+  
+        <p:column headerText="Luogo">  
+            #{componente.luogo}  
+        </p:column>  
+  
+        <p:column headerText="Descrizione" >  
+            #{componente.descrizione}  
+        </p:column>  
+  
+        <p:column headerText="Data Inizio Validità">  
+            #{componente.dataInizioValidita}  
+        </p:column>  
+        
+        <p:column headerText="Data Fine Validità">  
+            #{componente.dataFineValidita}  
+        </p:column>  
+        
+        <p:column headerText="Costo">  
+            #{componente.costo}  
+        </p:column>  
+  
+        <f:facet name="footer">  
+            <p:commandButton id="viewButton" value="Seleziona" icon="ui-icon-search"  
+                    update=":form:display" action="#{dettagliComponenteSelezionatoBean.DettagliComponenteSelezionato()}" ajax="false"/>  
+        </f:facet>  
+  
+    </p:dataTable>  
+  
 		
 		
   	</p:fieldset>
 
 	<!-- COME LISTA PACCHETTIPERSONALIZZATICLIENTE... RITORNO I DETTAGLI DEL COMPONENTE oncomplete="dettgliComponeteSelezionatoImpiegato" DEL ROWSELECT -->
-
-
         
 </h:form>
 </h:body>
