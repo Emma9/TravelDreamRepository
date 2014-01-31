@@ -16,12 +16,12 @@
 			<div style="display: inline;">
 				<div style="float: left">
 					<h:form id="pacc">
-						<p:commandButton id="bottoneCreaPacchetto" actionListener="creazionePacchettoPredefinito" value="Crea Pacchetto" immediate="true" ajax="false"/>
+						<h:button id="bottoneCreaPacchetto" outcome="creazionePacchettoPredefinito" value="Crea Pacchetto" ajax="false"/>
 					</h:form>
 				</div>
 				<div style="float: left">
 					<h:form id="comp">
-						<p:commandButton id="bottoneCreaComponente" actionListener="creazioneComponente" value="Aggiungi Componente" immediate="true" ajax="false"/>
+						<h:button id="bottoneCreaComponente" outcome="creazioneComponente" value="Aggiungi Componente" ajax="false"/>
 					</h:form>
 					
 				</div>
@@ -35,7 +35,7 @@
 					</div>
 					<div style="float: right: ;">
 					<h:form id="logout">
-						<p:commandButton actionListener="#{loginImpiegatoBean.logout}" value="Logout" immediate="true" ajax="false" />
+						<h:commandButton action="#{loginImpiegatoBean.logout()}" value="Logout" ajax="false" />
 					</h:form>
 					</div>
 				</div>
@@ -54,9 +54,9 @@
 								<h:outputText value="Ricerca Componente Tramite Codice:" />
 								<br />
 								<div style="display: inline;">
-									<h:inputText value="" autocomplete="true" />
+									<h:inputText  autocomplete="true" />
 									<h:panelGrid id="ricerca1">
-										<p:commandButton value="Ricerca" update="ricerca1"  actionListener="#{ricercaComponentiImpiegatoBean.ricercaComponenteImpiegatoId}" immediate="true" ajax="false"/>
+										<h:commandButton value="Ricerca" update="ricerca1"  action="#{ricercaComponentiImpiegatoBean.ricercaComponenteImpiegatoId()}" ajax="false"/>
 										<!--andiamo in listaComponentiRicercaImpiegato -->
 									</h:panelGrid>
 								</div>
@@ -67,9 +67,9 @@
 								<h:outputText value="Ricerca Componente Tramite Termine:" />
 								<br />
 								<div style="display: inline;">
-									<h:inputText value="" autocomplete="true" />
+									<h:inputText  autocomplete="true" />
 									<h:panelGrid id="ricerca2">
-									<p:commandButton value="Ricerca" update="ricerca2" actionListener="#{ricercaComponentiImpiegatoBean.ricercaComponenteImpiegatoTermine}" immediate="true" ajax="false" />
+									<h:commandButton value="Ricerca" update="ricerca2" action="#{ricercaComponentiImpiegatoBean.ricercaComponenteImpiegatoTermine()}" ajax="false" />
 									<!--andiamo in listaComponentiRicercaImpiegato -->
 									</h:panelGrid>
 								</div>
@@ -84,9 +84,9 @@
 								<h:outputText value="Ricerca Pacchetto Tramite Identificativo:" />
 								<br />
 								<div style="display: inline;">
-									<h:inputText value="" autocomplete="true" />
+									<h:inputText autocomplete="true" />
 									<h:panelGrid id="ricerca3">
-									<p:commandButton value="Ricerca" update="ricerca3" actionListener="#{ricercaPacchettiImpiegatoBean.ricercaPacchettoImpiegatoId}" immediate="true" ajax="false"/>
+									<h:commandButton value="Ricerca" update="ricerca3" action="#{ricercaPacchettiImpiegatoBean.ricercaPacchettoImpiegatoId()}" ajax="false"/>
 									<!--andiamo in listaPacchettiRicercaImpiegato -->
 									</h:panelGrid>
 								</div>
@@ -97,9 +97,9 @@
 								<h:outputText value="Ricerca Pacchetto Tramite Termine:" />
 								<br />
 								<div style="display: inline;">
-									<h:inputText value="" autocomplete="true" />
+									<h:inputText autocomplete="true" />
 									<h:panelGrid id="ricerca4">
-									<p:commandButton value="Ricerca" update="ricerca4" actionListener="#{ricercaPacchettiImpiegatoBean.ricercaPacchettoImpiegatoTermine}" immediate="true" ajax="false"/>
+									<h:commandButton value="Ricerca" update="ricerca4" action="#{ricercaPacchettiImpiegatoBean.ricercaPacchettoImpiegatoTermine()}" ajax="false"/>
 									<!--andiamo in listaPacchettiRicercaImpiegato -->
 									</h:panelGrid>
 								</div>
