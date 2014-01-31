@@ -2,16 +2,22 @@ package it.polimi.traveldream.ejb;
 
 
 import it.polimi.traveldream.ejb.client.ClienteBeanLocal;
+
 import it.polimi.traveldream.ejb.client.ClienteBeanRemote;
 import it.polimi.traveldream.ejb.client.InvitoBeanRemote;
 import it.polimi.traveldream.entities.Cliente;
 import it.polimi.traveldream.entities.ClienteDTO;
+import it.polimi.traveldream.entities.PacchettoDTO;
+import it.polimi.traveldream.entities.PacchettoPersonalizzato;
 import it.polimi.traveldream.entities.PacchettoPersonalizzatoDTO;
 
 import java.util.*;
 
 import javax.persistence.*;
 import javax.ejb.Stateless;
+
+import org.apache.commons.codec.digest.DigestUtils;
+
 /**Session Bean implementation class ClienteBean*/
 @Stateless
 public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
@@ -267,9 +273,67 @@ public class ClienteBean implements ClienteBeanRemote, ClienteBeanLocal {
 		clienteDTO.setCognome(cliente.getCognome());
 		clienteDTO.setCodiceFiscale(cliente.getCodiceFiscale());
 		
+		List<PacchettoPersonalizzatoDTO> pacchetti= new ArrayList<PacchettoPersonalizzatoDTO>();
+		for(int i=0; i<cliente.getPacchettiCliente().size();i++){
+			pacchetti.add(pacchettoPersonalizzatoToDTOInCliente(cliente.getPacchettiCliente().get(i)));
+		}
+		clienteDTO.setPacchettiCliente(pacchetti);
+		
+		List<PacchettoPersonalizzatoDTO> pacchettiGiftList= new ArrayList<PacchettoPersonalizzatoDTO>();
+		for(int i=0; i<cliente.getGiftList().size();i++){
+			pacchettiGiftList.add(pacchettoPersonalizzatoToDTOInCliente(cliente.getGiftList().get(i)));
+		}
+		clienteDTO.setGiftList(pacchettiGiftList);
+		
+		
 		return clienteDTO;
 		
 		
 	}
 	
+	public Cliente clienteDTOToCliente (ClienteDTO clienteDTO){
+		
+		Cliente cliente= new Cliente();
+		cliente.setIdCliente(clienteDTO.getIdCliente());
+		cliente.setEmail(clienteDTO.getEmail());
+		cliente.setPassword(DigestUtils.sha256Hex(clienteDTO.getPassword()));
+		cliente.setNome(clienteDTO.getNome());
+		cliente.setCognome(clienteDTO.getCognome());
+		cliente.setCodiceFiscale(clienteDTO.getCodiceFiscale());
+		
+		List<PacchettoPersonalizzato> pacchetti= new ArrayList<PacchettoPersonalizzato>();
+		for(int i=0; i<clienteDTO.getPacchettiCliente().size();i++){
+			pacchetti.add(pacchettoPersonalizzatoDTOToPacchettoPersInCliente(clienteDTO.getPacchettiCliente().get(i)));
+		}
+		cliente.setPacchettiCliente(pacchetti);
+		
+		List<PacchettoPersonalizzato> pacchettiGiftList= new ArrayList<PacchettoPersonalizzato>();
+		for(int i=0; i<clienteDTO.getGiftList().size();i++){
+			pacchettiGiftList.add(pacchettoPersonalizzatoDTOToPacchettoPersInCliente(clienteDTO.getGiftList().get(i)));
+		}
+		cliente.setGiftList(pacchettiGiftList);
+		
+		return cliente;
+		
+	}
+	
+	
+	public PacchettoPersonalizzatoDTO pacchettoPersonalizzatoToDTOInCliente(PacchettoPersonalizzato pacchettoPersonalizzato){
+		
+		PacchettoPersonalizzatoBean pacchettoPersonalizzatoBean= new PacchettoPersonalizzatoBean();
+		PacchettoPersonalizzatoDTO pacchettoPersonalizzatoDTO= new PacchettoPersonalizzatoDTO();
+		pacchettoPersonalizzatoDTO=pacchettoPersonalizzatoBean.pacchettoPersonalizzatoToDTO(pacchettoPersonalizzato);
+		
+		return pacchettoPersonalizzatoDTO;
+	}
+	
+	
+public PacchettoPersonalizzato pacchettoPersonalizzatoDTOToPacchettoPersInCliente(PacchettoPersonalizzatoDTO pacchettoPersonalizzatoDTO){
+		
+		PacchettoPersonalizzatoBean pacchettoPersonalizzatoBean= new PacchettoPersonalizzatoBean();
+		PacchettoPersonalizzato pacchettoPersonalizzato= new PacchettoPersonalizzato();
+		pacchettoPersonalizzato=pacchettoPersonalizzatoBean.pacchettoPersonalizzatoDTOToPacchettoPersonalizzato(pacchettoPersonalizzatoDTO);
+		
+		return pacchettoPersonalizzato;
+	}
 }
