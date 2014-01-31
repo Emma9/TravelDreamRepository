@@ -23,16 +23,16 @@
             
   	<div style="float: left;">
             <h:outputText value="Destinazione Viaggio:" />  
-            <h:outputText value="#{ricercaPacchettiBean.pacchettoSelezionato.destinazione}" />  
+            <h:outputText value="#{dettagliPacchettoSelezionatoBean}" />  
   
             <h:outputText value="Data di Partenza:" />  
-            <h:outputText value="#{ricercaPacchettiBean.pacchettoSelezionato.dataInizioValidita}" />  
+            <h:outputText value="#{dettagliPacchettoSelezionatoBean}" />  
   
             <h:outputText value="Data di Ritorno:" />  
-            <h:outputText value="#{ricercaPacchettiBean.pacchettoSelezionato.dataFineValidita}" />  
+            <h:outputText value="#{dettagliPacchettoSelezionatoBean}" />  
   
             <h:outputText value="Descrizione:" />  
-            <h:outputText value="#{ricercaPacchettiBean.pacchettoSelezionato.descrizione}" />
+            <h:outputText value="#{dettagliPacchettoSelezionatoBean}" />
             
             <h:outputText value="Lista Componenti del pacchetto:" />
 	</div>
@@ -64,22 +64,22 @@
 		        </p:column>
 		        
 		        <p:column headerText="Modifica">  
-		            <h:commandButton id="seleziona" value="Modifica"/><br /><!-- va a formmodificacomponentebaseimpiegato-->  
+		            <h:commandButton id="seleziona" value="Modifica" action="formModificaComponentebaseImpiegato"/><br /><!-- va a formmodificacomponentebaseimpiegato-->  
 		        </p:column>
 		        <p:column headerText="Rimuovi">  
-		            <h:commandButton id="rimuovi" value="Rimuovi"/><br /><!-- va a dettaglicomponenteSelezionatoimpiegato-->  
+		            <h:commandButton id="rimuovi" value="Rimuovi" actionListener="#{dettagliPacchettoSelezionatoBean.DettagliPacchettoSelezionato}"/><br /><!-- va a dettaglicomponenteSelezionatoimpiegato-->  
 		        </p:column>
 		        
 			</p:dataTable>
 
 
         <br />
-        <h:commandButton id="bottoneConferma" value="Conferma"/>  <!--RENDERE INVISIBILE IL BOTTONE AL CLICK.... visualizza dettaglipacchettoselezionatoimpiegato aggiornata-->
+        <h:commandButton id="bottoneConferma" value="Conferma" actionListener="#{dettagliPacchettoSelezionatoBean.DettagliPacchettoSelezionato}"/>  <!--RENDERE INVISIBILE IL BOTTONE AL CLICK.... visualizza dettaglipacchettoselezionatoimpiegato aggiornata-->
         <br />
-        <h:commandButton id="bottoneRimuovi" value="Rimuovi Pacchetto"/>  <!--RENDERE INVISIBILE IL BOTTONE AL CLICK.... visualizza listapacchettiricercaimpiegato aggiornata-->
+        <h:commandButton id="bottoneRimuovi" value="Rimuovi Pacchetto" actionListener="#{ricercaPacchettiImpiegatoBean}"/>  <!--RENDERE INVISIBILE IL BOTTONE AL CLICK.... visualizza listapacchettiricercaimpiegato aggiornata-->
         
         <br />
-        <h:commandButton id="bottoneAggiungi" value="Aggiungi Componente"/>  <!--RENDERE INVISIBILE IL BOTTONE AL CLICK.... visualizza homepage impiegato di ricerca componente-->
+        <h:commandButton id="bottoneAggiungi" value="Aggiungi Componente" actionListener="homepageImpiegato"/>  <!--RENDERE INVISIBILE IL BOTTONE AL CLICK.... visualizza homepage impiegato di ricerca componente-->
         
         </h:panelGrid>
 		

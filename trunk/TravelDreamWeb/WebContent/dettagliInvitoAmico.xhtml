@@ -48,23 +48,27 @@
 					
 											
 									<p:column headerText="Tipologia">  
-					            #{pacchettoPersonalizzato.destinazione}  
+					            #{componenteInvito.destinazione}  
 					        </p:column>
 					
 									<p:column headerText="Descrizione">  
-					            #{pacchettoPersonalizzato.dataInizioValidita}  
+					            #{componenteInvito.dataInizioValidita}  
 					        </p:column>
 					
+					<p:column headerText="Luogo">
+						#{componenteInvito.luogo}
+					</p:column>
+					
 									<p:column headerText="Costo">  
-					            #{pacchettoPersonalizzato.dataFineValidita}  
+					            #{componenteInvito.dataFineValidita}  
 					        </p:column>
 					        
 					        <p:column headerText="Data Inizio Validità">  
-					            #{pacchettoPersonalizzato.dataFineValidita}  
+					            #{componenteInvito.dataFineValidita}  
 					        </p:column>
 					         
             				<p:column headerText="Data Fine Validità">  
-					            #{pacchettoPersonalizzato.dataFineValidita}  
+					            #{componenteInvito.dataFineValidita}  
 					        </p:column>
              
 					        
@@ -84,7 +88,7 @@
             
             <div style="float: left;">
 	        	<h:panelGrid id="rifiutoInvito">
-	        		<p:commandButton id="bottoneRifiuta" value="Rifiuta" />
+	        		<p:commandButton id="bottoneRifiuta" value="Rifiuta" actionListener="hompagepage" />
 	        	</h:panelGrid><br />
 	           </div>
             
