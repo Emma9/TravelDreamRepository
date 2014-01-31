@@ -25,9 +25,9 @@ public class Componente implements Serializable {
 	private String tipologia;
 	private String descrizione;
 	private int costo;
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.DATE)
 	private Date dataInizioValidita;
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.DATE)
 	private Date dataFineValidita;
 	private List<DisponibilitaPerData> disponibilitaPerData = new ArrayList<DisponibilitaPerData>(0);
 	
