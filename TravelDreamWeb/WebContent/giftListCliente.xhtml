@@ -18,7 +18,7 @@
 				paginator="true" rows="10" selection="#{giftListClienteBean.pacchettoSelezionato}"
 				selectionMode="single">       
 
-				<p:ajax event="rowSelect" listener="#{giftListClienteBean.onRowSelect}" oncomplete="dettagliPacchettoPersonalizzato" /> 
+				<p:ajax event="rowSelect" listener="#{giftListClienteBean.onRowSelect}" oncomplete="dettagliGiftList" /> 
 					
 					
 				<!-- <p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->													
