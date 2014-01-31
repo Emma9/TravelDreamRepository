@@ -35,17 +35,87 @@
 	    <p:inputTextarea value="#{creazionePacchettoPredefinitoBean.descrizione}" id="descrizione" required="true" requiredMessage="Devi inserire la descrizione"/>
   		 <p:message for="descrizione" /><br />
   		 
-  		<p:inputTextarea rows="10" cols="33" required="true" disabled="true"/>
-		<p:commandButton value="Inserisci Hotel" /><br /><br /> <!-- manda all'homepage per fare la ricerca tramite id o filtro -->
-  		<p:inputTextarea rows="10" cols="33" required="true" disabled="true"/>
-		<p:commandButton value="Inserisci Volo" /><br /><br /> <!-- manda all'homepage per fare la ricerca tramite id o filtro -->
-		<p:inputTextarea rows="10" cols="33" required="true" disabled="true"/>
-		<p:commandButton value="Inserisci Escursione" /><br /> <!-- manda all'homepage per fare la ricerca tramite id o filtro -->
-  	<!-- cambiare con tre liste volo,hotel,escursione con i relativi bottoni e una colonna di radiootton per il predefinito -->
   	
   	
+  	<p:dataTable var="componenteVolo" value="#{ricercaComponentiImpiegatoBean.componenteSelezionato}" dir="rtl">  
+        <p:column headerText="Volo">  
+            <h:outputText value="#{componenteVolo.tipologia}" />  
+        </p:column>  
+  
+        <p:column headerText="luogo">  
+            <h:outputText value="#{componenteVolo.luogo}" />  
+        </p:column>  
+  
+        <p:column headerText="Data Fine Validità">  
+            <h:outputText value="#{componenteVolo.dataFineValidita}" />  
+        </p:column>  
+  
+  		 <p:column headerText="Data Fine Validità">  
+            <h:outputText value="#{componenteVolo.dataFineValidita}" />  
+        </p:column>
+  
+        <p:column headerText="Predefinito">  
+            <p:selectOneRadio id="tipologia" value="#{componenteVolo}" >  
+				            <f:selectItem itemLabel="Volo" itemValue="true" /> 
+			</p:selectOneRadio>/> 
+        </p:column>  
+        
+    </p:dataTable>  
   	
-  	
+    <br />
+		<p:commandButton value="Inserisci Volo" /><br /><br /> <!-- manda all'homepage per fare la ricerca tramite id o filtro -->  
+		<p:dataTable  var="componenteHotel" value="#{ricercaComponentiImpiegatoBean.componenteSelezionato}" dir="rtl">
+        <p:column headerText="Hotel">  
+            <h:outputText value="#{componenteHotel.tipologia}" />  
+        </p:column>  
+  
+        <p:column headerText="luogo">  
+            <h:outputText value="#{componenteHotel.luogo}" />  
+        </p:column>  
+  
+        <p:column headerText="Data Fine Validità">  
+            <h:outputText value="#{componenteHotel.dataFineValidita}" />  
+        </p:column>  
+  
+  		 <p:column headerText="Data Fine Validità">  
+            <h:outputText value="#{componenteHotel.dataFineValidita}" />  
+        </p:column>
+  
+        <p:column headerText="Predefinito">  
+            <p:selectOneRadio id="tipologia" value="#{componenteHotel}" >  
+				            <f:selectItem itemLabel="hotel" itemValue="true" /> 
+			</p:selectOneRadio>/> 
+        </p:column>
+        
+    </p:dataTable>
+    <br />
+		<p:commandButton value="Inserisci Hotel" /><br /><br /> <!-- manda all'homepage per fare la ricerca tramite id o filtro -->  
+    <p:dataTable var="componenteEscursione" value="#{ricercaComponentiImpiegatoBean.componenteSelezionato}" dir="rtl">  
+        <p:column headerText="Escursione">  
+            <h:outputText value="#{componenteEscursione.tipologia}" />  
+        </p:column>  
+  
+        <p:column headerText="luogo">  
+            <h:outputText value="#{componenteEscursione.luogo}" />  
+        </p:column>  
+  
+        <p:column headerText="Data Fine Validità">  
+            <h:outputText value="#{componenteEscursione.dataFineValidita}" />  
+        </p:column>  
+  
+  		 <p:column headerText="Data Fine Validità">  
+            <h:outputText value="#{componenteEscursione.dataFineValidita}" />  
+        </p:column>
+  
+        <p:column headerText="Predefinito">  
+            <p:selectOneRadio id="tipologia" value="#{componenteEscursione}" >  
+				            <f:selectItem itemLabel="escursione" itemValue="true" /> 
+			</p:selectOneRadio>/> 
+        </p:column>
+        
+    </p:dataTable>  
+    <br />
+		<p:commandButton value="Inserisci Escursione" /><br /><br /> <!-- manda all'homepage per fare la ricerca tramite id o filtro -->
   	
   	
   	
@@ -59,8 +129,12 @@
 	    <p:inputText  value="#{creazionePacchettoPredefinitoBean.sconto}" id="sconto" required="true" requiredMessage="Devi inserire per forza un numero per identificare lo sconto"/>
   		 <p:message for="sconto" /><br />
   	
-  	
-  	
+  <!--  <h:panelGrid columns="1" style="margin-bottom:10px">  
+        <h:outputText id="output" value="Sconto del %#{sliderBean.number2}"/>  
+        <h:inputHidden id="txt2" value="#{creazionePacchettoPredefinitoBean.sconto}" />  
+        <p:slider for="txt2" display="output" style="width:200px" displayTemplate="Settata a %{value}"/>  
+    </h:panelGrid>
+  	-->	
   	
   	
   	
