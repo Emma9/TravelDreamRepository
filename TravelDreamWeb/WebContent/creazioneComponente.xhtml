@@ -13,10 +13,10 @@
 		<p:fieldset legend="Ecco i parametri da settare per un nuovo componente" widgetVar="regWidget" style="width: 600px;">
 			<div style="float: center">
 				<div style="display: inline;">
-				<p:selectOneRadio id="tipologia">  
-				            <f:selectItem itemLabel="Volo" itemValue="VOLO" value="#{creazioneComponenteBean.tipologia}" />  
-				            <f:selectItem itemLabel="Hotel" itemValue="HOTEL"  value="#{creazioneComponenteBean.tipologia}" />  
-				            <f:selectItem itemLabel="Escursione" itemValue="ESCURSIONE"  value="#{creazioneComponenteBean.tipologia}" />    
+				<p:selectOneRadio id="tipologia" value="#{creazioneComponenteBean.tipologia}" >  
+				            <f:selectItem itemLabel="Volo" itemValue="VOLO" />  
+				            <f:selectItem itemLabel="Hotel" itemValue="HOTEL"  />  
+				            <f:selectItem itemLabel="Escursione" itemValue="ESCURSIONE"  />    
 				</p:selectOneRadio> 
 				
 				<p:outputLabel value="Descrizione: "/><br />
