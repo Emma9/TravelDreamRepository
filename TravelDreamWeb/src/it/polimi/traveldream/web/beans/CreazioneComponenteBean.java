@@ -136,7 +136,9 @@ public class CreazioneComponenteBean implements Serializable {
 			
 			componenteRemoto.createComponente(tipologia, luogo, descrizione, costo, dataInizioValidita, dataFineValidita, disponibilita);
 			
+			context.addMessage(null, new FacesMessage("Creazione componente riuscita"));
 			
+			return "homePageImpiegato";
 
 		}catch (EJBException e) {
 		
@@ -148,9 +150,9 @@ public class CreazioneComponenteBean implements Serializable {
 
 	}
 
-		context.addMessage(null, new FacesMessage("Creazione componente riuscita"));	
+		//context.addMessage(null, new FacesMessage("Creazione componente riuscita"));	
 		
-	return "homePageImpiegato";	
+	//return "homePageImpiegato";	
 		
 		
 	}
