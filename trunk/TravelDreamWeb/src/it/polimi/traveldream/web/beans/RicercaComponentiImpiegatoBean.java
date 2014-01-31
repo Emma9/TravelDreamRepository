@@ -116,7 +116,7 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 
 				}catch (EJBException e) {
 				
-				return null;
+					return "listaComponentiRicercaImpiegato";
 
 			}
 
@@ -139,7 +139,8 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 
 				}catch (EJBException e) {
 				
-				return null;
+
+					return "listaComponentiRicercaImpiegato";
 
 			}
 
