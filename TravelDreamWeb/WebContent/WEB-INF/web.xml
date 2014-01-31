@@ -21,25 +21,26 @@
 		</form-login-config>
 	</login-config>
 	<security-constraint>
-		<web-resource-collection>
-			<web-resource-name>Pagine Cliente</web-resource-name>
-			<description />
-			<url-pattern>/cliente/*</url-pattern>
-		</web-resource-collection>
-		<auth-constraint>
-			<role-name>CLIENTI</role-name>
-		</auth-constraint>
-	</security-constraint>
-	<security-constraint>
-		<web-resource-collection>
-			<web-resource-name>Pagine Impiegati</web-resource-name>
-			<description />
-			<url-pattern>/impiegati/*</url-pattern>
-		</web-resource-collection>
-		<auth-constraint>
-			<role-name>IMPIEGATI</role-name>
-		</auth-constraint>
-	</security-constraint>
+                <web-resource-collection>
+                        <web-resource-name>Admins Pages</web-resource-name>
+                        <description />
+                        <url-pattern>/admin/*</url-pattern>
+                </web-resource-collection>
+                <auth-constraint>
+                        <role-name>ADMIN</role-name>
+                </auth-constraint>
+        </security-constraint>
+        <security-constraint>
+                <web-resource-collection>
+                        <web-resource-name>Users Pages</web-resource-name>
+                        <description />
+                        <url-pattern>/user/*</url-pattern>
+                </web-resource-collection>
+                <auth-constraint>
+                        <role-name>USER</role-name>
+                </auth-constraint>
+        </security-constraint>
+
 
 	<welcome-file-list>
 		<welcome-file>homepage.xhtml</welcome-file>

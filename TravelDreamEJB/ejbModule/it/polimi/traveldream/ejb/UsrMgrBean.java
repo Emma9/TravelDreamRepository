@@ -31,26 +31,26 @@ public class UsrMgrBean implements UsrMgr {
 	public void save(UserDTO user) {
 		User newUser = new User(user);
 		List<Group> groups = new ArrayList<Group>();
-		groups.add(Group.CLIENTI);
+		groups.add(Group.USER);
 		newUser.setGroups(groups);
 		em.persist(newUser);
 	}
 
 
-	@RolesAllowed({Group._CLIENTE,Group._IMPIEGATO})
+	@RolesAllowed({Group._USER,Group._ADMIN})
 	public void update(UserDTO user) {
 		em.merge(new User(user));
 	}
 
 
-	@RolesAllowed({Group._CLIENTE,Group._IMPIEGATO})
+	@RolesAllowed({Group._USER,Group._ADMIN})
 	public UserDTO getUserDTO() {
 		UserDTO userDTO = convertToDTO(getPrincipalUser());
 		return userDTO;
 	}
 
 
-	@RolesAllowed({Group._CLIENTE})
+	@RolesAllowed({Group._USER})
 	public void unregister() {
 		remove(getPrincipalUser());
 	}
