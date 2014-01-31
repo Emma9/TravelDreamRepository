@@ -10,7 +10,7 @@
 		<class>it.polimi.traveldream.entities.Pacchetto</class>
 		<class>it.polimi.traveldream.entities.PacchettoPersonalizzato</class>
 		<class>it.polimi.traveldream.entities.DisponibilitaPerData</class>
-		<class>it.polimi.traveldream.ejb.User</class>
+		<class>it.polimi.traveldream.entities.User</class>
 		<properties>
 			<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
 		</properties>

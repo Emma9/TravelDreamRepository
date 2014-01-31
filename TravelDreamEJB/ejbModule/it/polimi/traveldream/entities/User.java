@@ -1,8 +1,7 @@
-package it.polimi.traveldream.ejb;
+package it.polimi.traveldream.entities;
 
 
 
-import it.polimi.traveldream.entities.Group;
 import it.polimi.traveldream.entities.UserDTO;
 
 import java.io.Serializable;

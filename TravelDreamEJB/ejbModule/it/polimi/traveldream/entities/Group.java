@@ -2,9 +2,9 @@ package it.polimi.traveldream.entities;
 
 public enum Group {
 
-	ADMIN, USER;
+	IMPIEGATI, CLIENTI;
 
-	public static final String _ADMIN = "ADMIN";
-	public static final String _USER = "USER";
+	public static final String _IMPIEGATO = "IMPIEGATO";
+	public static final String _CLIENTE = "CLIENTE";
 
 }
