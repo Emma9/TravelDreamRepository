@@ -2,7 +2,7 @@ package it.polimi.traveldream.web.beans;
 
 import java.io.Serializable;
 
-import it.polimi.traveldream.ejb.UsrMgr;
+import it.polimi.traveldream.ejb.client.UsrMgr;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;

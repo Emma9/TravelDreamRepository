@@ -1,6 +1,6 @@
 package it.polimi.traveldream.web.beans;
 
-import it.polimi.traveldream.ejb.UsrMgr;
+import it.polimi.traveldream.ejb.client.UsrMgr;
 import it.polimi.traveldream.entities.UserDTO;
 
 import java.io.Serializable;
@@ -37,6 +37,6 @@ public class RegisterBean implements Serializable {
 
 	public String register() {
 		userMgr.save(user);
-		return "clienti/index?faces-redirect=true";
+		return "user/index?faces-redirect=true";
 	}
 }

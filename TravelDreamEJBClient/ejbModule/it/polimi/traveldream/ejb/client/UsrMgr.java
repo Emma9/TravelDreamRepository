@@ -1,4 +1,4 @@
-package it.polimi.traveldream.ejb;
+package it.polimi.traveldream.ejb.client;
 
 import it.polimi.traveldream.entities.UserDTO;
 
