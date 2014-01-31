@@ -3,6 +3,7 @@ package it.polimi.traveldream.ejb;
 
 
 import it.polimi.traveldream.entities.Group;
+import it.polimi.traveldream.entities.User;
 import it.polimi.traveldream.entities.UserDTO;
 
 import java.util.ArrayList;
@@ -30,26 +31,26 @@ public class UsrMgrBean implements UsrMgr {
 	public void save(UserDTO user) {
 		User newUser = new User(user);
 		List<Group> groups = new ArrayList<Group>();
-		groups.add(Group.USER);
+		groups.add(Group.CLIENTI);
 		newUser.setGroups(groups);
 		em.persist(newUser);
 	}
 
 
-	@RolesAllowed({Group._USER,Group._ADMIN})
+	@RolesAllowed({Group._CLIENTE,Group._IMPIEGATO})
 	public void update(UserDTO user) {
 		em.merge(new User(user));
 	}
 
 
-	@RolesAllowed({Group._USER,Group._ADMIN})
+	@RolesAllowed({Group._CLIENTE,Group._IMPIEGATO})
 	public UserDTO getUserDTO() {
 		UserDTO userDTO = convertToDTO(getPrincipalUser());
 		return userDTO;
 	}
 
 
-	@RolesAllowed({Group._USER})
+	@RolesAllowed({Group._CLIENTE})
 	public void unregister() {
 		remove(getPrincipalUser());
 	}

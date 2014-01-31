@@ -37,6 +37,6 @@ public class RegisterBean implements Serializable {
 
 	public String register() {
 		userMgr.save(user);
-		return "homepage?faces-redirect=true";
+		return "clienti/index?faces-redirect=true";
 	}
 }

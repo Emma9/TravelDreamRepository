@@ -12,11 +12,17 @@
   
   <div align="center">
 	  <p:layoutUnit position="north" size="80"  header="TRAVELDREAM" resizable="false" closable="false" collapsible="false">  
-	           	<div align="right">
+	           	<!--  <div align="right">
 		           	<h:button outcome="loginImpiegato" value="Area Riservata"/>
 		        	<h:button outcome="registrazione" value="Registrati"/>
 		         	<h:button outcome="loginCliente" value="Login"/><br /> 
-	         	</div>
+	         	</div>-->
+	         	
+	         	<div align="right">
+                                <h:button value="Area Riservata" outcome="impiegati/index.xhtml" />
+                                <h:button value="Login Cliente" outcome="clienti/index.xhtml" />
+                        </div>
+	         	
 	    </p:layoutUnit>
   </div>
       

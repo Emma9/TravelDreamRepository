@@ -13,11 +13,11 @@
 		<servlet-name>FacesServlet</servlet-name>
 		<url-pattern>/faces/*</url-pattern>
 	</servlet-mapping>
-	<!--  <login-config>
+	<login-config>
 		<auth-method>FORM</auth-method>
 		<form-login-config>
-			<form-login-page>/loginCliente.xhtml</form-login-page>
-			<form-error-page>/loginCliente.xhtml</form-error-page>
+			<form-login-page>/login.xhtml</form-login-page>
+			<form-error-page>/loginError.xhtml</form-error-page>
 		</form-login-config>
 	</login-config>
 	<security-constraint>
@@ -39,7 +39,7 @@
 		<auth-constraint>
 			<role-name>IMPIEGATI</role-name>
 		</auth-constraint>
-	</security-constraint>-->
+	</security-constraint>
 
 	<welcome-file-list>
 		<welcome-file>homepage.xhtml</welcome-file>
