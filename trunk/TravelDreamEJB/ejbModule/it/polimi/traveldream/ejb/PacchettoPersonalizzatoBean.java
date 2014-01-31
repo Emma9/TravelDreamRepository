@@ -376,4 +376,62 @@ public class PacchettoPersonalizzatoBean implements
 
 	}
 
+	public PacchettoPersonalizzato pacchettoPersonalizzatoDTOToPacchettoPersonalizzato(
+			PacchettoPersonalizzatoDTO pacchettoPersonalizzatoDTO) {
+
+		PacchettoPersonalizzato pacchettoPersonalizzato = new PacchettoPersonalizzato();
+		pacchettoPersonalizzato
+				.setIdPacchettoPersonalizzato(pacchettoPersonalizzatoDTO
+						.getIdPacchettoPersonalizzato());
+		pacchettoPersonalizzato.setDataDiPartenza(pacchettoPersonalizzatoDTO
+				.getDataDiPartenza());
+		pacchettoPersonalizzato.setDataDiRitorno(pacchettoPersonalizzatoDTO
+				.getDataDiRitorno());
+		pacchettoPersonalizzato.setStato(pacchettoPersonalizzatoDTO.getStato());
+		pacchettoPersonalizzato.setIdCliente(pacchettoPersonalizzatoDTO
+				.getIdCliente());
+		pacchettoPersonalizzato.setIdPacchetto(pacchettoPersonalizzatoDTO
+				.getIdPacchetto());
+		pacchettoPersonalizzato.setCosto(pacchettoPersonalizzatoDTO.getCosto());
+		pacchettoPersonalizzato.setDataFineValidita(pacchettoPersonalizzatoDTO
+				.getDataFineValidita());
+		pacchettoPersonalizzato
+				.setDataInizioValidita(pacchettoPersonalizzatoDTO
+						.getDataInizioValidita());
+		pacchettoPersonalizzato.setDescrizione(pacchettoPersonalizzatoDTO
+				.getDescrizione());
+		pacchettoPersonalizzato.setDestinazione(pacchettoPersonalizzatoDTO
+				.getDestinazione());
+		pacchettoPersonalizzato.setEtichetta(pacchettoPersonalizzatoDTO
+				.getEtichetta());
+		pacchettoPersonalizzato.setSconto(pacchettoPersonalizzatoDTO
+				.getSconto());
+
+		List<Componente> listaComponenti = new ArrayList<Componente>();
+		for (int i = 0; i < pacchettoPersonalizzatoDTO.getListaComponenti().size(); i++) {
+			listaComponenti
+					.add(componenteDTOToComponenteInPacchettoPers(pacchettoPersonalizzatoDTO
+							.getListaComponenti().get(i)));
+
+		}
+
+		pacchettoPersonalizzato.setListaComponenti(listaComponenti);
+
+		List<Componente> listaComponentiSelezionati = new ArrayList<Componente>();
+		for (int i = 0; i < pacchettoPersonalizzatoDTO
+				.getListaComponentiSelezionati().size(); i++) {
+			listaComponentiSelezionati
+					.add(componenteDTOToComponenteInPacchettoPers(pacchettoPersonalizzatoDTO
+							.getListaComponentiSelezionati().get(i)));
+
+		}
+
+		pacchettoPersonalizzato
+				.setListaComponentiSelezionati(listaComponentiSelezionati);
+
+		return pacchettoPersonalizzato;
+
+	}
+
+	
 }
