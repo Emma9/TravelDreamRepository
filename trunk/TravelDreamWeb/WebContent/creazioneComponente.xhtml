@@ -25,6 +25,8 @@
 			       required="true"
 			       requiredMessage="Devi inserire una descrizione del componente">  
 			    </p:inputTextarea>
+			    
+     			 <f:validateLength minimum="1" maximum="15" for="descrizione"></f:validateLength>
 			    <p:message for="descrizione" />
 				
 				<p:outputLabel value="Luogo: "/>
@@ -33,6 +35,7 @@
 			       required="true"
 			       requiredMessage="Devi inserire il luogo del componente">  
 			    </p:inputText>
+     			 <f:validateLength minimum="1" maximum="15" for="luogo"></f:validateLength>
 			    <p:message for="luogo" />
 				
 				<p:outputLabel value="Costo: "/>
@@ -41,6 +44,7 @@
 			       required="true"
 			       requiredMessage="Devi inserire il costo del componente">  
 			    </p:inputText>
+			    
 			    <p:message for="costo" />
 			    
 			    <p:outputLabel value="Data Inizio Validità: "/>
@@ -63,7 +67,8 @@
 				
 				</div>
 				</div>
-   		 <h:commandButton value="Conferma" actionListener="#{creazioneComponenteBean.creazioneComponente}" /> <!-- messaggio avvenimento ritorno home page impiegato -->
+   		 <h:commandButton value="Conferma" action="#{creazioneComponenteBean.creazioneComponente()}" /> <!-- messaggio avvenimento ritorno home page impiegato -->
+   		 
   	</p:fieldset>
 
         
