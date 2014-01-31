@@ -1,13 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
-  <display-name>TravelDreamWeb</display-name>
-  <servlet>
-    <servlet-name>FacesServlet</servlet-name>
-    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>FacesServlet</servlet-name>
-    <url-pattern>/faces/*</url-pattern>
-  </servlet-mapping>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
+	<display-name>TravelDreamWeb</display-name>
+	<servlet>
+		<servlet-name>FacesServlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FacesServlet</servlet-name>
+		<url-pattern>/faces/*</url-pattern>
+	</servlet-mapping>
+	<!--  <login-config>
+		<auth-method>FORM</auth-method>
+		<form-login-config>
+			<form-login-page>/loginCliente.xhtml</form-login-page>
+			<form-error-page>/loginCliente.xhtml</form-error-page>
+		</form-login-config>
+	</login-config>
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Pagine Cliente</web-resource-name>
+			<description />
+			<url-pattern>/cliente/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>CLIENTI</role-name>
+		</auth-constraint>
+	</security-constraint>
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Pagine Impiegati</web-resource-name>
+			<description />
+			<url-pattern>/impiegati/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>IMPIEGATI</role-name>
+		</auth-constraint>
+	</security-constraint>-->
+
+	<welcome-file-list>
+		<welcome-file>homepage.xhtml</welcome-file>
+	</welcome-file-list>
+
+
+
 </web-app>

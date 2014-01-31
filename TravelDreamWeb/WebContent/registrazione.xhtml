@@ -14,18 +14,18 @@
    
     <p:focus context="panel" />
     <h:outputLabel value="Nome" />
-    <p:inputText value="#{registrazioneBean.nome}"
+    <p:inputText value="#{registerBean.user.firstName}"
        id="nome"
         required="true"
         requiredMessage="Devi inseriere il nome"
         validatorMessage="Il nome  deve avere una lunghezza da 1 a 15 caratteri"
         >
-     <f:validateLength minimum="1" maximum="11" for="nome"></f:validateLength>
+     <f:validateLength minimum="1" maximum="15" for="nome"></f:validateLength>
     </p:inputText>
     <p:message for="nome"/>
     
     <h:outputLabel value="Cognome" />
-    <p:inputText value="#{registrazioneBean.cognome}"
+    <p:inputText value="#{registerBean.user.lastName}"
        id="cognome"
        required="true"
        requiredMessage="Devi inserire il cognome"
@@ -35,24 +35,8 @@
     </p:inputText>
     <p:message for="cognome" />
     
-    <h:outputLabel value="Codice Fiscale" />
-    <p:inputText value="#{registrazioneBean.codiceFiscale}"
-       id="codiceFiscale"
-       required="true"
-       requiredMessage="Devi inserire il codice fiscale"
-       validatorMessage="Il codice fiscale inserito non è valido"><!-- messa io -->
-       	<f:validateRegex pattern="^[a-zA-Z]{6}[0-9]{2}[a-zA-Z]{1}[0-9]{2}[a-zA-Z]{1}[0-9]{3}[a-zA-Z]{1}$"></f:validateRegex><!-- messa io -->
-      <!--  required="true"
-       
-       requiredMessage="Devi inserire il codice fiscale"
-       validatorMessage="Il codice fiscale deve avere una lunghezza di 16 caratteri"
-       >
-      <f:validateLength minimum="16" maximum="16" for="codiceFiscale"></f:validateLength>-->
-    </p:inputText>
-    <p:message for="codiceFiscale" />
-    
     <h:outputLabel value="Email" />
-    <p:inputText value="#{registrazioneBean.email}"
+    <p:inputText value="#{registerBean.user.email}"
        id="email"
        required="true"
        requiredMessage="Devi inserire l'email"
@@ -63,7 +47,7 @@
     <p:message for="email" />
     
     <h:outputLabel value="Password" />
-    <p:password value="#{registrazioneBean.password}"
+    <p:password value="#{registerBean.user.password}"
        id="password"
        required="true"
        requiredMessage="Devi inserire una password"
@@ -74,8 +58,12 @@
     <p:message for="password" />
     
     
-    <p:commandButton value="Crea Account" action="#{registrazioneBean.registrazione()}" ajax="false" > </p:commandButton>
+    <p:commandButton value="Crea Account" action="#{registerBean.register()}" ajax="false" > </p:commandButton>
+	
+	
 
+	
+	
     <p:messages id="message" showSummary="true" showDetail="false" autoUpdate="true" closable="true" />
    </h:panelGrid>
   </p:fieldset>
