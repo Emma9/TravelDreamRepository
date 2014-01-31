@@ -54,7 +54,7 @@
 								<h:outputText value="Ricerca Componente Tramite Codice:" />
 								<br />
 								<div style="display: inline;">
-									<h:inputText  autocomplete="true" />
+									<h:inputText  autocomplete="true" value="#{ricercaComponentiImpiegatoBean.codiceComponente}" />
 									<h:panelGrid id="ricerca1">
 										<h:commandButton value="Ricerca" update="ricerca1"  action="#{ricercaComponentiImpiegatoBean.ricercaComponenteImpiegatoId()}" ajax="false"/>
 										<!--andiamo in listaComponentiRicercaImpiegato -->
