@@ -13,10 +13,10 @@
 		<p:fieldset legend="Ecco i parametri da settare per un nuovo componente" widgetVar="regWidget" style="width: 600px;">
 			<div style="float: center">
 				<div style="display: inline;">
-				<p:selectOneRadio id="tipologia" value="#{creazioneComponenteBean.tipologia}">  
-				            <f:selectItem itemLabel="Volo" itemValue="volo" />  
-				            <f:selectItem itemLabel="Hotel" itemValue="hotel" />  
-				            <f:selectItem itemLabel="Escursione" itemValue="escursione" />    
+				<p:selectOneRadio id="tipologia">  
+				            <f:selectItem itemLabel="Volo" itemValue="volo" value="#{creazioneComponenteBean.tipologia}" />  
+				            <f:selectItem itemLabel="Hotel" itemValue="hotel"  value="#{creazioneComponenteBean.tipologia}" />  
+				            <f:selectItem itemLabel="Escursione" itemValue="escursione"  value="#{creazioneComponenteBean.tipologia}" />    
 				</p:selectOneRadio> 
 				
 				<p:outputLabel value="Descrizione: "/><br />
@@ -63,7 +63,7 @@
 				
 				</div>
 				</div>
-   		 <p:commandButton value="Conferma" actionListener="#{creazioneComponenteBean.creazioneComponente}" /> <!-- messaggio avvenimento ritorno home page impiegato -->
+   		 <p:commandButton value="Conferma" action="#{creazioneComponenteBean.creazioneComponente()}" /> <!-- messaggio avvenimento ritorno home page impiegato -->
   	</p:fieldset>
 
         
