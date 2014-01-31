@@ -27,7 +27,7 @@
 			    </p:inputTextarea>
 			    <p:message for="descrizione" />
 				
-				<p:outputLabel value="Lungo: "/>
+				<p:outputLabel value="Luogo: "/>
 				<p:inputText value="#{creazioneComponenteBean.luogo}"
 			       id="luogo"
 			       required="true"
@@ -63,7 +63,7 @@
 				
 				</div>
 				</div>
-   		 <h:commandButton value="Conferma" action="#{creazioneComponenteBean.creazioneComponente()}" /> <!-- messaggio avvenimento ritorno home page impiegato -->
+   		 <h:commandButton value="Conferma" actionListener="#{creazioneComponenteBean.creazioneComponente}" /> <!-- messaggio avvenimento ritorno home page impiegato -->
   	</p:fieldset>
 
         
