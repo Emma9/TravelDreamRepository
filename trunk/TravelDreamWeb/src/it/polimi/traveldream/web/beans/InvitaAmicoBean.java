@@ -27,7 +27,7 @@ public class InvitaAmicoBean implements Serializable {
 		
 		private String emailMittente;
 		private String emailDestinatario;
-		private String idPacchettoPersonalizzato;
+		private Long idPacchettoPersonalizzato;
 	
 		
 		/**
@@ -57,13 +57,13 @@ public class InvitaAmicoBean implements Serializable {
 		/**
 		 * @return the idPacchettoPersonalizzato
 		 */
-		public String getIdPacchettoPersonalizzato() {
+		public Long getIdPacchettoPersonalizzato() {
 			return idPacchettoPersonalizzato;
 		}
 		/**
 		 * @param idPacchettoPersonalizzato the idPacchettoPersonalizzato to set
 		 */
-		public void setIdPacchettoPersonalizzato(String idPacchettoPersonalizzato) {
+		public void setIdPacchettoPersonalizzato(Long idPacchettoPersonalizzato) {
 			this.idPacchettoPersonalizzato = idPacchettoPersonalizzato;
 		}
 	

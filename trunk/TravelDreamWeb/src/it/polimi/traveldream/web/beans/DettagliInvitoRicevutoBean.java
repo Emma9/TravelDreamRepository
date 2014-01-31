@@ -4,6 +4,7 @@ import it.polimi.traveldream.ejb.client.InvitoBeanRemote;
 import it.polimi.traveldream.ejb.client.PacchettoPersonalizzatoBeanRemote;
 import it.polimi.traveldream.entities.ComponenteDTO;
 import it.polimi.traveldream.entities.InvitoDTO;
+import it.polimi.traveldream.entities.PacchettoPersonalizzatoDTO;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -36,7 +37,9 @@ public class DettagliInvitoRicevutoBean implements Serializable {
 	
 	private InvitoDTO invito;
 	
-	private List<ComponenteDTO> listaComponentiSelezionati= new ArrayList<ComponenteDTO>(0);
+	private List<ComponenteDTO> listaComponentiPacchetto= new ArrayList<ComponenteDTO>(0);
+	
+	private PacchettoPersonalizzatoDTO pacchetto; 
 
 	/**
 	 * @return the idInvito
@@ -70,7 +73,7 @@ public class DettagliInvitoRicevutoBean implements Serializable {
 	 * @return the listaComponentiSelezionati
 	 */
 	public List<ComponenteDTO> getListaComponentiSelezionati() {
-		return listaComponentiSelezionati;
+		return listaComponentiPacchetto;
 	}
 
 	/**
@@ -78,9 +81,25 @@ public class DettagliInvitoRicevutoBean implements Serializable {
 	 */
 	public void setListaComponentiSelezionati(
 			List<ComponenteDTO> listaComponentiSelezionati) {
-		this.listaComponentiSelezionati = listaComponentiSelezionati;
+		this.listaComponentiPacchetto = listaComponentiSelezionati;
+	}
+	
+	
+	
+
+	/**
+	 * @return the pacchetto
+	 */
+	public PacchettoPersonalizzatoDTO getPacchetto() {
+		return pacchetto;
 	}
 
+	/**
+	 * @param pacchetto the pacchetto to set
+	 */
+	public void setPacchetto(PacchettoPersonalizzatoDTO pacchetto) {
+		this.pacchetto = pacchetto;
+	}
 
 	public String dettagliInvitoRicevuto(){
 		
@@ -90,9 +109,11 @@ public class DettagliInvitoRicevutoBean implements Serializable {
 		
 		try {
 			
+			//INVITO PER I DETTAGLI
 			invito = invitoremoto.findByIdInvito(idInvito);
 			
-			//listaComponentiSelezionati = pacchettopersonalizzatoremoto  METODO CHE RESTITUISCE LA LISTA
+			//PACCHETTO DELL'INVITO PER LA LISTA DEI COMPONENTI
+			pacchetto = pacchettopersonalizzatoremoto.findByIdPacchettoPersonalizzato(invito.getIdPacchettoPersonalizzato());
 
 		}catch (EJBException e) {
 		
