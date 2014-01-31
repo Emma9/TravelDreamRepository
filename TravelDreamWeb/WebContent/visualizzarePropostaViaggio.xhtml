@@ -17,7 +17,7 @@
     
     
     <h:outputLabel value="ID Pacchetto Proposto:" />
-    <p:inputText value="#{loginClienteBean.password}"
+    <p:inputText value="#{mostraInvitiClienteBean.email}"
        id="idPacchetto"
        required="true"
        requiredMessage="Devi inserire l'id del pacchetto viaggio  da visualizzare"
@@ -27,7 +27,7 @@
     
     
     <h:outputLabel value="Email:" />
-    <p:inputText value="#{loginClienteBean.email}"
+    <p:inputText value="#{mostraInvitiClienteBean.email}"
        id="email"
        required="true"
        requiredMessage="Devi inserire l'email">  
@@ -38,7 +38,7 @@
     
     
 	
-    <p:commandButton id="bottoneProsegui" value="Prosegui" actionListener="#{dettagliInvitoAmico}"/><!-- va a caricare dettagli invito amico -->
+    <p:commandButton id="bottoneProsegui" value="Prosegui" actionListener="#{dettagliInvitoRicevutoBean.dettagliInvitoRicevuto}"/><!-- va a caricare dettagli invito amico -->
     <p:messages id="message" showSummary="true" showDetail="false" autoUpdate="true" closable="true" /> 
       
 
