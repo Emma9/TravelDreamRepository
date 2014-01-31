@@ -9,8 +9,7 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
+
 
 @ManagedBean()
 @SessionScoped
@@ -24,7 +23,7 @@ public class DettagliComponenteSelezionatoBean implements Serializable {
 	@EJB
 	private ComponenteBeanRemote componenteRemoto;
 	
-	private Long codiceComponente;
+	private int codiceComponente;
 	
 	private ComponenteDTO componente;
 	
@@ -48,14 +47,14 @@ public class DettagliComponenteSelezionatoBean implements Serializable {
 	/**
 	 * @return the codiceComponente
 	 */
-	public Long getCodiceComponente() {
+	public int getCodiceComponente() {
 		return codiceComponente;
 	}
 
 	/**
 	 * @param codiceComponente the codiceComponente to set
 	 */
-	public void setCodiceComponente(Long codiceComponente) {
+	public void setCodiceComponente(int codiceComponente) {
 		this.codiceComponente = codiceComponente;
 	}
 
@@ -76,9 +75,6 @@ public class DettagliComponenteSelezionatoBean implements Serializable {
 
 	public String DettagliComponenteSelezionato(){
 		
-		FacesContext context = FacesContext.getCurrentInstance();
-		HttpServletRequest request = (HttpServletRequest) context
-				.getExternalContext().getRequest();
 		
 		try {
 			
@@ -97,9 +93,6 @@ public class DettagliComponenteSelezionatoBean implements Serializable {
 	
 	public String DettagliComponenteSelezionatoImpiegato(){
 		
-		FacesContext context = FacesContext.getCurrentInstance();
-		HttpServletRequest request = (HttpServletRequest) context
-				.getExternalContext().getRequest();
 		
 		try {
 			

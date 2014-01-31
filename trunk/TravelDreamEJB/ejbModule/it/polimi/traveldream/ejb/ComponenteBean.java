@@ -42,7 +42,7 @@ public class ComponenteBean implements ComponenteBeanRemote,
 	 * @param disponibilitaDaSettare
 	 * @return codiceComponente
 	 */
-	public Long createComponente(String tipologia,String luogo, String descrizione,
+	public int createComponente(String tipologia,String luogo, String descrizione,
 			int costo, Date dataInizioValidita, Date dataFineValidita,
 			int disponibilitaDaSettare) {
 
@@ -67,12 +67,12 @@ public class ComponenteBean implements ComponenteBeanRemote,
 
 		}
 
-		return (long) -1;
+		return  -1;
 
 	}
 
 	/** @param codiceComponente */
-	public void removeComponente(Long codiceComponente) {
+	public void removeComponente(int codiceComponente) {
 
 		Componente c = manager.find(Componente.class, codiceComponente);
 		
@@ -90,7 +90,7 @@ public class ComponenteBean implements ComponenteBeanRemote,
 	 * @param dataFineValidita
 	 * @param disponibilitaDaSettare
 	 */
-	public void updateComponente(Long codiceComponente, String tipologia, String luogo,
+	public void updateComponente(int codiceComponente, String tipologia, String luogo,
 			String descrizione, int costo, Date dataInizioValidita, Date dataFineValidita,
 			int disponibilitaDaSettare) {
 
@@ -119,7 +119,7 @@ public class ComponenteBean implements ComponenteBeanRemote,
 	 * @param codiceComponente
 	 * @return ComponenteDTO
 	 */
-	public ComponenteDTO findByCodiceComponente(Long codiceComponente) {
+	public ComponenteDTO findByCodiceComponente(int codiceComponente) {
 
 		TypedQuery<Componente> q = manager
 				.createQuery(
@@ -129,8 +129,7 @@ public class ComponenteBean implements ComponenteBeanRemote,
 		q.setParameter("new_codiceComponente", codiceComponente);
 
 		ComponenteDTO componente = componenteToDTO(q.getSingleResult());
-		
-		
+			
 
 		return componente;
 	}
@@ -173,20 +172,12 @@ public class ComponenteBean implements ComponenteBeanRemote,
 		
 		ArrayList<ComponenteDTO> listaComponenti = new ArrayList<ComponenteDTO>();
 
-		ArrayList<ComponenteDTO> listaCOM = new ArrayList<ComponenteDTO>();
+
 		
-		ComponenteDTO componente = new ComponenteDTO();
-		
-		ArrayList<Long> listaCOD = findAll();
+		ArrayList<ComponenteDTO> listaCOM = findAll();
 			
 		
-		for(int i=0; i<listaCOD.size();i++){
-			
-			componente = findByCodiceComponente(listaCOD.get(i));
-			
-			listaCOM.add(componente);
-			
-		}
+		
 		
 		for(int j=0; j<listaCOM.size();j++){
 			
@@ -203,18 +194,18 @@ public class ComponenteBean implements ComponenteBeanRemote,
 	
 
 	/** @return ArrayList<codiceComponente> */
-	public ArrayList<Long> findAll() {
+	public ArrayList<ComponenteDTO> findAll() {
 
 		TypedQuery<Componente> q = manager.createQuery("FROM Componente c",
 				Componente.class);
 
 		
 
-		ArrayList<Long> lista = new ArrayList<Long>();
+		ArrayList<ComponenteDTO> lista = new ArrayList<ComponenteDTO>();
 
 		for (int i = 0; i < q.getResultList().size(); i++) {
 
-			lista.add(q.getResultList().get(i).getCodiceComponente());
+			lista.add(componenteToDTO(q.getResultList().get(i)));
 
 		}
 		return lista;
@@ -330,7 +321,7 @@ public class ComponenteBean implements ComponenteBeanRemote,
 	 * @param codiceComponente
 	 * @return true if codiceComponente is present in the DB, otherwise false
 	 */
-	public boolean verificaPresenzaComponente(Long codiceComponente) {
+	public boolean verificaPresenzaComponente(int codiceComponente) {
 		try {
 			if(manager.find(Componente.class, codiceComponente).equals(null)){
 				return false;

@@ -5,13 +5,13 @@ import it.polimi.traveldream.entities.ComponenteDTO;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
+
 
 @ManagedBean()
 @SessionScoped
@@ -26,7 +26,7 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 			@EJB
 			private ComponenteBeanRemote componenteremoto;
 		
-			private Long codiceComponente;
+			private int codiceComponente;
 			private String termine;
 			
 			//COMPONENTE SELEZIONATO
@@ -36,19 +36,19 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 			private ArrayList<ComponenteDTO> componentiRicercati = new ArrayList<ComponenteDTO>();
 			
 			//COMPONENTE INVIATO ALLA PAGINA WEB
-			private ComponenteDTO componenteRicercato;
+			//private ComponenteDTO componenteRicercato;
 			
 	
 			/**
 			 * @return the codiceComponente
 			 */
-			public Long getCodiceComponente() {
+			public int getCodiceComponente() {
 				return codiceComponente;
 			}
 			/**
 			 * @param codiceComponente the codiceComponente to set
 			 */
-			public void setCodiceComponente(Long codiceComponente) {
+			public void setCodiceComponente(int codiceComponente) {
 				this.codiceComponente = codiceComponente;
 			}
 			/**
@@ -92,27 +92,26 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 			/**
 			 * @return the componenteRicercato
 			 */
-			public ComponenteDTO getComponenteRicercato() {
-				return componenteRicercato;
-			}
+			//public ComponenteDTO getComponenteRicercato() {
+				//return componenteRicercato;
+			//}
 			/**
 			 * @param componenteRicercato the componenteRicercato to set
 			 */
-			public void setComponenteRicercato(ComponenteDTO componenteRicercato) {
-				this.componenteRicercato = componenteRicercato;
-			}
+			//public void setComponenteRicercato(ComponenteDTO componenteRicercato) {
+				//this.componenteRicercato = componenteRicercato;
+			//}
 			
 			
 			
 			public String ricercaComponenteImpiegatoId(){
 				
-				FacesContext context = FacesContext.getCurrentInstance();
-				HttpServletRequest request = (HttpServletRequest) context
-						.getExternalContext().getRequest();
+				
 				
 				try {
-					
-					componenteRicercato = componenteremoto.findByCodiceComponente(codiceComponente);
+					ArrayList<ComponenteDTO> lista= new ArrayList<ComponenteDTO>();
+					lista.add(componenteremoto.findByCodiceComponente(codiceComponente));
+					componentiRicercati = lista;
 
 				}catch (EJBException e) {
 				
@@ -129,9 +128,6 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 			
 			public String ricercaComponenteImpiegatoTermine(){
 							
-				FacesContext context = FacesContext.getCurrentInstance();
-				HttpServletRequest request = (HttpServletRequest) context
-						.getExternalContext().getRequest();
 				
 				try {
 					

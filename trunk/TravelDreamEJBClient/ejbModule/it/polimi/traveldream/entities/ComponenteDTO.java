@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 
 
 public class ComponenteDTO implements Serializable{
@@ -13,12 +16,14 @@ public class ComponenteDTO implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 205L;
-	private Long codiceComponente;
+	private int codiceComponente;
 	private String luogo;
 	private String tipologia;
 	private String descrizione;
 	private int costo;
+	@Temporal(TemporalType.DATE)
 	private Date dataInizioValidita;
+	@Temporal(TemporalType.DATE)
 	private Date dataFineValidita;
 	private List<DisponibilitaPerDataDTO> disponibilitaPerData = new ArrayList<DisponibilitaPerDataDTO>(0);
 	
@@ -31,7 +36,7 @@ public class ComponenteDTO implements Serializable{
 	}
 
 	/**@return codiceComponente*/
-	public Long getCodiceComponente() {
+	public int getCodiceComponente() {
 		
 		return this.codiceComponente;
 		
@@ -41,7 +46,7 @@ public class ComponenteDTO implements Serializable{
 	
 	
 	
-
+	
 
 	/**
 	 * @return the luogo
@@ -60,7 +65,7 @@ public class ComponenteDTO implements Serializable{
 	/**
 	 * @param codiceComponente the codiceComponente to set
 	 */
-	public void setCodiceComponente(Long codiceComponente) {
+	public void setCodiceComponente(int codiceComponente) {
 		this.codiceComponente = codiceComponente;
 	}
 
@@ -150,7 +155,6 @@ public class ComponenteDTO implements Serializable{
 		this.disponibilitaPerData = disponibilitaPerData;
 	}
 
-		
 	
 	
 }

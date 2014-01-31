@@ -2,6 +2,7 @@ package it.polimi.traveldream.ejb;
 
 
 
+import it.polimi.traveldream.ejb.client.UsrMgr;
 import it.polimi.traveldream.entities.Group;
 import it.polimi.traveldream.entities.User;
 import it.polimi.traveldream.entities.UserDTO;

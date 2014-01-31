@@ -9,8 +9,7 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
+
 
 @ManagedBean()
 @SessionScoped
@@ -26,7 +25,7 @@ public class FormModificaComponenteBean implements Serializable {
 		@EJB
 		private ComponenteBeanRemote componenteremoto;
 		
-		private Long codiceComponente;
+		private int codiceComponente;
 		
 		private ComponenteDTO componente = new ComponenteDTO();
 		
@@ -38,7 +37,7 @@ public class FormModificaComponenteBean implements Serializable {
 	/**
 		 * @return the codiceComponente
 		 */
-		public Long getCodiceComponente() {
+		public int getCodiceComponente() {
 			return codiceComponente;
 		}
 
@@ -50,7 +49,7 @@ public class FormModificaComponenteBean implements Serializable {
 		/**
 		 * @param codiceComponente the codiceComponente to set
 		 */
-		public void setCodiceComponente(Long codiceComponente) {
+		public void setCodiceComponente(int codiceComponente) {
 			this.codiceComponente = codiceComponente;
 		}
 
@@ -85,9 +84,7 @@ public class FormModificaComponenteBean implements Serializable {
 
 	public String formModificaComponente(){
 		
-		FacesContext context = FacesContext.getCurrentInstance();
-		HttpServletRequest request = (HttpServletRequest) context
-				.getExternalContext().getRequest();
+
 		
 		try {
 			

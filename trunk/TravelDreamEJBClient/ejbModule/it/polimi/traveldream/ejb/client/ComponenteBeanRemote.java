@@ -36,12 +36,12 @@ public interface ComponenteBeanRemote {
 	 * @param disponibilitaDaSettare
 	 * @return codiceComponente
 	 */
-	public Long createComponente(String tipologia,String luogo, String descrizione,
+	public int createComponente(String tipologia,String luogo, String descrizione,
 			int costo, Date dataInizioValidita, Date dataFineValidita,
 			int disponibilitaDaSettare);
 	
 	/**@param codiceComponente*/
-	public void removeComponente(Long codiceComponente);
+	public void removeComponente(int codiceComponente);
 
 	/**
 	 * @param codiceComponente
@@ -53,13 +53,13 @@ public interface ComponenteBeanRemote {
 	 * @param dataFineValidita
 	 * @param disponibilitaDaSettare
 	 */
-	public void updateComponente(Long codiceComponente, String tipologia, String luogo,
+	public void updateComponente(int codiceComponente, String tipologia, String luogo,
 			String descrizione, int costo, Date dataInizioValidita, Date dataFineValidita,
 			int disponibilitaDaSettare) ;
 	
 	/**@param codiceComponente
 	 * @return ComponenteDTO*/
-	public ComponenteDTO findByCodiceComponente(Long codiceComponente);
+	public ComponenteDTO findByCodiceComponente(int codiceComponente);
 	
 	/**
 	 * @param luogo
@@ -75,7 +75,7 @@ public interface ComponenteBeanRemote {
 	public ArrayList<ComponenteDTO> findByTermine(String termine);
 	
 	/**@return ArrayList<codiceComponente>*/
-	public ArrayList<Long> findAll();
+	public ArrayList<ComponenteDTO> findAll();
 	
 	/**@param dataPartenza
 	 * @param dataRitorno
@@ -122,7 +122,7 @@ public interface ComponenteBeanRemote {
 	 * @param codiceComponente
 	 * @return true if codiceComponente is present in the DB, otherwise false
 	 */
-	public boolean verificaPresenzaComponente(Long codiceComponente) ; 
+	public boolean verificaPresenzaComponente(int codiceComponente) ; 
 	
 	/**@param tipologia
 	 * @return true if tipologia is valid, otherwise false
