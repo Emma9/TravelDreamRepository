@@ -1,7 +1,11 @@
 package it.polimi.traveldream.entities;
 
+
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.*;
 
 /**
@@ -18,6 +22,11 @@ public class DisponibilitaPerData implements Serializable {
 	private int disponibilita;
 	private static final long serialVersionUID = 1L;
 
+	
+	@ManyToMany(mappedBy="disponibilitaPerData")
+	private List<Componente> componenti;
+	
+	
 	/**
 	 * 
 	 */

@@ -28,9 +28,19 @@ public class Componente implements Serializable {
 	private Date dataInizioValidita;
 	@Temporal(TemporalType.DATE)
 	private Date dataFineValidita;
-	private List<DisponibilitaPerData> disponibilitaPerData = new ArrayList<DisponibilitaPerData>(0);
+	//private List<DisponibilitaPerData> disponibilitaPerData = new ArrayList<DisponibilitaPerData>(0);
 	
-	
+	@ManyToMany(cascade = CascadeType.PERSIST)
+	@JoinTable(
+		name="Componente_DisponibilitaPerData"
+		, joinColumns={
+			@JoinColumn(name="codiceComponente", referencedColumnName="codiceComponente")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="data", referencedColumnName="data")
+			}
+		)
+	private List<DisponibilitaPerData> disponibilitaPerData;
 	
 
 	/**Costruttore*/
@@ -158,6 +168,7 @@ public class Componente implements Serializable {
 		this.disponibilitaPerData = disponibilitaPerData;
 	}
 
+	
 	
 	
 }

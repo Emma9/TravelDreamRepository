@@ -1,5 +1,6 @@
 package it.polimi.traveldream.ejb;
 
+
 import it.polimi.traveldream.ejb.client.ComponenteBeanLocal;
 import it.polimi.traveldream.ejb.client.ComponenteBeanRemote;
 import it.polimi.traveldream.entities.Componente;
@@ -13,6 +14,9 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -57,15 +61,16 @@ public class ComponenteBean implements ComponenteBeanRemote,
 			componente.setDataInizioValidita(dataInizioValidita);
 			componente.setDataFineValidita(dataFineValidita);
 
+			List<DisponibilitaPerData> listaDisponibilitaPerData= new ArrayList<DisponibilitaPerData>();
+			List<DisponibilitaPerDataDTO> listaDisponibilitaPerDataDTO= new ArrayList<DisponibilitaPerDataDTO>();
 			
-			/*
-			creaListaDisponibilitaPerData(componenteToDTO(componente), dataInizioValidita,
-					dataFineValidita, disponibilitaDaSettare);
-			*/
+			listaDisponibilitaPerDataDTO=creaListaDisponibilitaPerData(dataInizioValidita, dataFineValidita, disponibilitaDaSettare);
 			
+			for(int i=0;i<listaDisponibilitaPerDataDTO.size(); i++){
+				listaDisponibilitaPerData.add(disponibilitaPerDataDTOToDisponibilitaPerData(listaDisponibilitaPerDataDTO.get(i)));
+			}
 			
-			//componente.setDisponibilitaPerData();
-			
+			componente.setDisponibilitaPerData(listaDisponibilitaPerData);
 
 			manager.persist(componente);
 
@@ -111,11 +116,19 @@ public class ComponenteBean implements ComponenteBeanRemote,
 			componente.setCosto(costo);
 			componente.setDataInizioValidita(dataInizioValidita);
 			componente.setDataFineValidita(dataFineValidita);
+		
 			
-			// disponibilitaPerData=;
-			creaListaDisponibilitaPerData(componenteToDTO(componente), dataInizioValidita,
-								dataFineValidita, disponibilitaDaSettare);
-
+			List<DisponibilitaPerData> listaDisponibilitaPerData= new ArrayList<DisponibilitaPerData>();
+			List<DisponibilitaPerDataDTO> listaDisponibilitaPerDataDTO= new ArrayList<DisponibilitaPerDataDTO>();
+			
+			listaDisponibilitaPerDataDTO=creaListaDisponibilitaPerData(dataInizioValidita, dataFineValidita, disponibilitaDaSettare);
+			
+			for(int i=0;i<listaDisponibilitaPerDataDTO.size(); i++){
+				listaDisponibilitaPerData.add(disponibilitaPerDataDTOToDisponibilitaPerData(listaDisponibilitaPerDataDTO.get(i)));
+			}
+			
+			componente.setDisponibilitaPerData(listaDisponibilitaPerData);
+			
 			manager.merge(componente);
 		}
 
@@ -139,6 +152,11 @@ public class ComponenteBean implements ComponenteBeanRemote,
 
 		return componente;
 	}
+	
+	
+	
+	
+	
 	
 	/**
 	 * @param luogo
@@ -286,20 +304,25 @@ public class ComponenteBean implements ComponenteBeanRemote,
 	 * @param dataFineValidita
 	 * @param disponibilitaDaSettare
 	 */
-	public List<DisponibilitaPerData> creaListaDisponibilitaPerData(Date dataInizioValidita, Date dataFineValidita,int disponibilitaDaSettare) {
+	public List<DisponibilitaPerDataDTO> creaListaDisponibilitaPerData(Date dataInizioValidita, Date dataFineValidita,int disponibilitaDaSettare) {
 	
 		
-		List<DisponibilitaPerData> listaDisponibilita = new ArrayList<DisponibilitaPerData>();
+		List<DisponibilitaPerDataDTO> listaDisponibilita = new ArrayList<DisponibilitaPerDataDTO>();
 		
 		//INTERVALLO TRA LE DUE DATE (IN GIORNI)
 		int giorniIntervallo = Days.daysBetween(new DateTime(dataInizioValidita),new DateTime(dataFineValidita)).getDays();
 	
 		for (int i = 0; i < giorniIntervallo; i++) {
 			DateTime dataDaSettareJ = new DateTime();
-			dataDaSettareJ = dataDaSettareJ.plusDays(i);
+			dataDaSettareJ = (new DateTime(dataInizioValidita)).plusDays(i);
 			Date dataDaSettare = dataDaSettareJ.toDate();
-	
-			setDisponibilitaInData(dataDaSettare,disponibilitaDaSettare,listaDisponibilita);
+			
+			DisponibilitaPerData disponibilitaPerData =new DisponibilitaPerData();
+			disponibilitaPerData.setData(dataDaSettare);
+			disponibilitaPerData.setDisponibilita(disponibilitaDaSettare);
+			
+			listaDisponibilita.add(disponibilitaPerDataToDTO(disponibilitaPerData));
+			
 	
 		}
 		
@@ -346,27 +369,6 @@ public class ComponenteBean implements ComponenteBeanRemote,
 		}
 	}
 	*/
-	
-	/**
-	 * @param data
-	 * @param disponibilita
-	 * @param lista
-	 */
-	public void setDisponibilitaInData(Date data,int disponibilita, List<DisponibilitaPerData> lista) {
-		
-		Componente componente = new Componente();
-		componente = componenteDTOToComponente(componenteDto);
-
-		for (int i = 0; i < componente.getDisponibilitaPerData().size(); i++) {
-			if (componente.getDisponibilitaPerData().get(i).getData()
-					.equals(data)) {
-				componente.getDisponibilitaPerData().get(i)
-						.setDisponibilita(disponibilita);
-			}
-
-		}
-	}
-
 	
 	
 
@@ -528,6 +530,7 @@ public class ComponenteBean implements ComponenteBeanRemote,
 		return disponibilitaPerData;
 
 	}
+
 	
 
 }
