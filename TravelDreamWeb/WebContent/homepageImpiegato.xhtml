@@ -137,6 +137,60 @@
 											action="#{ricercaComponentiImpiegatoBean.ricercaComponenteImpiegatoTermine()}"
 											ajax="false" />
 										<!--andiamo in listaComponentiRicercaImpiegato -->
+									
+									<br />
+										<h:form>
+											<p:fieldset
+												legend="Ecco il risultato della ricerca di componenti"
+												widgetVar="regWidget" style="width: 600px;">
+
+												<p:growl id="growl" showDetail="true" />
+												<!-- c'è anche componentericercato cm fare? altro form?? -->
+
+
+
+
+												<p:dataTable id="componentiRicercati" var="componenti"
+													value="#{ricercaComponentiImpiegatoBean.componentiRicercati}"
+													rowKey="#{componenti.codiceComponente}"
+													selection="#{ricercaComponentiImpiegatoBean.componenteSelezionato}"
+													selectionMode="single">
+
+													<f:facet name="header">  
+            Clicca il pulsante "Seleziona" dopo aver selezionato una singola riga per vederne i dettagli  
+        </f:facet>
+
+													<p:column headerText="Codice Componente">  
+            #{componenti.codiceComponente}  
+        </p:column>
+
+													<p:column headerText="Luogo">  
+            #{componenti.luogo}  
+        </p:column>
+
+													<p:column headerText="Costo">  
+            #{componenti.costo}  
+        </p:column>
+
+													<f:facet name="footer">
+														<p:commandButton id="viewButton" value="Seleziona"
+															icon="ui-icon-search" update=":form:display"
+															action="#{ricercaComponentiImpiegatoBean.dettagliComponenteSelezionato()}"
+															ajax="false" />
+													</f:facet>
+
+												</p:dataTable>
+
+
+
+											</p:fieldset>
+
+											<!-- COME LISTA PACCHETTIPERSONALIZZATICLIENTE... RITORNO I DETTAGLI DEL COMPONENTE oncomplete="dettgliComponeteSelezionatoImpiegato" DEL ROWSELECT -->
+
+										</h:form>
+									
+									
+									
 									</h:panelGrid>
 								</div>
 							</h:panelGrid>

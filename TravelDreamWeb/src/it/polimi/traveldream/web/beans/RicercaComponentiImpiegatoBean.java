@@ -130,21 +130,18 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 			
 			
 			
-			public String ricercaComponenteImpiegatoTermine(){
+			public void ricercaComponenteImpiegatoTermine(){
 							
 				
 				try {
 					
-				componentiRicercati = componenteremoto.findByTermine(termine);
+				setComponentiRicercati(componenteremoto.findByTermine(termine));
 
 				}catch (EJBException e) {
-				
-
-					return "listaComponentiRicercaImpiegato";
-
+			
 			}
 
-			return "listaComponentiRicercaImpiegato";		
+					
 				}
 			
 				
