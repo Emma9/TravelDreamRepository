@@ -3,22 +3,11 @@ package it.polimi.traveldream.ejb.client;
 import it.polimi.traveldream.entities.ComponenteDTO;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+import it.polimi.traveldream.entities.DisponibilitaPerDataDTO;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.ejb.Remote;
 
@@ -90,12 +79,6 @@ public interface ComponenteBeanRemote {
 	 */
 	public int disponibilitaInData(ComponenteDTO componente, Date data);
 	
-	/**@param componente
-	 * @param data
-	 * @param disponibilita
-	 */
-	public void setDisponibilitaInData(ComponenteDTO componente, Date data,
-			int disponibilita);
 	
 
 	/**
@@ -129,14 +112,6 @@ public interface ComponenteBeanRemote {
 	 */
 	public boolean verificaTipologia(String tipologia);
 	
-	/**
-	 * @param componente
-	 * @param dataInizioValidita
-	 * @param dataFineValidita
-	 * @param disponibilitaDaSettare
-	 */
-	public void creaListaDisponibilitaPerData(ComponenteDTO componente,
-			Date dataInizioValidita, Date dataFineValidita,
-			int disponibilitaDaSettare) ;
+	public List<DisponibilitaPerDataDTO> creaListaDisponibilitaPerData(Date dataInizioValidita, Date dataFineValidita,int disponibilitaDaSettare);
 	
 }
