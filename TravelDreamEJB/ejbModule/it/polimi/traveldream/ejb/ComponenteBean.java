@@ -255,8 +255,11 @@ public class ComponenteBean implements ComponenteBeanRemote,
 	 * @param data
 	 * @param disponibilita
 	 */
-	public void setDisponibilitaInData(ComponenteDTO componente, Date data,
+	public void setDisponibilitaInData(ComponenteDTO componenteDto, Date data,
 			int disponibilita) {
+		
+		Componente componente = new Componente();
+		componente = componenteDTOToComponente(componenteDto);
 
 		for (int i = 0; i < componente.getDisponibilitaPerData().size(); i++) {
 			if (componente.getDisponibilitaPerData().get(i).getData()
