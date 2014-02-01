@@ -391,6 +391,7 @@ public class ComponenteBean implements ComponenteBeanRemote,
 
 		componenteDTO.setCodiceComponente(componente.getCodiceComponente());
 		componenteDTO.setCosto(componente.getCosto());
+		componenteDTO.setLuogo(componente.getLuogo());
 		componenteDTO.setDataFineValidita(componente.getDataFineValidita());
 		componenteDTO.setDataInizioValidita(componente.getDataInizioValidita());
 		componenteDTO.setDescrizione(componente.getDescrizione());
@@ -414,6 +415,7 @@ public class ComponenteBean implements ComponenteBeanRemote,
 
 		componente.setCodiceComponente(componenteDTO.getCodiceComponente());
 		componente.setCosto(componenteDTO.getCosto());
+		componente.setLuogo(componenteDTO.getLuogo());
 		componente.setDataFineValidita(componenteDTO.getDataFineValidita());
 		componente.setDataInizioValidita(componenteDTO.getDataInizioValidita());
 		componente.setDescrizione(componenteDTO.getDescrizione());

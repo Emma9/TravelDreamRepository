@@ -104,22 +104,26 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 			
 			
 			
-			public String ricercaComponenteImpiegatoId(){
+			public void ricercaComponenteImpiegatoId(){
 				
 				
 				
 				try {
+					
+					
+					
+					
 					ArrayList<ComponenteDTO> lista= new ArrayList<ComponenteDTO>();
 					lista.add(componenteremoto.findByCodiceComponente(codiceComponente));
-					componentiRicercati = lista;
+					setComponentiRicercati(lista);
 
 				}catch (EJBException e) {
 				
-					return "listaComponentiRicercaImpiegato";
+					
 
 			}
 
-			return "listaComponentiRicercaImpiegato";		
+			
 				}
 
 			
@@ -144,5 +148,17 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 				}
 			
 				
+			public String dettagliComponenteSelezionato(){
+				
+				int id=componenteSelezionato.getCodiceComponente();
+				
+
+			return "dettagliComponenteSelezionato?faces-redirect=true&cComponente"+id;	
+			
+				}
+			
+			
+			
+			
 			}
 	

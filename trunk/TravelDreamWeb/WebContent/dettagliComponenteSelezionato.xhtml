@@ -12,38 +12,36 @@
 	<h:form>
 		<p:fieldset legend="Ecco I Dettagli del componente" widgetVar="regWidget" style="width: 600px;">
 
-	<h:panelGrid id="dettagli" columns="2" cellpadding="4">  
+	<p:panelGrid id="dettagli" columns="2">  
   
-            <!-- <f:facet name="immagine">  
-                <p:graphicImage value="/images/cars/#{tableBean.selectedCar.manufacturer}.jpg"/>  
-            </f:facet>  --> 
+       
     
   
             <h:outputText value="Tipologia:" />  
-            <h:outputText value="#{ricercaComponenteBean.pacchettoSelezionato.tipologia}" />  
+            <h:outputText value="#{ricercaComponentiImpiegatoBean.componenteSelezionato.tipologia}" />  
   
             <h:outputText value="Descrizione:" />  
-            <h:outputText value="#{ricercaComponenteBean.pacchettoSelezionato.descrizione}" /> 
+            <h:outputText value="#{ricercaComponentiImpiegatoBean.componenteSelezionato.descrizione}" /> 
             
             
             <h:outputText value="Luogo: " />  
-            <h:outputText value="#{ricercaPacchettiBean.pacchettoSelezionato.descrizione}" />
+            <h:outputText value="#{ricercaComponentiImpiegatoBean.componenteSelezionato.luogo}" />
             
             
             <h:outputText value="Costo:" />  
-            <h:outputText value="#{ricercaComponenteBean.pacchettoSelezionato.costo}" /> 
+            <h:outputText value="#{ricercaComponentiImpiegatoBean.componenteSelezionato.costo}" /> 
             
             
             <h:outputText value="Data Inizio Validità: " />  
-            <h:outputText value="#{ricercaComponenteBean.pacchettoSelezionato.costo}" /> 
+            <h:outputText value="#{ricercaComponentiImpiegatoBean.componenteSelezionato.dataInizioValidita}" /> 
             
             
             <h:outputText value="Data Fine Validità: " />  
-            <h:outputText value="#{ricercaComponenteBean.pacchettoSelezionato.costo}" /> 
+            <h:outputText value="#{ricercaComponentiImpiegatoBean.componenteSelezionato.dataFineValidita}" /> 
              
-        </h:panelGrid>
+        </p:panelGrid>
         
-        <h:commandButton action="#{ricercaComponenteBean.pacchettoSelezionato.descrizione}" value="Modifica" />  <!-- visualizza la lista componenti base alternativi-->
+        <h:commandButton action="#{ricercaComponentiImpiegatoBean.componenteSelezionato.descrizione}" value="Modifica" />  <!-- visualizza la lista componenti base alternativi-->
           
   	</p:fieldset>
         </h:form>
