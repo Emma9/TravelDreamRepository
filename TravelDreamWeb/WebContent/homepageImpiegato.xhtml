@@ -16,27 +16,31 @@
 			<div style="display: inline;">
 				<div style="float: left">
 					<h:form id="pacc">
-						<h:button id="bottoneCreaPacchetto" outcome="creazionePacchettoPredefinito" value="Crea Pacchetto" ajax="false"/>
+						<h:button id="bottoneCreaPacchetto"
+							outcome="creazionePacchettoPredefinito" value="Crea Pacchetto"
+							ajax="false" />
 					</h:form>
 				</div>
 				<div style="float: left">
 					<h:form id="comp">
-						<h:button id="bottoneCreaComponente" outcome="creazioneComponente" value="Aggiungi Componente" ajax="false"/>
+						<h:button id="bottoneCreaComponente" outcome="creazioneComponente"
+							value="Aggiungi Componente" ajax="false" />
 					</h:form>
-					
+
 				</div>
 			</div>
 			<div align="right">
 				<div style="display: inline;">
 					<div style="float: right">
-					<h:outputText value="BENVENUTO: " />
-					<h:outputText value="#{loginImpiegatoBean.idImpiegato}" />
-					
+						<h:outputText value="BENVENUTO: " />
+						<h:outputText value="#{loginImpiegatoBean.idImpiegato}" />
+
 					</div>
-					<div style="float: right: ;">
-					<h:form id="logout">
-						<h:commandButton action="#{loginImpiegatoBean.logout()}" value="Logout" ajax="false" />
-					</h:form>
+					<div style="float: right:;">
+						<h:form id="logout">
+							<h:commandButton action="#{loginImpiegatoBean.logout()}"
+								value="Logout" ajax="false" />
+						</h:form>
 					</div>
 				</div>
 			</div>
@@ -54,23 +58,85 @@
 								<h:outputText value="Ricerca Componente Tramite Codice:" />
 								<br />
 								<div style="display: inline;">
-									<h:inputText  autocomplete="true" value="#{ricercaComponentiImpiegatoBean.codiceComponente}" />
+									<h:inputText autocomplete="true"
+										value="#{ricercaComponentiImpiegatoBean.codiceComponente}" />
 									<h:panelGrid id="ricerca1">
-										<h:commandButton value="Ricerca" update="ricerca1"  action="#{ricercaComponentiImpiegatoBean.ricercaComponenteImpiegatoId()}" ajax="false"/>
+										<h:commandButton value="Ricerca" update="ricerca1"
+											action="#{ricercaComponentiImpiegatoBean.ricercaComponenteImpiegatoId()}"
+											ajax="false" />
 										<!--andiamo in listaComponentiRicercaImpiegato -->
+
+
+										<br />
+										<h:form>
+											<p:fieldset
+												legend="Ecco il risultato della ricerca di componenti"
+												widgetVar="regWidget" style="width: 600px;">
+
+												<p:growl id="growl" showDetail="true" />
+												<!-- c'è anche componentericercato cm fare? altro form?? -->
+
+
+
+
+												<p:dataTable id="componentiRicercati" var="componenti"
+													value="#{ricercaComponentiImpiegatoBean.componentiRicercati}"
+													rowKey="#{componenti.codiceComponente}"
+													selection="#{ricercaComponentiImpiegatoBean.componenteSelezionato}"
+													selectionMode="single">
+
+													<f:facet name="header">  
+            Clicca il pulsante "Seleziona" dopo aver selezionato una singola riga per vederne i dettagli  
+        </f:facet>
+
+													<p:column headerText="Codice Componente">  
+            #{componenti.codiceComponente}  
+        </p:column>
+
+													<p:column headerText="Luogo">  
+            #{componenti.luogo}  
+        </p:column>
+
+													<p:column headerText="Costo">  
+            #{componenti.costo}  
+        </p:column>
+
+													<f:facet name="footer">
+														<p:commandButton id="viewButton" value="Seleziona"
+															icon="ui-icon-search" update=":form:display"
+															action="#{ricercaComponentiImpiegatoBean.dettagliComponenteSelezionato()}"
+															ajax="false" />
+													</f:facet>
+
+												</p:dataTable>
+
+
+
+											</p:fieldset>
+
+											<!-- COME LISTA PACCHETTIPERSONALIZZATICLIENTE... RITORNO I DETTAGLI DEL COMPONENTE oncomplete="dettgliComponeteSelezionatoImpiegato" DEL ROWSELECT -->
+
+										</h:form>
 									</h:panelGrid>
 								</div>
 							</h:panelGrid>
+
+
+
+
+
 						</div>
 						<div style="float: left">
 							<h:panelGrid columns="2" cellpadding="10" cellspacing="10">
 								<h:outputText value="Ricerca Componente Tramite Termine:" />
 								<br />
 								<div style="display: inline;">
-									<h:inputText  autocomplete="true" />
+									<h:inputText autocomplete="true" />
 									<h:panelGrid id="ricerca2">
-									<h:commandButton value="Ricerca" update="ricerca2" action="#{ricercaComponentiImpiegatoBean.ricercaComponenteImpiegatoTermine()}" ajax="false" />
-									<!--andiamo in listaComponentiRicercaImpiegato -->
+										<h:commandButton value="Ricerca" update="ricerca2"
+											action="#{ricercaComponentiImpiegatoBean.ricercaComponenteImpiegatoTermine()}"
+											ajax="false" />
+										<!--andiamo in listaComponentiRicercaImpiegato -->
 									</h:panelGrid>
 								</div>
 							</h:panelGrid>
@@ -86,8 +152,10 @@
 								<div style="display: inline;">
 									<h:inputText autocomplete="true" />
 									<h:panelGrid id="ricerca3">
-									<h:commandButton value="Ricerca" update="ricerca3" action="#{ricercaPacchettiImpiegatoBean.ricercaPacchettoImpiegatoId()}" ajax="false"/>
-									<!--andiamo in listaPacchettiRicercaImpiegato -->
+										<h:commandButton value="Ricerca" update="ricerca3"
+											action="#{ricercaPacchettiImpiegatoBean.ricercaPacchettoImpiegatoId()}"
+											ajax="false" />
+										<!--andiamo in listaPacchettiRicercaImpiegato -->
 									</h:panelGrid>
 								</div>
 							</h:panelGrid>
@@ -99,8 +167,10 @@
 								<div style="display: inline;">
 									<h:inputText autocomplete="true" />
 									<h:panelGrid id="ricerca4">
-									<h:commandButton value="Ricerca" update="ricerca4" action="#{ricercaPacchettiImpiegatoBean.ricercaPacchettoImpiegatoTermine()}" ajax="false"/>
-									<!--andiamo in listaPacchettiRicercaImpiegato -->
+										<h:commandButton value="Ricerca" update="ricerca4"
+											action="#{ricercaPacchettiImpiegatoBean.ricercaPacchettoImpiegatoTermine()}"
+											ajax="false" />
+										<!--andiamo in listaPacchettiRicercaImpiegato -->
 									</h:panelGrid>
 								</div>
 							</h:panelGrid>

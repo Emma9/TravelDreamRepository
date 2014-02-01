@@ -25,7 +25,7 @@ public class DettagliComponenteSelezionatoBean implements Serializable {
 	
 	private int codiceComponente;
 	
-	private ComponenteDTO componente;
+	private ComponenteDTO componenteSelezionato;
 	
 	
 	
@@ -61,34 +61,19 @@ public class DettagliComponenteSelezionatoBean implements Serializable {
 	/**
 	 * @return the componente
 	 */
-	public ComponenteDTO getComponente() {
-		return componente;
+	public ComponenteDTO getComponenteSelezionato() {
+		return componenteSelezionato;
 	}
 
 	/**
 	 * @param componente the componente to set
 	 */
-	public void setComponente(ComponenteDTO componente) {
-		this.componente = componente;
+	public void setComponenteSelezionato(ComponenteDTO componente) {
+		this.componenteSelezionato = componente;
 	}
 	
 
-	public String DettagliComponenteSelezionato(){
-		
-		
-		try {
-			
-			componente = componenteRemoto.findByCodiceComponente(codiceComponente);			
-
-		}catch (EJBException e) {
-		
-			return "dettagliComponenteSelezionato";
-
-	}
-
-	return "dettagliComponenteSelezionato";	
 	
-		}
 
 	
 	public String DettagliComponenteSelezionatoImpiegato(){
@@ -96,7 +81,7 @@ public class DettagliComponenteSelezionatoBean implements Serializable {
 		
 		try {
 			
-			componente = componenteRemoto.findByCodiceComponente(codiceComponente);			
+			componenteSelezionato = componenteRemoto.findByCodiceComponente(codiceComponente);			
 
 		}catch (EJBException e) {
 		
