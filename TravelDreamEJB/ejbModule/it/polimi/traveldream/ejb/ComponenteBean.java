@@ -182,12 +182,13 @@ public class ComponenteBean implements ComponenteBeanRemote,
 		
 		ArrayList<ComponenteDTO> listaCOM = findAll();
 			
-		
-		
+		CharSequence charseq= new String();
+		charseq=termine;
 		
 		for(int j=0; j<listaCOM.size();j++){
 			
-			if (listaCOM.get(j).getDescrizione().contains(termine)){
+			
+			if (listaCOM.get(j).getDescrizione().contains(charseq)){
 				
 				listaComponenti.add(listaCOM.get(j));
 				
@@ -198,7 +199,7 @@ public class ComponenteBean implements ComponenteBeanRemote,
 
 		for (int j = 0; j < listaCOM.size(); j++) {
 
-			if (listaCOM.get(j).getLuogo().contains(termine)) {
+			if (listaCOM.get(j).getLuogo().contains(charseq)) {
 
 				listaComponenti.add(listaCOM.get(j));
 

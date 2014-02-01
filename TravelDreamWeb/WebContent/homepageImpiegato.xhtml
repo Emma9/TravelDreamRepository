@@ -131,9 +131,9 @@
 								<h:outputText value="Ricerca Componente Tramite Termine:" />
 								<br />
 								<div style="display: inline;">
-									<h:inputText autocomplete="true" />
+									<h:inputText autocomplete="true" value="#{ricercaComponentiImpiegatoBean.termine}" />
 									<h:panelGrid id="ricerca2">
-										<h:commandButton value="Ricerca" update="ricerca2"
+										<h:commandButton id="ricercaTermine" value="Ricerca" update="ricerca2"
 											action="#{ricercaComponentiImpiegatoBean.ricercaComponenteImpiegatoTermine()}"
 											ajax="false" />
 										<!--andiamo in listaComponentiRicercaImpiegato -->
@@ -150,7 +150,7 @@
 
 
 
-												<p:dataTable id="componentiRicercati" var="componenti"
+												<p:dataTable id="componentiRicercatiTermine" var="componenti"
 													value="#{ricercaComponentiImpiegatoBean.componentiRicercati}"
 													rowKey="#{componenti.codiceComponente}"
 													selection="#{ricercaComponentiImpiegatoBean.componenteSelezionato}"
