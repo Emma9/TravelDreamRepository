@@ -135,6 +135,13 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 				
 				try {
 					
+					
+					ArrayList<ComponenteDTO> lista= new ArrayList<ComponenteDTO>();
+					for(int i=0;i<componenteremoto.findByTermine(termine).size();i++){
+						lista.add(componenteremoto.findByTermine(termine).get(i));
+					}
+					
+					setComponentiRicercati(lista);
 				setComponentiRicercati(componenteremoto.findByTermine(termine));
 
 				}catch (EJBException e) {
