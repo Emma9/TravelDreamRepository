@@ -57,9 +57,15 @@ public class ComponenteBean implements ComponenteBeanRemote,
 			componente.setDataInizioValidita(dataInizioValidita);
 			componente.setDataFineValidita(dataFineValidita);
 
-			// disponibilitaPerData=;
+			
+			/*
 			creaListaDisponibilitaPerData(componenteToDTO(componente), dataInizioValidita,
 					dataFineValidita, disponibilitaDaSettare);
+			*/
+			
+			
+			//componente.setDisponibilitaPerData();
+			
 
 			manager.persist(componente);
 
@@ -246,6 +252,61 @@ public class ComponenteBean implements ComponenteBeanRemote,
 		}
 
 	}
+/*
+	/**
+	 * @param componente
+	 * @param dataInizioValidita
+	 * @param dataFineValidita
+	 * @param disponibilitaDaSettare
+	 *
+	public void creaListaDisponibilitaPerData(ComponenteDTO componente,
+			Date dataInizioValidita, Date dataFineValidita,
+			int disponibilitaDaSettare) {
+	
+		int giorniIntervallo = Days.daysBetween(
+				new DateTime(dataInizioValidita),
+				new DateTime(dataFineValidita)).getDays();
+	
+		for (int i = 0; i < giorniIntervallo; i++) {
+			DateTime dataDaSettareJ = new DateTime();
+			dataDaSettareJ = dataDaSettareJ.plusDays(i);
+			Date dataDaSettare = dataDaSettareJ.toDate();
+	
+			setDisponibilitaInData(componente, dataDaSettare,
+					disponibilitaDaSettare);
+	
+		}
+	
+	} */
+	
+	
+	/**
+	 * @param dataInizioValidita
+	 * @param dataFineValidita
+	 * @param disponibilitaDaSettare
+	 */
+	public List<DisponibilitaPerData> creaListaDisponibilitaPerData(Date dataInizioValidita, Date dataFineValidita,int disponibilitaDaSettare) {
+	
+		
+		List<DisponibilitaPerData> listaDisponibilita = new ArrayList<DisponibilitaPerData>();
+		
+		//INTERVALLO TRA LE DUE DATE (IN GIORNI)
+		int giorniIntervallo = Days.daysBetween(new DateTime(dataInizioValidita),new DateTime(dataFineValidita)).getDays();
+	
+		for (int i = 0; i < giorniIntervallo; i++) {
+			DateTime dataDaSettareJ = new DateTime();
+			dataDaSettareJ = dataDaSettareJ.plusDays(i);
+			Date dataDaSettare = dataDaSettareJ.toDate();
+	
+			setDisponibilitaInData(dataDaSettare,disponibilitaDaSettare,listaDisponibilita);
+	
+		}
+		
+		return listaDisponibilita;
+	
+	}
+	
+	
 
 	/**@param componente
 	 * @param data
@@ -263,10 +324,11 @@ public class ComponenteBean implements ComponenteBeanRemote,
 		return -1;
 	}
 
+	/*
 	/**@param componente
 	 * @param data
 	 * @param disponibilita
-	 */
+	 *
 	public void setDisponibilitaInData(ComponenteDTO componenteDto, Date data,
 			int disponibilita) {
 		
@@ -282,8 +344,30 @@ public class ComponenteBean implements ComponenteBeanRemote,
 
 		}
 	}
+	*/
 	
+	/**
+	 * @param data
+	 * @param disponibilita
+	 * @param lista
+	 */
+	public void setDisponibilitaInData(Date data,int disponibilita, List<DisponibilitaPerData> lista) {
+		
+		Componente componente = new Componente();
+		componente = componenteDTOToComponente(componenteDto);
 
+		for (int i = 0; i < componente.getDisponibilitaPerData().size(); i++) {
+			if (componente.getDisponibilitaPerData().get(i).getData()
+					.equals(data)) {
+				componente.getDisponibilitaPerData().get(i)
+						.setDisponibilita(disponibilita);
+			}
+
+		}
+	}
+
+	
+	
 
 	/**
 	 * @param disponibilita
@@ -371,34 +455,6 @@ public class ComponenteBean implements ComponenteBeanRemote,
 		return false;
 
 	}
-
-	/**
-	 * @param componente
-	 * @param dataInizioValidita
-	 * @param dataFineValidita
-	 * @param disponibilitaDaSettare
-	 */
-	public void creaListaDisponibilitaPerData(ComponenteDTO componente,
-			Date dataInizioValidita, Date dataFineValidita,
-			int disponibilitaDaSettare) {
-
-		int giorniIntervallo = Days.daysBetween(
-				new DateTime(dataInizioValidita),
-				new DateTime(dataFineValidita)).getDays();
-
-		for (int i = 0; i < giorniIntervallo; i++) {
-			DateTime dataDaSettareJ = new DateTime();
-			dataDaSettareJ = dataDaSettareJ.plusDays(i);
-			Date dataDaSettare = dataDaSettareJ.toDate();
-
-			setDisponibilitaInData(componente, dataDaSettare,
-					disponibilitaDaSettare);
-
-		}
-
-	}
-	
-
 
 	public ComponenteDTO componenteToDTO(Componente componente) {
 
