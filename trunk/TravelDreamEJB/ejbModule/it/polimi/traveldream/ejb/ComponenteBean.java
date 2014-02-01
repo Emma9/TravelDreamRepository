@@ -188,6 +188,18 @@ public class ComponenteBean implements ComponenteBeanRemote,
 			}
 			
 		}
+		
+
+		for (int j = 0; j < listaCOM.size(); j++) {
+
+			if (listaCOM.get(j).getLuogo().contains(termine)) {
+
+				listaComponenti.add(listaCOM.get(j));
+
+			}
+
+		}
+
 
 		return listaComponenti;
 	}
