@@ -261,6 +261,7 @@ public class ComponenteBean implements ComponenteBeanRemote,
 		for (int i = 0; i < q.getResultList().size(); i++) {
 
 			lista.add(componenteToDTO(q.getResultList().get(i)));
+			System.out.println("findAll:"+ lista.get(i).getCodiceComponente());
 
 		}
 		return lista;
