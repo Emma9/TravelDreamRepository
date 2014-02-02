@@ -1,9 +1,12 @@
 package it.polimi.traveldream.web.beans;
 
 import it.polimi.traveldream.ejb.client.PacchettoBeanRemote;
+import it.polimi.traveldream.entities.ComponenteDTO;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
@@ -33,9 +36,11 @@ public class CreazionePacchettoPredefinitoBean implements Serializable {
 		private Date dataFineValidita;
 		private String etichetta;
 		
+		//COMPONENTI INSERITI
+		private List<ComponenteDTO> listaComponenti = new ArrayList<ComponenteDTO>();
 		
-		
-		
+		//COMPONENTI SELEZIONATI
+		private List<ComponenteDTO> listaComponentiSelezionati = new ArrayList<ComponenteDTO>();
 		
 		/**
 		 * @return the destinazione
@@ -166,6 +171,53 @@ public class CreazionePacchettoPredefinitoBean implements Serializable {
 		}
 
 
+		
+		
+
+
+
+		/**
+		 * @return the listaComponenti
+		 */
+		public List<ComponenteDTO> getListaComponenti() {
+			return listaComponenti;
+		}
+
+
+
+
+
+		/**
+		 * @param listaComponenti the listaComponenti to set
+		 */
+		public void setListaComponenti(List<ComponenteDTO> listaComponenti) {
+			this.listaComponenti = listaComponenti;
+		}
+
+
+
+
+
+		/**
+		 * @return the listaComponentiSelezionati
+		 */
+		public List<ComponenteDTO> getListaComponentiSelezionati() {
+			return listaComponentiSelezionati;
+		}
+
+
+
+
+
+		/**
+		 * @param listaComponentiSelezionati the listaComponentiSelezionati to set
+		 */
+		public void setListaComponentiSelezionati(
+				List<ComponenteDTO> listaComponentiSelezionati) {
+			this.listaComponentiSelezionati = listaComponentiSelezionati;
+		}
+
+
 
 
 
@@ -177,9 +229,15 @@ public class CreazionePacchettoPredefinitoBean implements Serializable {
 			
 			try {
 				
-				//COME INSERISCO LA LISTA COMPONENTI & LA LISTA COMPONENTI SELEZIONATI ????????
 				
-				//pacchettoRemoto.createPacchetto(destinazione, dataInizioValidita, dataFineValidita, etichetta, descrizione, listaComponenti, listaComponentiSelezionati, sconto);
+				for(int j=0;j<listaComponentiSelezionati.size();j++){
+					
+					listaComponenti.add(listaComponentiSelezionati.get(j));
+					
+				}
+				
+				
+				pacchettoRemoto.createPacchetto(destinazione, dataInizioValidita, dataFineValidita, etichetta, descrizione, listaComponenti, listaComponentiSelezionati, sconto);
 				
 
 			}catch (EJBException e) {
