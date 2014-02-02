@@ -36,89 +36,38 @@
   		 <p:message for="descrizione" /><br />
   		 
   	
-  	
-  	<p:dataTable var="componenteVolo" value="#{ricercaComponentiImpiegatoBean.componenteSelezionato}" dir="rtl">  
-        <p:column headerText="Volo">  
-            <h:outputText value="#{componenteVolo.tipologia}" />  
+
+  	 <p:dataTable id="componentiPacchetto" var="componente" value="#{tableBean.mediumCarsModel}" paginator="true" rows="10"  
+                 selection="#{tableBean.selectedCars}">  
+  
+        <f:facet name="header">  
+            Checkbox Based Selection  
+        </f:facet>  
+  
+        <p:column selectionMode="multiple" style="width:2%" />  
+  
+        <p:column headerText="Model" style="width:25%">  
+            #{car.model}  
         </p:column>  
   
-        <p:column headerText="luogo">  
-            <h:outputText value="#{componenteVolo.luogo}" />  
+        <p:column headerText="Year" style="width:25%">  
+            #{car.year}  
         </p:column>  
   
-        <p:column headerText="Data Fine Validità">  
-            <h:outputText value="#{componenteVolo.dataFineValidita}" />  
+        <p:column headerText="Manufacturer" style="width:24%">  
+            #{car.manufacturer}  
         </p:column>  
   
-  		 <p:column headerText="Data Fine Validità">  
-            <h:outputText value="#{componenteVolo.dataFineValidita}" />  
-        </p:column>
-  
-        <p:column headerText="Predefinito">  
-            <p:selectOneRadio id="tipologia" value="#{componenteVolo}" >  
-				            <f:selectItem itemLabel="Volo" itemValue="true" /> 
-			</p:selectOneRadio>/> 
+        <p:column headerText="Color" style="width:24%">  
+            #{car.color}  
         </p:column>  
-        
+  
+        <f:facet name="footer">  
+            <p:commandButton id="multiViewButton" value="View" icon="ui-icon-search"  
+                             update=":form:displayMulti" oncomplete="PF('multiCarDialog').show()"/>  
+        </f:facet>  
     </p:dataTable>  
-  	
-    <br />
-		<p:commandButton value="Inserisci Volo" /><br /><br /> <!-- manda all'homepage per fare la ricerca tramite id o filtro -->  
-		<p:dataTable  var="componenteHotel" value="#{ricercaComponentiImpiegatoBean.componenteSelezionato}" dir="rtl">
-        <p:column headerText="Hotel">  
-            <h:outputText value="#{componenteHotel.tipologia}" />  
-        </p:column>  
   
-        <p:column headerText="luogo">  
-            <h:outputText value="#{componenteHotel.luogo}" />  
-        </p:column>  
-  
-        <p:column headerText="Data Fine Validità">  
-            <h:outputText value="#{componenteHotel.dataFineValidita}" />  
-        </p:column>  
-  
-  		 <p:column headerText="Data Fine Validità">  
-            <h:outputText value="#{componenteHotel.dataFineValidita}" />  
-        </p:column>
-  
-        <p:column headerText="Predefinito">  
-            <p:selectOneRadio id="tipologia" value="#{componenteHotel}" >  
-				            <f:selectItem itemLabel="hotel" itemValue="true" /> 
-			</p:selectOneRadio>/> 
-        </p:column>
-        
-    </p:dataTable>
-    <br />
-		<p:commandButton value="Inserisci Hotel" /><br /><br /> <!-- manda all'homepage per fare la ricerca tramite id o filtro -->  
-    <p:dataTable var="componenteEscursione" value="#{ricercaComponentiImpiegatoBean.componenteSelezionato}" dir="rtl">  
-        <p:column headerText="Escursione">  
-            <h:outputText value="#{componenteEscursione.tipologia}" />  
-        </p:column>  
-  
-        <p:column headerText="luogo">  
-            <h:outputText value="#{componenteEscursione.luogo}" />  
-        </p:column>  
-  
-        <p:column headerText="Data Fine Validità">  
-            <h:outputText value="#{componenteEscursione.dataFineValidita}" />  
-        </p:column>  
-  
-  		 <p:column headerText="Data Fine Validità">  
-            <h:outputText value="#{componenteEscursione.dataFineValidita}" />  
-        </p:column>
-  
-        <p:column headerText="Predefinito">  
-            <p:selectOneRadio id="tipologia" value="#{componenteEscursione}" >  
-				            <f:selectItem itemLabel="escursione" itemValue="true" /> 
-			</p:selectOneRadio>/> 
-        </p:column>
-        
-    </p:dataTable>  
-    <br />
-		<p:commandButton value="Inserisci Escursione" /><br /><br /> <!-- manda all'homepage per fare la ricerca tramite id o filtro -->
-  	
-  	
-  	
   	
   	
   	
