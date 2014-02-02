@@ -232,8 +232,13 @@ public class CreazionePacchettoPredefinitoBean implements Serializable {
 				
 				for(int j=0;j<listaComponentiSelezionati.size();j++){
 					
+					if(!(listaComponenti.contains(listaComponentiSelezionati.get(j)))){
+										
+					
 					listaComponenti.add(listaComponentiSelezionati.get(j));
 					
+																					}
+				
 				}
 				
 				
