@@ -56,12 +56,20 @@ public class ComponenteBean implements ComponenteBeanRemote,
 
 		if (verificaTipologia(tipologia)) {
 			
-
+			
 			Componente componente = new Componente();
 			
 			BigInteger big = new BigInteger(130, random);
-			int codice = big.abs().intValue();
+			
+			int cod = big.intValue();
+			//System.out.println("COD_BIG"+cod);
+			if((cod*(-1)>0)){
+			cod= cod*(-1);
+			}
+			int codice = cod;
+			//System.out.println("CODICE"+codice);
 			componente.setCodiceComponente(codice);
+		
 			componente.setTipologia(tipologia);
 			componente.setLuogo(luogo);
 			componente.setDescrizione(descrizione);
@@ -72,7 +80,7 @@ public class ComponenteBean implements ComponenteBeanRemote,
 			List<DisponibilitaPerData> listaDisponibilitaPerData= new ArrayList<DisponibilitaPerData>();
 			List<DisponibilitaPerDataDTO> listaDisponibilitaPerDataDTO= new ArrayList<DisponibilitaPerDataDTO>();
 			
-			listaDisponibilitaPerDataDTO=creaListaDisponibilitaPerData(componente.getCodiceComponente(), dataInizioValidita, dataFineValidita, disponibilitaDaSettare);
+			listaDisponibilitaPerDataDTO=creaListaDisponibilitaPerData(codice, dataInizioValidita, dataFineValidita, disponibilitaDaSettare);
 			
 			for(int i=0;i<listaDisponibilitaPerDataDTO.size(); i++){
 				listaDisponibilitaPerData.add(disponibilitaPerDataDTOToDisponibilitaPerData(listaDisponibilitaPerDataDTO.get(i)));
@@ -330,10 +338,11 @@ public class ComponenteBean implements ComponenteBeanRemote,
 			Date dataDaSettare = dataDaSettareJ.toDate();
 			
 			DisponibilitaPerData disponibilitaPerData =new DisponibilitaPerData();
+			disponibilitaPerData.setCodiceComponente(codiceComponente);
 			disponibilitaPerData.setData(dataDaSettare);
 			disponibilitaPerData.setDisponibilita(disponibilitaDaSettare);
 			
-			disponibilitaPerData.setCodiceComponente(codiceComponente);
+			
 			
 			listaDisponibilita.add(disponibilitaPerDataToDTO(disponibilitaPerData));
 			
@@ -525,6 +534,7 @@ public class ComponenteBean implements ComponenteBeanRemote,
 			DisponibilitaPerData disponibilitaPerData) {
 
 		DisponibilitaPerDataDTO disponibilitaPerDataDTO = new DisponibilitaPerDataDTO();
+		disponibilitaPerDataDTO.setCodiceComponente(disponibilitaPerData.getCodiceComponente());
 		disponibilitaPerDataDTO.setData(disponibilitaPerData.getData());
 		disponibilitaPerDataDTO.setDisponibilita(disponibilitaPerData
 				.getDisponibilita());
@@ -537,6 +547,7 @@ public class ComponenteBean implements ComponenteBeanRemote,
 			DisponibilitaPerDataDTO disponibilitaPerDataDTO) {
 
 		DisponibilitaPerData disponibilitaPerData = new DisponibilitaPerData();
+		disponibilitaPerData.setCodiceComponente(disponibilitaPerDataDTO.getCodiceComponente());
 		disponibilitaPerData.setData(disponibilitaPerDataDTO.getData());
 		disponibilitaPerData.setDisponibilita(disponibilitaPerDataDTO
 				.getDisponibilita());
