@@ -11,44 +11,16 @@
 	<h:form>
 		<p:fieldset legend="Login Form" widgetVar="regWidget"
 			style="width: 600px;">
-			<h:panelGrid id="panel" columns="3" width="550" border="0">
-				<p:focus context="panel" />
-				<h:form id="login"
-					onsubmit="document.getElementById('login').action='j_security_check';"
-					prependId="false">
-					<!--  <h:panelGrid columns="2">
-						<p:outputLabel for="j_username" value="Email" />
-						<p:inputText id="j_username" name="j_username" required="true"
-							requiredMessage="Devi inserire l'email" />
-						<p:message for="email" />
-
-						<p:outputLabel for="j_password" value="Password" />
-						<p:password id="j_password" name="j_password" required="true"
-							requiredMessage="Devi inserire una password" />
-						<p:message for="password" />
-
-						<p:commandButton id="submit" value="Login" ajax="false" />
-						<p:messages id="message" showSummary="true" showDetail="false"
-							autoUpdate="true" closable="true" />
-
-					</h:panelGrid>-->
-					
-					<h:panelGrid columns="2">
-				<p:outputLabel for="j_username" value="Email" />
-				<p:inputText id="j_username" name="j_username" />
-				<p:outputLabel for="j_password" value="Password" />
-				<p:password id="j_password" name="j_password" />
-				<p:commandButton id="submit" value="Login" ajax="false" />
-			</h:panelGrid>
-				</h:form>
-
-
-			</h:panelGrid>
+			<h:form id="login" onsubmit="document.getElementById('login').action='j_security_check';" prependId="false">
+    <h:panelGrid columns="2">
+        <p:outputLabel for="j_username" value="Email" />
+        <p:inputText id="j_username" name="j_username" />            
+        <p:outputLabel for="j_password" value="Password" />
+        <p:password id="j_password" name="j_password"/>
+        <p:commandButton id="submit" value="Login" ajax="false"/>
+    </h:panelGrid>
+</h:form>
 		</p:fieldset>
-
-
-
-
 
 
 	</h:form>
