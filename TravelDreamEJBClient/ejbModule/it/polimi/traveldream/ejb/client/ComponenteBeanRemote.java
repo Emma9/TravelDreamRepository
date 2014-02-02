@@ -112,6 +112,6 @@ public interface ComponenteBeanRemote {
 	 */
 	public boolean verificaTipologia(String tipologia);
 	
-	public List<DisponibilitaPerDataDTO> creaListaDisponibilitaPerData(Date dataInizioValidita, Date dataFineValidita,int disponibilitaDaSettare);
+	public List<DisponibilitaPerDataDTO> creaListaDisponibilitaPerData(int codiceComponente, Date dataInizioValidita, Date dataFineValidita,int disponibilitaDaSettare);
 	
 }

@@ -8,6 +8,8 @@ import it.polimi.traveldream.entities.ComponenteDTO;
 import it.polimi.traveldream.entities.DisponibilitaPerData;
 import it.polimi.traveldream.entities.DisponibilitaPerDataDTO;
 
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,6 +32,8 @@ public class ComponenteBean implements ComponenteBeanRemote,
 
 	@PersistenceContext(unitName = "travelDream_project")
 	private EntityManager manager;
+	
+	private SecureRandom random = new SecureRandom();
 
 	/** Default constructor */
 	public ComponenteBean() {
@@ -51,9 +55,13 @@ public class ComponenteBean implements ComponenteBeanRemote,
 			int disponibilitaDaSettare) {
 
 		if (verificaTipologia(tipologia)) {
+			
 
 			Componente componente = new Componente();
-
+			
+			BigInteger big = new BigInteger(130, random);
+			int codice = big.abs().intValue();
+			componente.setCodiceComponente(codice);
 			componente.setTipologia(tipologia);
 			componente.setLuogo(luogo);
 			componente.setDescrizione(descrizione);
@@ -64,7 +72,7 @@ public class ComponenteBean implements ComponenteBeanRemote,
 			List<DisponibilitaPerData> listaDisponibilitaPerData= new ArrayList<DisponibilitaPerData>();
 			List<DisponibilitaPerDataDTO> listaDisponibilitaPerDataDTO= new ArrayList<DisponibilitaPerDataDTO>();
 			
-			listaDisponibilitaPerDataDTO=creaListaDisponibilitaPerData(dataInizioValidita, dataFineValidita, disponibilitaDaSettare);
+			listaDisponibilitaPerDataDTO=creaListaDisponibilitaPerData(componente.getCodiceComponente(), dataInizioValidita, dataFineValidita, disponibilitaDaSettare);
 			
 			for(int i=0;i<listaDisponibilitaPerDataDTO.size(); i++){
 				listaDisponibilitaPerData.add(disponibilitaPerDataDTOToDisponibilitaPerData(listaDisponibilitaPerDataDTO.get(i)));
@@ -73,7 +81,9 @@ public class ComponenteBean implements ComponenteBeanRemote,
 			componente.setDisponibilitaPerData(listaDisponibilitaPerData);
 
 			manager.persist(componente);
-
+			
+			
+			
 			return componente.getCodiceComponente();
 
 		}
@@ -121,7 +131,7 @@ public class ComponenteBean implements ComponenteBeanRemote,
 			List<DisponibilitaPerData> listaDisponibilitaPerData= new ArrayList<DisponibilitaPerData>();
 			List<DisponibilitaPerDataDTO> listaDisponibilitaPerDataDTO= new ArrayList<DisponibilitaPerDataDTO>();
 			
-			listaDisponibilitaPerDataDTO=creaListaDisponibilitaPerData(dataInizioValidita, dataFineValidita, disponibilitaDaSettare);
+			listaDisponibilitaPerDataDTO=creaListaDisponibilitaPerData(componente.getCodiceComponente(), dataInizioValidita, dataFineValidita, disponibilitaDaSettare);
 			
 			for(int i=0;i<listaDisponibilitaPerDataDTO.size(); i++){
 				listaDisponibilitaPerData.add(disponibilitaPerDataDTOToDisponibilitaPerData(listaDisponibilitaPerDataDTO.get(i)));
@@ -304,7 +314,7 @@ public class ComponenteBean implements ComponenteBeanRemote,
 	 * @param dataFineValidita
 	 * @param disponibilitaDaSettare
 	 */
-	public List<DisponibilitaPerDataDTO> creaListaDisponibilitaPerData(Date dataInizioValidita, Date dataFineValidita,int disponibilitaDaSettare) {
+	public List<DisponibilitaPerDataDTO> creaListaDisponibilitaPerData(int codiceComponente, Date dataInizioValidita, Date dataFineValidita,int disponibilitaDaSettare) {
 	
 		
 		List<DisponibilitaPerDataDTO> listaDisponibilita = new ArrayList<DisponibilitaPerDataDTO>();
@@ -313,6 +323,8 @@ public class ComponenteBean implements ComponenteBeanRemote,
 		int giorniIntervallo = Days.daysBetween(new DateTime(dataInizioValidita),new DateTime(dataFineValidita)).getDays();
 	
 		for (int i = 0; i < giorniIntervallo; i++) {
+			
+			
 			DateTime dataDaSettareJ = new DateTime();
 			dataDaSettareJ = (new DateTime(dataInizioValidita)).plusDays(i);
 			Date dataDaSettare = dataDaSettareJ.toDate();
@@ -320,6 +332,8 @@ public class ComponenteBean implements ComponenteBeanRemote,
 			DisponibilitaPerData disponibilitaPerData =new DisponibilitaPerData();
 			disponibilitaPerData.setData(dataDaSettare);
 			disponibilitaPerData.setDisponibilita(disponibilitaDaSettare);
+			
+			disponibilitaPerData.setCodiceComponente(codiceComponente);
 			
 			listaDisponibilita.add(disponibilitaPerDataToDTO(disponibilitaPerData));
 			

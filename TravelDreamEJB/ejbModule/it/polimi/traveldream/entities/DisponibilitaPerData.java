@@ -4,27 +4,36 @@ package it.polimi.traveldream.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
+//import java.util.List;
+
 
 import javax.persistence.*;
+
+
+
 
 /**
  * Entity implementation class for Entity: DisponibilitaPerData
  *
  */
 @Entity
+@IdClass(DisponibilitaPerDataPK.class)
 public class DisponibilitaPerData implements Serializable {
 
-	   
+	@Id   
+	private int codiceComponente;
 	@Id
 	@Temporal(TemporalType.DATE)
 	private Date data;
 	private int disponibilita;
 	private static final long serialVersionUID = 1L;
+	
+	
 
 	
-	@ManyToMany(mappedBy="disponibilitaPerData")
-	private List<Componente> componenti;
+	
+	/*@ManyToMany(mappedBy="disponibilitaPerData")
+	private List<Componente> componenti;*/
 	
 	
 	/**
@@ -60,6 +69,20 @@ public class DisponibilitaPerData implements Serializable {
 	 */
 	public void setDisponibilita(int disponibilita) {
 		this.disponibilita = disponibilita;
+	}
+
+	/**
+	 * @return the codiceComponente
+	 */
+	public int getCodiceComponente() {
+		return codiceComponente;
+	}
+
+	/**
+	 * @param codiceComponente the codiceComponente to set
+	 */
+	public void setCodiceComponente(int codiceComponente) {
+		this.codiceComponente = codiceComponente;
 	}
 
 	

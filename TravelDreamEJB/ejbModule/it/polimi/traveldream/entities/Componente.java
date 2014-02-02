@@ -18,7 +18,6 @@ public class Componente implements Serializable {
 
 	/**Attributi*/
 	@Id
-	@GeneratedValue
 	private int codiceComponente;
 	private String luogo;
 	private String tipologia;
@@ -30,7 +29,7 @@ public class Componente implements Serializable {
 	private Date dataFineValidita;
 	//private List<DisponibilitaPerData> disponibilitaPerData = new ArrayList<DisponibilitaPerData>(0);
 	
-	@ManyToMany(cascade = CascadeType.PERSIST)
+	/*@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(
 		name="Componente_DisponibilitaPerData"
 		, joinColumns={
@@ -40,6 +39,8 @@ public class Componente implements Serializable {
 			@JoinColumn(name="data", referencedColumnName="data")
 			}
 		)
+		*/
+	@ManyToMany(cascade = CascadeType.PERSIST)
 	private List<DisponibilitaPerData> disponibilitaPerData;
 	
 
