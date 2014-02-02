@@ -44,15 +44,16 @@ public class MostraTuttiComponentiBean implements Serializable {
 	}
 	
 	
-	public void mostraTuttiComponenti(){
+	public String mostraTuttiComponenti(){
 		
 		try {
 						
-			listaComponenti = componenteremoto.findAll();
+			setListaComponenti(componenteremoto.findAll());
 
 		}catch (EJBException e) {
 	
 	}
+		return "creazionePacchettoPredefinito";
 
 		
 		

@@ -36,40 +36,70 @@
   		 <p:message for="descrizione" /><br />
   		 
   	
-
-  	 <p:dataTable id="componentiPacchetto" var="componente" value="#{tableBean.mediumCarsModel}" paginator="true" rows="10"  
-                 selection="#{tableBean.selectedCars}">  
+<h:commandButton id="popolaTabelle" value="Popola Tabelle" action="#{mostraTuttiComponentiBean.mostraTuttiComponenti()}" ajax="false"  
+                              />  
+  	 <p:dataTable id="componentiPacchetto" var="componentePacchetto" value="#{mostraTuttiComponentiBean.listaComponenti}" paginator="true" rows="10"  
+                 selection="#{creazionePacchettoPredefinitoBean.listaComponenti}">  
   
         <f:facet name="header">  
-            Checkbox Based Selection  
+            Componenti del pacchetto 
         </f:facet>  
   
         <p:column selectionMode="multiple" style="width:2%" />  
   
-        <p:column headerText="Model" style="width:25%">  
-            #{car.model}  
+        <p:column headerText="Codice" style="width:25%">  
+            #{componentePacchetto.codiceComponente}  
         </p:column>  
   
-        <p:column headerText="Year" style="width:25%">  
-            #{car.year}  
+        <p:column headerText="Luogo" style="width:25%">  
+            #{componentePacchetto.luogo}  
         </p:column>  
   
-        <p:column headerText="Manufacturer" style="width:24%">  
-            #{car.manufacturer}  
+        <p:column headerText="Tipologia" style="width:24%">  
+            #{componentePacchetto.tipologia}  
         </p:column>  
   
-        <p:column headerText="Color" style="width:24%">  
-            #{car.color}  
+        <p:column headerText="Costo" style="width:24%">  
+            #{componentePacchetto.costo}  
         </p:column>  
   
         <f:facet name="footer">  
-            <p:commandButton id="multiViewButton" value="View" icon="ui-icon-search"  
-                             update=":form:displayMulti" oncomplete="PF('multiCarDialog').show()"/>  
+            <p:commandButton id="selezioneComponentiPacchetto" value="Aggiungi" icon="ui-icon-search"  
+                              />  
         </f:facet>  
     </p:dataTable>  
   
   	
-  	
+  	 <p:dataTable id="componentiPredefPacchetto" var="componentePredefPacchetto" value="#{mostraTuttiComponentiBean.listaComponenti}" paginator="true" rows="10"  
+                 selection="#{creazionePacchettoPredefinitoBean.listaComponentiSelezionati}">  
+  
+        <f:facet name="header">  
+            Componenti predefiniti del pacchetto 
+        </f:facet>  
+  
+        <p:column selectionMode="multiple" style="width:2%" />  
+  
+        <p:column headerText="Codice" style="width:25%">  
+            #{componentePredefPacchetto.codiceComponente}  
+        </p:column>  
+  
+        <p:column headerText="Luogo" style="width:25%">  
+            #{componentePredefPacchetto.luogo}  
+        </p:column>  
+  
+        <p:column headerText="Tipologia" style="width:24%">  
+            #{componentePredefPacchetto.tipologia}  
+        </p:column>  
+  
+        <p:column headerText="Costo" style="width:24%">  
+            #{componentePredefPacchetto.costo}  
+        </p:column>  
+  
+        <f:facet name="footer">  
+            <p:commandButton id="selezioneComponentiPredefPacchetto" value="Aggiungi" icon="ui-icon-search"  
+                             />  
+        </f:facet>  
+    </p:dataTable>  
   	
   	
   	<br />
