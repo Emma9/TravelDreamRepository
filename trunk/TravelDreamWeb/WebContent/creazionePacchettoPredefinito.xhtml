@@ -20,8 +20,8 @@
 	   
 	   <p:message for="etichetta" />
 	    <h:outputLabel value="Etichetta: " />
-	    <p:inputText value="#{creazionePacchettoPredefinitoBean.etichetta}" id="etichetta" required="true" requiredMessage="Devi inserire l'etichetta del pacchetto"/>
-	    <p:message for="etichetta" /><br />
+	    <p:inputText value="#{creazionePacchettoPredefinitoBean.etichetta}" id="etichetta" required="false" />
+	    <br />
 	   
 	   <p:message for="destinazione" />
 	    <h:outputLabel value="Destinazione: " />
@@ -34,6 +34,18 @@
 	    <h:outputLabel value="Descrizione: " />
 	    <p:inputTextarea value="#{creazionePacchettoPredefinitoBean.descrizione}" id="descrizione" required="true" requiredMessage="Devi inserire la descrizione"/>
   		 <p:message for="descrizione" /><br />
+  		 
+  		 
+  		   <p:outputLabel value="Data Inizio Validità: "/>
+				<p:calendar value="#{creazionePacchettoPredefinitoBean.dataInizioValidita}" id="dataInizio" required="true" requiredMessage="Devi inserire una data di inizio validità del pacchetto"/>
+				<p:message for="dataInizio"/>
+				<br />
+			
+			  <p:outputLabel value="Data Fine Validità: "/>
+				<p:calendar value="#{creazionePacchettoPredefinitoBean.dataFineValidita}" id="dataFine" required="true" requiredMessage="Devi inserire una data di fine validità del pacchetto"/>
+				<p:message for="dataFine"/>
+				<br />
+			
   		 
   	
 		 <p:dataTable id="componentiPacchetto" var="componentePacchetto" value="#{mostraTuttiComponentiBean.listaComponenti}" paginator="true" rows="10"  
@@ -106,17 +118,12 @@
 	    <p:inputText  value="#{creazionePacchettoPredefinitoBean.sconto}" id="sconto" required="true" requiredMessage="Devi inserire per forza un numero per identificare lo sconto"/>
   		 <p:message for="sconto" /><br />
   	
-  <!--  <h:panelGrid columns="1" style="margin-bottom:10px">  
-        <h:outputText id="output" value="Sconto del %#{sliderBean.number2}"/>  
-        <h:inputHidden id="txt2" value="#{creazionePacchettoPredefinitoBean.sconto}" />  
-        <p:slider for="txt2" display="output" style="width:200px" displayTemplate="Settata a %{value}"/>  
-    </h:panelGrid>
-  	-->	
+
   	
   	
   	
   		<div align="left">
-		    <p:commandButton id="bottoneConferma" value="Conferma" action="#{creazionePacchettoPredefinitoBean.creazionePacchetto()}"/>
+		    <h:commandButton id="bottoneConferma" value="Conferma" action="#{creazionePacchettoPredefinitoBean.creazionePacchetto()}" ajax="false"/>
 	    <!-- visualizza i homeimpiegato con mess. notifica creazione -->
 		    <p:messages id="message" showSummary="true" showDetail="false" autoUpdate="true" closable="true" /> 
      	</div>

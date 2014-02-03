@@ -39,7 +39,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 * @return idPacchetto*/
 	public Long createPacchetto(String destinazione, Date dataInizioValidita, Date dataFineValidita, String etichetta, String descrizione, List<ComponenteDTO> listaComponenti, List<ComponenteDTO> listaComponentiSelezionati, int sconto) {
 
-		if((verificaListaComponenti(listaComponenti))&&(verificaEtichetta(etichetta))){
+		if((verificaListaComponenti(listaComponentiSelezionati))&&(verificaEtichetta(etichetta))){
 		
 		Pacchetto pacchetto = new Pacchetto();
 
@@ -97,7 +97,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 */
 	public void updatePacchetto(Long idPacchetto, String destinazione, Date dataInizioValidita, Date dataFineValidita, String etichetta, String descrizione, List<ComponenteDTO> listaComponenti, List<ComponenteDTO> listaComponentiSelezionati, int sconto) {
 
-		if ((verificaPresenzaPacchetto(idPacchetto))&&(verificaListaComponenti(listaComponenti))&&(verificaEtichetta(etichetta))) {
+		if ((verificaPresenzaPacchetto(idPacchetto))&&(verificaListaComponenti(listaComponentiSelezionati))&&(verificaEtichetta(etichetta))) {
 			
 			Pacchetto pacchetto = manager.find(Pacchetto.class, idPacchetto);
 
@@ -386,14 +386,25 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 
 			case "LASTMINUTE":
 				break;
+			case "lastminute":
+				break;
 
 			case "OFFERTA":
+				break;
+			case "offerta":
 				break;
 
 			case "MARE":
 				break;
+			case "mare":
+				break;
 
 			case "MONTAGNA":
+				break;
+			case "montagna":
+				break;
+				
+			case "":
 				break;
 				
 			default:

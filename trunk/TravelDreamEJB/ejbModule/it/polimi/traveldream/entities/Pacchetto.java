@@ -28,8 +28,30 @@ public class Pacchetto implements Serializable {
 	private Date dataFineValidita;
 	private String etichetta;
 	private String descrizione;
-	private List<Componente> listaComponenti= new ArrayList<Componente>(0);
-	private List<Componente> listaComponentiSelezionati= new ArrayList<Componente>(0);
+	
+	@ManyToMany
+	@JoinTable(
+		name="Pacchetto_componenti"
+		, joinColumns={
+			@JoinColumn(name="idPacchetto", referencedColumnName="idPacchetto")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="codiceComponente", referencedColumnName="codiceComponente")
+			}
+		)
+	private List<Componente> listaComponenti= new ArrayList<Componente>();
+	
+	@ManyToMany
+	@JoinTable(
+		name="Pacchetto_componentiSelezionati"
+		, joinColumns={
+			@JoinColumn(name="idPacchetto", referencedColumnName="idPacchetto")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="codiceComponente", referencedColumnName="codiceComponente")
+			}
+		)
+	private List<Componente> listaComponentiSelezionati= new ArrayList<Componente>();
 	private int costo;
 	private int sconto;
 
