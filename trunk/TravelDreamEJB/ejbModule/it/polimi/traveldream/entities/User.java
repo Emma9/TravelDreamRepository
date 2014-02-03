@@ -40,7 +40,7 @@ public class User implements Serializable {
 	public static final String FIND_ALL = "User.findAll";
 	   
 	@Id
-	private String username;
+	private String email;
 	
     private String firstName;
       
@@ -64,7 +64,7 @@ public class User implements Serializable {
 	
 	public User(UserDTO user){
          
-        this.username     = user.getUsername();
+        this.email     = user.getEmail();
         this.firstName    = user.getFirstName();
         this.lastName     = user.getLastName();        
         this.password     = DigestUtils.sha256Hex(user.getPassword());
@@ -88,18 +88,19 @@ public class User implements Serializable {
     }
  
  
-    /**
-	 * @return the username
+    
+	/**
+	 * @return the email
 	 */
-	public String getUsername() {
-		return username;
+	public String getEmail() {
+		return email;
 	}
 
 	/**
-	 * @param username the username to set
+	 * @param email the email to set
 	 */
-	public void setUsername(String username) {
-		this.username = username;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	/**
@@ -131,7 +132,7 @@ public class User implements Serializable {
  
     @Override
     public String toString() {
-        return "User [username=" + username + ", firstName=" + firstName
+        return "User [email=" + email + ", firstName=" + firstName
                 + ", lastName=" + lastName + ", password=" + password
                 + ", registeredOn=" + registeredOn + ", groups=" + groups + "]";
     }

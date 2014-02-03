@@ -17,6 +17,7 @@
 	</servlet-mapping>
 	<login-config>
 		<auth-method>FORM</auth-method>
+		<realm-name>authJdbcRealm</realm-name>
 		<form-login-config>
 			<form-login-page>/login.xhtml</form-login-page>
 			<form-error-page>/loginError.xhtml</form-error-page>

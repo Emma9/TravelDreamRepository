@@ -87,7 +87,7 @@ public class UsrMgrBean implements UsrMgr {
 
     private UserDTO convertToDTO(User user) {
 		UserDTO userDTO = new UserDTO();
-		userDTO.setUsername(user.getUsername());;
+		userDTO.setEmail(user.getEmail());
 		userDTO.setFirstName(user.getFirstName());
 		userDTO.setLastName(user.getLastName());
 		return userDTO;

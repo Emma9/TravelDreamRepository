@@ -28,7 +28,7 @@ public class UserDTO implements Serializable {
 
 	public static final String FIND_ALL = "User.findAll";
 	   
-private String username;
+private String email;
 	
     private String firstName;
       
@@ -47,15 +47,48 @@ private String username;
 	
 
 	
+	
+    /**
+	 * @return the firstName
+	 */
 	public String getFirstName() {
-        return firstName;
-    }
- 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
- 
-    public String getLastName() {
+		return firstName;
+	}
+
+
+
+
+	/**
+	 * @param firstName the firstName to set
+	 */
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+
+
+
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+
+
+
+	/**
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+
+
+	public String getLastName() {
         return lastName;
     }
  
@@ -64,20 +97,7 @@ private String username;
     }
  
  
-    /**
-	 * @return the username
-	 */
-	public String getUsername() {
-		return username;
-	}
-
-	/**
-	 * @param username the username to set
-	 */
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
+    
 	/**
      * @return the password in SHA512 HEX representation
      */
@@ -107,7 +127,7 @@ private String username;
  
     @Override
     public String toString() {
-        return "User [username=" + username + ", firstName=" + firstName
+        return "User [username=" + email + ", firstName=" + firstName
                 + ", lastName=" + lastName + ", password=" + password
                 + ", registeredOn=" + registeredOn + ", groups=" + groups + "]";
     }
