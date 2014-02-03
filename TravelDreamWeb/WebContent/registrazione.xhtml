@@ -36,11 +36,11 @@
     <p:message for="cognome" />
     
     <h:outputLabel value="Email" />
-    <p:inputText value="#{registerBean.user.username}"
+    <p:inputText value="#{registerBean.user.email}"
        id="email"
        required="true"
-       requiredMessage="Devi inserire lo username"
-       validatorMessage="Lo username inserito non è valido">
+       requiredMessage="Devi inserire l'email"
+       validatorMessage="L'email inserita non è valida">
      <f:validateRegex pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$"></f:validateRegex>
      
     </p:inputText>
