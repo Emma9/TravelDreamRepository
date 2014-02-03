@@ -14,7 +14,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean()
 @SessionScoped
@@ -224,8 +223,7 @@ public class CreazionePacchettoPredefinitoBean implements Serializable {
 		public String creazionePacchetto(){
 			
 			FacesContext context = FacesContext.getCurrentInstance();
-			HttpServletRequest request = (HttpServletRequest) context
-					.getExternalContext().getRequest();
+			
 			
 			try {
 				
@@ -249,13 +247,13 @@ public class CreazionePacchettoPredefinitoBean implements Serializable {
 			
 				context.addMessage(null, new FacesMessage("Creazione pacchetto fallita"));
 				
-				return "homePageImpiegato";
+				return "homepageImpiegato";
 
 		}
 
 			context.addMessage(null, new FacesMessage("Creazione pacchetto riuscita"));
 			
-			return "homePageImpiegato";	
+			return "homepageImpiegato";	
 			
 			
 		}
