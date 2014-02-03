@@ -388,20 +388,28 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 				break;
 			case "lastminute":
 				break;
-
+			case "Lastminute":
+				break;
+				
 			case "OFFERTA":
 				break;
 			case "offerta":
+				break;
+			case "Offerta":
 				break;
 
 			case "MARE":
 				break;
 			case "mare":
 				break;
+			case "Mare":
+				break;
 
 			case "MONTAGNA":
 				break;
 			case "montagna":
+				break;
+			case "Montagna":
 				break;
 				
 			case "":
