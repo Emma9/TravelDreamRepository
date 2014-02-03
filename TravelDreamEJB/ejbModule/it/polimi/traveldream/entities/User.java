@@ -40,7 +40,7 @@ public class User implements Serializable {
 	public static final String FIND_ALL = "User.findAll";
 	   
 	@Id
-	private String email;
+	private String username;
 	
     private String firstName;
       
@@ -53,7 +53,7 @@ public class User implements Serializable {
 	
 	@ElementCollection(targetClass = Group.class)
     @CollectionTable(name = "USERS_GROUPS",
-                    joinColumns = @JoinColumn(name = "email"))
+                    joinColumns = @JoinColumn(name = "username"))
     @Enumerated(EnumType.STRING)
     @Column(name="groupname")
     private List<Group> groups;
@@ -64,7 +64,7 @@ public class User implements Serializable {
 	
 	public User(UserDTO user){
          
-        this.email        = user.getEmail();
+        this.username     = user.getUsername();
         this.firstName    = user.getFirstName();
         this.lastName     = user.getLastName();        
         this.password     = DigestUtils.sha256Hex(user.getPassword());
@@ -87,15 +87,22 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
  
-    public String getEmail() {
-        return email;
-    }
-  
-    public void setEmail(String email) {
-        this.email = email;
-    }
-  
+ 
     /**
+	 * @return the username
+	 */
+	public String getUsername() {
+		return username;
+	}
+
+	/**
+	 * @param username the username to set
+	 */
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	/**
      * @return the password in SHA512 HEX representation
      */
     public String getPassword() {
@@ -124,7 +131,7 @@ public class User implements Serializable {
  
     @Override
     public String toString() {
-        return "User [email=" + email + ", firstName=" + firstName
+        return "User [username=" + username + ", firstName=" + firstName
                 + ", lastName=" + lastName + ", password=" + password
                 + ", registeredOn=" + registeredOn + ", groups=" + groups + "]";
     }

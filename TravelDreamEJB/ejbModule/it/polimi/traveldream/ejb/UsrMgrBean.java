@@ -32,7 +32,7 @@ public class UsrMgrBean implements UsrMgr {
 	public void save(UserDTO user) {
 		User newUser = new User(user);
 		List<Group> groups = new ArrayList<Group>();
-		groups.add(Group.USERS);
+		groups.add(Group.USER);
 		newUser.setGroups(groups);
 		em.persist(newUser);
 	}
@@ -87,7 +87,7 @@ public class UsrMgrBean implements UsrMgr {
 
     private UserDTO convertToDTO(User user) {
 		UserDTO userDTO = new UserDTO();
-		userDTO.setEmail(user.getEmail());
+		userDTO.setUsername(user.getUsername());;
 		userDTO.setFirstName(user.getFirstName());
 		userDTO.setLastName(user.getLastName());
 		return userDTO;
