@@ -1,7 +1,7 @@
 package it.polimi.traveldream.entities;
 
 public enum Group {
-	ADMIN, USER;
+	ADMINS, USERS;
 	
 	public static final String _ADMIN = "ADMIN";
 	public static final String _USER = "USER";

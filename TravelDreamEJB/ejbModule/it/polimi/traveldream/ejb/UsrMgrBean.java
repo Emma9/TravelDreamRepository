@@ -32,7 +32,7 @@ public class UsrMgrBean implements UsrMgr {
 	public void save(UserDTO user) {
 		User newUser = new User(user);
 		List<Group> groups = new ArrayList<Group>();
-		groups.add(Group.USER);
+		groups.add(Group.USERS);
 		newUser.setGroups(groups);
 		em.persist(newUser);
 	}
