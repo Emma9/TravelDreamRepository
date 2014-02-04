@@ -102,66 +102,47 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 			//}
 			
 			
-			
-			public void ricercaComponenteImpiegatoId(){
-				
-				
-				
-				try {
-					
-					
-					
-					
-					ArrayList<ComponenteDTO> lista= new ArrayList<ComponenteDTO>();
-					lista.add(componenteremoto.findByCodiceComponente(codiceComponente));
-					setComponentiRicercati(lista);
+	public void ricercaComponenteImpiegatoId() {
 
-				}catch (EJBException e) {
-				
-					
+		try {
 
+			ArrayList<ComponenteDTO> lista = new ArrayList<ComponenteDTO>();
+			lista.add(componenteremoto.findByCodiceComponente(codiceComponente));
+			setComponentiRicercati(lista);
+
+		} catch (EJBException e) {
+
+		}
+
+	}
+
+	public void ricercaComponenteImpiegatoTermine() {
+
+		try {
+
+			ArrayList<ComponenteDTO> lista = new ArrayList<ComponenteDTO>();
+			for (int i = 0; i < componenteremoto.findByTermine(getTermine())
+					.size(); i++) {
+				lista.add(componenteremoto.findByTermine(getTermine()).get(i));
 			}
 
-			
-				}
+		
+			setComponentiRicercati(lista);
+			// setComponentiRicercati(componenteremoto.findByTermine(termine));
 
-			
-			
-			
-			
-			public void ricercaComponenteImpiegatoTermine(){
-							
-				
-				try {
-					
-					
-					ArrayList<ComponenteDTO> lista= new ArrayList<ComponenteDTO>();
-					for(int i=0;i<componenteremoto.findByTermine(termine).size();i++){
-						lista.add(componenteremoto.findByTermine(termine).get(i));
-					}
-					
-					setComponentiRicercati(lista);
-				setComponentiRicercati(componenteremoto.findByTermine(termine));
+		} catch (EJBException e) {
 
-				}catch (EJBException e) {
-			
-			}
+		}
 
-					
-				}
-			
-				
-			public String dettagliComponenteSelezionato(){
-				
-				int id=componenteSelezionato.getCodiceComponente();
-				
+	}
 
-			return "dettagliComponenteSelezionato?faces-redirect=true&cComponente"+id;	
-			
-				}
-			
-			
-			
-			
-			}
-	
+	public String dettagliComponenteSelezionato() {
+
+		int id = componenteSelezionato.getCodiceComponente();
+
+		return "dettagliComponenteSelezionato?faces-redirect=true&cComponente"
+				+ id;
+
+	}
+
+}
