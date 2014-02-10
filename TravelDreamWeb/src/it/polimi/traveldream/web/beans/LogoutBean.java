@@ -14,5 +14,4 @@ public class LogoutBean {
 	    return "/homepage?faces-redirect=true";
 	  }
 
-
 }
