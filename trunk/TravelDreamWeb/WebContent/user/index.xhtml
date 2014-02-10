@@ -1,151 +1,161 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
-<h:body>
-	<h1>BENVENUTO CLIENTE</h1>
-	<h:outputText value="Cliente: #{ContentBean.clienteContent}" />
-	<h:form>
-		<p:commandButton value="Logout" action="#{logoutBean.logout()}" ajax="false"/>
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
-	</h:form>
 <h:head>
 </h:head>
 
+	<p:layout fullPage="true">
 
-<p:layout fullPage="true">
-
-	<div align="center">
-		<p:layoutUnit position="north" size="90" header="TRAVELDREAM"
-			resizable="false" closable="false" collapsible="false">
-			<div style="display: inline;">
-				<div style="float: left">
-					<h:form id="pacc">
-						<p:commandButton id="bottoneListaMieiPacchetti" value="Lista dei miei Pacchetti" update="pacc" action="#{mostraPacchettiPersonalizzatiBean.mostraPacchettiPersonalizzati}">
-							 <f:setPropertyActionListener target="#{mostraPacchettiPersonalizzatiBean.email}" value="#{loginClienteBean.email}" />
-						</p:commandButton>
-					</h:form> 
-				</div>
-				<div style="float: left">
-				<h:form id="gift">
-					<p:commandButton id="bottoneMiaGiftList" value="La mia GiftList" update="gift" action="#{mostraGiftListBean.mostraGiftList}">
-						 <f:setPropertyActionListener target="#{mostraPacchettiPersonalizzatiBean.email}" value="#{loginClienteBean.email}" />
-					</p:commandButton>
-				</h:form> 
-				</div>
-			</div>
-			<div align="right">
+		<div align="center">
+			<p:layoutUnit position="north" size="90" header="TRAVELDREAM"
+				resizable="false" closable="false" collapsible="false">
 				<div style="display: inline;">
-					<div style="float: right">
-						<h:form>
-							<h:outputText value="BENVENUTO: " />
-							<h:outputText value="#{loginClienteBean.email}" />
+					<div style="float: left">
+						<h:form id="pacc">
+							<p:commandButton id="bottoneListaMieiPacchetti"
+								value="Lista dei miei Pacchetti" update="pacc"
+								action="#{mostraPacchettiPersonalizzatiBean.mostraPacchettiPersonalizzati}">
+
+							</p:commandButton>
 						</h:form>
 					</div>
-					<div style="float: right: ;">
-						<h:form id="logout">
-							<p:commandButton id="bottoneLogout" actionListener="#{loginClienteBean.logout}" update="logout" value="Logout" />
+					<div style="float: left">
+						<h:form id="gift">
+							<p:commandButton id="bottoneMiaGiftList" value="La mia GiftList"
+								update="gift" action="#{mostraGiftListBean.mostraGiftList}">
+
+							</p:commandButton>
 						</h:form>
 					</div>
 				</div>
-			</div>
-		</p:layoutUnit>
-	</div>
+				<div align="right">
+					<div style="display: inline;">
+						<div style="float: right">
+							<h:form>
+								<h:outputText value="BENVENUTO: " />
+								<h:outputText value="#{userBean.name}" />
+							</h:form>
+						</div>
+						<div style="float: right:;">
+							<h:form id="logout">
+								<p:commandButton id="bottoneLogout"
+									action="#{logoutBean.logout()}" value="Logout" ajax="false" />
+							</h:form>
+						</div>
+					</div>
+				</div>
+			</p:layoutUnit>
+		</div>
 
-	<!-- <p:layoutUnit position="south" size="100" header="Bottom" resizable="false" closable="false" collapsible="true">  
+		<!-- <p:layoutUnit position="south" size="100" header="Bottom" resizable="false" closable="false" collapsible="true">  
         <h:outputText value="South unit content." />  
     </p:layoutUnit> -->
 
 
-	<p:layoutUnit position="west" size="300" header="RICERCA PER DESTINAZIONE"
-		resizable="false" closable="false" collapsible="false">
-		<br />
-		<h:form id="form1">
-
-			<p:messages id="message" showSummary="true" showDetail="false" autoUpdate="true" closable="true" />
-			<h:outputLabel value="Destinazione: " />
-		    <p:inputText value="#{ricercaPacchettiBean.destinazione}"
-		       id="destinazione"
-		        required="true"
-		        requiredMessage="Devi inseriere una destinazione"
-		        validatorMessage="Il nome  deve avere una lunghezza da 1 a 15 caratteri"
-		        >
-		    </p:inputText>
-		    <p:message for="destinazione"/>
-
-			<h:outputLabel value="Data di Partenza: " />
-			<p:calendar value="#{ricercaPacchettiBean.dataPartenza}" id="dataDiPartenza" required="true" requiredMessage="Devi inserire una data di Partenza"/>
-			<p:message for="dataDiPartenza"/>
+		<p:layoutUnit position="west" size="300"
+			header="RICERCA PER DESTINAZIONE" resizable="false" closable="false"
+			collapsible="false">
 			<br />
-			
-			<h:outputText value="Data di Ritorno: " />
-			<p:calendar value="#{ricercaPacchettiBean.dataRitorno}" id="dataDiRitorno" required="true" requiredMessage="Devi inserire una data di Ritorno"/>
-			<p:message for="dataDiRitorno"/>
-			<br />
+			<h:form id="form1">
 
-			<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-				<h:outputText value="Numero di Partecipanti: " />
+				<p:messages id="message" showSummary="true" showDetail="false"
+					autoUpdate="true" closable="true" />
+				<h:outputLabel value="Destinazione: " />
+				<p:inputText value="#{ricercaPacchettiBean.destinazione}"
+					id="destinazione" required="true"
+					requiredMessage="Devi inseriere una destinazione"
+					validatorMessage="Il nome  deve avere una lunghezza da 1 a 15 caratteri">
+				</p:inputText>
+				<p:message for="destinazione" />
+
+				<h:outputLabel value="Data di Partenza: " />
+				<p:calendar value="#{ricercaPacchettiBean.dataPartenza}"
+					id="dataDiPartenza" required="true"
+					requiredMessage="Devi inserire una data di Partenza" />
+				<p:message for="dataDiPartenza" />
 				<br />
-				<p:selectOneMenu value="#{ricercaPacchettiBean.numPartecipanti}">
-					<f:selectItem itemLabel="1" itemValue="1" />
-					<f:selectItem itemLabel="2" itemValue="2" />
-					<f:selectItem itemLabel="3" itemValue="3" />
-					<f:selectItem itemLabel="4" itemValue="4" />
-					<f:selectItem itemLabel="5" itemValue="5" />
-					<f:selectItem itemLabel="6" itemValue="6" />
-					<f:selectItem itemLabel="7" itemValue="7" />
-					<f:selectItem itemLabel="8" itemValue="8" />
-				</p:selectOneMenu>
 
-			</h:panelGrid>
-			<h:form id="ricercaVeloce">
-			    <p:commandButton value="RicercaPacchetto" action="#{ricercaPacchettiBean.ricercaPacchetti}" ajax="false">
-			    </p:commandButton>
+				<h:outputText value="Data di Ritorno: " />
+				<p:calendar value="#{ricercaPacchettiBean.dataRitorno}"
+					id="dataDiRitorno" required="true"
+					requiredMessage="Devi inserire una data di Ritorno" />
+				<p:message for="dataDiRitorno" />
+				<br />
+
+				<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+					<h:outputText value="Numero di Partecipanti: " />
+					<br />
+					<p:selectOneMenu value="#{ricercaPacchettiBean.numPartecipanti}">
+						<f:selectItem itemLabel="1" itemValue="1" />
+						<f:selectItem itemLabel="2" itemValue="2" />
+						<f:selectItem itemLabel="3" itemValue="3" />
+						<f:selectItem itemLabel="4" itemValue="4" />
+						<f:selectItem itemLabel="5" itemValue="5" />
+						<f:selectItem itemLabel="6" itemValue="6" />
+						<f:selectItem itemLabel="7" itemValue="7" />
+						<f:selectItem itemLabel="8" itemValue="8" />
+					</p:selectOneMenu>
+
+				</h:panelGrid>
+				<h:form id="ricercaVeloce">
+					<p:commandButton value="RicercaPacchetto"
+						action="#{ricercaPacchettiBean.ricercaPacchetti}" ajax="false">
+					</p:commandButton>
+				</h:form>
+
 			</h:form>
 
-		</h:form>
-		
-	</p:layoutUnit>
+		</p:layoutUnit>
 
 
 
 
 
 
-	<!-- <p:layoutUnit position="east" size="200" header="Right" resizable="false" closable="false" collapsible="true" effect="drop">  
+		<!-- <p:layoutUnit position="east" size="200" header="Right" resizable="false" closable="false" collapsible="true" effect="drop">  
         <h:outputText value="Right unit content." />  
     </p:layoutUnit> -->
 
 
 
-   <p:layoutUnit position="center">
-		<h:form id="tabellapacchtti">
-			<p:tabView id="tabView">
+		<p:layoutUnit position="center">
+			<h:form id="tabellapacchtti">
+				<p:tabView id="tabView">
 
-				
-						<p:tab id="tab1" title="LAST-MINUTE">  
-			        <h:panelGrid columns="2" cellpadding="10">  
-			            <p:graphicImage id="tab1Img" value="/immagini/homepage/lastminute.jpg" />
-			              
-			            <h:outputText id="tab1Text" value="LISTA DEI PACCHETTI LASTMINUTE"/>
-			           
-			           
+
+					<p:tab id="tab1" title="LAST-MINUTE">
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:graphicImage id="tab1Img"
+								value="/immagini/homepage/lastminute.jpg" />
+
+							<h:outputText id="tab1Text"
+								value="LISTA DEI PACCHETTI LASTMINUTE" />
+
+
 							<h:outputLabel value="Data di Partenza: " />
-							<p:calendar value="#{ricercaPerEtichettaBean.dataPartenza}" id="dataDiPartenza1" required="true" requiredMessage="Devi inserire una data di Partenza"/>
-							<p:message for="dataDiPartenza1"/>
+							<p:calendar value="#{ricercaPerEtichettaBean.dataPartenza}"
+								id="dataDiPartenza1" required="true"
+								requiredMessage="Devi inserire una data di Partenza" />
+							<p:message for="dataDiPartenza1" />
 							<br />
-							
+
 							<h:outputText value="Data di Ritorno: " />
-							<p:calendar value="#{ricercaPerEtichettaBean.dataRitorno}" id="dataDiRitorno1" required="true" requiredMessage="Devi inserire una data di Ritorno"/>
-							<p:message for="dataDiRitorno1"/>
+							<p:calendar value="#{ricercaPerEtichettaBean.dataRitorno}"
+								id="dataDiRitorno1" required="true"
+								requiredMessage="Devi inserire una data di Ritorno" />
+							<p:message for="dataDiRitorno1" />
 							<br />
-				
-							<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+
+							<h:panelGrid columns="2" style="margin-bottom:10px"
+								cellpadding="5">
 								<h:outputText value="Numero di Partecipanti: " />
 								<br />
-								<p:selectOneMenu value="#{ricercaPerEtichettaBean.numPartecipanti}" >
+								<p:selectOneMenu
+									value="#{ricercaPerEtichettaBean.numPartecipanti}">
 									<f:selectItem itemLabel="1" itemValue="1" />
 									<f:selectItem itemLabel="2" itemValue="2" />
 									<f:selectItem itemLabel="3" itemValue="3" />
@@ -155,37 +165,48 @@
 									<f:selectItem itemLabel="7" itemValue="7" />
 									<f:selectItem itemLabel="8" itemValue="8" />
 								</p:selectOneMenu>
-				
-							</h:panelGrid><br />
+
+							</h:panelGrid>
+							<br />
 							<h:panelGrid id="ricercaEtichetta1">
-							    <p:commandButton id="Ricerca1" value="Ricerca" update="ricercaEtichetta1" actionListener="#{ricercaPerEtichettaBean.ricercaPerEtichettaClienteLastMinute}" immediate="true" ajax="false">
-							    </p:commandButton>
+								<p:commandButton id="Ricerca1" value="Ricerca"
+									update="ricercaEtichetta1"
+									actionListener="#{ricercaPerEtichettaBean.ricercaPerEtichettaClienteLastMinute}"
+									immediate="true" ajax="false">
+								</p:commandButton>
 							</h:panelGrid>
 
-					</h:panelGrid>		        	
-					  
-			    </p:tab>  
+						</h:panelGrid>
 
-				
-				<p:tab id="tab2" title="OFFERTE">
-					<h:panelGrid columns="2" cellpadding="10">
-						<p:graphicImage id="tab2Img" value="/immagini/homepage/offerte.jpg" />
-						<h:outputText id="tab2Text" value="RICERCA DEI PACCHETTI OFFERTE" />
-						
-						<h:outputLabel value="Data di Partenza: " />
-							<p:calendar value="#{ricercaPerEtichettaBean.dataPartenza}" id="dataDiPartenza2" required="true" requiredMessage="Devi inserire una data di Partenza"/>
-							<p:message for="dataDiPartenza2"/>
+					</p:tab>
+
+
+					<p:tab id="tab2" title="OFFERTE">
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:graphicImage id="tab2Img"
+								value="/immagini/homepage/offerte.jpg" />
+							<h:outputText id="tab2Text" value="RICERCA DEI PACCHETTI OFFERTE" />
+
+							<h:outputLabel value="Data di Partenza: " />
+							<p:calendar value="#{ricercaPerEtichettaBean.dataPartenza}"
+								id="dataDiPartenza2" required="true"
+								requiredMessage="Devi inserire una data di Partenza" />
+							<p:message for="dataDiPartenza2" />
 							<br />
-							
+
 							<h:outputText value="Data di Ritorno: " />
-							<p:calendar value="#{ricercaPerEtichettaBean.dataRitorno}" id="dataDiRitorno2" required="true" requiredMessage="Devi inserire una data di Ritorno"/>
-							<p:message for="dataDiRitorno2"/>
+							<p:calendar value="#{ricercaPerEtichettaBean.dataRitorno}"
+								id="dataDiRitorno2" required="true"
+								requiredMessage="Devi inserire una data di Ritorno" />
+							<p:message for="dataDiRitorno2" />
 							<br />
-				
-							<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+
+							<h:panelGrid columns="2" style="margin-bottom:10px"
+								cellpadding="5">
 								<h:outputText value="Numero di Partecipanti: " />
 								<br />
-								<p:selectOneMenu value="#{ricercaPerEtichettaBean.numPartecipanti}" >
+								<p:selectOneMenu
+									value="#{ricercaPerEtichettaBean.numPartecipanti}">
 									<f:selectItem itemLabel="1" itemValue="1" />
 									<f:selectItem itemLabel="2" itemValue="2" />
 									<f:selectItem itemLabel="3" itemValue="3" />
@@ -195,44 +216,54 @@
 									<f:selectItem itemLabel="7" itemValue="7" />
 									<f:selectItem itemLabel="8" itemValue="8" />
 								</p:selectOneMenu>
-				
-							</h:panelGrid><br />
+
+							</h:panelGrid>
+							<br />
 							<h:panelGrid id="ricercaEtichetta2">
-							    <p:commandButton id="Ricerca2" value="Ricerca" update="ricercaEtichetta2" actionListener="#{ricercaPerEtichettaBean.ricercaPerEtichettaClienteOfferte}" immediate="true" ajax="false">
-							    </p:commandButton>
+								<p:commandButton id="Ricerca2" value="Ricerca"
+									update="ricercaEtichetta2"
+									actionListener="#{ricercaPerEtichettaBean.ricercaPerEtichettaClienteOfferte}"
+									immediate="true" ajax="false">
+								</p:commandButton>
 							</h:panelGrid>
-							
-						
-						
-					</h:panelGrid>
-				</p:tab>
-				
-				
-				
 
-				<p:tab id="tab3" title="MARE">
-					<h:panelGrid columns="2" cellpadding="10">
-						<p:graphicImage id="tab3Img" value="/immagini/homepage/mare.jpg" />
-						<h:outputText id="tab3Text" value="RICERCA DEI PACCHETTI MARE" />
-						
-						
-						
-		
-		
+
+
+						</h:panelGrid>
+					</p:tab>
+
+
+
+
+					<p:tab id="tab3" title="MARE">
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:graphicImage id="tab3Img" value="/immagini/homepage/mare.jpg" />
+							<h:outputText id="tab3Text" value="RICERCA DEI PACCHETTI MARE" />
+
+
+
+
+
 							<h:outputLabel value="Data di Partenza: " />
-							<p:calendar value="#{ricercaPerEtichettaBean.dataPartenza}" id="dataDiPartenza3" required="true" requiredMessage="Devi inserire una data di Partenza"/>
-							<p:message for="dataDiPartenza3"/>
+							<p:calendar value="#{ricercaPerEtichettaBean.dataPartenza}"
+								id="dataDiPartenza3" required="true"
+								requiredMessage="Devi inserire una data di Partenza" />
+							<p:message for="dataDiPartenza3" />
 							<br />
-							
+
 							<h:outputText value="Data di Ritorno: " />
-							<p:calendar value="#{ricercaPerEtichettaBean.dataRitorno}" id="dataDiRitorno3" required="true" requiredMessage="Devi inserire una data di Ritorno"/>
-							<p:message for="dataDiRitorno3"/>
+							<p:calendar value="#{ricercaPerEtichettaBean.dataRitorno}"
+								id="dataDiRitorno3" required="true"
+								requiredMessage="Devi inserire una data di Ritorno" />
+							<p:message for="dataDiRitorno3" />
 							<br />
-				
-							<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+
+							<h:panelGrid columns="2" style="margin-bottom:10px"
+								cellpadding="5">
 								<h:outputText value="Numero di Partecipanti: " />
 								<br />
-								<p:selectOneMenu value="#{ricercaPerEtichettaBean.numPartecipanti}" >
+								<p:selectOneMenu
+									value="#{ricercaPerEtichettaBean.numPartecipanti}">
 									<f:selectItem itemLabel="1" itemValue="1" />
 									<f:selectItem itemLabel="2" itemValue="2" />
 									<f:selectItem itemLabel="3" itemValue="3" />
@@ -242,41 +273,52 @@
 									<f:selectItem itemLabel="7" itemValue="7" />
 									<f:selectItem itemLabel="8" itemValue="8" />
 								</p:selectOneMenu>
-				
-							</h:panelGrid><br />
+
+							</h:panelGrid>
+							<br />
 							<h:panelGrid id="ricercaEtichetta3">
-							    <p:commandButton id="Ricerca3" value="Ricerca" update="ricercaEtichetta3" actionListener="#{ricercaPerEtichettaBean.ricercaPerEtichettaClienteMare}" immediate="true" ajax="false">
-							    </p:commandButton>
+								<p:commandButton id="Ricerca3" value="Ricerca"
+									update="ricercaEtichetta3"
+									actionListener="#{ricercaPerEtichettaBean.ricercaPerEtichettaClienteMare}"
+									immediate="true" ajax="false">
+								</p:commandButton>
 							</h:panelGrid>
-						
-						
-						
-					</h:panelGrid>
-				</p:tab>
 
-				<p:tab id="tab4" title="MONTAGNA">
-					<h:panelGrid columns="2" cellpadding="10">
-						<p:graphicImage id="tab4Img"
-							value="/immagini/homepage/montagna.jpg" />
-						<h:outputText id="tab4Text" value="RICERCA DEI PACCHETTI MONTAGNA" />
 
-						
-						
-		
+
+						</h:panelGrid>
+					</p:tab>
+
+					<p:tab id="tab4" title="MONTAGNA">
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:graphicImage id="tab4Img"
+								value="/immagini/homepage/montagna.jpg" />
+							<h:outputText id="tab4Text"
+								value="RICERCA DEI PACCHETTI MONTAGNA" />
+
+
+
+
 							<h:outputLabel value="Data di Partenza: " />
-							<p:calendar value="#{ricercaPerEtichettaBean.dataPartenza}" id="dataDiPartenza4" required="true" requiredMessage="Devi inserire una data di Partenza"/>
-							<p:message for="dataDiPartenza4"/>
+							<p:calendar value="#{ricercaPerEtichettaBean.dataPartenza}"
+								id="dataDiPartenza4" required="true"
+								requiredMessage="Devi inserire una data di Partenza" />
+							<p:message for="dataDiPartenza4" />
 							<br />
-							
+
 							<h:outputText value="Data di Ritorno: " />
-							<p:calendar value="#{ricercaPerEtichettaBean.dataRitorno}" id="dataDiRitorno4" required="true" requiredMessage="Devi inserire una data di Ritorno"/>
-							<p:message for="dataDiRitorno4"/>
+							<p:calendar value="#{ricercaPerEtichettaBean.dataRitorno}"
+								id="dataDiRitorno4" required="true"
+								requiredMessage="Devi inserire una data di Ritorno" />
+							<p:message for="dataDiRitorno4" />
 							<br />
-				
-							<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+
+							<h:panelGrid columns="2" style="margin-bottom:10px"
+								cellpadding="5">
 								<h:outputText value="Numero di Partecipanti: " />
 								<br />
-								<p:selectOneMenu value="#{ricercaPerEtichettaBean.numPartecipanti}" >
+								<p:selectOneMenu
+									value="#{ricercaPerEtichettaBean.numPartecipanti}">
 									<f:selectItem itemLabel="1" itemValue="1" />
 									<f:selectItem itemLabel="2" itemValue="2" />
 									<f:selectItem itemLabel="3" itemValue="3" />
@@ -286,36 +328,27 @@
 									<f:selectItem itemLabel="7" itemValue="7" />
 									<f:selectItem itemLabel="8" itemValue="8" />
 								</p:selectOneMenu>
-				
-							</h:panelGrid><br />
-							<h:panelGrid id="ricercaEtichetta4">
-							    <p:commandButton id="Ricerca4" value="Ricerca" update="ricercaEtichetta4" actionListener="#{ricercaPerEtichettaBean.ricercaPerEtichettaClienteMontagna}" immediate="true" ajax="false">
-							    </p:commandButton>
+
 							</h:panelGrid>
-						
-						
-						
-					</h:panelGrid>
-				</p:tab>
-
-			</p:tabView>
-		</h:form>
-	</p:layoutUnit>
-  
-</p:layout> 
+							<br />
+							<h:panelGrid id="ricercaEtichetta4">
+								<p:commandButton id="Ricerca4" value="Ricerca"
+									update="ricercaEtichetta4"
+									actionListener="#{ricercaPerEtichettaBean.ricercaPerEtichettaClienteMontagna}"
+									immediate="true" ajax="false">
+								</p:commandButton>
+							</h:panelGrid>
 
 
 
+						</h:panelGrid>
+					</p:tab>
 
+				</p:tabView>
+			</h:form>
+		</p:layoutUnit>
 
+	</p:layout>
 
-
-
-	
-	
-	
-	
-	
-</h:body>
 
 </html>
