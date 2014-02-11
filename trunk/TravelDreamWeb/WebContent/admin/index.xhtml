@@ -5,12 +5,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:body>
-	<h1>BENVENUTO IMPIEGATO</h1>
-	<h:outputText value="Impiegato: #{ContentBean.impiegatoContent}" />
-	<h:form>
-		<p:commandButton value="Logout" action="#{logoutBean.logout()}"
-			ajax="false" />
-	</h:form>
+	
 
 <h:head>
 </h:head>
@@ -38,12 +33,12 @@
 				<div style="display: inline;">
 					<div style="float: right">
 					<h:outputText value="BENVENUTO: " />
-					<h:outputText value="#{loginImpiegatoBean.idImpiegato}" />
+					<h:outputText value="#{userBean.name}" />
 					
 					</div>
 					<div style="float: right: ;">
 					<h:form id="logout">
-						<h:commandButton action="#{loginImpiegatoBean.logout()}" value="Logout" ajax="false" />
+						<h:commandButton action="#{logoutBean.logout()}" value="Logout" ajax="false" />
 					</h:form>
 					</div>
 				</div>
