@@ -399,7 +399,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('mbianchi@libero.it','Mario','Bianchi','e24df920078c3dd4e7e8d2442f00e5c9ab2a231bb3918d65cc50906e49ecaef4','2014-02-04 00:36:44'),('rossif@gmail.com','Francesco','Rossi','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','2014-02-04 00:35:50'),('vrdand@msn.com','Andrea','Verdi','cfa073d701306c133dfca98f071fa831f571cbd8c1b0972aa440ccb144ebe27f','2014-02-04 00:37:31');
+INSERT INTO `users` VALUES ('mbianchi@libero.it','Mario','Bianchi','5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8','2014-02-04 00:36:44'),('rossif@gmail.com','Francesco','Rossi','5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8','2014-02-04 00:35:50'),('vrdand@msn.com','Andrea','Verdi','5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8','2014-02-04 00:37:31');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -424,7 +424,7 @@ CREATE TABLE `users_groups` (
 
 LOCK TABLES `users_groups` WRITE;
 /*!40000 ALTER TABLE `users_groups` DISABLE KEYS */;
-INSERT INTO `users_groups` VALUES ('rossif@gmail.com','USER'),('mbianchi@libero.it','USER'),('vrdand@msn.com','USER');
+INSERT INTO `users_groups` VALUES ('rossif@gmail.com','USER'),('mbianchi@libero.it','ADMIN'),('vrdand@msn.com','USER');
 /*!40000 ALTER TABLE `users_groups` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
