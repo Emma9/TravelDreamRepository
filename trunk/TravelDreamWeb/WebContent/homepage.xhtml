@@ -86,55 +86,67 @@
       
   
    <p:layoutUnit position="center">
-		<h:form id="tabellapacchtti">
+		<h:form id="tabellapacchetti">
 			<p:tabView id="tabView">
 
+			
+			<!-- PACCHETTI LAST MINUTE -->
 				
-						<p:tab id="tab1" title="LAST-MINUTE">  
-			        <h:panelGrid columns="2" cellpadding="10">  
-			            <p:graphicImage id="tab1Img" value="/immagini/homepage/lastminute.jpg" /><p:commandButton action="#{ricercaPerEtichettaBean.ricercaPerEtichettaLastMinute()}" value="Carica Pacchetti Last-Minute" />
-			              
-			            <div align="center"><h:outputText id="tab1Text" value="LISTA DEI PACCHETTI LASTMINUTE"/></div>
-			           
-			           <p:fieldset legend="Ecco i possibili pacchetti predefiniti inerenti alla ricerca effettuata" widgetVar="regWidget" style="width: 600px;">
+						<p:tab id="tab1" title="LAST-MINUTE">		
+						
+						
+						<h:body>
+	 <p:graphicImage id="tab1Img" value="/immagini/homepage/lastminute.jpg" />  <h:commandButton value="Ricerca" update="ricerca3" action="#{ricercaPerEtichettaBean.ricercaPerEtichettaLastMinute()}" ajax="false"/>
+	 <h2>LISTA DEI PACCHETTI LASTMINUTE</h2>
+	<h:form>
+		<p:fieldset legend="Ecco il risultato della ricerca di pacchetti" widgetVar="regWidget" style="width: 600px;">
 		
-		
-							<p:growl id="growl1" showDetail="true" />
-					
-								<p:dataTable id="listaPacchettiPredefinitiLM" var="pacchettoPredefinito" value="#{ricercaPerEtichettaBean.pacchettiRicercati}"
-									paginator="true" rows="10" selection="#{ricercaPerEtichettaBean.pacchettoSelezionato}"
-									selectionMode="single">       
-					
-									<p:ajax event="rowSelect" listener="#{ricercaPerEtichettaBean.onRowSelect}" oncomplete="dettgliPacchettoPredefinitoRicercato" /> 
-										
-										
-									<!-- <p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->													
-					
-									<f:facet name="header">  
-					            	Seleziona un pacchetto per visualizzare i dettagli  
-							        </f:facet>
-							
-													
-											<p:column headerText="Destinazione">  
-							            #{pacchettoPredefinito.destinazione}  
-							        </p:column>
-							
-											<p:column headerText="Data di Partenza">  
-							            #{pacchettoPredefinito.dataInizioValidita}  
-							        </p:column>
-							
-											<p:column headerText="Data di Ritorno">  
-							            #{pacchettoPredefinito.dataFineValidita}  
-							        </p:column>
-							        
-								</p:dataTable>
-							
-							
-					  	</p:fieldset>
+		<p:growl id="growl" showDetail="true" />
 
-					</h:panelGrid>		        	
+			<p:dataTable id="listaPacchettiLastMinute" var="pacchettoLastMinute" value="#{ricercaPerEtichettaBean.pacchettiRicercati}"
+				paginator="true" rows="10" selection="#{ricercaPerEtichettaBean.pacchettoSelezionato}"
+				selectionMode="single">       
+
+				<p:ajax event="rowSelect" listener="#{ricercaPerEtichettaBean.onRowSelect}" oncomplete="dettagliPacchettoSelezionato" />
+						
+															
+
+				<f:facet name="header">  
+            	Seleziona un pacchetto per visualizzare i dettagli  
+		        </f:facet>
+
+
+				<p:column headerText="Destinazione: ">  
+		            #{pacchettoLastMinute.destinazione}  
+		        </p:column>
+
+				<p:column headerText="Costo: ">  
+		            #{pacchettoLastMinute.costo}  
+		        </p:column>
+		
+						<p:column headerText="Data inizio validita: ">  
+		            #{pacchettoLastMinute.dataInizioValidita}  
+		        </p:column>
+		        
+		        
+						<p:column headerText="Data fine validita: ">  
+		            #{pacchettoLastMinute.dataFineValidita}  
+		        </p:column>
+		        
+			</p:dataTable>
+		
+		
+  	</p:fieldset>
+
+	        
+</h:form>
+</h:body>
+						
+						        	
 					  
 			    </p:tab>  
+			    
+			    <!-- PACCHETTI OFFERTE -->
 
 				
 				<p:tab id="tab2" title="OFFERTE">
@@ -185,7 +197,7 @@
 				</p:tab>
 				
 				
-				
+				<!-- PACCHETTI MARE -->
 
 				<p:tab id="tab3" title="MARE">
 					<h:panelGrid columns="2" cellpadding="10">
@@ -233,6 +245,8 @@
 						
 					</h:panelGrid>
 				</p:tab>
+				
+				<!-- PACCHETTI MONTAGNA -->
 
 				<p:tab id="tab4" title="MONTAGNA">
 					<h:panelGrid columns="2" cellpadding="10">
