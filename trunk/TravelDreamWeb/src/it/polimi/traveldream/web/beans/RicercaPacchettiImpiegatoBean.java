@@ -164,15 +164,19 @@ public class RicercaPacchettiImpiegatoBean implements Serializable {
 				
 				try {
 					
-					pacchettoRicercato = pacchettoremoto.findByIdPacchetto(idPacchetto);
-
+					//pacchettoRicercato = pacchettoremoto.findByIdPacchetto(idPacchetto);
+						
+					setPacchettoRicercato(pacchettoremoto.findByIdPacchetto(idPacchetto));
+					
 				}catch (EJBException e) {
+					
+					System.out.println("EJBException");
 				
 				return null;
 
 			}
 
-			return "listaPacchettiRicercaImpiegato";		
+			return "admin/listaPacchettiRicercaImpiegato";		
 				}
 
 			
@@ -192,6 +196,8 @@ public class RicercaPacchettiImpiegatoBean implements Serializable {
 
 				}catch (EJBException e) {
 				
+					System.out.println("EJBException");
+										
 				return null;
 
 			}
