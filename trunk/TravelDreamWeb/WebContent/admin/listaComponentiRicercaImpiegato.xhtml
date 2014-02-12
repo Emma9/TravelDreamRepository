@@ -12,11 +12,8 @@
 	<h:form>
 		<p:fieldset legend="Ecco il risultato della ricerca di componenti" widgetVar="regWidget" style="width: 600px;">
 		
-		<p:growl id="growl" showDetail="true" />
+		<p:growl id="growl" showDetail="true"/>
 																													<!-- c'è anche componentericercato cm fare? altro form?? -->
-			
-
-			
 			
 		<p:dataTable id="componentiRicercati" var="componenti" value="#{ricercaComponentiImpiegatoBean.componentiRicercati}" rowKey="#{componenti.codiceComponente}"  
                  selection="#{ricercaComponentiImpiegatoBean.componenteSelezionato}" selectionMode="single">  
