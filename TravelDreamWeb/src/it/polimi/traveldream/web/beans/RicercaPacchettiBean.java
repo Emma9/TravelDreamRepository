@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -36,6 +37,10 @@ public class RicercaPacchettiBean implements Serializable {
 	private Date dataPartenza;
 	private Date dataRitorno;
 	private int numPartecipanti;
+	private String etichetta;
+	
+	
+	
 	
 	//PACCHETTO SELEZIONATO
 	private PacchettoDTO pacchettoSelezionato;
@@ -104,6 +109,18 @@ public class RicercaPacchettiBean implements Serializable {
 	}
 
 
+	/**
+	 * @return the etichetta
+	 */
+	public String getEtichetta() {
+		return etichetta;
+	}
+	/**
+	 * @param etichetta the etichetta to set
+	 */
+	public void setEtichetta(String etichetta) {
+		this.etichetta = etichetta;
+	}
 	/**
 	 * @return the pacchettoSelezionato
 	 */
@@ -182,5 +199,299 @@ public class RicercaPacchettiBean implements Serializable {
 
 	}
 	
+	
+	
+	
+	
+	public String ricercaPerEtichettaLastMinute(){
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+		
+		try {
+				
+			//pacchettiRicercati = pacchettoRemoto.findByEtichettaOGG("LASTMINUTE");
+			setPacchettiRicercati(pacchettoRemoto.findByEtichettaOGG("lastminute"));
+			
+			
+		}catch (EJBException e) {
+		
+		return null;
+
+	}
+	
+	return "index";
+		
+	}
+	
+public String ricercaPerEtichettaOfferte(){
+		
+	FacesContext context = FacesContext.getCurrentInstance();
+	HttpServletRequest request = (HttpServletRequest) context
+			.getExternalContext().getRequest();
+	
+	try {
+			
+		//pacchettiRicercati = pacchettoRemoto.findByEtichettaOGG("OFFERTA");
+		setPacchettiRicercati(pacchettoRemoto.findByEtichettaOGG("offerta"));
+		
+
+	}catch (EJBException e) {
+	
+	return null;
+
+}
+
+return "index";		
+	}
+
+
+public String ricercaPerEtichettaMare(){
+	
+	FacesContext context = FacesContext.getCurrentInstance();
+	HttpServletRequest request = (HttpServletRequest) context
+			.getExternalContext().getRequest();
+	
+	try {
+			
+		//pacchettiRicercati = pacchettoRemoto.findByEtichettaOGG("MARE");
+		setPacchettiRicercati(pacchettoRemoto.findByEtichettaOGG("mare"));
+		
+
+	}catch (EJBException e) {
+	
+	return null;
+
+}
+
+return "index";	
+}
+
+
+public String ricercaPerEtichettaMontagna(){
+	
+	FacesContext context = FacesContext.getCurrentInstance();
+	HttpServletRequest request = (HttpServletRequest) context
+			.getExternalContext().getRequest();
+	
+	try {
+			
+		//pacchettiRicercati = pacchettoRemoto.findByEtichettaOGG("MONTAGNA");
+		setPacchettiRicercati(pacchettoRemoto.findByEtichettaOGG("montagna"));
+		
+
+	}catch (EJBException e) {
+	
+	return null;
+
+}
+
+return "index";	
+}
+	
+	
+	public String ricercaPerEtichettaClienteLastMinute() {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+
+		ArrayList<PacchettoDTO> pacchetti = new ArrayList<PacchettoDTO>();
+
+		try {
+
+			if (this.pacchettoRemoto.verificaConsistenzaDate(this.dataPartenza,
+					this.dataRitorno)) {
+				// LE DATE INSERITE SONO VALIDE
+
+				pacchetti = pacchettoRemoto.ricercaPerEtichetta("lastminute",
+						this.dataPartenza, this.dataRitorno);
+				// RITORNA LA LISTA DEI PACCHETTI CON DESTINAZIONE DESIDERATA E
+				// DISPONIBILI NEL PERIODO RICHIESTO
+
+				ArrayList<PacchettoDTO> pacchettiDaSettare = new ArrayList<PacchettoDTO>();
+				
+				for (int i = 0; i < pacchetti.size(); i++) {
+					// PER OGNI PACCHETTO VERIFICA CHE I SUOI COMPONENTI
+					// PREDEFINITI SIANO DISPONIBILI
+
+					if (pacchettoRemoto.verificaDisponibilitaComponenti(
+							this.dataPartenza, this.dataRitorno,
+							this.numPartecipanti,
+							(ArrayList<ComponenteDTO>) pacchetti.get(i)
+									.getListaComponentiSelezionati())) {
+						// SE TUTTI I COMPONENTI SONO DISPONIBILI NON RIMUOVE IL
+						// PACCHETTO DALLA LISTA
+						pacchettiDaSettare.add(pacchetti.get(i));
+
+					}
+
+				}
+				setPacchettiRicercati(pacchettiDaSettare);
+
+			}
+		} catch (EJBException e) {
+
+			return null;
+
+		}
+
+		
+		
+		return "listaRicercaPacchettiPredefiniti";
+
+	}
+	
+	
+	
+	public String ricercaPerEtichettaClienteOfferte(){
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+		
+		ArrayList<PacchettoDTO> pacchetti = new ArrayList<PacchettoDTO>();
+		
+		
+		try {
+		
+		
+		if(this.pacchettoRemoto.verificaConsistenzaDate(this.dataPartenza, this.dataRitorno)){
+			//LE DATE INSERITE SONO VALIDE
+		
+		pacchetti = pacchettoRemoto.ricercaPerEtichetta("offerta", this.dataPartenza, this.dataRitorno);
+			//RITORNA LA LISTA DEI PACCHETTI CON DESTINAZIONE DESIDERATA E DISPONIBILI NEL PERIODO RICHIESTO
+		
+		ArrayList<PacchettoDTO> pacchettiDaSettare = new ArrayList<PacchettoDTO>();
+		
+		for (int i = 0; i < pacchetti.size(); i++) {
+			// PER OGNI PACCHETTO VERIFICA CHE I SUOI COMPONENTI
+			// PREDEFINITI SIANO DISPONIBILI
+
+			if (pacchettoRemoto.verificaDisponibilitaComponenti(
+					this.dataPartenza, this.dataRitorno,
+					this.numPartecipanti,
+					(ArrayList<ComponenteDTO>) pacchetti.get(i)
+							.getListaComponentiSelezionati())) {
+				// SE TUTTI I COMPONENTI SONO DISPONIBILI NON RIMUOVE IL
+				// PACCHETTO DALLA LISTA
+				pacchettiDaSettare.add(pacchetti.get(i));
+
+			}
+
+		}
+		setPacchettiRicercati(pacchettiDaSettare);
+		}
+		
+
+	} catch (EJBException e) {
+		
+		return null;
+
+	}
+	
+	return "listaRicercaPacchettiPredefiniti";
+		
+	}
+
+	public String ricercaPerEtichettaClienteMare(){
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+		
+		ArrayList<PacchettoDTO> pacchetti = new ArrayList<PacchettoDTO>();
+		
+		
+		try {
+		
+		
+		if(this.pacchettoRemoto.verificaConsistenzaDate(this.dataPartenza, this.dataRitorno)){
+			//LE DATE INSERITE SONO VALIDE
+		
+		pacchetti = pacchettoRemoto.ricercaPerEtichetta("mare", this.dataPartenza, this.dataRitorno);
+			//RITORNA LA LISTA DEI PACCHETTI CON DESTINAZIONE DESIDERATA E DISPONIBILI NEL PERIODO RICHIESTO
+		ArrayList<PacchettoDTO> pacchettiDaSettare = new ArrayList<PacchettoDTO>();
+		
+		for (int i = 0; i < pacchetti.size(); i++) {
+			// PER OGNI PACCHETTO VERIFICA CHE I SUOI COMPONENTI
+			// PREDEFINITI SIANO DISPONIBILI
+
+			if (pacchettoRemoto.verificaDisponibilitaComponenti(
+					this.dataPartenza, this.dataRitorno,
+					this.numPartecipanti,
+					(ArrayList<ComponenteDTO>) pacchetti.get(i)
+							.getListaComponentiSelezionati())) {
+				// SE TUTTI I COMPONENTI SONO DISPONIBILI NON RIMUOVE IL
+				// PACCHETTO DALLA LISTA
+				pacchettiDaSettare.add(pacchetti.get(i));
+
+			}
+
+		}
+		setPacchettiRicercati(pacchettiDaSettare);
+		}
+		
+
+	} catch (EJBException e) {
+		
+		return null;
+
+	}
+	
+	return "listaRicercaPacchettiPredefiniti";
+		
+	}
+	
+	public String ricercaPerEtichettaClienteMontagna(){
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+		
+		ArrayList<PacchettoDTO> pacchetti = new ArrayList<PacchettoDTO>();
+		
+		
+		try {
+		
+		
+		if(this.pacchettoRemoto.verificaConsistenzaDate(this.dataPartenza, this.dataRitorno)){
+			//LE DATE INSERITE SONO VALIDE
+		
+		pacchetti = pacchettoRemoto.ricercaPerEtichetta("montagna", this.dataPartenza, this.dataRitorno);
+			//RITORNA LA LISTA DEI PACCHETTI CON DESTINAZIONE DESIDERATA E DISPONIBILI NEL PERIODO RICHIESTO
+		
+		ArrayList<PacchettoDTO> pacchettiDaSettare = new ArrayList<PacchettoDTO>();
+		
+		for (int i = 0; i < pacchetti.size(); i++) {
+			// PER OGNI PACCHETTO VERIFICA CHE I SUOI COMPONENTI
+			// PREDEFINITI SIANO DISPONIBILI
+
+			if (pacchettoRemoto.verificaDisponibilitaComponenti(
+					this.dataPartenza, this.dataRitorno,
+					this.numPartecipanti,
+					(ArrayList<ComponenteDTO>) pacchetti.get(i)
+							.getListaComponentiSelezionati())) {
+				// SE TUTTI I COMPONENTI SONO DISPONIBILI NON RIMUOVE IL
+				// PACCHETTO DALLA LISTA
+				pacchettiDaSettare.add(pacchetti.get(i));
+
+			}
+
+		}
+		setPacchettiRicercati(pacchettiDaSettare);
+		}
+		
+
+	} catch (EJBException e) {
+		
+		return null;
+
+	}
+	
+	return "listaRicercaPacchettiPredefiniti";
+		
+	}
 	
 }

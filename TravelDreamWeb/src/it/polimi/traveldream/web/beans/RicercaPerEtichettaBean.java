@@ -132,7 +132,7 @@ public class RicercaPerEtichettaBean implements Serializable {
 
 	}
 	
-	return "homepage";
+	return "index";
 		
 	}
 	
@@ -154,7 +154,7 @@ public String ricercaPerEtichettaOfferte(){
 
 }
 
-return "homepage";		
+return "index";		
 	}
 
 
@@ -176,7 +176,7 @@ public String ricercaPerEtichettaMare(){
 
 }
 
-return "homepage";	
+return "index";	
 }
 
 
@@ -198,66 +198,60 @@ public String ricercaPerEtichettaMontagna(){
 
 }
 
-return "homepage";	
+return "index";	
 }
 	
 	
-	public String ricercaPerEtichettaClienteLastMinute(){
-		
+	public String ricercaPerEtichettaClienteLastMinute() {
+
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
 				.getExternalContext().getRequest();
-		
+
 		ArrayList<PacchettoDTO> pacchetti = new ArrayList<PacchettoDTO>();
-		
-		
+
 		try {
-		
-		
-		if(this.pacchettoRemoto.verificaConsistenzaDate(this.dataPartenza, this.dataRitorno)){
-			//LE DATE INSERITE SONO VALIDE
-		
-		pacchetti = pacchettoRemoto.ricercaPerEtichetta("lastminute", this.dataPartenza, this.dataRitorno);
-			//RITORNA LA LISTA DEI PACCHETTI CON DESTINAZIONE DESIDERATA E DISPONIBILI NEL PERIODO RICHIESTO
-		
-		for(int i=0;i<pacchetti.size();i++){
-			//PER OGNI PACCHETTO VERIFICA CHE TUTTI I SUOI COMPONENTI SIANO DISPONIBILI
-			
-			if(pacchettoRemoto.verificaDisponibilitaComponenti(this.dataPartenza, this.dataRitorno, this.numPartecipanti, (ArrayList<ComponenteDTO>) pacchetti.get(i).getListaComponentiSelezionati())){
-			//SE TUTTI I COMPONENTI SONO DISPONIBILI NON RIMUOVE IL PACCHETTO DALLA LISTA
+
+			if (this.pacchettoRemoto.verificaConsistenzaDate(this.dataPartenza,
+					this.dataRitorno)) {
+				// LE DATE INSERITE SONO VALIDE
+
+				pacchetti = pacchettoRemoto.ricercaPerEtichetta("lastminute",
+						this.dataPartenza, this.dataRitorno);
+				// RITORNA LA LISTA DEI PACCHETTI CON DESTINAZIONE DESIDERATA E
+				// DISPONIBILI NEL PERIODO RICHIESTO
+
+				ArrayList<PacchettoDTO> pacchettiDaSettare = new ArrayList<PacchettoDTO>();
 				
-			}else{
-				pacchetti.set(i, null);
-			//SE CI SONO DEI COMPONENTI NON DISPONIBILI ANNULLA IL PACCHETTO CHE LI CONTIENE	
-				
+				for (int i = 0; i < pacchetti.size(); i++) {
+					// PER OGNI PACCHETTO VERIFICA CHE I SUOI COMPONENTI
+					// PREDEFINITI SIANO DISPONIBILI
+
+					if (pacchettoRemoto.verificaDisponibilitaComponenti(
+							this.dataPartenza, this.dataRitorno,
+							this.numPartecipanti,
+							(ArrayList<ComponenteDTO>) pacchetti.get(i)
+									.getListaComponentiSelezionati())) {
+						// SE TUTTI I COMPONENTI SONO DISPONIBILI NON RIMUOVE IL
+						// PACCHETTO DALLA LISTA
+						pacchettiDaSettare.add(pacchetti.get(i));
+
+					}
+
+				}
+				setPacchettiRicercati(pacchettiDaSettare);
+
 			}
-			
-		}				
-		
-		for(int j=0;j<pacchetti.size();j++){
-			//SCORRE LA LISTA DEI PACCHETTI
-		
-		if(pacchetti.get(j)==null){
-			//SE PACCHETTO == NULL PASSA AL PROSSIMO PACCHETTO
-			
-		}else{
-			//SE PACCHETTO != NULL LO COPIA IN PACCHETTIRICERCATI
-			pacchettiRicercati.set(j, pacchetti.get(j));
-		}
-			
-		}
-			
-		}
-		
+		} catch (EJBException e) {
 
-	} catch (EJBException e) {
-		
-		return null;
+			return null;
 
-	}
-	
-	return "homePageCliente";
+		}
+
 		
+		
+		return "index";
+
 	}
 	
 	
@@ -280,33 +274,25 @@ return "homepage";
 		pacchetti = pacchettoRemoto.ricercaPerEtichetta("offerta", this.dataPartenza, this.dataRitorno);
 			//RITORNA LA LISTA DEI PACCHETTI CON DESTINAZIONE DESIDERATA E DISPONIBILI NEL PERIODO RICHIESTO
 		
-		for(int i=0;i<pacchetti.size();i++){
-			//PER OGNI PACCHETTO VERIFICA CHE TUTTI I SUOI COMPONENTI SIANO DISPONIBILI
-			
-			if(pacchettoRemoto.verificaDisponibilitaComponenti(this.dataPartenza, this.dataRitorno, this.numPartecipanti, (ArrayList<ComponenteDTO>) pacchetti.get(i).getListaComponentiSelezionati())){
-			//SE TUTTI I COMPONENTI SONO DISPONIBILI NON RIMUOVE IL PACCHETTO DALLA LISTA
-				
-			}else{
-				pacchetti.set(i, null);
-			//SE CI SONO DEI COMPONENTI NON DISPONIBILI ANNULLA IL PACCHETTO CHE LI CONTIENE	
-				
+		ArrayList<PacchettoDTO> pacchettiDaSettare = new ArrayList<PacchettoDTO>();
+		
+		for (int i = 0; i < pacchetti.size(); i++) {
+			// PER OGNI PACCHETTO VERIFICA CHE I SUOI COMPONENTI
+			// PREDEFINITI SIANO DISPONIBILI
+
+			if (pacchettoRemoto.verificaDisponibilitaComponenti(
+					this.dataPartenza, this.dataRitorno,
+					this.numPartecipanti,
+					(ArrayList<ComponenteDTO>) pacchetti.get(i)
+							.getListaComponentiSelezionati())) {
+				// SE TUTTI I COMPONENTI SONO DISPONIBILI NON RIMUOVE IL
+				// PACCHETTO DALLA LISTA
+				pacchettiDaSettare.add(pacchetti.get(i));
+
 			}
-			
-		}				
-		
-		for(int j=0;j<pacchetti.size();j++){
-			//SCORRE LA LISTA DEI PACCHETTI
-		
-		if(pacchetti.get(j)==null){
-			//SE PACCHETTO == NULL PASSA AL PROSSIMO PACCHETTO
-			
-		}else{
-			//SE PACCHETTO != NULL LO COPIA IN PACCHETTIRICERCATI
-			pacchettiRicercati.set(j, pacchetti.get(j));
+
 		}
-			
-		}
-			
+		setPacchettiRicercati(pacchettiDaSettare);
 		}
 		
 
@@ -316,7 +302,7 @@ return "homepage";
 
 	}
 	
-	return "homePageCliente";
+	return "index";
 		
 	}
 
@@ -337,34 +323,25 @@ return "homepage";
 		
 		pacchetti = pacchettoRemoto.ricercaPerEtichetta("mare", this.dataPartenza, this.dataRitorno);
 			//RITORNA LA LISTA DEI PACCHETTI CON DESTINAZIONE DESIDERATA E DISPONIBILI NEL PERIODO RICHIESTO
+		ArrayList<PacchettoDTO> pacchettiDaSettare = new ArrayList<PacchettoDTO>();
 		
-		for(int i=0;i<pacchetti.size();i++){
-			//PER OGNI PACCHETTO VERIFICA CHE TUTTI I SUOI COMPONENTI SIANO DISPONIBILI
-			
-			if(pacchettoRemoto.verificaDisponibilitaComponenti(this.dataPartenza, this.dataRitorno, this.numPartecipanti, (ArrayList<ComponenteDTO>) pacchetti.get(i).getListaComponentiSelezionati())){
-			//SE TUTTI I COMPONENTI SONO DISPONIBILI NON RIMUOVE IL PACCHETTO DALLA LISTA
-				
-			}else{
-				pacchetti.set(i, null);
-			//SE CI SONO DEI COMPONENTI NON DISPONIBILI ANNULLA IL PACCHETTO CHE LI CONTIENE	
-				
+		for (int i = 0; i < pacchetti.size(); i++) {
+			// PER OGNI PACCHETTO VERIFICA CHE I SUOI COMPONENTI
+			// PREDEFINITI SIANO DISPONIBILI
+
+			if (pacchettoRemoto.verificaDisponibilitaComponenti(
+					this.dataPartenza, this.dataRitorno,
+					this.numPartecipanti,
+					(ArrayList<ComponenteDTO>) pacchetti.get(i)
+							.getListaComponentiSelezionati())) {
+				// SE TUTTI I COMPONENTI SONO DISPONIBILI NON RIMUOVE IL
+				// PACCHETTO DALLA LISTA
+				pacchettiDaSettare.add(pacchetti.get(i));
+
 			}
-			
-		}				
-		
-		for(int j=0;j<pacchetti.size();j++){
-			//SCORRE LA LISTA DEI PACCHETTI
-		
-		if(pacchetti.get(j)==null){
-			//SE PACCHETTO == NULL PASSA AL PROSSIMO PACCHETTO
-			
-		}else{
-			//SE PACCHETTO != NULL LO COPIA IN PACCHETTIRICERCATI
-			pacchettiRicercati.set(j, pacchetti.get(j));
+
 		}
-			
-		}
-			
+		setPacchettiRicercati(pacchettiDaSettare);
 		}
 		
 
@@ -374,7 +351,7 @@ return "homepage";
 
 	}
 	
-	return "homePageCliente";
+	return "index";
 		
 	}
 	
@@ -396,33 +373,25 @@ return "homepage";
 		pacchetti = pacchettoRemoto.ricercaPerEtichetta("montagna", this.dataPartenza, this.dataRitorno);
 			//RITORNA LA LISTA DEI PACCHETTI CON DESTINAZIONE DESIDERATA E DISPONIBILI NEL PERIODO RICHIESTO
 		
-		for(int i=0;i<pacchetti.size();i++){
-			//PER OGNI PACCHETTO VERIFICA CHE TUTTI I SUOI COMPONENTI SIANO DISPONIBILI
-			
-			if(pacchettoRemoto.verificaDisponibilitaComponenti(this.dataPartenza, this.dataRitorno, this.numPartecipanti, (ArrayList<ComponenteDTO>) pacchetti.get(i).getListaComponentiSelezionati())){
-			//SE TUTTI I COMPONENTI SONO DISPONIBILI NON RIMUOVE IL PACCHETTO DALLA LISTA
-				
-			}else{
-				pacchetti.set(i, null);
-			//SE CI SONO DEI COMPONENTI NON DISPONIBILI ANNULLA IL PACCHETTO CHE LI CONTIENE	
-				
+		ArrayList<PacchettoDTO> pacchettiDaSettare = new ArrayList<PacchettoDTO>();
+		
+		for (int i = 0; i < pacchetti.size(); i++) {
+			// PER OGNI PACCHETTO VERIFICA CHE I SUOI COMPONENTI
+			// PREDEFINITI SIANO DISPONIBILI
+
+			if (pacchettoRemoto.verificaDisponibilitaComponenti(
+					this.dataPartenza, this.dataRitorno,
+					this.numPartecipanti,
+					(ArrayList<ComponenteDTO>) pacchetti.get(i)
+							.getListaComponentiSelezionati())) {
+				// SE TUTTI I COMPONENTI SONO DISPONIBILI NON RIMUOVE IL
+				// PACCHETTO DALLA LISTA
+				pacchettiDaSettare.add(pacchetti.get(i));
+
 			}
-			
-		}				
-		
-		for(int j=0;j<pacchetti.size();j++){
-			//SCORRE LA LISTA DEI PACCHETTI
-		
-		if(pacchetti.get(j)==null){
-			//SE PACCHETTO == NULL PASSA AL PROSSIMO PACCHETTO
-			
-		}else{
-			//SE PACCHETTO != NULL LO COPIA IN PACCHETTIRICERCATI
-			pacchettiRicercati.set(j, pacchetti.get(j));
+
 		}
-			
-		}
-			
+		setPacchettiRicercati(pacchettiDaSettare);
 		}
 		
 
@@ -432,7 +401,7 @@ return "homepage";
 
 	}
 	
-	return "homePageCliente";
+	return "index";
 		
 	}
 	

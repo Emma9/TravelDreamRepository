@@ -19,11 +19,8 @@
 				paginator="true" rows="10" selection="#{ricercaPacchettiBean.pacchettoSelezionato}"
 				selectionMode="single">       
 
-				<p:ajax event="rowSelect" listener="#{ricercaPacchettiBean.onRowSelect}" oncomplete="dettgliPacchettoPredefinitoRicercato" /> 
 					
-					
-				<!-- <p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" /> -->													
-
+				
 				<f:facet name="header">  
             	Seleziona un pacchetto per visualizzare i dettagli  
 		        </f:facet>
@@ -40,7 +37,12 @@
 						<p:column headerText="Data di Ritorno">  
 		            #{pacchettoPredefinito.dataFineValidita}  
 		        </p:column>
-		        
+		        <f:facet name="footer">
+														<h:commandButton id="viewButton" value="Seleziona"
+															icon="ui-icon-search" update=":form:display"
+															action="#{dettagliPacchettoSelezionatoBean.dettagliPacchettoSelezionato()}"
+															ajax="false" />
+													</f:facet>
 			</p:dataTable>
 		
 		
