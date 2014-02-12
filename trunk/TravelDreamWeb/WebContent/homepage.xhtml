@@ -106,16 +106,13 @@
 					<h:body>
 						<p:graphicImage id="tab1Img"
 							value="/immagini/homepage/lastminute.jpg" />
-						<h:commandButton value="Ricerca" update="ricerca3"
-							action="#{ricercaPerEtichettaBean.ricercaPerEtichettaLastMinute()}"
-							ajax="false" />
 						<h2>LISTA DEI PACCHETTI LASTMINUTE</h2>
 						<h:form>
 							<p:fieldset legend="Ecco il risultato della ricerca di pacchetti"
 								widgetVar="regWidget" style="width: 600px;">
 
 								<p:growl id="growl" showDetail="true" />
-								<p:dataTable id="clistaPacchettiLastMinute"
+								<p:dataTable id="listaPacchettiLastMinute"
 									var="pacchettoLastMinute"
 									value="#{ricercaPerEtichettaBean.pacchettiRicercati}"
 									rowKey="#{pacchettoLastMinute.idPacchetto}"
@@ -146,7 +143,10 @@
 									<p:column headerText="Data fine validita: ">  
 		            #{pacchettoLastMinute.dataFineValidita}  
 		        </p:column>
-
+<f:facet name="footer">  
+            <p:commandButton id="bottoneRicerca" value="Seleziona" icon="ui-icon-search"  
+                    update=":form:display" action="#{dettagliPacchettoSelezionatoBean.dettagliPacchettoSelezionato()}" ajax="false"/>  
+        </f:facet>  
 								</p:dataTable>
 
 

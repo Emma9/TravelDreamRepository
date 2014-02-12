@@ -138,13 +138,13 @@ public class CreazioneComponenteBean implements Serializable {
 			
 			context.addMessage(null, new FacesMessage("Creazione componente riuscita"));
 			
-			return "homepageImpiegato";
+			return "index";
 
 		}catch (EJBException e) {
 		
 			context.addMessage(null, new FacesMessage("Creazione componente fallita"));
 			
-			return "homepageImpiegato";
+			return "index";
 			
 			
 

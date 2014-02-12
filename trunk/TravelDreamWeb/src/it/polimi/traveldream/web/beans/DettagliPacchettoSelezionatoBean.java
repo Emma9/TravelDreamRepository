@@ -68,7 +68,7 @@ public class DettagliPacchettoSelezionatoBean implements Serializable {
 	}
 
 
-	public String DettagliPacchettoSelezionato(){
+	public String dettagliPacchettoSelezionato(){
 		
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
@@ -91,7 +91,7 @@ public class DettagliPacchettoSelezionatoBean implements Serializable {
 	
 	
 	
-	public String DettagliPacchettoSelezionatoImpiegato(){
+	public String dettagliPacchettoSelezionatoImpiegato(){
 		
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context

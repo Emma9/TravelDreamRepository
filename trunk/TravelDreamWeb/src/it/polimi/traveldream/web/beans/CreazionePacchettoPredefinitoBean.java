@@ -247,13 +247,13 @@ public class CreazionePacchettoPredefinitoBean implements Serializable {
 			
 				context.addMessage(null, new FacesMessage("Creazione pacchetto fallita"));
 				
-				return "homepageImpiegato";
+				return "index";
 
 		}
 
 			context.addMessage(null, new FacesMessage("Creazione pacchetto riuscita"));
 			
-			return "homepageImpiegato";	
+			return "index";	
 			
 			
 		}
