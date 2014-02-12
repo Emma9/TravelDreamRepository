@@ -122,8 +122,10 @@ public class RicercaPerEtichettaBean implements Serializable {
 		
 		try {
 				
-			pacchettiRicercati = pacchettoRemoto.findByEtichettaOGG("LASTMINUTE");
-	
+			//pacchettiRicercati = pacchettoRemoto.findByEtichettaOGG("LASTMINUTE");
+			setPacchettiRicercati(pacchettoRemoto.findByEtichettaOGG("lastminute"));
+			
+			
 		}catch (EJBException e) {
 		
 		return null;
@@ -142,7 +144,9 @@ public String ricercaPerEtichettaOfferte(){
 	
 	try {
 			
-		pacchettiRicercati = pacchettoRemoto.findByEtichettaOGG("OFFERTA");
+		//pacchettiRicercati = pacchettoRemoto.findByEtichettaOGG("OFFERTA");
+		setPacchettiRicercati(pacchettoRemoto.findByEtichettaOGG("offerta"));
+		
 
 	}catch (EJBException e) {
 	
@@ -162,7 +166,9 @@ public String ricercaPerEtichettaMare(){
 	
 	try {
 			
-		pacchettiRicercati = pacchettoRemoto.findByEtichettaOGG("MARE");
+		//pacchettiRicercati = pacchettoRemoto.findByEtichettaOGG("MARE");
+		setPacchettiRicercati(pacchettoRemoto.findByEtichettaOGG("mare"));
+		
 
 	}catch (EJBException e) {
 	
@@ -182,7 +188,9 @@ public String ricercaPerEtichettaMontagna(){
 	
 	try {
 			
-		pacchettiRicercati = pacchettoRemoto.findByEtichettaOGG("MONTAGNA");
+		//pacchettiRicercati = pacchettoRemoto.findByEtichettaOGG("MONTAGNA");
+		setPacchettiRicercati(pacchettoRemoto.findByEtichettaOGG("montagna"));
+		
 
 	}catch (EJBException e) {
 	
@@ -209,7 +217,7 @@ return "homepage";
 		if(this.pacchettoRemoto.verificaConsistenzaDate(this.dataPartenza, this.dataRitorno)){
 			//LE DATE INSERITE SONO VALIDE
 		
-		pacchetti = pacchettoRemoto.ricercaPerEtichetta("LASTMINUTE", this.dataPartenza, this.dataRitorno);
+		pacchetti = pacchettoRemoto.ricercaPerEtichetta("lastminute", this.dataPartenza, this.dataRitorno);
 			//RITORNA LA LISTA DEI PACCHETTI CON DESTINAZIONE DESIDERATA E DISPONIBILI NEL PERIODO RICHIESTO
 		
 		for(int i=0;i<pacchetti.size();i++){
@@ -252,6 +260,8 @@ return "homepage";
 		
 	}
 	
+	
+	
 	public String ricercaPerEtichettaClienteOfferte(){
 		
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -267,7 +277,7 @@ return "homepage";
 		if(this.pacchettoRemoto.verificaConsistenzaDate(this.dataPartenza, this.dataRitorno)){
 			//LE DATE INSERITE SONO VALIDE
 		
-		pacchetti = pacchettoRemoto.ricercaPerEtichetta("OFFERTA", this.dataPartenza, this.dataRitorno);
+		pacchetti = pacchettoRemoto.ricercaPerEtichetta("offerta", this.dataPartenza, this.dataRitorno);
 			//RITORNA LA LISTA DEI PACCHETTI CON DESTINAZIONE DESIDERATA E DISPONIBILI NEL PERIODO RICHIESTO
 		
 		for(int i=0;i<pacchetti.size();i++){
@@ -325,7 +335,7 @@ return "homepage";
 		if(this.pacchettoRemoto.verificaConsistenzaDate(this.dataPartenza, this.dataRitorno)){
 			//LE DATE INSERITE SONO VALIDE
 		
-		pacchetti = pacchettoRemoto.ricercaPerEtichetta("MARE", this.dataPartenza, this.dataRitorno);
+		pacchetti = pacchettoRemoto.ricercaPerEtichetta("mare", this.dataPartenza, this.dataRitorno);
 			//RITORNA LA LISTA DEI PACCHETTI CON DESTINAZIONE DESIDERATA E DISPONIBILI NEL PERIODO RICHIESTO
 		
 		for(int i=0;i<pacchetti.size();i++){
@@ -383,7 +393,7 @@ return "homepage";
 		if(this.pacchettoRemoto.verificaConsistenzaDate(this.dataPartenza, this.dataRitorno)){
 			//LE DATE INSERITE SONO VALIDE
 		
-		pacchetti = pacchettoRemoto.ricercaPerEtichetta("MONTAGNA", this.dataPartenza, this.dataRitorno);
+		pacchetti = pacchettoRemoto.ricercaPerEtichetta("montagna", this.dataPartenza, this.dataRitorno);
 			//RITORNA LA LISTA DEI PACCHETTI CON DESTINAZIONE DESIDERATA E DISPONIBILI NEL PERIODO RICHIESTO
 		
 		for(int i=0;i<pacchetti.size();i++){

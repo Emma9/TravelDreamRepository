@@ -171,6 +171,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 * @return ArrayList<PacchettoDTO>*/
 	public ArrayList<PacchettoDTO> findByEtichettaOGG(String etichetta) {
 
+		//TypedQuery<Pacchetto> q = manager.createQuery("FROM Pacchetto p" WHERE p.idCliente=:NULL",Pacchetto.class);
 		TypedQuery<Pacchetto> q = manager.createQuery("FROM Pacchetto p", Pacchetto.class);
 
 		ArrayList<PacchettoDTO> pacchetti = new ArrayList<PacchettoDTO>();
