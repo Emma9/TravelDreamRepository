@@ -31,8 +31,11 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 			//COMPONENTE SELEZIONATO
 			private ComponenteDTO componenteSelezionato;
 			
-			//LISTA COMPONENTI INVIATA ALLA PAGINA WEB
-			private ArrayList<ComponenteDTO> componentiRicercati = new ArrayList<ComponenteDTO>();
+			//LISTA COMPONENTI PER ID INVIATA ALLA PAGINA WEB
+			private ArrayList<ComponenteDTO> componentiRicercatiID = new ArrayList<ComponenteDTO>();
+			
+			//LISTA COMPONENTI PER TERMINE INVIATA ALLA PAGINA WEB
+			private ArrayList<ComponenteDTO> componentiRicercatiT = new ArrayList<ComponenteDTO>();
 			
 			//COMPONENTE INVIATO ALLA PAGINA WEB
 			//private ComponenteDTO componenteRicercato;
@@ -76,17 +79,36 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 			public void setComponenteSelezionato(ComponenteDTO componenteSelezionato) {
 				this.componenteSelezionato = componenteSelezionato;
 			}
+			
+			
+						
+			
+			
 			/**
-			 * @return the componentiRicercati
+			 * @return the componentiRicercatiID
 			 */
-			public ArrayList<ComponenteDTO> getComponentiRicercati() {
-				return componentiRicercati;
+			public ArrayList<ComponenteDTO> getComponentiRicercatiID() {
+				return componentiRicercatiID;
 			}
 			/**
-			 * @param componentiRicercati the componentiRicercati to set
+			 * @param componentiRicercatiID the componentiRicercatiID to set
 			 */
-			public void setComponentiRicercati(ArrayList<ComponenteDTO> componentiRicercati) {
-				this.componentiRicercati = componentiRicercati;
+			public void setComponentiRicercatiID(
+					ArrayList<ComponenteDTO> componentiRicercatiID) {
+				this.componentiRicercatiID = componentiRicercatiID;
+			}
+			/**
+			 * @return the componentiRicercatiT
+			 */
+			public ArrayList<ComponenteDTO> getComponentiRicercatiT() {
+				return componentiRicercatiT;
+			}
+			/**
+			 * @param componentiRicercatiT the componentiRicercatiT to set
+			 */
+			public void setComponentiRicercatiT(
+					ArrayList<ComponenteDTO> componentiRicercatiT) {
+				this.componentiRicercatiT = componentiRicercatiT;
 			}
 			/**
 			 * @return the componenteRicercato
@@ -108,7 +130,7 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 
 			ArrayList<ComponenteDTO> lista = new ArrayList<ComponenteDTO>();
 			lista.add(componenteremoto.findByCodiceComponente(codiceComponente));
-			setComponentiRicercati(lista);
+			setComponentiRicercatiID(lista);
 
 		} catch (EJBException e) {
 
@@ -120,17 +142,26 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 
 		try {
 
-			ArrayList<ComponenteDTO> lista = new ArrayList<ComponenteDTO>();
+			
+			System.out.println("RAMO METODO");
+			
+			ArrayList<ComponenteDTO> lista2 = new ArrayList<ComponenteDTO>();
+			
+			
 			for (int i = 0; i < componenteremoto.findByTermine(getTermine())
 					.size(); i++) {
-				lista.add(componenteremoto.findByTermine(getTermine()).get(i));
+				lista2.add(componenteremoto.findByTermine(getTermine()).get(i));
 			}
 
 		
-			setComponentiRicercati(lista);
+			setComponentiRicercatiT(lista2);
 			// setComponentiRicercati(componenteremoto.findByTermine(termine));
 
+			System.out.println("ESEGUITO SET LISTA");
+			
 		} catch (EJBException e) {
+			
+			System.out.println("EJBException RAMO CATCH");
 
 		}
 
