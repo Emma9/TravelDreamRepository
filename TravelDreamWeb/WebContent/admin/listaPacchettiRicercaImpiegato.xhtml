@@ -1,47 +1,62 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 </h:head>
 <h:body>
 	<h2>IMPIEGATO: LISTA PACCHETTI</h2>
+
+
 	<h:form>
-		<p:fieldset legend="Ecco il risultato della ricerca dei pacchetti" widgetVar="regWidget" style="width: 600px;">
-		
-		<p:growl id="growl" showDetail="true" />
+		<p:fieldset legend="Ecco il risultato della ricerca dei pacchetti"
+			widgetVar="regWidget" style="width: 600px;">
 
-			<p:dataTable id="listaPacchettiImpiegato" var="pacchettoBaseImpiegato" value="#{ricercaPacchettiImpiegatoBean.pacchettiRicercati}">       
+			<p:growl id="growl" showDetail="true" />
 
-																
+
+
+
+			<p:dataTable id="pacchettoRicercato" var="pacchetto"
+				value="#{ricercaPacchettiImpiegatoBean.pacchettiRicercatiID}"
+				rowKey="#{pacchetto.idPacchetto}"
+				selection="#{ricercaPacchettiImpiegatoBean.pacchettoSelezionato}"
+				selectionMode="single">
 
 				<f:facet name="header">  
-            	Seleziona un pacchetto per visualizzare i dettagli  
-		        </f:facet>
+            Clicca il pulsante "Seleziona" dopo aver selezionato una singola riga per vederne i dettagli  
+        </f:facet>
 
+				<p:column headerText="ID pacchetto">  
+            #{pacchetto.idPacchetto}  
+        </p:column>
 
-				<p:column headerText="Destinazione: ">  
-		            #{pacchettoBaseImpiegato.destinazione}  
-		        </p:column>
+				<p:column headerText="Destinazione">  
+            #{pacchetto.destinazione}  
+        </p:column>
 
-				<p:column headerText="Data di Inizio validita: ">  
-		            #{pacchettoBaseImpiegato.dataInizioValidita}  
-		        </p:column>
-		
-						<p:column headerText="Data di Fine validita: ">  
-		            #{pacchettoBaseImpiegato.dataFineValidita}  
-		        </p:column>
-		        
+				<p:column headerText="Costo">  
+            #{pacchetto.costo}  
+        </p:column>
+
+				<f:facet name="footer">
+					<p:commandButton id="viewButton" value="Seleziona"
+						icon="ui-icon-search" update=":form:display"
+						action="#{ricercaPacchettiImpiegatoBean.dettagliPacchettoSelezionato()}"
+						ajax="false" />
+				</f:facet>
+
 			</p:dataTable>
-		
-		
-  	</p:fieldset>
 
-	
-        
-</h:form>
+
+
+		</p:fieldset>
+
+	</h:form>
+
+
 </h:body>
 </html>

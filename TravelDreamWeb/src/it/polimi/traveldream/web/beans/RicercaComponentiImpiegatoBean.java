@@ -124,7 +124,7 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 			//}
 			
 			
-	public void ricercaComponenteImpiegatoId() {
+	public String ricercaComponenteImpiegatoId() {
 
 		try {
 
@@ -134,11 +134,16 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 
 		} catch (EJBException e) {
 
+			
+			return null;
+			
 		}
+		
+		return "listaComponentiRicercaImpiegato";
 
 	}
 
-	public void ricercaComponenteImpiegatoTermine() {
+	public String ricercaComponenteImpiegatoTermine() {
 
 		try {
 
@@ -154,7 +159,7 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 			}
 
 		
-			setComponentiRicercatiT(lista2);
+			setComponentiRicercatiID(lista2);
 			// setComponentiRicercati(componenteremoto.findByTermine(termine));
 
 			System.out.println("ESEGUITO SET LISTA");
@@ -162,16 +167,20 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 		} catch (EJBException e) {
 			
 			System.out.println("EJBException RAMO CATCH");
+			
+			return null;
 
 		}
 
+		return "listaComponentiRicercaImpiegato";
+		
 	}
 
 	public String dettagliComponenteSelezionato() {
 
 		int id = componenteSelezionato.getCodiceComponente();
 
-		return "dettagliComponenteSelezionato?faces-redirect=true&cComponente"
+		return "dettagliComponenteSelezionatoImpiegato?faces-redirect=true&cComponente"
 				+ id;
 
 	}
