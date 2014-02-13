@@ -225,9 +225,9 @@ public class ComponenteBean implements ComponenteBeanRemote,
 			
 			
 			if (listaCOM.get(j).getDescrizione().contains(charseq)){
-				
+				if(!listaComponenti.contains(listaCOM.get(j))){
 				listaComponenti.add(listaCOM.get(j));
-				
+				}
 			}
 			
 		}
@@ -236,9 +236,9 @@ public class ComponenteBean implements ComponenteBeanRemote,
 		for (int j = 0; j < listaCOM.size(); j++) {
 
 			if (listaCOM.get(j).getLuogo().contains(charseq)) {
-
+				if(!listaComponenti.contains(listaCOM.get(j))){
 				listaComponenti.add(listaCOM.get(j));
-
+				}
 			}
 
 		}
