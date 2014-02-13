@@ -1,11 +1,13 @@
 package it.polimi.traveldream.web.beans;
 
 import it.polimi.traveldream.ejb.client.PacchettoBeanRemote;
-
+import it.polimi.traveldream.entities.ComponenteDTO;
 import it.polimi.traveldream.entities.PacchettoDTO;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
+
 
 
 
@@ -37,7 +39,12 @@ public class RicercaPacchettiImpiegatoBean implements Serializable {
 			private PacchettoDTO pacchettoSelezionato;
 			
 			//LISTA PACCHETTI INVIATA ALLA PAGINA WEB
-			private ArrayList<PacchettoDTO> pacchettiRicercati = new ArrayList<PacchettoDTO>();
+			
+			
+			private ArrayList<PacchettoDTO> pacchettiRicercatiID = new ArrayList<PacchettoDTO>();
+			
+			private ArrayList<PacchettoDTO> pacchettiRicercatiTER = new ArrayList<PacchettoDTO>();
+			
 			
 			//PACCHETTO INVIATO ALLA PAGINA WEB
 			private PacchettoDTO pacchettoRicercato;
@@ -112,11 +119,12 @@ public class RicercaPacchettiImpiegatoBean implements Serializable {
 
 
 
+
 			/**
-			 * @return the pacchettiRicercati
+			 * @return the pacchettiRicercatiID
 			 */
-			public ArrayList<PacchettoDTO> getPacchettiRicercati() {
-				return pacchettiRicercati;
+			public ArrayList<PacchettoDTO> getPacchettiRicercatiID() {
+				return pacchettiRicercatiID;
 			}
 
 
@@ -124,10 +132,33 @@ public class RicercaPacchettiImpiegatoBean implements Serializable {
 
 
 			/**
-			 * @param pacchettiRicercati the pacchettiRicercati to set
+			 * @param pacchettiRicercatiID the pacchettiRicercatiID to set
 			 */
-			public void setPacchettiRicercati(ArrayList<PacchettoDTO> pacchettiRicercati) {
-				this.pacchettiRicercati = pacchettiRicercati;
+			public void setPacchettiRicercatiID(ArrayList<PacchettoDTO> pacchettiRicercatiID) {
+				this.pacchettiRicercatiID = pacchettiRicercatiID;
+			}
+
+
+
+
+
+			/**
+			 * @return the pacchettiRicercatiTER
+			 */
+			public ArrayList<PacchettoDTO> getPacchettiRicercatiTER() {
+				return pacchettiRicercatiTER;
+			}
+
+
+
+
+
+			/**
+			 * @param pacchettiRicercatiTER the pacchettiRicercatiTER to set
+			 */
+			public void setPacchettiRicercatiTER(
+					ArrayList<PacchettoDTO> pacchettiRicercatiTER) {
+				this.pacchettiRicercatiTER = pacchettiRicercatiTER;
 			}
 
 
@@ -156,7 +187,7 @@ public class RicercaPacchettiImpiegatoBean implements Serializable {
 
 
 
-			public String ricercaPacchettoImpiegatoId(){
+			public void ricercaPacchettoImpiegatoId(){
 				
 				FacesContext context = FacesContext.getCurrentInstance();
 				HttpServletRequest request = (HttpServletRequest) context
@@ -165,25 +196,31 @@ public class RicercaPacchettiImpiegatoBean implements Serializable {
 				try {
 					
 					//pacchettoRicercato = pacchettoremoto.findByIdPacchetto(idPacchetto);
-						
-					setPacchettoRicercato(pacchettoremoto.findByIdPacchetto(idPacchetto));
+					
+					ArrayList<PacchettoDTO> lista = new ArrayList<PacchettoDTO>();
+					
+					lista.add(pacchettoremoto.findByIdPacchetto(idPacchetto));
+					
+					setPacchettiRicercatiID(lista);
 					
 				}catch (EJBException e) {
 					
 					System.out.println("EJBException");
 				
-				return null;
+				
 
 			}
 
-			return "admin/listaPacchettiRicercaImpiegato";		
-				}
+					
+				
+			
+			}
 
 			
 			
 			
 			
-			public String ricercaPacchettoImpiegatoTermine(){
+			public void ricercaPacchettoImpiegatoTermine(){
 							
 				FacesContext context = FacesContext.getCurrentInstance();
 				HttpServletRequest request = (HttpServletRequest) context
@@ -191,19 +228,32 @@ public class RicercaPacchettiImpiegatoBean implements Serializable {
 				
 				try {
 					
-				pacchettiRicercati=pacchettoremoto.findByTermine(termine);
+				setPacchettiRicercatiTER(pacchettoremoto.findByTermine(termine));
 					
 
 				}catch (EJBException e) {
 				
 					System.out.println("EJBException");
 										
-				return null;
+				
 
 			}
 
-			return "listaPacchettiRicercaImpiegato";		
+				
 				}
+			
+			
+
+			public String dettagliPacchettoSelezionato() {
+
+				Long id = pacchettoSelezionato.getIdPacchetto();
+
+				return "dettagliPacchettoSelezionatoImpiegato?faces-redirect=true&cPacchetto"
+						+ id;
+
+			}
+			
+			
 			
 				
 			}
