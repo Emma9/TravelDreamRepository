@@ -18,6 +18,7 @@ public class Componente implements Serializable {
 
 	/**Attributi*/
 	@Id
+	//@OneToMany(cascade=CascadeType.REMOVE,orphanRemoval = true)
 	private int codiceComponente;
 	private String luogo;
 	private String tipologia;
@@ -40,7 +41,7 @@ public class Componente implements Serializable {
 			}
 		)
 		*/
-	@ManyToMany(cascade = CascadeType.PERSIST)
+	@ManyToMany(cascade = CascadeType.REMOVE)
 	private List<DisponibilitaPerData> disponibilitaPerData;
 	
 
