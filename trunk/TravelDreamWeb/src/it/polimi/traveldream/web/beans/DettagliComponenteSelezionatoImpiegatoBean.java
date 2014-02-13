@@ -13,7 +13,7 @@ import javax.faces.bean.SessionScoped;
 
 @ManagedBean()
 @SessionScoped
-public class DettagliComponenteSelezionatoBean implements Serializable {
+public class DettagliComponenteSelezionatoImpiegatoBean implements Serializable {
 
 	/**
 	 * 

@@ -1,59 +1,78 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 </h:head>
 <h:body>
-	<h2>IMPIEGATO: DETTAGLI DEL COMPONENTE SELEZIONATO</h2>
+	<h2>DETTAGLI DEL COMPONENTE SELEZIONATO</h2>
 	<h:form>
-		<p:fieldset legend="Ecco I Dettagli del componente" widgetVar="regWidget" style="width: 600px;">
+		<p:fieldset legend="Ecco I Dettagli del componente"
+			widgetVar="regWidget" style="width: 600px;">
 
-	<h:panelGrid id="dettagli" columns="2" cellpadding="4">  
-  
-            <!-- <f:facet name="immagine">  
-                <p:graphicImage value="/images/cars/#{tableBean.selectedCar.manufacturer}.jpg"/>  
-            </f:facet>  --> 
-    
-  
-            <h:outputText value="Tipologia:" />  
-            <h:outputText value="#{dettagliComponenteSelezionatoBean.codiceComponente}" />  
-  
-            <h:outputText value="Descrizione:" />  
-            <h:outputText value="#{dettagliComponenteSelezionatoBean.codiceComponente}" /> 
-            
-            
-            <h:outputText value="Luogo: " />  
-            <h:outputText value="#{dettagliComponenteSelezionatoBean.codiceComponente}" />
-            
-            
-            <h:outputText value="Costo:" />  
-            <h:outputText value="#{dettagliComponenteSelezionatoBean.codiceComponente}" /> 
-            
-            <h:outputText value="Data Inizio Validità: " />  
-            <h:outputText value="#{dettagliComponenteSelezionatoBean.codiceComponente}" /> 
-            
-            
-            <h:outputText value="Data Fine Validità: " />  
-            <h:outputText value="#{dettagliComponenteSelezionatoBean.codiceComponente}" /> 
-             
-        </h:panelGrid>
-        
-        <h:commandButton action="#{ricercaComponentiImpiegatoBean}" value="Rimuovi" /> <!-- visualizza la lista componentiricercaimpiegato aggiornata-->
-        <br/>
-         <h:commandButton action="#{formModificaComponenteBaseImpiegato}" value="Modifica" /> <!-- visualizza form modifica componente base impiegato-->
-         <br />
-         <h:commandButton action="#{creazionepacchettopredefinito}" value="Conferma" /> <!-- visualizza creazionepacchettopredefinito aggiornata-->
-        	
-        <br />
-        <h:commandButton id="bottoneAggiungi" value="Aggiungi Componente" actionListener="#{dettagliPacchettoSelezionatoBean}"/>  <!--RENDERE INVISIBILE IL BOTTONE AL CLICK.... visualizza dettaglipacchettoselezionatoimpiegato aggiornata-->
-        
-        
-        
-  	</p:fieldset>
-        </h:form>
-        </h:body>
-        </html>
+			<p:panelGrid id="dettagli" columns="2">
+
+
+
+
+				<h:outputText value="Tipologia:" />
+				<h:outputText
+					value="#{ricercaComponentiImpiegatoBean.componenteSelezionato.tipologia}" />
+
+				<h:outputText value="Descrizione:" />
+				<h:outputText
+					value="#{ricercaComponentiImpiegatoBean.componenteSelezionato.descrizione}" />
+
+
+				<h:outputText value="Luogo: " />
+				<h:outputText
+					value="#{ricercaComponentiImpiegatoBean.componenteSelezionato.luogo}" />
+
+
+				<h:outputText value="Costo:" />
+				<h:outputText
+					value="#{ricercaComponentiImpiegatoBean.componenteSelezionato.costo}" />
+
+
+				<h:outputText value="Data Inizio Validità: " />
+				<h:outputText
+					value="#{ricercaComponentiImpiegatoBean.componenteSelezionato.dataInizioValidita}" />
+
+
+				<h:outputText value="Data Fine Validità: " />
+				<h:outputText
+					value="#{ricercaComponentiImpiegatoBean.componenteSelezionato.dataFineValidita}" />
+
+			</p:panelGrid>
+
+			<!-- BOTTONE MODIFICA COMPONENTE -->
+
+
+			<div align="left">
+				<h:form>
+					<h:commandButton
+						action="#{ricercaComponentiImpiegatoBean.componenteSelezionato.descrizione}"
+						value="Modifica" />
+				</h:form>
+			</div>
+
+
+
+			<!-- BOTTONE RIMUOVI COMPONENTE -->
+
+			<div align="left">
+				<h:form>
+					<h:commandButton
+						action="#{ricercaComponentiImpiegatoBean.componenteSelezionato.descrizione}"
+						value="Rimuovi" />
+				</h:form>
+			</div>
+
+
+		</p:fieldset>
+	</h:form>
+</h:body>
+</html>
