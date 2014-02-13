@@ -7,6 +7,7 @@ import it.polimi.traveldream.entities.Componente;
 import it.polimi.traveldream.entities.ComponenteDTO;
 import it.polimi.traveldream.entities.DisponibilitaPerData;
 import it.polimi.traveldream.entities.DisponibilitaPerDataDTO;
+import it.polimi.traveldream.entities.PacchettoDTO;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
@@ -102,6 +103,27 @@ public class ComponenteBean implements ComponenteBeanRemote,
 
 	/** @param codiceComponente */
 	public void removeComponente(int codiceComponente) {
+	
+	/*	
+		PacchettoBean pacchettoremoto = new PacchettoBean();
+		
+		ArrayList<Long> IDtuttipacchetti = pacchettoremoto.findAll();
+		ArrayList<PacchettoDTO> tuttipacchetti = new ArrayList<PacchettoDTO>();
+		
+		for(int i=0;i<IDtuttipacchetti.size();i++){
+				
+		tuttipacchetti.add(pacchettoremoto.findByIdPacchetto(IDtuttipacchetti.get(i)));
+		
+		}
+		
+		for(int j=0;j<tuttipacchetti.size();j++){
+			
+			if(tuttipacchetti.get(j).getListaComponenti())
+			
+			
+		}
+		*/		
+		
 
 		Componente c = manager.find(Componente.class, codiceComponente);
 		

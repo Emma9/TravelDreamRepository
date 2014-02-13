@@ -48,6 +48,8 @@
 
 			</p:panelGrid>
 
+</p:fieldset>
+</h:form>
 			<!-- BOTTONE MODIFICA COMPONENTE -->
 
 
@@ -55,7 +57,8 @@
 				<h:form>
 					<h:commandButton
 						action="#{ricercaComponentiImpiegatoBean.componenteSelezionato.descrizione}"
-						value="Modifica" />
+						value="Modifica"
+						ajax="false" />
 				</h:form>
 			</div>
 
@@ -65,14 +68,14 @@
 
 			<div align="left">
 				<h:form>
-					<h:commandButton
-						action="#{ricercaComponentiImpiegatoBean.componenteSelezionato.descrizione}"
-						value="Rimuovi" />
+					<h:commandButton value="Rimuovi"
+											action="#{ricercaComponentiImpiegatoBean.rimuoviComponente()}"
+											ajax="false" />
 				</h:form>
 			</div>
 
 
-		</p:fieldset>
-	</h:form>
+		
+	
 </h:body>
 </html>

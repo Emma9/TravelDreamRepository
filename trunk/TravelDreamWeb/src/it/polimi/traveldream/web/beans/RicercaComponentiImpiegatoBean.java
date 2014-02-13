@@ -10,6 +10,8 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 
 @ManagedBean()
@@ -27,6 +29,9 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 		
 			private int codiceComponente;
 			private String termine;
+			
+			private int id;
+
 			
 			//COMPONENTE SELEZIONATO
 			private ComponenteDTO componenteSelezionato;
@@ -67,6 +72,22 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 			}
 			
 			
+			
+			
+			
+			
+			/**
+			 * @return the id
+			 */
+			public int getId() {
+				return id;
+			}
+			/**
+			 * @param id the id to set
+			 */
+			public void setId(int id) {
+				this.id = id;
+			}
 			/**
 			 * @return the componenteSelezionato
 			 */
@@ -178,11 +199,37 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 
 	public String dettagliComponenteSelezionato() {
 
-		int id = componenteSelezionato.getCodiceComponente();
+		id = componenteSelezionato.getCodiceComponente();
 
 		return "dettagliComponenteSelezionatoImpiegato?faces-redirect=true&cComponente"
 				+ id;
 
+	}
+	
+	
+public String rimuoviComponente(){
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+
+try{		
+		
+		componenteremoto.removeComponente(id);
+		
+		System.out.println("METODO RIMOZIONE COMPONENTE");
+		
+} catch (EJBException e) {
+	
+	System.out.println("EJBException RAMO CATCH RIMOZIONE COMPONENTE");
+	
+	return null;
+
+}
+		
+		
+		return "listaComponentiRicercaImpiegato";
+		
 	}
 
 }
