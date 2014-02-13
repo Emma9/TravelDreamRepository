@@ -524,7 +524,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 			//q1.setParameter("new_etichetta", etichetta);
 			
 			//DATE
-			TypedQuery<Pacchetto> q = manager.createQuery("FROM Pacchetto p WHERE p.dataInizioValidita<=new_dataPartenza AND p.dataInizioValidita<=new_dataRitorno AND p.dataFineValidita>=new_dataPartenza AND p.dataFineValidita>=new_dataRitorno", Pacchetto.class);
+			TypedQuery<Pacchetto> q = manager.createQuery("FROM Pacchetto p WHERE (p.dataInizioValidita<:new_dataPartenza OR p.dataInizioValidita=:new_dataPartenza) AND (p.dataInizioValidita<:new_dataRitorno OR p.dataInizioValidita=:new_dataRitorno) AND (p.dataFineValidita>:new_dataPartenza OR p.dataFineValidita=:new_dataPartenza) AND (p.dataFineValidita>:new_dataRitorno OR p.dataFineValidita=:new_dataRitorno)", Pacchetto.class);
 
 			q.setParameter("new_dataPartenza", dataPartenza);
 			q.setParameter("new_dataRitorno", dataRitorno);
@@ -535,23 +535,15 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 			//q3.setParameter("q1", q1);
 			//q3.setParameter("q2", q2);			
 			
-			
+			CharSequence charseq= new String();
+			charseq=etichetta;
 			
 			for (int i=0; i<q.getResultList().size(); i++){
 				
-				if(q.getResultList().get(i).getEtichetta().contains(etichetta)){
+				if(q.getResultList().get(i).getEtichetta().contains(charseq)){
 					listaPacchettiRicercati.add(pacchettoToDTO(q.getResultList().get(i)));
 				}
 				
-				/*String[] etichette=splitEtichetta(pacchetti.get(i).getEtichetta()); 
-				for(int j=0; i<etichette.length;j++){
-					
-					if(etichette[j].equals(etichetta)){
-						listaPacchettiRicercati.add(pacchetti.get(i));
-					}
-					
-					
-				}*/
 				
 			}
 			

@@ -1,5 +1,7 @@
 package it.polimi.traveldream.entities;
 
+
+
 import java.io.Serializable;
 import java.lang.String;
 import java.util.ArrayList;
@@ -43,6 +45,12 @@ public class Componente implements Serializable {
 		*/
 	@ManyToMany(cascade = CascadeType.REMOVE)
 	private List<DisponibilitaPerData> disponibilitaPerData;
+	
+	@ManyToMany(mappedBy="listaComponenti", cascade=CascadeType.REMOVE)
+	private List<Pacchetto> pacchettiComp;
+	
+	@ManyToMany(mappedBy="listaComponentiSelezionati", cascade=CascadeType.REMOVE)
+	private List<Pacchetto> pacchettiCompSelezionati;
 	
 
 	/**Costruttore*/
@@ -168,6 +176,34 @@ public class Componente implements Serializable {
 	public void setDisponibilitaPerData(
 			List<DisponibilitaPerData> disponibilitaPerData) {
 		this.disponibilitaPerData = disponibilitaPerData;
+	}
+
+	/**
+	 * @return the pacchettiComp
+	 */
+	public List<Pacchetto> getPacchettiComp() {
+		return pacchettiComp;
+	}
+
+	/**
+	 * @param pacchettiComp the pacchettiComp to set
+	 */
+	public void setPacchettiComp(List<Pacchetto> pacchettiComp) {
+		this.pacchettiComp = pacchettiComp;
+	}
+
+	/**
+	 * @return the pacchettiCompSelezionati
+	 */
+	public List<Pacchetto> getPacchettiCompSelezionati() {
+		return pacchettiCompSelezionati;
+	}
+
+	/**
+	 * @param pacchettiCompSelezionati the pacchettiCompSelezionati to set
+	 */
+	public void setPacchettiCompSelezionati(List<Pacchetto> pacchettiCompSelezionati) {
+		this.pacchettiCompSelezionati = pacchettiCompSelezionati;
 	}
 
 	
