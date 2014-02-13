@@ -187,7 +187,7 @@ public class RicercaPacchettiImpiegatoBean implements Serializable {
 
 
 
-			public void ricercaPacchettoImpiegatoId(){
+			public String ricercaPacchettoImpiegatoId(){
 				
 				FacesContext context = FacesContext.getCurrentInstance();
 				HttpServletRequest request = (HttpServletRequest) context
@@ -206,12 +206,14 @@ public class RicercaPacchettiImpiegatoBean implements Serializable {
 				}catch (EJBException e) {
 					
 					System.out.println("EJBException");
-				
-				
-
-			}
-
 					
+					return null;
+				
+				
+
+			}
+
+				return "listaPacchettiRicercaImpiegato";	
 				
 			
 			}
@@ -220,7 +222,7 @@ public class RicercaPacchettiImpiegatoBean implements Serializable {
 			
 			
 			
-			public void ricercaPacchettoImpiegatoTermine(){
+			public String ricercaPacchettoImpiegatoTermine(){
 							
 				FacesContext context = FacesContext.getCurrentInstance();
 				HttpServletRequest request = (HttpServletRequest) context
@@ -228,17 +230,19 @@ public class RicercaPacchettiImpiegatoBean implements Serializable {
 				
 				try {
 					
-				setPacchettiRicercatiTER(pacchettoremoto.findByTermine(termine));
+				setPacchettiRicercatiID(pacchettoremoto.findByTermine(termine));
 					
 
 				}catch (EJBException e) {
 				
 					System.out.println("EJBException");
 										
-				
+				return null;
 
 			}
 
+				return "listaPacchettiRicercaImpiegato";
+				
 				
 				}
 			

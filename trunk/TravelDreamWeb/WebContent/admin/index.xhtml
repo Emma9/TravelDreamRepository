@@ -67,7 +67,7 @@
 
 						<br /> <br /> <br />
 
-						<div align="left">
+						<div>
 
 							<h:outputText value="Ricerca Componente Tramite Codice:" />
 							<br />
@@ -77,7 +77,7 @@
 
 							<h:form>
 
-								<div style="display: inline;" align="left">
+								<div style="display: inline;">
 
 									<h:inputText id="r1" autocomplete="true"
 										value="#{ricercaComponentiImpiegatoBean.codiceComponente}" />
@@ -88,52 +88,14 @@
 
 
 										<br />
-										<h:form>
-											<p:fieldset
-												legend="Ecco il risultato della ricerca di componenti"
-												widgetVar="regWidget" style="width: 600px;">
-
-												<p:growl id="growl" showDetail="true" />
 
 
 
 
-												<p:dataTable id="componentiRicercati" var="componenti"
-													value="#{ricercaComponentiImpiegatoBean.componentiRicercatiID}"
-													rowKey="#{componenti.codiceComponente}"
-													selection="#{ricercaComponentiImpiegatoBean.componenteSelezionato}"
-													selectionMode="single">
-
-													<f:facet name="header">  
-            Clicca il pulsante "Seleziona" dopo aver selezionato una singola riga per vederne i dettagli  
-        </f:facet>
-
-													<p:column headerText="Codice Componente">  
-            #{componenti.codiceComponente}  
-        </p:column>
-
-													<p:column headerText="Luogo">  
-            #{componenti.luogo}  
-        </p:column>
-
-													<p:column headerText="Costo">  
-            #{componenti.costo}  
-        </p:column>
-
-													<f:facet name="footer">
-														<p:commandButton id="viewButton" value="Seleziona"
-															icon="ui-icon-search" update=":form:display"
-															action="#{ricercaComponentiImpiegatoBean.dettagliComponenteSelezionato()}"
-															ajax="false" />
-													</f:facet>
-
-												</p:dataTable>
 
 
 
-											</p:fieldset>
 
-										</h:form>
 									</h:panelGrid>
 								</div>
 
@@ -172,52 +134,10 @@
 
 
 											<br />
-											<h:form>
-												<p:fieldset
-													legend="Ecco il risultato della ricerca di componenti"
-													widgetVar="regWidget" style="width: 600px;">
-
-													<p:growl id="growl" showDetail="true" />
 
 
 
 
-													<p:dataTable id="componentiRicercati" var="componenti"
-														value="#{ricercaComponentiImpiegatoBean.componentiRicercatiT}"
-														rowKey="#{componenti.codiceComponente}"
-														selection="#{ricercaComponentiImpiegatoBean.componenteSelezionato}"
-														selectionMode="single">
-
-														<f:facet name="header">  
-            Clicca il pulsante "Seleziona" dopo aver selezionato una singola riga per vederne i dettagli  
-        </f:facet>
-
-														<p:column headerText="Codice Componente">  
-            #{componenti.codiceComponente}  
-        </p:column>
-
-														<p:column headerText="Luogo">  
-            #{componenti.luogo}  
-        </p:column>
-
-														<p:column headerText="Costo">  
-            #{componenti.costo}  
-        </p:column>
-
-														<f:facet name="footer">
-															<p:commandButton id="viewButton" value="Seleziona"
-																icon="ui-icon-search" update=":form:display"
-																action="#{ricercaComponentiImpiegatoBean.dettagliComponenteSelezionato()}"
-																ajax="false" />
-														</f:facet>
-
-													</p:dataTable>
-
-
-
-												</p:fieldset>
-
-											</h:form>
 										</h:panelGrid>
 									</div>
 
@@ -267,52 +187,8 @@
 
 
 											<br />
-											<h:form>
-												<p:fieldset
-													legend="Ecco il risultato della ricerca dei pacchetti"
-													widgetVar="regWidget" style="width: 600px;">
-
-													<p:growl id="growl" showDetail="true" />
 
 
-
-
-													<p:dataTable id="pacchettoRicercato" var="pacchetto"
-														value="#{ricercaPacchettiImpiegatoBean.pacchettiRicercatiID}"
-														rowKey="#{pacchetto.idPacchetto}"
-														selection="#{ricercaPacchettiImpiegatoBean.pacchettoSelezionato}"
-														selectionMode="single">
-
-														<f:facet name="header">  
-            Clicca il pulsante "Seleziona" dopo aver selezionato una singola riga per vederne i dettagli  
-        </f:facet>
-
-														<p:column headerText="ID pacchetto">  
-            #{pacchetto.idPacchetto}  
-        </p:column>
-
-														<p:column headerText="Destinazione">  
-            #{pacchetto.destinazione}  
-        </p:column>
-
-														<p:column headerText="Costo">  
-            #{pacchetto.costo}  
-        </p:column>
-
-														<f:facet name="footer">
-															<p:commandButton id="viewButton" value="Seleziona"
-																icon="ui-icon-search" update=":form:display"
-																action="#{ricercaPacchettiImpiegatoBean.dettagliPacchettoSelezionato()}"
-																ajax="false" />
-														</f:facet>
-
-													</p:dataTable>
-
-
-
-												</p:fieldset>
-
-											</h:form>
 										</h:panelGrid>
 									</div>
 
@@ -344,62 +220,17 @@
 
 
 											<br />
-											<h:form>
-												<p:fieldset
-													legend="Ecco il risultato della ricerca dei pacchetti"
-													widgetVar="regWidget" style="width: 600px;">
 
-													<p:growl id="growl" showDetail="true" />
-
-
-
-
-													<p:dataTable id="pacchettiRicercati" var="pacchetto"
-														value="#{ricercaPacchettiImpiegatoBean.pacchettiRicercatiTER}"
-														rowKey="#{pacchetto.idPacchetto}"
-														selection="#{ricercaPacchettiImpiegatoBean.pacchettoSelezionato}"
-														selectionMode="single">
-
-														<f:facet name="header">  
-            Clicca il pulsante "Seleziona" dopo aver selezionato una singola riga per vederne i dettagli  
-        </f:facet>
-
-														<p:column headerText="ID pacchetto">  
-            #{pacchetto.idPacchetto}  
-        </p:column>
-
-														<p:column headerText="Destinazione">  
-            #{pacchetto.destinazione}  
-        </p:column>
-
-														<p:column headerText="Costo">  
-            #{pacchetto.costo}  
-        </p:column>
-
-														<f:facet name="footer">
-															<p:commandButton id="viewButton" value="Seleziona"
-																icon="ui-icon-search" update=":form:display"
-																action="#{ricercaPacchettiImpiegatoBean.dettagliPacchettoSelezionato()}"
-																ajax="false" />
-														</f:facet>
-
-													</p:dataTable>
-
-
-
-												</p:fieldset>
-
-											</h:form>
 										</h:panelGrid>
 									</div>
 
 								</h:form>
 
 							</div>
-	
-	
-	
-	
+
+
+
+
 
 						</h:panelGrid>
 					</div>
