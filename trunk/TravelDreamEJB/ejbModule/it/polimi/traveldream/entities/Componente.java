@@ -46,10 +46,10 @@ public class Componente implements Serializable {
 	@ManyToMany(cascade = CascadeType.REMOVE)
 	private List<DisponibilitaPerData> disponibilitaPerData;
 	
-	@ManyToMany(mappedBy="listaComponenti", cascade=CascadeType.REMOVE)
+	@ManyToMany(mappedBy="listaComponenti"/*, cascade=CascadeType.REMOVE*/)
 	private List<Pacchetto> pacchettiComp;
 	
-	@ManyToMany(mappedBy="listaComponentiSelezionati", cascade=CascadeType.REMOVE)
+	@ManyToMany(mappedBy="listaComponentiSelezionati"/*, cascade=CascadeType.REMOVE*/)
 	private List<Pacchetto> pacchettiCompSelezionati;
 	
 
