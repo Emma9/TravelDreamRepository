@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
+import javax.ejb.Stateless;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -179,29 +180,27 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 			setComponentiRicercatiID(lista);
 
 			System.out.println("ricercaComponenteImpiegatoID --> METODO");
-
+			
 		}
 		
 	
 
 		catch (NoResultException r) {
 
+						
 			System.out.println("ricercaComponenteImpiegatoID --> NORESULTEXCEPTION");
-
-			//return "listaComponentiRicercaImpiegatoID";
+						
 			
-			setId(0);
-			
-			return ricercaComponenteImpiegatoId();
+			return "index";
 			
 		}
-		
+	
 		
 		catch (EJBException e) {
 
 			System.out.println("ricercaComponenteImpiegatoID --> EJBEXCEPTION");
 
-			return "listaComponentiRicercaImpiegatoID";
+			return "index";
 
 		}
 
@@ -233,12 +232,8 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 		catch (NoResultException r) {
 
 			System.out.println("ricercaComponenteImpiegatoTER --> NORESULTEXCEPTION");
-
-			//return "listaComponentiRicercaImpiegatoID";
-			
-			setTermine("§");
-			
-			return ricercaComponenteImpiegatoTermine();
+	
+			return "index";
 			
 		}
 		
@@ -248,7 +243,7 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 
 			System.out.println("ricercaComponenteImpiegatoTER --> EJBEXCEPTION");
 
-			return "listaComponentiRicercaImpiegatoTER";
+			return "index";
 
 		}
 
