@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+	<h2>IMPIEGATO: LISTA COMPONENTI</h2>
+
+	<h:form>
+		<p:fieldset legend="Ecco il risultato della ricerca di componenti"
+			widgetVar="regWidget" style="width: 600px;">
+
+			<p:growl id="growl" showDetail="true" />
+
+
+
+
+			<p:dataTable id="componentiRicercati" var="componenti"
+				value="#{ricercaComponentiImpiegatoBean.componentiRicercatiID}"
+				rowKey="#{componenti.codiceComponente}"
+				selection="#{ricercaComponentiImpiegatoBean.componenteSelezionato}"
+				selectionMode="single">
+
+				<f:facet name="header">  
+            Clicca il pulsante "Seleziona" dopo aver selezionato una singola riga per vederne i dettagli  
+        </f:facet>
+
+				<p:column headerText="Codice Componente">  
+            #{componenti.codiceComponente}  
+        </p:column>
+
+				<p:column headerText="Luogo">  
+            #{componenti.luogo}  
+        </p:column>
+
+				<p:column headerText="Costo">  
+            #{componenti.costo}  
+        </p:column>
+
+				<f:facet name="footer">
+					<p:commandButton id="viewButton" value="Seleziona"
+						icon="ui-icon-search" update=":form:display"
+						action="#{ricercaComponentiImpiegatoBean.dettagliComponenteSelezionatoID()}"
+						ajax="false" />
+				</f:facet>
+
+			</p:dataTable>
+
+
+
+		</p:fieldset>
+
+	</h:form>
+
+
+
+</h:body>
+</html>
