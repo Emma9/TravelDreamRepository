@@ -20,7 +20,6 @@ public class Componente implements Serializable {
 
 	/**Attributi*/
 	@Id
-	//@OneToMany(cascade=CascadeType.REMOVE,orphanRemoval = true)
 	private int codiceComponente;
 	private String luogo;
 	private String tipologia;
@@ -30,7 +29,6 @@ public class Componente implements Serializable {
 	private Date dataInizioValidita;
 	@Temporal(TemporalType.DATE)
 	private Date dataFineValidita;
-	//private List<DisponibilitaPerData> disponibilitaPerData = new ArrayList<DisponibilitaPerData>(0);
 	
 	/*@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(
@@ -43,7 +41,7 @@ public class Componente implements Serializable {
 			}
 		)
 		*/
-	@ManyToMany(cascade = CascadeType.REMOVE)
+	@ManyToMany(cascade = CascadeType.ALL)
 	private List<DisponibilitaPerData> disponibilitaPerData;
 	
 	@ManyToMany(mappedBy="listaComponenti"/*, cascade=CascadeType.REMOVE*/)
