@@ -80,11 +80,11 @@ public class DettagliPacchettoSelezionatoBean implements Serializable {
 
 		}catch (EJBException e) {
 		
-			return "dettagliPacchettoPersonalizzato";
+			return null;
 
 	}
 
-	return "dettagliPacchettoPersonalizzato";	
+	return "/dettagliPacchettoPredefinitoRicercato";	
 	
 		}
 
