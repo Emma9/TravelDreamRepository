@@ -73,10 +73,10 @@
 				</p:selectOneMenu>
 
 			</h:panelGrid>
-			<p:commandButton id="bottoneRicerca" value="Ricerca"
-				action="#{ricercaPacchettiBean.ricercaPacchetti()}" immediate="true"
+			<h:commandButton id="bottoneRicerca" value="Ricerca"
+				action="#{ricercaPacchettiBean.ricercaPacchetti()}" 
 				ajax="false">
-			</p:commandButton>
+			</h:commandButton>
 
 
 		</h:form>
@@ -96,6 +96,9 @@
 			        <h:panelGrid columns="2" cellpadding="10">  
 			            <p:graphicImage id="tab1Img" value="/immagini/homepage/lastminute.jpg" />
 			              
+			              
+			              <div>
+			              <h:form>
 			            <h:outputText id="tab1Text" value="LISTA DEI PACCHETTI LASTMINUTE"/>
 			           
 			           
@@ -128,7 +131,8 @@
 							    <h:commandButton id="Ricerca1" value="Ricerca" update="ricercaEtichetta1" action="#{ricercaPacchettiBean.ricercaPerEtichettaClienteLastMinute()}" ajax="false">
 							    </h:commandButton>
 							</h:panelGrid>
-
+							</h:form>
+			              </div>
 					</h:panelGrid>		        	
 					  
 			    </p:tab>  

@@ -16,7 +16,7 @@
 		<p:growl id="growl" showDetail="true" />
 
 			<p:dataTable id="listaPacchettiPredefiniti" var="pacchettoPredefinito" value="#{ricercaPacchettiBean.pacchettiRicercati}"
-				paginator="true" rows="10" selection="#{ricercaPacchettiBean.pacchettoSelezionato}"
+				paginator="true" rows="10" rowKey="#{pacchettoPredefinito.idPacchetto}" selection="#{ricercaPacchettiBean.pacchettoSelezionato}"
 				selectionMode="single">       
 
 					

@@ -202,7 +202,7 @@ public class RicercaPacchettiBean implements Serializable {
 	
 	
 	
-	
+	/*
 	public String ricercaPerEtichettaLastMinute(){
 		
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -290,6 +290,7 @@ public String ricercaPerEtichettaMontagna(){
 return "index";	
 }
 	
+	*/
 	
 	public String ricercaPerEtichettaClienteLastMinute() {
 
@@ -301,7 +302,7 @@ return "index";
 
 		try {
 
-			if (this.pacchettoRemoto.verificaConsistenzaDate(this.dataPartenza,
+			if (pacchettoRemoto.verificaConsistenzaDate(this.dataPartenza,
 					this.dataRitorno)) {
 				// LE DATE INSERITE SONO VALIDE
 
@@ -339,7 +340,7 @@ return "index";
 
 		
 		
-		return "listaRicercaPacchettiPredefiniti";
+		return "/listaRicercaPacchettiPredefiniti";
 
 	}
 	
@@ -391,7 +392,7 @@ return "index";
 
 	}
 	
-	return "listaRicercaPacchettiPredefiniti";
+	return "/listaRicercaPacchettiPredefiniti";
 		
 	}
 
@@ -440,7 +441,7 @@ return "index";
 
 	}
 	
-	return "listaRicercaPacchettiPredefiniti";
+	return "/listaRicercaPacchettiPredefiniti";
 		
 	}
 	
@@ -490,7 +491,7 @@ return "index";
 
 	}
 	
-	return "listaRicercaPacchettiPredefiniti";
+	return "/listaRicercaPacchettiPredefiniti";
 		
 	}
 	
