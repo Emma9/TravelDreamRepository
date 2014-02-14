@@ -11,6 +11,7 @@ import javax.ejb.EJBException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean()
@@ -179,11 +180,28 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 
 			System.out.println("ricercaComponenteImpiegatoID --> METODO");
 
-		} catch (EJBException e) {
+		}
+		
+	
+
+		catch (NoResultException r) {
+
+			System.out.println("ricercaComponenteImpiegatoID --> NORESULTEXCEPTION");
+
+			//return "listaComponentiRicercaImpiegatoID";
+			
+			setId(0);
+			
+			return ricercaComponenteImpiegatoId();
+			
+		}
+		
+		
+		catch (EJBException e) {
 
 			System.out.println("ricercaComponenteImpiegatoID --> EJBEXCEPTION");
 
-			return null;
+			return "listaComponentiRicercaImpiegatoID";
 
 		}
 
@@ -210,11 +228,27 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 			
 			System.out.println("ricercaComponenteImpiegatoTER --> METODO");
 
-		} catch (EJBException e) {
+		} 
+		
+		catch (NoResultException r) {
+
+			System.out.println("ricercaComponenteImpiegatoTER --> NORESULTEXCEPTION");
+
+			//return "listaComponentiRicercaImpiegatoID";
+			
+			setTermine("§");
+			
+			return ricercaComponenteImpiegatoTermine();
+			
+		}
+		
+		
+		
+		catch (EJBException e) {
 
 			System.out.println("ricercaComponenteImpiegatoTER --> EJBEXCEPTION");
 
-			return null;
+			return "listaComponentiRicercaImpiegatoTER";
 
 		}
 
@@ -228,6 +262,7 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 
 	public String dettagliComponenteSelezionatoID() {
 
+		try{
 		id = componenteSelezionato.getCodiceComponente();
 
 		// setIdM(id);
@@ -237,6 +272,15 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 		return "dettagliComponenteSelezionatoImpiegatoID?faces-redirect=true&cComponente"
 				+ id;
 
+	}catch(NullPointerException n){
+		
+		System.out.println("dettagliComponenteSelezionatoID --> NULLPOINTEREXCEPTION");
+		
+		return "listaComponentiRicercaImpiegatoID";
+		
+	}
+		
+		
 	}
 	
 	
@@ -247,6 +291,7 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 
 	public String dettagliComponenteSelezionatoTER() {
 
+		try{
 		id = componenteSelezionato.getCodiceComponente();
 
 		// setTermineM(termine);
@@ -255,12 +300,16 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 		
 		return "dettagliComponenteSelezionatoImpiegatoTER?faces-redirect=true&cComponente"
 				+ id;
-
-	}
 	
-	
-	
-	
+		}catch(NullPointerException n){
+			
+			System.out.println("dettagliComponenteSelezionatoTER --> NULLPOINTEREXCEPTION");
+			
+			return "listaComponentiRicercaImpiegatoTER";
+			
+		}
+			
+	}	
 	
 
 	public String rimuoviComponenteID() {
@@ -278,7 +327,7 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 
 			System.out.println("rimuoviComponenteID --> METODO");
 
-			//ricercaComponenteImpiegatoId();
+			return ricercaComponenteImpiegatoId();
 			
 		} catch (EJBException e) {
 
@@ -288,7 +337,7 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 
 		}
 
-		return "index";
+		
 
 	}
 	
@@ -313,7 +362,7 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 
 			System.out.println("rimuoviComponenteTER --> METODO");
 
-			//ricercaComponenteImpiegatoTermine();
+			return ricercaComponenteImpiegatoTermine();
 			
 		} catch (EJBException e) {
 
@@ -323,7 +372,7 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 
 		}
 
-		return "index";
+		
 
 	}
 

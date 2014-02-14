@@ -103,29 +103,19 @@ public class ComponenteBean implements ComponenteBeanRemote,
 
 	/** @param codiceComponente */
 	public void removeComponente(int codiceComponente) {
-	
-	/*	
-		PacchettoBean pacchettoremoto = new PacchettoBean();
-		
-		ArrayList<Long> IDtuttipacchetti = pacchettoremoto.findAll();
-		ArrayList<PacchettoDTO> tuttipacchetti = new ArrayList<PacchettoDTO>();
-		
-		for(int i=0;i<IDtuttipacchetti.size();i++){
-				
-		tuttipacchetti.add(pacchettoremoto.findByIdPacchetto(IDtuttipacchetti.get(i)));
-		
-		}
-		
-		for(int j=0;j<tuttipacchetti.size();j++){
-			
-			if(tuttipacchetti.get(j).getListaComponenti())
-			
-			
-		}
-		*/		
-		
 
 		Componente c = manager.find(Componente.class, codiceComponente);
+		
+		/*
+		 
+		METODI CONTROLLO PACCHETTI:
+		
+		--> PREDEFINITO: SE COMPONENTE ELIMINATO E' IN LISTA SELEZIONATI CERCA DI SOSTITUIRLO CON COMPONENTE EQUIVALENTE
+						DALLA LISTA COMPONENTI, SE NON RIESCE ELIMINA IL PACCHETTO.
+						
+		--> PERSONALIZZATO: SE COMPONENTE ELIMINATO E' IN LISTA SELEZIONATI ELIMINA IL PACCHETTO PERSONALIZZATO.
+		
+		*/
 		
 		manager.remove(c);
 
