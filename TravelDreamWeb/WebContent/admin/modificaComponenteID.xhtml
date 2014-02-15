@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+	<h2>MODIFICA DI UN COMPONENTE</h2>
+	<h:form>
+		<p:fieldset legend="Ecco i parametri da settare per un componente"
+			widgetVar="regWidget" style="width: 600px;">
+			<div style="float: center">
+				<div style="display: inline;">
+					<p:selectOneRadio id="tipologia"
+						value="#{creazioneComponenteBean.tipologia}">
+						<f:selectItem itemLabel="Volo" itemValue="VOLO" />
+						<f:selectItem itemLabel="Hotel" itemValue="HOTEL" />
+						<f:selectItem itemLabel="Escursione" itemValue="ESCURSIONE" />
+					</p:selectOneRadio>
+
+					<p:outputLabel value="Descrizione: " />
+					<br />
+					<p:inputTextarea rows="10" cols="33"
+						value="#{creazioneComponenteBean.descrizione}" id="descrizione"
+						required="true"
+						requiredMessage="Devi inserire una descrizione del componente">
+					</p:inputTextarea>
+
+					<p:message for="descrizione" />
+
+					<p:outputLabel value="Luogo: " />
+					<p:inputText value="#{creazioneComponenteBean.luogo}" id="luogo"
+						required="true"
+						requiredMessage="Devi inserire il luogo del componente"
+							>
+					</p:inputText>
+					<p:message for="luogo" />					  
+
+
+					<p:outputLabel value="Costo: " />
+					<p:inputText value="#{creazioneComponenteBean.costo}" id="costo"
+						required="true"
+						requiredMessage="Devi inserire il costo del componente">
+					</p:inputText>
+
+					<p:message for="costo" />
+
+					<p:outputLabel value="Data Inizio Validità: " />
+					<p:calendar value="#{creazioneComponenteBean.dataInizioValidita}"
+						id="dataInizio" required="true"
+						requiredMessage="Devi inserire una data di inizio validità del componente" />
+					<p:message for="dataInizio" />
+					<br />
+
+					<h:outputText value="Data Fine Validità: " />
+					<p:calendar value="#{creazioneComponenteBean.dataFineValidita}"
+						id="dataFine" required="true"
+						requiredMessage="Devi inserire una data di fine validità del componente" />
+					<p:message for="dataFine" />
+					<br />
+
+					<p:outputLabel value="Disponibilità Posti: " />
+					<p:inputText value="#{creazioneComponenteBean.disponibilita}"
+						id="posti" required="true"
+						requiredMessage="Devi inserire la disponibilità dei posti">
+					</p:inputText>
+					<p:message for="posti" />
+
+				</div>
+			</div>
+			<h:commandButton value="Conferma"
+				action="#{creazioneComponenteBean.modificaComponenteID(ricercaComponentiImpiegatoBean.id)}" />
+
+		</p:fieldset>
+
+
+
+	</h:form>
+</h:body>
+</html>
