@@ -60,4 +60,20 @@ public class MostraTuttiComponentiBean implements Serializable {
 	}
 	
 	
+public String mostraTuttiComponentiMOD(){
+		
+		try {
+						
+			setListaComponenti(componenteremoto.findAll());
+
+		}catch (EJBException e) {
+	
+	}
+		return "modificaPacchetto";
+
+		
+		
+	}
+	
+	
 }
