@@ -18,6 +18,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.eclipse.persistence.internal.sessions.DirectCollectionChangeRecord.NULL;
+
 /**Session Bean implementation class PacchettoBean*/
 @Stateless
 public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
@@ -41,6 +43,8 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 
 		if((verificaListaComponenti(listaComponentiSelezionati))&&(verificaEtichetta(etichetta))){
 		
+			System.out.println("VERIFICA COMPONENTI & ETICHETTA CORRETTA");
+			
 		Pacchetto pacchetto = new Pacchetto();
 
 		pacchetto.setDestinazione(destinazione);
@@ -50,27 +54,41 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 		pacchetto.setDescrizione(descrizione);
 		
 		List<Componente> listaComponentiEnt= new ArrayList<Componente>();
+		
 		for (int i=0;i<listaComponenti.size();i++){
 			listaComponentiEnt.add(componenteDTOToComponenteInPacchetto(listaComponenti.get(i)));
 		}
+		
 		pacchetto.setListaComponenti(listaComponentiEnt);
+		
+		System.out.println("SET LISTA COMPONENTI");
 		
 		List<Componente> listaComponentiSelezionatiEnt= new ArrayList<Componente>();
 		for (int i=0;i<listaComponentiSelezionati.size();i++){
 			listaComponentiSelezionatiEnt.add(componenteDTOToComponenteInPacchetto(listaComponentiSelezionati.get(i)));
 		}
+		
 		pacchetto.setListaComponentiSelezionati(listaComponentiSelezionatiEnt);
+		
+		System.out.println("SET LISTA COMPONENTI SELEZIONATI");
 		
 		pacchetto.setSconto(sconto);
 		
 		int costoPacchetto=calcolaCostoPacchetto(listaComponenti, sconto);
 		pacchetto.setCosto(costoPacchetto);
+		
+		System.out.println("SET COSTO");
 
 		manager.persist(pacchetto);
+		
+		System.out.println("PERSIST PACCHETTO");
 		
 		return pacchetto.getIdPacchetto();
 
 		}else{
+			
+			System.out.println("VERIFICA COMPONENTI & ETICHETTA FALLITA");
+			
 			return (long) -1;
 		}
 		
@@ -367,10 +385,15 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 			
 			if((flagHotel==true)&&(flagVolo==true)&&(flagEscursione==true)){
 				
+				System.out.println("VERIFICA LISTA COMPONENTI CORRETTA");
+				
 				return true;
 			}	
 			
 		}
+		
+		System.out.println("VERIFICA LISTA COMPONENTI FALLITA");
+		
 		return false;
 	}
 
@@ -379,10 +402,22 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 * @return true if etichetta is valid, otherwise false	
 	 */
 	public boolean verificaEtichetta(String etichetta) {
+		
+		
+		System.out.println("VALORE ETICHETTA --> "+etichetta);
 
 		String[] etichette = splitEtichetta(etichetta);
 		for (int i = 0; i < etichette.length; i++) {
 
+			if(etichette[i]==null){
+				
+				System.out.println("VERIFICA ETICHETTA CORRETTA");
+				
+				return true;
+				
+			}
+			
+			
 			switch (etichette[i]) {
 
 			case "LASTMINUTE":
@@ -413,16 +448,18 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 			case "Montagna":
 				break;
 				
-			case "":
-				break;
-				
 			default:
+				
+				System.out.println("VERIFICA ETICHETTA FALLITA");
+				
 				return false;
 
 			}
 
 		}
 
+		System.out.println("VERIFICA ETICHETTA CORRETTA");
+		
 		return true;
 		
 	}
