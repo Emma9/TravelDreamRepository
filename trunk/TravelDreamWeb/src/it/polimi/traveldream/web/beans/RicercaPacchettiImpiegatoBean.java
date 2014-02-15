@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 
 
+
+
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.faces.bean.ManagedBean;
@@ -251,12 +253,49 @@ public class RicercaPacchettiImpiegatoBean implements Serializable {
 			public String dettagliPacchettoSelezionato() {
 
 				Long id = pacchettoSelezionato.getIdPacchetto();
+				
+				setIdPacchetto(id);
 
 				return "dettagliPacchettoSelezionatoImpiegato?faces-redirect=true&cPacchetto"
 						+ id;
 
 			}
 			
+			
+			public String rimuoviPacchetto() {
+
+				FacesContext context = FacesContext.getCurrentInstance();
+				HttpServletRequest request = (HttpServletRequest) context
+						.getExternalContext().getRequest();
+
+				try {
+
+					System.out.println("rimuoviPacchetto --> METODO");
+					
+					pacchettoremoto.removePacchetto(idPacchetto);
+
+					
+
+					return "index";
+
+				} catch (EJBException e) {
+
+					System.out.println("rimuoviPacchetto --> EJBEXCEPTION");
+
+					return null;
+
+				}
+
+			}
+			
+			
+			public String formModifica(Long idp){
+				
+				setIdPacchetto(idp);
+						
+				return "modificaPacchetto";
+				
+			}
 			
 			
 				

@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+	<h2>MODIFICA DI UN PACCHETTO PREDEFINITO</h2>
+	<h:form>
+		<p:fieldset legend="Ecco i parametri da settare per un pacchetto predefinito" widgetVar="regWidget" style="width: 600px;">
+  		
+		
+  	
+  	
+  		<p:focus context="destinazione" />
+	   <br />
+	   
+	   <p:message for="etichetta" />
+	    <h:outputLabel value="Etichetta: " />
+	    <p:inputText value="#{creazionePacchettoPredefinitoBean.etichetta}" id="etichetta" required="false" />
+	    <br />
+	   
+	   <p:message for="destinazione" />
+	    <h:outputLabel value="Destinazione: " />
+	    <p:inputText value="#{creazionePacchettoPredefinitoBean.destinazione}" id="destinazione" required="true" requiredMessage="Devi inserire la destinazione"/>
+	    <p:message for="destinazione" /><br />
+	   
+	     
+	    
+	    <p:message for="descrizione" />
+	    <h:outputLabel value="Descrizione: " />
+	    <p:inputTextarea value="#{creazionePacchettoPredefinitoBean.descrizione}" id="descrizione" required="true" requiredMessage="Devi inserire la descrizione"/>
+  		 <p:message for="descrizione" /><br />
+  		 
+  		 
+  		   <p:outputLabel value="Data Inizio Validità: "/>
+				<p:calendar value="#{creazionePacchettoPredefinitoBean.dataInizioValidita}" id="dataInizio" required="true" requiredMessage="Devi inserire una data di inizio validità del pacchetto" />
+				<p:message for="dataInizio"/>
+				<br />
+			
+			  <p:outputLabel value="Data Fine Validità: "/>
+				<p:calendar value="#{creazionePacchettoPredefinitoBean.dataFineValidita}" id="dataFine" required="true" requiredMessage="Devi inserire una data di fine validità del pacchetto"/>
+				<p:message for="dataFine"/>
+				<br />
+			
+  		 
+  	
+		 <p:dataTable id="componentiPacchetto" var="componentePacchetto" value="#{mostraTuttiComponentiBean.listaComponenti}" paginator="true" rows="10"  
+                 rowKey="#{componentePacchetto.codiceComponente}" selection="#{creazionePacchettoPredefinitoBean.listaComponenti}">  
+  
+        <f:facet name="header">  
+            Componenti del pacchetto 
+        </f:facet>  
+  
+        <p:column selectionMode="multiple" style="width:2%" />  
+  
+        <p:column headerText="Codice" style="width:25%">  
+            #{componentePacchetto.codiceComponente}  
+        </p:column>  
+  
+        <p:column headerText="Luogo" style="width:25%">  
+            #{componentePacchetto.luogo}  
+        </p:column>  
+  
+        <p:column headerText="Tipologia" style="width:24%">  
+            #{componentePacchetto.tipologia}  
+        </p:column>  
+  
+        <p:column headerText="Costo" style="width:24%">  
+            #{componentePacchetto.costo}  
+        </p:column>  
+  
+        <f:facet name="footer">  
+            <p:commandButton id="selezioneComponentiPacchetto" value="Aggiungi" icon="ui-icon-search"  
+                              />  
+        </f:facet>  
+    </p:dataTable>  
+  
+  	
+  	 <p:dataTable id="componentiPredefPacchetto" var="componentePredefPacchetto" value="#{mostraTuttiComponentiBean.listaComponenti}" paginator="true" rows="10"  
+                 rowKey="#{componentePredefPacchetto.codiceComponente}" selection="#{creazionePacchettoPredefinitoBean.listaComponentiSelezionati}">  
+  
+        <f:facet name="header">  
+            Componenti predefiniti del pacchetto 
+        </f:facet>  
+  
+        <p:column selectionMode="multiple" style="width:2%" />  
+  
+        <p:column headerText="Codice" style="width:25%">  
+            #{componentePredefPacchetto.codiceComponente}  
+        </p:column>  
+  
+        <p:column headerText="Luogo" style="width:25%">  
+            #{componentePredefPacchetto.luogo}  
+        </p:column>  
+  
+        <p:column headerText="Tipologia" style="width:24%">  
+            #{componentePredefPacchetto.tipologia}  
+        </p:column>  
+  
+        <p:column headerText="Costo" style="width:24%">  
+            #{componentePredefPacchetto.costo}  
+        </p:column>  
+  
+        <f:facet name="footer">  
+            <p:commandButton id="selezioneComponentiPredefPacchetto" value="Aggiungi" icon="ui-icon-search"  
+                             />  
+        </f:facet>  
+    </p:dataTable>  
+  	
+  	
+  	<br />
+  		<p:message for="sconto" />
+	    <h:outputLabel value="Sconto da applicare al pacchetto: " />
+	    <p:inputText  value="#{creazionePacchettoPredefinitoBean.sconto}" id="sconto" required="true" requiredMessage="Devi inserire per forza un numero per identificare lo sconto"/>
+  		 <p:message for="sconto" /><br />
+  	
+
+  	
+  	
+  	
+  		<div align="left">
+		    <h:commandButton id="bottoneConferma" value="Conferma" action="#{creazionePacchettoPredefinitoBean.modificaPacchetto(ricercaPacchettiImpiegatoBean.idPacchetto)}" ajax="false"/>
+	    
+		    <p:messages id="message" showSummary="true" showDetail="false" autoUpdate="true" closable="true" /> 
+     	</div>
+  	
+  	</p:fieldset>
+
+	
+        
+</h:form>
+</h:body>
+</html>

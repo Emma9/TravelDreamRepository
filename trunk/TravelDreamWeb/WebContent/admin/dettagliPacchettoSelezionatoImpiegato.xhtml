@@ -47,15 +47,19 @@
 					value="#{ricercaPacchettiImpiegatoBean.pacchettoSelezionato.dataFineValidita}" />
 
 			</p:panelGrid>
+			
+			</p:fieldset>
+	</h:form>
+			
 
 			<!-- BOTTONE MODIFICA PACCHETTO -->
 
 
 			<div align="left">
 				<h:form>
-					<h:commandButton
-						action="#{ricercaComponentiImpiegatoBean.componenteSelezionato.descrizione}"
-						value="Modifica" />
+					<h:commandButton value="Modifica"
+						action="#{ricercaPacchettiImpiegatoBean.formModifica(ricercaPacchettiImpiegatoBean.idPacchetto)}"
+						ajax="false" />
 				</h:form>
 			</div>
 
@@ -65,14 +69,13 @@
 
 			<div align="left">
 				<h:form>
-					<h:commandButton
-						action="#{ricercaComponentiImpiegatoBean.componenteSelezionato.descrizione}"
-						value="Rimuovi" />
+					<h:commandButton value="Rimuovi"
+						action="#{ricercaPacchettiImpiegatoBean.rimuoviPacchetto()}"
+						ajax="false" />
 				</h:form>
 			</div>
 
 
-		</p:fieldset>
-	</h:form>
+		
 </h:body>
 </html>

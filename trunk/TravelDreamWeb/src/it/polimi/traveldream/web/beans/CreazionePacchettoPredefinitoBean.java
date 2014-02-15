@@ -14,6 +14,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean()
 @SessionScoped
@@ -168,7 +169,7 @@ public class CreazionePacchettoPredefinitoBean implements Serializable {
 		try {
 
 			System.out.println("CREAZIONE PACCHETTO --> METODO");
-			
+
 			for (int j = 0; j < listaComponentiSelezionati.size(); j++) {
 
 				if (!(listaComponenti.contains(listaComponentiSelezionati
@@ -183,14 +184,13 @@ public class CreazionePacchettoPredefinitoBean implements Serializable {
 			pacchettoRemoto.createPacchetto(destinazione, dataInizioValidita,
 					dataFineValidita, etichetta, descrizione, listaComponenti,
 					listaComponentiSelezionati, sconto);
-			
+
 			System.out.println("CREAZIONE PACCHETTO --> PACCHETTO CREATO");
-			
 
 		} catch (EJBException e) {
 
 			System.out.println("CREAZIONE PACCHETTO --> EJBEXCEPTION");
-			
+
 			context.addMessage(null, new FacesMessage(
 					"Creazione pacchetto fallita"));
 
@@ -202,6 +202,32 @@ public class CreazionePacchettoPredefinitoBean implements Serializable {
 				"Creazione pacchetto riuscita"));
 
 		return "index";
+
+	}
+
+	public String modificaPacchetto(Long id) {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+
+		try {
+
+			pacchettoRemoto.updatePacchetto(id, destinazione, dataInizioValidita, dataFineValidita, etichetta, descrizione, listaComponenti, listaComponentiSelezionati, sconto);
+
+			context.addMessage(null, new FacesMessage(
+					"Modifica pacchetto riuscita"));
+
+			return "index";
+
+		} catch (EJBException e) {
+
+			context.addMessage(null, new FacesMessage(
+					"Modifica pacchetto fallita"));
+
+			return "index";
+
+		}
 
 	}
 
