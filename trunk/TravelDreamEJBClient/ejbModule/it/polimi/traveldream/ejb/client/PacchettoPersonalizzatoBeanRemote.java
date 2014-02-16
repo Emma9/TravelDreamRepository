@@ -26,7 +26,7 @@ public interface PacchettoPersonalizzatoBeanRemote {
 	 * @param stato
 	 * @param listaComponenti*/
 	public void updatePacchettoPersonalizzato(Long idPacchettoPersonalizzato,
-			Long idCliente, String stato, Date dataDiPartenza,
+			String emailUtente, String stato, Date dataDiPartenza,
 			Date dataDiRitorno, List<ComponenteDTO> listaComponentiSelezionati);
 	
 	
