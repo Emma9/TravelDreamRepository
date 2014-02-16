@@ -13,7 +13,7 @@ public class PacchettoPersonalizzatoDTO extends PacchettoDTO implements Serializ
 	
 	private Long idPacchettoPersonalizzato;
 	private String stato;
-	private Long idCliente;
+	private String emailUtente;
 	private Date dataDiPartenza;
 	private Date dataDiRitorno;
 
@@ -52,18 +52,20 @@ public class PacchettoPersonalizzatoDTO extends PacchettoDTO implements Serializ
 
 	}
 
-	/**@return idCliente*/
-	public Long getIdCliente() {
-		
-		return this.idCliente;
 	
+
+	/**
+	 * @return the emailUtente
+	 */
+	public String getEmailUtente() {
+		return emailUtente;
 	}
 
-	/**@param idCliente idCliente to set*/
-	public void setIdCliente(Long idCliente) {
-		
-		this.idCliente = idCliente;
-		
+	/**
+	 * @param emailUtente the emailUtente to set
+	 */
+	public void setEmailUtente(String emailUtente) {
+		this.emailUtente = emailUtente;
 	}
 
 	/**

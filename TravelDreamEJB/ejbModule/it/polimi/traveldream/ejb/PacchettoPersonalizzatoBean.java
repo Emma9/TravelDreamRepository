@@ -86,7 +86,7 @@ public class PacchettoPersonalizzatoBean implements
 	 * @param listaComponenti
 	 */
 	public void updatePacchettoPersonalizzato(Long idPacchettoPersonalizzato,
-			Long idCliente, String stato, Date dataDiPartenza,
+			String emailUtente, String stato, Date dataDiPartenza,
 			Date dataDiRitorno, List<ComponenteDTO> listaComponentiSelezionati) {
 
 		if ((verificaPresenzaPacchettoPersonalizzato(idPacchettoPersonalizzato))
@@ -101,7 +101,7 @@ public class PacchettoPersonalizzatoBean implements
 			pacchettoPersonalizzato.setStato(stato);
 			pacchettoPersonalizzato.setDataDiPartenza(dataDiPartenza);
 			pacchettoPersonalizzato.setDataDiRitorno(dataDiRitorno);
-			pacchettoPersonalizzato.setIdCliente(idCliente);
+			pacchettoPersonalizzato.setEmailUtente(emailUtente);
 
 			List<Componente> componentiSelezionati = new ArrayList<Componente>();
 			for (int i = 0; i < listaComponentiSelezionati.size(); i++) {
@@ -331,8 +331,8 @@ public class PacchettoPersonalizzatoBean implements
 		pacchettoPersonalizzatoDTO.setDataDiRitorno(pacchettoPersonalizzato
 				.getDataDiRitorno());
 		pacchettoPersonalizzatoDTO.setStato(pacchettoPersonalizzato.getStato());
-		pacchettoPersonalizzatoDTO.setIdCliente(pacchettoPersonalizzato
-				.getIdCliente());
+		pacchettoPersonalizzatoDTO.setEmailUtente(pacchettoPersonalizzato
+				.getEmailUtente());
 		pacchettoPersonalizzatoDTO.setIdPacchetto(pacchettoPersonalizzato
 				.getIdPacchetto());
 		pacchettoPersonalizzatoDTO.setCosto(pacchettoPersonalizzato.getCosto());
@@ -388,8 +388,8 @@ public class PacchettoPersonalizzatoBean implements
 		pacchettoPersonalizzato.setDataDiRitorno(pacchettoPersonalizzatoDTO
 				.getDataDiRitorno());
 		pacchettoPersonalizzato.setStato(pacchettoPersonalizzatoDTO.getStato());
-		pacchettoPersonalizzato.setIdCliente(pacchettoPersonalizzatoDTO
-				.getIdCliente());
+		pacchettoPersonalizzato.setEmailUtente(pacchettoPersonalizzatoDTO
+				.getEmailUtente());
 		pacchettoPersonalizzato.setIdPacchetto(pacchettoPersonalizzatoDTO
 				.getIdPacchetto());
 		pacchettoPersonalizzato.setCosto(pacchettoPersonalizzatoDTO.getCosto());
