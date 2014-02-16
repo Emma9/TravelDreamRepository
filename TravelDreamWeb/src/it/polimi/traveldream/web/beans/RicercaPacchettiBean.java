@@ -186,7 +186,7 @@ public class RicercaPacchettiBean implements Serializable {
 			
 		}
 	
-		return "listaRicercaPacchettiPredefiniti";
+		return "/listaRicercaPacchettiPredefiniti";
 		
 
 		/*
