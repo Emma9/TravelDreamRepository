@@ -299,13 +299,13 @@ return "index";
 				.getExternalContext().getRequest();
 
 		ArrayList<PacchettoDTO> pacchetti = new ArrayList<PacchettoDTO>();
-
+		System.out.println("RICERCA PER ETICHETTA INIZIATA");
 		try {
 
 			if (pacchettoRemoto.verificaConsistenzaDate(this.dataPartenza,
 					this.dataRitorno)) {
 				// LE DATE INSERITE SONO VALIDE
-
+				System.out.println("RICERCA PER ETICHETTA VERIFICA CONSISTENZA OK");
 				pacchetti = pacchettoRemoto.ricercaPerEtichetta("lastminute",
 						this.dataPartenza, this.dataRitorno);
 				// RITORNA LA LISTA DEI PACCHETTI CON DESTINAZIONE DESIDERATA E
@@ -329,8 +329,10 @@ return "index";
 					}
 
 				}
+				System.out.println("RICERCA PER ETICHETTA PACCHETTI SETTATI");
 				setPacchettiRicercati(pacchettiDaSettare);
-
+				System.out.println("NUMERO PACCHETTI DA SETTARE:" + pacchettiDaSettare.size());
+				
 			}
 		} catch (EJBException e) {
 
@@ -338,7 +340,8 @@ return "index";
 
 		}
 
-		
+		System.out.println("RICERCA PER ETICHETTA FINITA CORRETTAMENTE");
+		System.out.println("NUMERO PACCHETTI RICERCATI:" + pacchettiRicercati.size());
 		
 		return "/listaRicercaPacchettiPredefiniti";
 

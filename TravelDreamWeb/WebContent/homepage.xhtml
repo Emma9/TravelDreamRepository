@@ -24,9 +24,7 @@
 		</p:layoutUnit>
 	</div>
 
-	<!-- <p:layoutUnit position="south" size="100" header="Bottom" resizable="false" closable="false" collapsible="true">  
-        <h:outputText value="South unit content." />  
-    </p:layoutUnit> -->
+	
 
 
 	<p:layoutUnit position="west" size="300"
@@ -74,8 +72,7 @@
 
 			</h:panelGrid>
 			<h:commandButton id="bottoneRicerca" value="Ricerca"
-				action="#{ricercaPacchettiBean.ricercaPacchetti()}" 
-				ajax="false">
+				action="#{ricercaPacchettiBean.ricercaPacchetti()}" ajax="false">
 			</h:commandButton>
 
 
@@ -85,143 +82,182 @@
 
 
 
+<div>
 
-
-   <p:layoutUnit position="center">
-		<h:form id="tabellapacchtti">
+	<p:layoutUnit position="center">
+		<h:form id="tabellapacchetti">
 			<p:tabView id="tabView">
 
-				
-						<p:tab id="tab1" title="LAST-MINUTE">  
-			        <h:panelGrid columns="2" cellpadding="10">  
-			            <p:graphicImage id="tab1Img" value="/immagini/homepage/lastminute.jpg" />
-			              
-			              
-			              <div>
-			              <h:form>
-			            <h:outputText id="tab1Text" value="LISTA DEI PACCHETTI LASTMINUTE"/>
-			           
-			           		<br />
-							<h:outputLabel value="Data di Partenza: " />
-							<p:calendar value="#{ricercaPacchettiBean.dataPartenza}" id="dataDiPartenza1" required="true" requiredMessage="Devi inserire una data di Partenza"/>
-							<p:message for="dataDiPartenza1"/>
-							<br />
-							
-							<h:outputText value="Data di Ritorno: " />
-							<p:calendar value="#{ricercaPacchettiBean.dataRitorno}" id="dataDiRitorno1" required="true" requiredMessage="Devi inserire una data di Ritorno"/>
-							<p:message for="dataDiRitorno1"/>
-							<br />
-				
-							<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-								<h:outputText value="Numero di Partecipanti: " />
-								<br />
-								<p:selectOneMenu value="#{ricercaPacchettiBean.numPartecipanti}" >
-									<f:selectItem itemLabel="1" itemValue="1" />
-									<f:selectItem itemLabel="2" itemValue="2" />
-									<f:selectItem itemLabel="3" itemValue="3" />
-									<f:selectItem itemLabel="4" itemValue="4" />
-									<f:selectItem itemLabel="5" itemValue="5" />
-									<f:selectItem itemLabel="6" itemValue="6" />
-									<f:selectItem itemLabel="7" itemValue="7" />
-									<f:selectItem itemLabel="8" itemValue="8" />
-								</p:selectOneMenu>
-				
-							</h:panelGrid><br />
-							<h:panelGrid id="ricercaEtichetta1">
-							    <h:commandButton id="Ricerca1" value="Ricerca" update="ricercaEtichetta1" action="#{ricercaPacchettiBean.ricercaPerEtichettaClienteLastMinute()}" ajax="false">
-							    </h:commandButton>
-							</h:panelGrid>
-							</h:form>
-			              </div>
-					</h:panelGrid>		        	
-					  
-			    </p:tab>  
 
-				
-				<p:tab id="tab2" title="OFFERTE">
+				<p:tab id="tab1" title="LAST-MINUTE">
 					<h:panelGrid columns="2" cellpadding="10">
-						<p:graphicImage id="tab2Img" value="/immagini/homepage/offerte.jpg" />
-						<h:outputText id="tab2Text" value="RICERCA DEI PACCHETTI OFFERTE" />
-						
-						<h:outputLabel value="Data di Partenza: " />
-							<p:calendar value="#{ricercaPacchettiBean.dataPartenza}" id="dataDiPartenza2" required="true" requiredMessage="Devi inserire una data di Partenza"/>
-							<p:message for="dataDiPartenza2"/>
-							<br />
-							
-							<h:outputText value="Data di Ritorno: " />
-							<p:calendar value="#{ricercaPacchettiBean.dataRitorno}" id="dataDiRitorno2" required="true" requiredMessage="Devi inserire una data di Ritorno"/>
-							<p:message for="dataDiRitorno2"/>
-							<br />
-				
-							<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-								<h:outputText value="Numero di Partecipanti: " />
+						<p:graphicImage id="tab1Img"
+							value="/immagini/homepage/lastminute.jpg" />
+
+
+						<div>
+							<h:form>
+								<h:outputText id="tab1Text"
+									value="LISTA DEI PACCHETTI LASTMINUTE" />
+
 								<br />
-								<p:selectOneMenu value="#{ricercaPacchettiBean.numPartecipanti}" >
-									<f:selectItem itemLabel="1" itemValue="1" />
-									<f:selectItem itemLabel="2" itemValue="2" />
-									<f:selectItem itemLabel="3" itemValue="3" />
-									<f:selectItem itemLabel="4" itemValue="4" />
-									<f:selectItem itemLabel="5" itemValue="5" />
-									<f:selectItem itemLabel="6" itemValue="6" />
-									<f:selectItem itemLabel="7" itemValue="7" />
-									<f:selectItem itemLabel="8" itemValue="8" />
-								</p:selectOneMenu>
-				
-							</h:panelGrid><br />
-							<h:panelGrid id="ricercaEtichetta2">
-							    <h:commandButton id="Ricerca2" value="Ricerca" update="ricercaEtichetta2" action="#{ricercaPacchettiBean.ricercaPerEtichettaClienteOfferte()}" ajax="false">
-							    </h:commandButton>
-							</h:panelGrid>
-							
-						
-						
+								<h:outputLabel value="Data di Partenza: " />
+								<p:calendar value="#{ricercaPacchettiBean.dataPartenza}"
+									id="dataDiPartenza1" required="true"
+									requiredMessage="Devi inserire una data di Partenza" />
+								<p:message for="dataDiPartenza1" />
+								<br />
+
+								<h:outputText value="Data di Ritorno: " />
+								<p:calendar value="#{ricercaPacchettiBean.dataRitorno}"
+									id="dataDiRitorno1" required="true"
+									requiredMessage="Devi inserire una data di Ritorno" />
+								<p:message for="dataDiRitorno1" />
+								<br />
+
+								<h:panelGrid columns="2" style="margin-bottom:10px"
+									cellpadding="5">
+									<h:outputText value="Numero di Partecipanti: " />
+									<br />
+									<p:selectOneMenu
+										value="#{ricercaPacchettiBean.numPartecipanti}">
+										<f:selectItem itemLabel="1" itemValue="1" />
+										<f:selectItem itemLabel="2" itemValue="2" />
+										<f:selectItem itemLabel="3" itemValue="3" />
+										<f:selectItem itemLabel="4" itemValue="4" />
+										<f:selectItem itemLabel="5" itemValue="5" />
+										<f:selectItem itemLabel="6" itemValue="6" />
+										<f:selectItem itemLabel="7" itemValue="7" />
+										<f:selectItem itemLabel="8" itemValue="8" />
+									</p:selectOneMenu>
+
+								</h:panelGrid>
+								<br />
+								<h:panelGrid id="ricercaEtichetta1">
+									<h:commandButton id="Ricerca1" value="Ricerca"
+										update="ricercaEtichetta1"
+										action="#{ricercaPacchettiBean.ricercaPerEtichettaClienteLastMinute()}"
+										ajax="false">
+									</h:commandButton>
+								</h:panelGrid>
+							</h:form>
+						</div>
+					</h:panelGrid>
+
+				</p:tab>
+
+<p:tab id="tab2" title="OFFERTE">
+					<h:panelGrid columns="2" cellpadding="10">
+						<p:graphicImage id="tab2Img"
+							value="/immagini/homepage/offerte.jpg" />
+
+
+						<div>
+							<h:form>
+								<h:outputText id="tab2Text"
+									value="OFFERTE" />
+
+								<br />
+								<h:outputLabel value="Data di Partenza: " />
+								<p:calendar value="#{ricercaPacchettiBean.dataPartenza}"
+									id="dataDiPartenza2" required="true"
+									requiredMessage="Devi inserire una data di Partenza" />
+								<p:message for="dataDiPartenza2" />
+								<br />
+
+								<h:outputText value="Data di Ritorno: " />
+								<p:calendar value="#{ricercaPacchettiBean.dataRitorno}"
+									id="dataDiRitorno2" required="true"
+									requiredMessage="Devi inserire una data di Ritorno" />
+								<p:message for="dataDiRitorno2" />
+								<br />
+
+								<h:panelGrid columns="2" style="margin-bottom:10px"
+									cellpadding="5">
+									<h:outputText value="Numero di Partecipanti: " />
+									<br />
+									<p:selectOneMenu
+										value="#{ricercaPacchettiBean.numPartecipanti}">
+										<f:selectItem itemLabel="1" itemValue="1" />
+										<f:selectItem itemLabel="2" itemValue="2" />
+										<f:selectItem itemLabel="3" itemValue="3" />
+										<f:selectItem itemLabel="4" itemValue="4" />
+										<f:selectItem itemLabel="5" itemValue="5" />
+										<f:selectItem itemLabel="6" itemValue="6" />
+										<f:selectItem itemLabel="7" itemValue="7" />
+										<f:selectItem itemLabel="8" itemValue="8" />
+									</p:selectOneMenu>
+
+								</h:panelGrid>
+								<br />
+								<h:panelGrid id="ricercaEtichetta2">
+									<h:commandButton id="Ricerca2" value="Ricerca"
+										update="ricercaEtichetta2"
+										action="#{ricercaPacchettiBean.ricercaPerEtichettaClienteOfferte()}"
+										ajax="false">
+									</h:commandButton>
+								</h:panelGrid>
+							</h:form>
+						</div>
 					</h:panelGrid>
 				</p:tab>
-				
-				
 				
 
 				<p:tab id="tab3" title="MARE">
 					<h:panelGrid columns="2" cellpadding="10">
 						<p:graphicImage id="tab3Img" value="/immagini/homepage/mare.jpg" />
-						<h:outputText id="tab3Text" value="RICERCA DEI PACCHETTI MARE" />
-						
-						
-						
-		
-		
-							<h:outputLabel value="Data di Partenza: " />
-							<p:calendar value="#{ricercaPacchettiBean.dataPartenza}" id="dataDiPartenza3" required="true" requiredMessage="Devi inserire una data di Partenza"/>
-							<p:message for="dataDiPartenza3"/>
-							<br />
-							
-							<h:outputText value="Data di Ritorno: " />
-							<p:calendar value="#{ricercaPacchettiBean.dataRitorno}" id="dataDiRitorno3" required="true" requiredMessage="Devi inserire una data di Ritorno"/>
-							<p:message for="dataDiRitorno3"/>
-							<br />
-				
-							<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-								<h:outputText value="Numero di Partecipanti: " />
+
+						<div>
+							<h:form>
+								<h:outputText id="tab3Text" value="RICERCA DEI PACCHETTI MARE" />
+
+
+
+
+
+								<h:outputLabel value="Data di Partenza: " />
+								<p:calendar value="#{ricercaPacchettiBean.dataPartenza}"
+									id="dataDiPartenza3" required="true"
+									requiredMessage="Devi inserire una data di Partenza" />
+								<p:message for="dataDiPartenza3" />
 								<br />
-								<p:selectOneMenu value="#{ricercaPacchettiBean.numPartecipanti}" >
-									<f:selectItem itemLabel="1" itemValue="1" />
-									<f:selectItem itemLabel="2" itemValue="2" />
-									<f:selectItem itemLabel="3" itemValue="3" />
-									<f:selectItem itemLabel="4" itemValue="4" />
-									<f:selectItem itemLabel="5" itemValue="5" />
-									<f:selectItem itemLabel="6" itemValue="6" />
-									<f:selectItem itemLabel="7" itemValue="7" />
-									<f:selectItem itemLabel="8" itemValue="8" />
-								</p:selectOneMenu>
-				
-							</h:panelGrid><br />
-							<h:panelGrid id="ricercaEtichetta3">
-							    <h:commandButton id="Ricerca3" value="Ricerca" update="ricercaEtichetta3" action="#{ricercaPacchettiBean.ricercaPerEtichettaClienteMare()}" ajax="false">
-							    </h:commandButton>
-							</h:panelGrid>
-						
-						
-						
+
+								<h:outputText value="Data di Ritorno: " />
+								<p:calendar value="#{ricercaPacchettiBean.dataRitorno}"
+									id="dataDiRitorno3" required="true"
+									requiredMessage="Devi inserire una data di Ritorno" />
+								<p:message for="dataDiRitorno3" />
+								<br />
+
+								<h:panelGrid columns="2" style="margin-bottom:10px"
+									cellpadding="5">
+									<h:outputText value="Numero di Partecipanti: " />
+									<br />
+									<p:selectOneMenu
+										value="#{ricercaPacchettiBean.numPartecipanti}">
+										<f:selectItem itemLabel="1" itemValue="1" />
+										<f:selectItem itemLabel="2" itemValue="2" />
+										<f:selectItem itemLabel="3" itemValue="3" />
+										<f:selectItem itemLabel="4" itemValue="4" />
+										<f:selectItem itemLabel="5" itemValue="5" />
+										<f:selectItem itemLabel="6" itemValue="6" />
+										<f:selectItem itemLabel="7" itemValue="7" />
+										<f:selectItem itemLabel="8" itemValue="8" />
+									</p:selectOneMenu>
+
+								</h:panelGrid>
+								<br />
+								<h:panelGrid id="ricercaEtichetta3">
+									<h:commandButton id="Ricerca3" value="Ricerca"
+										update="ricercaEtichetta3"
+										action="#{ricercaPacchettiBean.ricercaPerEtichettaClienteMare()}"
+										ajax="false">
+									</h:commandButton>
+								</h:panelGrid>
+							</h:form>
+						</div>
+
+
 					</h:panelGrid>
 				</p:tab>
 
@@ -229,59 +265,66 @@
 					<h:panelGrid columns="2" cellpadding="10">
 						<p:graphicImage id="tab4Img"
 							value="/immagini/homepage/montagna.jpg" />
-						<h:outputText id="tab4Text" value="RICERCA DEI PACCHETTI MONTAGNA" />
 
-						
-						
-		
-							<h:outputLabel value="Data di Partenza: " />
-							<p:calendar value="#{ricercaPacchettiBean.dataPartenza}" id="dataDiPartenza4" required="true" requiredMessage="Devi inserire una data di Partenza"/>
-							<p:message for="dataDiPartenza4"/>
-							<br />
-							
-							<h:outputText value="Data di Ritorno: " />
-							<p:calendar value="#{ricercaPacchettiBean.dataRitorno}" id="dataDiRitorno4" required="true" requiredMessage="Devi inserire una data di Ritorno"/>
-							<p:message for="dataDiRitorno4"/>
-							<br />
-				
-							<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-								<h:outputText value="Numero di Partecipanti: " />
+
+						<div>
+							<h:form>
+
+								<h:outputText id="tab4Text"
+									value="RICERCA DEI PACCHETTI MONTAGNA" />
+
+
+
+
+								<h:outputLabel value="Data di Partenza: " />
+								<p:calendar value="#{ricercaPacchettiBean.dataPartenza}"
+									id="dataDiPartenza4" required="true"
+									requiredMessage="Devi inserire una data di Partenza" />
+								<p:message for="dataDiPartenza4" />
 								<br />
-								<p:selectOneMenu value="#{ricercaPacchettiBean.numPartecipanti}" >
-									<f:selectItem itemLabel="1" itemValue="1" />
-									<f:selectItem itemLabel="2" itemValue="2" />
-									<f:selectItem itemLabel="3" itemValue="3" />
-									<f:selectItem itemLabel="4" itemValue="4" />
-									<f:selectItem itemLabel="5" itemValue="5" />
-									<f:selectItem itemLabel="6" itemValue="6" />
-									<f:selectItem itemLabel="7" itemValue="7" />
-									<f:selectItem itemLabel="8" itemValue="8" />
-								</p:selectOneMenu>
-				
-							</h:panelGrid><br />
-							<h:panelGrid id="ricercaEtichetta4">
-							    <h:commandButton id="Ricerca4" value="Ricerca" update="ricercaEtichetta4" action="#{ricercaPacchettiBean.ricercaPerEtichettaClienteMontagna()}" ajax="false">
-							    </h:commandButton>
-							</h:panelGrid>
-						
-						
-						
+
+								<h:outputText value="Data di Ritorno: " />
+								<p:calendar value="#{ricercaPacchettiBean.dataRitorno}"
+									id="dataDiRitorno4" required="true"
+									requiredMessage="Devi inserire una data di Ritorno" />
+								<p:message for="dataDiRitorno4" />
+								<br />
+
+								<h:panelGrid columns="2" style="margin-bottom:10px"
+									cellpadding="5">
+									<h:outputText value="Numero di Partecipanti: " />
+									<br />
+									<p:selectOneMenu
+										value="#{ricercaPacchettiBean.numPartecipanti}">
+										<f:selectItem itemLabel="1" itemValue="1" />
+										<f:selectItem itemLabel="2" itemValue="2" />
+										<f:selectItem itemLabel="3" itemValue="3" />
+										<f:selectItem itemLabel="4" itemValue="4" />
+										<f:selectItem itemLabel="5" itemValue="5" />
+										<f:selectItem itemLabel="6" itemValue="6" />
+										<f:selectItem itemLabel="7" itemValue="7" />
+										<f:selectItem itemLabel="8" itemValue="8" />
+									</p:selectOneMenu>
+
+								</h:panelGrid>
+								<br />
+								<h:panelGrid id="ricercaEtichetta4">
+									<h:commandButton id="Ricerca4" value="Ricerca"
+										update="ricercaEtichetta4"
+										action="#{ricercaPacchettiBean.ricercaPerEtichettaClienteMontagna()}"
+										ajax="false">
+									</h:commandButton>
+								</h:panelGrid>
+							</h:form>
+						</div>
 					</h:panelGrid>
 				</p:tab>
 
 			</p:tabView>
 		</h:form>
 	</p:layoutUnit>
-  
-</p:layout> 
-
-
-
-
-
-
-
-
+</div>
+</p:layout>
 
 
 </html>
