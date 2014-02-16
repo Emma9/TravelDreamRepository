@@ -624,7 +624,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 
 			// q3.setParameter("q1", q1);
 			// q3.setParameter("q2", q2);
-
+			System.out.println("QUERY - NUMERO RISULTATI: "+ q.getResultList().size());
 			CharSequence charseq = new String();
 			charseq = etichetta;
 
