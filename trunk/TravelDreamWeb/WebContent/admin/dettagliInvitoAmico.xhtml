@@ -15,10 +15,7 @@
 		
 		<h:panelGrid id="dettagliInvitoRicevuto" columns="2" cellpadding="4" >  
   
-            <!-- <f:facet name="immagine">  
-                <p:graphicImage value="/images/cars/#{tableBean.selectedCar.manufacturer}.jpg"/>
-            
-            </f:facet> -->
+           
             
             <div align="left">
 		        <h:outputText value="Destinazione Viaggio:" />  
@@ -36,7 +33,7 @@
         		<h:outputText value="Lista Componenti del pacchetto:" />
             </div>	
 					
-					<div align="left">
+					<div align="left"> 
 					
 						<p:dataTable id="listaComponentiInvito" var="componenteInvito" value="#{mostraPacchettiPersonalizzatiBean.pacchettiPersonalizzatiRicercati}"
 							paginator="true" rows="10" selection="#{mostraPacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato}"
