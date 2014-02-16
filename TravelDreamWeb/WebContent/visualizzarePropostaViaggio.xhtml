@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+	<h2>DETTAGLI DELL'INVITO RICEVUTO</h2>
+	<h:form>
+		<p:fieldset legend="Ecco I Dettagli dell'invito ricevuto"
+			widgetVar="regWidget" style="width: 600px;">
+
+
+			<h:panelGrid id="dettagliInvitoRicevuto" columns="2" cellpadding="4">
+
+
+
+				<div align="left">
+					<h:outputText value="Destinazione Viaggio:" />
+					<h:outputText
+						value="#{invitaAmicoBean.pacchettoPersonalizzato.destinazione}" />
+
+					<h:outputText value="Data di Partenza:" />
+					<h:outputText
+						value="#{invitaAmicoBean.pacchettoPersonalizzato.dataDiPartenza}" />
+
+					<h:outputText value="Data di Ritorno:" />
+					<h:outputText
+						value="#{invitaAmicoBean.pacchettoPersonalizzato.dataDiRitorno}" />
+
+					<h:outputText value="Descrizione:" />
+					<h:outputText
+						value="#{invitaAmicoBean.pacchettoPersonalizzato.descrizione}" />
+
+					<h:outputText value="Lista Componenti del pacchetto:" />
+				</div>
+
+				<div align="left">
+
+					<p:dataTable id="listaComponentiInvito" var="componenteInvito"
+						value="#{invitaAmicoBean.pacchettoPersonalizzato.listaComponentiSelezionati}"
+						rows="10">
+
+						<f:facet name="header">  
+			            	Ecco i dettagli dei componenti del pacchetto  
+					        </f:facet>
+
+
+						<p:column headerText="Tipologia">  
+					            #{componenteInvito.tipologia}  
+					        </p:column>
+
+						<p:column headerText="Descrizione">  
+					            #{componenteInvito.descrizione}  
+					        </p:column>
+
+						<p:column headerText="Luogo">
+						#{componenteInvito.luogo}
+					</p:column>
+
+						<p:column headerText="Costo">  
+					            #{componenteInvito.costo}  
+					        </p:column>
+
+						<p:column headerText="Data Inizio Validità">  
+					            #{componenteInvito.dataInizioValidita}  
+					        </p:column>
+
+						<p:column headerText="Data Fine Validità">  
+					            #{componenteInvito.dataFineValidita}  
+					        </p:column>
+
+
+
+					</p:dataTable>
+
+				</div>
+
+
+
+				<div style="float: left;">
+					<h:panelGrid id="accettaInvito">
+						<h:commandButton id="bottoneAccetta" value="Accetta"
+							action="bean!!!!" ajax="false" />
+					</h:panelGrid>
+					<br />
+				</div>
+
+				<div style="float: left;">
+					<h:panelGrid id="rifiutoInvito">
+						<h:commandButton id="bottoneRifiuta" value="Rifiuta"
+							action="bean!!!!" />
+					</h:panelGrid>
+					<br />
+				</div>
+
+			</h:panelGrid>
+
+
+
+		</p:fieldset>
+
+
+
+	</h:form>
+</h:body>
+
+
+
+</html>
