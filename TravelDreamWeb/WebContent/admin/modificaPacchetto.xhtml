@@ -48,7 +48,7 @@
 			
   		 
   	
-		 <p:dataTable id="componentiPacchetto" var="componentePacchetto" value="#{mostraTuttiComponentiBean.listaComponenti}" paginator="true" rows="10"  
+		 <p:dataTable id="componentiPacchetto" var="componentePacchetto" value="#{ricercaPacchettiImpiegatoBean.listaComponenti}" paginator="true" rows="10"  
                  rowKey="#{componentePacchetto.codiceComponente}" selection="#{creazionePacchettoPredefinitoBean.listaComponenti}">  
   
         <f:facet name="header">  
@@ -80,7 +80,7 @@
     </p:dataTable>  
   
   	
-  	 <p:dataTable id="componentiPredefPacchetto" var="componentePredefPacchetto" value="#{mostraTuttiComponentiBean.listaComponenti}" paginator="true" rows="10"  
+  	 <p:dataTable id="componentiPredefPacchetto" var="componentePredefPacchetto" value="#{ricercaPacchettiImpiegatoBean.listaComponenti}" paginator="true" rows="10"  
                  rowKey="#{componentePredefPacchetto.codiceComponente}" selection="#{creazionePacchettoPredefinitoBean.listaComponentiSelezionati}">  
   
         <f:facet name="header">  
