@@ -1,6 +1,8 @@
 package it.polimi.traveldream.web.beans;
 
 import it.polimi.traveldream.ejb.client.InvitoBeanRemote;
+import it.polimi.traveldream.ejb.client.PacchettoPersonalizzatoBeanRemote;
+import it.polimi.traveldream.entities.PacchettoPersonalizzatoDTO;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -24,11 +26,15 @@ public class InvitaAmicoBean implements Serializable {
 	// Session bean i cui metodi sono utilizzati nel codice
 		@EJB
 		private InvitoBeanRemote invitoremoto;
+		@EJB
+		private PacchettoPersonalizzatoBeanRemote pacchettoPersRemoto;
+		
 		
 		private String emailMittente;
 		private String emailDestinatario;
 		private Long idPacchettoPersonalizzato;
-	
+		private PacchettoPersonalizzatoDTO pacchettoPersonalizzato;
+		
 		
 		/**
 		 * @return the emailMittente
@@ -68,6 +74,19 @@ public class InvitaAmicoBean implements Serializable {
 		}
 	
 	
+	/**
+		 * @return the pacchettoPersonalizzato
+		 */
+		public PacchettoPersonalizzatoDTO getPacchettoPersonalizzato() {
+			return pacchettoPersonalizzato;
+		}
+		/**
+		 * @param pacchettoPersonalizzato the pacchettoPersonalizzato to set
+		 */
+		public void setPacchettoPersonalizzato(
+				PacchettoPersonalizzatoDTO pacchettoPersonalizzato) {
+			this.pacchettoPersonalizzato = pacchettoPersonalizzato;
+		}
 	public String invitaAmico(){
 		
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -78,7 +97,7 @@ public class InvitaAmicoBean implements Serializable {
 			
 			//idPacchettoPersonalizzato = request.getParameter(idpacc);
 			
-			emailDestinatario=request.getUserPrincipal().getName();
+			emailMittente=request.getUserPrincipal().getName();
 			
 			Date dataCorrente = new Date();
 			
@@ -92,7 +111,20 @@ public class InvitaAmicoBean implements Serializable {
 
 	return "gestioneInviti";		
 		}
+	
+	
+	
+	public String mostraPropostaPacchettoViaggio(){
+		
+		setPacchettoPersonalizzato(pacchettoPersRemoto.findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato));
+		return "/dettagliInvitoAmico";
+		
 		
 	}
+	
+		
+	}
+
+
 
 
