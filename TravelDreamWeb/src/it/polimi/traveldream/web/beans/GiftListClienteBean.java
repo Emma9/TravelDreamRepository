@@ -1,6 +1,7 @@
 package it.polimi.traveldream.web.beans;
 
-import it.polimi.traveldream.ejb.client.ClienteBeanRemote;
+
+import it.polimi.traveldream.ejb.client.UserBeanRemote;
 import it.polimi.traveldream.entities.PacchettoDTO;
 import it.polimi.traveldream.entities.PacchettoPersonalizzatoDTO;
 
@@ -24,7 +25,7 @@ public class GiftListClienteBean implements Serializable {
 	private static final long serialVersionUID = 345L;
 	
 	@EJB
-	private ClienteBeanRemote clienteRemoto;
+	private UserBeanRemote utenteRemoto;
 	
 	private Long idCliente;
 	
@@ -86,7 +87,7 @@ public class GiftListClienteBean implements Serializable {
 		
 		try {
 			
-			pacchettiRicercati = clienteRemoto.giftListCliente(idCliente);			
+			//pacchettiRicercati = clienteRemoto.giftListCliente(idCliente);			
 
 		}catch (EJBException e) {
 		

@@ -45,7 +45,6 @@ public class User implements Serializable {
 
 	private String password; // sha-512 + hex
 	
-	private String codiceFiscale;
 	
 	private List<PacchettoPersonalizzato> pacchettiCliente = new ArrayList<PacchettoPersonalizzato>(0);
 	
@@ -119,20 +118,6 @@ public class User implements Serializable {
 	}
 
 	
-	
-	/**
-	 * @return the codiceFiscale
-	 */
-	public String getCodiceFiscale() {
-		return codiceFiscale;
-	}
-
-	/**
-	 * @param codiceFiscale the codiceFiscale to set
-	 */
-	public void setCodiceFiscale(String codiceFiscale) {
-		this.codiceFiscale = codiceFiscale;
-	}
 	
 	
 

@@ -189,26 +189,20 @@ public class RicercaPacchettiBean implements Serializable {
 					this.dataRitorno)) {
 				// LE DATE INSERITE SONO VALIDE
 
-				System.out
-						.println("RICERCAPACCHETTI --> CONSISTENZA DATE CORRETTA");
+				System.out.println("RICERCAPACCHETTI --> CONSISTENZA DATE CORRETTA");
 
-				pacchetti = pacchettoRemoto.ricercaPacchetti(this.destinazione,
-						this.dataPartenza, this.dataRitorno);
+				pacchetti = pacchettoRemoto.ricercaPacchetti(this.destinazione,this.dataPartenza, this.dataRitorno);
 				// RITORNA LA LISTA DEI PACCHETTI CON DESTINAZIONE DESIDERATA E
 				// DISPONIBILI NEL PERIODO RICHIESTO
 
-				System.out.println("RICERCAPACCHETTI --> RICERCA ESEGUITA");
+				System.out.println("RICERCAPACCHETTI --> RICERCA ESEGUITA DIMENSIONE LISTA " + pacchetti.size());
 
 				for (int i = 0; i < pacchetti.size(); i++) {
 					// PER OGNI PACCHETTO VERIFICA CHE TUTTI I SUOI COMPONENTI
 					// SIANO
 					// DISPONIBILI
 
-					if (pacchettoRemoto.verificaDisponibilitaComponenti(
-							this.dataPartenza, this.dataRitorno,
-							this.numPartecipanti,
-							(List<ComponenteDTO>) pacchetti.get(i)
-									.getListaComponentiSelezionati())) {
+					if (pacchettoRemoto.verificaDisponibilitaComponenti(this.dataPartenza, this.dataRitorno,this.numPartecipanti, pacchetti.get(i).getListaComponentiSelezionati())) {
 						// SE TUTTI I COMPONENTI SONO DISPONIBILI AGGIUNGE IL
 						// PACCHETTO NELLA LISTA PACCHETTI RICERCATI
 						pacchettiRicercati.add(pacchetti.get(i));
@@ -216,6 +210,9 @@ public class RicercaPacchettiBean implements Serializable {
 					}
 				}
 
+				System.out
+				.println("RICERCAPACCHETTI --> DIMENSIONE LISTA DOPO VERIFICA DISPONIBILITA  "+pacchettiRicercati.size());
+				
 				System.out
 						.println("RICERCAPACCHETTI --> VERIFICA DISPONIBILITA");
 

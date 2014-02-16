@@ -434,22 +434,34 @@ public class ComponenteBean implements ComponenteBeanRemote,
 			int disponibilitaRichiesta, Date dataPartenza, Date dataRitorno,
 			ComponenteDTO componente) {
 
+		System.out.println("VERIFICADISPONIBILITACOMPONENTEIN PERIODO --> INIZIO METODO");
+		
 		int giorniIntervallo = Days.daysBetween(new DateTime(dataPartenza),
 				new DateTime(dataRitorno)).getDays();
+		
+		System.out.println("GIORNI INTERVALLO "+giorniIntervallo);
+		
 
 		for (int i = 0; i < giorniIntervallo; i++) {
 
 			DateTime dataDaVerificareJ = new DateTime();
 			dataDaVerificareJ = dataDaVerificareJ.plusDays(i);
 			Date dataDaVerificare = dataDaVerificareJ.toDate();
+			
+			System.out.println("DATA DA VERIFICARE "+dataDaVerificare);
 
 			if (verificaDisponibilitaComponenteInUnaData(
 					disponibilitaRichiesta, dataDaVerificare, componente) == false) {
+				
+				System.out.println("VERIFICADISPONIBILITACOMPONENTEINUNADATA --> RETURN FALSE");
+				
 				return false;
 			}
 
 		}
 
+		System.out.println("VERIFICADISPONIBILITACOMPONENTEINPERIODO --> FINE METODO");
+		
 		return true;
 
 	}
