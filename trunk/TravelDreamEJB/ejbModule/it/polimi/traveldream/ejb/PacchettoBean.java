@@ -332,6 +332,8 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 			Date dataRitorno, int disponibilitaRichiesta,
 			List<ComponenteDTO> listaComponentiSelezionati) {
 
+		System.out.println("VERIFICADISPONIBILITACOMPONENTI --> INIZIO METODO");
+
 		ComponenteBeanRemote componenteRemoto = new ComponenteBean();
 
 		ComponenteDTO componente = new ComponenteDTO();
@@ -342,26 +344,36 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 
 			componente = listaComponentiSelezionati.get(i);
 
+			System.out
+					.println("ID COMPONENTE LISTA COMPONENTI SELEZIONATI --> "
+							+ componente.getCodiceComponente());
+
 			if (!componenteRemoto.verificaValiditaComponente(dataPartenza,
 					dataRitorno, componente)) {
+
+				System.out
+						.println("VERIFICAVALIDITACOMPONENTE --> RETURN FALSE");
+
 				return false;
 			}
 
-			if (componenteRemoto.verificaValiditaComponente(dataPartenza,
-					dataRitorno, componente)) {
-				if (!componenteRemoto.verificaDisponibilitaComponenteInPeriodo(
-						disponibilitaRichiesta, dataPartenza, dataRitorno,
-						componente)) {
-					return false;
-				}
+			if (!componenteRemoto.verificaDisponibilitaComponenteInPeriodo(
+					disponibilitaRichiesta, dataPartenza, dataRitorno,
+					componente)) {
 
-				// un componente valido disponibile in tutto il periodo
-				// richiesto
+				System.out
+						.println("VERIFICADISPONIBILITACOMPONENTEINPERIODO --> RETURN FALSE");
 
+				return false;
 			}
+
+			// un componente valido disponibile in tutto il periodo
+			// richiesto
+
 		}
 
-		// un componente non valido
+		System.out.println("TUTTI I COMPONENTI DISPONIBILI --> RETURN TRUE");
+
 		return true;
 
 	}
@@ -624,7 +636,8 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 
 			// q3.setParameter("q1", q1);
 			// q3.setParameter("q2", q2);
-			System.out.println("QUERY - NUMERO RISULTATI: "+ q.getResultList().size());
+			System.out.println("QUERY - NUMERO RISULTATI: "
+					+ q.getResultList().size());
 			CharSequence charseq = new String();
 			charseq = etichetta;
 
