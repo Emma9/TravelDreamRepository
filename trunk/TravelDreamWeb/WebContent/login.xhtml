@@ -8,6 +8,7 @@
 </h:head>
 <h:body>
 	<h2>FORM DI LOGIN</h2>
+	<div>
 	<h:form id="login"
 		onsubmit="document.getElementById('login').action='j_security_check';"
 		prependId="false">
@@ -21,6 +22,15 @@
 			<p:commandButton id="submit" value="Login" ajax="false" />
 		</h:panelGrid>
 	</h:form>
+</div>
+<br />
+<div>
+<h:form id="registrazione">
+<p:outputLabel value="Sei un nuovo utente?" />
+<h:commandLink action="/registrazione"  value="Registrati ora" style="font-size:20px;"/>
+</h:form>
+</div>
+
 
 </h:body>
 </html>
