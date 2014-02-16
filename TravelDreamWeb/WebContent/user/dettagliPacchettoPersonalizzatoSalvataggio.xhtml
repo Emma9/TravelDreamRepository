@@ -8,9 +8,9 @@
 <h:head>
 </h:head>
 <h:body>
-	<h2>DETTAGLI DEL PACCHETTO SELEZIONATO</h2>
+	<h2>DETTAGLI DEL PACCHETTO PERSONALIZZATO</h2>
 	<h:form>
-		<p:fieldset legend="Ecco I Dettagli del pacchetto"
+		<p:fieldset legend="Ecco I Dettagli del pacchetto personalizzato"
 			widgetVar="regWidget" style="width: 600px;">
 
 			<p:panelGrid id="dettagli" columns="2">
@@ -45,6 +45,22 @@
 				<h:outputText value="Data Fine Validità: " />
 				<h:outputText
 					value="#{ricercaPacchettiBean.pacchettoSelezionato.dataFineValidita}" />
+					
+					
+				<h:outputText value="Data di Partenza: " />
+				<h:outputText
+					value="#{ricercaPacchettiBean.dataPartenza}" />
+				
+				
+				<h:outputText value="Data di Ritorno: " />
+				<h:outputText
+					value="#{ricercaPacchettiBean.dataRitorno}" />
+					
+					
+				<h:outputText value="Numero di partecipanti: " />
+				<h:outputText
+					value="#{ricercaPacchettiBean.numPartecipanti}" />	
+					
 
 			</p:panelGrid>
 
@@ -52,24 +68,12 @@
 	</h:form>
 
 
-	<!-- BOTTONE MODIFICA PACCHETTO -->
-
-
-	<div align="left">
-		<h:form>
-			<h:commandButton value="Modifica"
-				action="#{ricercaPacchettiImpiegatoBean.formModifica(ricercaPacchettiImpiegatoBean.idPacchetto)}"
-				ajax="false" />
-		</h:form>
-	</div>
-
-
 
 	<!-- BOTTONE SALVA PACCHETTO -->
 
 	<div align="left">
 		<h:form>
-			<h:commandButton value="Salva"
+			<h:commandButton value="Conferma Salvataggio"
 				action="#{ricercaPacchettiBean.creaPersonalizzato()}"
 				ajax="false" />
 		</h:form>

@@ -15,7 +15,7 @@ public interface PacchettoPersonalizzatoBeanRemote {
 	/**@param stato
 	 * @param idCliente
 	 * @return idPacchettoPersonalizzato*/
-	public Long createPacchettoPersonalizzato(String stato, Long idCliente,
+	public Long createPacchettoPersonalizzato(String stato, String emailUtente,
 			Date dataDiPartenza, Date dataDiRitorno,
 			List<ComponenteDTO> listaComponentiSelezionati);
 	
