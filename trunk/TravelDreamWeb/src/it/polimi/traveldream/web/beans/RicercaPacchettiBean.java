@@ -1,6 +1,8 @@
 package it.polimi.traveldream.web.beans;
 
 import it.polimi.traveldream.ejb.client.PacchettoBeanRemote;
+import it.polimi.traveldream.ejb.client.PacchettoPersonalizzatoBeanRemote;
+import it.polimi.traveldream.ejb.client.UsrMgr;
 import it.polimi.traveldream.entities.ComponenteDTO;
 import it.polimi.traveldream.entities.PacchettoDTO;
 
@@ -18,6 +20,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
+import org.eclipse.persistence.internal.sessions.DirectCollectionChangeRecord.NULL;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 
@@ -33,6 +36,12 @@ public class RicercaPacchettiBean implements Serializable {
 	@EJB
 	private PacchettoBeanRemote pacchettoRemoto;
 
+	@EJB
+	private PacchettoPersonalizzatoBeanRemote pacchettoPersonalizzatoRemoto;
+
+	@EJB
+	private UsrMgr user;
+
 	private Long idPacchetto;
 
 	// INPUT DA PAGINA WEB RICERCA
@@ -40,6 +49,10 @@ public class RicercaPacchettiBean implements Serializable {
 	private Date dataPartenza;
 	private Date dataRitorno;
 	private int numPartecipanti;
+	
+	private List<ComponenteDTO> listaComponentiSelezionati;
+	
+	private List<ComponenteDTO> listaComponenti;
 
 	private String etichetta;
 
@@ -123,6 +136,43 @@ public class RicercaPacchettiBean implements Serializable {
 	public void setNumPartecipanti(int numPartecipanti) {
 		this.numPartecipanti = numPartecipanti;
 	}
+	
+	
+	
+	
+
+	/**
+	 * @return the listaComponentiSelezionati
+	 */
+	public List<ComponenteDTO> getListaComponentiSelezionati() {
+		return listaComponentiSelezionati;
+	}
+
+	/**
+	 * @param listaComponentiSelezionati the listaComponentiSelezionati to set
+	 */
+	public void setListaComponentiSelezionati(
+			List<ComponenteDTO> listaComponentiSelezionati) {
+		this.listaComponentiSelezionati = listaComponentiSelezionati;
+	}
+	
+	
+	
+	
+
+	/**
+	 * @return the listaComponenti
+	 */
+	public List<ComponenteDTO> getListaComponenti() {
+		return listaComponenti;
+	}
+
+	/**
+	 * @param listaComponenti the listaComponenti to set
+	 */
+	public void setListaComponenti(List<ComponenteDTO> listaComponenti) {
+		this.listaComponenti = listaComponenti;
+	}
 
 	/**
 	 * @return the etichetta
@@ -180,7 +230,7 @@ public class RicercaPacchettiBean implements Serializable {
 		try {
 
 			System.out.println("RICERCAPACCHETTI --> INIZIO METODO");
-			
+
 			pacchettiRicercati.clear();
 
 			List<PacchettoDTO> pacchetti = new ArrayList<PacchettoDTO>();
@@ -189,20 +239,27 @@ public class RicercaPacchettiBean implements Serializable {
 					this.dataRitorno)) {
 				// LE DATE INSERITE SONO VALIDE
 
-				System.out.println("RICERCAPACCHETTI --> CONSISTENZA DATE CORRETTA");
+				System.out
+						.println("RICERCAPACCHETTI --> CONSISTENZA DATE CORRETTA");
 
-				pacchetti = pacchettoRemoto.ricercaPacchetti(this.destinazione,this.dataPartenza, this.dataRitorno);
+				pacchetti = pacchettoRemoto.ricercaPacchetti(this.destinazione,
+						this.dataPartenza, this.dataRitorno);
 				// RITORNA LA LISTA DEI PACCHETTI CON DESTINAZIONE DESIDERATA E
 				// DISPONIBILI NEL PERIODO RICHIESTO
 
-				System.out.println("RICERCAPACCHETTI --> RICERCA ESEGUITA DIMENSIONE LISTA " + pacchetti.size());
+				System.out
+						.println("RICERCAPACCHETTI --> RICERCA ESEGUITA DIMENSIONE LISTA "
+								+ pacchetti.size());
 
 				for (int i = 0; i < pacchetti.size(); i++) {
 					// PER OGNI PACCHETTO VERIFICA CHE TUTTI I SUOI COMPONENTI
 					// SIANO
 					// DISPONIBILI
 
-					if (pacchettoRemoto.verificaDisponibilitaComponenti(this.dataPartenza, this.dataRitorno,this.numPartecipanti, pacchetti.get(i).getListaComponentiSelezionati())) {
+					if (pacchettoRemoto.verificaDisponibilitaComponenti(
+							this.dataPartenza, this.dataRitorno,
+							this.numPartecipanti, pacchetti.get(i)
+									.getListaComponentiSelezionati())) {
 						// SE TUTTI I COMPONENTI SONO DISPONIBILI AGGIUNGE IL
 						// PACCHETTO NELLA LISTA PACCHETTI RICERCATI
 						pacchettiRicercati.add(pacchetti.get(i));
@@ -211,8 +268,9 @@ public class RicercaPacchettiBean implements Serializable {
 				}
 
 				System.out
-				.println("RICERCAPACCHETTI --> DIMENSIONE LISTA DOPO VERIFICA DISPONIBILITA  "+pacchettiRicercati.size());
-				
+						.println("RICERCAPACCHETTI --> DIMENSIONE LISTA DOPO VERIFICA DISPONIBILITA  "
+								+ pacchettiRicercati.size());
+
 				System.out
 						.println("RICERCAPACCHETTI --> VERIFICA DISPONIBILITA");
 
@@ -231,92 +289,6 @@ public class RicercaPacchettiBean implements Serializable {
 		}
 
 	}
-
-	/*
-	 * public String ricercaPerEtichettaLastMinute(){
-	 * 
-	 * FacesContext context = FacesContext.getCurrentInstance();
-	 * HttpServletRequest request = (HttpServletRequest) context
-	 * .getExternalContext().getRequest();
-	 * 
-	 * try {
-	 * 
-	 * //pacchettiRicercati = pacchettoRemoto.findByEtichettaOGG("LASTMINUTE");
-	 * setPacchettiRicercati(pacchettoRemoto.findByEtichettaOGG("lastminute"));
-	 * 
-	 * 
-	 * }catch (EJBException e) {
-	 * 
-	 * return null;
-	 * 
-	 * }
-	 * 
-	 * return "index";
-	 * 
-	 * }
-	 * 
-	 * public String ricercaPerEtichettaOfferte(){
-	 * 
-	 * FacesContext context = FacesContext.getCurrentInstance();
-	 * HttpServletRequest request = (HttpServletRequest) context
-	 * .getExternalContext().getRequest();
-	 * 
-	 * try {
-	 * 
-	 * //pacchettiRicercati = pacchettoRemoto.findByEtichettaOGG("OFFERTA");
-	 * setPacchettiRicercati(pacchettoRemoto.findByEtichettaOGG("offerta"));
-	 * 
-	 * 
-	 * }catch (EJBException e) {
-	 * 
-	 * return null;
-	 * 
-	 * }
-	 * 
-	 * return "index"; }
-	 * 
-	 * 
-	 * public String ricercaPerEtichettaMare(){
-	 * 
-	 * FacesContext context = FacesContext.getCurrentInstance();
-	 * HttpServletRequest request = (HttpServletRequest) context
-	 * .getExternalContext().getRequest();
-	 * 
-	 * try {
-	 * 
-	 * //pacchettiRicercati = pacchettoRemoto.findByEtichettaOGG("MARE");
-	 * setPacchettiRicercati(pacchettoRemoto.findByEtichettaOGG("mare"));
-	 * 
-	 * 
-	 * }catch (EJBException e) {
-	 * 
-	 * return null;
-	 * 
-	 * }
-	 * 
-	 * return "index"; }
-	 * 
-	 * 
-	 * public String ricercaPerEtichettaMontagna(){
-	 * 
-	 * FacesContext context = FacesContext.getCurrentInstance();
-	 * HttpServletRequest request = (HttpServletRequest) context
-	 * .getExternalContext().getRequest();
-	 * 
-	 * try {
-	 * 
-	 * //pacchettiRicercati = pacchettoRemoto.findByEtichettaOGG("MONTAGNA");
-	 * setPacchettiRicercati(pacchettoRemoto.findByEtichettaOGG("montagna"));
-	 * 
-	 * 
-	 * }catch (EJBException e) {
-	 * 
-	 * return null;
-	 * 
-	 * }
-	 * 
-	 * return "index"; }
-	 */
 
 	public String ricercaPerEtichettaClienteLastMinute() {
 
@@ -527,23 +499,99 @@ public class RicercaPacchettiBean implements Serializable {
 
 	public String dettagliPacchettoSelezionato() {
 
-	try{
-		Long id = pacchettoSelezionato.getIdPacchetto();
+		try {
+			Long id = pacchettoSelezionato.getIdPacchetto();
 
-		setIdPacchetto(id);
+			setIdPacchetto(id);
 
-		return "dettagliPacchettoPredefinitoRicercato?faces-redirect=true&cPacchetto"
-				+ id;
+			return "dettagliPacchettoPredefinitoRicercato?faces-redirect=true&cPacchetto"
+					+ id;
 
-	} catch (NullPointerException n) {
+		} catch (NullPointerException n) {
 
-		System.out
-				.println("dettagliPacchettoSelezionato --> NULLPOINTEREXCEPTION");
+			System.out
+					.println("dettagliPacchettoSelezionato --> NULLPOINTEREXCEPTION");
 
-		return "listaRicercaPacchettiPredefiniti";
+			return "listaRicercaPacchettiPredefiniti";
+
+		}
 
 	}
-		
+
+	public String dettagliPacchettoSalvataggio() {
+
+		try {
+			Long id = pacchettoSelezionato.getIdPacchetto();
+
+			setIdPacchetto(id);
+
+			return "user/dettagliPacchettoPersonalizzatoSalvataggio?faces-redirect=true&cPacchetto"
+					+ id;
+
+		} catch (NullPointerException n) {
+
+			System.out
+					.println("dettagliPacchettoSelezionato --> NULLPOINTEREXCEPTION");
+
+			return null;
+
+		}
+
+	}
+
+	public String creaPersonalizzato() {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+
+		try {
+			System.out.println("CREAPERSONALIZZATO --> INIZIO METODO");
+
+			if (!(user.getPrincipalEmail() == null)) {
+
+				System.out.println("CREAPERSONALIZZATO --> UTENTE REGISTRATO");
+				
+				String emailUtente=user.getPrincipalEmail();
+
+				for (int j = 0; j < listaComponentiSelezionati.size(); j++) {
+
+					if (!(listaComponenti.contains(listaComponentiSelezionati
+							.get(j)))) {
+
+						listaComponenti.add(listaComponentiSelezionati.get(j));
+
+					}
+
+				}
+
+				pacchettoPersonalizzatoRemoto.createPacchettoPersonalizzato(
+						"salvato", emailUtente, dataPartenza, dataRitorno,
+						listaComponentiSelezionati);
+
+				System.out.println("CREAPERSONALIZZATO --> FINE METODO");
+			}else{
+				
+				System.out.println("CREAPERSONALIZZATO --> UTENTE NON REGISTRATO");
+				
+				return "/user/index";
+				
+			}
+
+		} catch (EJBException e) {
+
+			System.out.println("CREAPERSONALIZZATO --> EJBEXCEPTION");
+
+			context.addMessage(null, new FacesMessage(
+					"Creazione pacchetto personalizzato fallita"));
+
+			return "index";
+
+		}
+
+		context.addMessage(null, new FacesMessage(
+				"Creazione pacchetto personalizzato riuscita"));
+
+		return "index";
+
 	}
 
 }

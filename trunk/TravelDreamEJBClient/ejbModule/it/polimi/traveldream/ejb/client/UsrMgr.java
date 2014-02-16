@@ -15,6 +15,7 @@ public interface UsrMgr {
    
     public UserDTO getUserDTO();
     
+    public String getPrincipalEmail();   
     
 
 	

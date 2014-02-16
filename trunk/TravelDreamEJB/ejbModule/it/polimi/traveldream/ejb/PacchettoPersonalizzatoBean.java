@@ -34,7 +34,7 @@ public class PacchettoPersonalizzatoBean implements
 	 * @param idCliente
 	 * @return idPacchettoPersonalizzato
 	 */
-	public Long createPacchettoPersonalizzato(String stato, Long idCliente,
+	public Long createPacchettoPersonalizzato(String stato, String emailUtente,
 			Date dataDiPartenza, Date dataDiRitorno,
 			List<ComponenteDTO> listaComponentiSelezionati) {
 
@@ -43,7 +43,7 @@ public class PacchettoPersonalizzatoBean implements
 			PacchettoPersonalizzato pacchettoPersonalizzato = new PacchettoPersonalizzato();
 
 			pacchettoPersonalizzato.setStato(stato);
-			pacchettoPersonalizzato.setIdCliente(idCliente);
+			pacchettoPersonalizzato.setEmailUtente(emailUtente);
 			pacchettoPersonalizzato.setDataDiPartenza(dataDiPartenza);
 			pacchettoPersonalizzato.setDataDiRitorno(dataDiRitorno);
 
