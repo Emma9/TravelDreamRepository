@@ -24,7 +24,7 @@
 		</p:layoutUnit>
 	</div>
 
-	
+
 
 
 	<p:layoutUnit position="west" size="300"
@@ -82,10 +82,10 @@
 
 
 
-<div>
+	<div>
 
-	<p:layoutUnit position="center">
-		<h:form id="tabellapacchetti">
+		<p:layoutUnit position="center">
+
 			<p:tabView id="tabView">
 
 
@@ -94,12 +94,15 @@
 						<p:graphicImage id="tab1Img"
 							value="/immagini/homepage/lastminute.jpg" />
 
+						<br />
+						<br />
 
 						<div>
 							<h:form>
 								<h:outputText id="tab1Text"
 									value="LISTA DEI PACCHETTI LASTMINUTE" />
 
+								<br />
 								<br />
 								<h:outputLabel value="Data di Partenza: " />
 								<p:calendar value="#{ricercaPacchettiBean.dataPartenza}"
@@ -146,18 +149,21 @@
 
 				</p:tab>
 
-<p:tab id="tab2" title="OFFERTE">
+				<p:tab id="tab2" title="OFFERTE">
 					<h:panelGrid columns="2" cellpadding="10">
 						<p:graphicImage id="tab2Img"
 							value="/immagini/homepage/offerte.jpg" />
 
+						<br />
+						<br />
 
 						<div>
 							<h:form>
-								<h:outputText id="tab2Text"
-									value="OFFERTE" />
+								<h:outputText id="tab2Text" value="OFFERTE" />
 
 								<br />
+								<br />
+
 								<h:outputLabel value="Data di Partenza: " />
 								<p:calendar value="#{ricercaPacchettiBean.dataPartenza}"
 									id="dataDiPartenza2" required="true"
@@ -201,17 +207,21 @@
 						</div>
 					</h:panelGrid>
 				</p:tab>
-				
+
 
 				<p:tab id="tab3" title="MARE">
 					<h:panelGrid columns="2" cellpadding="10">
 						<p:graphicImage id="tab3Img" value="/immagini/homepage/mare.jpg" />
 
+						<br />
+						<br />
+
 						<div>
 							<h:form>
 								<h:outputText id="tab3Text" value="RICERCA DEI PACCHETTI MARE" />
 
-
+								<br />
+								<br />
 
 
 
@@ -266,6 +276,8 @@
 						<p:graphicImage id="tab4Img"
 							value="/immagini/homepage/montagna.jpg" />
 
+						<br />
+						<br />
 
 						<div>
 							<h:form>
@@ -273,7 +285,8 @@
 								<h:outputText id="tab4Text"
 									value="RICERCA DEI PACCHETTI MONTAGNA" />
 
-
+								<br />
+								<br />
 
 
 								<h:outputLabel value="Data di Partenza: " />
@@ -321,9 +334,9 @@
 				</p:tab>
 
 			</p:tabView>
-		</h:form>
-	</p:layoutUnit>
-</div>
+
+		</p:layoutUnit>
+	</div>
 </p:layout>
 
 
