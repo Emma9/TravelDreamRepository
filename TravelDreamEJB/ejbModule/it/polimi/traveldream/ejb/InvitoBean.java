@@ -11,6 +11,7 @@ import it.polimi.traveldream.entities.InvitoDTO;
 
 
 import it.polimi.traveldream.entities.PacchettoPersonalizzato;
+import it.polimi.traveldream.entities.PacchettoPersonalizzatoDTO;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,6 +28,8 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 
 	@PersistenceContext(unitName = "travelDream_project") private EntityManager manager;
 
+	private PacchettoPersonalizzatoBean pacchettopersonalizzato= new PacchettoPersonalizzatoBean();
+	
 	/**Default constructor*/
 	public InvitoBean() {
 		// TODO Auto-generated constructor stub
@@ -38,13 +41,13 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 	 * @param data
 	 * @param stato
 	 * @return idInvito*/
-	public Long createInvito(String emailMittente, String emailDestinatario,PacchettoPersonalizzato pacchettoPersonalizzato, Date data, boolean stato) {
+	public Long createInvito(String emailMittente, String emailDestinatario,PacchettoPersonalizzatoDTO pacchettoPersonalizzato, Date data, boolean stato) {
 
 		Invito invito = new Invito();
 
 		invito.setEmailMittente(emailMittente);
 		invito.setEmailDestinatario(emailDestinatario);
-		invito.setPacchettoPersonalizzato(pacchettoPersonalizzato);
+		invito.setPacchettoPersonalizzato(pacchettopersonalizzato.pacchettoPersonalizzatoDTOToPacchettoPersonalizzato(pacchettoPersonalizzato));
 		invito.setData(data);
 		invito.setStato(stato);
 
@@ -83,7 +86,7 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 	 * @param idPacchettoPersonalizzato
 	 * @param data
 	 * @param stato*/
-	public void updateInvito(Long idInvito, String emailMittente,String emailDestinatario, PacchettoPersonalizzato pacchettoPersonalizzato,Date data, boolean stato) {
+	public void updateInvito(Long idInvito, String emailMittente,String emailDestinatario, PacchettoPersonalizzatoDTO pacchettoPersonalizzato,Date data, boolean stato) {
 
 		if (verificaPresenzaInvito(idInvito)) {
 
@@ -93,7 +96,7 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 			
 			invito.setEmailMittente(emailMittente);
 			invito.setEmailDestinatario(emailDestinatario);
-			invito.setPacchettoPersonalizzato(pacchettoPersonalizzato);
+			invito.setPacchettoPersonalizzato(pacchettopersonalizzato.pacchettoPersonalizzatoDTOToPacchettoPersonalizzato(pacchettoPersonalizzato));
 			invito.setData(data);
 
 			manager.merge(invito);
@@ -182,11 +185,9 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 		invitoDTO.setEmailMittente(invito.getEmailMittente());
 		invitoDTO.setEmailDestinatario(invito.getEmailDestinatario());
 		invitoDTO.setData(invito.getData());
-		invitoDTO.setPacchettoPersonalizzato(invito.getPacchettoPersonalizzato());
+		invitoDTO.setPacchettoPersonalizzato(pacchettopersonalizzato.pacchettoPersonalizzatoToDTO(invito.getPacchettoPersonalizzato()));
 		invitoDTO.setStato(invito.getStato());
 		
 		return invitoDTO;
 	}
-
-	
 }
