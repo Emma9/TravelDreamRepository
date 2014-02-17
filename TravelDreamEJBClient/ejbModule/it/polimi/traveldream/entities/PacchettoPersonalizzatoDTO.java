@@ -1,7 +1,15 @@
 package it.polimi.traveldream.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 public class PacchettoPersonalizzatoDTO extends PacchettoDTO implements Serializable{
@@ -11,11 +19,18 @@ public class PacchettoPersonalizzatoDTO extends PacchettoDTO implements Serializ
 	 */
 	private static final long serialVersionUID = 200L;
 	
+	
+	/**Attributi*/
+
+	
 	private Long idPacchettoPersonalizzato;
-	private String stato;
+	private String stato; //SALVATO BLOCCATO CONFERMATO ACCETTATO
 	private String emailUtente;
 	private Date dataDiPartenza;
 	private Date dataDiRitorno;
+	
+	private List<InvitoDTO> invitiPacchetto= new ArrayList<InvitoDTO>();
+	
 
 	/**Costruttore*/
 	public PacchettoPersonalizzatoDTO() {
@@ -95,6 +110,23 @@ public class PacchettoPersonalizzatoDTO extends PacchettoDTO implements Serializ
 	public void setDataDiRitorno(Date dataDiRitorno) {
 		this.dataDiRitorno = dataDiRitorno;
 	}
+
+	/**
+	 * @return the invitiPacchetto
+	 */
+	public List<InvitoDTO> getInvitiPacchetto() {
+		return invitiPacchetto;
+	}
+
+	/**
+	 * @param invitiPacchetto the invitiPacchetto to set
+	 */
+	public void setInvitiPacchetto(List<InvitoDTO> invitiPacchetto) {
+		this.invitiPacchetto = invitiPacchetto;
+	}
+
+	
+	
 	
 	
 	
