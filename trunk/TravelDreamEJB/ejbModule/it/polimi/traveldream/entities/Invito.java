@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.lang.Long;
 import java.lang.String;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -21,10 +22,14 @@ public class Invito implements Serializable {
 	private Long idInvito;
 	private String emailMittente;
 	private String emailDestinatario;
-	private Long idPacchettoPersonalizzato;
+	//private Long idPacchettoPersonalizzato;
 	@Temporal(TemporalType.DATE)
 	private Date data;
 	private boolean stato; //TRUE=>ACCETTATO
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name = "idPacchettoPersonalizzato", referencedColumnName="idPacchettoPersonalizzato")
+	private PacchettoPersonalizzato pacchettoPersonalizzato;
 
 	/**Costruttore*/
 	public Invito() {
@@ -75,18 +80,23 @@ public class Invito implements Serializable {
 		
 	}
 
-	/**@return idPacchettoPersonalizzato*/
-	public Long getIdPacchettoPersonalizzato() {
-		
-		return this.idPacchettoPersonalizzato;
-		
+	
+
+	
+
+	/**
+	 * @return the pacchettoPersonalizzato
+	 */
+	public PacchettoPersonalizzato getPacchettoPersonalizzato() {
+		return pacchettoPersonalizzato;
 	}
 
-	/**@param idPacchettoPersonalizzato idPacchettoPersonalizzato to set*/
-	public void setIdPacchettoPersonalizzato(Long idPacchettoPersonalizzato) {
-		
-		this.idPacchettoPersonalizzato = idPacchettoPersonalizzato;
-		
+	/**
+	 * @param pacchettoPersonalizzato the pacchettoPersonalizzato to set
+	 */
+	public void setPacchettoPersonalizzato(
+			PacchettoPersonalizzato pacchettoPersonalizzato) {
+		this.pacchettoPersonalizzato = pacchettoPersonalizzato;
 	}
 
 	/**@return data*/
@@ -116,4 +126,6 @@ public class Invito implements Serializable {
 		this.stato = stato;
 		
 	}
+	
+	
 }

@@ -1,7 +1,9 @@
 package it.polimi.traveldream.entities;
 
 import java.lang.Long;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -23,6 +25,10 @@ public class PacchettoPersonalizzato extends Pacchetto {
 	private Date dataDiPartenza;
 	@Temporal(TemporalType.DATE)
 	private Date dataDiRitorno;
+	
+	@OneToMany(fetch=FetchType.EAGER, mappedBy="pacchettoPersonalizzato")
+	private List<Invito> invitiPacchetto= new ArrayList<Invito>();
+	
 
 	/**Costruttore*/
 	public PacchettoPersonalizzato() {
@@ -102,7 +108,21 @@ public class PacchettoPersonalizzato extends Pacchetto {
 	public void setDataDiRitorno(Date dataDiRitorno) {
 		this.dataDiRitorno = dataDiRitorno;
 	}
-	
+
+	/**
+	 * @return the invitiPacchetto
+	 */
+	public List<Invito> getInvitiPacchetto() {
+		return invitiPacchetto;
+	}
+
+	/**
+	 * @param invitiPacchetto the invitiPacchetto to set
+	 */
+	public void setInvitiPacchetto(List<Invito> invitiPacchetto) {
+		this.invitiPacchetto = invitiPacchetto;
+	}
+
 	
 	
 	
