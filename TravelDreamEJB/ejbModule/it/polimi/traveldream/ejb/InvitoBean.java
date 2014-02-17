@@ -10,6 +10,8 @@ import it.polimi.traveldream.entities.InvitoDTO;
 
 
 
+import it.polimi.traveldream.entities.PacchettoPersonalizzato;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -36,13 +38,13 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 	 * @param data
 	 * @param stato
 	 * @return idInvito*/
-	public Long createInvito(String emailMittente, String emailDestinatario,Long idPacchettoPersonalizzato, Date data, boolean stato) {
+	public Long createInvito(String emailMittente, String emailDestinatario,PacchettoPersonalizzato pacchettoPersonalizzato, Date data, boolean stato) {
 
 		Invito invito = new Invito();
 
 		invito.setEmailMittente(emailMittente);
 		invito.setEmailDestinatario(emailDestinatario);
-		invito.setIdPacchettoPersonalizzato(idPacchettoPersonalizzato);
+		invito.setPacchettoPersonalizzato(pacchettoPersonalizzato);
 		invito.setData(data);
 		invito.setStato(stato);
 
@@ -81,7 +83,7 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 	 * @param idPacchettoPersonalizzato
 	 * @param data
 	 * @param stato*/
-	public void updateInvito(Long idInvito, String emailMittente,String emailDestinatario, Long idPacchettoPersonalizzato,Date data, boolean stato) {
+	public void updateInvito(Long idInvito, String emailMittente,String emailDestinatario, PacchettoPersonalizzato pacchettoPersonalizzato,Date data, boolean stato) {
 
 		if (verificaPresenzaInvito(idInvito)) {
 
@@ -91,7 +93,7 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 			
 			invito.setEmailMittente(emailMittente);
 			invito.setEmailDestinatario(emailDestinatario);
-			invito.setIdPacchettoPersonalizzato(idPacchettoPersonalizzato);
+			invito.setPacchettoPersonalizzato(pacchettoPersonalizzato);
 			invito.setData(data);
 
 			manager.merge(invito);
@@ -180,7 +182,7 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 		invitoDTO.setEmailMittente(invito.getEmailMittente());
 		invitoDTO.setEmailDestinatario(invito.getEmailDestinatario());
 		invitoDTO.setData(invito.getData());
-		invitoDTO.setIdPacchettoPersonalizzato(invito.getIdPacchettoPersonalizzato());
+		invitoDTO.setPacchettoPersonalizzato(invito.getPacchettoPersonalizzato());
 		invitoDTO.setStato(invito.getStato());
 		
 		return invitoDTO;

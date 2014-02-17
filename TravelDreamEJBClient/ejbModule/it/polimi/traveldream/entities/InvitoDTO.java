@@ -17,7 +17,7 @@ public class InvitoDTO implements Serializable{
 	private Long idInvito;
 	private String emailMittente;
 	private String emailDestinatario;
-	private Long idPacchettoPersonalizzato;
+	private PacchettoPersonalizzatoDTO pacchettoPersonalizzato;
 	@Temporal(TemporalType.TIME)
 	private Date data;
 	private boolean stato;
@@ -70,18 +70,21 @@ public class InvitoDTO implements Serializable{
 		
 	}
 
-	/**@return idPacchettoPersonalizzato*/
-	public Long getIdPacchettoPersonalizzato() {
-		
-		return this.idPacchettoPersonalizzato;
-		
+	
+
+	/**
+	 * @return the pacchettoPersonalizzato
+	 */
+	public PacchettoPersonalizzatoDTO getPacchettoPersonalizzato() {
+		return pacchettoPersonalizzato;
 	}
 
-	/**@param idPacchettoPersonalizzato idPacchettoPersonalizzato to set*/
-	public void setIdPacchettoPersonalizzato(Long idPacchettoPersonalizzato) {
-		
-		this.idPacchettoPersonalizzato = idPacchettoPersonalizzato;
-		
+	/**
+	 * @param pacchettoPersonalizzato the pacchettoPersonalizzato to set
+	 */
+	public void setPacchettoPersonalizzato(
+			PacchettoPersonalizzatoDTO pacchettoPersonalizzato) {
+		this.pacchettoPersonalizzato = pacchettoPersonalizzato;
 	}
 
 	/**@return data*/
