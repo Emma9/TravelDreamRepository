@@ -90,7 +90,7 @@ CREATE TABLE `pacchetto` (
   `SCONTO` int(11) DEFAULT NULL,
   `DATADIPARTENZA` date DEFAULT NULL,
   `DATADIRITORNO` date DEFAULT NULL,
-  `IDCLIENTE` bigint(20) DEFAULT NULL,
+  `EMAILUTENTE` bigint(20) DEFAULT NULL,
   `IDPACCHETTOPERSONALIZZATO` bigint(20) DEFAULT NULL,
   `STATO` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`IDPACCHETTO`)
@@ -157,38 +157,6 @@ LOCK TABLES `sequence` WRITE;
 INSERT INTO `sequence` VALUES ('SEQ_GEN',50);
 /*!40000 ALTER TABLE `sequence` ENABLE KEYS */;
 UNLOCK TABLES;
-
-
---
--- Table structure for table `pacchetto_componente`
---
-
-DROP TABLE IF EXISTS `pacchetto_componente`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `pacchetto_componente` (
-  `Pacchetto_IDPACCHETTO` bigint(20) NOT NULL,
-  `listaComponenti_CODICECOMPONENTE` int(11) NOT NULL,
-  `listaComponentiSelezionati_CODICECOMPONENTE` int(11) NOT NULL,
-  PRIMARY KEY (`Pacchetto_IDPACCHETTO`,`listaComponenti_CODICECOMPONENTE`,`listaComponentiSelezionati_CODICECOMPONENTE`),
-  KEY `PCCHTTCMPNENTElstCmpnntSelezionatiCODICECOMPONENTE` (`listaComponentiSelezionati_CODICECOMPONENTE`),
-  KEY `PACCHETTOCOMPONENTElistaComponentiCODICECOMPONENTE` (`listaComponenti_CODICECOMPONENTE`),
-  CONSTRAINT `PACCHETTOCOMPONENTElistaComponentiCODICECOMPONENTE` FOREIGN KEY (`listaComponenti_CODICECOMPONENTE`) REFERENCES `componente` (`CODICECOMPONENTE`),
-  CONSTRAINT `FK_PACCHETTO_COMPONENTE_Pacchetto_IDPACCHETTO` FOREIGN KEY (`Pacchetto_IDPACCHETTO`) REFERENCES `pacchetto` (`IDPACCHETTO`),
-  CONSTRAINT `PCCHTTCMPNENTElstCmpnntSelezionatiCODICECOMPONENTE` FOREIGN KEY (`listaComponentiSelezionati_CODICECOMPONENTE`) REFERENCES `componente` (`CODICECOMPONENTE`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `pacchetto_componente`
---
-
-LOCK TABLES `pacchetto_componente` WRITE;
-/*!40000 ALTER TABLE `pacchetto_componente` DISABLE KEYS */;
-/*!40000 ALTER TABLE `pacchetto_componente` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
 
 --
 -- Table structure for table `pacchetto_componenti`
