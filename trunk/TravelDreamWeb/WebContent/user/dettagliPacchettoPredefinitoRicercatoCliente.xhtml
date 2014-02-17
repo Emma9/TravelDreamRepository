@@ -8,7 +8,7 @@
 <h:head>
 </h:head>
 <h:body>
-	<h2>DETTAGLI DEL PACCHETTO SELEZIONATO</h2>
+	<h2>DETTAGLI DEL PACCHETTO SELEZIONATO DAL CLIENTE</h2>
 	<h:form>
 		<p:fieldset legend="Ecco I Dettagli del pacchetto"
 			widgetVar="regWidget" style="width: 600px;">
@@ -70,10 +70,9 @@
 	<div align="left">
 		<h:form>
 
-			<h:button value="Salva" outcome="user/dettagliPacchettoPredefinitoRicercatoCliente"
+			<h:button value="Salva" outcome="listaPacchettiPersonalizzatiCliente"
 				action="#{ricercaPacchettiBean.creaPersonalizzato()}"
-				ajax="false" />>
-
+				ajax="false" />
 
 		</h:form>
 	</div>

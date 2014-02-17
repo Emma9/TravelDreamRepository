@@ -49,9 +49,9 @@ public class RicercaPacchettiBean implements Serializable {
 	private Date dataPartenza;
 	private Date dataRitorno;
 	private int numPartecipanti;
-	
+
 	private List<ComponenteDTO> listaComponentiSelezionati;
-	
+
 	private List<ComponenteDTO> listaComponenti;
 
 	private String etichetta;
@@ -136,10 +136,6 @@ public class RicercaPacchettiBean implements Serializable {
 	public void setNumPartecipanti(int numPartecipanti) {
 		this.numPartecipanti = numPartecipanti;
 	}
-	
-	
-	
-	
 
 	/**
 	 * @return the listaComponentiSelezionati
@@ -149,16 +145,13 @@ public class RicercaPacchettiBean implements Serializable {
 	}
 
 	/**
-	 * @param listaComponentiSelezionati the listaComponentiSelezionati to set
+	 * @param listaComponentiSelezionati
+	 *            the listaComponentiSelezionati to set
 	 */
 	public void setListaComponentiSelezionati(
 			List<ComponenteDTO> listaComponentiSelezionati) {
 		this.listaComponentiSelezionati = listaComponentiSelezionati;
 	}
-	
-	
-	
-	
 
 	/**
 	 * @return the listaComponenti
@@ -168,7 +161,8 @@ public class RicercaPacchettiBean implements Serializable {
 	}
 
 	/**
-	 * @param listaComponenti the listaComponenti to set
+	 * @param listaComponenti
+	 *            the listaComponenti to set
 	 */
 	public void setListaComponenti(List<ComponenteDTO> listaComponenti) {
 		this.listaComponenti = listaComponenti;
@@ -503,10 +497,11 @@ public class RicercaPacchettiBean implements Serializable {
 			Long id = pacchettoSelezionato.getIdPacchetto();
 
 			setIdPacchetto(id);
-			
+
 			setListaComponenti(pacchettoSelezionato.getListaComponenti());
-			
-			setListaComponentiSelezionati(pacchettoSelezionato.getListaComponentiSelezionati());
+
+			setListaComponentiSelezionati(pacchettoSelezionato
+					.getListaComponentiSelezionati());
 
 			return "dettagliPacchettoPredefinitoRicercato?faces-redirect=true&cPacchetto"
 					+ id;
@@ -522,19 +517,26 @@ public class RicercaPacchettiBean implements Serializable {
 
 	}
 
-
 	public String creaPersonalizzato() {
 
 		FacesContext context = FacesContext.getCurrentInstance();
+		
+		System.out.println("CREAPERSONALIZZATO --> INIZIO METODO");
 
 		try {
-			System.out.println("CREAPERSONALIZZATO --> INIZIO METODO");
 
-			if (!(user.getPrincipalEmail() == null)) {
+			System.out.println("CREAPERSONALIZZATO --> INIZIO TRY");
+
+			System.out.println("CREAPERSONALIZZATO --> USER_EMAIL "
+					+ user.getPrincipalEmail());
+
+			if (!(user.getPrincipalEmail().equalsIgnoreCase("ANONYMOUS"))) {
+
+				// UTENTE REGISTRATO --> CREAZIONE PACCHETTO PERSONALIZZATO
 
 				System.out.println("CREAPERSONALIZZATO --> UTENTE REGISTRATO");
-				
-				String emailUtente=user.getPrincipalEmail();
+
+				String emailUtente = user.getPrincipalEmail();
 
 				for (int j = 0; j < listaComponentiSelezionati.size(); j++) {
 
@@ -552,12 +554,23 @@ public class RicercaPacchettiBean implements Serializable {
 						listaComponentiSelezionati);
 
 				System.out.println("CREAPERSONALIZZATO --> FINE METODO");
-			}else{
+
+				context.addMessage(null, new FacesMessage(
+						"Creazione pacchetto personalizzato riuscita"));
+
+				return null;
+
+			} else {
+
+				// UTENTE NON REGISTRATO --> LOGIN/REGISTRAZIONE
+
+				System.out
+						.println("CREAPERSONALIZZATO --> UTENTE NON REGISTRATO");
+
+				//return "user/dettagliPacchettoPredefinitoRicercatoCliente";
+				return null;
 				
-				System.out.println("CREAPERSONALIZZATO --> UTENTE NON REGISTRATO");
-				
-				return "/user/index";
-				
+
 			}
 
 		} catch (EJBException e) {
@@ -567,14 +580,16 @@ public class RicercaPacchettiBean implements Serializable {
 			context.addMessage(null, new FacesMessage(
 					"Creazione pacchetto personalizzato fallita"));
 
-			return "index";
+			return null;
 
 		}
 
-		context.addMessage(null, new FacesMessage(
-				"Creazione pacchetto personalizzato riuscita"));
-
-		return "index";
+		/*
+		 * context.addMessage(null, new FacesMessage(
+		 * "Creazione pacchetto personalizzato riuscita"));
+		 * 
+		 * return "index";
+		 */
 
 	}
 
