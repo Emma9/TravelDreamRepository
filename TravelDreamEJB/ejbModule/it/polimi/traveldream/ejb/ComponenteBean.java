@@ -441,10 +441,10 @@ public class ComponenteBean implements ComponenteBeanRemote,
 		
 		System.out.println("GIORNI INTERVALLO "+giorniIntervallo);
 		
-
+		DateTime dataDaVerificareJ = new DateTime(dataPartenza);
+		
 		for (int i = 0; i < giorniIntervallo; i++) {
 
-			DateTime dataDaVerificareJ = new DateTime();
 			dataDaVerificareJ = dataDaVerificareJ.plusDays(i);
 			Date dataDaVerificare = dataDaVerificareJ.toDate();
 			

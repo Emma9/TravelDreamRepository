@@ -503,6 +503,10 @@ public class RicercaPacchettiBean implements Serializable {
 			Long id = pacchettoSelezionato.getIdPacchetto();
 
 			setIdPacchetto(id);
+			
+			setListaComponenti(pacchettoSelezionato.getListaComponenti());
+			
+			setListaComponentiSelezionati(pacchettoSelezionato.getListaComponentiSelezionati());
 
 			return "dettagliPacchettoPredefinitoRicercato?faces-redirect=true&cPacchetto"
 					+ id;
@@ -518,26 +522,6 @@ public class RicercaPacchettiBean implements Serializable {
 
 	}
 
-	public String dettagliPacchettoSalvataggio() {
-
-		try {
-			Long id = pacchettoSelezionato.getIdPacchetto();
-
-			setIdPacchetto(id);
-
-			return "user/dettagliPacchettoPersonalizzatoSalvataggio?faces-redirect=true&cPacchetto"
-					+ id;
-
-		} catch (NullPointerException n) {
-
-			System.out
-					.println("dettagliPacchettoSelezionato --> NULLPOINTEREXCEPTION");
-
-			return null;
-
-		}
-
-	}
 
 	public String creaPersonalizzato() {
 
