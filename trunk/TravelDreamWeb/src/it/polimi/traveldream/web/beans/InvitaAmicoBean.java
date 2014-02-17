@@ -95,7 +95,6 @@ public class InvitaAmicoBean implements Serializable {
 		
 		try {
 			
-			//idPacchettoPersonalizzato = request.getParameter(idpacc);
 			
 			emailMittente=request.getUserPrincipal().getName();
 			setPacchettoPersonalizzato(pacchettoPersRemoto.findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato));
