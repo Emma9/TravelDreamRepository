@@ -3,6 +3,9 @@ package it.polimi.traveldream.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -17,10 +20,10 @@ public class InvitoDTO implements Serializable{
 	private Long idInvito;
 	private String emailMittente;
 	private String emailDestinatario;
-	private PacchettoPersonalizzatoDTO pacchettoPersonalizzato;
-	@Temporal(TemporalType.TIME)
 	private Date data;
-	private boolean stato;
+	private boolean stato; //TRUE=>ACCETTATO
+	
+	private PacchettoPersonalizzatoDTO pacchettoPersonalizzato;
 
 	/**Costruttore*/
 	public InvitoDTO() {
@@ -33,6 +36,7 @@ public class InvitoDTO implements Serializable{
 		return this.idInvito;
 		
 	}
+	
 	
 
 	/**
@@ -69,6 +73,8 @@ public class InvitoDTO implements Serializable{
 		this.emailDestinatario = emailDestinatario;
 		
 	}
+
+	
 
 	
 
@@ -114,5 +120,6 @@ public class InvitoDTO implements Serializable{
 		this.stato = stato;
 		
 	}
-
+	
+	
 }

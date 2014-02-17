@@ -113,7 +113,7 @@ public class DettagliInvitoRicevutoBean implements Serializable {
 			invito = invitoremoto.findByIdInvito(idInvito);
 			
 			//PACCHETTO DELL'INVITO PER LA LISTA DEI COMPONENTI
-			pacchetto = pacchettopersonalizzatoremoto.findByIdPacchettoPersonalizzato(invito.getIdPacchettoPersonalizzato());
+			pacchetto = pacchettopersonalizzatoremoto.findByIdPacchettoPersonalizzato(invito.getPacchettoPersonalizzato().getIdPacchetto());
 
 		}catch (EJBException e) {
 		
