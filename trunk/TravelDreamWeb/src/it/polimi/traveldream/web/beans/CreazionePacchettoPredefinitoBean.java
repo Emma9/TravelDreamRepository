@@ -28,6 +28,7 @@ public class CreazionePacchettoPredefinitoBean implements Serializable {
 	@EJB
 	private PacchettoBeanRemote pacchettoRemoto;
 
+	private Long idpacchetto;
 	private String destinazione;
 	private String descrizione;
 	private int sconto;
@@ -40,6 +41,24 @@ public class CreazionePacchettoPredefinitoBean implements Serializable {
 
 	// COMPONENTI SELEZIONATI
 	private List<ComponenteDTO> listaComponentiSelezionati = new ArrayList<ComponenteDTO>();
+
+	
+	
+	
+	
+	/**
+	 * @return the idpacchetto
+	 */
+	public Long getIdpacchetto() {
+		return idpacchetto;
+	}
+
+	/**
+	 * @param idpacchetto the idpacchetto to set
+	 */
+	public void setIdpacchetto(Long idpacchetto) {
+		this.idpacchetto = idpacchetto;
+	}
 
 	/**
 	 * @return the destinazione
@@ -217,8 +236,11 @@ public class CreazionePacchettoPredefinitoBean implements Serializable {
 
 			context.addMessage(null, new FacesMessage(
 					"Modifica pacchetto riuscita"));
+			
+			setIdpacchetto(id);
+			
 
-			return "index";
+			return "dettagliPacchettoSelezionatoImpiegatoModifica";
 
 		} catch (EJBException e) {
 

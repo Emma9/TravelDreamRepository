@@ -299,7 +299,7 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 
 			System.out.println("rimuoviComponenteID --> METODO");
 
-			return ricercaComponenteImpiegatoId();
+			return "index";
 
 		} catch (EJBException e) {
 
@@ -325,7 +325,7 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 
 			System.out.println("rimuoviComponenteTER --> METODO");
 
-			return ricercaComponenteImpiegatoTermine();
+			return "index";
 
 		} catch (EJBException e) {
 

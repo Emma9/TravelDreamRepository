@@ -105,49 +105,47 @@
 
 
 
-						<h:panelGrid columns="2" cellpadding="10" cellspacing="10">
 
 
 
 
-							<!-- RICERCA COMPONENTE PER TERMINE -->
 
+						<!-- RICERCA COMPONENTE PER TERMINE -->
+
+						<br /> <br /> <br />
+
+						<div align="left">
+
+							<h:outputText value="Ricerca Componente Tramite Termine:" />
 							<br />
-							<br />
-							<br />
-
-							<div align="left">
-
-								<h:outputText value="Ricerca Componente Tramite Termine:" />
-								<br />
 
 
-								<h:form>
+							<h:form>
 
-									<div style="display: inline;">
-										<h:inputText id="r2" autocomplete="true"
-											value="#{ricercaComponentiImpiegatoBean.termine}" />
-										<h:panelGrid id="ricerca2">
-											<h:commandButton value="Ricerca" update="ricerca2"
-												action="#{ricercaComponentiImpiegatoBean.ricercaComponenteImpiegatoTermine()}"
-												ajax="false" />
+								<div style="display: inline;">
+									<h:inputText id="r2" autocomplete="true"
+										value="#{ricercaComponentiImpiegatoBean.termine}" />
+									<h:panelGrid id="ricerca2">
+										<h:commandButton value="Ricerca" update="ricerca2"
+											action="#{ricercaComponentiImpiegatoBean.ricercaComponenteImpiegatoTermine()}"
+											ajax="false" />
 
 
-											<br />
+										<br />
 
 
 
 
-										</h:panelGrid>
-									</div>
+									</h:panelGrid>
+								</div>
 
 
-								</h:form>
+							</h:form>
 
 
-							</div>
+						</div>
 
-						</h:panelGrid>
+
 
 					</div>
 
