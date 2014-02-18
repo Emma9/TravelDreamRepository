@@ -22,8 +22,7 @@ public class PacchettoPersonalizzatoDTO extends PacchettoDTO implements Serializ
 	
 	/**Attributi*/
 
-	
-	private Long idPacchettoPersonalizzato;
+
 	private String stato; //SALVATO BLOCCATO CONFERMATO ACCETTATO
 	private String emailUtente;
 	private Date dataDiPartenza;
@@ -35,22 +34,6 @@ public class PacchettoPersonalizzatoDTO extends PacchettoDTO implements Serializ
 	/**Costruttore*/
 	public PacchettoPersonalizzatoDTO() {
 		super();
-	}
-
-	/**@return idPacchettoPersonalizzato*/
-	public Long getIdPacchettoPersonalizzato() {
-		
-		return this.idPacchettoPersonalizzato;
-		
-	}
-	
-	
-
-	/**
-	 * @param idPacchettoPersonalizzato the idPacchettoPersonalizzato to set
-	 */
-	public void setIdPacchettoPersonalizzato(Long idPacchettoPersonalizzato) {
-		this.idPacchettoPersonalizzato = idPacchettoPersonalizzato;
 	}
 
 	/**@return Stato*/

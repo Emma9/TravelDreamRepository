@@ -13,6 +13,7 @@ public class PacchettoDTO implements Serializable {
 	private static final long serialVersionUID = 201L;
 
 	private Long idPacchetto;
+	private Long idPacchettoPersonalizzato;
 	private String destinazione;
 	private Date dataInizioValidita;
 	private Date dataFineValidita;
@@ -64,6 +65,24 @@ public class PacchettoDTO implements Serializable {
 	/** @return destinazione */
 	public String getDestinazione() {
 		return this.destinazione;
+	}
+
+	
+	
+	
+	
+	/**
+	 * @return the idPacchettoPersonalizzato
+	 */
+	public Long getIdPacchettoPersonalizzato() {
+		return idPacchettoPersonalizzato;
+	}
+
+	/**
+	 * @param idPacchettoPersonalizzato the idPacchettoPersonalizzato to set
+	 */
+	public void setIdPacchettoPersonalizzato(Long idPacchettoPersonalizzato) {
+		this.idPacchettoPersonalizzato = idPacchettoPersonalizzato;
 	}
 
 	/**
