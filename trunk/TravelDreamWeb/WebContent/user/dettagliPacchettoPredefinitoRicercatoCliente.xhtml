@@ -52,25 +52,13 @@
 	</h:form>
 
 
-	<!-- BOTTONE MODIFICA PACCHETTO -->
 
-
-	<div align="left">
-		<h:form>
-			<h:commandButton value="Modifica"
-				action="#{ricercaPacchettiImpiegatoBean.formModifica(ricercaPacchettiImpiegatoBean.idPacchetto)}"
-				ajax="false" />
-		</h:form>
-	</div>
-
-
-
-	<!-- BOTTONE SALVA PACCHETTO -->
+	<!-- BOTTONE CONFERMA SALVATAGGIO PACCHETTO -->
 
 	<div align="left">
 		<h:form>
 
-			<h:button value="Salva" outcome="listaPacchettiPersonalizzatiCliente"
+			<h:commandButton value="Conferma Salvataggio"
 				action="#{ricercaPacchettiBean.creaPersonalizzato()}"
 				ajax="false" />
 

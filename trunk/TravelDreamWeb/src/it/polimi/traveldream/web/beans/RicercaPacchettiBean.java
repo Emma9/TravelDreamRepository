@@ -520,7 +520,7 @@ public class RicercaPacchettiBean implements Serializable {
 	public String creaPersonalizzato() {
 
 		FacesContext context = FacesContext.getCurrentInstance();
-		
+
 		System.out.println("CREAPERSONALIZZATO --> INIZIO METODO");
 
 		try {
@@ -558,7 +558,7 @@ public class RicercaPacchettiBean implements Serializable {
 				context.addMessage(null, new FacesMessage(
 						"Creazione pacchetto personalizzato riuscita"));
 
-				return null;
+				return "listaPacchettiPersonalizzatiCliente";
 
 			} else {
 
@@ -567,9 +567,8 @@ public class RicercaPacchettiBean implements Serializable {
 				System.out
 						.println("CREAPERSONALIZZATO --> UTENTE NON REGISTRATO");
 
-				//return "user/dettagliPacchettoPredefinitoRicercatoCliente";
+				// return "user/dettagliPacchettoPredefinitoRicercatoCliente";
 				return null;
-				
 
 			}
 
@@ -583,13 +582,6 @@ public class RicercaPacchettiBean implements Serializable {
 			return null;
 
 		}
-
-		/*
-		 * context.addMessage(null, new FacesMessage(
-		 * "Creazione pacchetto personalizzato riuscita"));
-		 * 
-		 * return "index";
-		 */
 
 	}
 

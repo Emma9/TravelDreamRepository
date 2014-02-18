@@ -37,8 +37,12 @@ public class PacchettoPersonalizzatoBean implements
 	public Long createPacchettoPersonalizzato(String stato, String emailUtente,
 			Date dataDiPartenza, Date dataDiRitorno,
 			List<ComponenteDTO> listaComponentiSelezionati) {
+		
+			System.out.println("BEAN --> CREAPACCHETTOPERSONALIZZATO --> INIZIO METODO");
 
 		if (verificaStatoPerCreazione(stato)) {
+			
+			System.out.println("BEAN --> CREAPACCHETTOPERSONALIZZATO --> STATO CORRETTO");
 
 			PacchettoPersonalizzato pacchettoPersonalizzato = new PacchettoPersonalizzato();
 
@@ -56,12 +60,18 @@ public class PacchettoPersonalizzatoBean implements
 			pacchettoPersonalizzato
 					.setListaComponentiSelezionati(componentiSelezionati);
 
+			System.out.println("BEAN --> CREAPACCHETTOPERSONALIZZATO --> PRIMA DI PERSIST");
+			
 			manager.persist(pacchettoPersonalizzato);
+			
+			System.out.println("BEAN --> CREAPACCHETTOPERSONALIZZATO --> DOPO PERSIST");
 
 			return pacchettoPersonalizzato.getIdPacchettoPersonalizzato();
 
 		} else {
 
+			System.out.println("BEAN --> CREAPACCHETTOPERSONALIZZATO --> STATO ERRATO");
+			
 			return (long) -1;
 
 		}
@@ -295,7 +305,19 @@ public class PacchettoPersonalizzatoBean implements
 
 		case "ACCETTATO":
 			return true;
+			
+		case "salvato":
+			return true;
 
+		case "accettato":
+			return true;	
+
+		case "Salvato":
+			return true;
+
+		case "Accettato":
+			return true;	
+			
 		}
 
 		return false;
