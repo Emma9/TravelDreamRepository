@@ -53,6 +53,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 			System.out.println("VERIFICA COMPONENTI & ETICHETTA CORRETTA");
 
 			Pacchetto pacchetto = new Pacchetto();
+			//UTILIZZARE NUOVO COSTRUTTORE
 
 			pacchetto.setDestinazione(destinazione);
 			pacchetto.setDataInizioValidita(dataInizioValidita);

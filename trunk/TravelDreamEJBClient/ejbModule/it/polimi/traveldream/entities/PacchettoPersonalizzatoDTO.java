@@ -5,52 +5,66 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+public class PacchettoPersonalizzatoDTO extends PacchettoDTO implements
+		Serializable {
 
-
-public class PacchettoPersonalizzatoDTO extends PacchettoDTO implements Serializable{
-	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 200L;
-	
-	
-	/**Attributi*/
 
+	/** Attributi */
 
-	private String stato; //SALVATO BLOCCATO CONFERMATO ACCETTATO
+	private String stato; // SALVATO BLOCCATO CONFERMATO ACCETTATO
 	private String emailUtente;
 	private Date dataDiPartenza;
 	private Date dataDiRitorno;
-	
-	private List<InvitoDTO> invitiPacchetto= new ArrayList<InvitoDTO>();
-	
 
-	/**Costruttore*/
+	private List<InvitoDTO> invitiPacchetto = new ArrayList<InvitoDTO>();
+
+	/** Costruttore */
 	public PacchettoPersonalizzatoDTO() {
-		super();
 	}
 
-	/**@return Stato*/
+	/** Costruttore PACCHETTOPERSONALIZZATO */
+	public PacchettoPersonalizzatoDTO(Long idPacchetto,
+			Long idPacchettoPersonalizzato, String destinazione,
+			Date dataInizioValidita, Date dateFineValidita, String etichetta,
+			String descrizione, List<ComponenteDTO> listaComponenti,
+			List<ComponenteDTO> listaComponentiSelezionati, int costo,
+			int sconto, String stato, String emailUtente, Date dataDiPartenza,
+			Date dataDiRitorno, List<InvitoDTO> invitiPacchetto) {
+
+		super(idPacchettoPersonalizzato, destinazione, dataInizioValidita,
+				dateFineValidita, etichetta, descrizione, listaComponenti,
+				listaComponentiSelezionati, costo, sconto);
+
+		this.setStato(stato);
+		this.setEmailUtente(emailUtente);
+		this.setDataDiPartenza(dataDiPartenza);
+		this.setDataDiRitorno(dataDiRitorno);
+		this.setInvitiPacchetto(invitiPacchetto);
+
+		super.setIdPacchetto(idPacchetto);
+
+	}
+
+	/** @return Stato */
 	public String getStato() {
-		
+
 		return this.stato;
-		
+
 	}
 
-	/**@param stato stato to set*/
+	/**
+	 * @param stato
+	 *            stato to set
+	 */
 	public void setStato(String stato) {
-		
+
 		this.stato = stato;
 
 	}
-
-	
 
 	/**
 	 * @return the emailUtente
@@ -60,7 +74,8 @@ public class PacchettoPersonalizzatoDTO extends PacchettoDTO implements Serializ
 	}
 
 	/**
-	 * @param emailUtente the emailUtente to set
+	 * @param emailUtente
+	 *            the emailUtente to set
 	 */
 	public void setEmailUtente(String emailUtente) {
 		this.emailUtente = emailUtente;
@@ -74,7 +89,8 @@ public class PacchettoPersonalizzatoDTO extends PacchettoDTO implements Serializ
 	}
 
 	/**
-	 * @param dataDiPartenza the dataDiPartenza to set
+	 * @param dataDiPartenza
+	 *            the dataDiPartenza to set
 	 */
 	public void setDataDiPartenza(Date dataDiPartenza) {
 		this.dataDiPartenza = dataDiPartenza;
@@ -88,7 +104,8 @@ public class PacchettoPersonalizzatoDTO extends PacchettoDTO implements Serializ
 	}
 
 	/**
-	 * @param dataDiRitorno the dataDiRitorno to set
+	 * @param dataDiRitorno
+	 *            the dataDiRitorno to set
 	 */
 	public void setDataDiRitorno(Date dataDiRitorno) {
 		this.dataDiRitorno = dataDiRitorno;
@@ -102,15 +119,11 @@ public class PacchettoPersonalizzatoDTO extends PacchettoDTO implements Serializ
 	}
 
 	/**
-	 * @param invitiPacchetto the invitiPacchetto to set
+	 * @param invitiPacchetto
+	 *            the invitiPacchetto to set
 	 */
 	public void setInvitiPacchetto(List<InvitoDTO> invitiPacchetto) {
 		this.invitiPacchetto = invitiPacchetto;
 	}
 
-	
-	
-	
-	
-	
 }

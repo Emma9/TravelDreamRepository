@@ -33,19 +33,58 @@ public class Pacchetto implements Serializable {
 	private String descrizione;
 
 	@ManyToMany
-	@JoinTable(name = "Pacchetto_componenti", joinColumns = { @JoinColumn(name = "idPacchetto", referencedColumnName = "idPacchetto"), @JoinColumn(name = "idPacchettoPersonalizzato", referencedColumnName = "idPacchettoPersonalizzato") }, inverseJoinColumns = { @JoinColumn(name = "codiceComponente", referencedColumnName = "codiceComponente") })
+	@JoinTable(name = "Pacchetto_componenti", joinColumns = {
+			@JoinColumn(name = "idPacchetto", referencedColumnName = "idPacchetto"),
+			@JoinColumn(name = "idPacchettoPersonalizzato", referencedColumnName = "idPacchettoPersonalizzato") }, inverseJoinColumns = { @JoinColumn(name = "codiceComponente", referencedColumnName = "codiceComponente") })
 	private List<Componente> listaComponenti = new ArrayList<Componente>();
 
 	@ManyToMany
-	@JoinTable(name = "Pacchetto_componentiSelezionati", joinColumns = { @JoinColumn(name = "idPacchetto", referencedColumnName = "idPacchetto"), @JoinColumn(name = "idPacchettoPersonalizzato", referencedColumnName = "idPacchettoPersonalizzato") }, inverseJoinColumns = { @JoinColumn(name = "codiceComponente", referencedColumnName = "codiceComponente") })
+	@JoinTable(name = "Pacchetto_componentiSelezionati", joinColumns = {
+			@JoinColumn(name = "idPacchetto", referencedColumnName = "idPacchetto"),
+			@JoinColumn(name = "idPacchettoPersonalizzato", referencedColumnName = "idPacchettoPersonalizzato") }, inverseJoinColumns = { @JoinColumn(name = "codiceComponente", referencedColumnName = "codiceComponente") })
 	private List<Componente> listaComponentiSelezionati = new ArrayList<Componente>();
 	private int costo;
 	private int sconto;
 
 	/** Costruttore */
 	public Pacchetto() {
-		
-		
+	};
+
+	/** Costruttore PACCHETTO */
+	public Pacchetto(String destinazione, Date dataInizioValidita,
+			Date dateFineValidita, String etichetta, String descrizione,
+			List<Componente> listaComponenti,
+			List<Componente> listaComponentiSelezionati, int costo, int sconto) {
+
+		this.setIdPacchettoPersonalizzato((long) 0);
+		this.setDestinazione(destinazione);
+		this.setDataInizioValidita(dataInizioValidita);
+		this.setDataFineValidita(dateFineValidita);
+		this.setEtichetta(etichetta);
+		this.setDescrizione(descrizione);
+		this.setListaComponenti(listaComponenti);
+		this.setListaComponentiSelezionati(listaComponentiSelezionati);
+		this.setCosto(costo);
+		this.setSconto(sconto);
+
+	}
+
+	/** Costruttore PACCHETTOPERSONALIZZATO */
+	public Pacchetto(Long idPacchettoPersonalizzato, String destinazione,
+			Date dataInizioValidita, Date dateFineValidita, String etichetta,
+			String descrizione, List<Componente> listaComponenti,
+			List<Componente> listaComponentiSelezionati, int costo, int sconto) {
+
+		this.setIdPacchettoPersonalizzato(idPacchettoPersonalizzato);
+		this.setDestinazione(destinazione);
+		this.setDataInizioValidita(dataInizioValidita);
+		this.setDataFineValidita(dateFineValidita);
+		this.setEtichetta(etichetta);
+		this.setDescrizione(descrizione);
+		this.setListaComponenti(listaComponenti);
+		this.setListaComponentiSelezionati(listaComponentiSelezionati);
+		this.setCosto(costo);
+		this.setSconto(sconto);
 
 	}
 

@@ -45,7 +45,9 @@ public class PacchettoPersonalizzatoBean implements
 			System.out.println("BEAN --> CREAPACCHETTOPERSONALIZZATO --> STATO CORRETTO");
 
 			PacchettoPersonalizzato pacchettoPersonalizzato = new PacchettoPersonalizzato();
-
+			
+			//UTILIZZARE NUOVO COSTRUTTORE E GENERARE IDPACCHETTOPERSONALIZZATO COME COMPONENTEBEAN
+			
 			pacchettoPersonalizzato.setStato(stato);
 			pacchettoPersonalizzato.setEmailUtente(emailUtente);
 			pacchettoPersonalizzato.setDataDiPartenza(dataDiPartenza);
