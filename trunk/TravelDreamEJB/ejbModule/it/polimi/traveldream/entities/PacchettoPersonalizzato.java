@@ -17,8 +17,6 @@ public class PacchettoPersonalizzato extends Pacchetto {
 
 	/**Attributi*/
 
-	@GeneratedValue
-	private Long idPacchettoPersonalizzato;
 	private String stato; //SALVATO BLOCCATO CONFERMATO ACCETTATO
 	private String emailUtente;
 	@Temporal(TemporalType.DATE)
@@ -35,21 +33,8 @@ public class PacchettoPersonalizzato extends Pacchetto {
 		super();
 	}
 
-	/**@return idPacchettoPersonalizzato*/
-	public Long getIdPacchettoPersonalizzato() {
-		
-		return this.idPacchettoPersonalizzato;
-		
-	}
 	
 	
-
-	/**
-	 * @param idPacchettoPersonalizzato the idPacchettoPersonalizzato to set
-	 */
-	public void setIdPacchettoPersonalizzato(Long idPacchettoPersonalizzato) {
-		this.idPacchettoPersonalizzato = idPacchettoPersonalizzato;
-	}
 
 	/**@return Stato*/
 	public String getStato() {
