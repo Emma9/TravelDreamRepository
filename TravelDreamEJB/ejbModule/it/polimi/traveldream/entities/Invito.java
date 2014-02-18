@@ -28,7 +28,7 @@ public class Invito implements Serializable {
 	private boolean stato; //TRUE=>ACCETTATO
 	
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "idPacchettoPersonalizzato", referencedColumnName="idPacchettoPersonalizzato")
+	@JoinColumns({@JoinColumn(name = "idPacchetto", referencedColumnName = "idPacchetto"), @JoinColumn(name = "idPacchettoPersonalizzato", referencedColumnName = "idPacchettoPersonalizzato")})
 	private PacchettoPersonalizzato pacchettoPersonalizzato;
 
 	/**Costruttore*/
