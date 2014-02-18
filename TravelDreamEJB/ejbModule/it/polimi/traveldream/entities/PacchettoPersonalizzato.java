@@ -7,50 +7,70 @@ import java.util.List;
 
 import javax.persistence.*;
 
-/**PacchettoPersonalizzato di TravelDream*/
+/** PacchettoPersonalizzato di TravelDream */
 
 @Entity
 public class PacchettoPersonalizzato extends Pacchetto {
 
-	/**Version number*/
+	/** Version number */
 	private static final long serialVersionUID = 107L;
 
-	/**Attributi*/
+	/** Attributi */
 
-	private String stato; //SALVATO BLOCCATO CONFERMATO ACCETTATO
+	private String stato; // SALVATO BLOCCATO CONFERMATO ACCETTATO
 	private String emailUtente;
 	@Temporal(TemporalType.DATE)
 	private Date dataDiPartenza;
 	@Temporal(TemporalType.DATE)
 	private Date dataDiRitorno;
-	
-	@OneToMany(fetch=FetchType.EAGER, mappedBy="pacchettoPersonalizzato")
-	private List<Invito> invitiPacchetto= new ArrayList<Invito>();
-	
 
-	/**Costruttore*/
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "pacchettoPersonalizzato")
+	private List<Invito> invitiPacchetto = new ArrayList<Invito>();
+
+	/** Costruttore */
 	public PacchettoPersonalizzato() {
 		super();
 	}
 
-	
-	
+	/** Costruttore PACCHETTOPERSONALIZZATO */
+	public PacchettoPersonalizzato(Long idPacchetto,
+			Long idPacchettoPersonalizzato, String destinazione,
+			Date dataInizioValidita, Date dateFineValidita, String etichetta,
+			String descrizione, List<Componente> listaComponenti,
+			List<Componente> listaComponentiSelezionati, int costo, int sconto,
+			String stato, String emailUtente, Date dataDiPartenza,
+			Date dataDiRitorno, List<Invito> invitiPacchetto) {
 
-	/**@return Stato*/
-	public String getStato() {
-		
-		return this.stato;
-		
+		super(idPacchettoPersonalizzato, destinazione, dataInizioValidita,
+				dateFineValidita, etichetta, descrizione, listaComponenti,
+				listaComponentiSelezionati, costo, sconto);
+
+		this.setStato(stato);
+		this.setEmailUtente(emailUtente);
+		this.setDataDiPartenza(dataDiPartenza);
+		this.setDataDiRitorno(dataDiRitorno);
+		this.setInvitiPacchetto(invitiPacchetto);
+
+		super.setIdPacchetto(idPacchetto);
+
 	}
 
-	/**@param stato stato to set*/
+	/** @return Stato */
+	public String getStato() {
+
+		return this.stato;
+
+	}
+
+	/**
+	 * @param stato
+	 *            stato to set
+	 */
 	public void setStato(String stato) {
-		
+
 		this.stato = stato;
 
 	}
-
-	
 
 	/**
 	 * @return the emailUtente
@@ -60,7 +80,8 @@ public class PacchettoPersonalizzato extends Pacchetto {
 	}
 
 	/**
-	 * @param emailUtente the emailUtente to set
+	 * @param emailUtente
+	 *            the emailUtente to set
 	 */
 	public void setEmailUtente(String emailUtente) {
 		this.emailUtente = emailUtente;
@@ -74,7 +95,8 @@ public class PacchettoPersonalizzato extends Pacchetto {
 	}
 
 	/**
-	 * @param dataDiPartenza the dataDiPartenza to set
+	 * @param dataDiPartenza
+	 *            the dataDiPartenza to set
 	 */
 	public void setDataDiPartenza(Date dataDiPartenza) {
 		this.dataDiPartenza = dataDiPartenza;
@@ -88,7 +110,8 @@ public class PacchettoPersonalizzato extends Pacchetto {
 	}
 
 	/**
-	 * @param dataDiRitorno the dataDiRitorno to set
+	 * @param dataDiRitorno
+	 *            the dataDiRitorno to set
 	 */
 	public void setDataDiRitorno(Date dataDiRitorno) {
 		this.dataDiRitorno = dataDiRitorno;
@@ -102,15 +125,11 @@ public class PacchettoPersonalizzato extends Pacchetto {
 	}
 
 	/**
-	 * @param invitiPacchetto the invitiPacchetto to set
+	 * @param invitiPacchetto
+	 *            the invitiPacchetto to set
 	 */
 	public void setInvitiPacchetto(List<Invito> invitiPacchetto) {
 		this.invitiPacchetto = invitiPacchetto;
 	}
 
-	
-	
-	
-	
-	
 }

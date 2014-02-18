@@ -28,7 +28,46 @@ public class PacchettoDTO implements Serializable {
 
 	/** Costruttore */
 	public PacchettoDTO() {
-		super();
+	};
+
+	/** Costruttore PACCHETTO */
+	public PacchettoDTO(String destinazione, Date dataInizioValidita,
+			Date dateFineValidita, String etichetta, String descrizione,
+			List<ComponenteDTO> listaComponenti,
+			List<ComponenteDTO> listaComponentiSelezionati, int costo,
+			int sconto) {
+
+		this.setIdPacchettoPersonalizzato((long) 0);
+		this.setDestinazione(destinazione);
+		this.setDataInizioValidita(dataInizioValidita);
+		this.setDataFineValidita(dateFineValidita);
+		this.setEtichetta(etichetta);
+		this.setDescrizione(descrizione);
+		this.setListaComponenti(listaComponenti);
+		this.setListaComponentiSelezionati(listaComponentiSelezionati);
+		this.setCosto(costo);
+		this.setSconto(sconto);
+
+	}
+
+	/** Costruttore PACCHETTOPERSONALIZZATO */
+	public PacchettoDTO(Long idPacchettoPersonalizzato, String destinazione,
+			Date dataInizioValidita, Date dateFineValidita, String etichetta,
+			String descrizione, List<ComponenteDTO> listaComponenti,
+			List<ComponenteDTO> listaComponentiSelezionati, int costo,
+			int sconto) {
+
+		this.setIdPacchettoPersonalizzato(idPacchettoPersonalizzato);
+		this.setDestinazione(destinazione);
+		this.setDataInizioValidita(dataInizioValidita);
+		this.setDataFineValidita(dateFineValidita);
+		this.setEtichetta(etichetta);
+		this.setDescrizione(descrizione);
+		this.setListaComponenti(listaComponenti);
+		this.setListaComponentiSelezionati(listaComponentiSelezionati);
+		this.setCosto(costo);
+		this.setSconto(sconto);
+
 	}
 
 	/**
@@ -67,10 +106,6 @@ public class PacchettoDTO implements Serializable {
 		return this.destinazione;
 	}
 
-	
-	
-	
-	
 	/**
 	 * @return the idPacchettoPersonalizzato
 	 */
@@ -79,7 +114,8 @@ public class PacchettoDTO implements Serializable {
 	}
 
 	/**
-	 * @param idPacchettoPersonalizzato the idPacchettoPersonalizzato to set
+	 * @param idPacchettoPersonalizzato
+	 *            the idPacchettoPersonalizzato to set
 	 */
 	public void setIdPacchettoPersonalizzato(Long idPacchettoPersonalizzato) {
 		this.idPacchettoPersonalizzato = idPacchettoPersonalizzato;
@@ -192,7 +228,8 @@ public class PacchettoDTO implements Serializable {
 	}
 
 	/**
-	 * @param costo the costo to set
+	 * @param costo
+	 *            the costo to set
 	 */
 	public void setCosto(int costo) {
 		this.costo = costo;
@@ -206,10 +243,11 @@ public class PacchettoDTO implements Serializable {
 	}
 
 	/**
-	 * @param sconto the sconto to set
+	 * @param sconto
+	 *            the sconto to set
 	 */
 	public void setSconto(int sconto) {
 		this.sconto = sconto;
-	}	
+	}
 
 }
