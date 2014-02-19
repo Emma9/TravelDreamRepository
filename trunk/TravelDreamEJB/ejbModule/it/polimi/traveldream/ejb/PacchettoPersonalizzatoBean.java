@@ -97,13 +97,13 @@ public class PacchettoPersonalizzatoBean implements
 	}
 
 	/** @param idPacchettoPersonalizzato */
-	public void removePacchettoPersonalizzato(Long idPacchettoPersonalizzato) {
+	public void removePacchettoPersonalizzato(Long idPacchettoPersonalizzato, Long idPacchetto) {
 
 		// PacchettoPersonalizzatoDTO pacchetto=
 		// findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato);
 
 		PacchettoPersonalizzato pacchetto = manager.find(
-				PacchettoPersonalizzato.class, idPacchettoPersonalizzato);
+				PacchettoPersonalizzato.class, new PacchettoPKDTO(idPacchetto, idPacchettoPersonalizzato));
 
 		manager.remove(pacchetto);
 	}
