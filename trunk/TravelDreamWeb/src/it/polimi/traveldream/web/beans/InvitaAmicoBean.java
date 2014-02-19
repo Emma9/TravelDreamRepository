@@ -121,7 +121,7 @@ public class InvitaAmicoBean implements Serializable {
 		
 		for(int i=0; i< pacchettoPersonalizzato.getInvitiPacchetto().size();i++){
 			if(pacchettoPersonalizzato.getInvitiPacchetto().get(i).getEmailDestinatario().equals(emailDestinatario)){
-				return "/dettagliInvitoAmico";
+				return "/visualizzarePropostaViaggio";
 				
 			}
 			
