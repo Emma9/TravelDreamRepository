@@ -247,13 +247,8 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 */
 	public PacchettoDTO findByIdPacchetto(Long idPacchetto) {
 
-		TypedQuery<Pacchetto> q = manager.createQuery(
-				"FROM Pacchetto p WHERE p.idPacchetto=:new_idPacchetto",
-				Pacchetto.class);
-
-		q.setParameter("new_idPacchetto", idPacchetto);
-
-		PacchettoDTO pacchetto = pacchettoToDTO(q.getSingleResult());
+		
+		PacchettoDTO pacchetto = pacchettoToDTO(manager.find(Pacchetto.class, new PacchettoPKDTO(idPacchetto, (long)0)));
 
 		return pacchetto;
 	}
