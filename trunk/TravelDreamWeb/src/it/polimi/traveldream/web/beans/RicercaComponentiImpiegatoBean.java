@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
-import javax.ejb.Stateless;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -336,22 +335,21 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 		}
 
 	}
-	
-	
-	public String formModificaID(int idc){
-		
+
+	public String formModificaID(int idc) {
+
 		setId(idc);
-				
+
 		return "modificaComponenteID";
-		
+
 	}
-	
-	public String formModificaTER(int idc){
-		
+
+	public String formModificaTER(int idc) {
+
 		setId(idc);
-				
+
 		return "modificaComponenteTER";
-		
+
 	}
 
 }
