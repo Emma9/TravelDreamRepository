@@ -72,7 +72,9 @@ public class PacchettoPersonalizzatoBean implements
 						.add(componenteDTOToComponenteInPacchettoPers(listaComponentiSelezionati
 								.get(i)));
 			}
-			Pacchetto pacchetto= manager.find(Pacchetto.class, pacchettoPKDTO);
+			
+			PacchettoPK pacchettoPK= new PacchettoPK(pacchettoPKDTO.getIdPacchetto(), pacchettoPKDTO.getIdPacchettoPersonalizzato());
+			Pacchetto pacchetto= manager.find(Pacchetto.class, pacchettoPK);
 			
 			List<Invito> invitiPacchetto= new ArrayList<Invito>();
 			
@@ -103,7 +105,7 @@ public class PacchettoPersonalizzatoBean implements
 		// findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato);
 
 		PacchettoPersonalizzato pacchetto = manager.find(
-				PacchettoPersonalizzato.class, new PacchettoPKDTO(idPacchetto, idPacchettoPersonalizzato));
+				PacchettoPersonalizzato.class, new PacchettoPK(idPacchetto, idPacchettoPersonalizzato));
 
 		manager.remove(pacchetto);
 	}
@@ -123,8 +125,9 @@ public class PacchettoPersonalizzatoBean implements
 			// PacchettoPersonalizzatoDTO pacchettoPersonalizzato =
 			// findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato);
 
+			PacchettoPK pacchettoPK= new PacchettoPK(pacchettoPKDTO.getIdPacchetto(), pacchettoPKDTO.getIdPacchettoPersonalizzato());
 			PacchettoPersonalizzato pacchettoPersonalizzato = manager.find(
-					PacchettoPersonalizzato.class,pacchettoPKDTO);
+					PacchettoPersonalizzato.class,pacchettoPK);
 
 			pacchettoPersonalizzato.setStato(stato);
 			pacchettoPersonalizzato.setDataDiPartenza(dataDiPartenza);
