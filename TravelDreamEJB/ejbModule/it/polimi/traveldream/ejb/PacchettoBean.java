@@ -248,7 +248,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	public PacchettoDTO findByIdPacchetto(Long idPacchetto) {
 
 		
-		PacchettoDTO pacchetto = pacchettoToDTO(manager.find(Pacchetto.class, new PacchettoPKDTO(idPacchetto, (long)0)));
+		PacchettoDTO pacchetto = pacchettoToDTO(manager.find(Pacchetto.class, new PacchettoPK(idPacchetto, (long)0)));
 
 		return pacchetto;
 	}
