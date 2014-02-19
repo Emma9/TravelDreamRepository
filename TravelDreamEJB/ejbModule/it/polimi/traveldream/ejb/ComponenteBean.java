@@ -139,6 +139,8 @@ public class ComponenteBean implements ComponenteBeanRemote,
 				&& (verificaTipologia(tipologia))) {
 
 			Componente componente = manager.find(Componente.class, codiceComponente);
+			
+			//System.out.println("IDCOMPONENTE "+componente.getCodiceComponente());
 
 			componente.setTipologia(tipologia);
 			componente.setLuogo(luogo);
