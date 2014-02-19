@@ -19,6 +19,37 @@ public class PacchettoPK implements Serializable {
 
 	}
 
+	
+	
+	
+	/**
+	 * @return the idPacchetto
+	 */
+	public Long getIdPacchetto() {
+		return idPacchetto;
+	}
+
+	/**
+	 * @param idPacchetto the idPacchetto to set
+	 */
+	public void setIdPacchetto(Long idPacchetto) {
+		this.idPacchetto = idPacchetto;
+	}
+
+	/**
+	 * @return the idPacchettoPersonalizzato
+	 */
+	public Long getIdPacchettoPersonalizzato() {
+		return idPacchettoPersonalizzato;
+	}
+
+	/**
+	 * @param idPacchettoPersonalizzato the idPacchettoPersonalizzato to set
+	 */
+	public void setIdPacchettoPersonalizzato(Long idPacchettoPersonalizzato) {
+		this.idPacchettoPersonalizzato = idPacchettoPersonalizzato;
+	}
+
 	public boolean equals(Object object) {
 
 		if (object instanceof PacchettoPK) {

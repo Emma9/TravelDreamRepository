@@ -1,12 +1,20 @@
 package it.polimi.traveldream.ejb;
 
+import it.polimi.traveldream.ejb.client.PacchettoBeanRemote;
 import it.polimi.traveldream.ejb.client.PacchettoPersonalizzatoBeanLocal;
 import it.polimi.traveldream.ejb.client.PacchettoPersonalizzatoBeanRemote;
 import it.polimi.traveldream.entities.Componente;
 import it.polimi.traveldream.entities.ComponenteDTO;
+import it.polimi.traveldream.entities.Invito;
+import it.polimi.traveldream.entities.Pacchetto;
+import it.polimi.traveldream.entities.PacchettoDTO;
+import it.polimi.traveldream.entities.PacchettoPK;
+import it.polimi.traveldream.entities.PacchettoPKDTO;
 import it.polimi.traveldream.entities.PacchettoPersonalizzato;
 import it.polimi.traveldream.entities.PacchettoPersonalizzatoDTO;
 
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +31,8 @@ public class PacchettoPersonalizzatoBean implements
 
 	@PersistenceContext(unitName = "travelDream_project")
 	private EntityManager manager;
+	
+	private SecureRandom random = new SecureRandom();
 
 	/** Default constructor */
 	public PacchettoPersonalizzatoBean() {
@@ -36,7 +46,7 @@ public class PacchettoPersonalizzatoBean implements
 	 */
 	public Long createPacchettoPersonalizzato(String stato, String emailUtente,
 			Date dataDiPartenza, Date dataDiRitorno,
-			List<ComponenteDTO> listaComponentiSelezionati) {
+			List<ComponenteDTO> listaComponentiSelezionati, PacchettoPKDTO pacchettoPKDTO) {
 		
 			System.out.println("BEAN --> CREAPACCHETTOPERSONALIZZATO --> INIZIO METODO");
 
@@ -44,14 +54,17 @@ public class PacchettoPersonalizzatoBean implements
 			
 			System.out.println("BEAN --> CREAPACCHETTOPERSONALIZZATO --> STATO CORRETTO");
 
-			PacchettoPersonalizzato pacchettoPersonalizzato = new PacchettoPersonalizzato();
 			
 			//UTILIZZARE NUOVO COSTRUTTORE E GENERARE IDPACCHETTOPERSONALIZZATO COME COMPONENTEBEAN
 			
-			pacchettoPersonalizzato.setStato(stato);
-			pacchettoPersonalizzato.setEmailUtente(emailUtente);
-			pacchettoPersonalizzato.setDataDiPartenza(dataDiPartenza);
-			pacchettoPersonalizzato.setDataDiRitorno(dataDiRitorno);
+			BigInteger big = new BigInteger(130, random);
+			
+			int cod = big.intValue();
+			//System.out.println("COD_BIG"+cod);
+			if((cod*(-1)>0)){
+			cod= cod*(-1);
+			}
+			Long codice = (long)cod;
 
 			List<Componente> componentiSelezionati = new ArrayList<Componente>();
 			for (int i = 0; i < listaComponentiSelezionati.size(); i++) {
@@ -59,9 +72,12 @@ public class PacchettoPersonalizzatoBean implements
 						.add(componenteDTOToComponenteInPacchettoPers(listaComponentiSelezionati
 								.get(i)));
 			}
-			pacchettoPersonalizzato
-					.setListaComponentiSelezionati(componentiSelezionati);
-
+			Pacchetto pacchetto= manager.find(Pacchetto.class, pacchettoPKDTO);
+			
+			List<Invito> invitiPacchetto= new ArrayList<Invito>();
+			
+			PacchettoPersonalizzato pacchettoPersonalizzato = new PacchettoPersonalizzato(pacchetto.getIdPacchetto(), codice, pacchetto.getDestinazione(), pacchetto.getDataInizioValidita(), pacchetto.getDataFineValidita(), pacchetto.getEtichetta(), pacchetto.getDescrizione(), pacchetto.getListaComponenti(), componentiSelezionati, pacchetto.getCosto(), pacchetto.getSconto(), stato, emailUtente, dataDiPartenza, dataDiRitorno, invitiPacchetto);
+					
 			System.out.println("BEAN --> CREAPACCHETTOPERSONALIZZATO --> PRIMA DI PERSIST");
 			
 			manager.persist(pacchettoPersonalizzato);
@@ -97,18 +113,18 @@ public class PacchettoPersonalizzatoBean implements
 	 * @param stato
 	 * @param listaComponenti
 	 */
-	public void updatePacchettoPersonalizzato(Long idPacchettoPersonalizzato,
+	public void updatePacchettoPersonalizzato(PacchettoPKDTO pacchettoPKDTO,
 			String emailUtente, String stato, Date dataDiPartenza,
 			Date dataDiRitorno, List<ComponenteDTO> listaComponentiSelezionati) {
 
-		if ((verificaPresenzaPacchettoPersonalizzato(idPacchettoPersonalizzato))
+		if ((verificaPresenzaPacchettoPersonalizzato(pacchettoPKDTO))
 				&& (verificaStato(stato))) {
 
 			// PacchettoPersonalizzatoDTO pacchettoPersonalizzato =
 			// findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato);
 
 			PacchettoPersonalizzato pacchettoPersonalizzato = manager.find(
-					PacchettoPersonalizzato.class, idPacchettoPersonalizzato);
+					PacchettoPersonalizzato.class,pacchettoPKDTO);
 
 			pacchettoPersonalizzato.setStato(stato);
 			pacchettoPersonalizzato.setDataDiPartenza(dataDiPartenza);
@@ -251,15 +267,15 @@ public class PacchettoPersonalizzatoBean implements
 	 *         false
 	 */
 	public boolean verificaPresenzaPacchettoPersonalizzato(
-			Long idPacchettoPersonalizzato) {
+			PacchettoPKDTO pacchettoPKDTO) {
 		try {
 			TypedQuery<PacchettoPersonalizzato> q = manager
 					.createQuery(
-							"FROM PacchettoPersonalizzato p WHERE p.idPacchettoPersonalizzato=:new_idPacchettoPersonalizzato",
+							"FROM PacchettoPersonalizzato p WHERE (p.idPacchettoPersonalizzato=:new_idPacchettoPersonalizzato",
 							PacchettoPersonalizzato.class);
 
 			q.setParameter("new_idPacchettoPersonalizzato",
-					idPacchettoPersonalizzato);
+					pacchettoPKDTO.getIdPacchettoPersonalizzato());
 
 			if(q.getResultList().isEmpty()){
 				return false;

@@ -7,6 +7,7 @@ import it.polimi.traveldream.entities.Componente;
 import it.polimi.traveldream.entities.ComponenteDTO;
 import it.polimi.traveldream.entities.Pacchetto;
 import it.polimi.traveldream.entities.PacchettoDTO;
+import it.polimi.traveldream.entities.PacchettoPK;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -52,14 +53,8 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 
 			System.out.println("VERIFICA COMPONENTI & ETICHETTA CORRETTA");
 
-			Pacchetto pacchetto = new Pacchetto();
-			//UTILIZZARE NUOVO COSTRUTTORE
-
-			pacchetto.setDestinazione(destinazione);
-			pacchetto.setDataInizioValidita(dataInizioValidita);
-			pacchetto.setDataFineValidita(dataFineValidita);
-			pacchetto.setEtichetta(etichetta);
-			pacchetto.setDescrizione(descrizione);
+			
+			
 
 			List<Componente> listaComponentiEnt = new ArrayList<Componente>();
 
@@ -69,7 +64,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 								.get(i)));
 			}
 
-			pacchetto.setListaComponenti(listaComponentiEnt);
+			
 
 			System.out.println("SET LISTA COMPONENTI");
 
@@ -80,18 +75,19 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 								.get(i)));
 			}
 
-			pacchetto
-					.setListaComponentiSelezionati(listaComponentiSelezionatiEnt);
-
+			
 			System.out.println("SET LISTA COMPONENTI SELEZIONATI");
 
-			pacchetto.setSconto(sconto);
+		
 
 			int costoPacchetto = calcolaCostoPacchetto(listaComponenti, sconto);
-			pacchetto.setCosto(costoPacchetto);
+			
 
 			System.out.println("SET COSTO");
 
+			Pacchetto pacchetto = new Pacchetto(destinazione, dataInizioValidita, dataFineValidita, etichetta, descrizione, listaComponentiEnt, listaComponentiSelezionatiEnt, costoPacchetto, sconto);
+					
+			
 			manager.persist(pacchetto);
 
 			System.out.println("PERSIST PACCHETTO");
@@ -140,8 +136,11 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 				&& (verificaListaComponenti(listaComponentiSelezionati))
 				&& (verificaEtichetta(etichetta))) {
 
-			Pacchetto pacchetto = manager.find(Pacchetto.class, idPacchetto);
-
+			PacchettoPK chiave= new PacchettoPK(idPacchetto, (long)0);
+			
+			Pacchetto pacchetto = manager.find(Pacchetto.class, chiave);
+			
+			
 			pacchetto.setDestinazione(destinazione);
 			pacchetto.setDataInizioValidita(dataInizioValidita);
 			pacchetto.setDataFineValidita(dataFineValidita);
@@ -385,13 +384,11 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 */
 	public boolean verificaPresenzaPacchetto(Long idPacchetto) {
 		try {
-			TypedQuery<Pacchetto> q = manager.createQuery(
-					"FROM Pacchetto p WHERE p.idPacchetto=:new_idPacchetto",
-					Pacchetto.class);
-
-			q.setParameter("new_idPacchetto", idPacchetto);
-
-			if (q.getResultList().isEmpty()) {
+			
+			PacchettoPK chiave= new PacchettoPK(idPacchetto, (long)0);
+			
+			Pacchetto pacchetto = manager.find(Pacchetto.class, chiave);
+			if (pacchetto==null) {
 				return false;
 			}
 

@@ -1,6 +1,7 @@
 package it.polimi.traveldream.ejb.client;
 
 import it.polimi.traveldream.entities.ComponenteDTO;
+import it.polimi.traveldream.entities.PacchettoPKDTO;
 import it.polimi.traveldream.entities.PacchettoPersonalizzatoDTO;
 
 import java.util.ArrayList;
@@ -12,23 +13,34 @@ import javax.ejb.Remote;
 @Remote
 public interface PacchettoPersonalizzatoBeanRemote {
 
-	/**@param stato
-	 * @param idCliente
-	 * @return idPacchettoPersonalizzato*/
+	
+	/**
+	 * @param stato
+	 * @param emailUtente
+	 * @param dataDiPartenza
+	 * @param dataDiRitorno
+	 * @param listaComponentiSelezionati
+	 * @param pacchettoPKDTO
+	 * @return
+	 */
 	public Long createPacchettoPersonalizzato(String stato, String emailUtente,
 			Date dataDiPartenza, Date dataDiRitorno,
-			List<ComponenteDTO> listaComponentiSelezionati);
-	
+			List<ComponenteDTO> listaComponentiSelezionati, PacchettoPKDTO pacchettoPKDTO);	
 	/**@param idPacchettoPersonalizzato*/
 	public void removePacchettoPersonalizzato(Long idPacchettoPersonalizzato);	
 	
-	/**@param idPacchettoPersonalizzato
+	
+	/**
+	 * @param pacchettoPKDTO
+	 * @param emailUtente
 	 * @param stato
-	 * @param listaComponenti*/
-	public void updatePacchettoPersonalizzato(Long idPacchettoPersonalizzato,
+	 * @param dataDiPartenza
+	 * @param dataDiRitorno
+	 * @param listaComponentiSelezionati
+	 */
+	public void updatePacchettoPersonalizzato(PacchettoPKDTO pacchettoPKDTO,
 			String emailUtente, String stato, Date dataDiPartenza,
 			Date dataDiRitorno, List<ComponenteDTO> listaComponentiSelezionati);
-	
 	
 	/**@param idPacchettoPersonalizzato
 	 * @return PacchettoPersonalizzato*/
@@ -41,9 +53,13 @@ public interface PacchettoPersonalizzatoBeanRemote {
 	/**@return ArrayList<idPacchettoPersonalizzato>*/
 	public ArrayList<Long> findAll();
 	
-	/**@param idPacchettoPersonalizzato
-	 * @return true if idPacchettoPersonalizzato is not present in the DB, otherwise false*/
-	public boolean verificaPresenzaPacchettoPersonalizzato(Long idPacchettoPersonalizzato);
+	
+	/**
+	 * @param pacchettoPKDTO
+	 * @return
+	 */
+	public boolean verificaPresenzaPacchettoPersonalizzato(
+			PacchettoPKDTO pacchettoPKDTO);
 	
 	/**@param stato
 	 * @return true if stato is valid, otherwise false
