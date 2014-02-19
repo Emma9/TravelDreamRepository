@@ -109,7 +109,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 
 		System.out.println("SESSION PRIMA DI FIND");
 
-		Pacchetto p = manager.find(Pacchetto.class, new PacchettoPKDTO(idPacchetto, (long)0));
+		Pacchetto p = manager.find(Pacchetto.class, new PacchettoPK(idPacchetto, (long)0));
 
 		System.out.println("SESSION DOPO FIND");
 
