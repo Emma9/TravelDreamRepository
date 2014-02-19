@@ -8,6 +8,7 @@ import it.polimi.traveldream.entities.ComponenteDTO;
 import it.polimi.traveldream.entities.Pacchetto;
 import it.polimi.traveldream.entities.PacchettoDTO;
 import it.polimi.traveldream.entities.PacchettoPK;
+import it.polimi.traveldream.entities.PacchettoPKDTO;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -108,7 +109,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 
 		System.out.println("SESSION PRIMA DI FIND");
 
-		Pacchetto p = manager.find(Pacchetto.class, idPacchetto);
+		Pacchetto p = manager.find(Pacchetto.class, new PacchettoPKDTO(idPacchetto, (long)0));
 
 		System.out.println("SESSION DOPO FIND");
 

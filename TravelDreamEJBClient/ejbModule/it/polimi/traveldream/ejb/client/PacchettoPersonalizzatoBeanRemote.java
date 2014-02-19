@@ -26,10 +26,15 @@ public interface PacchettoPersonalizzatoBeanRemote {
 	public Long createPacchettoPersonalizzato(String stato, String emailUtente,
 			Date dataDiPartenza, Date dataDiRitorno,
 			List<ComponenteDTO> listaComponentiSelezionati, PacchettoPKDTO pacchettoPKDTO);	
-	/**@param idPacchettoPersonalizzato*/
-	public void removePacchettoPersonalizzato(Long idPacchettoPersonalizzato);	
+
 	
-	
+
+	/**
+	 * @param idPacchettoPersonalizzato
+	 * @param idPacchetto
+	 */
+	public void removePacchettoPersonalizzato(Long idPacchettoPersonalizzato, Long idPacchetto);
+
 	/**
 	 * @param pacchettoPKDTO
 	 * @param emailUtente
