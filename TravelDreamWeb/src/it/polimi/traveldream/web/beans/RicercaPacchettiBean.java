@@ -504,7 +504,7 @@ public class RicercaPacchettiBean implements Serializable {
 			setListaComponentiSelezionati(pacchettoSelezionato
 					.getListaComponentiSelezionati());
 
-			return "dettagliPacchettoPredefinitoRicercato?faces-redirect=true&cPacchetto"
+			return "/dettagliPacchettoPredefinitoRicercato?faces-redirect=true&cPacchetto"
 					+ id;
 
 		} catch (NullPointerException n) {
@@ -533,9 +533,9 @@ public class RicercaPacchettiBean implements Serializable {
 
 			if (!(user.getPrincipalEmail().equalsIgnoreCase("ANONYMOUS"))) {
 
-				// UTENTE REGISTRATO --> CREAZIONE PACCHETTO PERSONALIZZATO
+				// UTENTE LOGGATO --> CREAZIONE PACCHETTO PERSONALIZZATO
 
-				System.out.println("CREAPERSONALIZZATO --> UTENTE REGISTRATO");
+				System.out.println("CREAPERSONALIZZATO --> UTENTE LOGGATO");
 
 				String emailUtente = user.getPrincipalEmail();
 
@@ -551,7 +551,7 @@ public class RicercaPacchettiBean implements Serializable {
 				}
 
 				pacchettoPersonalizzatoRemoto.createPacchettoPersonalizzato(
-						"salvato", emailUtente, dataPartenza, dataRitorno,
+						"salvato", emailUtente, dataPartenza, dataRitorno, numPartecipanti,
 						listaComponentiSelezionati, new PacchettoPKDTO(idPacchetto, (long)0));
 
 				System.out.println("CREAPERSONALIZZATO --> FINE METODO");
@@ -559,7 +559,7 @@ public class RicercaPacchettiBean implements Serializable {
 				context.addMessage(null, new FacesMessage(
 						"Creazione pacchetto personalizzato riuscita"));
 
-				return "listaPacchettiPersonalizzatiCliente";
+				return "/user/index";
 
 			} else {
 

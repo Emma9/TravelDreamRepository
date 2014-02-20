@@ -20,46 +20,46 @@
 
 				<h:outputText value="ID:" />
 				<h:outputText
-					value="#{ricercaPacchettiBean.pacchettoSelezionato.idPacchetto}" />
+					value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.idPacchettoPersonalizzato}" />
 
 				<h:outputText value="Destinazione:" />
 				<h:outputText
-					value="#{ricercaPacchettiBean.pacchettoSelezionato.destinazione}" />
+					value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.destinazione}" />
 
 
 				<h:outputText value="Etichetta: " />
 				<h:outputText
-					value="#{ricercaPacchettiBean.pacchettoSelezionato.etichetta}" />
+					value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.etichetta}" />
 
 
 				<h:outputText value="Costo:" />
 				<h:outputText
-					value="#{ricercaPacchettiBean.pacchettoSelezionato.costo}" />
+					value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.costo}" />
 
 
 				<h:outputText value="Data Inizio Validità: " />
 				<h:outputText
-					value="#{ricercaPacchettiBean.pacchettoSelezionato.dataInizioValidita}" />
+					value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.dataInizioValidita}" />
 
 
 				<h:outputText value="Data Fine Validità: " />
 				<h:outputText
-					value="#{ricercaPacchettiBean.pacchettoSelezionato.dataFineValidita}" />
+					value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.dataFineValidita}" />
 					
 					
 				<h:outputText value="Data di Partenza: " />
 				<h:outputText
-					value="#{ricercaPacchettiBean.dataPartenza}" />
+					value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.dataDiPartenza}" />
 				
 				
 				<h:outputText value="Data di Ritorno: " />
 				<h:outputText
-					value="#{ricercaPacchettiBean.dataRitorno}" />
+					value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.dataDiRitorno}" />
 					
 					
 				<h:outputText value="Numero di partecipanti: " />
 				<h:outputText
-					value="#{ricercaPacchettiBean.numPartecipanti}" />	
+					value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.}" />	
 					
 
 			</p:panelGrid>
@@ -69,12 +69,12 @@
 
 
 
-	<!-- BOTTONE SALVA PACCHETTO -->
+	<!-- BOTTONE MODIFICA PACCHETTO -->
 
 	<div align="left">
 		<h:form>
-			<h:commandButton value="Conferma Salvataggio"
-				action="#{ricercaPacchettiBean.creaPersonalizzato()}"
+			<h:commandButton value="Modifica"
+				action="#{}"
 				ajax="false" />
 		</h:form>
 	</div>

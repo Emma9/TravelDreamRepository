@@ -15,16 +15,11 @@
 
 			<p:growl id="growl" showDetail="true" />
 
-			<p:dataTable id="listaPacchettiPersonalizzati" var="pacchettoPersonalizzato" value="#{mostraPacchettiPersonalizzatiBean.pacchettiPersonalizzatiRicercati}"
-				paginator="true" rows="10" selection="#{mostraPacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato}"
+			<p:dataTable id="listaPacchettiPersonalizzati" var="pacchettoPersonalizzato" value="#{gestionePacchettiPersonalizzatiBean.pacchettiPersonalizzatiCliente}"
+				paginator="true" rows="10" selection="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato}"
 				selectionMode="single">       
 
-				<p:ajax event="rowSelect" listener="#{ricercaPacchettiBean.onRowSelect}" oncomplete="dettgliPacchettoPersonalizzato" />
 						
-					
-					
-				<!-- <p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->													
-
 				<f:facet name="header">  
             	Seleziona un pacchetto per visualizzare i dettagli  
 		        </f:facet>
@@ -41,6 +36,17 @@
 						<p:column headerText="Data di Ritorno">  
 		            #{pacchettoPersonalizzato.dataFineValidita}  
 		        </p:column>
+		        
+		        <p:column headerText="Stato">  
+		            #{pacchettoPersonalizzato.stato}  
+		        </p:column>
+		        
+		        <f:facet name="footer">
+					<h:commandButton id="viewButton" value="Seleziona"
+						icon="ui-icon-search" update=":form:display"
+						action="#{gestionePacchettiPersonalizzatiBean.}"
+						ajax="false" />
+				</f:facet>
 		        
 			</p:dataTable>
 		

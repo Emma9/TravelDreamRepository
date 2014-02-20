@@ -1,6 +1,7 @@
 package it.polimi.traveldream.web.beans;
 
 import it.polimi.traveldream.ejb.client.UserBeanRemote;
+import it.polimi.traveldream.ejb.client.UsrMgr;
 import it.polimi.traveldream.entities.PacchettoPersonalizzatoDTO;
 
 import java.io.Serializable;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean()
 @SessionScoped
-public class MostraPacchettiPersonalizzatiBean implements Serializable {
+public class GestionePacchettiPersonalizzatiBean implements Serializable {
 
 	/**
 	 * 
@@ -24,6 +25,8 @@ public class MostraPacchettiPersonalizzatiBean implements Serializable {
 	
 	@EJB
 	private UserBeanRemote utenteRemoto;
+	@EJB
+	private UsrMgr usermanager;
 	
 	private String email;
 	
@@ -31,7 +34,7 @@ public class MostraPacchettiPersonalizzatiBean implements Serializable {
 		private PacchettoPersonalizzatoDTO pacchettoPersonalizzatoSelezionato;
 		
 		//LISTA PACCHETTI PERSONALIZZATI INVIATA ALLA PAGINA WEB
-		private ArrayList<PacchettoPersonalizzatoDTO> pacchettiPersonalizzatiRicercati = new ArrayList<PacchettoPersonalizzatoDTO>();
+		private ArrayList<PacchettoPersonalizzatoDTO> pacchettiPersonalizzatiCliente = new ArrayList<PacchettoPersonalizzatoDTO>();
 
 		/**
 		 * @return the email
@@ -62,22 +65,24 @@ public class MostraPacchettiPersonalizzatiBean implements Serializable {
 			this.pacchettoPersonalizzatoSelezionato = pacchettoPersonalizzatoSelezionato;
 		}
 
+		
+		
+		
 		/**
-		 * @return the pacchettiPersonalizzatiRicercati
+		 * @return the pacchettiPersonalizzatiCliente
 		 */
-		public ArrayList<PacchettoPersonalizzatoDTO> getPacchettiPersonalizzatiRicercati() {
-			return pacchettiPersonalizzatiRicercati;
+		public ArrayList<PacchettoPersonalizzatoDTO> getPacchettiPersonalizzatiCliente() {
+			return pacchettiPersonalizzatiCliente;
 		}
 
 		/**
-		 * @param pacchettiPersonalizzatiRicercati the pacchettiPersonalizzatiRicercati to set
+		 * @param pacchettiPersonalizzatiCliente the pacchettiPersonalizzatiCliente to set
 		 */
-		public void setPacchettiPersonalizzatiRicercati(
-				ArrayList<PacchettoPersonalizzatoDTO> pacchettiPersonalizzatiRicercati) {
-			this.pacchettiPersonalizzatiRicercati = pacchettiPersonalizzatiRicercati;
+		public void setPacchettiPersonalizzatiCliente(
+				ArrayList<PacchettoPersonalizzatoDTO> pacchettiPersonalizzatiCliente) {
+			this.pacchettiPersonalizzatiCliente = pacchettiPersonalizzatiCliente;
 		}
-		
-		
+
 		public String mostraPacchettiPersonalizzati(){
 			
 			FacesContext context = FacesContext.getCurrentInstance();
@@ -85,9 +90,10 @@ public class MostraPacchettiPersonalizzatiBean implements Serializable {
 					.getExternalContext().getRequest();
 
 			try{
-				//Long idCliente = clienteRemoto.daEmailAId(this.email);
-			
-			//pacchettiPersonalizzatiRicercati = clienteRemoto.elencoPacchettiCliente(idCliente);
+				
+				setPacchettiPersonalizzatiCliente((ArrayList<PacchettoPersonalizzatoDTO>) usermanager.getUserDTO().getPacchettiCliente());
+				
+				
 			}
 			catch(EJBException e){
 				
@@ -98,4 +104,20 @@ public class MostraPacchettiPersonalizzatiBean implements Serializable {
 			
 		}
 
+		
+		public String dettagliPacchettoSelezionato() {
+
+			try {
+				
+
+				return "dettagliPacchettoPersonalizzatoSalvato";
+
+			} catch (NullPointerException n) {
+
+				return "dettagliPacchettoPersonalizzatoSalvato";
+
+			}
+		
+		
+}
 }
