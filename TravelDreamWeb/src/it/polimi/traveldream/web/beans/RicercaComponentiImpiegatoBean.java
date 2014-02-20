@@ -282,6 +282,10 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 
 	public String ricercaComponenteImpiegatoId() {
 
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+
 		try {
 
 			ArrayList<ComponenteDTO> lista = new ArrayList<ComponenteDTO>();
@@ -290,12 +294,17 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 
 			System.out.println("ricercaComponenteImpiegatoID --> METODO");
 
+			return "listaComponentiRicercaImpiegatoID";
+
 		}
 
 		catch (NoResultException r) {
 
 			System.out
 					.println("ricercaComponenteImpiegatoID --> NORESULTEXCEPTION");
+
+			context.addMessage(null, new FacesMessage(
+					"Nessun componente trovato"));
 
 			return "index";
 
@@ -305,15 +314,20 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 
 			System.out.println("ricercaComponenteImpiegatoID --> EJBEXCEPTION");
 
+			context.addMessage(null, new FacesMessage(
+					"Ricerca componente fallita"));
+
 			return "index";
 
 		}
 
-		return "listaComponentiRicercaImpiegatoID";
-
 	}
 
 	public String ricercaComponenteImpiegatoTermine() {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
 
 		try {
 
@@ -328,12 +342,17 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 
 			System.out.println("ricercaComponenteImpiegatoTER --> METODO");
 
+			return "listaComponentiRicercaImpiegatoTER";
+
 		}
 
 		catch (NoResultException r) {
 
 			System.out
 					.println("ricercaComponenteImpiegatoTER --> NORESULTEXCEPTION");
+
+			context.addMessage(null, new FacesMessage(
+					"Nessun componente trovato"));
 
 			return "index";
 
@@ -344,11 +363,12 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 			System.out
 					.println("ricercaComponenteImpiegatoTER --> EJBEXCEPTION");
 
+			context.addMessage(null, new FacesMessage(
+					"Ricerca componente fallita"));
+
 			return "index";
 
 		}
-
-		return "listaComponentiRicercaImpiegatoTER";
 
 	}
 
@@ -412,11 +432,17 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 
 			System.out.println("rimuoviComponenteID --> METODO");
 
+			context.addMessage(null, new FacesMessage(
+					"Rimozione componente riuscita"));
+
 			return "index";
 
 		} catch (EJBException e) {
 
 			System.out.println("rimuoviComponenteID --> EJBEXCEPTION");
+
+			context.addMessage(null, new FacesMessage(
+					"Rimozione componente fallita"));
 
 			return null;
 
@@ -438,11 +464,17 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 
 			System.out.println("rimuoviComponenteTER --> METODO");
 
+			context.addMessage(null, new FacesMessage(
+					"Rimozione componente riuscita"));
+
 			return "index";
 
 		} catch (EJBException e) {
 
 			System.out.println("rimuoviComponenteTER --> EJBEXCEPTION");
+
+			context.addMessage(null, new FacesMessage(
+					"Rimozione componente fallita"));
 
 			return null;
 
@@ -469,7 +501,7 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 	public String formModificaTER(int idc) {
 
 		setId(idc);
-		
+
 		setId(componenteSelezionato.getCodiceComponente());
 		setDescrizione(componenteSelezionato.getDescrizione());
 		setLuogo(componenteSelezionato.getLuogo());
