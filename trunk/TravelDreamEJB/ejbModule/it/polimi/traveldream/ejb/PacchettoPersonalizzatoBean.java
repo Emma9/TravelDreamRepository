@@ -45,7 +45,7 @@ public class PacchettoPersonalizzatoBean implements
 	 * @return idPacchettoPersonalizzato
 	 */
 	public Long createPacchettoPersonalizzato(String stato, String emailUtente,
-			Date dataDiPartenza, Date dataDiRitorno,
+			Date dataDiPartenza, Date dataDiRitorno, int numPartecipanti,
 			List<ComponenteDTO> listaComponentiSelezionati, PacchettoPKDTO pacchettoPKDTO) {
 		
 			System.out.println("BEAN --> CREAPACCHETTOPERSONALIZZATO --> INIZIO METODO");
@@ -78,7 +78,7 @@ public class PacchettoPersonalizzatoBean implements
 			
 			List<Invito> invitiPacchetto= new ArrayList<Invito>();
 			
-			PacchettoPersonalizzato pacchettoPersonalizzato = new PacchettoPersonalizzato(pacchetto.getIdPacchetto(), codice, pacchetto.getDestinazione(), pacchetto.getDataInizioValidita(), pacchetto.getDataFineValidita(), pacchetto.getEtichetta(), pacchetto.getDescrizione(), pacchetto.getListaComponenti(), componentiSelezionati, pacchetto.getCosto(), pacchetto.getSconto(), stato, emailUtente, dataDiPartenza, dataDiRitorno, invitiPacchetto);
+			PacchettoPersonalizzato pacchettoPersonalizzato = new PacchettoPersonalizzato(pacchetto.getIdPacchetto(), codice, pacchetto.getDestinazione(), pacchetto.getDataInizioValidita(), pacchetto.getDataFineValidita(), pacchetto.getEtichetta(), pacchetto.getDescrizione(), pacchetto.getListaComponenti(), componentiSelezionati, pacchetto.getCosto(), pacchetto.getSconto(), stato, emailUtente, dataDiPartenza, dataDiRitorno, numPartecipanti, invitiPacchetto);
 					
 			System.out.println("BEAN --> CREAPACCHETTOPERSONALIZZATO --> PRIMA DI PERSIST");
 			
@@ -117,7 +117,7 @@ public class PacchettoPersonalizzatoBean implements
 	 */
 	public void updatePacchettoPersonalizzato(PacchettoPKDTO pacchettoPKDTO,
 			String emailUtente, String stato, Date dataDiPartenza,
-			Date dataDiRitorno, List<ComponenteDTO> listaComponentiSelezionati) {
+			Date dataDiRitorno, int numPartecipanti, List<ComponenteDTO> listaComponentiSelezionati) {
 
 		if ((verificaPresenzaPacchettoPersonalizzato(pacchettoPKDTO))
 				&& (verificaStato(stato))) {
@@ -132,6 +132,7 @@ public class PacchettoPersonalizzatoBean implements
 			pacchettoPersonalizzato.setStato(stato);
 			pacchettoPersonalizzato.setDataDiPartenza(dataDiPartenza);
 			pacchettoPersonalizzato.setDataDiRitorno(dataDiRitorno);
+			pacchettoPersonalizzato.setNumPartecipanti(numPartecipanti);
 			pacchettoPersonalizzato.setEmailUtente(emailUtente);
 
 			List<Componente> componentiSelezionati = new ArrayList<Componente>();

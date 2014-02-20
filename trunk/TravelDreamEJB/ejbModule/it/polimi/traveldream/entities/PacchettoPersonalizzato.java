@@ -23,6 +23,7 @@ public class PacchettoPersonalizzato extends Pacchetto {
 	private Date dataDiPartenza;
 	@Temporal(TemporalType.DATE)
 	private Date dataDiRitorno;
+	private int numPartecipanti;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "pacchettoPersonalizzato")
 	private List<Invito> invitiPacchetto = new ArrayList<Invito>();
@@ -39,7 +40,7 @@ public class PacchettoPersonalizzato extends Pacchetto {
 			String descrizione, List<Componente> listaComponenti,
 			List<Componente> listaComponentiSelezionati, int costo, int sconto,
 			String stato, String emailUtente, Date dataDiPartenza,
-			Date dataDiRitorno, List<Invito> invitiPacchetto) {
+			Date dataDiRitorno, int numPartecipanti, List<Invito> invitiPacchetto) {
 
 		super(idPacchettoPersonalizzato, destinazione, dataInizioValidita,
 				dateFineValidita, etichetta, descrizione, listaComponenti,
@@ -49,6 +50,7 @@ public class PacchettoPersonalizzato extends Pacchetto {
 		this.setEmailUtente(emailUtente);
 		this.setDataDiPartenza(dataDiPartenza);
 		this.setDataDiRitorno(dataDiRitorno);
+		this.setNumPartecipanti(numPartecipanti);
 		this.setInvitiPacchetto(invitiPacchetto);
 
 		super.setIdPacchetto(idPacchetto);
@@ -115,6 +117,22 @@ public class PacchettoPersonalizzato extends Pacchetto {
 	 */
 	public void setDataDiRitorno(Date dataDiRitorno) {
 		this.dataDiRitorno = dataDiRitorno;
+	}
+	
+	
+
+	/**
+	 * @return the numPartecipanti
+	 */
+	public int getNumPartecipanti() {
+		return numPartecipanti;
+	}
+
+	/**
+	 * @param numPartecipanti the numPartecipanti to set
+	 */
+	public void setNumPartecipanti(int numPartecipanti) {
+		this.numPartecipanti = numPartecipanti;
 	}
 
 	/**

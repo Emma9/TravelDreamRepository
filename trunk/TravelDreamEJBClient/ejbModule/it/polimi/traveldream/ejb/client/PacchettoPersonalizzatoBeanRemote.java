@@ -14,17 +14,19 @@ import javax.ejb.Remote;
 public interface PacchettoPersonalizzatoBeanRemote {
 
 	
+	
 	/**
 	 * @param stato
 	 * @param emailUtente
 	 * @param dataDiPartenza
 	 * @param dataDiRitorno
+	 * @param numPartecipanti
 	 * @param listaComponentiSelezionati
 	 * @param pacchettoPKDTO
 	 * @return
 	 */
 	public Long createPacchettoPersonalizzato(String stato, String emailUtente,
-			Date dataDiPartenza, Date dataDiRitorno,
+			Date dataDiPartenza, Date dataDiRitorno, int numPartecipanti,
 			List<ComponenteDTO> listaComponentiSelezionati, PacchettoPKDTO pacchettoPKDTO);	
 
 	
@@ -45,7 +47,7 @@ public interface PacchettoPersonalizzatoBeanRemote {
 	 */
 	public void updatePacchettoPersonalizzato(PacchettoPKDTO pacchettoPKDTO,
 			String emailUtente, String stato, Date dataDiPartenza,
-			Date dataDiRitorno, List<ComponenteDTO> listaComponentiSelezionati);
+			Date dataDiRitorno, int numPartecipanti, List<ComponenteDTO> listaComponentiSelezionati);
 	
 	/**@param idPacchettoPersonalizzato
 	 * @return PacchettoPersonalizzato*/

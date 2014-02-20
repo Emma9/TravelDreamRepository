@@ -19,6 +19,7 @@ public class PacchettoPersonalizzatoDTO extends PacchettoDTO implements
 	private String emailUtente;
 	private Date dataDiPartenza;
 	private Date dataDiRitorno;
+	private int numPartecipanti;
 
 	private List<InvitoDTO> invitiPacchetto = new ArrayList<InvitoDTO>();
 
@@ -109,6 +110,22 @@ public class PacchettoPersonalizzatoDTO extends PacchettoDTO implements
 	 */
 	public void setDataDiRitorno(Date dataDiRitorno) {
 		this.dataDiRitorno = dataDiRitorno;
+	}
+	
+	
+
+	/**
+	 * @return the numPartecipanti
+	 */
+	public int getNumPartecipanti() {
+		return numPartecipanti;
+	}
+
+	/**
+	 * @param numPartecipanti the numPartecipanti to set
+	 */
+	public void setNumPartecipanti(int numPartecipanti) {
+		this.numPartecipanti = numPartecipanti;
 	}
 
 	/**
