@@ -311,15 +311,18 @@ public class RicercaPacchettiImpiegatoBean implements Serializable {
 
 			setPacchettiRicercatiID(lista);
 
+			return "listaPacchettiRicercaImpiegato";
+
 		} catch (EJBException e) {
 
 			System.out.println("EJBException");
 
+			context.addMessage(null, new FacesMessage(
+					"Ricerca pacchetto fallita"));
+
 			return null;
 
 		}
-
-		return "listaPacchettiRicercaImpiegato";
 
 	}
 
@@ -333,15 +336,18 @@ public class RicercaPacchettiImpiegatoBean implements Serializable {
 
 			setPacchettiRicercatiID(pacchettoremoto.findByTermine(termine));
 
+			return "listaPacchettiRicercaImpiegato";
+
 		} catch (EJBException e) {
 
 			System.out.println("EJBException");
 
+			context.addMessage(null, new FacesMessage(
+					"Ricerca pacchetto fallita"));
+
 			return null;
 
 		}
-
-		return "listaPacchettiRicercaImpiegato";
 
 	}
 
@@ -378,13 +384,19 @@ public class RicercaPacchettiImpiegatoBean implements Serializable {
 
 			pacchettoremoto.removePacchetto(idPacchetto);
 
+			context.addMessage(null, new FacesMessage(
+					"Rimozione pacchetto riuscita"));
+
 			return "index";
 
 		} catch (EJBException e) {
 
 			System.out.println("rimuoviPacchetto --> EJBEXCEPTION");
 
-			return null;
+			context.addMessage(null, new FacesMessage(
+					"Rimozione pacchetto fallita"));
+
+			return "index";
 
 		}
 
@@ -432,6 +444,11 @@ public class RicercaPacchettiImpiegatoBean implements Serializable {
 
 			System.out.println("CREAZIONE PACCHETTO --> PACCHETTO CREATO");
 
+			context.addMessage(null, new FacesMessage(
+					"Creazione pacchetto riuscita"));
+
+			return "index";
+
 		} catch (EJBException e) {
 
 			System.out.println("CREAZIONE PACCHETTO --> EJBEXCEPTION");
@@ -442,11 +459,6 @@ public class RicercaPacchettiImpiegatoBean implements Serializable {
 			return "index";
 
 		}
-
-		context.addMessage(null, new FacesMessage(
-				"Creazione pacchetto riuscita"));
-
-		return "index";
 
 	}
 

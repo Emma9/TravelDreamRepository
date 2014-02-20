@@ -277,7 +277,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 
 		for (int j = 0; j < listaPAC.size(); j++) {
 
-			if (listaPAC.get(j).getDescrizione().contains(termine)) {
+			if ((listaPAC.get(j).getDescrizione().contains(termine))||(listaPAC.get(j).getDestinazione().contains(termine))  ) {
 
 				listaPacchetti.add(listaPAC.get(j));
 
