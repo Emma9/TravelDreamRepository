@@ -453,15 +453,14 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 	public String formModificaID(int idc) {
 
 		setId(idc);
-		
+
 		setId(componenteSelezionato.getCodiceComponente());
 		setDescrizione(componenteSelezionato.getDescrizione());
 		setLuogo(componenteSelezionato.getLuogo());
 		setCosto(componenteSelezionato.getCosto());
 		setDataInizioValidita(componenteSelezionato.getDataInizioValidita());
 		setDataFineValidita(componenteSelezionato.getDataFineValidita());
-		
-		
+		setDisponibilita(0);
 
 		return "modificaComponenteID";
 
@@ -470,6 +469,14 @@ public class RicercaComponentiImpiegatoBean implements Serializable {
 	public String formModificaTER(int idc) {
 
 		setId(idc);
+		
+		setId(componenteSelezionato.getCodiceComponente());
+		setDescrizione(componenteSelezionato.getDescrizione());
+		setLuogo(componenteSelezionato.getLuogo());
+		setCosto(componenteSelezionato.getCosto());
+		setDataInizioValidita(componenteSelezionato.getDataInizioValidita());
+		setDataFineValidita(componenteSelezionato.getDataFineValidita());
+		setDisponibilita(0);
 
 		return "modificaComponenteTER";
 
