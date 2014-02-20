@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean()
 @SessionScoped
-public class CreazioneComponenteBean implements Serializable {
+public class CreazioneComponenteBeanM implements Serializable {
 
 	/**
 	 * 

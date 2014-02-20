@@ -15,7 +15,7 @@
 			<div style="float: center">
 				<div style="display: inline;">
 					<p:selectOneRadio id="tipologia"
-						value="#{creazioneComponenteBean.tipologia}">
+						value="#{ricercaComponentiImpiegatoBean.tipologia}">
 						<f:selectItem itemLabel="Volo" itemValue="VOLO" />
 						<f:selectItem itemLabel="Hotel" itemValue="HOTEL" />
 						<f:selectItem itemLabel="Escursione" itemValue="ESCURSIONE" />
@@ -23,56 +23,72 @@
 
 					<p:outputLabel value="Descrizione: " />
 					<br />
-					<p:inputTextarea rows="10" cols="33"
-						value="#{creazioneComponenteBean.descrizione}" id="descrizione"
-						required="true"
-						requiredMessage="Devi inserire una descrizione del componente">
-					</p:inputTextarea>
+					<p:inplace editor="true">
+						<p:inputTextarea rows="10" cols="33"
+							value="#{ricercaComponentiImpiegatoBean.descrizione}"
+							id="descrizione" required="true"
+							requiredMessage="Devi inserire una descrizione del componente">
+						</p:inputTextarea>
+					</p:inplace>
 
 					<p:message for="descrizione" />
 
 					<p:outputLabel value="Luogo: " />
-					<p:inputText value="#{creazioneComponenteBean.luogo}" id="luogo"
-						required="true"
-						requiredMessage="Devi inserire il luogo del componente"
-							>
-					</p:inputText>
-					<p:message for="luogo" />					  
+					<p:inplace editor="true">
+						<p:inputText value="#{ricercaComponentiImpiegatoBean.luogo}"
+							id="luogo" required="true"
+							requiredMessage="Devi inserire il luogo del componente">
+						</p:inputText>
+					</p:inplace>
+					<p:message for="luogo" />
 
 
 					<p:outputLabel value="Costo: " />
-					<p:inputText value="#{creazioneComponenteBean.costo}" id="costo"
-						required="true"
-						requiredMessage="Devi inserire il costo del componente">
-					</p:inputText>
+					<p:inplace editor="true">
+						<p:inputText value="#{ricercaComponentiImpiegatoBean.costo}"
+							id="costo" required="true"
+							requiredMessage="Devi inserire il costo del componente">
+						</p:inputText>
+					</p:inplace>
 
 					<p:message for="costo" />
 
 					<p:outputLabel value="Data Inizio Validità: " />
-					<p:calendar value="#{creazioneComponenteBean.dataInizioValidita}"
-						id="dataInizio" required="true"
-						requiredMessage="Devi inserire una data di inizio validità del componente" />
+					<p:inplace editor="true">
+						<p:calendar
+							value="#{ricercaComponentiImpiegatoBean.dataInizioValidita}"
+							id="dataInizio" required="true"
+							requiredMessage="Devi inserire una data di inizio validità del componente" />
+					</p:inplace>
+
 					<p:message for="dataInizio" />
 					<br />
 
 					<h:outputText value="Data Fine Validità: " />
-					<p:calendar value="#{creazioneComponenteBean.dataFineValidita}"
-						id="dataFine" required="true"
-						requiredMessage="Devi inserire una data di fine validità del componente" />
+					<p:inplace editor="true">
+						<p:calendar
+							value="#{ricercaComponentiImpiegatoBean.dataFineValidita}"
+							id="dataFine" required="true"
+							requiredMessage="Devi inserire una data di fine validità del componente" />
+					</p:inplace>
+
 					<p:message for="dataFine" />
 					<br />
 
 					<p:outputLabel value="Disponibilità Posti: " />
-					<p:inputText value="#{creazioneComponenteBean.disponibilita}"
-						id="posti" required="true"
-						requiredMessage="Devi inserire la disponibilità dei posti">
-					</p:inputText>
+					<p:inplace editor="true">
+						<p:inputText
+							value="#{ricercaComponentiImpiegatoBean.disponibilita}"
+							id="posti" required="true"
+							requiredMessage="Devi inserire la disponibilità dei posti">
+						</p:inputText>
+					</p:inplace>
 					<p:message for="posti" />
 
 				</div>
 			</div>
 			<h:commandButton value="Conferma"
-				action="#{creazioneComponenteBean.modificaComponenteID(ricercaComponentiImpiegatoBean.id)}" />
+				action="#{ricercaComponentiImpiegatoBean.modificaComponenteID(ricercaComponentiImpiegatoBean.id)}" />
 
 		</p:fieldset>
 
