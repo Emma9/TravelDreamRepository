@@ -48,34 +48,33 @@
 
 			</p:panelGrid>
 
-</p:fieldset>
-</h:form>
-			<!-- BOTTONE MODIFICA COMPONENTE -->
+		</p:fieldset>
+	</h:form>
+	<!-- BOTTONE MODIFICA COMPONENTE -->
 
 
-			<div align="left">
-				<h:form>
-					<h:commandButton
-						action="modificaComponenteTER"
-						value="Modifica"
-						ajax="false" />
-				</h:form>
-			</div>
+	<div align="left">
+		<h:form>
+			<h:commandButton
+				action="#{ricercaComponentiImpiegatoBean.formModificaTER(ricercaComponentiImpiegatoBean.componenteSelezionato.codiceComponente)}"
+				value="Modifica" ajax="false" />
+		</h:form>
+	</div>
 
 
 
-			<!-- BOTTONE RIMUOVI COMPONENTE -->
+	<!-- BOTTONE RIMUOVI COMPONENTE -->
 
-			<div align="left">
-				<h:form>
-					<h:commandButton value="Rimuovi"
-											action="#{ricercaComponentiImpiegatoBean.rimuoviComponenteTER()}"
-											ajax="false" />
-				</h:form>
-			</div>
+	<div align="left">
+		<h:form>
+			<h:commandButton value="Rimuovi"
+				action="#{ricercaComponentiImpiegatoBean.rimuoviComponenteTER()}"
+				ajax="false" />
+		</h:form>
+	</div>
 
 
-		
-	
+
+
 </h:body>
 </html>

@@ -20,36 +20,36 @@
 	   
 	   <p:message for="etichetta" />
 	    <h:outputLabel value="Etichetta: " />
-	    <p:inputText value="#{creazionePacchettoPredefinitoBean.etichetta}" id="etichetta" required="false" />
+	    <p:inputText value="#{ricercaPacchettiImpiegatoBean.etichetta}" id="etichetta" required="false" />
 	    <br />
 	   
 	   <p:message for="destinazione" />
 	    <h:outputLabel value="Destinazione: " />
-	    <p:inputText value="#{creazionePacchettoPredefinitoBean.destinazione}" id="destinazione" required="true" requiredMessage="Devi inserire la destinazione"/>
+	    <p:inputText value="#{ricercaPacchettiImpiegatoBean.destinazione}" id="destinazione" required="true" requiredMessage="Devi inserire la destinazione"/>
 	    <p:message for="destinazione" /><br />
 	   
 	     
 	    
 	    <p:message for="descrizione" />
 	    <h:outputLabel value="Descrizione: " />
-	    <p:inputTextarea value="#{creazionePacchettoPredefinitoBean.descrizione}" id="descrizione" required="true" requiredMessage="Devi inserire la descrizione"/>
+	    <p:inputTextarea value="#{ricercaPacchettiImpiegatoBean.descrizione}" id="descrizione" required="true" requiredMessage="Devi inserire la descrizione"/>
   		 <p:message for="descrizione" /><br />
   		 
   		 
   		   <p:outputLabel value="Data Inizio Validità: "/>
-				<p:calendar value="#{creazionePacchettoPredefinitoBean.dataInizioValidita}" id="dataInizio" required="true" requiredMessage="Devi inserire una data di inizio validità del pacchetto" />
+				<p:calendar value="#{ricercaPacchettiImpiegatoBean.dataInizioValidita}" id="dataInizio" required="true" requiredMessage="Devi inserire una data di inizio validità del pacchetto" />
 				<p:message for="dataInizio"/>
 				<br />
 			
 			  <p:outputLabel value="Data Fine Validità: "/>
-				<p:calendar value="#{creazionePacchettoPredefinitoBean.dataFineValidita}" id="dataFine" required="true" requiredMessage="Devi inserire una data di fine validità del pacchetto"/>
+				<p:calendar value="#{ricercaPacchettiImpiegatoBean.dataFineValidita}" id="dataFine" required="true" requiredMessage="Devi inserire una data di fine validità del pacchetto"/>
 				<p:message for="dataFine"/>
 				<br />
 			
   		 
   	
 		 <p:dataTable id="componentiPacchetto" var="componentePacchetto" value="#{mostraTuttiComponentiBean.listaComponenti}" paginator="true" rows="10"  
-                 rowKey="#{componentePacchetto.codiceComponente}" selection="#{creazionePacchettoPredefinitoBean.listaComponenti}">  
+                 rowKey="#{componentePacchetto.codiceComponente}" selection="#{ricercaPacchettiImpiegatoBean.listaComponenti}">  
   
         <f:facet name="header">  
             Componenti del pacchetto 
@@ -81,7 +81,7 @@
   
   	
   	 <p:dataTable id="componentiPredefPacchetto" var="componentePredefPacchetto" value="#{mostraTuttiComponentiBean.listaComponenti}" paginator="true" rows="10"  
-                 rowKey="#{componentePredefPacchetto.codiceComponente}" selection="#{creazionePacchettoPredefinitoBean.listaComponentiSelezionati}">  
+                 rowKey="#{componentePredefPacchetto.codiceComponente}" selection="#{ricercaPacchettiImpiegatoBean.listaComponentiSelezionati}">  
   
         <f:facet name="header">  
             Componenti predefiniti del pacchetto 
@@ -115,7 +115,7 @@
   	<br />
   		<p:message for="sconto" />
 	    <h:outputLabel value="Sconto da applicare al pacchetto: " />
-	    <p:inputText  value="#{creazionePacchettoPredefinitoBean.sconto}" id="sconto" required="true" requiredMessage="Devi inserire per forza un numero per identificare lo sconto"/>
+	    <p:inputText  value="#{ricercaPacchettiImpiegatoBean.sconto}" id="sconto" required="true" requiredMessage="Devi inserire per forza un numero per identificare lo sconto"/>
   		 <p:message for="sconto" /><br />
   	
 
@@ -123,7 +123,7 @@
   	
   	
   		<div align="left">
-		    <h:commandButton id="bottoneConferma" value="Conferma" action="#{creazionePacchettoPredefinitoBean.creazionePacchetto()}" ajax="false"/>
+		    <h:commandButton id="bottoneConferma" value="Conferma" action="#{ricercaPacchettiImpiegatoBean.creazionePacchetto()}" ajax="false"/>
 	    <!-- visualizza i homeimpiegato con mess. notifica creazione -->
 		    <p:messages id="message" showSummary="true" showDetail="false" autoUpdate="true" closable="true" /> 
      	</div>

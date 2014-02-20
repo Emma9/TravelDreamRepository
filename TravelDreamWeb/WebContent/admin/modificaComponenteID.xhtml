@@ -14,6 +14,7 @@
 			widgetVar="regWidget" style="width: 600px;">
 			<div style="float: center">
 				<div style="display: inline;">
+
 					<p:selectOneRadio id="tipologia"
 						value="#{ricercaComponentiImpiegatoBean.tipologia}">
 						<f:selectItem itemLabel="Volo" itemValue="VOLO" />
@@ -21,9 +22,10 @@
 						<f:selectItem itemLabel="Escursione" itemValue="ESCURSIONE" />
 					</p:selectOneRadio>
 
-					<p:outputLabel value="Descrizione: " />
+
+					<p:outputLabel value="Descrizione: " style="font-weight:bold" />
 					<br />
-					<p:inplace editor="true">
+					<p:inplace>
 						<p:inputTextarea rows="10" cols="33"
 							value="#{ricercaComponentiImpiegatoBean.descrizione}"
 							id="descrizione" required="true"
@@ -33,28 +35,37 @@
 
 					<p:message for="descrizione" />
 
-					<p:outputLabel value="Luogo: " />
-					<p:inplace editor="true">
+					<p:outputLabel value="Luogo: " style="font-weight:bold" />
+
+					<p:inplace>
+
 						<p:inputText value="#{ricercaComponentiImpiegatoBean.luogo}"
 							id="luogo" required="true"
 							requiredMessage="Devi inserire il luogo del componente">
 						</p:inputText>
+
 					</p:inplace>
+
 					<p:message for="luogo" />
 
 
-					<p:outputLabel value="Costo: " />
-					<p:inplace editor="true">
+					<p:outputLabel value="Costo: " style="font-weight:bold" />
+
+					<p:inplace>
+
 						<p:inputText value="#{ricercaComponentiImpiegatoBean.costo}"
 							id="costo" required="true"
 							requiredMessage="Devi inserire il costo del componente">
 						</p:inputText>
+
 					</p:inplace>
+
 
 					<p:message for="costo" />
 
-					<p:outputLabel value="Data Inizio Validità: " />
-					<p:inplace editor="true">
+					<p:outputLabel value="Data Inizio Validità: "
+						style="font-weight:bold" />
+					<p:inplace>
 						<p:calendar
 							value="#{ricercaComponentiImpiegatoBean.dataInizioValidita}"
 							id="dataInizio" required="true"
@@ -64,8 +75,8 @@
 					<p:message for="dataInizio" />
 					<br />
 
-					<h:outputText value="Data Fine Validità: " />
-					<p:inplace editor="true">
+					<h:outputText value="Data Fine Validità: " style="font-weight:bold" />
+					<p:inplace>
 						<p:calendar
 							value="#{ricercaComponentiImpiegatoBean.dataFineValidita}"
 							id="dataFine" required="true"
@@ -75,8 +86,9 @@
 					<p:message for="dataFine" />
 					<br />
 
-					<p:outputLabel value="Disponibilità Posti: " />
-					<p:inplace editor="true">
+					<p:outputLabel value="Disponibilità Posti: "
+						style="font-weight:bold" />
+					<p:inplace>
 						<p:inputText
 							value="#{ricercaComponentiImpiegatoBean.disponibilita}"
 							id="posti" required="true"
