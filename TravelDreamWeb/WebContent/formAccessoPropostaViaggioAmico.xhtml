@@ -13,12 +13,15 @@
 			widgetVar="regWidget" style="width: 600px;">
 
 			<h:outputLabel value="ID Pacchetto: " />
-			<p:inputText value="#{invitaAmicoBean.idPacchettoPersonalizzato}" id="pacchettoPersonalizzato"
-				required="true" requiredMessage="Devi inserire l'ID del pacchetto">
+			<p:inputText value="#{invitaAmicoBean.idPacchettoPersonalizzato}"
+				id="pacchettoPersonalizzato" required="true"
+				requiredMessage="Devi inserire l'ID del pacchetto">
 			</p:inputText>
+			<p:message for="pacchettoPersonalizzato" />
 
 
-			<br /><br />
+			<br />
+			<br />
 
 			<h:outputLabel value="Email: " />
 			<p:inputText value="#{invitaAmicoBean.emailDestinatario}" id="email"
@@ -31,9 +34,12 @@
 
 			<br />
 
-			<h:commandButton id="visualizzaPacchetto" value="Visualizza Pacchetto"
+			<!-- VISUALIZZA PROPOSTA VIAGGIO -->
+
+			<h:commandButton id="visualizzaPacchetto"
+				value="Visualizza Pacchetto"
 				action="#{invitaAmicoBean.mostraPropostaPacchettoViaggio()}" />
-			</p:fieldset>
+		</p:fieldset>
 
 
 	</h:form>
