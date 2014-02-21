@@ -68,7 +68,14 @@ public class User implements Serializable {
 		super();
 	}
 
-	
+	public User(UserDTO user) {
+
+		this.email = user.getEmail();
+		this.firstName = user.getFirstName();
+		this.lastName = user.getLastName();
+		this.password = DigestUtils.sha256Hex(user.getPassword());
+		this.registeredOn = new Date();
+	}
 
 	public String getFirstName() {
 		return firstName;
