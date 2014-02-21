@@ -125,7 +125,7 @@ public UserDTO userToUserDTO(User user) {
 		PacchettoPersonalizzatoBean pacchettopersremote= new PacchettoPersonalizzatoBean();
 		UserDTO userDTO= new UserDTO();
 		userDTO.setEmail(user.getEmail());
-		userDTO.setFirstName(user.getEmail());
+		userDTO.setFirstName(user.getFirstName());
 		userDTO.setLastName(user.getLastName());
 		userDTO.setPassword(user.getPassword());
 		userDTO.setRegisteredOn(user.getRegisteredOn());
