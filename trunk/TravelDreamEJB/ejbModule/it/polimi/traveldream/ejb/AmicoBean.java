@@ -27,9 +27,8 @@ public class AmicoBean implements AmicoBeanRemote, AmicoBeanLocal {
 		// TODO Auto-generated constructor stub
 	}
 
-	/**@param email
-	 * @return idAmico*/
-	public Long createAmico(String email) {
+	
+	public void createAmico(String email) {
 
 		if (!(verificaPresenzaAmicoEm(email))) {
 
@@ -39,26 +38,22 @@ public class AmicoBean implements AmicoBeanRemote, AmicoBeanLocal {
 
 			manager.persist(amico);
 
-			return amico.getIdAmico();
-
-		} else {
-			return (long) -1;
 		}
 	}
 
 	/**@param idAmico */
-	public void removeAmico(Long idAmico) {
+	public void removeAmico(String emailAmico) {
 
 		InitialContext ctx;
 		try {
 			ctx = new InitialContext();
 			InvitoBeanRemote invitoLocal = (InvitoBeanRemote) ctx.lookup("InvitoBean/local");
 
-			invitoLocal.removeInvitiCliente(daIdAEmail(idAmico));
+			invitoLocal.removeInvitiCliente(emailAmico);
 
 			//Amico a = findByIdAmico(idAmico);
 			
-			Amico a = manager.find(Amico.class, idAmico);
+			Amico a = manager.find(Amico.class, emailAmico);
 			
 			manager.remove(a);
 
@@ -71,45 +66,42 @@ public class AmicoBean implements AmicoBeanRemote, AmicoBeanLocal {
 
 	/**@param idAmico
 	 * @param email*/
-	public void updateAmico(Long idAmico, String email) {
+	public void updateAmico(String emailAmico) {
 
-		if (verificaPresenzaAmicoId(idAmico)) {
+		if (verificaPresenzaAmicoEm(emailAmico)) {
 
-			//AmicoDTO amico = findByIdAmico(idAmico);
 			
-			Amico amico = manager.find(Amico.class, idAmico);
+			Amico amico = manager.find(Amico.class, emailAmico);
 
-			amico.setEmail(email);
 
 			manager.merge(amico);
 		}
 	}
 
-	/**@param idAmico
-	 * @return Amico*/
-	public AmicoDTO findByIdAmico(Long idAmico) {
+	
+	public AmicoDTO findByEmailAmico(String emailAmico) {
 
-		TypedQuery<AmicoDTO> q = manager.createQuery("FROM Amico a WHERE a.idAmico=:new_idAmico", AmicoDTO.class);
+		TypedQuery<Amico> q = manager.createQuery("FROM Amico a WHERE a.email=:new_emailAmico", Amico.class);
 
-		q.setParameter("new_idAmico", idAmico);
+		q.setParameter("new_emailAmico", emailAmico);
 
-		AmicoDTO amico = q.getSingleResult();
+		Amico amico = q.getSingleResult();
 
-		return amico;
+		return amicoToAmicoDTO(amico);
 	}
 
 	/**@return ArrayList<idAmico>*/
-	public ArrayList<Long> findAll() {
+	public ArrayList<String> findAll() {
 
 		TypedQuery<AmicoDTO> q = manager.createQuery("FROM Amico a", AmicoDTO.class);
 
 		List<AmicoDTO> amici = q.getResultList();
 
-		ArrayList<Long> lista = new ArrayList<Long>();
+		ArrayList<String> lista = new ArrayList<String>();
 
 		for (int i = 0; i < amici.size(); i++) {
 
-			lista.set(i, amici.get(i).getIdAmico());
+			lista.set(i, amici.get(i).getEmail());
 		}
 
 		return lista;
@@ -139,41 +131,15 @@ public class AmicoBean implements AmicoBeanRemote, AmicoBeanLocal {
 		}
 	}
 
-	/**@param idAmico
-	 * @return true if idAmico is not present in the DB, otherwise false*/
-	public boolean verificaPresenzaAmicoId(Long idAmico) {
-		try {
-			TypedQuery<AmicoDTO> q = manager.createQuery("FROM Amico a WHERE a.idAmico=:new_idAmico", AmicoDTO.class);
-
-			q.setParameter("new_idAmico", idAmico);
-
-			List<AmicoDTO> amici = q.getResultList();
-
-			if (amici.size() == 0) {
-				return true;
-
-			} else {
-				return false;
-
-			}
-		} catch (NullPointerException e) {
-			return true;
-		}
-	}
 	
-	/**@param idAmico
-	 * @return email*/
-	public String daIdAEmail(Long idAmico) {
-		AmicoDTO a = findByIdAmico(idAmico);
-		return a.getEmail();
-	}
+	
+	
 	
 	
 	public AmicoDTO amicoToAmicoDTO(Amico amico) {
 	
 		AmicoDTO amicoDTO= new AmicoDTO();
 		amicoDTO.setEmail(amico.getEmail());
-		amicoDTO.setIdAmico(amico.getIdAmico());
 		return amicoDTO;
 		
 	}
@@ -183,9 +149,10 @@ public class AmicoBean implements AmicoBeanRemote, AmicoBeanLocal {
 		
 		Amico amico= new Amico();
 		amico.setEmail(amicoDTO.getEmail());
-		amico.setIdAmico(amicoDTO.getIdAmico());
 		return amico;
 		
 	}
-	
+
+
+
 }
