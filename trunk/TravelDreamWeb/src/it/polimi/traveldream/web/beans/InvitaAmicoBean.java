@@ -9,6 +9,7 @@ import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -22,121 +23,182 @@ public class InvitaAmicoBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 335L;
-	
+
 	// Session bean i cui metodi sono utilizzati nel codice
-		@EJB
-		private InvitoBeanRemote invitoremoto;
-		@EJB
-		private PacchettoPersonalizzatoBeanRemote pacchettoPersRemoto;
-		
-		
-		private String emailMittente;
-		private String emailDestinatario;
-		private Long idPacchettoPersonalizzato;
-		private PacchettoPersonalizzatoDTO pacchettoPersonalizzato;
-		
-		
-		/**
-		 * @return the emailMittente
-		 */
-		public String getEmailMittente() {
-			return emailMittente;
-		}
-		/**
-		 * @param emailMittente the emailMittente to set
-		 */
-		public void setEmailMittente(String emailMittente) {
-			this.emailMittente = emailMittente;
-		}
-		/**
-		 * @return the emailDestinatario
-		 */
-		public String getEmailDestinatario() {
-			return emailDestinatario;
-		}
-		/**
-		 * @param emailDestinatario the emailDestinatario to set
-		 */
-		public void setEmailDestinatario(String emailDestinatario) {
-			this.emailDestinatario = emailDestinatario;
-		}
-		/**
-		 * @return the idPacchettoPersonalizzato
-		 */
-		public Long getIdPacchettoPersonalizzato() {
-			return idPacchettoPersonalizzato;
-		}
-		/**
-		 * @param idPacchettoPersonalizzato the idPacchettoPersonalizzato to set
-		 */
-		public void setIdPacchettoPersonalizzato(Long idPacchettoPersonalizzato) {
-			this.idPacchettoPersonalizzato = idPacchettoPersonalizzato;
-		}
-	
-	
+	@EJB
+	private InvitoBeanRemote invitoremoto;
+	@EJB
+	private PacchettoPersonalizzatoBeanRemote pacchettoPersRemoto;
+
+	private String emailMittente;
+	private String emailDestinatario;
+	private Long idPacchettoPersonalizzato;
+	private PacchettoPersonalizzatoDTO pacchettoPersonalizzato;
+
 	/**
-		 * @return the pacchettoPersonalizzato
-		 */
-		public PacchettoPersonalizzatoDTO getPacchettoPersonalizzato() {
-			return pacchettoPersonalizzato;
-		}
-		/**
-		 * @param pacchettoPersonalizzato the pacchettoPersonalizzato to set
-		 */
-		public void setPacchettoPersonalizzato(
-				PacchettoPersonalizzatoDTO pacchettoPersonalizzato) {
-			this.pacchettoPersonalizzato = pacchettoPersonalizzato;
-		}
-	public String invitaAmico(){
-		
+	 * @return the emailMittente
+	 */
+	public String getEmailMittente() {
+		return emailMittente;
+	}
+
+	/**
+	 * @param emailMittente
+	 *            the emailMittente to set
+	 */
+	public void setEmailMittente(String emailMittente) {
+		this.emailMittente = emailMittente;
+	}
+
+	/**
+	 * @return the emailDestinatario
+	 */
+	public String getEmailDestinatario() {
+		return emailDestinatario;
+	}
+
+	/**
+	 * @param emailDestinatario
+	 *            the emailDestinatario to set
+	 */
+	public void setEmailDestinatario(String emailDestinatario) {
+		this.emailDestinatario = emailDestinatario;
+	}
+
+	/**
+	 * @return the idPacchettoPersonalizzato
+	 */
+	public Long getIdPacchettoPersonalizzato() {
+		return idPacchettoPersonalizzato;
+	}
+
+	/**
+	 * @param idPacchettoPersonalizzato
+	 *            the idPacchettoPersonalizzato to set
+	 */
+	public void setIdPacchettoPersonalizzato(Long idPacchettoPersonalizzato) {
+		this.idPacchettoPersonalizzato = idPacchettoPersonalizzato;
+	}
+
+	/**
+	 * @return the pacchettoPersonalizzato
+	 */
+	public PacchettoPersonalizzatoDTO getPacchettoPersonalizzato() {
+		return pacchettoPersonalizzato;
+	}
+
+	/**
+	 * @param pacchettoPersonalizzato
+	 *            the pacchettoPersonalizzato to set
+	 */
+	public void setPacchettoPersonalizzato(
+			PacchettoPersonalizzatoDTO pacchettoPersonalizzato) {
+		this.pacchettoPersonalizzato = pacchettoPersonalizzato;
+	}
+
+	public String invitaAmico() {
+
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
 				.getExternalContext().getRequest();
-		
+
 		try {
-			
-			
-			emailMittente=request.getUserPrincipal().getName();
-			setPacchettoPersonalizzato(pacchettoPersRemoto.findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato));
-			
+
+			emailMittente = request.getUserPrincipal().getName();
+			setPacchettoPersonalizzato(pacchettoPersRemoto
+					.findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato));
+
 			Date dataCorrente = new Date();
-			
-			invitoremoto.createInvito(emailMittente, emailDestinatario, pacchettoPersonalizzato, dataCorrente, false);
 
-		}catch (EJBException e) {
-		
-		return null;
+			invitoremoto.createInvito(emailMittente, emailDestinatario,
+					pacchettoPersonalizzato, dataCorrente, false);
 
+		} catch (EJBException e) {
+
+			return null;
+
+		}
+
+		return "gestioneInviti";
 	}
 
-	return "gestioneInviti";		
-		}
-	
-	
-	
-	public String mostraPropostaPacchettoViaggio(){
-		
+	public String mostraPropostaPacchettoViaggio() {
 
-		setPacchettoPersonalizzato(pacchettoPersRemoto.findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato));
-		
-		for(int i=0; i< pacchettoPersonalizzato.getInvitiPacchetto().size();i++){
-			if(pacchettoPersonalizzato.getInvitiPacchetto().get(i).getEmailDestinatario().equals(emailDestinatario)){
+		setPacchettoPersonalizzato(pacchettoPersRemoto
+				.findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato));
+
+		for (int i = 0; i < pacchettoPersonalizzato.getInvitiPacchetto().size(); i++) {
+			if (pacchettoPersonalizzato.getInvitiPacchetto().get(i)
+					.getEmailDestinatario().equals(emailDestinatario)) {
 				return "/visualizzarePropostaViaggio";
-				
+
 			}
-			
+
 		}
-		
-		
+
 		return "/formAccessoPropostaViaggioAmico";
-		
-		
-		
-	}
-	
-		
+
 	}
 
+	public String mostraPropostaPacchettoRegalo() {
 
+		setPacchettoPersonalizzato(pacchettoPersRemoto
+				.findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato));
 
+		for (int i = 0; i < pacchettoPersonalizzato.getInvitiPacchetto().size(); i++) {
+			if (pacchettoPersonalizzato.getInvitiPacchetto().get(i)
+					.getEmailDestinatario().equals(emailDestinatario)) {
+				return "/visualizzarePropostaViaggio";
 
+			}
+
+		}
+
+		return "/formAccessoPropostaRegaloAmico";
+
+	}
+
+	public String rifiutaPropostaPacchettoViaggio() {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+
+		try {
+
+			context.addMessage(null, new FacesMessage("Proposta rifiutata"));
+
+			return "homepage";
+
+		} catch (EJBException e) {
+
+			context.addMessage(null, new FacesMessage("Operazione fallita "));
+
+			return "homepage";
+
+		}
+	}
+
+	public String rifiutaPropostaPacchettoRegalo() {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+
+		try {
+
+			context.addMessage(null, new FacesMessage("Proposta rifiutata"));
+
+			return "homepage";
+
+		} catch (EJBException e) {
+
+			context.addMessage(null, new FacesMessage("Operazione fallita "));
+
+			return "homepage";
+
+		}
+
+	}
+
+}

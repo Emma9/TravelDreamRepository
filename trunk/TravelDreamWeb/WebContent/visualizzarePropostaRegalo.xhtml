@@ -8,7 +8,7 @@
 <h:head>
 </h:head>
 <h:body>
-	<p:fieldset legend="Ecco I Dettagli dell'invito ricevuto"
+	<p:fieldset legend="Ecco I Dettagli della proposta ricevuta"
 		widgetVar="regWidget" style="width: 600px;">
 
 
@@ -98,25 +98,25 @@
 		<br />
 
 
-		<!-- BOTTONE ACCETTA INVITO -->
+		<!-- BOTTONE REGALA COMPONENTE -->
 
 		<div style="float: left;">
 			<h:form>
-				<h:commandButton id="bottoneAccetta" value="Accetta"
-					action="bean!!!!" ajax="false" />
+				<h:commandButton id="bottoneRegala" value="Regala" action="bean!!!!"
+					ajax="false" />
 			</h:form>
 		</div>
 
 		<br />
 		<br />
 
-		<!-- BOTTONE RIFIUTA INVITO -->
+		<!-- BOTTONE RIFIUTA PROPOSTA -->
 
 
 		<div style="float: left;">
 			<h:form>
 				<h:commandButton id="bottoneRifiuta" value="Rifiuta"
-					action="#{invitaAmicoBean.rifiutaPropostaPacchettoViaggio()}" />
+					action="#{invitaAmicoBean.rifiutaPropostaPacchettoRegalo()}" />
 			</h:form>
 			<br />
 		</div>
@@ -125,7 +125,6 @@
 
 
 	</p:fieldset>
-
 
 	<br />
 	<br />
