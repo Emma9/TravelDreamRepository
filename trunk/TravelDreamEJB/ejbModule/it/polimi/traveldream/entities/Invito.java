@@ -20,8 +20,8 @@ public class Invito implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long idInvito;
-	private String emailMittente;
-	private String emailDestinatario;
+	private User mittente;
+	private Amico destinatario;
 	//private Long idPacchettoPersonalizzato;
 	@Temporal(TemporalType.DATE)
 	private Date data;
@@ -52,37 +52,38 @@ public class Invito implements Serializable {
 		this.idInvito = idInvito;
 	}
 
-	/**@return emailMittente*/
-	public String getEmailMittente() {
-		
-		return this.emailMittente;
-		
-	}
-
-	/**@param emailMittente emailMittente to set*/
-	public void setEmailMittente(String emailMittente) {
-		
-		this.emailMittente = emailMittente;
-		
-	}
-
-	/**@return emailDestinatario*/
-	public String getEmailDestinatario() {
-		
-		return this.emailDestinatario;
-
-	}
-
-	/**@param emailDestinatario emailDestinatario to set*/
-	public void setEmailDestinatario(String emailDestinatario) {
-		
-		this.emailDestinatario = emailDestinatario;
-		
-	}
-
+	
 	
 
 	
+
+	/**
+	 * @return the mittente
+	 */
+	public User getMittente() {
+		return mittente;
+	}
+
+	/**
+	 * @param mittente the mittente to set
+	 */
+	public void setMittente(User mittente) {
+		this.mittente = mittente;
+	}
+
+	/**
+	 * @return the destinatario
+	 */
+	public Amico getDestinatario() {
+		return destinatario;
+	}
+
+	/**
+	 * @param destinatario the destinatario to set
+	 */
+	public void setDestinatario(Amico destinatario) {
+		this.destinatario = destinatario;
+	}
 
 	/**
 	 * @return the pacchettoPersonalizzato

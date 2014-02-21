@@ -12,6 +12,8 @@ import it.polimi.traveldream.entities.PacchettoPK;
 import it.polimi.traveldream.entities.PacchettoPKDTO;
 import it.polimi.traveldream.entities.PacchettoPersonalizzato;
 import it.polimi.traveldream.entities.PacchettoPersonalizzatoDTO;
+import it.polimi.traveldream.entities.User;
+import it.polimi.traveldream.entities.UserDTO;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
@@ -44,7 +46,7 @@ public class PacchettoPersonalizzatoBean implements
 	 * @param idCliente
 	 * @return idPacchettoPersonalizzato
 	 */
-	public Long createPacchettoPersonalizzato(String stato, String emailUtente,
+	public Long createPacchettoPersonalizzato(String stato, UserDTO clienteDTO,
 			Date dataDiPartenza, Date dataDiRitorno, int numPartecipanti,
 			List<ComponenteDTO> listaComponentiSelezionati, PacchettoPKDTO pacchettoPKDTO) {
 		
@@ -53,7 +55,8 @@ public class PacchettoPersonalizzatoBean implements
 		if (verificaStatoPerCreazione(stato)) {
 			
 			System.out.println("BEAN --> CREAPACCHETTOPERSONALIZZATO --> STATO CORRETTO");
-
+			User cliente= new User();
+			cliente=userDTOToUser(clienteDTO);
 			
 			//UTILIZZARE NUOVO COSTRUTTORE E GENERARE IDPACCHETTOPERSONALIZZATO COME COMPONENTEBEAN
 			
@@ -78,7 +81,9 @@ public class PacchettoPersonalizzatoBean implements
 			
 			List<Invito> invitiPacchetto= new ArrayList<Invito>();
 			
-			PacchettoPersonalizzato pacchettoPersonalizzato = new PacchettoPersonalizzato(pacchetto.getIdPacchetto(), codice, pacchetto.getDestinazione(), pacchetto.getDataInizioValidita(), pacchetto.getDataFineValidita(), pacchetto.getEtichetta(), pacchetto.getDescrizione(), pacchetto.getListaComponenti(), componentiSelezionati, pacchetto.getCosto(), pacchetto.getSconto(), stato, emailUtente, dataDiPartenza, dataDiRitorno, numPartecipanti, invitiPacchetto);
+			
+			
+			PacchettoPersonalizzato pacchettoPersonalizzato = new PacchettoPersonalizzato(pacchetto.getIdPacchetto(), codice, pacchetto.getDestinazione(), pacchetto.getDataInizioValidita(), pacchetto.getDataFineValidita(), pacchetto.getEtichetta(), pacchetto.getDescrizione(), pacchetto.getListaComponenti(), componentiSelezionati, pacchetto.getCosto(), pacchetto.getSconto(), stato, cliente, dataDiPartenza, dataDiRitorno, numPartecipanti, invitiPacchetto);
 					
 			System.out.println("BEAN --> CREAPACCHETTOPERSONALIZZATO --> PRIMA DI PERSIST");
 			
@@ -116,7 +121,7 @@ public class PacchettoPersonalizzatoBean implements
 	 * @param listaComponenti
 	 */
 	public void updatePacchettoPersonalizzato(PacchettoPKDTO pacchettoPKDTO,
-			String emailUtente, String stato, Date dataDiPartenza,
+			UserDTO clienteDTO, String stato, Date dataDiPartenza,
 			Date dataDiRitorno, int numPartecipanti, List<ComponenteDTO> listaComponentiSelezionati) {
 
 		if ((verificaPresenzaPacchettoPersonalizzato(pacchettoPKDTO))
@@ -133,7 +138,7 @@ public class PacchettoPersonalizzatoBean implements
 			pacchettoPersonalizzato.setDataDiPartenza(dataDiPartenza);
 			pacchettoPersonalizzato.setDataDiRitorno(dataDiRitorno);
 			pacchettoPersonalizzato.setNumPartecipanti(numPartecipanti);
-			pacchettoPersonalizzato.setEmailUtente(emailUtente);
+			pacchettoPersonalizzato.setCliente(userDTOToUser(clienteDTO));
 
 			List<Componente> componentiSelezionati = new ArrayList<Componente>();
 			for (int i = 0; i < listaComponentiSelezionati.size(); i++) {
@@ -374,9 +379,9 @@ public class PacchettoPersonalizzatoBean implements
 				.getDataDiPartenza());
 		pacchettoPersonalizzatoDTO.setDataDiRitorno(pacchettoPersonalizzato
 				.getDataDiRitorno());
+		pacchettoPersonalizzatoDTO.setNumPartecipanti(pacchettoPersonalizzato.getNumPartecipanti());
 		pacchettoPersonalizzatoDTO.setStato(pacchettoPersonalizzato.getStato());
-		pacchettoPersonalizzatoDTO.setEmailUtente(pacchettoPersonalizzato
-				.getEmailUtente());
+		pacchettoPersonalizzatoDTO.setCliente(userToUserDTO(pacchettoPersonalizzato.getCliente()));
 		pacchettoPersonalizzatoDTO.setIdPacchetto(pacchettoPersonalizzato
 				.getIdPacchetto());
 		pacchettoPersonalizzatoDTO.setCosto(pacchettoPersonalizzato.getCosto());
@@ -432,8 +437,7 @@ public class PacchettoPersonalizzatoBean implements
 		pacchettoPersonalizzato.setDataDiRitorno(pacchettoPersonalizzatoDTO
 				.getDataDiRitorno());
 		pacchettoPersonalizzato.setStato(pacchettoPersonalizzatoDTO.getStato());
-		pacchettoPersonalizzato.setEmailUtente(pacchettoPersonalizzatoDTO
-				.getEmailUtente());
+		pacchettoPersonalizzato.setCliente(userDTOToUser(pacchettoPersonalizzatoDTO.getCliente()));
 		pacchettoPersonalizzato.setIdPacchetto(pacchettoPersonalizzatoDTO
 				.getIdPacchetto());
 		pacchettoPersonalizzato.setCosto(pacchettoPersonalizzatoDTO.getCosto());
@@ -477,5 +481,59 @@ public class PacchettoPersonalizzatoBean implements
 
 	}
 
+	public User userDTOToUser(UserDTO userDTO) {
+		
+		User user= new User();
+		user.setEmail(userDTO.getEmail());
+		user.setFirstName(userDTO.getEmail());
+		user.setLastName(userDTO.getLastName());
+		user.setPassword(userDTO.getPassword());
+		user.setRegisteredOn(userDTO.getRegisteredOn());
+		
+		List<PacchettoPersonalizzato> pacchettiCliente= new ArrayList<PacchettoPersonalizzato>();
+		for(int i=0;i<userDTO.getPacchettiCliente().size(); i++){
+			pacchettiCliente.add(pacchettoPersonalizzatoDTOToPacchettoPersonalizzato(userDTO.getPacchettiCliente().get(i)));
+		}
+		user.setPacchettiCliente(pacchettiCliente);
+		
+		List<PacchettoPersonalizzato> giftList= new ArrayList<PacchettoPersonalizzato>();
+		for(int i=0;i<userDTO.getGiftList().size(); i++){
+			pacchettiCliente.add(pacchettoPersonalizzatoDTOToPacchettoPersonalizzato(userDTO.getGiftList().get(i)));
+		}
+		user.setGiftList(giftList);
+		
+		return user;
+		
+		
+		
+	}
+
+public UserDTO userToUserDTO(User user) {
+		
+		UserDTO userDTO= new UserDTO();
+		userDTO.setEmail(user.getEmail());
+		userDTO.setFirstName(user.getEmail());
+		userDTO.setLastName(user.getLastName());
+		userDTO.setPassword(user.getPassword());
+		userDTO.setRegisteredOn(user.getRegisteredOn());
+		
+		List<PacchettoPersonalizzatoDTO> pacchettiCliente= new ArrayList<PacchettoPersonalizzatoDTO>();
+		for(int i=0;i<user.getPacchettiCliente().size(); i++){
+			pacchettiCliente.add(pacchettoPersonalizzatoToDTO(user.getPacchettiCliente().get(i)));
+		}
+		userDTO.setPacchettiCliente(pacchettiCliente);;
+		
+		List<PacchettoPersonalizzatoDTO> giftList= new ArrayList<PacchettoPersonalizzatoDTO>();
+		for(int i=0;i<user.getGiftList().size(); i++){
+			pacchettiCliente.add(pacchettoPersonalizzatoToDTO(user.getGiftList().get(i)));
+		}
+		userDTO.setGiftList(giftList);
+		
+		return userDTO;
+		
+		
+		
+	}	
+	
 	
 }

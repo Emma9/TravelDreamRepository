@@ -5,6 +5,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 public class PacchettoPersonalizzatoDTO extends PacchettoDTO implements
 		Serializable {
 
@@ -15,8 +22,10 @@ public class PacchettoPersonalizzatoDTO extends PacchettoDTO implements
 
 	/** Attributi */
 
-	private String stato; // SALVATO BLOCCATO CONFERMATO ACCETTATO
-	private String emailUtente;
+private String stato; // SALVATO BLOCCATO CONFERMATO ACCETTATO
+	
+	
+	private UserDTO cliente;
 	private Date dataDiPartenza;
 	private Date dataDiRitorno;
 	private int numPartecipanti;
@@ -25,6 +34,7 @@ public class PacchettoPersonalizzatoDTO extends PacchettoDTO implements
 
 	/** Costruttore */
 	public PacchettoPersonalizzatoDTO() {
+		super();
 	}
 
 	/** Costruttore PACCHETTOPERSONALIZZATO */
@@ -32,18 +42,19 @@ public class PacchettoPersonalizzatoDTO extends PacchettoDTO implements
 			Long idPacchettoPersonalizzato, String destinazione,
 			Date dataInizioValidita, Date dateFineValidita, String etichetta,
 			String descrizione, List<ComponenteDTO> listaComponenti,
-			List<ComponenteDTO> listaComponentiSelezionati, int costo,
-			int sconto, String stato, String emailUtente, Date dataDiPartenza,
-			Date dataDiRitorno, List<InvitoDTO> invitiPacchetto) {
+			List<ComponenteDTO> listaComponentiSelezionati, int costo, int sconto,
+			String stato, UserDTO cliente, Date dataDiPartenza,
+			Date dataDiRitorno, int numPartecipanti, List<InvitoDTO> invitiPacchetto) {
 
 		super(idPacchettoPersonalizzato, destinazione, dataInizioValidita,
 				dateFineValidita, etichetta, descrizione, listaComponenti,
 				listaComponentiSelezionati, costo, sconto);
 
 		this.setStato(stato);
-		this.setEmailUtente(emailUtente);
+		this.setCliente(cliente);
 		this.setDataDiPartenza(dataDiPartenza);
 		this.setDataDiRitorno(dataDiRitorno);
+		this.setNumPartecipanti(numPartecipanti);
 		this.setInvitiPacchetto(invitiPacchetto);
 
 		super.setIdPacchetto(idPacchetto);
@@ -67,19 +78,22 @@ public class PacchettoPersonalizzatoDTO extends PacchettoDTO implements
 
 	}
 
+	
+	
+	
+	
 	/**
-	 * @return the emailUtente
+	 * @return the cliente
 	 */
-	public String getEmailUtente() {
-		return emailUtente;
+	public UserDTO getCliente() {
+		return cliente;
 	}
 
 	/**
-	 * @param emailUtente
-	 *            the emailUtente to set
+	 * @param cliente the cliente to set
 	 */
-	public void setEmailUtente(String emailUtente) {
-		this.emailUtente = emailUtente;
+	public void setCliente(UserDTO cliente) {
+		this.cliente = cliente;
 	}
 
 	/**

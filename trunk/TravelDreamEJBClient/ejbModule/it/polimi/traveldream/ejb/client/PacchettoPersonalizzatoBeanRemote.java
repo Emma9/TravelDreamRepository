@@ -3,6 +3,7 @@ package it.polimi.traveldream.ejb.client;
 import it.polimi.traveldream.entities.ComponenteDTO;
 import it.polimi.traveldream.entities.PacchettoPKDTO;
 import it.polimi.traveldream.entities.PacchettoPersonalizzatoDTO;
+import it.polimi.traveldream.entities.UserDTO;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,10 +26,9 @@ public interface PacchettoPersonalizzatoBeanRemote {
 	 * @param pacchettoPKDTO
 	 * @return
 	 */
-	public Long createPacchettoPersonalizzato(String stato, String emailUtente,
+	public Long createPacchettoPersonalizzato(String stato, UserDTO clienteDTO,
 			Date dataDiPartenza, Date dataDiRitorno, int numPartecipanti,
-			List<ComponenteDTO> listaComponentiSelezionati, PacchettoPKDTO pacchettoPKDTO);	
-
+			List<ComponenteDTO> listaComponentiSelezionati, PacchettoPKDTO pacchettoPKDTO);
 	
 
 	/**
@@ -39,15 +39,16 @@ public interface PacchettoPersonalizzatoBeanRemote {
 
 	/**
 	 * @param pacchettoPKDTO
-	 * @param emailUtente
+	 * @param clienteDTO
 	 * @param stato
 	 * @param dataDiPartenza
 	 * @param dataDiRitorno
 	 * @param listaComponentiSelezionati
 	 */
 	public void updatePacchettoPersonalizzato(PacchettoPKDTO pacchettoPKDTO,
-			String emailUtente, String stato, Date dataDiPartenza,
+			UserDTO clienteDTO, String stato, Date dataDiPartenza,
 			Date dataDiRitorno, int numPartecipanti, List<ComponenteDTO> listaComponentiSelezionati);
+	
 	
 	/**@param idPacchettoPersonalizzato
 	 * @return PacchettoPersonalizzato*/
@@ -74,6 +75,9 @@ public interface PacchettoPersonalizzatoBeanRemote {
 	public boolean verificaStato (String stato);
 	
 	public boolean verificaStatoPerCreazione(String stato);
+	
+	
+	
 
 
 }

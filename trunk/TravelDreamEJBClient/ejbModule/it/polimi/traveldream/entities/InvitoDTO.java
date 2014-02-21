@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -16,10 +17,9 @@ public class InvitoDTO implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 202L;
-	
 	private Long idInvito;
-	private String emailMittente;
-	private String emailDestinatario;
+	private UserDTO mittente;
+	private AmicoDTO destinatario;
 	private Date data;
 	private boolean stato; //TRUE=>ACCETTATO
 	
@@ -46,37 +46,38 @@ public class InvitoDTO implements Serializable{
 		this.idInvito = idInvito;
 	}
 
-	/**@return emailMittente*/
-	public String getEmailMittente() {
-		
-		return this.emailMittente;
-		
-	}
-
-	/**@param emailMittente emailMittente to set*/
-	public void setEmailMittente(String emailMittente) {
-		
-		this.emailMittente = emailMittente;
-		
-	}
-
-	/**@return emailDestinatario*/
-	public String getEmailDestinatario() {
-		
-		return this.emailDestinatario;
-
-	}
-
-	/**@param emailDestinatario emailDestinatario to set*/
-	public void setEmailDestinatario(String emailDestinatario) {
-		
-		this.emailDestinatario = emailDestinatario;
-		
-	}
-
+	
 	
 
 	
+
+	/**
+	 * @return the mittente
+	 */
+	public UserDTO getMittente() {
+		return mittente;
+	}
+
+	/**
+	 * @param mittente the mittente to set
+	 */
+	public void setMittente(UserDTO mittente) {
+		this.mittente = mittente;
+	}
+
+	/**
+	 * @return the destinatario
+	 */
+	public AmicoDTO getDestinatario() {
+		return destinatario;
+	}
+
+	/**
+	 * @param destinatario the destinatario to set
+	 */
+	public void setDestinatario(AmicoDTO destinatario) {
+		this.destinatario = destinatario;
+	}
 
 	/**
 	 * @return the pacchettoPersonalizzato
