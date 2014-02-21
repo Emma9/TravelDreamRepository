@@ -18,7 +18,10 @@ public class PacchettoPersonalizzato extends Pacchetto {
 	/** Attributi */
 
 	private String stato; // SALVATO BLOCCATO CONFERMATO ACCETTATO
-	private String emailUtente;
+	
+	@ManyToOne
+    @JoinColumn(nullable=false)
+	private User cliente;
 	@Temporal(TemporalType.DATE)
 	private Date dataDiPartenza;
 	@Temporal(TemporalType.DATE)
@@ -39,7 +42,7 @@ public class PacchettoPersonalizzato extends Pacchetto {
 			Date dataInizioValidita, Date dateFineValidita, String etichetta,
 			String descrizione, List<Componente> listaComponenti,
 			List<Componente> listaComponentiSelezionati, int costo, int sconto,
-			String stato, String emailUtente, Date dataDiPartenza,
+			String stato, User cliente, Date dataDiPartenza,
 			Date dataDiRitorno, int numPartecipanti, List<Invito> invitiPacchetto) {
 
 		super(idPacchettoPersonalizzato, destinazione, dataInizioValidita,
@@ -47,7 +50,7 @@ public class PacchettoPersonalizzato extends Pacchetto {
 				listaComponentiSelezionati, costo, sconto);
 
 		this.setStato(stato);
-		this.setEmailUtente(emailUtente);
+		this.setCliente(cliente);
 		this.setDataDiPartenza(dataDiPartenza);
 		this.setDataDiRitorno(dataDiRitorno);
 		this.setNumPartecipanti(numPartecipanti);
@@ -74,19 +77,22 @@ public class PacchettoPersonalizzato extends Pacchetto {
 
 	}
 
+	
+	
+	
+	
 	/**
-	 * @return the emailUtente
+	 * @return the cliente
 	 */
-	public String getEmailUtente() {
-		return emailUtente;
+	public User getCliente() {
+		return cliente;
 	}
 
 	/**
-	 * @param emailUtente
-	 *            the emailUtente to set
+	 * @param cliente the cliente to set
 	 */
-	public void setEmailUtente(String emailUtente) {
-		this.emailUtente = emailUtente;
+	public void setCliente(User cliente) {
+		this.cliente = cliente;
 	}
 
 	/**

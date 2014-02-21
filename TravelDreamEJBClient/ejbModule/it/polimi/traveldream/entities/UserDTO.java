@@ -5,12 +5,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 
 import org.apache.commons.codec.digest.DigestUtils;
@@ -23,41 +26,50 @@ public class UserDTO implements Serializable {
 
 	public static final String FIND_ALL = "User.findAll";
 
+	@Id
 	private String email;
 
 	private String firstName;
 
 	private String lastName;
 
-	private String password; // sha-256 + hex
+	private String password; // sha-512 + hex
+	
+	private List<PacchettoPersonalizzatoDTO> pacchettiCliente = new ArrayList<PacchettoPersonalizzatoDTO>(0);
+	
+	private List<PacchettoPersonalizzatoDTO> giftList = new ArrayList<PacchettoPersonalizzatoDTO>(0);
 
-	private List<PacchettoPersonalizzatoDTO> pacchettiCliente = new ArrayList<PacchettoPersonalizzatoDTO>(
-			0);
+	
+	
 
-	private List<PacchettoPersonalizzatoDTO> giftList = new ArrayList<PacchettoPersonalizzatoDTO>(
-			0);
-
+	@Temporal(javax.persistence.TemporalType.TIMESTAMP)
 	private Date registeredOn;
 
+	@ElementCollection(targetClass = GroupDTO.class)
+	@CollectionTable(name = "USERS_GROUPS", joinColumns = @JoinColumn(name = "email"))
+	@Enumerated(EnumType.STRING)
+	@Column(name = "groupname")
 	private List<GroupDTO> groups;
 
 	public UserDTO() {
 		super();
 	}
 
-	/**
-	 * @return the firstName
-	 */
+
 	public String getFirstName() {
 		return firstName;
 	}
 
-	/**
-	 * @param firstName
-	 *            the firstName to set
-	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	/**
@@ -75,14 +87,6 @@ public class UserDTO implements Serializable {
 		this.email = email;
 	}
 
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
 	/**
 	 * @return the password in SHA512 HEX representation
 	 */
@@ -94,6 +98,10 @@ public class UserDTO implements Serializable {
 		this.password = password;
 	}
 
+	
+	
+	
+
 	/**
 	 * @return the pacchettiCliente
 	 */
@@ -102,11 +110,9 @@ public class UserDTO implements Serializable {
 	}
 
 	/**
-	 * @param pacchettiCliente
-	 *            the pacchettiCliente to set
+	 * @param pacchettiCliente the pacchettiCliente to set
 	 */
-	public void setPacchettiCliente(
-			List<PacchettoPersonalizzatoDTO> pacchettiCliente) {
+	public void setPacchettiCliente(List<PacchettoPersonalizzatoDTO> pacchettiCliente) {
 		this.pacchettiCliente = pacchettiCliente;
 	}
 
@@ -118,8 +124,7 @@ public class UserDTO implements Serializable {
 	}
 
 	/**
-	 * @param giftList
-	 *            the giftList to set
+	 * @param giftList the giftList to set
 	 */
 	public void setGiftList(List<PacchettoPersonalizzatoDTO> giftList) {
 		this.giftList = giftList;
@@ -143,7 +148,7 @@ public class UserDTO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "User [username=" + email + ", firstName=" + firstName
+		return "User [email=" + email + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", password=" + password
 				+ ", registeredOn=" + registeredOn + ", groups=" + groups + "]";
 	}

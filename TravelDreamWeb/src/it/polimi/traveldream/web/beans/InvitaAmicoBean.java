@@ -2,7 +2,10 @@ package it.polimi.traveldream.web.beans;
 
 import it.polimi.traveldream.ejb.client.InvitoBeanRemote;
 import it.polimi.traveldream.ejb.client.PacchettoPersonalizzatoBeanRemote;
+import it.polimi.traveldream.ejb.client.UsrMgr;
+import it.polimi.traveldream.entities.AmicoDTO;
 import it.polimi.traveldream.entities.PacchettoPersonalizzatoDTO;
+import it.polimi.traveldream.entities.UserDTO;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -29,40 +32,42 @@ public class InvitaAmicoBean implements Serializable {
 	private InvitoBeanRemote invitoremoto;
 	@EJB
 	private PacchettoPersonalizzatoBeanRemote pacchettoPersRemoto;
+	@EJB
+	private UsrMgr usermgr;
+	
+	private UserDTO mittente;
+	private AmicoDTO destinatario;
 
-	private String emailMittente;
-	private String emailDestinatario;
 	private Long idPacchettoPersonalizzato;
 	private PacchettoPersonalizzatoDTO pacchettoPersonalizzato;
 
+	
 	/**
-	 * @return the emailMittente
+	 * @return the mittente
 	 */
-	public String getEmailMittente() {
-		return emailMittente;
+	public UserDTO getMittente() {
+		return mittente;
 	}
 
 	/**
-	 * @param emailMittente
-	 *            the emailMittente to set
+	 * @param mittente the mittente to set
 	 */
-	public void setEmailMittente(String emailMittente) {
-		this.emailMittente = emailMittente;
+	public void setMittente(UserDTO mittente) {
+		this.mittente = mittente;
 	}
 
 	/**
-	 * @return the emailDestinatario
+	 * @return the destinatario
 	 */
-	public String getEmailDestinatario() {
-		return emailDestinatario;
+	public AmicoDTO getDestinatario() {
+		return destinatario;
 	}
 
 	/**
-	 * @param emailDestinatario
-	 *            the emailDestinatario to set
+	 * @param destinatario the destinatario to set
 	 */
-	public void setEmailDestinatario(String emailDestinatario) {
-		this.emailDestinatario = emailDestinatario;
+	public void setDestinatario(AmicoDTO destinatario) {
+		this.destinatario = destinatario;
 	}
 
 	/**
@@ -104,14 +109,12 @@ public class InvitaAmicoBean implements Serializable {
 
 		try {
 
-			emailMittente = request.getUserPrincipal().getName();
-			setPacchettoPersonalizzato(pacchettoPersRemoto
-					.findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato));
+			mittente=usermgr.getUserDTO();
+			setPacchettoPersonalizzato(pacchettoPersRemoto.findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato));
 
 			Date dataCorrente = new Date();
 
-			invitoremoto.createInvito(emailMittente, emailDestinatario,
-					pacchettoPersonalizzato, dataCorrente, false);
+			invitoremoto.createInvito(mittente, destinatario, pacchettoPersonalizzato, dataCorrente, false);
 
 		} catch (EJBException e) {
 
@@ -124,12 +127,11 @@ public class InvitaAmicoBean implements Serializable {
 
 	public String mostraPropostaPacchettoViaggio() {
 
-		setPacchettoPersonalizzato(pacchettoPersRemoto
-				.findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato));
+setPacchettoPersonalizzato(pacchettoPersRemoto.findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato));
+		
+		for(int i=0; i< pacchettoPersonalizzato.getInvitiPacchetto().size();i++){
+			if(pacchettoPersonalizzato.getInvitiPacchetto().get(i).getDestinatario().equals(destinatario)){
 
-		for (int i = 0; i < pacchettoPersonalizzato.getInvitiPacchetto().size(); i++) {
-			if (pacchettoPersonalizzato.getInvitiPacchetto().get(i)
-					.getEmailDestinatario().equals(emailDestinatario)) {
 				return "/visualizzarePropostaViaggio";
 
 			}
@@ -147,7 +149,7 @@ public class InvitaAmicoBean implements Serializable {
 
 		for (int i = 0; i < pacchettoPersonalizzato.getInvitiPacchetto().size(); i++) {
 			if (pacchettoPersonalizzato.getInvitiPacchetto().get(i)
-					.getEmailDestinatario().equals(emailDestinatario)) {
+					.getDestinatario().equals(destinatario)) {
 				return "/visualizzarePropostaViaggio";
 
 			}

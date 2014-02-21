@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -17,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -45,7 +47,7 @@ public class User implements Serializable {
 
 	private String password; // sha-512 + hex
 	
-	
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="cliente")
 	private List<PacchettoPersonalizzato> pacchettiCliente = new ArrayList<PacchettoPersonalizzato>(0);
 	
 	private List<PacchettoPersonalizzato> giftList = new ArrayList<PacchettoPersonalizzato>(0);
@@ -66,14 +68,7 @@ public class User implements Serializable {
 		super();
 	}
 
-	public User(UserDTO user) {
-
-		this.email = user.getEmail();
-		this.firstName = user.getFirstName();
-		this.lastName = user.getLastName();
-		this.password = DigestUtils.sha256Hex(user.getPassword());
-		this.registeredOn = new Date();
-	}
+	
 
 	public String getFirstName() {
 		return firstName;

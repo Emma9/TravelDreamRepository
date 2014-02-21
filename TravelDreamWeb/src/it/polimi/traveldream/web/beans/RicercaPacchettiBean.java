@@ -6,6 +6,7 @@ import it.polimi.traveldream.ejb.client.UsrMgr;
 import it.polimi.traveldream.entities.ComponenteDTO;
 import it.polimi.traveldream.entities.PacchettoDTO;
 import it.polimi.traveldream.entities.PacchettoPKDTO;
+import it.polimi.traveldream.entities.UserDTO;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -537,7 +538,9 @@ public class RicercaPacchettiBean implements Serializable {
 
 				System.out.println("CREAPERSONALIZZATO --> UTENTE LOGGATO");
 
-				String emailUtente = user.getPrincipalEmail();
+				UserDTO userDTO = new UserDTO();
+				userDTO=user.getUserDTO();
+				
 
 				for (int j = 0; j < listaComponentiSelezionati.size(); j++) {
 
@@ -551,7 +554,7 @@ public class RicercaPacchettiBean implements Serializable {
 				}
 
 				pacchettoPersonalizzatoRemoto.createPacchettoPersonalizzato(
-						"salvato", emailUtente, dataPartenza, dataRitorno, numPartecipanti,
+						"salvato", userDTO, dataPartenza, dataRitorno, numPartecipanti,
 						listaComponentiSelezionati, new PacchettoPKDTO(idPacchetto, (long)0));
 
 				System.out.println("CREAPERSONALIZZATO --> FINE METODO");

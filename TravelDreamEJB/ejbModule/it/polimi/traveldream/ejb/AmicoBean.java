@@ -5,6 +5,8 @@ import it.polimi.traveldream.ejb.client.AmicoBeanRemote;
 import it.polimi.traveldream.ejb.client.InvitoBeanRemote;
 import it.polimi.traveldream.entities.Amico;
 import it.polimi.traveldream.entities.AmicoDTO;
+import it.polimi.traveldream.entities.User;
+import it.polimi.traveldream.entities.UserDTO;
 
 import java.util.*;
 
@@ -165,4 +167,25 @@ public class AmicoBean implements AmicoBeanRemote, AmicoBeanLocal {
 		AmicoDTO a = findByIdAmico(idAmico);
 		return a.getEmail();
 	}
+	
+	
+	public AmicoDTO amicoToAmicoDTO(Amico amico) {
+	
+		AmicoDTO amicoDTO= new AmicoDTO();
+		amicoDTO.setEmail(amico.getEmail());
+		amicoDTO.setIdAmico(amico.getIdAmico());
+		return amicoDTO;
+		
+	}
+	
+	
+	public Amico amicoDTOToAmico(AmicoDTO amicoDTO) {
+		
+		Amico amico= new Amico();
+		amico.setEmail(amicoDTO.getEmail());
+		amico.setIdAmico(amicoDTO.getIdAmico());
+		return amico;
+		
+	}
+	
 }
