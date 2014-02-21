@@ -17,13 +17,21 @@
 		<p:layoutUnit position="north" size="80" header="TRAVELDREAM"
 			resizable="false" closable="false" collapsible="false">
 
+
+
+
+
+
 			<div align="right">
+				<h:button value="Visualizza proposta regalo"
+					outcome="formAccessoPropostaRegaloAmico" />
 				<h:button value="Visualizza proposta viaggio"
 					outcome="formAccessoPropostaViaggioAmico" />
 				<h:button value="Area Riservata" outcome="admin/index" />
 				<h:button value="Login Cliente" outcome="user/index" />
 				<h:button value="Registrati" outcome="registrazione" />
 			</div>
+
 
 		</p:layoutUnit>
 	</div>
@@ -35,10 +43,8 @@
 	<p:layoutUnit position="west" size="300"
 		header="RICERCA PER DESTINAZIONE" resizable="false" closable="false"
 		collapsible="false">
-		<h:form id="form">
+		<div>
 
-			<p:messages id="message" showSummary="true" showDetail="false"
-				autoUpdate="true" closable="true" />
 			<h:outputLabel value="Destinazione: " />
 			<p:inputText value="#{ricercaPacchettiBean.destinazione}"
 				id="destinazione" required="true"
@@ -80,8 +86,16 @@
 				action="#{ricercaPacchettiBean.ricercaPacchetti()}" ajax="false">
 			</h:commandButton>
 
+		</div>
 
-		</h:form>
+		<br />
+		<br />
+
+		<div>
+			<p:messages id="messages" showDetail="false" autoUpdate="true"
+				closable="true" />
+		</div>
+
 	</p:layoutUnit>
 
 
