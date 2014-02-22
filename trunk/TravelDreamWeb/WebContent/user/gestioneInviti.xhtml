@@ -1,57 +1,68 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 </h:head>
 <h:body>
 	<h2>GESTIONE DEGLI INVITI</h2>
-	<h:form id="invita">
-		<p:fieldset legend="Ecco la lista dei tuoi inviti" widgetVar="regWidget" style="width: 600px;">
-  		
-  		
-  		<p:growl id="growl" showDetail="true" />
 
-			<p:dataTable id="listaInviti" var="invito" value="#{mostraInvitiClienteBean.invitiRicercati}"
-				paginator="true" rows="10" selection="#{mostraInvitiClienteBean.invitoSelezionato}"
-				selectionMode="single">       
+	<p:fieldset legend="Ecco la lista dei tuoi inviti"
+		widgetVar="regWidget" style="width: 600px;">
 
-				<!-- <p:ajax event="rowSelect" listener="#{ricercaPacchettiBean.onRowSelect}" update=":form:display :form:growl" oncomplete="dettgliPacchettoPredefinitoRicercato" />
+
+		<p:growl id="growl" showDetail="true" />
+
+		<p:dataTable id="listaInviti" var="invito"
+			value="#{mostraInvitiClienteBean.invitiRicercati}" paginator="true"
+			rows="10" selection="#{mostraInvitiClienteBean.invitoSelezionato}"
+			selectionMode="single">
+
+			<!-- <p:ajax event="rowSelect" listener="#{ricercaPacchettiBean.onRowSelect}" update=":form:display :form:growl" oncomplete="dettgliPacchettoPredefinitoRicercato" />
 						
 					
 					
-				<p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->													
+				<p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->
 
-				<f:facet name="header">  
+			<f:facet name="header">  
             	Seleziona un pacchetto per visualizzare i dettagli  
 		        </f:facet>
-		
-								
-						<p:column headerText="Destinatario Invito">  
+
+
+			<p:column headerText="Destinatario Invito">  
 		            #{invito.emailDestinatario}  
 		        </p:column>
-		
-						<p:column headerText="Data di Invito">  
+
+			<p:column headerText="Data di Invito">  
 		            #{invito.data}  
 		        </p:column>
-		
-						<p:column headerText="Stato Invito">  
+
+			<p:column headerText="Stato Invito">  
 		            #{invito.stato}  
 		        </p:column>
-		        
-			</p:dataTable>
-		
-			<br />
 
-		  	<p:commandButton id="bottoneInvita" value="Invita Amico" update="invita" actionListener="formInvitoAmico">
-								 <f:setPropertyActionListener target="#{mostraInvitiClienteBean.email}" value="#{loginClienteBean.email}" />
-			</p:commandButton>
-  	</p:fieldset>
+		</p:dataTable>
 
-        
-</h:form>
+		<br />
+
+		<p:commandButton id="bottoneInvita" value="Invita Amico"
+			actionListener="formInvitoAmico">
+			<f:setPropertyActionListener
+				target="#{mostraInvitiClienteBean.email}"
+				value="#{loginClienteBean.email}" />
+		</p:commandButton>
+	</p:fieldset>
+
+	<br />
+	<br />
+	<div align="left">
+		<h:button id="bottoneHome" value="Torna alla Homepage" outcome="index"
+			ajax="false" />
+	</div>
+
+
 </h:body>
 </html>

@@ -9,27 +9,43 @@
 <h:body>
 	<h2>FORM DI LOGIN</h2>
 	<div>
-	<h:form id="login"
-		onsubmit="document.getElementById('login').action='j_security_check';"
-		prependId="false">
-		<h:panelGrid columns="2">
-			<p:outputLabel for="j_username" value="Email" />
-			<p:inputText id="j_username" name="j_username" required="true"
-				requiredMessage="Inserire un'email" />
-			<p:outputLabel for="j_password" value="Password" />
-			<p:password id="j_password" name="j_password" required="true"
-				requiredMessage="Inserire una password" />
-			<p:commandButton id="submit" value="Login" ajax="false" />
-		</h:panelGrid>
-	</h:form>
-</div>
-<br />
-<div>
-<h:form id="registrazione">
-<p:outputLabel value="Sei un nuovo utente?" />
-<h:commandLink action="/registrazione"  value="Registrati ora" style="font-size:20px;"/>
-</h:form>
-</div>
+		<h:form id="login"
+			onsubmit="document.getElementById('login').action='j_security_check';"
+			prependId="false">
+			<h:panelGrid columns="2">
+				<p:outputLabel for="j_username" value="Email" />
+				<p:inputText id="j_username" name="j_username" required="true"
+					requiredMessage="Inserire un'email" />
+				<p:outputLabel for="j_password" value="Password" />
+				<p:password id="j_password" name="j_password" required="true"
+					requiredMessage="Inserire una password" />
+				<br />
+				<br />
+				<p:commandButton id="submit" value="Login" ajax="false" />
+
+			</h:panelGrid>
+		</h:form>
+	</div>
+
+
+
+	<!-- BOTTONE REGISTRAZIONE -->
+
+	<br />
+	<div>
+		<h:form id="registrazione">
+			<p:outputLabel value="Sei un nuovo utente?" />
+			<h:commandLink action="/registrazione" value="Registrati ora"
+				style="font-size:20px;" />
+		</h:form>
+	</div>
+
+	<br />
+	<br />
+	<div align="left">
+		<h:button id="bottoneHome" value="Torna alla Homepage"
+			outcome="homepage" ajax="false" />
+	</div>
 
 
 </h:body>
