@@ -7,7 +7,6 @@
 <h:head>
 </h:head>
 <h:body>
-	<h2>LISTA DEI MIEI PACCHETTI</h2>
 
 	<p:fieldset legend="Ecco la lista dei miei Pacchetti Personalizzati"
 		widgetVar="regWidget" style="width: 600px;">
@@ -45,20 +44,25 @@
 		        </p:column>
 
 			<f:facet name="footer">
-				<h:commandButton id="viewButton" value="Seleziona"
-					icon="ui-icon-search" update=":form:display" ajax="false" />
+				<h:form>
+					<p:commandButton id="viewButton" value="Seleziona"
+						icon="ui-icon-search" update=":form:display"
+						action="#{gestionePacchettiPersonalizzatiBean.dettagliPacchettoSelezionato()}"
+						ajax="false" />
+
+				</h:form>
 			</f:facet>
 
 		</p:dataTable>
 
 
-
-
-
 	</p:fieldset>
 
+
 	<br />
 	<br />
+
+	<!-- BOTTONE HOMEPAGE -->
 
 	<div align="left">
 		<h:form>
@@ -66,6 +70,14 @@
 			<h:button value="Torna alla homepage" outcome="index" ajax="false" />
 
 		</h:form>
+	</div>
+
+	<br />
+	<br />
+
+	<div>
+		<p:messages id="messages" showDetail="false" autoUpdate="true"
+			closable="true" />
 	</div>
 
 

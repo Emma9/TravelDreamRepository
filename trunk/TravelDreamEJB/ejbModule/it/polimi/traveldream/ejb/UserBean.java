@@ -1,8 +1,11 @@
 package it.polimi.traveldream.ejb;
 
 import it.polimi.traveldream.ejb.client.UserBeanRemote;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  * Session Bean implementation class UserBean
@@ -10,6 +13,10 @@ import javax.ejb.Stateless;
 @Stateless
 @LocalBean
 public class UserBean implements UserBeanRemote {
+	
+	
+	@PersistenceContext(unitName = "travelDream_project")
+	private EntityManager manager;
 
     /**
      * Default constructor. 
