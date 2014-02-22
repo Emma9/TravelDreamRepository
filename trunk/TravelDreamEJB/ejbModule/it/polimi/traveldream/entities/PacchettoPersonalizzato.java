@@ -20,7 +20,7 @@ public class PacchettoPersonalizzato extends Pacchetto {
 	private String stato; // SALVATO BLOCCATO CONFERMATO ACCETTATO
 	
 	@ManyToOne
-    @JoinColumn(nullable=false)
+    @JoinColumn
 	private User cliente;
 	@Temporal(TemporalType.DATE)
 	private Date dataDiPartenza;
