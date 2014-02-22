@@ -7,7 +7,6 @@
 <h:head>
 </h:head>
 <h:body>
-	<h2>MIA GIFT LIST</h2>
 
 	<p:fieldset legend="Ecco la mia Gift List" widgetVar="regWidget"
 		style="width: 600px;">
@@ -20,12 +19,6 @@
 			rows="10" selection="#{giftListClienteBean.pacchettoSelezionato}"
 			selectionMode="single">
 
-			<p:ajax event="rowSelect"
-				listener="#{giftListClienteBean.onRowSelect}"
-				oncomplete="dettagliGiftList" />
-
-
-			<!-- <p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->
 
 			<f:facet name="header">  
             	Seleziona un pacchetto per visualizzare i dettagli  

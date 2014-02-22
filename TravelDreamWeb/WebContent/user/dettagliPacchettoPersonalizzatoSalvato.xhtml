@@ -8,15 +8,11 @@
 <h:head>
 </h:head>
 <h:body>
-	<h2>DETTAGLI DEL PACCHETTO PERSONALIZZATO</h2>
 
 	<p:fieldset legend="Ecco I Dettagli del pacchetto personalizzato"
 		widgetVar="regWidget" style="width: 600px;">
 
 		<p:panelGrid id="dettagli" columns="2">
-
-
-
 
 			<h:outputText value="ID:" />
 			<h:outputText
@@ -59,7 +55,7 @@
 
 			<h:outputText value="Numero di partecipanti: " />
 			<h:outputText
-				value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.}" />
+				value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.numPartecipanti}" />
 
 
 		</p:panelGrid>
@@ -73,7 +69,24 @@
 
 	<div align="left">
 		<h:form>
-			<h:commandButton value="Modifica" action="#{}" ajax="false" />
+			<h:commandButton value="Modifica"
+				action="#{gestionePacchettiPersonalizzatiBean}" ajax="false" />
+		</h:form>
+	</div>
+
+
+
+	<br />
+	<br />
+
+	<!-- BOTTONE AGGIUNGI A GIFTLIST -->
+
+	<div align="left">
+		<h:form>
+
+			<h:button value="Aggiungi alla gift list" outcome="#{gestionePacchettiPersonalizzatiBean.aggiungiAllaGiftlist()}"
+				ajax="false" />
+
 		</h:form>
 	</div>
 

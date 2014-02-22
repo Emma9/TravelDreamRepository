@@ -1,7 +1,7 @@
 package it.polimi.traveldream.web.beans;
 
-
 import it.polimi.traveldream.ejb.client.UserBeanRemote;
+import it.polimi.traveldream.ejb.client.UsrMgr;
 import it.polimi.traveldream.entities.PacchettoDTO;
 import it.polimi.traveldream.entities.PacchettoPersonalizzatoDTO;
 
@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -23,18 +24,20 @@ public class GiftListClienteBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 345L;
-	
+
 	@EJB
 	private UserBeanRemote utenteRemoto;
-	
-	private Long idCliente;
-	
-	//PACCHETTO SELEZIONATO
-	private PacchettoPersonalizzatoDTO pacchettoSelezionato;
-	
-	//LISTA PACCHETTI INVIATA ALLA PAGINA WEB
-	private ArrayList<PacchettoPersonalizzatoDTO> pacchettiRicercati = new ArrayList<PacchettoPersonalizzatoDTO>();
 
+	@EJB
+	private UsrMgr usermanager;
+
+	private Long idCliente;
+
+	// PACCHETTO SELEZIONATO
+	private PacchettoPersonalizzatoDTO pacchettoSelezionato;
+
+	// LISTA PACCHETTI INVIATA ALLA PAGINA WEB
+	private ArrayList<PacchettoPersonalizzatoDTO> pacchettiRicercati = new ArrayList<PacchettoPersonalizzatoDTO>();
 
 	/**
 	 * @return the pacchettoSelezionato
@@ -44,9 +47,11 @@ public class GiftListClienteBean implements Serializable {
 	}
 
 	/**
-	 * @param pacchettoSelezionato the pacchettoSelezionato to set
+	 * @param pacchettoSelezionato
+	 *            the pacchettoSelezionato to set
 	 */
-	public void setPacchettoSelezionato(PacchettoPersonalizzatoDTO pacchettoSelezionato) {
+	public void setPacchettoSelezionato(
+			PacchettoPersonalizzatoDTO pacchettoSelezionato) {
 		this.pacchettoSelezionato = pacchettoSelezionato;
 	}
 
@@ -58,13 +63,14 @@ public class GiftListClienteBean implements Serializable {
 	}
 
 	/**
-	 * @param pacchettiRicercati the pacchettiRicercati to set
+	 * @param pacchettiRicercati
+	 *            the pacchettiRicercati to set
 	 */
-	public void setPacchettiRicercati(ArrayList<PacchettoPersonalizzatoDTO> pacchettiRicercati) {
+	public void setPacchettiRicercati(
+			ArrayList<PacchettoPersonalizzatoDTO> pacchettiRicercati) {
 		this.pacchettiRicercati = pacchettiRicercati;
 	}
 
-	
 	/**
 	 * @return the idCliente
 	 */
@@ -73,30 +79,34 @@ public class GiftListClienteBean implements Serializable {
 	}
 
 	/**
-	 * @param idCliente the idCliente to set
+	 * @param idCliente
+	 *            the idCliente to set
 	 */
 	public void setIdCliente(Long idCliente) {
 		this.idCliente = idCliente;
 	}
 
-	public String giftList(){
-		
+	public String mostraGiftList() {
+
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
 				.getExternalContext().getRequest();
-		
-		try {
-			
-			//pacchettiRicercati = clienteRemoto.giftListCliente(idCliente);			
 
-		}catch (EJBException e) {
-		
+		try {
+
+			setPacchettiRicercati((ArrayList<PacchettoPersonalizzatoDTO>) usermanager
+					.getUserDTO().getGiftList());
+			
 			return "giftListCliente";
 
+		} catch (EJBException e) {
+
+			context.addMessage(null, new FacesMessage("Operazione fallita"));
+
+			return "index";
+
+		}
+
 	}
 
-	return "giftListCliente";		
-		}
-			
-		
-	}
+}

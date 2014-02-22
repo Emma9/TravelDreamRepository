@@ -43,59 +43,70 @@
 	<p:layoutUnit position="west" size="300"
 		header="RICERCA PER DESTINAZIONE" resizable="false" closable="false"
 		collapsible="false">
-		<div>
 
-			<h:outputLabel value="Destinazione: " />
-			<p:inputText value="#{ricercaPacchettiBean.destinazione}"
-				id="destinazione" required="true"
-				requiredMessage="Devi inseriere una destinazione"
-				validatorMessage="Il nome  deve avere una lunghezza da 1 a 15 caratteri">
-			</p:inputText>
-			<p:message for="destinazione" />
+		<h:form>
 
-			<h:outputLabel value="Data di Partenza: " />
-			<p:calendar value="#{ricercaPacchettiBean.dataPartenza}"
-				id="dataDiPartenza" required="true"
-				requiredMessage="Devi inserire una data di Partenza" />
-			<p:message for="dataDiPartenza" />
-			<br />
+			<div>
 
-			<h:outputText value="Data di Ritorno: " />
-			<p:calendar value="#{ricercaPacchettiBean.dataRitorno}"
-				id="dataDiRitorno" required="true"
-				requiredMessage="Devi inserire una data di Ritorno" />
-			<p:message for="dataDiRitorno" />
-			<br />
+				<h:outputLabel value="Destinazione: " />
+				<p:inputText value="#{ricercaPacchettiBean.destinazione}"
+					id="destinazione" required="true"
+					requiredMessage="Devi inseriere una destinazione"
+					validatorMessage="Il nome  deve avere una lunghezza da 1 a 15 caratteri">
+				</p:inputText>
+				<p:message for="destinazione" />
 
-			<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-				<h:outputText value="Numero di Partecipanti: " />
+				<h:outputLabel value="Data di Partenza: " />
+				<p:calendar value="#{ricercaPacchettiBean.dataPartenza}"
+					id="dataDiPartenza" required="true"
+					requiredMessage="Devi inserire una data di Partenza" />
+				<p:message for="dataDiPartenza" />
 				<br />
-				<p:selectOneMenu value="#{ricercaPacchettiBean.numPartecipanti}">
-					<f:selectItem itemLabel="1" itemValue="1" />
-					<f:selectItem itemLabel="2" itemValue="2" />
-					<f:selectItem itemLabel="3" itemValue="3" />
-					<f:selectItem itemLabel="4" itemValue="4" />
-					<f:selectItem itemLabel="5" itemValue="5" />
-					<f:selectItem itemLabel="6" itemValue="6" />
-					<f:selectItem itemLabel="7" itemValue="7" />
-					<f:selectItem itemLabel="8" itemValue="8" />
-				</p:selectOneMenu>
 
-			</h:panelGrid>
-			<h:commandButton id="bottoneRicerca" value="Ricerca"
-				action="#{ricercaPacchettiBean.ricercaPacchetti()}" ajax="false">
-			</h:commandButton>
+				<h:outputText value="Data di Ritorno: " />
+				<p:calendar value="#{ricercaPacchettiBean.dataRitorno}"
+					id="dataDiRitorno" required="true"
+					requiredMessage="Devi inserire una data di Ritorno" />
+				<p:message for="dataDiRitorno" />
+				<br />
 
-		</div>
+				<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+					<h:outputText value="Numero di Partecipanti: " />
+					<br />
+					<p:selectOneMenu value="#{ricercaPacchettiBean.numPartecipanti}">
+						<f:selectItem itemLabel="1" itemValue="1" />
+						<f:selectItem itemLabel="2" itemValue="2" />
+						<f:selectItem itemLabel="3" itemValue="3" />
+						<f:selectItem itemLabel="4" itemValue="4" />
+						<f:selectItem itemLabel="5" itemValue="5" />
+						<f:selectItem itemLabel="6" itemValue="6" />
+						<f:selectItem itemLabel="7" itemValue="7" />
+						<f:selectItem itemLabel="8" itemValue="8" />
+					</p:selectOneMenu>
 
-		<br />
-		<br />
+				</h:panelGrid>
 
+			</div>
+
+			<div>
+				<h:commandButton id="bottoneRicerca" value="Ricerca"
+					action="#{ricercaPacchettiBean.ricercaPacchetti()}" ajax="false">
+				</h:commandButton>
+			</div>
+
+
+
+			<br />
+			<br />
+
+
+		</h:form>
+		
+		
 		<div>
 			<p:messages id="messages" showDetail="false" autoUpdate="true"
 				closable="true" />
 		</div>
-
 	</p:layoutUnit>
 
 

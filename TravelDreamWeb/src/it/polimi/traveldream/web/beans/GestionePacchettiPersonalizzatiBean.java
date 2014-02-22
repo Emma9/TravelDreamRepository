@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -22,102 +23,164 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 549L;
-	
+
 	@EJB
 	private UserBeanRemote utenteRemoto;
 	@EJB
 	private UsrMgr usermanager;
-	
+
 	private String email;
-	
-		//PACCHETTO PERSONALIZZATO SELEZIONATO
-		private PacchettoPersonalizzatoDTO pacchettoPersonalizzatoSelezionato;
-		
-		//LISTA PACCHETTI PERSONALIZZATI INVIATA ALLA PAGINA WEB
-		private ArrayList<PacchettoPersonalizzatoDTO> pacchettiPersonalizzatiCliente = new ArrayList<PacchettoPersonalizzatoDTO>();
 
-		/**
-		 * @return the email
-		 */
-		public String getEmail() {
-			return email;
-		}
+	private Long idPacchettoPersonalizzato;
 
-		/**
-		 * @param email the email to set
-		 */
-		public void setEmail(String email) {
-			this.email = email;
-		}
+	// PACCHETTO PERSONALIZZATO SELEZIONATO
+	private PacchettoPersonalizzatoDTO pacchettoPersonalizzatoSelezionato;
 
-		/**
-		 * @return the pacchettoPersonalizzatoSelezionato
-		 */
-		public PacchettoPersonalizzatoDTO getPacchettoPersonalizzatoSelezionato() {
-			return pacchettoPersonalizzatoSelezionato;
-		}
+	// LISTA PACCHETTI PERSONALIZZATI INVIATA ALLA PAGINA WEB
+	private ArrayList<PacchettoPersonalizzatoDTO> pacchettiPersonalizzatiCliente = new ArrayList<PacchettoPersonalizzatoDTO>();
 
-		/**
-		 * @param pacchettoPersonalizzatoSelezionato the pacchettoPersonalizzatoSelezionato to set
-		 */
-		public void setPacchettoPersonalizzatoSelezionato(
-				PacchettoPersonalizzatoDTO pacchettoPersonalizzatoSelezionato) {
-			this.pacchettoPersonalizzatoSelezionato = pacchettoPersonalizzatoSelezionato;
-		}
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
 
-		
-		
-		
-		/**
-		 * @return the pacchettiPersonalizzatiCliente
-		 */
-		public ArrayList<PacchettoPersonalizzatoDTO> getPacchettiPersonalizzatiCliente() {
-			return pacchettiPersonalizzatiCliente;
-		}
+	/**
+	 * @param email
+	 *            the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-		/**
-		 * @param pacchettiPersonalizzatiCliente the pacchettiPersonalizzatiCliente to set
-		 */
-		public void setPacchettiPersonalizzatiCliente(
-				ArrayList<PacchettoPersonalizzatoDTO> pacchettiPersonalizzatiCliente) {
-			this.pacchettiPersonalizzatiCliente = pacchettiPersonalizzatiCliente;
-		}
+	/**
+	 * @return the idPacchettoPersonalizzato
+	 */
+	public Long getIdPacchettoPersonalizzato() {
+		return idPacchettoPersonalizzato;
+	}
 
-		public String mostraPacchettiPersonalizzati(){
-			
-			FacesContext context = FacesContext.getCurrentInstance();
-			HttpServletRequest request = (HttpServletRequest) context
-					.getExternalContext().getRequest();
+	/**
+	 * @param idPacchettoPersonalizzato
+	 *            the idPacchettoPersonalizzato to set
+	 */
+	public void setIdPacchettoPersonalizzato(Long idPacchettoPersonalizzato) {
+		this.idPacchettoPersonalizzato = idPacchettoPersonalizzato;
+	}
 
-			try{
-				
-				setPacchettiPersonalizzatiCliente((ArrayList<PacchettoPersonalizzatoDTO>) usermanager.getUserDTO().getPacchettiCliente());
-				
-				
-			}
-			catch(EJBException e){
-				
-				return "listaPacchettiPersonalizzatiCliente"; 
-				
-			}
+	/**
+	 * @return the pacchettoPersonalizzatoSelezionato
+	 */
+	public PacchettoPersonalizzatoDTO getPacchettoPersonalizzatoSelezionato() {
+		return pacchettoPersonalizzatoSelezionato;
+	}
+
+	/**
+	 * @param pacchettoPersonalizzatoSelezionato
+	 *            the pacchettoPersonalizzatoSelezionato to set
+	 */
+	public void setPacchettoPersonalizzatoSelezionato(
+			PacchettoPersonalizzatoDTO pacchettoPersonalizzatoSelezionato) {
+		this.pacchettoPersonalizzatoSelezionato = pacchettoPersonalizzatoSelezionato;
+	}
+
+	/**
+	 * @return the pacchettiPersonalizzatiCliente
+	 */
+	public ArrayList<PacchettoPersonalizzatoDTO> getPacchettiPersonalizzatiCliente() {
+		return pacchettiPersonalizzatiCliente;
+	}
+
+	/**
+	 * @param pacchettiPersonalizzatiCliente
+	 *            the pacchettiPersonalizzatiCliente to set
+	 */
+	public void setPacchettiPersonalizzatiCliente(
+			ArrayList<PacchettoPersonalizzatoDTO> pacchettiPersonalizzatiCliente) {
+		this.pacchettiPersonalizzatiCliente = pacchettiPersonalizzatiCliente;
+	}
+
+	public String mostraPacchettiPersonalizzati() {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+
+		try {
+
+			setPacchettiPersonalizzatiCliente((ArrayList<PacchettoPersonalizzatoDTO>) usermanager
+					.getUserDTO().getPacchettiCliente());
+
+		} catch (EJBException e) {
+
 			return "listaPacchettiPersonalizzatiCliente";
-			
+
+		}
+		return "listaPacchettiPersonalizzatiCliente";
+
+	}
+
+	public String dettagliPacchettoSelezionato() {
+
+		try {
+
+			/*
+			 * Long id = pacchettoPersonalizzatoSelezionato
+			 * .getIdPacchettoPersonalizzato();
+			 * 
+			 * setIdPacchettoPersonalizzato(id);
+			 */
+
+			return "dettagliPacchettoPersonalizzatoSalvato";
+
+		} catch (NullPointerException n) {
+
+			return null;
+
 		}
 
-		
-		public String dettagliPacchettoSelezionato() {
+		catch (EJBException e) {
 
-			try {
+			return null;
+
+		}
+
+	}
+
+	public String aggiungiAllaGiftlist() {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+
+		try {
+
+			if (!(usermanager.getUserDTO().getGiftList()
+					.contains(pacchettoPersonalizzatoSelezionato))) {
+
+				usermanager.getUserDTO().getGiftList()
+						.add(pacchettoPersonalizzatoSelezionato);
 				
+				context.addMessage(null, new FacesMessage("Pacchetto inserito in gift list"));
 
-				return "dettagliPacchettoPersonalizzatoSalvato";
+				return "listaPacchettiPersonalizzatiCliente";
 
-			} catch (NullPointerException n) {
-
-				return "dettagliPacchettoPersonalizzatoSalvato";
-
+			}else{
+				
+				context.addMessage(null, new FacesMessage("Pacchetto gia presente in gift list"));
+				
+				return null;
 			}
-		
-		
-}
+
+		} catch (EJBException e) {
+			
+			context.addMessage(null, new FacesMessage("Operazione fallita"));
+
+			return null;
+
+		}
+
+	}
+
 }

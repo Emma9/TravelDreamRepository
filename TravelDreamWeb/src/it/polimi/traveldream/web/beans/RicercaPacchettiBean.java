@@ -19,12 +19,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-
-import org.eclipse.persistence.internal.sessions.DirectCollectionChangeRecord.NULL;
-import org.primefaces.event.SelectEvent;
-import org.primefaces.event.UnselectEvent;
 
 @ManagedBean()
 @SessionScoped
@@ -539,8 +534,7 @@ public class RicercaPacchettiBean implements Serializable {
 				System.out.println("CREAPERSONALIZZATO --> UTENTE LOGGATO");
 
 				UserDTO userDTO = new UserDTO();
-				userDTO=user.getUserDTO();
-				
+				userDTO = user.getUserDTO();
 
 				for (int j = 0; j < listaComponentiSelezionati.size(); j++) {
 
@@ -554,8 +548,9 @@ public class RicercaPacchettiBean implements Serializable {
 				}
 
 				pacchettoPersonalizzatoRemoto.createPacchettoPersonalizzato(
-						"salvato", userDTO, dataPartenza, dataRitorno, numPartecipanti,
-						listaComponentiSelezionati, new PacchettoPKDTO(idPacchetto, (long)0));
+						"salvato", userDTO, dataPartenza, dataRitorno,
+						numPartecipanti, listaComponentiSelezionati,
+						new PacchettoPKDTO(idPacchetto, (long) 0));
 
 				System.out.println("CREAPERSONALIZZATO --> FINE METODO");
 
