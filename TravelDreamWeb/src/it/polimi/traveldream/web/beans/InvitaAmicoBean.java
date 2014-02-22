@@ -148,8 +148,10 @@ setPacchettoPersonalizzato(pacchettoPersRemoto.findByIdPacchettoPersonalizzato(i
 				.findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato));
 
 		for (int i = 0; i < pacchettoPersonalizzato.getInvitiPacchetto().size(); i++) {
+
 			if (pacchettoPersonalizzato.getInvitiPacchetto().get(i)
 					.getDestinatario().equals(destinatario)) {
+
 				return "/visualizzarePropostaViaggio";
 
 			}
@@ -167,6 +169,9 @@ setPacchettoPersonalizzato(pacchettoPersRemoto.findByIdPacchettoPersonalizzato(i
 				.getExternalContext().getRequest();
 
 		try {
+			
+			
+			
 
 			context.addMessage(null, new FacesMessage("Proposta rifiutata"));
 
@@ -190,6 +195,46 @@ setPacchettoPersonalizzato(pacchettoPersRemoto.findByIdPacchettoPersonalizzato(i
 		try {
 
 			context.addMessage(null, new FacesMessage("Proposta rifiutata"));
+
+			return "homepage";
+
+		} catch (EJBException e) {
+
+			context.addMessage(null, new FacesMessage("Operazione fallita "));
+
+			return "homepage";
+
+		}
+
+	}
+
+	public String accettaPropostaPacchettoViaggio() {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+
+		try {
+
+			return "homepage";
+
+		} catch (EJBException e) {
+
+			context.addMessage(null, new FacesMessage("Operazione fallita "));
+
+			return "homepage";
+
+		}
+
+	}
+
+	public String regalaComponente() {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+
+		try {
 
 			return "homepage";
 
