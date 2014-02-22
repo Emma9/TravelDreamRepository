@@ -191,6 +191,7 @@ CREATE TABLE `pacchetto` (
 
 LOCK TABLES `pacchetto` WRITE;
 /*!40000 ALTER TABLE `pacchetto` DISABLE KEYS */;
+INSERT INTO `pacchetto` VALUES (0,1,'Pacchetto',755,'2014-06-30','2014-02-01','Vacanza a Londra','Londra','',0,NULL,NULL,NULL,NULL,NULL),(0,2,'Pacchetto',755,'2014-06-30','2014-03-01','Splendido soggiorno in Inghilterra!!!','Londra','offerta',30,NULL,NULL,NULL,NULL,NULL),(0,3,'Pacchetto',755,'2014-10-30','2014-05-01','Scopri la capitale del Regno Unito!!!','Londra','lastminute',15,NULL,NULL,NULL,NULL,NULL),(0,4,'Pacchetto',715,'2014-09-30','2014-06-01','Vacanza al mare in Grecia','Atene','mare',5,NULL,NULL,NULL,NULL,NULL),(0,5,'Pacchetto',715,'2014-09-30','2014-06-01','Visita la penisola Greca!!!','Atene','montagna',5,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `pacchetto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -218,6 +219,7 @@ CREATE TABLE `pacchetto_componenti` (
 
 LOCK TABLES `pacchetto_componenti` WRITE;
 /*!40000 ALTER TABLE `pacchetto_componenti` DISABLE KEYS */;
+INSERT INTO `pacchetto_componenti` VALUES (197128214,1,0),(833655107,1,0),(1011267803,1,0),(1160705406,1,0),(1648465634,1,0),(1685316153,1,0),(197128214,2,0),(833655107,2,0),(1011267803,2,0),(1160705406,2,0),(1648465634,2,0),(1685316153,2,0),(197128214,3,0),(833655107,3,0),(1011267803,3,0),(1160705406,3,0),(1648465634,3,0),(1685316153,3,0),(7520254,4,0),(790245361,4,0),(952966156,4,0),(1453743803,4,0),(1774541259,4,0),(1881374565,4,0),(7520254,5,0),(790245361,5,0),(952966156,5,0),(1453743803,5,0),(1774541259,5,0),(1881374565,5,0);
 /*!40000 ALTER TABLE `pacchetto_componenti` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -245,6 +247,7 @@ CREATE TABLE `pacchetto_componentiselezionati` (
 
 LOCK TABLES `pacchetto_componentiselezionati` WRITE;
 /*!40000 ALTER TABLE `pacchetto_componentiselezionati` DISABLE KEYS */;
+INSERT INTO `pacchetto_componentiselezionati` VALUES (197128214,1,0),(833655107,1,0),(1011267803,1,0),(833655107,2,0),(1011267803,2,0),(1648465634,2,0),(1011267803,3,0),(1648465634,3,0),(1685316153,3,0),(7520254,4,0),(790245361,4,0),(1453743803,4,0),(7520254,5,0),(1774541259,5,0),(1881374565,5,0);
 /*!40000 ALTER TABLE `pacchetto_componentiselezionati` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -268,7 +271,7 @@ CREATE TABLE `sequence` (
 
 LOCK TABLES `sequence` WRITE;
 /*!40000 ALTER TABLE `sequence` DISABLE KEYS */;
-INSERT INTO `sequence` VALUES ('SEQ_GEN',0);
+INSERT INTO `sequence` VALUES ('SEQ_GEN',50);
 /*!40000 ALTER TABLE `sequence` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -360,4 +363,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-02-22  1:15:21
+-- Dump completed on 2014-02-22  1:34:58
