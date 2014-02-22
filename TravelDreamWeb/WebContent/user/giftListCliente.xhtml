@@ -8,46 +8,54 @@
 </h:head>
 <h:body>
 	<h2>MIA GIFT LIST</h2>
-	<h:form>
-		<p:fieldset legend="Ecco la mia Gift List" widgetVar="regWidget" style="width: 600px;">
-		
-		
+
+	<p:fieldset legend="Ecco la mia Gift List" widgetVar="regWidget"
+		style="width: 600px;">
+
+
 		<p:growl id="growl" showDetail="true" />
 
-			<p:dataTable id="giftList" var="pacchettoGiftList" value="#{giftListClienteBean.pacchettiRicercati}"
-				paginator="true" rows="10" selection="#{giftListClienteBean.pacchettoSelezionato}"
-				selectionMode="single">       
+		<p:dataTable id="giftList" var="pacchettoGiftList"
+			value="#{giftListClienteBean.pacchettiRicercati}" paginator="true"
+			rows="10" selection="#{giftListClienteBean.pacchettoSelezionato}"
+			selectionMode="single">
 
-				<p:ajax event="rowSelect" listener="#{giftListClienteBean.onRowSelect}" oncomplete="dettagliGiftList" /> 
-					
-					
-				<!-- <p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->													
+			<p:ajax event="rowSelect"
+				listener="#{giftListClienteBean.onRowSelect}"
+				oncomplete="dettagliGiftList" />
 
-				<f:facet name="header">  
+
+			<!-- <p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->
+
+			<f:facet name="header">  
             	Seleziona un pacchetto per visualizzare i dettagli  
 		        </f:facet>
-		
-								
-						<p:column headerText="Destinazione">  
+
+
+			<p:column headerText="Destinazione">  
 		            #{pacchettoGiftList.destinazione}  
 		        </p:column>
-		
-						<p:column headerText="Data di Partenza">  
+
+			<p:column headerText="Data di Partenza">  
 		            #{pacchettoGiftList.dataInizioValidita}  
 		        </p:column>
-		
-						<p:column headerText="Data di Ritorno">  
+
+			<p:column headerText="Data di Ritorno">  
 		            #{pacchettoGiftList.dataFineValidita}  
 		        </p:column>
-		        
-			</p:dataTable>
-		
-		
-  </p:fieldset>
-  
-  
-  <!-- COME LISTA PACCHETTIPERSONALIZZATICLIENTE... RITORNO I DETTAGLI DEL COMPONENTE ALTERNATIVO FACENDO oncomplete="dettgliComponeteAlternativo" DEL ROWSELECT -->
-  
-	</h:form>
+
+		</p:dataTable>
+
+
+	</p:fieldset>
+
+	<br />
+	<br />
+	<div align="left">
+		<h:button id="bottoneHome" value="Torna alla Homepage" outcome="index"
+			ajax="false" />
+	</div>
+
+
 </h:body>
 </html>

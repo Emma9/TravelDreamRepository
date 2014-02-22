@@ -8,64 +8,66 @@
 </h:head>
 <h:body>
 	<h2>LISTA DEI MIEI PACCHETTI</h2>
-	<h:form>
-		<p:fieldset legend="Ecco la lista dei miei Pacchetti Personalizzati"
-			widgetVar="regWidget" style="width: 600px;">
+
+	<p:fieldset legend="Ecco la lista dei miei Pacchetti Personalizzati"
+		widgetVar="regWidget" style="width: 600px;">
 
 
-			<p:growl id="growl" showDetail="true" />
+		<p:growl id="growl" showDetail="true" />
 
-			<p:dataTable id="listaPacchettiPersonalizzati" var="pacchettoPersonalizzato" value="#{gestionePacchettiPersonalizzatiBean.pacchettiPersonalizzatiCliente}"
-				paginator="true" rows="10" selection="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato}"
-				selectionMode="single">       
+		<p:dataTable id="listaPacchettiPersonalizzati"
+			var="pacchettoPersonalizzato"
+			value="#{gestionePacchettiPersonalizzatiBean.pacchettiPersonalizzatiCliente}"
+			paginator="true" rows="10"
+			selection="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato}"
+			selectionMode="single">
 
-						
-				<f:facet name="header">  
+
+			<f:facet name="header">  
             	Seleziona un pacchetto per visualizzare i dettagli  
 		        </f:facet>
-		
-								
-						<p:column headerText="Destinazione">  
+
+
+			<p:column headerText="Destinazione">  
 		            #{pacchettoPersonalizzato.destinazione}  
 		        </p:column>
-		
-						<p:column headerText="Data di Partenza">  
+
+			<p:column headerText="Data di Partenza">  
 		            #{pacchettoPersonalizzato.dataInizioValidita}  
 		        </p:column>
-		
-						<p:column headerText="Data di Ritorno">  
+
+			<p:column headerText="Data di Ritorno">  
 		            #{pacchettoPersonalizzato.dataFineValidita}  
 		        </p:column>
-		        
-		        <p:column headerText="Stato">  
+
+			<p:column headerText="Stato">  
 		            #{pacchettoPersonalizzato.stato}  
 		        </p:column>
-		        
-		        <f:facet name="footer">
-					<h:commandButton id="viewButton" value="Seleziona"
-						icon="ui-icon-search" update=":form:display"
-						
-						ajax="false" />
-				</f:facet>
-		        
-			</p:dataTable>
-		
+
+			<f:facet name="footer">
+				<h:commandButton id="viewButton" value="Seleziona"
+					icon="ui-icon-search" update=":form:display" ajax="false" />
+			</f:facet>
+
+		</p:dataTable>
 
 
 
 
-		</p:fieldset>
-	</h:form>
-	
+
+	</p:fieldset>
+
+	<br />
+	<br />
+
 	<div align="left">
 		<h:form>
 
-			<h:button value="Torna alla homepage" outcome="index"
-				ajax="false" />
+			<h:button value="Torna alla homepage" outcome="index" ajax="false" />
 
 		</h:form>
 	</div>
-	
-	
+
+
 </h:body>
 </html>

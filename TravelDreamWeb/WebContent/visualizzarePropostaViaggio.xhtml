@@ -11,10 +11,6 @@
 	<p:fieldset legend="Ecco I Dettagli dell'invito ricevuto"
 		widgetVar="regWidget" style="width: 600px;">
 
-
-
-
-
 		<div align="left">
 
 			<br />
@@ -95,38 +91,37 @@
 
 		</div>
 
-		<br />
-
-
-		<!-- BOTTONE ACCETTA INVITO -->
-
-		<div style="float: left;">
-			<h:form>
-				<h:commandButton id="bottoneAccetta" value="Accetta"
-					action="#{invitaAmicoBean.accettaPropostaPacchettoViaggio()}" ajax="false" />
-			</h:form>
-		</div>
-
-		<br />
-		<br />
-
-		<!-- BOTTONE RIFIUTA INVITO -->
-
-
-		<div style="float: left;">
-			<h:form>
-				<h:commandButton id="bottoneRifiuta" value="Rifiuta"
-					action="#{invitaAmicoBean.rifiutaPropostaPacchettoViaggio()}" />
-			</h:form>
-			<br />
-		</div>
-
-
-
-
 	</p:fieldset>
 
+	<br />
 
+
+	<!-- BOTTONE ACCETTA INVITO -->
+
+	<div style="float: left;">
+		<h:form>
+			<h:commandButton id="bottoneAccetta" value="Accetta"
+				action="#{invitaAmicoBean.accettaPropostaPacchettoViaggio()}"
+				ajax="false" />
+		</h:form>
+	</div>
+
+	<br />
+	<br />
+
+	<!-- BOTTONE RIFIUTA INVITO -->
+
+
+	<div style="float: left;">
+		<h:form>
+			<h:commandButton id="bottoneRifiuta" value="Rifiuta"
+				action="#{invitaAmicoBean.rifiutaPropostaPacchettoViaggio()}" />
+		</h:form>
+		<br />
+	</div>
+
+
+	<br />
 	<br />
 	<br />
 	<div align="left">

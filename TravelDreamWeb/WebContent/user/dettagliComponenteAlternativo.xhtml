@@ -1,50 +1,74 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 </h:head>
 <h:body>
 	<h2>DETTAGLI DEL COMPONENTE ALTERNATIVO</h2>
-	<h:form>
-		<p:fieldset legend="Ecco I Dettagli del componente" widgetVar="regWidget" style="width: 600px;">
 
-	<h:panelGrid id="dettagli" columns="2" cellpadding="4">  
-  
-            <!-- <f:facet name="immagine">  
+	<p:fieldset legend="Ecco I Dettagli del componente"
+		widgetVar="regWidget" style="width: 600px;">
+
+		<h:panelGrid id="dettagli" columns="2" cellpadding="4">
+
+			<!-- <f:facet name="immagine">  
                 <p:graphicImage value="/images/cars/#{tableBean.selectedCar.manufacturer}.jpg"/>  
-            </f:facet>  --> 
-    
-  
-            <h:outputText value="Tipologia:" />  
-            <h:outputText value="#{dettagliComponenteSelezionatoBean.codiceComponente}" />  
-  
-            <h:outputText value="Descrizione:" />  
-            <h:outputText value="#{dettagliComponenteSelezionatoBean.codiceComponente}" /> 
-            
-            <h:outputText value="Luogo: " />  
-            <h:outputText value="#{dettagliComponenteSelezionatoBean.codiceComponente}" />
-            
-            
-            <h:outputText value="Costo: " />  
-            <h:outputText value="#{dettagliComponenteSelezionatoBean.codiceComponente}" /> 
-            
-            
-            <h:outputText value="Data Inizio Validità: " />  
-            <h:outputText value="#{dettagliComponenteSelezionatoBean.codiceComponente}" /> 
-            
-            
-            <h:outputText value="Data Fine Validità: " />  
-            <h:outputText value="#{dettagliComponenteSelezionatoBean.codiceComponente}" />
-            
-        </h:panelGrid>
-        
-        <h:commandButton value="Scegli" action="#{dettagliPacchettoSelezionatoBean.DettagliPacchettoSelezionato()}"/> <!-- visualizza i dettagli del pacchetto aggiornato-->
-        
-  	</p:fieldset>
-        </h:form>
-        </h:body>
-        </html>
+            </f:facet>  -->
+
+
+			<h:outputText value="Tipologia:" />
+			<h:outputText
+				value="#{dettagliComponenteSelezionatoBean.codiceComponente}" />
+
+			<h:outputText value="Descrizione:" />
+			<h:outputText
+				value="#{dettagliComponenteSelezionatoBean.codiceComponente}" />
+
+			<h:outputText value="Luogo: " />
+			<h:outputText
+				value="#{dettagliComponenteSelezionatoBean.codiceComponente}" />
+
+
+			<h:outputText value="Costo: " />
+			<h:outputText
+				value="#{dettagliComponenteSelezionatoBean.codiceComponente}" />
+
+
+			<h:outputText value="Data Inizio Validità: " />
+			<h:outputText
+				value="#{dettagliComponenteSelezionatoBean.codiceComponente}" />
+
+
+			<h:outputText value="Data Fine Validità: " />
+			<h:outputText
+				value="#{dettagliComponenteSelezionatoBean.codiceComponente}" />
+
+		</h:panelGrid>
+
+
+
+	</p:fieldset>
+
+	<br />
+	<br />
+	<div align="left">
+		<h:commandButton value="Scegli"
+			action="#{dettagliPacchettoSelezionatoBean.DettagliPacchettoSelezionato()}" />
+	</div>
+
+
+
+
+	<br />
+	<br />
+	<div align="left">
+		<h:button id="bottoneHome" value="Torna alla Homepage" outcome="index"
+			ajax="false" />
+	</div>
+
+</h:body>
+</html>

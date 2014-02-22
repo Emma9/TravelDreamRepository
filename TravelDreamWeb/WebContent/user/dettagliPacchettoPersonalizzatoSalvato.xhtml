@@ -9,74 +9,79 @@
 </h:head>
 <h:body>
 	<h2>DETTAGLI DEL PACCHETTO PERSONALIZZATO</h2>
-	<h:form>
-		<p:fieldset legend="Ecco I Dettagli del pacchetto personalizzato"
-			widgetVar="regWidget" style="width: 600px;">
 
-			<p:panelGrid id="dettagli" columns="2">
+	<p:fieldset legend="Ecco I Dettagli del pacchetto personalizzato"
+		widgetVar="regWidget" style="width: 600px;">
 
-
+		<p:panelGrid id="dettagli" columns="2">
 
 
-				<h:outputText value="ID:" />
-				<h:outputText
-					value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.idPacchettoPersonalizzato}" />
-
-				<h:outputText value="Destinazione:" />
-				<h:outputText
-					value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.destinazione}" />
 
 
-				<h:outputText value="Etichetta: " />
-				<h:outputText
-					value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.etichetta}" />
+			<h:outputText value="ID:" />
+			<h:outputText
+				value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.idPacchettoPersonalizzato}" />
+
+			<h:outputText value="Destinazione:" />
+			<h:outputText
+				value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.destinazione}" />
 
 
-				<h:outputText value="Costo:" />
-				<h:outputText
-					value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.costo}" />
+			<h:outputText value="Etichetta: " />
+			<h:outputText
+				value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.etichetta}" />
 
 
-				<h:outputText value="Data Inizio Validità: " />
-				<h:outputText
-					value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.dataInizioValidita}" />
+			<h:outputText value="Costo:" />
+			<h:outputText
+				value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.costo}" />
 
 
-				<h:outputText value="Data Fine Validità: " />
-				<h:outputText
-					value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.dataFineValidita}" />
-					
-					
-				<h:outputText value="Data di Partenza: " />
-				<h:outputText
-					value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.dataDiPartenza}" />
-				
-				
-				<h:outputText value="Data di Ritorno: " />
-				<h:outputText
-					value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.dataDiRitorno}" />
-					
-					
-				<h:outputText value="Numero di partecipanti: " />
-				<h:outputText
-					value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.}" />	
-					
-
-			</p:panelGrid>
-
-		</p:fieldset>
-	</h:form>
+			<h:outputText value="Data Inizio Validità: " />
+			<h:outputText
+				value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.dataInizioValidita}" />
 
 
+			<h:outputText value="Data Fine Validità: " />
+			<h:outputText
+				value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.dataFineValidita}" />
+
+
+			<h:outputText value="Data di Partenza: " />
+			<h:outputText
+				value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.dataDiPartenza}" />
+
+
+			<h:outputText value="Data di Ritorno: " />
+			<h:outputText
+				value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.dataDiRitorno}" />
+
+
+			<h:outputText value="Numero di partecipanti: " />
+			<h:outputText
+				value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.}" />
+
+
+		</p:panelGrid>
+
+	</p:fieldset>
+
+	<br />
+	<br />
 
 	<!-- BOTTONE MODIFICA PACCHETTO -->
 
 	<div align="left">
 		<h:form>
-			<h:commandButton value="Modifica"
-				action="#{}"
-				ajax="false" />
+			<h:commandButton value="Modifica" action="#{}" ajax="false" />
 		</h:form>
+	</div>
+
+	<br />
+	<br />
+	<div align="left">
+		<h:button id="bottoneHome" value="Torna alla Homepage" outcome="index"
+			ajax="false" />
 	</div>
 
 

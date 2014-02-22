@@ -8,75 +8,81 @@
 <h:head>
 </h:head>
 <h:body>
-	<h2>DETTAGLI DEL PACCHETTO SELEZIONATO</h2>
-	<h:form>
-		<p:fieldset legend="Ecco I Dettagli del pacchetto"
-			widgetVar="regWidget" style="width: 600px;">
+	<p:fieldset legend="Ecco I Dettagli del pacchetto"
+		widgetVar="regWidget" style="width: 600px;">
 
-			<p:panelGrid id="dettagli" columns="2">
+		<p:panelGrid id="dettagli" columns="2">
 
 
 
 
-				<h:outputText value="ID:" />
-				<h:outputText
-					value="#{ricercaPacchettiBean.pacchettoSelezionato.idPacchetto}" />
+			<h:outputText value="ID:" />
+			<h:outputText
+				value="#{ricercaPacchettiBean.pacchettoSelezionato.idPacchetto}" />
 
-				<h:outputText value="Destinazione:" />
-				<h:outputText
-					value="#{ricercaPacchettiBean.pacchettoSelezionato.destinazione}" />
-
-
-				<h:outputText value="Etichetta: " />
-				<h:outputText
-					value="#{ricercaPacchettiBean.pacchettoSelezionato.etichetta}" />
+			<h:outputText value="Destinazione:" />
+			<h:outputText
+				value="#{ricercaPacchettiBean.pacchettoSelezionato.destinazione}" />
 
 
-				<h:outputText value="Costo:" />
-				<h:outputText
-					value="#{ricercaPacchettiBean.pacchettoSelezionato.costo}" />
+			<h:outputText value="Etichetta: " />
+			<h:outputText
+				value="#{ricercaPacchettiBean.pacchettoSelezionato.etichetta}" />
 
 
-				<h:outputText value="Data Inizio Validità: " />
-				<h:outputText
-					value="#{ricercaPacchettiBean.pacchettoSelezionato.dataInizioValidita}" />
+			<h:outputText value="Costo:" />
+			<h:outputText
+				value="#{ricercaPacchettiBean.pacchettoSelezionato.costo}" />
 
 
-				<h:outputText value="Data Fine Validità: " />
-				<h:outputText
-					value="#{ricercaPacchettiBean.pacchettoSelezionato.dataFineValidita}" />
+			<h:outputText value="Data Inizio Validità: " />
+			<h:outputText
+				value="#{ricercaPacchettiBean.pacchettoSelezionato.dataInizioValidita}" />
 
-			</p:panelGrid>
 
-		</p:fieldset>
-	</h:form>
+			<h:outputText value="Data Fine Validità: " />
+			<h:outputText
+				value="#{ricercaPacchettiBean.pacchettoSelezionato.dataFineValidita}" />
 
+		</p:panelGrid>
+
+	</p:fieldset>
+
+
+	<br />
+	<br />
 
 	<!-- BOTTONE MODIFICA PACCHETTO -->
 
 
 	<div align="left">
 		<h:form>
-			<h:commandButton value="Modifica"
-			
-				ajax="false" />
+			<h:commandButton value="Modifica" ajax="false" />
 		</h:form>
 	</div>
 
-
+	<br />
 
 	<!-- BOTTONE SALVA PACCHETTO -->
 
 	<div align="left">
 		<h:form>
 
-			<h:button value="Salva" outcome="user/dettagliPacchettoPredefinitoRicercatoCliente"
+			<h:button value="Salva"
+				outcome="user/dettagliPacchettoPredefinitoRicercatoCliente"
 				ajax="false" />
 
 
 		</h:form>
 	</div>
 
+
+	<br />
+	<br />
+	<div align="left">
+		<h:button id="bottoneHome" value="Torna alla Homepage"
+			outcome="homepage" ajax="false" />
+	</div>
 
 
 </h:body>

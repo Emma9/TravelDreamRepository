@@ -1,49 +1,73 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 </h:head>
 <h:body>
 	<h2>DETTAGLI DEL COMPONENTE SELEZIONATO</h2>
-	<h:form>
-		<p:fieldset legend="Ecco I Dettagli del componente" widgetVar="regWidget" style="width: 600px;">
 
-	<p:panelGrid id="dettagli" columns="2">  
-  
-       
-    
-  
-            <h:outputText value="Tipologia:" />  
-            <h:outputText value="#{ricercaComponentiImpiegatoBean.componenteSelezionato.tipologia}" />  
-  
-            <h:outputText value="Descrizione:" />  
-            <h:outputText value="#{ricercaComponentiImpiegatoBean.componenteSelezionato.descrizione}" /> 
-            
-            
-            <h:outputText value="Luogo: " />  
-            <h:outputText value="#{ricercaComponentiImpiegatoBean.componenteSelezionato.luogo}" />
-            
-            
-            <h:outputText value="Costo:" />  
-            <h:outputText value="#{ricercaComponentiImpiegatoBean.componenteSelezionato.costo}" /> 
-            
-            
-            <h:outputText value="Data Inizio Validità: " />  
-            <h:outputText value="#{ricercaComponentiImpiegatoBean.componenteSelezionato.dataInizioValidita}" /> 
-            
-            
-            <h:outputText value="Data Fine Validità: " />  
-            <h:outputText value="#{ricercaComponentiImpiegatoBean.componenteSelezionato.dataFineValidita}" /> 
-             
-        </p:panelGrid>
-        
-        <h:commandButton action="#{ricercaComponentiImpiegatoBean.componenteSelezionato.descrizione}" value="Modifica" />  <!-- visualizza la lista componenti base alternativi-->
-          
-  	</p:fieldset>
-        </h:form>
-        </h:body>
-        </html>
+	<p:fieldset legend="Ecco I Dettagli del componente"
+		widgetVar="regWidget" style="width: 600px;">
+
+		<p:panelGrid id="dettagli" columns="2">
+
+
+
+
+			<h:outputText value="Tipologia:" />
+			<h:outputText
+				value="#{ricercaComponentiImpiegatoBean.componenteSelezionato.tipologia}" />
+
+			<h:outputText value="Descrizione:" />
+			<h:outputText
+				value="#{ricercaComponentiImpiegatoBean.componenteSelezionato.descrizione}" />
+
+
+			<h:outputText value="Luogo: " />
+			<h:outputText
+				value="#{ricercaComponentiImpiegatoBean.componenteSelezionato.luogo}" />
+
+
+			<h:outputText value="Costo:" />
+			<h:outputText
+				value="#{ricercaComponentiImpiegatoBean.componenteSelezionato.costo}" />
+
+
+			<h:outputText value="Data Inizio Validità: " />
+			<h:outputText
+				value="#{ricercaComponentiImpiegatoBean.componenteSelezionato.dataInizioValidita}" />
+
+
+			<h:outputText value="Data Fine Validità: " />
+			<h:outputText
+				value="#{ricercaComponentiImpiegatoBean.componenteSelezionato.dataFineValidita}" />
+
+		</p:panelGrid>
+
+
+	</p:fieldset>
+
+	<br />
+	<br />
+
+	<div align="left">
+		<h:commandButton
+			action="#{ricercaComponentiImpiegatoBean.componenteSelezionato.descrizione}"
+			value="Modifica" />
+	</div>
+
+
+	<br />
+	<br />
+	<div align="left">
+		<h:button id="bottoneHome" value="Torna alla Homepage" outcome="index"
+			ajax="false" />
+	</div>
+
+
+</h:body>
+</html>

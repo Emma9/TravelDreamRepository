@@ -1,55 +1,64 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 </h:head>
 <h:body>
-	<h2>COMPONENTI BASE ALTERNATIVI</h2>
-	<h:form>
-		<p:fieldset legend="Ecco i possibili Componenti di base Alternativi" widgetVar="regWidget" style="width: 600px;">
-		
+	<p:fieldset legend="Ecco i Componenti di base Alternativi"
+		widgetVar="regWidget" style="width: 600px;">
+
 		<p:growl id="growl" showDetail="true" />
 
-			<p:dataTable id="listaComponentiBaseAlternativi" var="componenteBase" value="#{listaComponentiAlternativiBean.componentiRicercati}"
-				paginator="true" rows="10" selection="#{listaComponentiAlternativiBean.componenteSelezionato}"
-				selectionMode="single">       
+		<p:dataTable id="listaComponentiBaseAlternativi" var="componenteBase"
+			value="#{listaComponentiAlternativiBean.componentiRicercati}"
+			paginator="true" rows="10"
+			selection="#{listaComponentiAlternativiBean.componenteSelezionato}"
+			selectionMode="single">
 
-				<p:ajax event="rowSelect" listener="#{listaComponentiAlternativiBean.onRowSelect}" oncomplete="dettgliComponeteAlternativo" />
-						
-					
-					
-				<!-- <p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->													
+			<p:ajax event="rowSelect"
+				listener="#{listaComponentiAlternativiBean.onRowSelect}"
+				oncomplete="dettgliComponeteAlternativo" />
 
-				<f:facet name="header">  
+
+
+			<!-- <p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->
+
+			<f:facet name="header">  
             	Seleziona un pacchetto per visualizzare i dettagli  
 		        </f:facet>
-		
-								
-						<p:column headerText="Tipologia">  
+
+
+			<p:column headerText="Tipologia">  
 		            #{componenteBase.tipologia}  
 		        </p:column>
-		
-						<p:column headerText="Descrizione">  
+
+			<p:column headerText="Descrizione">  
 		            #{componenteBase.descrizione}  
 		        </p:column>
-		
-						<p:column headerText="Costo">  
+
+			<p:column headerText="Costo">  
 		            #{componenteBase.costo}  
 		        </p:column>
-		        
-			</p:dataTable>
-		
-		
-  	</p:fieldset>
 
-	<!-- COME LISTA PACCHETTIPERSONALIZZATICLIENTE... RITORNO I DETTAGLI DEL COMPONENTE ALTERNATIVO FACENDO oncomplete="dettgliComponeteAlternativo" DEL ROWSELECT -->
+		</p:dataTable>
 
 
-        
-</h:form>
+	</p:fieldset>
+
+
+	<br />
+	<br />
+	<div align="left">
+		<h:button id="bottoneHome" value="Torna alla Homepage"
+			outcome="homepage" ajax="false" />
+	</div>
+
+
+
+
 </h:body>
 </html>

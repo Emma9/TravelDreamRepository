@@ -8,54 +8,57 @@
 <h:head>
 </h:head>
 <h:body>
-	<h2>LISTA DEI PACCHETTI RICERCATI</h2>
-	<h:form>
-		<p:fieldset
-			legend="Ecco i pacchetti predefiniti inerenti alla ricerca effettuata"
-			widgetVar="regWidget" style="width: 600px;">
+
+	<p:fieldset
+		legend="Ecco i pacchetti predefiniti inerenti alla ricerca effettuata"
+		widgetVar="regWidget" style="width: 600px;">
 
 
-			<p:growl id="growl" showDetail="true" />
+		<p:growl id="growl" showDetail="true" />
 
-			<p:dataTable id="listaPacchettiPredefiniti"
-				var="pacchettoPredefinito"
-				value="#{ricercaPacchettiBean.pacchettiRicercati}" paginator="true"
-				rows="10" rowKey="#{pacchettoPredefinito.idPacchetto}"
-				selection="#{ricercaPacchettiBean.pacchettoSelezionato}"
-				selectionMode="single">
+		<p:dataTable id="listaPacchettiPredefiniti" var="pacchettoPredefinito"
+			value="#{ricercaPacchettiBean.pacchettiRicercati}" paginator="true"
+			rows="10" rowKey="#{pacchettoPredefinito.idPacchetto}"
+			selection="#{ricercaPacchettiBean.pacchettoSelezionato}"
+			selectionMode="single">
 
 
 
-				<f:facet name="header">  
+			<f:facet name="header">  
             	Seleziona un pacchetto per visualizzare i dettagli  
 		        </f:facet>
 
 
-				<p:column headerText="Destinazione">  
+			<p:column headerText="Destinazione">  
 		            #{pacchettoPredefinito.destinazione}  
 		        </p:column>
 
-				<p:column headerText="Data di inizio validita">  
+			<p:column headerText="Data di inizio validita">  
 		            #{pacchettoPredefinito.dataInizioValidita}  
 		        </p:column>
 
-				<p:column headerText="Data di fine validita">  
+			<p:column headerText="Data di fine validita">  
 		            #{pacchettoPredefinito.dataFineValidita}  
 		        </p:column>
-				<f:facet name="footer">
-					<h:commandButton id="viewButton" value="Seleziona"
-						icon="ui-icon-search" update=":form:display"
-						action="#{ricercaPacchettiBean.dettagliPacchettoSelezionato()}"
-						ajax="false" />
-				</f:facet>
-			</p:dataTable>
+			<f:facet name="footer">
+				<h:commandButton id="viewButton" value="Seleziona"
+					icon="ui-icon-search" update=":form:display"
+					action="#{ricercaPacchettiBean.dettagliPacchettoSelezionato()}"
+					ajax="false" />
+			</f:facet>
+		</p:dataTable>
 
 
-		</p:fieldset>
+	</p:fieldset>
+
+	<br />
+	<br />
+	<div align="left">
+		<h:button id="bottoneHome" value="Torna alla Homepage"
+			outcome="homepage" ajax="false" />
+	</div>
 
 
 
-
-	</h:form>
 </h:body>
 </html>
