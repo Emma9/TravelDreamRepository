@@ -1,5 +1,6 @@
 package it.polimi.traveldream.web.beans;
 
+import it.polimi.traveldream.ejb.client.PacchettoPersonalizzatoBeanRemote;
 import it.polimi.traveldream.ejb.client.UserBeanRemote;
 import it.polimi.traveldream.ejb.client.UsrMgr;
 import it.polimi.traveldream.entities.PacchettoPersonalizzatoDTO;
@@ -28,6 +29,8 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 	private UserBeanRemote utenteRemoto;
 	@EJB
 	private UsrMgr usermanager;
+	@EJB
+	private PacchettoPersonalizzatoBeanRemote pacchettopersremote;
 
 	private String email;
 
@@ -143,6 +146,28 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 		catch (EJBException e) {
 
 			return null;
+
+		}
+		
+		
+		
+		
+
+	}
+	
+	
+
+	public String rimuoviPacchettoSelezionato() {
+
+		try {
+			
+			pacchettopersremote.removePacchettoPersonalizzato(pacchettoPersonalizzatoSelezionato.getIdPacchettoPersonalizzato(), pacchettoPersonalizzatoSelezionato.getIdPacchetto());
+
+			return "index";
+
+		} catch (NullPointerException n) {
+
+			return "index";
 
 		}
 
