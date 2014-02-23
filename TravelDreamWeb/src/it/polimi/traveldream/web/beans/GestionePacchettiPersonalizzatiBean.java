@@ -148,20 +148,17 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 			return null;
 
 		}
-		
-		
-		
-		
 
 	}
-	
-	
 
 	public String rimuoviPacchettoSelezionato() {
 
 		try {
-			
-			pacchettopersremote.removePacchettoPersonalizzato(pacchettoPersonalizzatoSelezionato.getIdPacchettoPersonalizzato(), pacchettoPersonalizzatoSelezionato.getIdPacchetto());
+
+			pacchettopersremote.removePacchettoPersonalizzato(
+					pacchettoPersonalizzatoSelezionato
+							.getIdPacchettoPersonalizzato(),
+					pacchettoPersonalizzatoSelezionato.getIdPacchetto());
 
 			return "index";
 
@@ -186,23 +183,62 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 
 				usermanager.getUserDTO().getGiftList()
 						.add(pacchettoPersonalizzatoSelezionato);
-				
-				context.addMessage(null, new FacesMessage("Pacchetto inserito in gift list"));
+
+				context.addMessage(null, new FacesMessage(
+						"Pacchetto inserito in gift list"));
 
 				return "listaPacchettiPersonalizzatiCliente";
 
-			}else{
-				
-				context.addMessage(null, new FacesMessage("Pacchetto gia presente in gift list"));
-				
-				return null;
+			} else {
+
+				context.addMessage(null, new FacesMessage(
+						"Pacchetto gia presente in gift list"));
+
+				return "listaPacchettiPersonalizzatiCliente";
 			}
 
 		} catch (EJBException e) {
-			
+
 			context.addMessage(null, new FacesMessage("Operazione fallita"));
 
-			return null;
+			return "listaPacchettiPersonalizzatiCliente";
+
+		}
+
+	}
+
+	public String rimuoviDallaGiftlist() {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+
+		try {
+
+			if (usermanager.getUserDTO().getGiftList()
+					.contains(pacchettoPersonalizzatoSelezionato)) {
+
+				usermanager.getUserDTO().getGiftList()
+						.remove(pacchettoPersonalizzatoSelezionato);
+
+				context.addMessage(null, new FacesMessage(
+						"Pacchetto rimosso dalla gift list"));
+
+				return "listaPacchettiPersonalizzatiCliente";
+
+			} else {
+
+				context.addMessage(null, new FacesMessage(
+						"Pacchetto non presente in gift list"));
+
+				return "listaPacchettiPersonalizzatiCliente";
+			}
+
+		} catch (EJBException e) {
+
+			context.addMessage(null, new FacesMessage("Operazione fallita"));
+
+			return "listaPacchettiPersonalizzatiCliente";
 
 		}
 
