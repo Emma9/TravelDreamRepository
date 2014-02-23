@@ -547,10 +547,26 @@ public class RicercaPacchettiBean implements Serializable {
 
 				}
 
-				pacchettoPersonalizzatoRemoto.createPacchettoPersonalizzato(
-						"salvato", userDTO, dataPartenza, dataRitorno,
-						numPartecipanti, listaComponentiSelezionati,
-						new PacchettoPKDTO(idPacchetto, (long) 0));
+				Long idp = pacchettoPersonalizzatoRemoto
+						.createPacchettoPersonalizzato("salvato", userDTO,
+								dataPartenza, dataRitorno, numPartecipanti,
+								listaComponentiSelezionati, new PacchettoPKDTO(
+										idPacchetto, (long) 0));
+
+				
+				//Long idf = pacchettoPersonalizzatoRemoto.findByIdPacchettoPersonalizzato(idp).getIdPacchetto();
+				
+				//System.out.println("IDF  "+ idf);
+				
+				user.getUserDTO()
+						.getPacchettiCliente()
+						.add(pacchettoPersonalizzatoRemoto
+								.findByIdPacchettoPersonalizzato(idp));
+				
+				System.out.println("NUM ELEMENTI LISTA UTENTE  "+user.getUserDTO()
+				.getPacchettiCliente().size());
+				
+				
 
 				System.out.println("CREAPERSONALIZZATO --> FINE METODO");
 
