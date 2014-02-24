@@ -321,16 +321,16 @@ public class PacchettoPersonalizzatoBean implements
 
 		switch (stato) {
 
-		case "CONFERMATO":
+		case "confermato":
 			return true;
 
-		case "SALVATO":
+		case "salvato":
 			return true;
 
-		case "BLOCCATO":
+		case "bloccato":
 			return true;
 
-		case "ACCETTATO":
+		case "accettato":
 			return true;
 
 		}
