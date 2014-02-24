@@ -117,8 +117,9 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 
 		try {
 
-			ArrayList<PacchettoPersonalizzatoDTO> pacchettiPersonalizzati= new ArrayList<PacchettoPersonalizzatoDTO>();
-			pacchettiPersonalizzati=pacchettopersremote.findByEmailCliente(usermanager.getPrincipalEmail());
+			ArrayList<PacchettoPersonalizzatoDTO> pacchettiPersonalizzati = new ArrayList<PacchettoPersonalizzatoDTO>();
+			pacchettiPersonalizzati = pacchettopersremote
+					.findByEmailCliente(usermanager.getPrincipalEmail());
 			setPacchettiPersonalizzatiCliente(pacchettiPersonalizzati);
 
 		} catch (EJBException e) {
@@ -142,21 +143,23 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 			 */
 
 			System.out.println("DETTAGLI --> METODO");
-			
-			System.out.println("DETTAGLI --> IDP "+pacchettoPersonalizzatoSelezionato.getIdPacchettoPersonalizzato());
-			
+
+			System.out.println("DETTAGLI --> IDP "
+					+ pacchettoPersonalizzatoSelezionato
+							.getIdPacchettoPersonalizzato());
+
 			return "dettagliPacchettoPersonalizzatoSalvato";
 
 		} catch (NullPointerException n) {
 
 			System.out.println("DETTAGLI --> NULLPOINTEREXCEPTION");
-			
+
 			return null;
 
 		}
 
 		catch (EJBException e) {
-			
+
 			System.out.println("DETTAGLI --> EJBEXCEPTION");
 
 			return null;
@@ -239,11 +242,9 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 
 		try {
 
-			if (!(usermanager.getUserDTO().getGiftList()
-					.contains(pacchettoPersonalizzatoSelezionato))) {
+			if (!(pacchettoPersonalizzatoSelezionato.getStato()
+					.equalsIgnoreCase("giftlist"))) {
 
-			
-				
 				PacchettoPKDTO pacchettoPK = new PacchettoPKDTO(
 						pacchettoPersonalizzatoSelezionato.getIdPacchetto(),
 						pacchettoPersonalizzatoSelezionato
@@ -297,11 +298,30 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 
 		try {
 
-			if (usermanager.getUserDTO().getGiftList()
-					.contains(pacchettoPersonalizzatoSelezionato)) {
+			if (pacchettoPersonalizzatoSelezionato.getStato()
+			.equalsIgnoreCase("giftlist")) {
 
-				usermanager.getUserDTO().getGiftList()
-						.remove(pacchettoPersonalizzatoSelezionato);
+				PacchettoPKDTO pacchettoPK = new PacchettoPKDTO(
+						pacchettoPersonalizzatoSelezionato.getIdPacchetto(),
+						pacchettoPersonalizzatoSelezionato
+								.getIdPacchettoPersonalizzato());
+
+				UserDTO cli = pacchettoPersonalizzatoSelezionato.getCliente();
+
+				Date datap = pacchettoPersonalizzatoSelezionato
+						.getDataDiPartenza();
+
+				Date datar = pacchettoPersonalizzatoSelezionato
+						.getDataDiRitorno();
+
+				int nump = pacchettoPersonalizzatoSelezionato
+						.getNumPartecipanti();
+
+				List<ComponenteDTO> listacs = pacchettoPersonalizzatoSelezionato
+						.getListaComponentiSelezionati();
+
+				pacchettopersremote.updatePacchettoPersonalizzato(pacchettoPK,
+						cli, "salvato", datap, datar, nump, listacs);
 
 				context.addMessage(null, new FacesMessage(
 						"Pacchetto rimosso dalla gift list"));
@@ -392,7 +412,7 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 
 			if (!(pacchettoPersonalizzatoSelezionato.getStato()
 					.equalsIgnoreCase("confermato"))) {
-				
+
 				System.out.println("CONFERMA --> IF");
 
 				PacchettoPKDTO pacchettoPK = new PacchettoPKDTO(
@@ -422,7 +442,7 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 				return "listaPacchettiPersonalizzatiCliente";
 
 			} else {
-				
+
 				System.out.println("CONFERMA --> ELSE");
 
 				context.addMessage(null, new FacesMessage(
@@ -432,7 +452,7 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 			}
 
 		} catch (EJBException e) {
-			
+
 			System.out.println("CONFERMA --> EJBEXCEPTION");
 
 			context.addMessage(null, new FacesMessage("Operazione fallita"));
