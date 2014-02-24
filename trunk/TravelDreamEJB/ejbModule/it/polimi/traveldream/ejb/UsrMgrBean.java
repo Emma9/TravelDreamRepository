@@ -25,7 +25,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class UsrMgrBean implements UsrMgr {
-	@PersistenceContext
+	@PersistenceContext(unitName = "travelDream_project")
     private EntityManager em;
 	
 	@Resource
@@ -82,7 +82,7 @@ public class UsrMgrBean implements UsrMgr {
     
     
     public User getPrincipalUser() {
-    	return find(getPrincipalEmail());
+    	return em.find(User.class, getPrincipalEmail());
     }
 	
     

@@ -2,6 +2,7 @@ package it.polimi.traveldream.ejb;
 
 import it.polimi.traveldream.ejb.client.PacchettoPersonalizzatoBeanLocal;
 import it.polimi.traveldream.ejb.client.PacchettoPersonalizzatoBeanRemote;
+import it.polimi.traveldream.ejb.client.UsrMgr;
 import it.polimi.traveldream.entities.Componente;
 import it.polimi.traveldream.entities.ComponenteDTO;
 import it.polimi.traveldream.entities.Invito;
@@ -33,6 +34,8 @@ public class PacchettoPersonalizzatoBean implements
 	private EntityManager manager;
 	
 	private SecureRandom random = new SecureRandom();
+	
+	private UsrMgr userbean= new UsrMgrBean();
 
 	/** Default constructor */
 	public PacchettoPersonalizzatoBean() {
@@ -81,11 +84,26 @@ public class PacchettoPersonalizzatoBean implements
 			
 			
 			
+			
 			PacchettoPersonalizzato pacchettoPersonalizzato = new PacchettoPersonalizzato(pacchetto.getIdPacchetto(), codice, pacchetto.getDestinazione(), pacchetto.getDataInizioValidita(), pacchetto.getDataFineValidita(), pacchetto.getEtichetta(), pacchetto.getDescrizione(), pacchetto.getListaComponenti(), componentiSelezionati, pacchetto.getCosto(), pacchetto.getSconto(), stato, cliente, dataDiPartenza, dataDiRitorno, numPartecipanti, invitiPacchetto);
-					
+			
+			
 			System.out.println("BEAN --> CREAPACCHETTOPERSONALIZZATO --> PRIMA DI PERSIST");
 			
+			
 			manager.persist(pacchettoPersonalizzato);
+			
+			List<PacchettoPersonalizzato> listaPacchetti=new ArrayList<PacchettoPersonalizzato>();
+			
+			listaPacchetti=cliente.getPacchettiCliente();
+			
+			listaPacchetti.add(pacchettoPersonalizzato);
+			
+			cliente.setPacchettiCliente(listaPacchetti);
+			
+			manager.merge(cliente);
+			/*clienteDTO=userToUserDTO(cliente);
+			userbean.update(clienteDTO);*/
 			
 			System.out.println("BEAN --> CREAPACCHETTOPERSONALIZZATO --> DOPO PERSIST");
 

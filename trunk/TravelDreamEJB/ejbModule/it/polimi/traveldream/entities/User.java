@@ -47,8 +47,9 @@ public class User implements Serializable {
 
 	private String password; // sha-512 + hex
 	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="cliente")
+	@OneToMany(cascade=CascadeType.REMOVE, mappedBy="cliente")
 	private List<PacchettoPersonalizzato> pacchettiCliente = new ArrayList<PacchettoPersonalizzato>(0);
+	
 	
 	private List<PacchettoPersonalizzato> giftList = new ArrayList<PacchettoPersonalizzato>(0);
 
