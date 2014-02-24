@@ -89,17 +89,17 @@ public class PacchettoPersonalizzatoBean implements
 			
 			
 			System.out.println("BEAN --> CREAPACCHETTOPERSONALIZZATO --> PRIMA DI PERSIST");
-			
+	
 			
 			manager.persist(pacchettoPersonalizzato);
 			
-			List<PacchettoPersonalizzato> listaPacchetti=new ArrayList<PacchettoPersonalizzato>();
+			/*List<PacchettoPersonalizzato> listaPacchetti=new ArrayList<PacchettoPersonalizzato>();
 			
 			listaPacchetti=cliente.getPacchettiCliente();
 			
 			listaPacchetti.add(pacchettoPersonalizzato);
 			
-			cliente.setPacchettiCliente(listaPacchetti);
+			cliente.setPacchettiCliente(listaPacchetti);/*
 			
 			manager.merge(cliente);
 			/*clienteDTO=userToUserDTO(cliente);
@@ -248,14 +248,14 @@ public class PacchettoPersonalizzatoBean implements
 	 * @param idCliente
 	 * @return ArrayList<PacchettoPersonalizzatoDTO>
 	 */
-	public ArrayList<PacchettoPersonalizzatoDTO> findByIdCliente(Long idCliente) {
+	public ArrayList<PacchettoPersonalizzatoDTO> findByEmailCliente(String emailCliente) {
 
 		TypedQuery<PacchettoPersonalizzato> q = manager
 				.createQuery(
-						"FROM PacchettoPersonalizzato p WHERE p.idCliente=:new_idCliente",
+						"FROM PacchettoPersonalizzato p WHERE p.cliente.email=:new_emailCliente",
 						PacchettoPersonalizzato.class);
 
-		q.setParameter("new_idCliente", idCliente);
+		q.setParameter("new_emailCliente", emailCliente);
 
 		ArrayList<PacchettoPersonalizzatoDTO> pacchettiPersonalizzati = new ArrayList<PacchettoPersonalizzatoDTO>();
 		

@@ -56,7 +56,7 @@ public interface PacchettoPersonalizzatoBeanRemote {
 
 	/**@param idCliente
 	 * @return ArrayList<PacchettoPersonalizzato>*/
-	public ArrayList<PacchettoPersonalizzatoDTO> findByIdCliente(Long idCliente);
+	public ArrayList<PacchettoPersonalizzatoDTO> findByEmailCliente(String emailCliente);
 
 	/**@return ArrayList<idPacchettoPersonalizzato>*/
 	public ArrayList<Long> findAll();

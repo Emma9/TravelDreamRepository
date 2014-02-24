@@ -16,6 +16,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -47,7 +48,10 @@ public class User implements Serializable {
 
 	private String password; // sha-512 + hex
 	
-	@OneToMany(cascade=CascadeType.REMOVE, mappedBy="cliente")
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="cliente")
+	@JoinTable(name="users_pacchetto", 
+    joinColumns=@JoinColumn(name="User_EMAIL", referencedColumnName="email"),
+    inverseJoinColumns={@JoinColumn(name = "IDPACCHETTO", referencedColumnName = "idPacchetto"), @JoinColumn(name = "IDPACCHETTOPERSONALIZZATO")})
 	private List<PacchettoPersonalizzato> pacchettiCliente = new ArrayList<PacchettoPersonalizzato>(0);
 	
 	

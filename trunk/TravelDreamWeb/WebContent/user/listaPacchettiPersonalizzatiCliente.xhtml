@@ -17,7 +17,7 @@
 		<p:dataTable id="listaPacchettiPersonalizzati"
 			var="pacchettoPersonalizzato"
 			value="#{gestionePacchettiPersonalizzatiBean.pacchettiPersonalizzatiCliente}"
-			paginator="true" rows="10"
+			paginator="true" rows="10" rowKey="#{pacchettoPersonalizzato.idPacchettoPersonalizzato}"
 			selection="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato}"
 			selectionMode="single">
 

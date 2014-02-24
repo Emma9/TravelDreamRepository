@@ -19,8 +19,7 @@ public class PacchettoPersonalizzato extends Pacchetto {
 
 	private String stato; // SALVATO BLOCCATO CONFERMATO ACCETTATO
 	
-	@ManyToOne(fetch = FetchType.EAGER) //cascade=CascadeType.MERGE)
-    @JoinColumn(name="CLIENTE_EMAIL")
+	@ManyToOne
 	private User cliente;
 	@Temporal(TemporalType.DATE)
 	private Date dataDiPartenza;
