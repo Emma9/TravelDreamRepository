@@ -181,7 +181,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	public ArrayList<Long> findByDestinazione(String destinazione) {
 
 		TypedQuery<Pacchetto> q = manager.createQuery(
-				"FROM Pacchetto p WHERE p.destinazione=:new_destinazione",
+				"FROM Pacchetto p WHERE p.destinazione=:new_destinazione AND p.idPacchettoPersonalizzato=0",
 				Pacchetto.class);
 
 		q.setParameter("new_destinazione", destinazione);
@@ -202,7 +202,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 */
 	public ArrayList<Long> findByEtichetta(String etichetta) {
 
-		TypedQuery<Pacchetto> q = manager.createQuery("FROM Pacchetto p",
+		TypedQuery<Pacchetto> q = manager.createQuery("FROM Pacchetto p WHERE p.idPacchettoPersonalizzato=0",
 				Pacchetto.class);
 
 		ArrayList<Long> pacchetti = new ArrayList<Long>();
@@ -225,7 +225,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 
 		// TypedQuery<Pacchetto> q = manager.createQuery("FROM Pacchetto p"
 		// WHERE p.idCliente=:NULL",Pacchetto.class);
-		TypedQuery<Pacchetto> q = manager.createQuery("FROM Pacchetto p",
+		TypedQuery<Pacchetto> q = manager.createQuery("FROM Pacchetto p WHERE p.idPacchettoPersonalizzato=0",
 				Pacchetto.class);
 
 		ArrayList<PacchettoDTO> pacchetti = new ArrayList<PacchettoDTO>();
@@ -289,9 +289,24 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	}
 
 	/** @return ArrayList<idPacchetto> */
-	public ArrayList<Long> findAll() {
+	public ArrayList<Long> findAllConPacchettiPers() {
 
 		TypedQuery<Pacchetto> q = manager.createQuery("FROM Pacchetto p",
+				Pacchetto.class);
+
+		ArrayList<Long> pacchetti = new ArrayList<Long>();
+
+		for (int i = 0; i < q.getResultList().size(); i++) {
+			pacchetti.add(q.getResultList().get(i).getIdPacchetto());
+		}
+
+		return pacchetti;
+	}
+	
+	/** @return ArrayList<idPacchetto> */
+	public ArrayList<Long> findAll() {
+
+		TypedQuery<Pacchetto> q = manager.createQuery("FROM Pacchetto p WHERE p.idPacchettoPersonalizzato=0",
 				Pacchetto.class);
 
 		ArrayList<Long> pacchetti = new ArrayList<Long>();
@@ -575,7 +590,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 
 			TypedQuery<Pacchetto> q = manager
 					.createQuery(
-							"FROM Pacchetto p WHERE p IN (SELECT p FROM Pacchetto p WHERE p.destinazione=:new_destinazione) AND p IN (SELECT p FROM Pacchetto p WHERE p.dataInizioValidita<=:new_dataPartenza AND p.dataInizioValidita<=:new_dataRitorno AND p.dataFineValidita>=:new_dataPartenza AND p.dataFineValidita>=:new_dataRitorno)",
+							"FROM Pacchetto p WHERE (p.idPacchettoPersonalizzato=0) AND p IN (SELECT p FROM Pacchetto p WHERE p.destinazione=:new_destinazione) AND p IN (SELECT p FROM Pacchetto p WHERE p.dataInizioValidita<=:new_dataPartenza AND p.dataInizioValidita<=:new_dataRitorno AND p.dataFineValidita>=:new_dataPartenza AND p.dataFineValidita>=:new_dataRitorno)",
 							Pacchetto.class);
 			q.setParameter("new_destinazione", destinazione);
 			q.setParameter("new_dataPartenza", dataRitorno);
@@ -619,7 +634,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 			// DATE
 			TypedQuery<Pacchetto> q = manager
 					.createQuery(
-							"FROM Pacchetto p WHERE (p.dataInizioValidita<:new_dataPartenza OR p.dataInizioValidita=:new_dataPartenza) AND (p.dataInizioValidita<:new_dataRitorno OR p.dataInizioValidita=:new_dataRitorno) AND (p.dataFineValidita>:new_dataPartenza OR p.dataFineValidita=:new_dataPartenza) AND (p.dataFineValidita>:new_dataRitorno OR p.dataFineValidita=:new_dataRitorno)",
+							"FROM Pacchetto p WHERE (p.idPacchettoPersonalizzato=0) AND (p.dataInizioValidita<:new_dataPartenza OR p.dataInizioValidita=:new_dataPartenza) AND (p.dataInizioValidita<:new_dataRitorno OR p.dataInizioValidita=:new_dataRitorno) AND (p.dataFineValidita>:new_dataPartenza OR p.dataFineValidita=:new_dataPartenza) AND (p.dataFineValidita>:new_dataRitorno OR p.dataFineValidita=:new_dataRitorno)",
 							Pacchetto.class);
 
 			q.setParameter("new_dataPartenza", dataPartenza);
