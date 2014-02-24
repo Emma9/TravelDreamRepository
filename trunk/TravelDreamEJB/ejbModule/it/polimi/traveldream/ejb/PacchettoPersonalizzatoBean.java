@@ -296,7 +296,7 @@ public class PacchettoPersonalizzatoBean implements
 		try {
 			TypedQuery<PacchettoPersonalizzato> q = manager
 					.createQuery(
-							"FROM PacchettoPersonalizzato p WHERE (p.idPacchettoPersonalizzato=:new_idPacchettoPersonalizzato",
+							"FROM PacchettoPersonalizzato p WHERE (p.idPacchettoPersonalizzato=:new_idPacchettoPersonalizzato)",
 							PacchettoPersonalizzato.class);
 
 			q.setParameter("new_idPacchettoPersonalizzato",
