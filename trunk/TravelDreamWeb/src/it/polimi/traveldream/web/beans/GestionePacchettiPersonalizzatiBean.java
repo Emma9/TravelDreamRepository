@@ -195,8 +195,29 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 			if (!(usermanager.getUserDTO().getGiftList()
 					.contains(pacchettoPersonalizzatoSelezionato))) {
 
-				usermanager.getUserDTO().getGiftList()
-						.add(pacchettoPersonalizzatoSelezionato);
+			
+				
+				PacchettoPKDTO pacchettoPK = new PacchettoPKDTO(
+						pacchettoPersonalizzatoSelezionato.getIdPacchetto(),
+						pacchettoPersonalizzatoSelezionato
+								.getIdPacchettoPersonalizzato());
+
+				UserDTO cli = pacchettoPersonalizzatoSelezionato.getCliente();
+
+				Date datap = pacchettoPersonalizzatoSelezionato
+						.getDataDiPartenza();
+
+				Date datar = pacchettoPersonalizzatoSelezionato
+						.getDataDiRitorno();
+
+				int nump = pacchettoPersonalizzatoSelezionato
+						.getNumPartecipanti();
+
+				List<ComponenteDTO> listacs = pacchettoPersonalizzatoSelezionato
+						.getListaComponentiSelezionati();
+
+				pacchettopersremote.updatePacchettoPersonalizzato(pacchettoPK,
+						cli, "giftlist", datap, datar, nump, listacs);
 
 				context.addMessage(null, new FacesMessage(
 						"Pacchetto inserito in gift list"));
