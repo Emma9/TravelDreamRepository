@@ -332,6 +332,9 @@ public class PacchettoPersonalizzatoBean implements
 
 		case "accettato":
 			return true;
+			
+		case "giftlist":
+			return true;	
 
 		}
 

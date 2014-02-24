@@ -12,11 +12,11 @@
 		style="width: 600px;">
 
 
-		<p:growl id="growl" showDetail="true" />
 
 		<p:dataTable id="giftList" var="pacchettoGiftList"
 			value="#{giftListClienteBean.pacchettiRicercati}" paginator="true"
 			rows="10" selection="#{giftListClienteBean.pacchettoSelezionato}"
+			rowKey="#{pacchettoGiftList.idPacchettoPersonalizzato}"
 			selectionMode="single">
 
 

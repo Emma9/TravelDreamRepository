@@ -1,5 +1,6 @@
 package it.polimi.traveldream.web.beans;
 
+import it.polimi.traveldream.ejb.client.PacchettoPersonalizzatoBeanRemote;
 import it.polimi.traveldream.ejb.client.UserBeanRemote;
 import it.polimi.traveldream.ejb.client.UsrMgr;
 import it.polimi.traveldream.entities.PacchettoDTO;
@@ -27,6 +28,9 @@ public class GiftListClienteBean implements Serializable {
 
 	@EJB
 	private UserBeanRemote utenteRemoto;
+
+	@EJB
+	private PacchettoPersonalizzatoBeanRemote pacchettoPersRemoto;
 
 	@EJB
 	private UsrMgr usermanager;
@@ -94,9 +98,23 @@ public class GiftListClienteBean implements Serializable {
 
 		try {
 
-			setPacchettiRicercati((ArrayList<PacchettoPersonalizzatoDTO>) usermanager
-					.getUserDTO().getGiftList());
-			
+			pacchettiRicercati.clear();
+
+			String mail = usermanager.getUserDTO().getEmail();
+
+			ArrayList<PacchettoPersonalizzatoDTO> pacchClie = pacchettoPersRemoto
+					.findByEmailCliente(mail);
+
+			for (int i = 0; i < pacchClie.size(); i++) {
+
+				if (pacchClie.get(i).getStato().equalsIgnoreCase("giftlist")) {
+
+					pacchettiRicercati.add(pacchClie.get(i));
+
+				}
+
+			}
+
 			return "giftListCliente";
 
 		} catch (EJBException e) {
