@@ -33,9 +33,11 @@
 	<!-- BOTTONE INVIA INVITO -->
 
 	<div align="left">
-		<h:commandButton value="Invia invito"
-			action="#{invitaAmicoBean.invitaAmico(gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.idPacchettoPersonalizzato)}"
-			ajax="false" />
+		<h:form>
+			<h:commandButton value="Invia invito"
+				action="#{invitaAmicoBean.invitaAmico(gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.idPacchettoPersonalizzato)}"
+				ajax="false" />
+		</h:form>
 	</div>
 
 
