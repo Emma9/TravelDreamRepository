@@ -165,6 +165,53 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 
 	}
 
+	
+	public String modificaPacchetto() {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+
+		try {
+
+			System.out.println("MODIFICA PACCHETTO --> METODO");
+/*
+			for (int j = 0; j < listaComponentiSelezionati.size(); j++) {
+
+				if (!(listaComponenti.contains(listaComponentiSelezionati
+						.get(j)))) {
+
+					listaComponenti.add(listaComponentiSelezionati.get(j));
+
+				}
+
+			}
+
+			pacchettoremoto.createPacchetto(destinazione, dataInizioValidita,
+					dataFineValidita, etichetta, descrizione, listaComponenti,
+					listaComponentiSelezionati, sconto);
+
+			System.out.println("CREAZIONE PACCHETTO --> PACCHETTO CREATO");
+
+			context.addMessage(null, new FacesMessage(
+					"Creazione pacchetto riuscita"));*/
+
+			return "index";
+
+		} catch (EJBException e) {
+
+			System.out.println("CREAZIONE PACCHETTO --> EJBEXCEPTION");
+
+			context.addMessage(null, new FacesMessage(
+					"Creazione pacchetto fallita"));
+
+			return "index";
+
+		}
+
+	}
+	
+	
+	
+	
 	public String rimuoviPacchettoSelezionato() {
 
 		try {
