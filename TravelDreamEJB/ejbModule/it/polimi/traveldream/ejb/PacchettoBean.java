@@ -78,7 +78,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 
 			
 			System.out.println("SET LISTA COMPONENTI SELEZIONATI");
-
+			
 		
 
 			int costoPacchetto = calcolaCostoPacchetto(listaComponenti, sconto);

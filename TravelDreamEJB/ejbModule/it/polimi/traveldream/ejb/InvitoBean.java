@@ -28,7 +28,8 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 
-	@PersistenceContext(unitName = "travelDream_project") private EntityManager manager;
+	@PersistenceContext(unitName = "travelDream_project") 
+	private EntityManager manager;
 
 	private PacchettoPersonalizzatoBean pacchettopersonalizzato= new PacchettoPersonalizzatoBean();
 	

@@ -6,6 +6,7 @@ import it.polimi.traveldream.ejb.client.UsrMgr;
 import it.polimi.traveldream.entities.ComponenteDTO;
 import it.polimi.traveldream.entities.PacchettoDTO;
 import it.polimi.traveldream.entities.PacchettoPKDTO;
+import it.polimi.traveldream.entities.PacchettoPersonalizzatoDTO;
 import it.polimi.traveldream.entities.UserDTO;
 
 import java.io.Serializable;
@@ -558,10 +559,19 @@ public class RicercaPacchettiBean implements Serializable {
 				
 				//System.out.println("IDF  "+ idf);
 				
-				user.getUserDTO()
+				/*user.getUserDTO()
 						.getPacchettiCliente()
 						.add(pacchettoPersonalizzatoRemoto
-								.findByIdPacchettoPersonalizzato(idp));
+								.findByIdPacchettoPersonalizzato(idp));*/
+				
+				/*List<PacchettoPersonalizzatoDTO> listaPacchetti=new ArrayList<PacchettoPersonalizzatoDTO>();
+				
+				listaPacchetti=userDTO.getPacchettiCliente();
+				
+				listaPacchetti.add(pacchettoPersonalizzatoRemoto.findByIdPacchettoPersonalizzato(idp));
+				
+				userDTO.setPacchettiCliente(listaPacchetti);*/
+				
 				
 				System.out.println("NUM ELEMENTI LISTA UTENTE  "+user.getUserDTO()
 				.getPacchettiCliente().size());
