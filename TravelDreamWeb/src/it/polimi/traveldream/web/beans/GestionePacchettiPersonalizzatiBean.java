@@ -117,8 +117,9 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 
 		try {
 
-			setPacchettiPersonalizzatiCliente((ArrayList<PacchettoPersonalizzatoDTO>) usermanager
-					.getUserDTO().getPacchettiCliente());
+			ArrayList<PacchettoPersonalizzatoDTO> pacchettiPersonalizzati= new ArrayList<PacchettoPersonalizzatoDTO>();
+			pacchettiPersonalizzati=pacchettopersremote.findByEmailCliente(usermanager.getPrincipalEmail());
+			setPacchettiPersonalizzatiCliente(pacchettiPersonalizzati);
 
 		} catch (EJBException e) {
 
