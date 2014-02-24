@@ -1,13 +1,11 @@
 package it.polimi.traveldream.ejb;
 
-import it.polimi.traveldream.ejb.client.PacchettoBeanRemote;
 import it.polimi.traveldream.ejb.client.PacchettoPersonalizzatoBeanLocal;
 import it.polimi.traveldream.ejb.client.PacchettoPersonalizzatoBeanRemote;
 import it.polimi.traveldream.entities.Componente;
 import it.polimi.traveldream.entities.ComponenteDTO;
 import it.polimi.traveldream.entities.Invito;
 import it.polimi.traveldream.entities.Pacchetto;
-import it.polimi.traveldream.entities.PacchettoDTO;
 import it.polimi.traveldream.entities.PacchettoPK;
 import it.polimi.traveldream.entities.PacchettoPKDTO;
 import it.polimi.traveldream.entities.PacchettoPersonalizzato;

@@ -63,7 +63,7 @@
 	</p:fieldset>
 
 	<br />
-	<br />
+	
 
 	<!-- BOTTONE MODIFICA PACCHETTO -->
 
@@ -76,15 +76,37 @@
 
 	<br />
 
+	<!-- BOTTONE RIMUOVI PACCHETTO -->
+
 	<div align="left">
 		<h:form>
-			<h:commandButton value="Rimuovi" ajax="false" />
+			<h:commandButton value="Rimuovi" ajax="false"
+				action="#{gestionePacchettiPersonalizzatiBean.rimuoviPacchettoSelezionato()}" />
 		</h:form>
 	</div>
 
+	<br />
+	
+	<!-- BOTTONE GESTIONE INVITI -->
 
+	<div align="left">
+		<h:form>
+			<h:commandButton value="Gestisci inviti" ajax="false"
+				outcome="#{gestionePacchettiPersonalizzatiBean.bloccaPacchetto()}" />
+		</h:form>
+	</div>
 
 	<br />
+
+	<!-- BOTTONE BLOCCA PRENOTAZIONE -->
+
+	<div align="left">
+		<h:form>
+			<h:commandButton value="Blocca prenotazione" ajax="false"
+				outcome="#{gestionePacchettiPersonalizzatiBean.bloccaPacchetto()}" />
+		</h:form>
+	</div>
+
 	<br />
 
 	<!-- BOTTONE AGGIUNGI A GIFTLIST -->
@@ -100,7 +122,6 @@
 	</div>
 
 	<br />
-	<br />
 
 	<!-- BOTTONE RIMUOVI DALLA GIFTLIST -->
 
@@ -114,8 +135,8 @@
 		</h:form>
 	</div>
 
+	<!-- BOTTONE HOMEPAGE -->
 
-	<br />
 	<br />
 	<div align="left">
 		<h:button id="bottoneHome" value="Torna alla Homepage" outcome="index"

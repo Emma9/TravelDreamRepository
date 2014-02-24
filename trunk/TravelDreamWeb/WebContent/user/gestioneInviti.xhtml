@@ -8,60 +8,131 @@
 <h:head>
 </h:head>
 <h:body>
-	<h2>GESTIONE DEGLI INVITI</h2>
+	<br />
 
-	<p:fieldset legend="Ecco la lista dei tuoi inviti"
+	<div>
+		<p:messages id="messages" showDetail="false" autoUpdate="true"
+			closable="true" />
+	</div>
+
+	<br />
+	<br />
+
+	<p:fieldset
+		legend="Ecco I Dettagli del pacchetto personalizzato selezionato"
 		widgetVar="regWidget" style="width: 600px;">
+
+		<p:panelGrid id="dettagli" columns="2">
+
+			<h:outputText value="ID:" />
+			<h:outputText
+				value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.idPacchettoPersonalizzato}" />
+
+			<h:outputText value="Destinazione:" />
+			<h:outputText
+				value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.destinazione}" />
+
+
+			<h:outputText value="Etichetta: " />
+			<h:outputText
+				value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.etichetta}" />
+
+
+			<h:outputText value="Costo:" />
+			<h:outputText
+				value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.costo}" />
+
+
+			<h:outputText value="Data Inizio Validità: " />
+			<h:outputText
+				value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.dataInizioValidita}" />
+
+
+			<h:outputText value="Data Fine Validità: " />
+			<h:outputText
+				value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.dataFineValidita}" />
+
+
+			<h:outputText value="Data di Partenza: " />
+			<h:outputText
+				value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.dataDiPartenza}" />
+
+
+			<h:outputText value="Data di Ritorno: " />
+			<h:outputText
+				value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.dataDiRitorno}" />
+
+
+			<h:outputText value="Numero di partecipanti: " />
+			<h:outputText
+				value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.numPartecipanti}" />
+
+
+		</p:panelGrid>
+
+	</p:fieldset>
+
+	<br />
+
+	<p:fieldset legend="Ecco la lista degli inviti" widgetVar="regWidget"
+		style="width: 600px;">
 
 
 		<p:growl id="growl" showDetail="true" />
 
-		<p:dataTable id="listaInviti" var="invito"
-			value="#{mostraInvitiClienteBean.invitiRicercati}" paginator="true"
-			rows="10" selection="#{mostraInvitiClienteBean.invitoSelezionato}"
-			selectionMode="single">
-
-			<!-- <p:ajax event="rowSelect" listener="#{ricercaPacchettiBean.onRowSelect}" update=":form:display :form:growl" oncomplete="dettgliPacchettoPredefinitoRicercato" />
-						
-					
-					
-				<p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->
-
-			<f:facet name="header">  
-            	Seleziona un pacchetto per visualizzare i dettagli  
-		        </f:facet>
+		<p:dataTable id="listaPacchettiPersonalizzati"
+			var="pacchettoPersonalizzato"
+			value="#{gestionePacchettiPersonalizzatiBean.pacchettiPersonalizzatiCliente}"
+			paginator="true" rows="10">
 
 
-			<p:column headerText="Destinatario Invito">  
-		            #{invito.emailDestinatario}  
+
+
+
+			<p:column headerText="Destinazione">  
+		            #{pacchettoPersonalizzato.destinazione}  
 		        </p:column>
 
-			<p:column headerText="Data di Invito">  
-		            #{invito.data}  
+			<p:column headerText="Data di Partenza">  
+		            #{pacchettoPersonalizzato.dataInizioValidita}  
 		        </p:column>
 
-			<p:column headerText="Stato Invito">  
-		            #{invito.stato}  
+			<p:column headerText="Data di Ritorno">  
+		            #{pacchettoPersonalizzato.dataFineValidita}  
 		        </p:column>
+
+			<p:column headerText="Stato">  
+		            #{pacchettoPersonalizzato.stato}  
+		        </p:column>
+
+
 
 		</p:dataTable>
 
-		<br />
 
-		<p:commandButton id="bottoneInvita" value="Invita Amico"
-			actionListener="formInvitoAmico">
-			<f:setPropertyActionListener
-				target="#{mostraInvitiClienteBean.email}"
-				value="#{loginClienteBean.email}" />
-		</p:commandButton>
 	</p:fieldset>
 
+
 	<br />
+
+
+	<!-- BOTTONE INVITA UN AMICO -->
+
+	<div align="left">
+		<h:form>
+			<h:commandButton value="Invita un amico"
+				action="#{gestionePacchettiPersonalizzatiBean}" ajax="false" />
+		</h:form>
+	</div>
+
+	<!-- BOTTONE HOMEPAGE -->
+
 	<br />
 	<div align="left">
 		<h:button id="bottoneHome" value="Torna alla Homepage" outcome="index"
 			ajax="false" />
 	</div>
+
 
 
 </h:body>
