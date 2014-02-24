@@ -415,10 +415,7 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 
 				System.out.println("CONFERMA --> IF");
 
-				PacchettoPKDTO pacchettoPK = new PacchettoPKDTO(
-						pacchettoPersonalizzatoSelezionato.getIdPacchetto(),
-						pacchettoPersonalizzatoSelezionato
-								.getIdPacchettoPersonalizzato());
+				PacchettoPKDTO pacchettoPK = new PacchettoPKDTO(pacchettoPersonalizzatoSelezionato.getIdPacchetto(), pacchettoPersonalizzatoSelezionato.getIdPacchettoPersonalizzato());
 
 				UserDTO cli = pacchettoPersonalizzatoSelezionato.getCliente();
 
@@ -434,8 +431,7 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 				List<ComponenteDTO> listacs = pacchettoPersonalizzatoSelezionato
 						.getListaComponentiSelezionati();
 
-				pacchettopersremote.updatePacchettoPersonalizzato(pacchettoPK,
-						cli, "confermato", datap, datar, nump, listacs);
+				pacchettopersremote.updatePacchettoPersonalizzato(pacchettoPK, cli, "confermato", datap, datar numPartecipanti, listaComponentiSelezionati);
 
 				context.addMessage(null, new FacesMessage("Viaggio confermato"));
 
