@@ -439,7 +439,7 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 
 				context.addMessage(null, new FacesMessage("Viaggio confermato"));
 
-				return "listaPacchettiPersonalizzatiCliente";
+				return "index";
 
 			} else {
 
