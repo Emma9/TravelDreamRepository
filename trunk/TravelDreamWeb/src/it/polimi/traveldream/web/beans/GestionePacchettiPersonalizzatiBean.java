@@ -141,15 +141,23 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 			 * setIdPacchettoPersonalizzato(id);
 			 */
 
+			System.out.println("DETTAGLI --> METODO");
+			
+			System.out.println("DETTAGLI --> IDP "+pacchettoPersonalizzatoSelezionato.getIdPacchettoPersonalizzato());
+			
 			return "dettagliPacchettoPersonalizzatoSalvato";
 
 		} catch (NullPointerException n) {
 
+			System.out.println("DETTAGLI --> NULLPOINTEREXCEPTION");
+			
 			return null;
 
 		}
 
 		catch (EJBException e) {
+			
+			System.out.println("DETTAGLI --> EJBEXCEPTION");
 
 			return null;
 
@@ -312,9 +320,12 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 				.getExternalContext().getRequest();
 
 		try {
+			System.out.println("CONFERMA --> TRY");
 
 			if (!(pacchettoPersonalizzatoSelezionato.getStato()
 					.equalsIgnoreCase("confermato"))) {
+				
+				System.out.println("CONFERMA --> IF");
 
 				PacchettoPKDTO pacchettoPK = new PacchettoPKDTO(
 						pacchettoPersonalizzatoSelezionato.getIdPacchetto(),
@@ -343,6 +354,8 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 				return "listaPacchettiPersonalizzatiCliente";
 
 			} else {
+				
+				System.out.println("CONFERMA --> ELSE");
 
 				context.addMessage(null, new FacesMessage(
 						"Viaggio gia confermato"));
@@ -351,6 +364,8 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 			}
 
 		} catch (EJBException e) {
+			
+			System.out.println("CONFERMA --> EJBEXCEPTION");
 
 			context.addMessage(null, new FacesMessage("Operazione fallita"));
 
