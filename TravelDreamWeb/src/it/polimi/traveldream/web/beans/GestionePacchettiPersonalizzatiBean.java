@@ -378,8 +378,7 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 		}
 
 	}
-	
-	
+
 	public String formInvitaAmico() {
 
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -388,7 +387,7 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 
 		try {
 
-			return "gestioneInviti";
+			return "formInvitoAmico";
 
 		} catch (NullPointerException n) {
 
@@ -399,30 +398,5 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 		}
 
 	}
-	
-	
-	public String inviaInvito() {
-
-		FacesContext context = FacesContext.getCurrentInstance();
-		HttpServletRequest request = (HttpServletRequest) context
-				.getExternalContext().getRequest();
-
-		try {
-			
-			
-			
-
-			return "gestioneInviti";
-
-		} catch (NullPointerException n) {
-
-			context.addMessage(null, new FacesMessage("Operazione fallita"));
-
-			return "listaPacchettiPersonalizzatiCliente";
-
-		}
-
-	}
-	
 
 }

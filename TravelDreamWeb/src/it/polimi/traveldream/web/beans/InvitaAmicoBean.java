@@ -34,14 +34,13 @@ public class InvitaAmicoBean implements Serializable {
 	private PacchettoPersonalizzatoBeanRemote pacchettoPersRemoto;
 	@EJB
 	private UsrMgr usermgr;
-	
+
 	private UserDTO mittente;
 	private AmicoDTO destinatario;
 
 	private Long idPacchettoPersonalizzato;
 	private PacchettoPersonalizzatoDTO pacchettoPersonalizzato;
 
-	
 	/**
 	 * @return the mittente
 	 */
@@ -50,7 +49,8 @@ public class InvitaAmicoBean implements Serializable {
 	}
 
 	/**
-	 * @param mittente the mittente to set
+	 * @param mittente
+	 *            the mittente to set
 	 */
 	public void setMittente(UserDTO mittente) {
 		this.mittente = mittente;
@@ -64,7 +64,8 @@ public class InvitaAmicoBean implements Serializable {
 	}
 
 	/**
-	 * @param destinatario the destinatario to set
+	 * @param destinatario
+	 *            the destinatario to set
 	 */
 	public void setDestinatario(AmicoDTO destinatario) {
 		this.destinatario = destinatario;
@@ -101,7 +102,7 @@ public class InvitaAmicoBean implements Serializable {
 		this.pacchettoPersonalizzato = pacchettoPersonalizzato;
 	}
 
-	public String invitaAmico() {
+	public String invitaAmico(Long idpers) {
 
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
@@ -109,28 +110,39 @@ public class InvitaAmicoBean implements Serializable {
 
 		try {
 
-			mittente=usermgr.getUserDTO();
-			setPacchettoPersonalizzato(pacchettoPersRemoto.findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato));
+			setIdPacchettoPersonalizzato(idpers);
+
+			mittente = usermgr.getUserDTO();
+			setPacchettoPersonalizzato(pacchettoPersRemoto
+					.findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato));
 
 			Date dataCorrente = new Date();
 
-			invitoremoto.createInvito(mittente, destinatario, pacchettoPersonalizzato, dataCorrente, false);
+			invitoremoto.createInvito(mittente, destinatario,
+					pacchettoPersonalizzato, dataCorrente, false);
+
+			context.addMessage(null, new FacesMessage("Invito inviato "));
+
+			return "gestioneInviti";
 
 		} catch (EJBException e) {
+
+			context.addMessage(null, new FacesMessage("Operazione fallita "));
 
 			return null;
 
 		}
 
-		return "gestioneInviti";
 	}
 
 	public String mostraPropostaPacchettoViaggio() {
 
-setPacchettoPersonalizzato(pacchettoPersRemoto.findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato));
-		
-		for(int i=0; i< pacchettoPersonalizzato.getInvitiPacchetto().size();i++){
-			if(pacchettoPersonalizzato.getInvitiPacchetto().get(i).getDestinatario().equals(destinatario)){
+		setPacchettoPersonalizzato(pacchettoPersRemoto
+				.findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato));
+
+		for (int i = 0; i < pacchettoPersonalizzato.getInvitiPacchetto().size(); i++) {
+			if (pacchettoPersonalizzato.getInvitiPacchetto().get(i)
+					.getDestinatario().equals(destinatario)) {
 
 				return "/visualizzarePropostaViaggio";
 
@@ -169,9 +181,6 @@ setPacchettoPersonalizzato(pacchettoPersRemoto.findByIdPacchettoPersonalizzato(i
 				.getExternalContext().getRequest();
 
 		try {
-			
-			
-			
 
 			context.addMessage(null, new FacesMessage("Proposta rifiutata"));
 
