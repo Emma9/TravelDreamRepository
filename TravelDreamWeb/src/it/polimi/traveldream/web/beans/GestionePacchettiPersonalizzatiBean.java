@@ -3,10 +3,15 @@ package it.polimi.traveldream.web.beans;
 import it.polimi.traveldream.ejb.client.PacchettoPersonalizzatoBeanRemote;
 import it.polimi.traveldream.ejb.client.UserBeanRemote;
 import it.polimi.traveldream.ejb.client.UsrMgr;
+import it.polimi.traveldream.entities.ComponenteDTO;
+import it.polimi.traveldream.entities.PacchettoPKDTO;
 import it.polimi.traveldream.entities.PacchettoPersonalizzatoDTO;
+import it.polimi.traveldream.entities.UserDTO;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
@@ -230,6 +235,61 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 
 				context.addMessage(null, new FacesMessage(
 						"Pacchetto non presente in gift list"));
+
+				return "listaPacchettiPersonalizzatiCliente";
+			}
+
+		} catch (EJBException e) {
+
+			context.addMessage(null, new FacesMessage("Operazione fallita"));
+
+			return "listaPacchettiPersonalizzatiCliente";
+
+		}
+
+	}
+
+	public String bloccaPacchetto() {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+
+		try {
+
+			if (!(pacchettoPersonalizzatoSelezionato.getStato()
+					.equals("bloccato"))) {
+
+				PacchettoPKDTO pacchettoPK = new PacchettoPKDTO(
+						pacchettoPersonalizzatoSelezionato.getIdPacchetto(),
+						pacchettoPersonalizzatoSelezionato
+								.getIdPacchettoPersonalizzato());
+
+				UserDTO cli = pacchettoPersonalizzatoSelezionato.getCliente();
+				
+				Date datap = pacchettoPersonalizzatoSelezionato
+						.getDataDiPartenza();
+				
+				Date datar = pacchettoPersonalizzatoSelezionato
+						.getDataDiRitorno();
+				
+				int nump = pacchettoPersonalizzatoSelezionato
+						.getNumPartecipanti();
+				
+				List<ComponenteDTO> listacs = pacchettoPersonalizzatoSelezionato
+						.getListaComponentiSelezionati();
+
+				pacchettopersremote.updatePacchettoPersonalizzato(pacchettoPK,
+						cli, "bloccato", datap, datar, nump, listacs);
+
+				context.addMessage(null, new FacesMessage("Pacchetto bloccato"));
+
+				return "listaPacchettiPersonalizzatiCliente";
+
+			} else {
+
+				context.addMessage(null, new FacesMessage(
+						"Pacchetto gia bloccato"));
 
 				return "listaPacchettiPersonalizzatiCliente";
 			}

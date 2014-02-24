@@ -8,15 +8,15 @@
 <h:head>
 </h:head>
 <h:body>
-	<h2>GESTIONE DEGLI INVITI REGALO</h2>
+	<h2>GESTIONE DEGLI INVITI</h2>
 
-	<p:fieldset legend="Ecco la lista dei tuoi inviti regalo"
+	<p:fieldset legend="Ecco la lista dei tuoi inviti"
 		widgetVar="regWidget" style="width: 600px;">
 
 
 		<p:growl id="growl" showDetail="true" />
 
-		<p:dataTable id="listaInviti" var="invitoRegalo"
+		<p:dataTable id="listaInviti" var="invito"
 			value="#{mostraInvitiClienteBean.invitiRicercati}" paginator="true"
 			rows="10" selection="#{mostraInvitiClienteBean.invitoSelezionato}"
 			selectionMode="single">
@@ -33,30 +33,28 @@
 
 
 			<p:column headerText="Destinatario Invito">  
-		            #{invitoRegalo.emailDestinatario}  
+		            #{invito.emailDestinatario}  
 		        </p:column>
 
 			<p:column headerText="Data di Invito">  
-		            #{invitoRegalo.data}  
+		            #{invito.data}  
 		        </p:column>
 
 			<p:column headerText="Stato Invito">  
-		            #{invitoRegalo.stato}  
+		            #{invito.stato}  
 		        </p:column>
 
 		</p:dataTable>
 
 		<br />
 
-		<p:commandButton id="bottoneInvitaARegalo"
-			value="Invita Amico a Regalare" update="bottoneInvitaARegalo"
-			actionListener="formInvitoRegalo">
+		<p:commandButton id="bottoneInvita" value="Invita Amico"
+			actionListener="formInvitoAmico">
 			<f:setPropertyActionListener
 				target="#{mostraInvitiClienteBean.email}"
 				value="#{loginClienteBean.email}" />
 		</p:commandButton>
 	</p:fieldset>
-
 
 	<br />
 	<br />
@@ -64,7 +62,6 @@
 		<h:button id="bottoneHome" value="Torna alla Homepage" outcome="index"
 			ajax="false" />
 	</div>
-
 
 
 </h:body>
