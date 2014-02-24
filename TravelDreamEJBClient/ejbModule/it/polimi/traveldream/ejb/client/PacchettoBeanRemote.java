@@ -62,6 +62,8 @@ public interface PacchettoBeanRemote {
 	/** @return ArrayList<idPacchetto> */
 	public ArrayList<Long> findAll();
 	
+	public ArrayList<Long> findAllConPacchettiPers();
+	
 	/**@param dataPartenza
 	 * @param dataRitorno
 	 * @return true if dataPartenza comes before dataRitorno, otherwise false*/
