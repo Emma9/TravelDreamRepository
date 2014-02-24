@@ -63,11 +63,12 @@
 	</p:fieldset>
 
 	<br />
-	
+
+
 
 	<!-- BOTTONE MODIFICA PACCHETTO -->
 
-	<div align="left">
+	<div align="left" style="width: 180px;">
 		<h:form>
 			<h:commandButton value="Modifica"
 				action="#{gestionePacchettiPersonalizzatiBean}" ajax="false" />
@@ -78,7 +79,7 @@
 
 	<!-- BOTTONE RIMUOVI PACCHETTO -->
 
-	<div align="left">
+	<div align="left" style="width: 180px;">
 		<h:form>
 			<h:commandButton value="Rimuovi" ajax="false"
 				action="#{gestionePacchettiPersonalizzatiBean.rimuoviPacchettoSelezionato()}" />
@@ -86,13 +87,25 @@
 	</div>
 
 	<br />
-	
+
+	<!-- BOTTONE CONFERMA VIAGGIO -->
+
+	<div align="left" style="width: 180px;">
+		<h:form>
+			<h:commandButton value="Conferma viaggio" ajax="false"
+				outcome="#{gestionePacchettiPersonalizzatiBean.confermaViaggio()}" />
+		</h:form>
+	</div>
+
+	<br />
+
+
 	<!-- BOTTONE GESTIONE INVITI -->
 
-	<div align="left">
+	<div align="left" style="width: 180px;">
 		<h:form>
 			<h:commandButton value="Gestisci inviti" ajax="false"
-				outcome="#{gestionePacchettiPersonalizzatiBean.bloccaPacchetto()}" />
+				outcome="#{gestionePacchettiPersonalizzatiBean.gestioneInviti()}" />
 		</h:form>
 	</div>
 
@@ -100,12 +113,13 @@
 
 	<!-- BOTTONE BLOCCA PRENOTAZIONE -->
 
-	<div align="left">
+	<div align="left" style="width: 180px;">
 		<h:form>
 			<h:commandButton value="Blocca prenotazione" ajax="false"
 				outcome="#{gestionePacchettiPersonalizzatiBean.bloccaPacchetto()}" />
 		</h:form>
 	</div>
+
 
 	<br />
 

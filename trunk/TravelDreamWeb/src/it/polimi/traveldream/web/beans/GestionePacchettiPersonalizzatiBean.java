@@ -258,7 +258,7 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 		try {
 
 			if (!(pacchettoPersonalizzatoSelezionato.getStato()
-					.equals("bloccato"))) {
+					.equalsIgnoreCase("bloccato"))) {
 
 				PacchettoPKDTO pacchettoPK = new PacchettoPKDTO(
 						pacchettoPersonalizzatoSelezionato.getIdPacchetto(),
@@ -266,16 +266,16 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 								.getIdPacchettoPersonalizzato());
 
 				UserDTO cli = pacchettoPersonalizzatoSelezionato.getCliente();
-				
+
 				Date datap = pacchettoPersonalizzatoSelezionato
 						.getDataDiPartenza();
-				
+
 				Date datar = pacchettoPersonalizzatoSelezionato
 						.getDataDiRitorno();
-				
+
 				int nump = pacchettoPersonalizzatoSelezionato
 						.getNumPartecipanti();
-				
+
 				List<ComponenteDTO> listacs = pacchettoPersonalizzatoSelezionato
 						.getListaComponentiSelezionati();
 
@@ -303,5 +303,126 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 		}
 
 	}
+
+	public String confermaViaggio() {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+
+		try {
+
+			if (!(pacchettoPersonalizzatoSelezionato.getStato()
+					.equalsIgnoreCase("confermato"))) {
+
+				PacchettoPKDTO pacchettoPK = new PacchettoPKDTO(
+						pacchettoPersonalizzatoSelezionato.getIdPacchetto(),
+						pacchettoPersonalizzatoSelezionato
+								.getIdPacchettoPersonalizzato());
+
+				UserDTO cli = pacchettoPersonalizzatoSelezionato.getCliente();
+
+				Date datap = pacchettoPersonalizzatoSelezionato
+						.getDataDiPartenza();
+
+				Date datar = pacchettoPersonalizzatoSelezionato
+						.getDataDiRitorno();
+
+				int nump = pacchettoPersonalizzatoSelezionato
+						.getNumPartecipanti();
+
+				List<ComponenteDTO> listacs = pacchettoPersonalizzatoSelezionato
+						.getListaComponentiSelezionati();
+
+				pacchettopersremote.updatePacchettoPersonalizzato(pacchettoPK,
+						cli, "confermato", datap, datar, nump, listacs);
+
+				context.addMessage(null, new FacesMessage("Viaggio confermato"));
+
+				return "listaPacchettiPersonalizzatiCliente";
+
+			} else {
+
+				context.addMessage(null, new FacesMessage(
+						"Viaggio gia confermato"));
+
+				return "listaPacchettiPersonalizzatiCliente";
+			}
+
+		} catch (EJBException e) {
+
+			context.addMessage(null, new FacesMessage("Operazione fallita"));
+
+			return "listaPacchettiPersonalizzatiCliente";
+
+		}
+
+	}
+
+	public String gestioneInviti() {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+
+		try {
+
+			return "gestioneInviti";
+
+		} catch (NullPointerException n) {
+
+			context.addMessage(null, new FacesMessage("Operazione fallita"));
+
+			return "listaPacchettiPersonalizzatiCliente";
+
+		}
+
+	}
+	
+	
+	public String formInvitaAmico() {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+
+		try {
+
+			return "gestioneInviti";
+
+		} catch (NullPointerException n) {
+
+			context.addMessage(null, new FacesMessage("Operazione fallita"));
+
+			return "listaPacchettiPersonalizzatiCliente";
+
+		}
+
+	}
+	
+	
+	public String inviaInvito() {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+
+		try {
+			
+			
+			
+
+			return "gestioneInviti";
+
+		} catch (NullPointerException n) {
+
+			context.addMessage(null, new FacesMessage("Operazione fallita"));
+
+			return "listaPacchettiPersonalizzatiCliente";
+
+		}
+
+	}
+	
 
 }
