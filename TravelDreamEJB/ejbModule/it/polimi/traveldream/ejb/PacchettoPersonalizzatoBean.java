@@ -513,6 +513,7 @@ public class PacchettoPersonalizzatoBean implements
 		for(int i=0;i<userDTO.getPacchettiCliente().size(); i++){
 			pacchettiCliente.add(pacchettoPersonalizzatoDTOToPacchettoPersonalizzato(userDTO.getPacchettiCliente().get(i)));
 		}
+		/*
 		user.setPacchettiCliente(pacchettiCliente);
 		
 		List<PacchettoPersonalizzato> giftList= new ArrayList<PacchettoPersonalizzato>();
@@ -520,7 +521,7 @@ public class PacchettoPersonalizzatoBean implements
 			pacchettiCliente.add(pacchettoPersonalizzatoDTOToPacchettoPersonalizzato(userDTO.getGiftList().get(i)));
 		}
 		user.setGiftList(giftList);
-		
+		*/
 		return user;
 		
 		
@@ -535,7 +536,7 @@ public UserDTO userToUserDTO(User user) {
 		userDTO.setLastName(user.getLastName());
 		userDTO.setPassword(user.getPassword());
 		userDTO.setRegisteredOn(user.getRegisteredOn());
-		
+		/*
 		List<PacchettoPersonalizzatoDTO> pacchettiCliente= new ArrayList<PacchettoPersonalizzatoDTO>();
 		for(int i=0;i<user.getPacchettiCliente().size(); i++){
 			pacchettiCliente.add(pacchettoPersonalizzatoToDTO(user.getPacchettiCliente().get(i)));
@@ -547,7 +548,7 @@ public UserDTO userToUserDTO(User user) {
 			pacchettiCliente.add(pacchettoPersonalizzatoToDTO(user.getGiftList().get(i)));
 		}
 		userDTO.setGiftList(giftList);
-		
+		*/
 		return userDTO;
 		
 		
