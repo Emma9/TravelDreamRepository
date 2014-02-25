@@ -41,11 +41,17 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 
 	private Long idPacchettoPersonalizzato;
 
+	private String stringStato;
+
 	// PACCHETTO PERSONALIZZATO SELEZIONATO
 	private PacchettoPersonalizzatoDTO pacchettoPersonalizzatoSelezionato;
 
 	// LISTA PACCHETTI PERSONALIZZATI INVIATA ALLA PAGINA WEB
 	private ArrayList<PacchettoPersonalizzatoDTO> pacchettiPersonalizzatiCliente = new ArrayList<PacchettoPersonalizzatoDTO>();
+
+	private List<ComponenteDTO> listaComponenti;
+
+	private List<ComponenteDTO> listaComponentiSelezionati;
 
 	/**
 	 * @return the email
@@ -75,6 +81,21 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 	 */
 	public void setIdPacchettoPersonalizzato(Long idPacchettoPersonalizzato) {
 		this.idPacchettoPersonalizzato = idPacchettoPersonalizzato;
+	}
+
+	/**
+	 * @return the stringStato
+	 */
+	public String getStringStato() {
+		return stringStato;
+	}
+
+	/**
+	 * @param stringStato
+	 *            the stringStato to set
+	 */
+	public void setStringStato(String stringStato) {
+		this.stringStato = stringStato;
 	}
 
 	/**
@@ -109,6 +130,37 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 		this.pacchettiPersonalizzatiCliente = pacchettiPersonalizzatiCliente;
 	}
 
+	/**
+	 * @return the listaComponenti
+	 */
+	public List<ComponenteDTO> getListaComponenti() {
+		return listaComponenti;
+	}
+
+	/**
+	 * @param listaComponenti
+	 *            the listaComponenti to set
+	 */
+	public void setListaComponenti(List<ComponenteDTO> listaComponenti) {
+		this.listaComponenti = listaComponenti;
+	}
+
+	/**
+	 * @return the listaComponentiSelezionati
+	 */
+	public List<ComponenteDTO> getListaComponentiSelezionati() {
+		return listaComponentiSelezionati;
+	}
+
+	/**
+	 * @param listaComponentiSelezionati
+	 *            the listaComponentiSelezionati to set
+	 */
+	public void setListaComponentiSelezionati(
+			List<ComponenteDTO> listaComponentiSelezionati) {
+		this.listaComponentiSelezionati = listaComponentiSelezionati;
+	}
+
 	public String mostraPacchettiPersonalizzati() {
 
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -135,18 +187,15 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 
 		try {
 
-			/*
-			 * Long id = pacchettoPersonalizzatoSelezionato
-			 * .getIdPacchettoPersonalizzato();
-			 * 
-			 * setIdPacchettoPersonalizzato(id);
-			 */
-
 			System.out.println("DETTAGLI --> METODO");
 
 			System.out.println("DETTAGLI --> IDP "
 					+ pacchettoPersonalizzatoSelezionato
 							.getIdPacchettoPersonalizzato());
+
+			setStringStato(pacchettoPersonalizzatoSelezionato.getStato());
+
+			System.out.println("VALORE STATO " + stringStato);
 
 			return "dettagliPacchettoPersonalizzatoSalvato";
 
@@ -168,53 +217,56 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 
 	}
 
-	
 	public String modificaPacchetto() {
 
 		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
 
 		try {
 
-			System.out.println("MODIFICA PACCHETTO --> METODO");
-/*
-			for (int j = 0; j < listaComponentiSelezionati.size(); j++) {
+			PacchettoPKDTO pacchettoPK = new PacchettoPKDTO(
+					pacchettoPersonalizzatoSelezionato.getIdPacchetto(),
+					pacchettoPersonalizzatoSelezionato
+							.getIdPacchettoPersonalizzato());
 
-				if (!(listaComponenti.contains(listaComponentiSelezionati
-						.get(j)))) {
+			UserDTO cli = pacchettoPersonalizzatoSelezionato.getCliente();
 
-					listaComponenti.add(listaComponentiSelezionati.get(j));
+			Date datap = pacchettoPersonalizzatoSelezionato.getDataDiPartenza();
 
-				}
+			Date datar = pacchettoPersonalizzatoSelezionato.getDataDiRitorno();
+
+			int nump = pacchettoPersonalizzatoSelezionato.getNumPartecipanti();
+
+			Long idp = pacchettopersremote.updatePacchettoPersonalizzato(
+					pacchettoPK, cli, stringStato, datap, datar, nump,
+					listaComponentiSelezionati);
+
+			if (idp > 0) {
+
+				context.addMessage(null, new FacesMessage(
+						"Pacchetto modificato"));
+
+				return "index";
+
+			} else {
+
+				context.addMessage(null, new FacesMessage("Operazione fallita"));
+
+				return "listaPacchettiPersonalizzatiCliente";
 
 			}
 
-			pacchettoremoto.createPacchetto(destinazione, dataInizioValidita,
-					dataFineValidita, etichetta, descrizione, listaComponenti,
-					listaComponentiSelezionati, sconto);
-
-			System.out.println("CREAZIONE PACCHETTO --> PACCHETTO CREATO");
-
-			context.addMessage(null, new FacesMessage(
-					"Creazione pacchetto riuscita"));*/
-
-			return "index";
-
 		} catch (EJBException e) {
 
-			System.out.println("CREAZIONE PACCHETTO --> EJBEXCEPTION");
+			context.addMessage(null, new FacesMessage("Operazione fallita"));
 
-			context.addMessage(null, new FacesMessage(
-					"Creazione pacchetto fallita"));
-
-			return "index";
+			return "listaPacchettiPersonalizzatiCliente";
 
 		}
 
 	}
-	
-	
-	
-	
+
 	public String rimuoviPacchettoSelezionato() {
 
 		try {
@@ -298,8 +350,8 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 
 		try {
 
-			if (pacchettoPersonalizzatoSelezionato.getStato()
-			.equalsIgnoreCase("giftlist")) {
+			if (pacchettoPersonalizzatoSelezionato.getStato().equalsIgnoreCase(
+					"giftlist")) {
 
 				PacchettoPKDTO pacchettoPK = new PacchettoPKDTO(
 						pacchettoPersonalizzatoSelezionato.getIdPacchetto(),
@@ -496,6 +548,55 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 		} catch (NullPointerException n) {
 
 			context.addMessage(null, new FacesMessage("Operazione fallita"));
+
+			return "listaPacchettiPersonalizzatiCliente";
+
+		}
+
+	}
+
+	// MODIFICA DEL PACCHETTO PERSONALIZZATO CLIENTE
+
+	public String formModificaPersonalizzatoCliente() {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+
+		try {
+
+			if (stringStato.equalsIgnoreCase("salvato")) {
+
+				System.out.println("formModificaPersonalizzato --> METODO");
+
+				Long id = pacchettoPersonalizzatoSelezionato.getIdPacchetto();
+
+				System.out.println("formModificaPersonalizzatoCliente --> ID "
+						+ id);
+
+				setIdPacchettoPersonalizzato(id);
+
+				setListaComponenti(pacchettoPersonalizzatoSelezionato
+						.getListaComponenti());
+
+				System.out
+						.println("formModificaPersonalizzatoCliente --> RETURN");
+
+				return "formModificaPersonalizzatoCliente";
+
+			} else {
+
+				context.addMessage(null, new FacesMessage(
+						"Impossibile modificare: stato non valido"));
+
+				return "listaPacchettiPersonalizzatiCliente";
+
+			}
+
+		} catch (NullPointerException n) {
+
+			System.out
+					.println("formModificaPersonalizzatoCliente --> NULLPOINTEREXCEPTION");
 
 			return "listaPacchettiPersonalizzatiCliente";
 
