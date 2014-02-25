@@ -34,7 +34,7 @@ public interface PacchettoBeanRemote {
 	 * @param listaComponenti
 	 * @param sconto
 	 */
-	public void updatePacchetto(Long idPacchetto, String destinazione, Date dataInizioValidita, Date dataFineValidita, String etichetta, String descrizione, List<ComponenteDTO> listaComponenti, List<ComponenteDTO> listaComponentiSelezionati, int sconto);
+	public Long updatePacchetto(Long idPacchetto, String destinazione, Date dataInizioValidita, Date dataFineValidita, String etichetta, String descrizione, List<ComponenteDTO> listaComponenti, List<ComponenteDTO> listaComponentiSelezionati, int sconto);
 
 	/**@param destinazione
 	 * @return ArrayList<idPacchetto>*/

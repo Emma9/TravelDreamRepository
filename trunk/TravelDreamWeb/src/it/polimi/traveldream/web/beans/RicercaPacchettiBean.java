@@ -554,6 +554,14 @@ public class RicercaPacchettiBean implements Serializable {
 								listaComponentiSelezionati, new PacchettoPKDTO(
 										idPacchetto, (long) 0));
 
+				
+				if(idp==(long)-1){
+					context.addMessage(null, new FacesMessage(
+							"Creazione pacchetto personalizzato fallita"));
+					return "/user/index";
+				}
+				
+				
 				// Long idf =
 				// pacchettoPersonalizzatoRemoto.findByIdPacchettoPersonalizzato(idp).getIdPacchetto();
 
@@ -646,7 +654,7 @@ public class RicercaPacchettiBean implements Serializable {
 					}
 
 				}
-
+//Da cambiare!!!
 				Long idp = pacchettoPersonalizzatoRemoto
 						.createPacchettoPersonalizzato("salvato", userDTO,
 								dataPartenza, dataRitorno, numPartecipanti,

@@ -438,10 +438,14 @@ public class RicercaPacchettiImpiegatoBean implements Serializable {
 
 			}
 
-			pacchettoremoto.createPacchetto(destinazione, dataInizioValidita,
+			Long idp = pacchettoremoto.createPacchetto(destinazione, dataInizioValidita,
 					dataFineValidita, etichetta, descrizione, listaComponenti,
 					listaComponentiSelezionati, sconto);
-
+			if(idp==(long)-1){
+				context.addMessage(null, new FacesMessage(
+						"Creazione pacchetto personalizzato fallita"));
+				return "/admin/index";
+			}
 			System.out.println("CREAZIONE PACCHETTO --> PACCHETTO CREATO");
 
 			context.addMessage(null, new FacesMessage(
@@ -470,11 +474,17 @@ public class RicercaPacchettiImpiegatoBean implements Serializable {
 
 		try {
 
-			pacchettoremoto.updatePacchetto(id, destinazione,
+			Long idp= pacchettoremoto.updatePacchetto(id, destinazione,
 					dataInizioValidita, dataFineValidita, etichetta,
 					descrizione, listaComponenti, listaComponentiSelezionati,
 					sconto);
-
+			if(idp==(long)-1){
+				context.addMessage(null, new FacesMessage(
+						"Modifica pacchetto personalizzato fallita"));
+				return "/admin/index";
+			}
+			
+			
 			context.addMessage(null, new FacesMessage(
 					"Modifica pacchetto riuscita"));
 

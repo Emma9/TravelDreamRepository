@@ -45,7 +45,7 @@ public interface PacchettoPersonalizzatoBeanRemote {
 	 * @param dataDiRitorno
 	 * @param listaComponentiSelezionati
 	 */
-	public void updatePacchettoPersonalizzato(PacchettoPKDTO pacchettoPKDTO,
+	public Long updatePacchettoPersonalizzato(PacchettoPKDTO pacchettoPKDTO,
 			UserDTO clienteDTO, String stato, Date dataDiPartenza,
 			Date dataDiRitorno, int numPartecipanti, List<ComponenteDTO> listaComponentiSelezionati);
 	
