@@ -424,6 +424,8 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 *         least three of them are of a different type, otherwise false
 	 */
 	public boolean verificaListaComponenti(List<ComponenteDTO> listaComponenti) {
+		
+		System.out.println("DIMENSIONE LISTA COMPONENTI = "+listaComponenti.size());
 
 		if (listaComponenti.size() > 2) {
 

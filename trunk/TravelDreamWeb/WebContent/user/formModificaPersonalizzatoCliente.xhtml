@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+	<h2>MODIFICA DI UN PACCHETTO</h2>
+	<h:form>
+		<p:fieldset legend="Scegli i componenti predefiniti del pacchetto"
+			widgetVar="regWidget" style="width: 600px;">
+
+			<p:dataTable id="componentiPredefPacchetto"
+				var="componentePredefPacchetto"
+				value="#{gestionePacchettiPersonalizzatiBean.listaComponenti}"
+				paginator="true" rows="10"
+				rowKey="#{componentePredefPacchetto.codiceComponente}"
+				selection="#{gestionePacchettiPersonalizzatiBean.listaComponentiSelezionati}">
+
+				<f:facet name="header">  
+            Componenti del pacchetto 
+        </f:facet>
+
+				<p:column selectionMode="multiple" style="width:2%" />
+
+				<p:column headerText="Codice" style="width:25%">  
+            #{componentePredefPacchetto.codiceComponente}  
+        </p:column>
+
+				<p:column headerText="Luogo" style="width:25%">  
+            #{componentePredefPacchetto.luogo}  
+        </p:column>
+
+				<p:column headerText="Tipologia" style="width:24%">  
+            #{componentePredefPacchetto.tipologia}  
+        </p:column>
+
+				<p:column headerText="Costo" style="width:24%">  
+            #{componentePredefPacchetto.costo}  
+        </p:column>
+
+				<f:facet name="footer">
+
+					<p:commandButton id="selezioneComponentiPacchetto" value="Aggiungi"
+						icon="ui-icon-search" />
+
+				</f:facet>
+			</p:dataTable>
+
+			<br />
+
+			<!-- BOTTONE CONFERMA -->
+
+			<div align="left">
+
+				<h:commandButton value="Conferma"
+					action="#{gestionePacchettiPersonalizzatiBean.modificaPacchetto()}"
+					ajax="false" />
+
+				<p:messages id="message" showSummary="true" showDetail="false"
+					autoUpdate="true" closable="true" />
+			</div>
+
+		</p:fieldset>
+
+		<br />
+		<br />
+
+		<!-- BOTTONE HOMEPAGE -->
+
+		<div align="left">
+			<h:button id="bottoneHome" value="Torna alla Homepage"
+				outcome="index" ajax="false" />
+		</div>
+
+
+
+	</h:form>
+</h:body>
+</html>
