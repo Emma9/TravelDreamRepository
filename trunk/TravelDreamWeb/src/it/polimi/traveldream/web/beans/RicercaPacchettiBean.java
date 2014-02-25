@@ -554,29 +554,31 @@ public class RicercaPacchettiBean implements Serializable {
 								listaComponentiSelezionati, new PacchettoPKDTO(
 										idPacchetto, (long) 0));
 
-				
-				//Long idf = pacchettoPersonalizzatoRemoto.findByIdPacchettoPersonalizzato(idp).getIdPacchetto();
-				
-				//System.out.println("IDF  "+ idf);
-				
-				/*user.getUserDTO()
-						.getPacchettiCliente()
-						.add(pacchettoPersonalizzatoRemoto
-								.findByIdPacchettoPersonalizzato(idp));*/
-				
-				/*List<PacchettoPersonalizzatoDTO> listaPacchetti=new ArrayList<PacchettoPersonalizzatoDTO>();
-				
-				listaPacchetti=userDTO.getPacchettiCliente();
-				
-				listaPacchetti.add(pacchettoPersonalizzatoRemoto.findByIdPacchettoPersonalizzato(idp));
-				
-				userDTO.setPacchettiCliente(listaPacchetti);*/
-				
-				
-				System.out.println("NUM ELEMENTI LISTA UTENTE  "+user.getUserDTO()
-				.getPacchettiCliente().size());
-				
-				
+				// Long idf =
+				// pacchettoPersonalizzatoRemoto.findByIdPacchettoPersonalizzato(idp).getIdPacchetto();
+
+				// System.out.println("IDF  "+ idf);
+
+				/*
+				 * user.getUserDTO() .getPacchettiCliente()
+				 * .add(pacchettoPersonalizzatoRemoto
+				 * .findByIdPacchettoPersonalizzato(idp));
+				 */
+
+				/*
+				 * List<PacchettoPersonalizzatoDTO> listaPacchetti=new
+				 * ArrayList<PacchettoPersonalizzatoDTO>();
+				 * 
+				 * listaPacchetti=userDTO.getPacchettiCliente();
+				 * 
+				 * listaPacchetti.add(pacchettoPersonalizzatoRemoto.
+				 * findByIdPacchettoPersonalizzato(idp));
+				 * 
+				 * userDTO.setPacchettiCliente(listaPacchetti);
+				 */
+
+				System.out.println("NUM ELEMENTI LISTA UTENTE  "
+						+ user.getUserDTO().getPacchettiCliente().size());
 
 				System.out.println("CREAPERSONALIZZATO --> FINE METODO");
 
@@ -600,6 +602,105 @@ public class RicercaPacchettiBean implements Serializable {
 		} catch (EJBException e) {
 
 			System.out.println("CREAPERSONALIZZATO --> EJBEXCEPTION");
+
+			context.addMessage(null, new FacesMessage(
+					"Creazione pacchetto personalizzato fallita"));
+
+			return null;
+
+		}
+
+	}
+
+	// MODIFICA DEL PACCHETTO PERSONALIZZATO
+
+	public String modificaPersonalizzato() {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+
+		System.out.println("MODIFICAPERSONALIZZATO --> INIZIO METODO");
+
+		try {
+
+			System.out.println("MODIFICAPERSONALIZZATO --> INIZIO TRY");
+
+			System.out.println("MODIFICAPERSONALIZZATO --> USER_EMAIL "
+					+ user.getPrincipalEmail());
+
+			if (!(user.getPrincipalEmail().equalsIgnoreCase("ANONYMOUS"))) {
+
+				// UTENTE LOGGATO --> CREAZIONE PACCHETTO PERSONALIZZATO
+
+				System.out.println("MODIFICAPERSONALIZZATO --> UTENTE LOGGATO");
+
+				UserDTO userDTO = new UserDTO();
+				userDTO = user.getUserDTO();
+
+				for (int j = 0; j < listaComponentiSelezionati.size(); j++) {
+
+					if (!(listaComponenti.contains(listaComponentiSelezionati
+							.get(j)))) {
+
+						listaComponenti.add(listaComponentiSelezionati.get(j));
+
+					}
+
+				}
+
+				Long idp = pacchettoPersonalizzatoRemoto
+						.createPacchettoPersonalizzato("salvato", userDTO,
+								dataPartenza, dataRitorno, numPartecipanti,
+								listaComponentiSelezionati, new PacchettoPKDTO(
+										idPacchetto, (long) 0));
+
+				// Long idf =
+				// pacchettoPersonalizzatoRemoto.findByIdPacchettoPersonalizzato(idp).getIdPacchetto();
+
+				// System.out.println("IDF  "+ idf);
+
+				/*
+				 * user.getUserDTO() .getPacchettiCliente()
+				 * .add(pacchettoPersonalizzatoRemoto
+				 * .findByIdPacchettoPersonalizzato(idp));
+				 */
+
+				/*
+				 * List<PacchettoPersonalizzatoDTO> listaPacchetti=new
+				 * ArrayList<PacchettoPersonalizzatoDTO>();
+				 * 
+				 * listaPacchetti=userDTO.getPacchettiCliente();
+				 * 
+				 * listaPacchetti.add(pacchettoPersonalizzatoRemoto.
+				 * findByIdPacchettoPersonalizzato(idp));
+				 * 
+				 * userDTO.setPacchettiCliente(listaPacchetti);
+				 */
+
+				System.out.println("NUM ELEMENTI LISTA UTENTE  "
+						+ user.getUserDTO().getPacchettiCliente().size());
+
+				System.out.println("MODIFICAPERSONALIZZATO --> FINE METODO");
+
+				context.addMessage(null, new FacesMessage(
+						"Creazione pacchetto personalizzato riuscita"));
+
+				return "/user/index";
+
+			} else {
+
+				// UTENTE NON REGISTRATO --> LOGIN/REGISTRAZIONE
+
+				System.out
+						.println("MODIFICAPERSONALIZZATO --> UTENTE NON REGISTRATO");
+
+				// return "user/dettagliPacchettoPredefinitoRicercatoCliente";
+				return null;
+
+			}
+
+		} catch (EJBException e) {
+
+			System.out.println("MODIFICAPERSONALIZZATO --> EJBEXCEPTION");
 
 			context.addMessage(null, new FacesMessage(
 					"Creazione pacchetto personalizzato fallita"));
