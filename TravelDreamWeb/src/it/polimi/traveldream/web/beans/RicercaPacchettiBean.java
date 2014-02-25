@@ -560,29 +560,6 @@ public class RicercaPacchettiBean implements Serializable {
 					return "/user/index";
 				}
 
-				// Long idf =
-				// pacchettoPersonalizzatoRemoto.findByIdPacchettoPersonalizzato(idp).getIdPacchetto();
-
-				// System.out.println("IDF  "+ idf);
-
-				/*
-				 * user.getUserDTO() .getPacchettiCliente()
-				 * .add(pacchettoPersonalizzatoRemoto
-				 * .findByIdPacchettoPersonalizzato(idp));
-				 */
-
-				/*
-				 * List<PacchettoPersonalizzatoDTO> listaPacchetti=new
-				 * ArrayList<PacchettoPersonalizzatoDTO>();
-				 * 
-				 * listaPacchetti=userDTO.getPacchettiCliente();
-				 * 
-				 * listaPacchetti.add(pacchettoPersonalizzatoRemoto.
-				 * findByIdPacchettoPersonalizzato(idp));
-				 * 
-				 * userDTO.setPacchettiCliente(listaPacchetti);
-				 */
-
 				System.out.println("NUM ELEMENTI LISTA UTENTE  "
 						+ user.getUserDTO().getPacchettiCliente().size());
 
@@ -619,72 +596,6 @@ public class RicercaPacchettiBean implements Serializable {
 	}
 
 	// MODIFICA DEL PACCHETTO PERSONALIZZATO
-
-	public String modificaPersonalizzato() {
-
-		FacesContext context = FacesContext.getCurrentInstance();
-		HttpServletRequest request = (HttpServletRequest) context
-				.getExternalContext().getRequest();
-
-		System.out.println("MODIFICAPERSONALIZZATO --> INIZIO METODO");
-
-		try {
-
-			System.out.println("MODIFICAPERSONALIZZATO --> INIZIO TRY");
-
-			System.out.println("MODIFICAPERSONALIZZATO --> USER_EMAIL "
-					+ user.getPrincipalEmail());
-
-			if (!(user.getPrincipalEmail().equalsIgnoreCase("ANONYMOUS"))) {
-
-				// UTENTE LOGGATO --> MODIFICA PACCHETTO PERSONALIZZATO
-
-				System.out.println("MODIFICAPERSONALIZZATO --> UTENTE LOGGATO");
-
-				UserDTO userDTO = new UserDTO();
-				userDTO = user.getUserDTO();
-
-				
-				Long idp = pacchettoPersonalizzatoRemoto
-						.createPacchettoPersonalizzato("salvato", userDTO,
-								dataPartenza, dataRitorno, numPartecipanti,
-								listaComponentiSelezionati, new PacchettoPKDTO(
-										idPacchetto, (long) 0));
-
-				System.out.println("NUM ELEMENTI LISTA UTENTE  "
-						+ user.getUserDTO().getPacchettiCliente().size());
-
-				System.out.println("MODIFICAPERSONALIZZATO --> FINE METODO");
-
-				context.addMessage(null, new FacesMessage(
-						"Modifica pacchetto riuscita"));
-
-				return "/user/index";
-
-			} else {
-
-				// UTENTE NON REGISTRATO --> LOGIN/REGISTRAZIONE
-
-				System.out
-						.println("MODIFICAPERSONALIZZATO --> UTENTE NON REGISTRATO");
-
-				// return "user/dettagliPacchettoPredefinitoRicercatoCliente";
-				return null;
-
-			}
-
-		} catch (EJBException e) {
-
-			System.out.println("MODIFICAPERSONALIZZATO --> EJBEXCEPTION");
-
-			context.addMessage(null, new FacesMessage(
-					"Creazione pacchetto personalizzato fallita"));
-
-			return null;
-
-		}
-
-	}
 
 	public String formModificaPersonalizzato() {
 
