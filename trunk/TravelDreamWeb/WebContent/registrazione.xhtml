@@ -55,8 +55,10 @@
 	<br />
 	<br />
 	<div align="left">
-		<p:commandButton value="Registrati" update="panel"
-			action="#{registerBean.register()}" />
+	<h:form>
+		<h:commandButton value="Registrati" update="panel"
+			action="#{registerBean.register()}" ajax="false" />
+			</h:form>
 	</div>
 
 	<br />
