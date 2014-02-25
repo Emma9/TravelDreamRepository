@@ -381,7 +381,7 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 
 				context.addMessage(null, new FacesMessage("Pacchetto bloccato"));
 
-				return "listaPacchettiPersonalizzatiCliente";
+				return "index";
 
 			} else {
 
