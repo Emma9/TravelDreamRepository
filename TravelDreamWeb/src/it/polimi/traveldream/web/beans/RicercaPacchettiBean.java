@@ -278,6 +278,12 @@ public class RicercaPacchettiBean implements Serializable {
 
 			return null;
 
+		} catch (NullPointerException n) {
+
+			System.out.println("RICERCAPACCHETTI --> NULLPOINTEREXCEPTION");
+
+			return null;
+
 		}
 
 	}

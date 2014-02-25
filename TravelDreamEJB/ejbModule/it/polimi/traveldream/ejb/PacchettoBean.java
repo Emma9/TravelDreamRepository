@@ -54,9 +54,6 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 
 			System.out.println("VERIFICA COMPONENTI & ETICHETTA CORRETTA");
 
-			
-			
-
 			List<Componente> listaComponentiEnt = new ArrayList<Componente>();
 
 			for (int i = 0; i < listaComponenti.size(); i++) {
@@ -64,8 +61,6 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 						.add(componenteDTOToComponenteInPacchetto(listaComponenti
 								.get(i)));
 			}
-
-			
 
 			System.out.println("SET LISTA COMPONENTI");
 
@@ -76,19 +71,17 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 								.get(i)));
 			}
 
-			
 			System.out.println("SET LISTA COMPONENTI SELEZIONATI");
-			
-		
 
 			int costoPacchetto = calcolaCostoPacchetto(listaComponenti, sconto);
-			
 
 			System.out.println("SET COSTO");
 
-			Pacchetto pacchetto = new Pacchetto(destinazione, dataInizioValidita, dataFineValidita, etichetta, descrizione, listaComponentiEnt, listaComponentiSelezionatiEnt, costoPacchetto, sconto);
-					
-			
+			Pacchetto pacchetto = new Pacchetto(destinazione,
+					dataInizioValidita, dataFineValidita, etichetta,
+					descrizione, listaComponentiEnt,
+					listaComponentiSelezionatiEnt, costoPacchetto, sconto);
+
 			manager.persist(pacchetto);
 
 			System.out.println("PERSIST PACCHETTO");
@@ -109,7 +102,8 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 
 		System.out.println("SESSION PRIMA DI FIND");
 
-		Pacchetto p = manager.find(Pacchetto.class, new PacchettoPK(idPacchetto, (long)0));
+		Pacchetto p = manager.find(Pacchetto.class, new PacchettoPK(
+				idPacchetto, (long) 0));
 
 		System.out.println("SESSION DOPO FIND");
 
@@ -137,11 +131,10 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 				&& (verificaTreComponentiSelezionati(listaComponentiSelezionati))
 				&& (verificaEtichetta(etichetta))) {
 
-			PacchettoPK chiave= new PacchettoPK(idPacchetto, (long)0);
-			
+			PacchettoPK chiave = new PacchettoPK(idPacchetto, (long) 0);
+
 			Pacchetto pacchetto = manager.find(Pacchetto.class, chiave);
-			
-			
+
 			pacchetto.setDestinazione(destinazione);
 			pacchetto.setDataInizioValidita(dataInizioValidita);
 			pacchetto.setDataFineValidita(dataFineValidita);
@@ -173,12 +166,10 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 			manager.merge(pacchetto);
 			return pacchetto.getIdPacchetto();
 		}
-	
 
 		System.out.println("VERIFICA COMPONENTI & ETICHETTA FALLITA");
 
 		return (long) -1;
-	
 
 	}
 
@@ -188,9 +179,10 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 */
 	public ArrayList<Long> findByDestinazione(String destinazione) {
 
-		TypedQuery<Pacchetto> q = manager.createQuery(
-				"FROM Pacchetto p WHERE p.destinazione=:new_destinazione AND p.idPacchettoPersonalizzato=0",
-				Pacchetto.class);
+		TypedQuery<Pacchetto> q = manager
+				.createQuery(
+						"FROM Pacchetto p WHERE p.destinazione=:new_destinazione AND p.idPacchettoPersonalizzato=0",
+						Pacchetto.class);
 
 		q.setParameter("new_destinazione", destinazione);
 
@@ -210,7 +202,8 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 */
 	public ArrayList<Long> findByEtichetta(String etichetta) {
 
-		TypedQuery<Pacchetto> q = manager.createQuery("FROM Pacchetto p WHERE p.idPacchettoPersonalizzato=0",
+		TypedQuery<Pacchetto> q = manager.createQuery(
+				"FROM Pacchetto p WHERE p.idPacchettoPersonalizzato=0",
 				Pacchetto.class);
 
 		ArrayList<Long> pacchetti = new ArrayList<Long>();
@@ -233,7 +226,8 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 
 		// TypedQuery<Pacchetto> q = manager.createQuery("FROM Pacchetto p"
 		// WHERE p.idCliente=:NULL",Pacchetto.class);
-		TypedQuery<Pacchetto> q = manager.createQuery("FROM Pacchetto p WHERE p.idPacchettoPersonalizzato=0",
+		TypedQuery<Pacchetto> q = manager.createQuery(
+				"FROM Pacchetto p WHERE p.idPacchettoPersonalizzato=0",
 				Pacchetto.class);
 
 		ArrayList<PacchettoDTO> pacchetti = new ArrayList<PacchettoDTO>();
@@ -255,8 +249,8 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 */
 	public PacchettoDTO findByIdPacchetto(Long idPacchetto) {
 
-		
-		PacchettoDTO pacchetto = pacchettoToDTO(manager.find(Pacchetto.class, new PacchettoPK(idPacchetto, (long)0)));
+		PacchettoDTO pacchetto = pacchettoToDTO(manager.find(Pacchetto.class,
+				new PacchettoPK(idPacchetto, (long) 0)));
 
 		return pacchetto;
 	}
@@ -285,7 +279,8 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 
 		for (int j = 0; j < listaPAC.size(); j++) {
 
-			if ((listaPAC.get(j).getDescrizione().contains(termine))||(listaPAC.get(j).getDestinazione().contains(termine))  ) {
+			if ((listaPAC.get(j).getDescrizione().contains(termine))
+					|| (listaPAC.get(j).getDestinazione().contains(termine))) {
 
 				listaPacchetti.add(listaPAC.get(j));
 
@@ -310,11 +305,12 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 
 		return pacchetti;
 	}
-	
+
 	/** @return ArrayList<idPacchetto> */
 	public ArrayList<Long> findAll() {
 
-		TypedQuery<Pacchetto> q = manager.createQuery("FROM Pacchetto p WHERE p.idPacchettoPersonalizzato=0",
+		TypedQuery<Pacchetto> q = manager.createQuery(
+				"FROM Pacchetto p WHERE p.idPacchettoPersonalizzato=0",
 				Pacchetto.class);
 
 		ArrayList<Long> pacchetti = new ArrayList<Long>();
@@ -403,11 +399,11 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 */
 	public boolean verificaPresenzaPacchetto(Long idPacchetto) {
 		try {
-			
-			PacchettoPK chiave= new PacchettoPK(idPacchetto, (long)0);
-			
+
+			PacchettoPK chiave = new PacchettoPK(idPacchetto, (long) 0);
+
 			Pacchetto pacchetto = manager.find(Pacchetto.class, chiave);
-			if (pacchetto==null) {
+			if (pacchetto == null) {
 				return false;
 			}
 
@@ -424,8 +420,9 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 *         least three of them are of a different type, otherwise false
 	 */
 	public boolean verificaListaComponenti(List<ComponenteDTO> listaComponenti) {
-		
-		System.out.println("DIMENSIONE LISTA COMPONENTI = "+listaComponenti.size());
+
+		System.out.println("DIMENSIONE LISTA COMPONENTI = "
+				+ listaComponenti.size());
 
 		if (listaComponenti.size() > 2) {
 
@@ -585,18 +582,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 			Date dataPartenza, Date dataRitorno) {
 
 		try {
-
-			// DESTINAZIONE
-			// TypedQuery<PacchettoDTO> q1 =
-			// manager.createQuery("FROM Pacchetto p WHERE p.destinazione=:new_destinazione",
-			// PacchettoDTO.class);
-
-			// DATE
-			// TypedQuery<PacchettoDTO> q2 =
-			// manager.createQuery("FROM Pacchetto p WHERE p.dataInizioValidita<=:new_dataPartenza AND p.dataInizioValidita<=:new_dataRitorno AND p.dataFineValidita>=:new_dataPartenza AND p.dataFineValidita>=:new_dataRitorno",
-			// PacchettoDTO.class);
-
-			// q2.setParameter("new_dataPartenza", dataPartenza);
+			System.out.println("RICERCAPACCHETTI-SB --> TRY");
 
 			TypedQuery<Pacchetto> q = manager
 					.createQuery(
@@ -611,6 +597,46 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 
 				pacchetti.add(pacchettoToDTO(q.getResultList().get(i)));
 			}
+
+			System.out.println("RICERCAPACCHETTI-SB --> FINE QUERY "
+					+ pacchetti.size());
+
+			ArrayList<Long> listaIDP = findAll();
+
+			System.out.println("RICERCAPACCHETTI-SB --> FINDALL "
+					+ listaIDP.size());
+
+			CharSequence charseq = new String();
+			charseq = destinazione;
+
+			for (int i = 0; i < listaIDP.size(); i++) {
+
+				System.out.println("RICERCAPACCHETTI-SB --> FINDBYIDPACCHETTO");
+
+				PacchettoDTO pac = findByIdPacchetto(listaIDP.get(i));
+
+				System.out.println("RICERCAPACCHETTI-SB --> PAC IDPERS"
+						+ pac.getIdPacchettoPersonalizzato() + " DESC "
+						+ pac.getDescrizione());
+
+				System.out.println("RICERCAPACCHETTI-SB --> CONTAINS");
+
+				if (pac.getDescrizione().contains(charseq)) {
+
+					System.out.println("RICERCAPACCHETTI-SB --> CONTAINS PAC");
+
+					if (!(pacchetti.contains(pac))) {
+
+						pacchetti.add(pac);
+
+					}
+
+				}
+
+			}
+
+			System.out.println("RICERCAPACCHETTI-SB --> RETURN "
+					+ pacchetti.size());
 
 			return pacchetti;
 
