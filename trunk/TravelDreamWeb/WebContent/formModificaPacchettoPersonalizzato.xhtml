@@ -15,9 +15,8 @@
 
 			<p:dataTable id="componentiPredefPacchetto"
 				var="componentePredefPacchetto"
-				value="#{ricercaPacchettiBean.listaComponenti}"
-				paginator="true" rows="10"
-				rowKey="#{componentePredefPacchetto.codiceComponente}"
+				value="#{ricercaPacchettiBean.listaComponenti}" paginator="true"
+				rows="10" rowKey="#{componentePredefPacchetto.codiceComponente}"
 				selection="#{ricercaPacchettiBean.listaComponentiSelezionati}">
 
 				<f:facet name="header">  
@@ -56,8 +55,8 @@
 
 			<div align="left">
 
-				<h:commandButton id="bottoneConferma" value="Conferma"
-					action="#{ricercaPacchettiBean.modificaPersonalizzato()}"
+				<h:button value="Conferma"
+					outcome="user/dettagliPacchettoPredefinitoRicercatoCliente"
 					ajax="false" />
 
 				<p:messages id="message" showSummary="true" showDetail="false"
