@@ -47,7 +47,7 @@ public class User implements Serializable {
 	private String lastName;
 
 	private String password; // sha-512 + hex
-	
+	/*
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="cliente")
 	@JoinTable(name="users_pacchetto", 
     joinColumns=@JoinColumn(name="User_EMAIL", referencedColumnName="email"),
@@ -57,7 +57,7 @@ public class User implements Serializable {
 	
 	private List<PacchettoPersonalizzato> giftList = new ArrayList<PacchettoPersonalizzato>(0);
 
-	
+	*/
 	
 
 	@Temporal(javax.persistence.TemporalType.TIMESTAMP)
@@ -128,33 +128,6 @@ public class User implements Serializable {
 	
 	
 
-	/**
-	 * @return the pacchettiCliente
-	 */
-	public List<PacchettoPersonalizzato> getPacchettiCliente() {
-		return pacchettiCliente;
-	}
-
-	/**
-	 * @param pacchettiCliente the pacchettiCliente to set
-	 */
-	public void setPacchettiCliente(List<PacchettoPersonalizzato> pacchettiCliente) {
-		this.pacchettiCliente = pacchettiCliente;
-	}
-
-	/**
-	 * @return the giftList
-	 */
-	public List<PacchettoPersonalizzato> getGiftList() {
-		return giftList;
-	}
-
-	/**
-	 * @param giftList the giftList to set
-	 */
-	public void setGiftList(List<PacchettoPersonalizzato> giftList) {
-		this.giftList = giftList;
-	}
 
 	public Date getRegisteredOn() {
 		return registeredOn;

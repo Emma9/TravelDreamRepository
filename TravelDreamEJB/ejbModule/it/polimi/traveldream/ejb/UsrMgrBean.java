@@ -100,7 +100,7 @@ public User userDTOToUser(UserDTO userDTO) {
 		user.setLastName(userDTO.getLastName());
 		user.setPassword(userDTO.getPassword());
 		user.setRegisteredOn(userDTO.getRegisteredOn());
-		
+		/*
 		List<PacchettoPersonalizzato> pacchettiCliente= new ArrayList<PacchettoPersonalizzato>();
 		for(int i=0;i<userDTO.getPacchettiCliente().size(); i++){
 			pacchettiCliente.add(pacchettopersremote.pacchettoPersonalizzatoDTOToPacchettoPersonalizzato(userDTO.getPacchettiCliente().get(i)));
@@ -112,7 +112,7 @@ public User userDTOToUser(UserDTO userDTO) {
 			pacchettiCliente.add(pacchettopersremote.pacchettoPersonalizzatoDTOToPacchettoPersonalizzato(userDTO.getGiftList().get(i)));
 		}
 		user.setGiftList(giftList);
-		
+		*/
 		return user;
 		
 		
@@ -129,7 +129,7 @@ public UserDTO userToUserDTO(User user) {
 		userDTO.setLastName(user.getLastName());
 		userDTO.setPassword(user.getPassword());
 		userDTO.setRegisteredOn(user.getRegisteredOn());
-		
+		/*
 		List<PacchettoPersonalizzatoDTO> pacchettiCliente= new ArrayList<PacchettoPersonalizzatoDTO>();
 		for(int i=0;i<user.getPacchettiCliente().size(); i++){
 			pacchettiCliente.add(pacchettopersremote.pacchettoPersonalizzatoToDTO(user.getPacchettiCliente().get(i)));
@@ -141,7 +141,7 @@ public UserDTO userToUserDTO(User user) {
 			pacchettiCliente.add(pacchettopersremote.pacchettoPersonalizzatoToDTO(user.getGiftList().get(i)));
 		}
 		userDTO.setGiftList(giftList);
-		
+		*/
 		return userDTO;
 		
 		
