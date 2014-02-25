@@ -15,13 +15,13 @@
 
 			<p:dataTable id="componentiPredefPacchetto"
 				var="componentePredefPacchetto"
-				value="#{ricercaPacchettiBean.pacchettoSelezionato.listaComponentiSelezionati}"
+				value="#{ricercaPacchettiBean.listaComponenti}"
 				paginator="true" rows="10"
 				rowKey="#{componentePredefPacchetto.codiceComponente}"
 				selection="#{ricercaPacchettiBean.listaComponentiSelezionati}">
 
 				<f:facet name="header">  
-            Componenti predefiniti del pacchetto 
+            Componenti del pacchetto 
         </f:facet>
 
 				<p:column selectionMode="multiple" style="width:2%" />
@@ -57,7 +57,7 @@
 			<div align="left">
 
 				<h:commandButton id="bottoneConferma" value="Conferma"
-					action="#{ricercaPacchettiImpiegatoBean.modificaPacchetto(ricercaPacchettiImpiegatoBean.idPacchetto)}"
+					action="#{ricercaPacchettiBean.modificaPersonalizzato()}"
 					ajax="false" />
 
 				<p:messages id="message" showSummary="true" showDetail="false"
@@ -73,7 +73,7 @@
 
 		<div align="left">
 			<h:button id="bottoneHome" value="Torna alla Homepage"
-				outcome="index" ajax="false" />
+				outcome="homepage" ajax="false" />
 		</div>
 
 
