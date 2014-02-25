@@ -554,14 +554,12 @@ public class RicercaPacchettiBean implements Serializable {
 								listaComponentiSelezionati, new PacchettoPKDTO(
 										idPacchetto, (long) 0));
 
-				
-				if(idp==(long)-1){
+				if (idp == (long) -1) {
 					context.addMessage(null, new FacesMessage(
 							"Creazione pacchetto personalizzato fallita"));
 					return "/user/index";
 				}
-				
-				
+
 				// Long idf =
 				// pacchettoPersonalizzatoRemoto.findByIdPacchettoPersonalizzato(idp).getIdPacchetto();
 
@@ -625,6 +623,8 @@ public class RicercaPacchettiBean implements Serializable {
 	public String modificaPersonalizzato() {
 
 		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
 
 		System.out.println("MODIFICAPERSONALIZZATO --> INIZIO METODO");
 
@@ -637,52 +637,19 @@ public class RicercaPacchettiBean implements Serializable {
 
 			if (!(user.getPrincipalEmail().equalsIgnoreCase("ANONYMOUS"))) {
 
-				// UTENTE LOGGATO --> CREAZIONE PACCHETTO PERSONALIZZATO
+				// UTENTE LOGGATO --> MODIFICA PACCHETTO PERSONALIZZATO
 
 				System.out.println("MODIFICAPERSONALIZZATO --> UTENTE LOGGATO");
 
 				UserDTO userDTO = new UserDTO();
 				userDTO = user.getUserDTO();
 
-				for (int j = 0; j < listaComponentiSelezionati.size(); j++) {
-
-					if (!(listaComponenti.contains(listaComponentiSelezionati
-							.get(j)))) {
-
-						listaComponenti.add(listaComponentiSelezionati.get(j));
-
-					}
-
-				}
-//Da cambiare!!!
+				
 				Long idp = pacchettoPersonalizzatoRemoto
 						.createPacchettoPersonalizzato("salvato", userDTO,
 								dataPartenza, dataRitorno, numPartecipanti,
 								listaComponentiSelezionati, new PacchettoPKDTO(
 										idPacchetto, (long) 0));
-
-				// Long idf =
-				// pacchettoPersonalizzatoRemoto.findByIdPacchettoPersonalizzato(idp).getIdPacchetto();
-
-				// System.out.println("IDF  "+ idf);
-
-				/*
-				 * user.getUserDTO() .getPacchettiCliente()
-				 * .add(pacchettoPersonalizzatoRemoto
-				 * .findByIdPacchettoPersonalizzato(idp));
-				 */
-
-				/*
-				 * List<PacchettoPersonalizzatoDTO> listaPacchetti=new
-				 * ArrayList<PacchettoPersonalizzatoDTO>();
-				 * 
-				 * listaPacchetti=userDTO.getPacchettiCliente();
-				 * 
-				 * listaPacchetti.add(pacchettoPersonalizzatoRemoto.
-				 * findByIdPacchettoPersonalizzato(idp));
-				 * 
-				 * userDTO.setPacchettiCliente(listaPacchetti);
-				 */
 
 				System.out.println("NUM ELEMENTI LISTA UTENTE  "
 						+ user.getUserDTO().getPacchettiCliente().size());
@@ -690,7 +657,7 @@ public class RicercaPacchettiBean implements Serializable {
 				System.out.println("MODIFICAPERSONALIZZATO --> FINE METODO");
 
 				context.addMessage(null, new FacesMessage(
-						"Creazione pacchetto personalizzato riuscita"));
+						"Modifica pacchetto riuscita"));
 
 				return "/user/index";
 
@@ -718,27 +685,31 @@ public class RicercaPacchettiBean implements Serializable {
 		}
 
 	}
-	
-	
+
 	public String formModificaPersonalizzato() {
 
 		try {
+
+			System.out.println("formModificaPersonalizzato --> METODO");
+
 			Long id = pacchettoSelezionato.getIdPacchetto();
+
+			System.out.println("formModificaPersonalizzato --> ID " + id);
 
 			setIdPacchetto(id);
 
 			setListaComponenti(pacchettoSelezionato.getListaComponenti());
 
-			setListaComponentiSelezionati(pacchettoSelezionato
-					.getListaComponentiSelezionati());
+			System.out.println("formModificaPersonalizzato --> RETURN");
 
-			return "/dettagliPacchettoPredefinitoRicercato?faces-redirect=true&cPacchetto"
-					+ id;
+			// return "formModificaPacchettoPersonalizzato" + id;
+
+			return "/formModificaPacchettoPersonalizzato";
 
 		} catch (NullPointerException n) {
 
 			System.out
-					.println("dettagliPacchettoSelezionato --> NULLPOINTEREXCEPTION");
+					.println("formModificaPersonalizzato --> NULLPOINTEREXCEPTION");
 
 			return "listaRicercaPacchettiPredefiniti";
 
