@@ -270,7 +270,7 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 				context.addMessage(null, new FacesMessage(
 						"Pacchetto inserito in gift list"));
 
-				return "listaPacchettiPersonalizzatiCliente";
+				return "index";
 
 			} else {
 
