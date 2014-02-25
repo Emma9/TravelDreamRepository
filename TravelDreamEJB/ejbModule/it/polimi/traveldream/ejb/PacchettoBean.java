@@ -49,7 +49,7 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 			List<ComponenteDTO> listaComponenti,
 			List<ComponenteDTO> listaComponentiSelezionati, int sconto) {
 
-		if ((verificaListaComponenti(listaComponentiSelezionati))
+		if ((verificaTreComponentiSelezionati(listaComponentiSelezionati))
 				&& (verificaEtichetta(etichetta))) {
 
 			System.out.println("VERIFICA COMPONENTI & ETICHETTA CORRETTA");
@@ -128,13 +128,13 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 * @param listaComponenti
 	 * @param sconto
 	 */
-	public void updatePacchetto(Long idPacchetto, String destinazione,
+	public Long updatePacchetto(Long idPacchetto, String destinazione,
 			Date dataInizioValidita, Date dataFineValidita, String etichetta,
 			String descrizione, List<ComponenteDTO> listaComponenti,
 			List<ComponenteDTO> listaComponentiSelezionati, int sconto) {
 
 		if ((verificaPresenzaPacchetto(idPacchetto))
-				&& (verificaListaComponenti(listaComponentiSelezionati))
+				&& (verificaTreComponentiSelezionati(listaComponentiSelezionati))
 				&& (verificaEtichetta(etichetta))) {
 
 			PacchettoPK chiave= new PacchettoPK(idPacchetto, (long)0);
@@ -171,7 +171,15 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 			pacchetto.setCosto(costoPacchetto);
 
 			manager.merge(pacchetto);
+			return pacchetto.getIdPacchetto();
 		}
+	
+
+		System.out.println("VERIFICA COMPONENTI & ETICHETTA FALLITA");
+
+		return (long) -1;
+	
+
 	}
 
 	/**
