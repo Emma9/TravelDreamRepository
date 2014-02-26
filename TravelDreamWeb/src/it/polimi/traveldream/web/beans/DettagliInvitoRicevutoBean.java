@@ -25,21 +25,21 @@ public class DettagliInvitoRicevutoBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 147L;
-	
+
 	@EJB
 	private InvitoBeanRemote invitoremoto;
-	
+
 	@EJB
 	private PacchettoPersonalizzatoBeanRemote pacchettopersonalizzatoremoto;
-	
-	
+
 	private Long idInvito;
-	
+
 	private InvitoDTO invito;
-	
-	private List<ComponenteDTO> listaComponentiPacchetto= new ArrayList<ComponenteDTO>(0);
-	
-	private PacchettoPersonalizzatoDTO pacchetto; 
+
+	private List<ComponenteDTO> listaComponentiPacchetto = new ArrayList<ComponenteDTO>(
+			0);
+
+	private PacchettoPersonalizzatoDTO pacchetto;
 
 	/**
 	 * @return the idInvito
@@ -49,7 +49,8 @@ public class DettagliInvitoRicevutoBean implements Serializable {
 	}
 
 	/**
-	 * @param idInvito the idInvito to set
+	 * @param idInvito
+	 *            the idInvito to set
 	 */
 	public void setIdInvito(Long idInvito) {
 		this.idInvito = idInvito;
@@ -63,7 +64,8 @@ public class DettagliInvitoRicevutoBean implements Serializable {
 	}
 
 	/**
-	 * @param invito the invito to set
+	 * @param invito
+	 *            the invito to set
 	 */
 	public void setInvito(InvitoDTO invito) {
 		this.invito = invito;
@@ -77,15 +79,13 @@ public class DettagliInvitoRicevutoBean implements Serializable {
 	}
 
 	/**
-	 * @param listaComponentiSelezionati the listaComponentiSelezionati to set
+	 * @param listaComponentiSelezionati
+	 *            the listaComponentiSelezionati to set
 	 */
 	public void setListaComponentiSelezionati(
 			List<ComponenteDTO> listaComponentiSelezionati) {
 		this.listaComponentiPacchetto = listaComponentiSelezionati;
 	}
-	
-	
-	
 
 	/**
 	 * @return the pacchetto
@@ -95,38 +95,38 @@ public class DettagliInvitoRicevutoBean implements Serializable {
 	}
 
 	/**
-	 * @param pacchetto the pacchetto to set
+	 * @param pacchetto
+	 *            the pacchetto to set
 	 */
 	public void setPacchetto(PacchettoPersonalizzatoDTO pacchetto) {
 		this.pacchetto = pacchetto;
 	}
 
-	public String dettagliInvitoRicevuto(){
-		
+	public String dettagliInvitoRicevuto() {
+
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
 				.getExternalContext().getRequest();
-		
-		try {
-			
-			//INVITO PER I DETTAGLI
-			invito = invitoremoto.findByIdInvito(idInvito);
-			
-			//PACCHETTO DELL'INVITO PER LA LISTA DEI COMPONENTI
-			pacchetto = pacchettopersonalizzatoremoto.findByIdPacchettoPersonalizzato(invito.getPacchettoPersonalizzato().getIdPacchetto());
 
-		}catch (EJBException e) {
-		
+		try {
+
+			// INVITO PER I DETTAGLI
+			invito = invitoremoto.findByIdInvito(idInvito);
+			/*
+			 * //PACCHETTO DELL'INVITO PER LA LISTA DEI COMPONENTI pacchetto =
+			 * pacchettopersonalizzatoremoto
+			 * .findByIdPacchettoPersonalizzato(invito
+			 * .getPacchettoPersonalizzato().getIdPacchetto());
+			 */
+
+		} catch (EJBException e) {
+
 			return "dettagliInvitoAmico";
 
-	}
+		}
 
-	return "dettagliInvitoAmico";	
-	
-		
+		return "dettagliInvitoAmico";
+
 	}
-	
-	
-	
 
 }

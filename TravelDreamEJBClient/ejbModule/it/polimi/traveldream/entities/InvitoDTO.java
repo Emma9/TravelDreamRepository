@@ -17,12 +17,15 @@ public class InvitoDTO implements Serializable {
 	 */
 	private static final long serialVersionUID = 202L;
 	private Long idInvito;
-	private UserDTO mittente;
-	private AmicoDTO destinatario;
+	// private UserDTO mittente;
+	// private AmicoDTO destinatario;
+	private String emailDestinatario;
+
+	private String emailMittente;
 	private Date data;
 	private boolean stato; // TRUE=>ACCETTATO
 
-	private PacchettoPersonalizzatoDTO pacchettoPersonalizzato;
+	private Long idPacchettoPersonalizzato;
 
 	/** Costruttore */
 	public InvitoDTO() {
@@ -45,33 +48,33 @@ public class InvitoDTO implements Serializable {
 	}
 
 	/**
-	 * @return the mittente
+	 * @return the emailDestinatario
 	 */
-	public UserDTO getMittente() {
-		return mittente;
+	public String getEmailDestinatario() {
+		return emailDestinatario;
 	}
 
 	/**
-	 * @param mittente
-	 *            the mittente to set
+	 * @param emailDestinatario
+	 *            the emailDestinatario to set
 	 */
-	public void setMittente(UserDTO mittente) {
-		this.mittente = mittente;
+	public void setEmailDestinatario(String emailDestinatario) {
+		this.emailDestinatario = emailDestinatario;
 	}
 
 	/**
-	 * @return the destinatario
+	 * @return the emailMittente
 	 */
-	public AmicoDTO getDestinatario() {
-		return destinatario;
+	public String getEmailMittente() {
+		return emailMittente;
 	}
 
 	/**
-	 * @param destinatario
-	 *            the destinatario to set
+	 * @param emailMittente
+	 *            the emailMittente to set
 	 */
-	public void setDestinatario(AmicoDTO destinatario) {
-		this.destinatario = destinatario;
+	public void setEmailMittente(String emailMittente) {
+		this.emailMittente = emailMittente;
 	}
 
 	/** @return data */
@@ -109,19 +112,18 @@ public class InvitoDTO implements Serializable {
 	}
 
 	/**
-	 * @return the pacchettoPersonalizzato
+	 * @return the idPacchettoPersonalizzato
 	 */
-	public PacchettoPersonalizzatoDTO getPacchettoPersonalizzato() {
-		return pacchettoPersonalizzato;
+	public Long getIdPacchettoPersonalizzato() {
+		return idPacchettoPersonalizzato;
 	}
 
 	/**
-	 * @param pacchettoPersonalizzato
-	 *            the pacchettoPersonalizzato to set
+	 * @param idPacchettoPersonalizzato
+	 *            the idPacchettoPersonalizzato to set
 	 */
-	public void setPacchettoPersonalizzato(
-			PacchettoPersonalizzatoDTO pacchettoPersonalizzato) {
-		this.pacchettoPersonalizzato = pacchettoPersonalizzato;
+	public void setIdPacchettoPersonalizzato(Long idPacchettoPersonalizzato) {
+		this.idPacchettoPersonalizzato = idPacchettoPersonalizzato;
 	}
 
 }

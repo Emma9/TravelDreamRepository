@@ -153,6 +153,8 @@ public class InvitaAmicoBean implements Serializable {
 	 */
 	public void setMailDest(String mailDest) {
 		this.mailDest = mailDest;
+
+		System.out.println("SETMAILDEST " + mailDest);
 	}
 
 	public String gestioneInviti(Long idpp) {
@@ -167,15 +169,16 @@ public class InvitaAmicoBean implements Serializable {
 
 			invitiPacchetto.clear();
 
-			setMittente(usermgr.getUserDTO());
+			String emailmit = usermgr.getUserDTO().getEmail();
+
+			// setMittente(usermgr.getUserDTO());
 
 			ArrayList<InvitoDTO> invitiCliente = invitoremoto
-					.findByMittente(mittente);
+					.findByEmailMittente(emailmit);
 
 			for (int i = 0; i < invitiCliente.size(); i++) {
 
 				if (idpp.equals(invitiCliente.get(i)
-						.getPacchettoPersonalizzato()
 						.getIdPacchettoPersonalizzato())) {
 
 					invitiPacchetto.add(invitiCliente.get(i));
@@ -230,21 +233,26 @@ public class InvitaAmicoBean implements Serializable {
 
 		try {
 
+			System.out.println("INVITA AMICO --> METODO " + mailDest);
+
 			setPacchettoPersonalizzato(pacchettoPersRemoto
 					.findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato));
 
-			System.out.println("INVITA AMICO --> METODO");
-
-			AmicoDTO dest = new AmicoDTO();
-
-			dest.setEmail(mailDest);
-
-			setDestinatario(dest);
+			System.out
+					.println("INVITA AMICO --> PACCHETTOPERSONALIZZATO TROVATO");
 
 			Date dataCorrente = new Date();
 
-			invitoremoto.createInvito(mittente, destinatario,
-					pacchettoPersonalizzato, dataCorrente, false);
+			System.out.println("INVITA AMICO --> DATA");
+
+			String emailmitt = usermgr.getUserDTO().getEmail();
+
+			System.out.println("INVITA AMICO --> EMAILMITTENTE " + emailmitt);
+
+			invitoremoto.createInvito(emailmitt, mailDest,
+					idPacchettoPersonalizzato, dataCorrente, false);
+
+			System.out.println("INVITA AMICO --> INVITO CREATO");
 
 			context.addMessage(null, new FacesMessage("Invito inviato "));
 
