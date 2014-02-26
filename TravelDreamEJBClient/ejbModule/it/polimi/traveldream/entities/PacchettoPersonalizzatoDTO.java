@@ -22,15 +22,12 @@ public class PacchettoPersonalizzatoDTO extends PacchettoDTO implements
 
 	/** Attributi */
 
-private String stato; // SALVATO BLOCCATO CONFERMATO ACCETTATO
-	
-	
+	private String stato; // SALVATO BLOCCATO CONFERMATO ACCETTATO
+
 	private UserDTO cliente;
 	private Date dataDiPartenza;
 	private Date dataDiRitorno;
 	private int numPartecipanti;
-
-	private List<InvitoDTO> invitiPacchetto = new ArrayList<InvitoDTO>();
 
 	/** Costruttore */
 	public PacchettoPersonalizzatoDTO() {
@@ -42,9 +39,10 @@ private String stato; // SALVATO BLOCCATO CONFERMATO ACCETTATO
 			Long idPacchettoPersonalizzato, String destinazione,
 			Date dataInizioValidita, Date dateFineValidita, String etichetta,
 			String descrizione, List<ComponenteDTO> listaComponenti,
-			List<ComponenteDTO> listaComponentiSelezionati, int costo, int sconto,
-			String stato, UserDTO cliente, Date dataDiPartenza,
-			Date dataDiRitorno, int numPartecipanti, List<InvitoDTO> invitiPacchetto) {
+			List<ComponenteDTO> listaComponentiSelezionati, int costo,
+			int sconto, String stato, UserDTO cliente, Date dataDiPartenza,
+			Date dataDiRitorno, int numPartecipanti,
+			List<InvitoDTO> invitiPacchetto) {
 
 		super(idPacchettoPersonalizzato, destinazione, dataInizioValidita,
 				dateFineValidita, etichetta, descrizione, listaComponenti,
@@ -55,7 +53,6 @@ private String stato; // SALVATO BLOCCATO CONFERMATO ACCETTATO
 		this.setDataDiPartenza(dataDiPartenza);
 		this.setDataDiRitorno(dataDiRitorno);
 		this.setNumPartecipanti(numPartecipanti);
-		this.setInvitiPacchetto(invitiPacchetto);
 
 		super.setIdPacchetto(idPacchetto);
 
@@ -78,10 +75,6 @@ private String stato; // SALVATO BLOCCATO CONFERMATO ACCETTATO
 
 	}
 
-	
-	
-	
-	
 	/**
 	 * @return the cliente
 	 */
@@ -90,7 +83,8 @@ private String stato; // SALVATO BLOCCATO CONFERMATO ACCETTATO
 	}
 
 	/**
-	 * @param cliente the cliente to set
+	 * @param cliente
+	 *            the cliente to set
 	 */
 	public void setCliente(UserDTO cliente) {
 		this.cliente = cliente;
@@ -125,8 +119,6 @@ private String stato; // SALVATO BLOCCATO CONFERMATO ACCETTATO
 	public void setDataDiRitorno(Date dataDiRitorno) {
 		this.dataDiRitorno = dataDiRitorno;
 	}
-	
-	
 
 	/**
 	 * @return the numPartecipanti
@@ -136,25 +128,11 @@ private String stato; // SALVATO BLOCCATO CONFERMATO ACCETTATO
 	}
 
 	/**
-	 * @param numPartecipanti the numPartecipanti to set
+	 * @param numPartecipanti
+	 *            the numPartecipanti to set
 	 */
 	public void setNumPartecipanti(int numPartecipanti) {
 		this.numPartecipanti = numPartecipanti;
-	}
-
-	/**
-	 * @return the invitiPacchetto
-	 */
-	public List<InvitoDTO> getInvitiPacchetto() {
-		return invitiPacchetto;
-	}
-
-	/**
-	 * @param invitiPacchetto
-	 *            the invitiPacchetto to set
-	 */
-	public void setInvitiPacchetto(List<InvitoDTO> invitiPacchetto) {
-		this.invitiPacchetto = invitiPacchetto;
 	}
 
 }

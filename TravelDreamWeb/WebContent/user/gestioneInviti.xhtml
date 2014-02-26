@@ -67,6 +67,10 @@
 			<h:outputText
 				value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.numPartecipanti}" />
 
+			<h:outputText value="Descrizione: " />
+			<h:outputText
+				value="#{gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.descrizione}" />
+
 
 		</p:panelGrid>
 
@@ -80,29 +84,21 @@
 
 		<p:growl id="growl" showDetail="true" />
 
-		<p:dataTable id="listaPacchettiPersonalizzati"
-			var="pacchettoPersonalizzato"
-			value="#{gestionePacchettiPersonalizzatiBean.pacchettiPersonalizzatiCliente}"
-			paginator="true" rows="10">
+		<p:dataTable id="listaInvitiPacchetto" var="invito"
+			value="#{invitaAmicoBean.invitiPacchetto}" paginator="true" rows="10">
 
 
 
-
-
-			<p:column headerText="Destinazione">  
-		            #{pacchettoPersonalizzato.destinazione}  
+			<p:column headerText="Data">  
+		            #{invito.data}  
 		        </p:column>
 
-			<p:column headerText="Data di Partenza">  
-		            #{pacchettoPersonalizzato.dataInizioValidita}  
-		        </p:column>
-
-			<p:column headerText="Data di Ritorno">  
-		            #{pacchettoPersonalizzato.dataFineValidita}  
+			<p:column headerText="Destinatario">  
+		            #{invito.destinatario}  
 		        </p:column>
 
 			<p:column headerText="Stato">  
-		            #{pacchettoPersonalizzato.stato}  
+		            #{invito.stato}  
 		        </p:column>
 
 
@@ -121,7 +117,7 @@
 	<div align="left">
 		<h:form>
 			<h:commandButton value="Invita un amico"
-				action="#{gestionePacchettiPersonalizzatiBean.formInvitaAmico()}" ajax="false" />
+				action="#{invitaAmicoBean.formInvitaAmico()}" ajax="false" />
 		</h:form>
 	</div>
 

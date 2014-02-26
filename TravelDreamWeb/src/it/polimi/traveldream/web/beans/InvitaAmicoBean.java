@@ -4,10 +4,12 @@ import it.polimi.traveldream.ejb.client.InvitoBeanRemote;
 import it.polimi.traveldream.ejb.client.PacchettoPersonalizzatoBeanRemote;
 import it.polimi.traveldream.ejb.client.UsrMgr;
 import it.polimi.traveldream.entities.AmicoDTO;
+import it.polimi.traveldream.entities.InvitoDTO;
 import it.polimi.traveldream.entities.PacchettoPersonalizzatoDTO;
 import it.polimi.traveldream.entities.UserDTO;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.ejb.EJB;
@@ -40,6 +42,12 @@ public class InvitaAmicoBean implements Serializable {
 
 	private Long idPacchettoPersonalizzato;
 	private PacchettoPersonalizzatoDTO pacchettoPersonalizzato;
+
+	private ArrayList<InvitoDTO> invitiPacchetto = new ArrayList<InvitoDTO>();
+
+	private String statoInvito;
+
+	private String mailDest;
 
 	/**
 	 * @return the mittente
@@ -102,7 +110,52 @@ public class InvitaAmicoBean implements Serializable {
 		this.pacchettoPersonalizzato = pacchettoPersonalizzato;
 	}
 
-	public String invitaAmico(Long idpers) {
+	/**
+	 * @return the invitiPacchetto
+	 */
+	public ArrayList<InvitoDTO> getInvitiPacchetto() {
+		return invitiPacchetto;
+	}
+
+	/**
+	 * @param invitiPacchetto
+	 *            the invitiPacchetto to set
+	 */
+	public void setInvitiPacchetto(ArrayList<InvitoDTO> invitiPacchetto) {
+		this.invitiPacchetto = invitiPacchetto;
+	}
+
+	/**
+	 * @return the statoInvito
+	 */
+	public String getStatoInvito() {
+		return statoInvito;
+	}
+
+	/**
+	 * @param statoInvito
+	 *            the statoInvito to set
+	 */
+	public void setStatoInvito(String statoInvito) {
+		this.statoInvito = statoInvito;
+	}
+
+	/**
+	 * @return the mailDest
+	 */
+	public String getMailDest() {
+		return mailDest;
+	}
+
+	/**
+	 * @param mailDest
+	 *            the mailDest to set
+	 */
+	public void setMailDest(String mailDest) {
+		this.mailDest = mailDest;
+	}
+
+	public String gestioneInviti(Long idpp) {
 
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
@@ -110,11 +163,83 @@ public class InvitaAmicoBean implements Serializable {
 
 		try {
 
-			setIdPacchettoPersonalizzato(idpers);
+			setIdPacchettoPersonalizzato(idpp);
 
-			mittente = usermgr.getUserDTO();
+			invitiPacchetto.clear();
+
+			setMittente(usermgr.getUserDTO());
+
+			ArrayList<InvitoDTO> invitiCliente = invitoremoto
+					.findByMittente(mittente);
+
+			for (int i = 0; i < invitiCliente.size(); i++) {
+
+				if (idpp.equals(invitiCliente.get(i)
+						.getPacchettoPersonalizzato()
+						.getIdPacchettoPersonalizzato())) {
+
+					invitiPacchetto.add(invitiCliente.get(i));
+
+				}
+
+			}
+
+			return "gestioneInviti";
+
+		} catch (NullPointerException n) {
+
+			context.addMessage(null, new FacesMessage("Operazione fallita"));
+
+			return "listaPacchettiPersonalizzatiCliente";
+
+		} catch (EJBException e) {
+
+			context.addMessage(null, new FacesMessage("Operazione fallita"));
+
+			return "listaPacchettiPersonalizzatiCliente";
+
+		}
+
+	}
+
+	public String formInvitaAmico() {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+
+		try {
+
+			return "formInvitoAmico";
+
+		} catch (NullPointerException n) {
+
+			context.addMessage(null, new FacesMessage("Operazione fallita"));
+
+			return "listaPacchettiPersonalizzatiCliente";
+
+		}
+
+	}
+
+	public String invitaAmico() {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+
+		try {
+
 			setPacchettoPersonalizzato(pacchettoPersRemoto
 					.findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato));
+
+			System.out.println("INVITA AMICO --> METODO");
+
+			AmicoDTO dest = new AmicoDTO();
+
+			dest.setEmail(mailDest);
+
+			setDestinatario(dest);
 
 			Date dataCorrente = new Date();
 
@@ -123,13 +248,13 @@ public class InvitaAmicoBean implements Serializable {
 
 			context.addMessage(null, new FacesMessage("Invito inviato "));
 
-			return "gestioneInviti";
+			return "index";
 
 		} catch (EJBException e) {
 
 			context.addMessage(null, new FacesMessage("Operazione fallita "));
 
-			return null;
+			return "listaPacchettiPersonalizzatiCliente";
 
 		}
 
@@ -140,16 +265,19 @@ public class InvitaAmicoBean implements Serializable {
 		setPacchettoPersonalizzato(pacchettoPersRemoto
 				.findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato));
 
-		for (int i = 0; i < pacchettoPersonalizzato.getInvitiPacchetto().size(); i++) {
-			if (pacchettoPersonalizzato.getInvitiPacchetto().get(i)
-					.getDestinatario().equals(destinatario)) {
-
-				return "/visualizzarePropostaViaggio";
-
-			}
-
-		}
-
+		/*
+		 * 
+		 * for (int i = 0; i <
+		 * pacchettoPersonalizzato.getInvitiPacchetto().size(); i++) { if
+		 * (pacchettoPersonalizzato.getInvitiPacchetto().get(i)
+		 * .getDestinatario().equals(destinatario)) {
+		 * 
+		 * return "/visualizzarePropostaViaggio";
+		 * 
+		 * }
+		 * 
+		 * }
+		 */
 		return "/formAccessoPropostaViaggioAmico";
 
 	}
@@ -158,17 +286,19 @@ public class InvitaAmicoBean implements Serializable {
 
 		setPacchettoPersonalizzato(pacchettoPersRemoto
 				.findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato));
-
-		for (int i = 0; i < pacchettoPersonalizzato.getInvitiPacchetto().size(); i++) {
-
-			if (pacchettoPersonalizzato.getInvitiPacchetto().get(i)
-					.getDestinatario().equals(destinatario)) {
-
-				return "/visualizzarePropostaViaggio";
-
-			}
-
-		}
+		/*
+		 * for (int i = 0; i <
+		 * pacchettoPersonalizzato.getInvitiPacchetto().size(); i++) {
+		 * 
+		 * if (pacchettoPersonalizzato.getInvitiPacchetto().get(i)
+		 * .getDestinatario().equals(destinatario)) {
+		 * 
+		 * return "/visualizzarePropostaViaggio";
+		 * 
+		 * }
+		 * 
+		 * }
+		 */
 
 		return "/formAccessoPropostaRegaloAmico";
 

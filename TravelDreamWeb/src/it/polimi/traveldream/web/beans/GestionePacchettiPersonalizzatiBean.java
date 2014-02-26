@@ -578,45 +578,47 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 
 	}
 
-	public String gestioneInviti() {
-
-		FacesContext context = FacesContext.getCurrentInstance();
-		HttpServletRequest request = (HttpServletRequest) context
-				.getExternalContext().getRequest();
-
-		try {
-
-			return "gestioneInviti";
-
-		} catch (NullPointerException n) {
-
-			context.addMessage(null, new FacesMessage("Operazione fallita"));
-
-			return "listaPacchettiPersonalizzatiCliente";
-
-		}
-
-	}
-
-	public String formInvitaAmico() {
-
-		FacesContext context = FacesContext.getCurrentInstance();
-		HttpServletRequest request = (HttpServletRequest) context
-				.getExternalContext().getRequest();
-
-		try {
-
-			return "formInvitoAmico";
-
-		} catch (NullPointerException n) {
-
-			context.addMessage(null, new FacesMessage("Operazione fallita"));
-
-			return "listaPacchettiPersonalizzatiCliente";
-
-		}
-
-	}
+	/*
+	 * public String gestioneInviti() {
+	 * 
+	 * FacesContext context = FacesContext.getCurrentInstance();
+	 * HttpServletRequest request = (HttpServletRequest) context
+	 * .getExternalContext().getRequest();
+	 * 
+	 * try {
+	 * 
+	 * return "gestioneInviti";
+	 * 
+	 * } catch (NullPointerException n) {
+	 * 
+	 * context.addMessage(null, new FacesMessage("Operazione fallita"));
+	 * 
+	 * return "listaPacchettiPersonalizzatiCliente";
+	 * 
+	 * }
+	 * 
+	 * }
+	 * 
+	 * public String formInvitaAmico() {
+	 * 
+	 * FacesContext context = FacesContext.getCurrentInstance();
+	 * HttpServletRequest request = (HttpServletRequest) context
+	 * .getExternalContext().getRequest();
+	 * 
+	 * try {
+	 * 
+	 * return "formInvitoAmico";
+	 * 
+	 * } catch (NullPointerException n) {
+	 * 
+	 * context.addMessage(null, new FacesMessage("Operazione fallita"));
+	 * 
+	 * return "listaPacchettiPersonalizzatiCliente";
+	 * 
+	 * }
+	 * 
+	 * }
+	 */
 
 	// MODIFICA DEL PACCHETTO PERSONALIZZATO CLIENTE
 
