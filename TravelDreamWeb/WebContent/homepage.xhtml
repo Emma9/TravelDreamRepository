@@ -57,16 +57,20 @@
 				<p:message for="destinazione" />
 
 				<h:outputLabel value="Data di Partenza: " />
-				<p:calendar value="#{ricercaPacchettiBean.dataPartenza}"
-					id="dataDiPartenza" required="true"
-					requiredMessage="Devi inserire una data di Partenza" />
-				<p:message for="dataDiPartenza" />
-				<br />
+					<p:calendar value="#{ricercaPacchettiBean.dataPartenza}"
+						id="dataDiPartenza" mindate="calwidget.today()" widgetVar="calwidget" required="true"
+						requiredMessage="Devi inserire una data di Partenza" >
+						<p:ajax event="dateSelect" update="dataDiRitorno" />
+						</p:calendar>
+					<p:message for="dataDiPartenza" />
+					<br />
 
-				<h:outputText value="Data di Ritorno: " />
-				<p:calendar value="#{ricercaPacchettiBean.dataRitorno}"
-					id="dataDiRitorno" required="true"
-					requiredMessage="Devi inserire una data di Ritorno" />
+					<h:outputText value="Data di Ritorno: " />
+					<p:calendar value="#{ricercaPacchettiBean.dataRitorno}"
+						id="dataDiRitorno"  mindate="#{ricercaPacchettiBean.dataPartenza}" required="true"
+						requiredMessage="Devi inserire una data di Ritorno" >
+						<p:ajax event="dateSelect" update="dataDiPartenza" />
+				</p:calendar>
 				<p:message for="dataDiRitorno" />
 				<br />
 
@@ -119,7 +123,7 @@
 
 			<p:tabView id="tabView">
 
-				<!-- TAB RICERCHA PER ETICHETTA LASTMINUTE -->
+				<!-- TAB RICERCA PER ETICHETTA LASTMINUTE -->
 
 				<p:tab id="tab1" title="LAST-MINUTE">
 					<h:panelGrid columns="2" cellpadding="10">
@@ -137,16 +141,20 @@
 								<br />
 								<br />
 								<h:outputLabel value="Data di Partenza: " />
-								<p:calendar value="#{ricercaPacchettiBean.dataPartenza}"
-									id="dataDiPartenza1" required="true"
-									requiredMessage="Devi inserire una data di Partenza" />
-								<p:message for="dataDiPartenza1" />
-								<br />
+							<p:calendar value="#{ricercaPacchettiBean.dataPartenza}"
+								id="dataDiPartenza1" mindate="calwidget.today()" widgetVar="calwidget" required="true"
+								requiredMessage="Devi inserire una data di Partenza" >
+						<p:ajax event="dateSelect" update="dataDiRitorno1" />
+						</p:calendar>
+						<p:message for="dataDiPartenza1" />
+							<br />
 
-								<h:outputText value="Data di Ritorno: " />
-								<p:calendar value="#{ricercaPacchettiBean.dataRitorno}"
-									id="dataDiRitorno1" required="true"
-									requiredMessage="Devi inserire una data di Ritorno" />
+							<h:outputText value="Data di Ritorno: " />
+							<p:calendar value="#{ricercaPacchettiBean.dataRitorno}"
+								id="dataDiRitorno1" mindate="#{ricercaPacchettiBean.dataPartenza}" required="true"
+								requiredMessage="Devi inserire una data di Ritorno" >
+						<p:ajax event="dateSelect" update="dataDiPartenza1" />
+						</p:calendar>
 								<p:message for="dataDiRitorno1" />
 								<br />
 
@@ -199,16 +207,20 @@
 								<br />
 
 								<h:outputLabel value="Data di Partenza: " />
-								<p:calendar value="#{ricercaPacchettiBean.dataPartenza}"
-									id="dataDiPartenza2" required="true"
-									requiredMessage="Devi inserire una data di Partenza" />
-								<p:message for="dataDiPartenza2" />
-								<br />
+							<p:calendar value="#{ricercaPacchettiBean.dataPartenza}"
+								id="dataDiPartenza2" mindate="calwidget.today()" widgetVar="calwidget" required="true"
+								requiredMessage="Devi inserire una data di Partenza" >
+						<p:ajax event="dateSelect" update="dataDiRitorno2" />
+						</p:calendar>
+						<p:message for="dataDiPartenza2" />
+							<br />
 
-								<h:outputText value="Data di Ritorno: " />
-								<p:calendar value="#{ricercaPacchettiBean.dataRitorno}"
-									id="dataDiRitorno2" required="true"
-									requiredMessage="Devi inserire una data di Ritorno" />
+							<h:outputText value="Data di Ritorno: " />
+							<p:calendar value="#{ricercaPacchettiBean.dataRitorno}"
+								id="dataDiRitorno2" mindate="#{ricercaPacchettiBean.dataPartenza}" required="true"
+								requiredMessage="Devi inserire una data di Ritorno" >
+						<p:ajax event="dateSelect" update="dataDiPartenza2" />
+						</p:calendar>
 								<p:message for="dataDiRitorno2" />
 								<br />
 
@@ -261,16 +273,20 @@
 
 
 								<h:outputLabel value="Data di Partenza: " />
-								<p:calendar value="#{ricercaPacchettiBean.dataPartenza}"
-									id="dataDiPartenza3" required="true"
-									requiredMessage="Devi inserire una data di Partenza" />
-								<p:message for="dataDiPartenza3" />
-								<br />
+							<p:calendar value="#{ricercaPacchettiBean.dataPartenza}"
+								id="dataDiPartenza3" mindate="calwidget.today()" widgetVar="calwidget" required="true"
+								requiredMessage="Devi inserire una data di Partenza" >
+						<p:ajax event="dateSelect" update="dataDiRitorno3" />
+						</p:calendar>
+						<p:message for="dataDiPartenza3" />
+							<br />
 
-								<h:outputText value="Data di Ritorno: " />
-								<p:calendar value="#{ricercaPacchettiBean.dataRitorno}"
-									id="dataDiRitorno3" required="true"
-									requiredMessage="Devi inserire una data di Ritorno" />
+							<h:outputText value="Data di Ritorno: " />
+							<p:calendar value="#{ricercaPacchettiBean.dataRitorno}"
+								id="dataDiRitorno3" mindate="#{ricercaPacchettiBean.dataPartenza}" required="true"
+								requiredMessage="Devi inserire una data di Ritorno" >
+						<p:ajax event="dateSelect" update="dataDiPartenza3" />
+						</p:calendar>
 								<p:message for="dataDiRitorno3" />
 								<br />
 
@@ -327,16 +343,20 @@
 
 
 								<h:outputLabel value="Data di Partenza: " />
-								<p:calendar value="#{ricercaPacchettiBean.dataPartenza}"
-									id="dataDiPartenza4" required="true"
-									requiredMessage="Devi inserire una data di Partenza" />
-								<p:message for="dataDiPartenza4" />
-								<br />
+							<p:calendar value="#{ricercaPacchettiBean.dataPartenza}"
+								id="dataDiPartenza4" mindate="calwidget.today()" widgetVar="calwidget" required="true"
+								requiredMessage="Devi inserire una data di Partenza" >
+						<p:ajax event="dateSelect" update="dataDiRitorno4" />
+						</p:calendar>
+						<p:message for="dataDiPartenza4" />
+							<br />
 
-								<h:outputText value="Data di Ritorno: " />
-								<p:calendar value="#{ricercaPacchettiBean.dataRitorno}"
-									id="dataDiRitorno4" required="true"
-									requiredMessage="Devi inserire una data di Ritorno" />
+							<h:outputText value="Data di Ritorno: " />
+							<p:calendar value="#{ricercaPacchettiBean.dataRitorno}"
+								id="dataDiRitorno4" mindate="#{ricercaPacchettiBean.dataPartenza}" required="true"
+								requiredMessage="Devi inserire una data di Ritorno" >
+						<p:ajax event="dateSelect" update="dataDiPartenza4" />
+						</p:calendar>
 								<p:message for="dataDiRitorno4" />
 								<br />
 
