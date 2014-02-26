@@ -48,15 +48,19 @@
 			<p:outputLabel value="Data Inizio Validità: " />
 			<p:calendar
 				value="#{ricercaPacchettiImpiegatoBean.dataInizioValidita}"
-				id="dataInizio" required="true"
-				requiredMessage="Devi inserire una data di inizio validità del pacchetto" />
+				id="dataInizio" mindate="calwidget.today()" widgetVar="calwidget" required="true"
+				requiredMessage="Devi inserire una data di inizio validità del pacchetto" >
+				<p:ajax event="dateSelect" update="dataFine" />
+				</p:calendar>
 			<p:message for="dataInizio" />
 			<br />
 
 			<p:outputLabel value="Data Fine Validità: " />
 			<p:calendar value="#{ricercaPacchettiImpiegatoBean.dataFineValidita}"
-				id="dataFine" required="true"
-				requiredMessage="Devi inserire una data di fine validità del pacchetto" />
+				id="dataFine" mindate="#{ricercaPacchettiImpiegatoBean.dataInizioValidita}" required="true"
+				requiredMessage="Devi inserire una data di fine validità del pacchetto" >
+				<p:ajax event="dateSelect" update="dataInizio" />
+				</p:calendar>
 			<p:message for="dataFine" />
 			<br />
 
