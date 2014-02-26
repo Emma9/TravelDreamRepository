@@ -18,7 +18,7 @@ public class PacchettoPersonalizzato extends Pacchetto {
 	/** Attributi */
 
 	private String stato; // SALVATO BLOCCATO CONFERMATO ACCETTATO
-	
+
 	@ManyToOne
 	private User cliente;
 	@Temporal(TemporalType.DATE)
@@ -26,9 +26,6 @@ public class PacchettoPersonalizzato extends Pacchetto {
 	@Temporal(TemporalType.DATE)
 	private Date dataDiRitorno;
 	private int numPartecipanti;
-
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "pacchettoPersonalizzato")
-	private List<Invito> invitiPacchetto = new ArrayList<Invito>();
 
 	/** Costruttore */
 	public PacchettoPersonalizzato() {
@@ -42,7 +39,8 @@ public class PacchettoPersonalizzato extends Pacchetto {
 			String descrizione, List<Componente> listaComponenti,
 			List<Componente> listaComponentiSelezionati, int costo, int sconto,
 			String stato, User cliente, Date dataDiPartenza,
-			Date dataDiRitorno, int numPartecipanti, List<Invito> invitiPacchetto) {
+			Date dataDiRitorno, int numPartecipanti,
+			List<Invito> invitiPacchetto) {
 
 		super(idPacchettoPersonalizzato, destinazione, dataInizioValidita,
 				dateFineValidita, etichetta, descrizione, listaComponenti,
@@ -53,7 +51,6 @@ public class PacchettoPersonalizzato extends Pacchetto {
 		this.setDataDiPartenza(dataDiPartenza);
 		this.setDataDiRitorno(dataDiRitorno);
 		this.setNumPartecipanti(numPartecipanti);
-		this.setInvitiPacchetto(invitiPacchetto);
 
 		super.setIdPacchetto(idPacchetto);
 
@@ -76,10 +73,6 @@ public class PacchettoPersonalizzato extends Pacchetto {
 
 	}
 
-	
-	
-	
-	
 	/**
 	 * @return the cliente
 	 */
@@ -88,7 +81,8 @@ public class PacchettoPersonalizzato extends Pacchetto {
 	}
 
 	/**
-	 * @param cliente the cliente to set
+	 * @param cliente
+	 *            the cliente to set
 	 */
 	public void setCliente(User cliente) {
 		this.cliente = cliente;
@@ -123,8 +117,6 @@ public class PacchettoPersonalizzato extends Pacchetto {
 	public void setDataDiRitorno(Date dataDiRitorno) {
 		this.dataDiRitorno = dataDiRitorno;
 	}
-	
-	
 
 	/**
 	 * @return the numPartecipanti
@@ -134,25 +126,11 @@ public class PacchettoPersonalizzato extends Pacchetto {
 	}
 
 	/**
-	 * @param numPartecipanti the numPartecipanti to set
+	 * @param numPartecipanti
+	 *            the numPartecipanti to set
 	 */
 	public void setNumPartecipanti(int numPartecipanti) {
 		this.numPartecipanti = numPartecipanti;
-	}
-
-	/**
-	 * @return the invitiPacchetto
-	 */
-	public List<Invito> getInvitiPacchetto() {
-		return invitiPacchetto;
-	}
-
-	/**
-	 * @param invitiPacchetto
-	 *            the invitiPacchetto to set
-	 */
-	public void setInvitiPacchetto(List<Invito> invitiPacchetto) {
-		this.invitiPacchetto = invitiPacchetto;
 	}
 
 }

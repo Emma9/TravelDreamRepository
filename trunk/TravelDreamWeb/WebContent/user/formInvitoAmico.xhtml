@@ -13,7 +13,7 @@
 
 
 		<h:outputLabel value="Email dell'amico che vuoi invitare: " />
-		<p:inputText value="#{invitaAmicoBean.destinatario.email}" id="email"
+		<p:inputText value="#{invitaAmicoBean.mailDest}" id="email"
 			required="true" requiredMessage="Devi inserire l'email"
 			validatorMessage="L'email inserita non è valida">
 			<f:validateRegex
@@ -35,8 +35,7 @@
 	<div align="left">
 		<h:form>
 			<h:commandButton value="Invia invito"
-				action="#{invitaAmicoBean.invitaAmico(gestionePacchettiPersonalizzatiBean.pacchettoPersonalizzatoSelezionato.idPacchettoPersonalizzato)}"
-				ajax="false" />
+				action="#{invitaAmicoBean.invitaAmico()}" ajax="false" />
 		</h:form>
 	</div>
 

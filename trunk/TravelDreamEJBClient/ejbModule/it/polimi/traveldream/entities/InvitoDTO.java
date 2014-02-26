@@ -10,9 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-public class InvitoDTO implements Serializable{
-	
-	
+public class InvitoDTO implements Serializable {
+
 	/**
 	 * 
 	 */
@@ -21,35 +20,29 @@ public class InvitoDTO implements Serializable{
 	private UserDTO mittente;
 	private AmicoDTO destinatario;
 	private Date data;
-	private boolean stato; //TRUE=>ACCETTATO
-	
+	private boolean stato; // TRUE=>ACCETTATO
+
 	private PacchettoPersonalizzatoDTO pacchettoPersonalizzato;
 
-	/**Costruttore*/
+	/** Costruttore */
 	public InvitoDTO() {
 		super();
 	}
 
-	/**@return idInvito*/
+	/** @return idInvito */
 	public Long getIdInvito() {
-		
+
 		return this.idInvito;
-		
+
 	}
-	
-	
 
 	/**
-	 * @param idInvito the idInvito to set
+	 * @param idInvito
+	 *            the idInvito to set
 	 */
 	public void setIdInvito(Long idInvito) {
 		this.idInvito = idInvito;
 	}
-
-	
-	
-
-	
 
 	/**
 	 * @return the mittente
@@ -59,7 +52,8 @@ public class InvitoDTO implements Serializable{
 	}
 
 	/**
-	 * @param mittente the mittente to set
+	 * @param mittente
+	 *            the mittente to set
 	 */
 	public void setMittente(UserDTO mittente) {
 		this.mittente = mittente;
@@ -73,10 +67,45 @@ public class InvitoDTO implements Serializable{
 	}
 
 	/**
-	 * @param destinatario the destinatario to set
+	 * @param destinatario
+	 *            the destinatario to set
 	 */
 	public void setDestinatario(AmicoDTO destinatario) {
 		this.destinatario = destinatario;
+	}
+
+	/** @return data */
+	public Date getData() {
+
+		return this.data;
+
+	}
+
+	/**
+	 * @param data
+	 *            data to set
+	 */
+	public void setData(Date data) {
+
+		this.data = data;
+
+	}
+
+	/** @return stato */
+	public boolean getStato() {
+
+		return this.stato;
+
+	}
+
+	/**
+	 * @param stato
+	 *            stato to set
+	 */
+	public void setStato(boolean stato) {
+
+		this.stato = stato;
+
 	}
 
 	/**
@@ -87,40 +116,12 @@ public class InvitoDTO implements Serializable{
 	}
 
 	/**
-	 * @param pacchettoPersonalizzato the pacchettoPersonalizzato to set
+	 * @param pacchettoPersonalizzato
+	 *            the pacchettoPersonalizzato to set
 	 */
 	public void setPacchettoPersonalizzato(
 			PacchettoPersonalizzatoDTO pacchettoPersonalizzato) {
 		this.pacchettoPersonalizzato = pacchettoPersonalizzato;
 	}
 
-	/**@return data*/
-	public Date getData() {
-		
-		return this.data;
-		
-	}
-
-	/**@param data data to set*/
-	public void setData(Date data) {
-		
-		this.data = data;
-		
-	}
-
-	/**@return stato*/
-	public boolean getStato() {
-		
-		return this.stato;
-		
-	}
-
-	/**@param stato stato to set*/
-	public void setStato(boolean stato) {
-		
-		this.stato = stato;
-		
-	}
-	
-	
 }
