@@ -2,11 +2,8 @@ package it.polimi.traveldream.ejb;
 
 import it.polimi.traveldream.ejb.client.InvitoBeanLocal;
 import it.polimi.traveldream.ejb.client.InvitoBeanRemote;
-import it.polimi.traveldream.entities.AmicoDTO;
 import it.polimi.traveldream.entities.Invito;
 import it.polimi.traveldream.entities.InvitoDTO;
-import it.polimi.traveldream.entities.PacchettoPersonalizzato;
-import it.polimi.traveldream.entities.PacchettoPersonalizzatoDTO;
 import it.polimi.traveldream.entities.User;
 import it.polimi.traveldream.entities.UserDTO;
 
@@ -26,8 +23,6 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 	@PersistenceContext(unitName = "travelDream_project")
 	private EntityManager manager;
 
-	private PacchettoPersonalizzatoBean pacchettopersonalizzato = new PacchettoPersonalizzatoBean();
-
 	/** Default constructor */
 	public InvitoBean() {
 		// TODO Auto-generated constructor stub
@@ -41,22 +36,48 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 	 * @param stato
 	 * @return idInvito
 	 */
-	public Long createInvito(UserDTO mittente, AmicoDTO destinatario,
-			PacchettoPersonalizzatoDTO pacchettoPersonalizzato, Date data,
-			boolean stato) {
+	public Long createInvito(String mittente, String destinatario,
+			Long idpacchettoPersonalizzato, Date data, boolean stato) {
+
+		System.out.println("CREATEINVITO --> METODO "+destinatario);
 
 		Invito invito = new Invito();
 
-		UsrMgrBean usrmgrbean = new UsrMgrBean();
-		invito.setMittente(usrmgrbean.userDTOToUser(mittente));
-		AmicoBean amicobean = new AmicoBean();
-		invito.setDestinatario(amicobean.amicoDTOToAmico(destinatario));
-		invito.setPacchettoPersonalizzato(pacchettopersonalizzato
-				.pacchettoPersonalizzatoDTOToPacchettoPersonalizzato(pacchettoPersonalizzato));
+		// UsrMgrBean usrmgrbean = new UsrMgrBean();
+
+		System.out.println("CREATEINVITO --> NUOVO INVITO");
+
+		invito.setEmailMittente(mittente);
+
+		System.out.println("CREATEINVITO --> SETEMAILMITTENTE");
+
+		//AmicoBean amicobean = new AmicoBean();
+
+		//System.out.println("CREATEINVITO --> NUOVO AMICO");
+
+		//amicobean.createAmico(destinatario);
+
+		System.out.println("CREATEINVITO --> CREATE AMICO");
+
+		invito.setEmailDestinatario(destinatario);
+
+		System.out.println("CREATEINVITO --> SETEMAILDESTINATARIO");
+
+		invito.setIdPacchettoPersonalizzato(idpacchettoPersonalizzato);
+
+		System.out.println("CREATEINVITO --> SETIDPP");
+
 		invito.setData(data);
+
+		System.out.println("CREATEINVITO --> SETDATA");
+
 		invito.setStato(stato);
 
+		System.out.println("CREATEINVITO --> SETSTATO");
+
 		manager.persist(invito);
+
+		System.out.println("CREATEINVITO --> PERSIST");
 
 		return invito.getIdInvito();
 	}
@@ -94,9 +115,8 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 	 * @param data
 	 * @param stato
 	 */
-	public void updateInvito(Long idInvito, UserDTO mittente,
-			AmicoDTO destinatario,
-			PacchettoPersonalizzatoDTO pacchettoPersonalizzato, Date data,
+	public void updateInvito(Long idInvito, String mittente,
+			String destinatario, Long idpacchettoPersonalizzato, Date data,
 			boolean stato) {
 
 		if (verificaPresenzaInvito(idInvito)) {
@@ -104,12 +124,16 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 			// InvitoDTO invito = findByIdInvito(idInvito);
 
 			Invito invito = manager.find(Invito.class, idInvito);
-			UsrMgrBean usrmgrbean = new UsrMgrBean();
-			invito.setMittente(usrmgrbean.userDTOToUser(mittente));
+			// UsrMgrBean usrmgrbean = new UsrMgrBean();
+			invito.setEmailMittente(mittente);
+
 			AmicoBean amicobean = new AmicoBean();
-			invito.setDestinatario(amicobean.amicoDTOToAmico(destinatario));
-			invito.setPacchettoPersonalizzato(pacchettopersonalizzato
-					.pacchettoPersonalizzatoDTOToPacchettoPersonalizzato(pacchettoPersonalizzato));
+
+			amicobean.updateAmico(destinatario);
+
+			invito.setEmailDestinatario(destinatario);
+
+			invito.setIdPacchettoPersonalizzato(idpacchettoPersonalizzato);
 			invito.setData(data);
 
 			manager.merge(invito);
@@ -227,15 +251,12 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 		InvitoDTO invitoDTO = new InvitoDTO();
 
 		invitoDTO.setIdInvito(invito.getIdInvito());
-		UsrMgrBean usrmgrbean = new UsrMgrBean();
-		invitoDTO.setMittente(usrmgrbean.userToUserDTO(invito.getMittente()));
-		AmicoBean amicobean = new AmicoBean();
-		invitoDTO.setDestinatario(amicobean.amicoToAmicoDTO(invito
-				.getDestinatario()));
+		// UsrMgrBean usrmgrbean = new UsrMgrBean();
+		invitoDTO.setEmailMittente(invito.getEmailMittente());
+		invitoDTO.setEmailDestinatario(invito.getEmailDestinatario());
 		invitoDTO.setData(invito.getData());
-		invitoDTO.setPacchettoPersonalizzato(pacchettopersonalizzato
-				.pacchettoPersonalizzatoToDTO(invito
-						.getPacchettoPersonalizzato()));
+		invitoDTO.setIdPacchettoPersonalizzato(invito
+				.getIdPacchettoPersonalizzato());
 		invitoDTO.setStato(invito.getStato());
 
 		return invitoDTO;

@@ -20,9 +20,15 @@ public class Invito implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long idInvito;
-	private User mittente;
-	private Amico destinatario;
+	// private User mittente;
+
+	// private Amico destinatario;
 	// private Long idPacchettoPersonalizzato;
+
+	private String emailDestinatario;
+
+	private String emailMittente;
+
 	@Temporal(TemporalType.DATE)
 	private Date data;
 	private boolean stato; // TRUE=>ACCETTATO
@@ -31,7 +37,7 @@ public class Invito implements Serializable {
 	// @JoinColumns({@JoinColumn(name = "idPacchetto", referencedColumnName =
 	// "idPacchetto"), @JoinColumn(name = "idPacchettoPersonalizzato",
 	// referencedColumnName = "idPacchettoPersonalizzato")})
-	private PacchettoPersonalizzato pacchettoPersonalizzato;
+	private Long idPacchettoPersonalizzato;
 
 	/** Costruttore */
 	public Invito() {
@@ -54,49 +60,48 @@ public class Invito implements Serializable {
 	}
 
 	/**
-	 * @return the mittente
+	 * @return the emailDestinatario
 	 */
-	public User getMittente() {
-		return mittente;
+	public String getEmailDestinatario() {
+		return emailDestinatario;
 	}
 
 	/**
-	 * @param mittente
-	 *            the mittente to set
+	 * @param emailDestinatario
+	 *            the emailDestinatario to set
 	 */
-	public void setMittente(User mittente) {
-		this.mittente = mittente;
+	public void setEmailDestinatario(String emailDestinatario) {
+		this.emailDestinatario = emailDestinatario;
 	}
 
 	/**
-	 * @return the destinatario
+	 * @return the emailMittente
 	 */
-	public Amico getDestinatario() {
-		return destinatario;
+	public String getEmailMittente() {
+		return emailMittente;
 	}
 
 	/**
-	 * @param destinatario
-	 *            the destinatario to set
+	 * @param emailMittente
+	 *            the emailMittente to set
 	 */
-	public void setDestinatario(Amico destinatario) {
-		this.destinatario = destinatario;
+	public void setEmailMittente(String emailMittente) {
+		this.emailMittente = emailMittente;
 	}
 
 	/**
-	 * @return the pacchettoPersonalizzato
+	 * @return the idPacchettoPersonalizzato
 	 */
-	public PacchettoPersonalizzato getPacchettoPersonalizzato() {
-		return pacchettoPersonalizzato;
+	public Long getIdPacchettoPersonalizzato() {
+		return idPacchettoPersonalizzato;
 	}
 
 	/**
-	 * @param pacchettoPersonalizzato
-	 *            the pacchettoPersonalizzato to set
+	 * @param idPacchettoPersonalizzato
+	 *            the idPacchettoPersonalizzato to set
 	 */
-	public void setPacchettoPersonalizzato(
-			PacchettoPersonalizzato pacchettoPersonalizzato) {
-		this.pacchettoPersonalizzato = pacchettoPersonalizzato;
+	public void setIdPacchettoPersonalizzato(Long idPacchettoPersonalizzato) {
+		this.idPacchettoPersonalizzato = idPacchettoPersonalizzato;
 	}
 
 	/** @return data */
