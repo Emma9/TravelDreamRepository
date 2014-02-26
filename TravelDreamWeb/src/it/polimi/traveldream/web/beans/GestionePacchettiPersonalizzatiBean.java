@@ -437,7 +437,7 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 				context.addMessage(null, new FacesMessage(
 						"Pacchetto rimosso dalla gift list"));
 
-				return "listaPacchettiPersonalizzatiCliente";
+				return "index";
 
 			} else {
 
