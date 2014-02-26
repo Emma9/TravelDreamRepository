@@ -43,6 +43,8 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 
 	private String stringStato;
 
+	private String statolista;
+
 	// PACCHETTO PERSONALIZZATO SELEZIONATO
 	private PacchettoPersonalizzatoDTO pacchettoPersonalizzatoSelezionato;
 
@@ -96,6 +98,21 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 	 */
 	public void setStringStato(String stringStato) {
 		this.stringStato = stringStato;
+	}
+
+	/**
+	 * @return the statolista
+	 */
+	public String getStatolista() {
+		return statolista;
+	}
+
+	/**
+	 * @param statolista
+	 *            the statolista to set
+	 */
+	public void setStatolista(String statolista) {
+		this.statolista = statolista;
 	}
 
 	/**
@@ -225,33 +242,51 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 
 		try {
 
-			PacchettoPKDTO pacchettoPK = new PacchettoPKDTO(
-					pacchettoPersonalizzatoSelezionato.getIdPacchetto(),
-					pacchettoPersonalizzatoSelezionato
-							.getIdPacchettoPersonalizzato());
+			setStatolista(pacchettoPersonalizzatoSelezionato.getStato());
 
-			UserDTO cli = pacchettoPersonalizzatoSelezionato.getCliente();
+			if (!((statolista.equalsIgnoreCase("bloccato"))
+					|| (statolista.equalsIgnoreCase("confermato")) || (statolista
+						.equalsIgnoreCase("giftlist")))) {
 
-			Date datap = pacchettoPersonalizzatoSelezionato.getDataDiPartenza();
+				PacchettoPKDTO pacchettoPK = new PacchettoPKDTO(
+						pacchettoPersonalizzatoSelezionato.getIdPacchetto(),
+						pacchettoPersonalizzatoSelezionato
+								.getIdPacchettoPersonalizzato());
 
-			Date datar = pacchettoPersonalizzatoSelezionato.getDataDiRitorno();
+				UserDTO cli = pacchettoPersonalizzatoSelezionato.getCliente();
 
-			int nump = pacchettoPersonalizzatoSelezionato.getNumPartecipanti();
+				Date datap = pacchettoPersonalizzatoSelezionato
+						.getDataDiPartenza();
 
-			Long idp = pacchettopersremote.updatePacchettoPersonalizzato(
-					pacchettoPK, cli, stringStato, datap, datar, nump,
-					listaComponentiSelezionati);
+				Date datar = pacchettoPersonalizzatoSelezionato
+						.getDataDiRitorno();
 
-			if (idp > 0) {
+				int nump = pacchettoPersonalizzatoSelezionato
+						.getNumPartecipanti();
 
-				context.addMessage(null, new FacesMessage(
-						"Pacchetto modificato"));
+				Long idp = pacchettopersremote.updatePacchettoPersonalizzato(
+						pacchettoPK, cli, stringStato, datap, datar, nump,
+						listaComponentiSelezionati);
 
-				return "index";
+				if (idp > 0) {
 
+					context.addMessage(null, new FacesMessage(
+							"Pacchetto modificato"));
+
+					return "index";
+
+				} else {
+
+					context.addMessage(null, new FacesMessage(
+							"Operazione fallita"));
+
+					return "listaPacchettiPersonalizzatiCliente";
+
+				}
 			} else {
 
-				context.addMessage(null, new FacesMessage("Operazione fallita"));
+				context.addMessage(null, new FacesMessage(
+						"Impossibile modificare il pacchetto"));
 
 				return "listaPacchettiPersonalizzatiCliente";
 
@@ -269,16 +304,37 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 
 	public String rimuoviPacchettoSelezionato() {
 
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+
 		try {
 
-			pacchettopersremote.removePacchettoPersonalizzato(
-					pacchettoPersonalizzatoSelezionato
-							.getIdPacchettoPersonalizzato(),
-					pacchettoPersonalizzatoSelezionato.getIdPacchetto());
+			setStatolista(pacchettoPersonalizzatoSelezionato.getStato());
 
-			return "index";
+			if (!(statolista.equalsIgnoreCase("confermato"))) {
+
+				pacchettopersremote.removePacchettoPersonalizzato(
+						pacchettoPersonalizzatoSelezionato
+								.getIdPacchettoPersonalizzato(),
+						pacchettoPersonalizzatoSelezionato.getIdPacchetto());
+
+				context.addMessage(null, new FacesMessage("Pacchetto rimosso"));
+
+				return "index";
+
+			} else {
+
+				context.addMessage(null, new FacesMessage(
+						"Impossibile rimuovere pacchetto confermato"));
+
+				return "listaPacchettiPersonalizzatiCliente";
+
+			}
 
 		} catch (NullPointerException n) {
+
+			context.addMessage(null, new FacesMessage("Operazione fallita"));
 
 			return "index";
 
@@ -294,8 +350,11 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 
 		try {
 
-			if (!(pacchettoPersonalizzatoSelezionato.getStato()
-					.equalsIgnoreCase("giftlist"))) {
+			setStatolista(pacchettoPersonalizzatoSelezionato.getStato());
+
+			if (!((statolista.equalsIgnoreCase("bloccato"))
+					|| (statolista.equalsIgnoreCase("confermato")) || (statolista
+						.equalsIgnoreCase("giftlist")))) {
 
 				PacchettoPKDTO pacchettoPK = new PacchettoPKDTO(
 						pacchettoPersonalizzatoSelezionato.getIdPacchetto(),
@@ -327,7 +386,7 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 			} else {
 
 				context.addMessage(null, new FacesMessage(
-						"Pacchetto gia presente in gift list"));
+						"Impossibile inserire il pacchetto in giftlist"));
 
 				return "listaPacchettiPersonalizzatiCliente";
 			}
@@ -406,8 +465,11 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 
 		try {
 
-			if (!(pacchettoPersonalizzatoSelezionato.getStato()
-					.equalsIgnoreCase("bloccato"))) {
+			setStatolista(pacchettoPersonalizzatoSelezionato.getStato());
+
+			if (!((statolista.equalsIgnoreCase("bloccato"))
+					|| (statolista.equalsIgnoreCase("confermato")) || (statolista
+						.equalsIgnoreCase("giftlist")))) {
 
 				PacchettoPKDTO pacchettoPK = new PacchettoPKDTO(
 						pacchettoPersonalizzatoSelezionato.getIdPacchetto(),
@@ -438,7 +500,7 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 			} else {
 
 				context.addMessage(null, new FacesMessage(
-						"Pacchetto gia bloccato"));
+						"Impossibile bloccare pacchetto"));
 
 				return "listaPacchettiPersonalizzatiCliente";
 			}
@@ -462,8 +524,9 @@ public class GestionePacchettiPersonalizzatiBean implements Serializable {
 		try {
 			System.out.println("CONFERMA --> TRY");
 
-			if (!(pacchettoPersonalizzatoSelezionato.getStato()
-					.equalsIgnoreCase("confermato"))) {
+			setStatolista(pacchettoPersonalizzatoSelezionato.getStato());
+
+			if (!(statolista.equalsIgnoreCase("confermato"))) {
 
 				System.out.println("CONFERMA --> IF");
 
