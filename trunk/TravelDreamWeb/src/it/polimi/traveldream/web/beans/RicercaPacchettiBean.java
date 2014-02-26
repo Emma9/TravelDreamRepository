@@ -259,30 +259,44 @@ public class RicercaPacchettiBean implements Serializable {
 					}
 				}
 
+				if (pacchettiRicercati.isEmpty()) {
+
+					context.addMessage(null, new FacesMessage(
+							"Nessun pacchetto trovato"));
+
+					return "/homepage";
+
+				}
+
 				System.out
 						.println("RICERCAPACCHETTI --> DIMENSIONE LISTA DOPO VERIFICA DISPONIBILITA  "
 								+ pacchettiRicercati.size());
 
-				System.out
-						.println("RICERCAPACCHETTI --> VERIFICA DISPONIBILITA");
+				return "/listaRicercaPacchettiPredefiniti";
+
+			} else {
+
+				context.addMessage(null, new FacesMessage("Date non valide"));
+
+				return "/homepage";
 
 			}
 
-			System.out.println("RICERCAPACCHETTI --> FINE METODO");
-
-			return "/listaRicercaPacchettiPredefiniti";
-
 		} catch (EJBException e) {
+
+			context.addMessage(null, new FacesMessage("Operazione fallita"));
 
 			System.out.println("RICERCAPACCHETTI --> EJBEXCEPTION");
 
-			return null;
+			return "/homepage";
 
 		} catch (NullPointerException n) {
 
 			System.out.println("RICERCAPACCHETTI --> NULLPOINTEREXCEPTION");
 
-			return null;
+			context.addMessage(null, new FacesMessage("Operazione fallita"));
+
+			return "/homepage";
 
 		}
 
@@ -326,12 +340,29 @@ public class RicercaPacchettiBean implements Serializable {
 					}
 
 				}
+
+				if (pacchettiRicercati.isEmpty()) {
+
+					context.addMessage(null, new FacesMessage(
+							"Nessun pacchetto trovato"));
+
+					return "/homepage";
+
+				}
+
 				System.out.println("RICERCA PER ETICHETTA PACCHETTI SETTATI");
 				setPacchettiRicercati(pacchettiDaSettare);
 				System.out.println("NUMERO PACCHETTI DA SETTARE:"
 						+ pacchettiDaSettare.size());
 
+			} else {
+
+				context.addMessage(null, new FacesMessage("Date non valide"));
+
+				return "/homepage";
+
 			}
+
 		} catch (EJBException e) {
 
 			return null;
@@ -384,6 +415,23 @@ public class RicercaPacchettiBean implements Serializable {
 
 				}
 				setPacchettiRicercati(pacchettiDaSettare);
+
+				if (pacchettiRicercati.isEmpty()) {
+
+					context.addMessage(null, new FacesMessage(
+							"Nessun pacchetto trovato"));
+
+					return "/homepage";
+
+				}
+			}
+
+			else {
+
+				context.addMessage(null, new FacesMessage("Date non valide"));
+
+				return "/homepage";
+
 			}
 
 		} catch (EJBException e) {
@@ -432,7 +480,25 @@ public class RicercaPacchettiBean implements Serializable {
 					}
 
 				}
+
+				if (pacchettiRicercati.isEmpty()) {
+
+					context.addMessage(null, new FacesMessage(
+							"Nessun pacchetto trovato"));
+
+					return "/homepage";
+
+				}
+
 				setPacchettiRicercati(pacchettiDaSettare);
+			}
+
+			else {
+
+				context.addMessage(null, new FacesMessage("Date non valide"));
+
+				return "/homepage";
+
 			}
 
 		} catch (EJBException e) {
@@ -482,7 +548,25 @@ public class RicercaPacchettiBean implements Serializable {
 					}
 
 				}
+
+				if (pacchettiRicercati.isEmpty()) {
+
+					context.addMessage(null, new FacesMessage(
+							"Nessun pacchetto trovato"));
+
+					return "/homepage";
+
+				}
+
 				setPacchettiRicercati(pacchettiDaSettare);
+			}
+
+			else {
+
+				context.addMessage(null, new FacesMessage("Date non valide"));
+
+				return "/homepage";
+
 			}
 
 		} catch (EJBException e) {
