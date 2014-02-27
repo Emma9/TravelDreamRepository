@@ -4,13 +4,16 @@ import it.polimi.traveldream.ejb.client.InvitoBeanRemote;
 import it.polimi.traveldream.ejb.client.PacchettoPersonalizzatoBeanRemote;
 import it.polimi.traveldream.ejb.client.UsrMgr;
 import it.polimi.traveldream.entities.AmicoDTO;
+import it.polimi.traveldream.entities.ComponenteDTO;
 import it.polimi.traveldream.entities.InvitoDTO;
+import it.polimi.traveldream.entities.PacchettoPKDTO;
 import it.polimi.traveldream.entities.PacchettoPersonalizzatoDTO;
 import it.polimi.traveldream.entities.UserDTO;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
@@ -48,6 +51,8 @@ public class InvitaAmicoBean implements Serializable {
 	private String statoInvito;
 
 	private String mailDest;
+
+	private InvitoDTO invitoViaggio;
 
 	/**
 	 * @return the mittente
@@ -155,6 +160,21 @@ public class InvitaAmicoBean implements Serializable {
 		this.mailDest = mailDest;
 
 		System.out.println("SETMAILDEST " + mailDest);
+	}
+
+	/**
+	 * @return the invitoViaggio
+	 */
+	public InvitoDTO getInvitoViaggio() {
+		return invitoViaggio;
+	}
+
+	/**
+	 * @param invitoViaggio
+	 *            the invitoViaggio to set
+	 */
+	public void setInvitoViaggio(InvitoDTO invitoViaggio) {
+		this.invitoViaggio = invitoViaggio;
 	}
 
 	public String gestioneInviti(Long idpp) {
@@ -270,23 +290,57 @@ public class InvitaAmicoBean implements Serializable {
 
 	public String mostraPropostaPacchettoViaggio() {
 
-		setPacchettoPersonalizzato(pacchettoPersRemoto
-				.findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato));
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
 
-		/*
-		 * 
-		 * for (int i = 0; i <
-		 * pacchettoPersonalizzato.getInvitiPacchetto().size(); i++) { if
-		 * (pacchettoPersonalizzato.getInvitiPacchetto().get(i)
-		 * .getDestinatario().equals(destinatario)) {
-		 * 
-		 * return "/visualizzarePropostaViaggio";
-		 * 
-		 * }
-		 * 
-		 * }
-		 */
-		return "/formAccessoPropostaViaggioAmico";
+		try {
+
+			System.out.println("IDPP  " + idPacchettoPersonalizzato);
+
+			setPacchettoPersonalizzato(pacchettoPersRemoto
+					.findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato));
+
+			if (!(pacchettoPersonalizzato.getStato()
+					.equalsIgnoreCase("giftlist"))) {
+
+				ArrayList<InvitoDTO> inviti = invitoremoto.findAll();
+
+				for (int i = 0; i < inviti.size(); i++) {
+
+					if ((inviti.get(i).getIdPacchettoPersonalizzato()
+							.equals(idPacchettoPersonalizzato))
+							&& (inviti.get(i).getEmailDestinatario()
+									.equalsIgnoreCase(mailDest))) {
+
+						setInvitoViaggio(inviti.get(i));
+
+						return "/dettagliInvitoViaggio";
+
+					}
+
+				}
+
+				context.addMessage(null, new FacesMessage("Invito non trovato"));
+
+				return "homepage";
+
+			} else {
+
+				context.addMessage(null, new FacesMessage(
+						"Errore stato pacchetto "));
+
+				return "homepage";
+
+			}
+
+		} catch (EJBException e) {
+
+			context.addMessage(null, new FacesMessage("Operazione fallita "));
+
+			return "homepage";
+
+		}
 
 	}
 
@@ -294,21 +348,8 @@ public class InvitaAmicoBean implements Serializable {
 
 		setPacchettoPersonalizzato(pacchettoPersRemoto
 				.findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato));
-		/*
-		 * for (int i = 0; i <
-		 * pacchettoPersonalizzato.getInvitiPacchetto().size(); i++) {
-		 * 
-		 * if (pacchettoPersonalizzato.getInvitiPacchetto().get(i)
-		 * .getDestinatario().equals(destinatario)) {
-		 * 
-		 * return "/visualizzarePropostaViaggio";
-		 * 
-		 * }
-		 * 
-		 * }
-		 */
 
-		return "/formAccessoPropostaRegaloAmico";
+		return "/dettagliInvitoViaggio";
 
 	}
 
@@ -363,7 +404,53 @@ public class InvitaAmicoBean implements Serializable {
 
 		try {
 
+			return "user/dettagliPacchettoInvitoViaggio";
+
+		} catch (EJBException e) {
+
+			context.addMessage(null, new FacesMessage("Operazione fallita "));
+
 			return "homepage";
+
+		}
+
+	}
+
+	public String creaPacchettoAmico() {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+
+		try {
+
+			UserDTO cl = usermgr.getUserDTO();
+
+			Date datap = pacchettoPersonalizzato.getDataDiPartenza();
+
+			Date datar = pacchettoPersonalizzato.getDataDiRitorno();
+
+			List<ComponenteDTO> list = pacchettoPersonalizzato
+					.getListaComponentiSelezionati();
+
+			Long idpp = pacchettoPersonalizzato.getIdPacchetto();
+
+			pacchettoPersRemoto.createPacchettoPersonalizzato("confermato", cl,
+					datap, datar, 1, list, new PacchettoPKDTO(idpp, (long) 0));
+
+			Long idin = invitoViaggio.getIdInvito();
+
+			String mi = invitoViaggio.getEmailMittente();
+
+			String de = invitoViaggio.getEmailDestinatario();
+
+			Long idpa = invitoViaggio.getIdPacchettoPersonalizzato();
+
+			Date datainv = invitoViaggio.getData();
+
+			invitoremoto.updateInvito(idin, mi, de, idpa, datainv, true);
+
+			return "index";
 
 		} catch (EJBException e) {
 

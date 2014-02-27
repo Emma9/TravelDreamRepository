@@ -88,11 +88,21 @@ public class PacchettoPersonalizzatoBean implements
 					pacchettoPKDTO.getIdPacchetto(),
 					pacchettoPKDTO.getIdPacchettoPersonalizzato());
 			Pacchetto pacchetto = manager.find(Pacchetto.class, pacchettoPK);
+			
+			System.out
+			.println("BEAN --> CREAPACCHETTOPERSONALIZZATO --> FINDPACCHETTO "+pacchetto.getIdPacchetto());
 
 			List<Invito> invitiPacchetto = new ArrayList<Invito>();
 
+			System.out
+					.println("BEAN --> CREAPACCHETTOPERSONALIZZATO --> PRIMA DI VERIFICA 3 COMPONENTI");
+
 			if (pacchettoremote
 					.verificaTreComponentiSelezionati(listaComponentiSelezionati)) {
+
+				System.out
+						.println("BEAN --> CREAPACCHETTOPERSONALIZZATO --> VERIFICA 3 COMPONENTI EFFETTUATA");
+
 				PacchettoPersonalizzato pacchettoPersonalizzato = new PacchettoPersonalizzato(
 						pacchetto.getIdPacchetto(), codice,
 						pacchetto.getDestinazione(),
@@ -103,6 +113,9 @@ public class PacchettoPersonalizzatoBean implements
 						pacchetto.getCosto(), pacchetto.getSconto(), stato,
 						cliente, dataDiPartenza, dataDiRitorno,
 						numPartecipanti, invitiPacchetto);
+
+				System.out
+						.println("BEAN --> CREAPACCHETTOPERSONALIZZATO --> PACCHETTO CREATO");
 
 				System.out
 						.println("BEAN --> CREAPACCHETTOPERSONALIZZATO --> PRIMA DI PERSIST");
@@ -202,11 +215,9 @@ public class PacchettoPersonalizzatoBean implements
 			}
 		}
 
-
 		System.out.println("VERIFICA COMPONENTI & ETICHETTA FALLITA");
 
 		return (long) -1;
-	
 
 	}
 
@@ -406,6 +417,9 @@ public class PacchettoPersonalizzatoBean implements
 			return true;
 
 		case "giftlist":
+			return true;
+
+		case "confermato":
 			return true;
 
 		}
