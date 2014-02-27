@@ -449,7 +449,7 @@ public class InvitaAmicoBean implements Serializable {
 
 			Long idpp = pacchettoPersonalizzato.getIdPacchetto();
 
-			pacchettoPersRemoto.createPacchettoPersonalizzato("confermato", cl,
+			pacchettoPersRemoto.createPacchettoPersonalizzato("salvato", cl,
 					datap, datar, 1, list, new PacchettoPKDTO(idpp, (long) 0));
 
 			Long idin = invitoViaggio.getIdInvito();
