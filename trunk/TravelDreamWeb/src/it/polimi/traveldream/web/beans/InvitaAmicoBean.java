@@ -56,6 +56,8 @@ public class InvitaAmicoBean implements Serializable {
 
 	private InvitoDTO invitoViaggio;
 
+	private InvitoDTO invitoRegalo;
+
 	/**
 	 * @return the mittente
 	 */
@@ -192,6 +194,21 @@ public class InvitaAmicoBean implements Serializable {
 	 */
 	public void setInvitoViaggio(InvitoDTO invitoViaggio) {
 		this.invitoViaggio = invitoViaggio;
+	}
+
+	/**
+	 * @return the invitoRegalo
+	 */
+	public InvitoDTO getInvitoRegalo() {
+		return invitoRegalo;
+	}
+
+	/**
+	 * @param invitoRegalo
+	 *            the invitoRegalo to set
+	 */
+	public void setInvitoRegalo(InvitoDTO invitoRegalo) {
+		this.invitoRegalo = invitoRegalo;
 	}
 
 	public String gestioneInviti(Long idpp) {
@@ -401,7 +418,7 @@ public class InvitaAmicoBean implements Serializable {
 
 		try {
 
-			return "user/dettagliPacchettoInvitoViaggio";
+			return "/user/dettagliPacchettoInvitoViaggio";
 
 		} catch (EJBException e) {
 
@@ -485,7 +502,7 @@ public class InvitaAmicoBean implements Serializable {
 
 						if (inviti.get(i).getStato() == false) {
 
-							setInvitoViaggio(inviti.get(i));
+							setInvitoRegalo(inviti.get(i));
 
 							return "/dettagliInvitoRegalo";
 
@@ -553,8 +570,9 @@ public class InvitaAmicoBean implements Serializable {
 
 		try {
 
-			return "user/dettagliPacchettoInvitoRegalo";
+			return "/user/dettagliPacchettoInvitoRegalo";
 
+			
 		} catch (EJBException e) {
 
 			context.addMessage(null, new FacesMessage("Operazione fallita "));
@@ -570,16 +588,104 @@ public class InvitaAmicoBean implements Serializable {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
 				.getExternalContext().getRequest();
+		
+		System.out.println("CONFERMA REGALO --> INIZIO");
+		
 
 		try {
+			
+			System.out.println("CONFERMA REGALO --> TRY");
 
-			return "homepage";
+			int cc = componenteSelezionato.getCodiceComponente();
+			
+			System.out.println("CODICE COMPONENTE SELEZIONATO --> "+cc);
+
+			// AGGIORNAMENTO STATO INVITO
+
+			Long idin = invitoRegalo.getIdInvito();
+
+			String mi = invitoRegalo.getEmailMittente();
+
+			String de = invitoRegalo.getEmailDestinatario();
+
+			Long idpa = invitoRegalo.getIdPacchettoPersonalizzato();
+
+			Date datainv = invitoRegalo.getData();
+
+			invitoremoto.updateInvito(idin, mi, de, idpa, datainv, true);
+			
+			System.out.println("CONFERMA REGALO --> INVITO AGGIORNATO");
+
+			// VERIFICA SE 3 INVITI UTILIZZATI
+
+			ArrayList<InvitoDTO> inviti = invitoremoto.findAll();
+
+			ArrayList<InvitoDTO> invitiRegaloPacchetto = new ArrayList<InvitoDTO>();
+
+			for (int i = 0; i < inviti.size(); i++) {
+
+				if ((inviti.get(i).getIdPacchettoPersonalizzato().equals(idpa))
+						&& (inviti.get(i).getEmailMittente()
+								.equalsIgnoreCase(mi))
+						&& (inviti.get(i).getStato() == true)) {
+
+					invitiRegaloPacchetto.add(inviti.get(i));
+
+				}
+
+			}
+			
+			System.out.println("CONFERMA REGALO --> VERIFICA INVITI");
+
+			// PACCHETTOPERSONALIZZATO --> STATO CONFERMATO
+
+			if (invitiRegaloPacchetto.size() > 3) {
+				
+				System.out.println("CONFERMA REGALO --> MODIFICA PACCHETTO");
+
+				UserDTO cl = pacchettoPersonalizzato.getCliente();
+
+				Date datap = pacchettoPersonalizzato.getDataDiPartenza();
+
+				Date datar = pacchettoPersonalizzato.getDataDiRitorno();
+
+				List<ComponenteDTO> list = pacchettoPersonalizzato
+						.getListaComponentiSelezionati();
+
+				int nump = pacchettoPersonalizzato.getNumPartecipanti();
+
+				Long idp = pacchettoPersonalizzato.getIdPacchetto();
+
+				Long idpp = pacchettoPersonalizzato
+						.getIdPacchettoPersonalizzato();
+
+				PacchettoPKDTO pacchettoPK = new PacchettoPKDTO(idp, idpp);
+
+				pacchettoPersRemoto.updatePacchettoPersonalizzato(pacchettoPK,
+						cl, "confermato", datap, datar, nump, list);
+				
+				System.out.println("CONFERMA REGALO --> UPDATE PACCHETTO");
+
+			}
+
+			// RETURN
+
+			context.addMessage(null, new FacesMessage("Regalo effettuato"));
+
+			return "index";
 
 		} catch (EJBException e) {
 
 			context.addMessage(null, new FacesMessage("Operazione fallita "));
 
 			return "homepage";
+
+		} catch (NullPointerException n) {
+
+			System.out.println("NULLPOINTEREXCEPTION");
+			
+			
+			return null;
 
 		}
 

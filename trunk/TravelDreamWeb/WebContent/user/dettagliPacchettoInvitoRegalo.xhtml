@@ -44,16 +44,24 @@
 		        </p:column>
 
 
-				<f:facet name="footer">
-					<h:commandButton id="viewButton" value="Conferma Regalo"
-						icon="ui-icon-search" update=":form:display"
-						action="#{invitaAmicoBean.confermaRegalo()}" ajax="false" />
-				</f:facet>
+
 			</p:dataTable>
 
 
 		</p:fieldset>
 
+
+
+		<br />
+
+		<!-- BOTTONE CONFERMA REGALO -->
+
+		<div align="left" style="width: 180px;">
+			<h:form>
+				<h:commandButton value="Conferma regalo" ajax="false"
+					action="#{invitaAmicoBean.confermaRegalo()}" />
+			</h:form>
+		</div>
 
 
 		<br />
