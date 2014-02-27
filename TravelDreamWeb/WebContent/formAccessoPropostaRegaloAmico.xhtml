@@ -25,7 +25,7 @@
 
 		<h:outputLabel value="Email:" />
 		<br />
-		<p:inputText value="#{invitaAmicoBean.destinatario.email}" id="email"
+		<p:inputText value="#{invitaAmicoBean.mailDest}" id="email"
 			required="true" requiredMessage="Devi inserire l'email"
 			validatorMessage="L'email inserita non è valida">
 			<f:validateRegex
@@ -50,6 +50,9 @@
 
 	<br />
 	<br />
+
+	<!-- BOTTONE HOMEPAGE -->
+
 	<div align="left">
 		<h:button id="bottoneHome" value="Torna alla Homepage"
 			outcome="homepage" ajax="false" />

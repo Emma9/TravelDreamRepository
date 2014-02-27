@@ -127,14 +127,16 @@ public class InvitoBean implements InvitoBeanRemote, InvitoBeanLocal {
 			// UsrMgrBean usrmgrbean = new UsrMgrBean();
 			invito.setEmailMittente(mittente);
 
-			AmicoBean amicobean = new AmicoBean();
+			//AmicoBean amicobean = new AmicoBean();
 
-			amicobean.updateAmico(destinatario);
+			//amicobean.updateAmico(destinatario);
 
 			invito.setEmailDestinatario(destinatario);
 
 			invito.setIdPacchettoPersonalizzato(idpacchettoPersonalizzato);
 			invito.setData(data);
+			
+			invito.setStato(stato);
 
 			manager.merge(invito);
 		}

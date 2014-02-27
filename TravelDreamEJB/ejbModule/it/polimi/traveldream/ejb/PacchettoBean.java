@@ -421,16 +421,25 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	 */
 	public boolean verificaListaComponenti(List<ComponenteDTO> listaComponenti) {
 
+		System.out
+				.println("PACCHETTOBEAN --> VERIFICALISTACOMP --> INIZIO METODO");
+
 		System.out.println("DIMENSIONE LISTA COMPONENTI = "
 				+ listaComponenti.size());
 
 		if (listaComponenti.size() > 2) {
+
+			System.out
+					.println("PACCHETTOBEAN --> VERIFICALISTACOMP --> SIZE > 2");
 
 			boolean flagHotel = false;
 			boolean flagVolo = false;
 			boolean flagEscursione = false;
 
 			for (int i = 0; i < listaComponenti.size(); i++) {
+
+				System.out
+						.println("PACCHETTOBEAN --> VERIFICALISTACOMP --> INIZIO SWITCH");
 
 				ComponenteDTO componente = listaComponenti.get(i);
 
@@ -450,7 +459,12 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 
 				}
 
+				System.out
+						.println("PACCHETTOBEAN --> VERIFICALISTACOMP --> FINE SWITCH");
+
 			}
+
+			System.out.println("PACCHETTOBEAN --> VERIFICALISTACOMP --> FLAG");
 
 			if ((flagHotel == true) && (flagVolo == true)
 					&& (flagEscursione == true)) {
@@ -542,14 +556,23 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 			List<ComponenteDTO> listaComponenti,
 			List<ComponenteDTO> listaComponentiSelezionati) {
 
+		System.out
+				.println("PACCHETTOBEAN --> VERIFICACOMPSEL --> INIZIO METODO");
+
 		for (int i = 0; i < listaComponentiSelezionati.size(); i++) {
 
 			if (!listaComponenti.contains(listaComponentiSelezionati.get(i))) {
+
+				System.out
+						.println("PACCHETTOBEAN --> VERIFICACOMPSEL --> RETURN FALSE");
+
 				return false;
 
 			}
 
 		}
+
+		System.out.println("PACCHETTOBEAN --> VERIFICACOMPSEL --> RETURN TRUE");
 
 		return true;
 
@@ -563,11 +586,23 @@ public class PacchettoBean implements PacchettoBeanRemote, PacchettoBeanLocal {
 	public boolean verificaTreComponentiSelezionati(
 			List<ComponenteDTO> listaComponentiSelezionati) {
 
+		System.out
+				.println("PACCHETTOBEAN --> VERIFICA3COMPSEL --> INIZIO METODO");
+
 		if (verificaListaComponenti(listaComponentiSelezionati)) {
+
 			if (listaComponentiSelezionati.size() == 3) {
+
+				System.out
+						.println("PACCHETTOBEAN --> VERIFICACOMPSEL --> RETURN TRUE");
+
 				return true;
 			}
 		}
+
+		System.out
+				.println("PACCHETTOBEAN --> VERIFICA3COMPSEL --> RETURN FALSE");
+
 		return false;
 
 	}

@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+
+	<p:fieldset legend="Ecco I Dettagli dell'Invito" widgetVar="regWidget"
+		style="width: 600px;">
+
+		<p:panelGrid id="dettagli" columns="2">
+
+			<h:outputText value="ID:" />
+			<h:outputText
+				value="#{invitaAmicoBean.pacchettoPersonalizzato.idPacchettoPersonalizzato}" />
+
+			<h:outputText value="Destinazione:" />
+			<h:outputText
+				value="#{invitaAmicoBean.pacchettoPersonalizzato.destinazione}" />
+
+
+			<h:outputText value="Etichetta: " />
+			<h:outputText
+				value="#{invitaAmicoBean.pacchettoPersonalizzato.etichetta}" />
+
+
+			<h:outputText value="Costo:" />
+			<h:outputText
+				value="#{invitaAmicoBean.pacchettoPersonalizzato.costo}" />
+
+
+			<h:outputText value="Data Inizio Validità: " />
+			<h:outputText
+				value="invitaAmicoBean.pacchettoPersonalizzato.dataInizioValidita}" />
+
+
+			<h:outputText value="Data Fine Validità: " />
+			<h:outputText
+				value="#{invitaAmicoBean.pacchettoPersonalizzato.dataFineValidita}" />
+
+
+			<h:outputText value="Data di Partenza: " />
+			<h:outputText
+				value="#{invitaAmicoBean.pacchettoPersonalizzato.dataDiPartenza}" />
+
+
+			<h:outputText value="Data di Ritorno: " />
+			<h:outputText
+				value="#{invitaAmicoBean.pacchettoPersonalizzato.dataDiRitorno}" />
+
+
+			<h:outputText value="Numero di partecipanti: " />
+			<h:outputText
+				value="#{invitaAmicoBean.pacchettoPersonalizzato.numPartecipanti}" />
+
+			<h:outputText value="Descrizione: " />
+			<h:outputText
+				value="#{invitaAmicoBean.pacchettoPersonalizzato.descrizione}" />
+
+
+
+		</p:panelGrid>
+
+	</p:fieldset>
+
+	<br />
+
+
+
+	<!-- BOTTONE ACCETTA PROPOSTA -->
+
+	<div align="left" style="width: 180px;">
+		<h:form>
+			<h:commandButton value="Accetta"
+				action="#{invitaAmicoBean.accettaPropostaPacchettoViaggio()}"
+				ajax="false" />
+		</h:form>
+	</div>
+
+	<br />
+
+	<!-- BOTTONE RIFIUTA PROPOSTA -->
+
+	<div align="left" style="width: 180px;">
+		<h:form>
+			<h:commandButton value="Rifiuta" ajax="false"
+				action="#{invitaAmicoBean.rifiutaPropostaPacchettoViaggio()}" />
+		</h:form>
+	</div>
+
+	<br />
+
+
+	<!-- BOTTONE HOMEPAGE -->
+
+	<br />
+	<div align="left">
+		<h:button id="bottoneHome" value="Torna alla Homepage"
+			outcome="homepage" ajax="false" />
+	</div>
+
+
+
+</h:body>
+</html>
