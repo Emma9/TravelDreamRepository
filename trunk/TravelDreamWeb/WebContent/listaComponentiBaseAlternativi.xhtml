@@ -19,14 +19,7 @@
 			selection="#{listaComponentiAlternativiBean.componenteSelezionato}"
 			selectionMode="single">
 
-			<p:ajax event="rowSelect"
-				listener="#{listaComponentiAlternativiBean.onRowSelect}"
-				oncomplete="dettgliComponeteAlternativo" />
-
-
-
-			<!-- <p:ajax event="rowUnselect" listener="#{ricercaPacchettiBean.onRowUnselect}" update=":form:growl" />	 -->
-
+		
 			<f:facet name="header">  
             	Seleziona un pacchetto per visualizzare i dettagli  
 		        </f:facet>
