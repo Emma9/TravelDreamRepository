@@ -6,6 +6,7 @@ import it.polimi.traveldream.entities.UserDTO;
 import java.io.Serializable;
 
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
@@ -36,7 +37,13 @@ public class RegisterBean implements Serializable {
 	}
 
 	public String register() {
-		userMgr.save(user);
-		return "user/index?faces-redirect=true";
+		try{
+			userMgr.save(user);
+			return "user/index?faces-redirect=true";
+		}catch(EJBException e){
+			return "/registrazione";
+			
+		}
+		
 	}
 }
