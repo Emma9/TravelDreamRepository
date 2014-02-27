@@ -132,18 +132,11 @@ DROP TABLE IF EXISTS `invito`;
 CREATE TABLE `invito` (
   `IDINVITO` bigint(20) NOT NULL,
   `DATA` date DEFAULT NULL,
+  `EMAILDESTINATARIO` varchar(255) DEFAULT NULL,
+  `EMAILMITTENTE` varchar(255) DEFAULT NULL,
+  `IDPACCHETTOPERSONALIZZATO` bigint(20) DEFAULT NULL,
   `STATO` tinyint(1) DEFAULT '0',
-  `idPacchettoPersonalizzato` bigint(20) DEFAULT NULL,
-  `idPacchetto` bigint(20) DEFAULT NULL,
-  `DESTINATARIO_EMAIL` varchar(255) DEFAULT NULL,
-  `MITTENTE_EMAIL` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`IDINVITO`),
-  KEY `FK_INVITO_idPacchettoPersonalizzato` (`idPacchettoPersonalizzato`,`idPacchetto`),
-  KEY `FK_INVITO_MITTENTE_EMAIL` (`MITTENTE_EMAIL`),
-  KEY `FK_INVITO_DESTINATARIO_EMAIL` (`DESTINATARIO_EMAIL`),
-  CONSTRAINT `FK_INVITO_DESTINATARIO_EMAIL` FOREIGN KEY (`DESTINATARIO_EMAIL`) REFERENCES `amico` (`EMAIL`),
-  CONSTRAINT `FK_INVITO_idPacchettoPersonalizzato` FOREIGN KEY (`idPacchettoPersonalizzato`, `idPacchetto`) REFERENCES `pacchetto` (`IDPACCHETTOPERSONALIZZATO`, `IDPACCHETTO`),
-  CONSTRAINT `FK_INVITO_MITTENTE_EMAIL` FOREIGN KEY (`MITTENTE_EMAIL`) REFERENCES `users` (`EMAIL`)
+  PRIMARY KEY (`IDINVITO`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -153,6 +146,7 @@ CREATE TABLE `invito` (
 
 LOCK TABLES `invito` WRITE;
 /*!40000 ALTER TABLE `invito` DISABLE KEYS */;
+INSERT INTO `invito` VALUES (51,'2014-02-27','amico1@gmail.com','utente1@td.it',12785384,0),(52,'2014-02-27','amico2@gmail.com','utente1@td.it',1043027065,0),(101,'2014-02-27','amico3@gmail.com','utente1@td.it',1043027065,0),(102,'2014-02-27','amico4@gmail.com','utente1@td.it',1043027065,0),(103,'2014-02-27','amico5@gmail.com','utente1@td.it',1043027065,0);
 /*!40000 ALTER TABLE `invito` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -271,7 +265,7 @@ CREATE TABLE `sequence` (
 
 LOCK TABLES `sequence` WRITE;
 /*!40000 ALTER TABLE `sequence` DISABLE KEYS */;
-INSERT INTO `sequence` VALUES ('SEQ_GEN',50);
+INSERT INTO `sequence` VALUES ('SEQ_GEN',150);
 /*!40000 ALTER TABLE `sequence` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -298,7 +292,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('impiegato@td.it','Mario','Bianchi','5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8','2014-02-04 00:36:44'),('utente1@td.it','Francesco','Rossi','5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8','2014-02-04 00:35:50'),('utente2@td.it','Andrea','Verdi','5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8','2014-02-04 00:37:31');
+INSERT INTO `users` VALUES ('impiegato@td.it','Mario','Bianchi','5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8','2014-02-04 00:36:44'),('utente1@td.it','Francesco','Rossi','5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8','2014-02-04 00:35:50'),('utente2@td.it','Andrea','Verdi','5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8','2014-02-04 00:37:31'),('utente3@td.it','Paolo','Ferrari','5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8','2014-02-27 14:22:04'),('utente4@td.it','Luca','De Luca','5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8','2014-02-27 14:22:56'),('utente5@td.it','Francesca','Alberti','5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8','2014-02-27 14:27:51');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -323,7 +317,7 @@ CREATE TABLE `users_groups` (
 
 LOCK TABLES `users_groups` WRITE;
 /*!40000 ALTER TABLE `users_groups` DISABLE KEYS */;
-INSERT INTO `users_groups` VALUES ('utente1@td.it','USER'),('impiegato@td.it','ADMIN'),('utente2@td.it','USER');
+INSERT INTO `users_groups` VALUES ('utente1@td.it','USER'),('impiegato@td.it','ADMIN'),('utente2@td.it','USER'),('utente3@td.it','USER'),('utente4@td.it','USER'),('utente5@td.it','USER');
 /*!40000 ALTER TABLE `users_groups` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -336,4 +330,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-02-25 13:07:39
+-- Dump completed on 2014-02-27 14:29:01
