@@ -464,6 +464,8 @@ public class InvitaAmicoBean implements Serializable {
 
 			invitoremoto.updateInvito(idin, mi, de, idpa, datainv, true);
 
+			context.addMessage(null, new FacesMessage("Invito accettato"));
+			
 			return "index";
 
 		} catch (EJBException e) {
