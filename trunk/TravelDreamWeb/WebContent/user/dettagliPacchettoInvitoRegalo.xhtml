@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<h:body>
+	<h:form>
+		<p:fieldset legend="Ecco i componenti disponibili per il pacchetto"
+			widgetVar="regWidget" style="width: 600px;">
+
+
+
+			<p:dataTable id="listaComponenti" var="componente"
+				value="#{invitaAmicoBean.pacchettoPersonalizzato.listaComponentiSelezionati}"
+				paginator="true" rows="10" rowKey="#{componente.codiceComponente}"
+				selection="#{invitaAmicoBean.componenteSelezionato}"
+				selectionMode="single">
+
+
+
+				<f:facet name="header">  
+            	Seleziona il componente che vuoi regalare  
+		        </f:facet>
+
+
+				<p:column headerText="Luogo">  
+		            #{componente.luogo}  
+		        </p:column>
+
+				<p:column headerText="Tipologia">  
+		            #{componente.tipologia}  
+		        </p:column>
+
+				<p:column headerText="Costo">  
+		            #{componente.costo}  
+		        </p:column>
+
+				<p:column headerText="Descrizione">  
+		            #{componente.descrizione}  
+		        </p:column>
+
+
+				<f:facet name="footer">
+					<h:commandButton id="viewButton" value="Conferma Regalo"
+						icon="ui-icon-search" update=":form:display"
+						action="#{invitaAmicoBean.confermaRegalo()}" ajax="false" />
+				</f:facet>
+			</p:dataTable>
+
+
+		</p:fieldset>
+
+
+
+		<br />
+
+
+		<!-- BOTTONE HOMEPAGE -->
+
+		<br />
+		<div align="left">
+			<h:button id="bottoneHome" value="Torna alla Homepage"
+				outcome="/homepage" ajax="false" />
+		</div>
+
+	</h:form>
+
+</h:body>
+</html>
