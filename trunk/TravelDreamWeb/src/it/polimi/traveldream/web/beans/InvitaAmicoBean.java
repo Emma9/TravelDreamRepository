@@ -639,7 +639,7 @@ public class InvitaAmicoBean implements Serializable {
 
 			// PACCHETTOPERSONALIZZATO --> STATO CONFERMATO
 
-			if (invitiRegaloPacchetto.size() > 3) {
+			if (invitiRegaloPacchetto.size() == 3) {
 				
 				System.out.println("CONFERMA REGALO --> MODIFICA PACCHETTO");
 
