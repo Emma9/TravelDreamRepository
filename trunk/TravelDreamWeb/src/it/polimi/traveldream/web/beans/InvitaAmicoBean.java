@@ -313,6 +313,73 @@ public class InvitaAmicoBean implements Serializable {
 							&& (inviti.get(i).getEmailDestinatario()
 									.equalsIgnoreCase(mailDest))) {
 
+						if (inviti.get(i).getStato() == false) {
+
+							setInvitoViaggio(inviti.get(i));
+
+							return "/dettagliInvitoViaggio";
+
+						} else {
+
+							context.addMessage(null, new FacesMessage(
+									" Invito gia utilizzato"));
+
+							return "homepage";
+
+						}
+
+					}
+
+				}
+
+				context.addMessage(null, new FacesMessage("Invito non trovato"));
+
+				return "homepage";
+
+			} else {
+
+				context.addMessage(null, new FacesMessage(
+						"Errore stato pacchetto"));
+
+				return "homepage";
+
+			}
+
+		} catch (EJBException e) {
+
+			context.addMessage(null, new FacesMessage("Operazione fallita "));
+
+			return "homepage";
+
+		}
+
+	}
+
+	public String mostraPropostaPacchettoRegalo() {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+
+		try {
+
+			System.out.println("IDPP  " + idPacchettoPersonalizzato);
+
+			setPacchettoPersonalizzato(pacchettoPersRemoto
+					.findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato));
+
+			if ((pacchettoPersonalizzato.getStato()
+					.equalsIgnoreCase("giftlist"))) {
+
+				ArrayList<InvitoDTO> inviti = invitoremoto.findAll();
+
+				for (int i = 0; i < inviti.size(); i++) {
+
+					if ((inviti.get(i).getIdPacchettoPersonalizzato()
+							.equals(idPacchettoPersonalizzato))
+							&& (inviti.get(i).getEmailDestinatario()
+									.equalsIgnoreCase(mailDest))) {
+
 						setInvitoViaggio(inviti.get(i));
 
 						return "/dettagliInvitoViaggio";
@@ -341,16 +408,6 @@ public class InvitaAmicoBean implements Serializable {
 			return "homepage";
 
 		}
-
-	}
-
-	public String mostraPropostaPacchettoRegalo() {
-
-		setPacchettoPersonalizzato(pacchettoPersRemoto
-				.findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato));
-
-		return "/dettagliInvitoViaggio";
-
 	}
 
 	public String rifiutaPropostaPacchettoViaggio() {
