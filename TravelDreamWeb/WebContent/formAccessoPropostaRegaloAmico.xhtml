@@ -8,56 +8,58 @@
 <h:head>
 </h:head>
 <h:body>
-	<p:fieldset legend="Visualizza i dettagli del pacchetto proposto"
-		widgetVar="regWidget" style="width: 600px;">
 
-		<h:outputLabel value="ID Pacchetto: " />
+	<h:form>
+		<p:fieldset legend="Visualizza i dettagli del pacchetto proposto"
+			widgetVar="regWidget" style="width: 600px;">
+
+			<h:outputLabel value="ID Pacchetto: " />
+			<br />
+			<p:inputText value="#{invitaAmicoBean.idPacchettoPersonalizzato}"
+				id="pacchettoPersonalizzato" required="true"
+				requiredMessage="Devi inserire l'ID del pacchetto">
+			</p:inputText>
+			<p:message for="pacchettoPersonalizzato" />
+
+
+
+			<br />
+
+			<h:outputLabel value="Email:" />
+			<br />
+			<p:inputText value="#{invitaAmicoBean.mailDest}" id="email"
+				required="true" requiredMessage="Devi inserire l'email"
+				validatorMessage="L'email inserita non è valida">
+				<f:validateRegex
+					pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$"></f:validateRegex>
+			</p:inputText>
+			<p:message for="email" />
+
+		</p:fieldset>
+
 		<br />
-		<p:inputText value="#{invitaAmicoBean.idPacchettoPersonalizzato}"
-			id="pacchettoPersonalizzato" required="true"
-			requiredMessage="Devi inserire l'ID del pacchetto">
-		</p:inputText>
-		<p:message for="pacchettoPersonalizzato" />
+		<br />
+
+		<!-- VISUALIZZA PROPOSTA REGALO -->
+
+		<div align="left">
+			<h:commandButton id="visualizzaPacchetto" value="Prosegui"
+				action="#{invitaAmicoBean.mostraPropostaPacchettoRegalo()}" />
+		</div>
+
 
 
 
 		<br />
-
-		<h:outputLabel value="Email:" />
 		<br />
-		<p:inputText value="#{invitaAmicoBean.mailDest}" id="email"
-			required="true" requiredMessage="Devi inserire l'email"
-			validatorMessage="L'email inserita non è valida">
-			<f:validateRegex
-				pattern="^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$"></f:validateRegex>
-		</p:inputText>
-		<p:message for="email" />
 
-	</p:fieldset>
+		<!-- BOTTONE HOMEPAGE -->
 
-	<br />
-	<br />
+		<div align="left">
+			<h:button id="bottoneHome" value="Torna alla Homepage"
+				outcome="homepage" ajax="false" />
+		</div>
 
-	<!-- VISUALIZZA PROPOSTA REGALO -->
-
-	<div align="left">
-		<h:commandButton id="visualizzaPacchetto" value="Prosegui"
-			action="#{invitaAmicoBean.mostraPropostaPacchettoRegalo()}" />
-	</div>
-
-
-
-
-	<br />
-	<br />
-
-	<!-- BOTTONE HOMEPAGE -->
-
-	<div align="left">
-		<h:button id="bottoneHome" value="Torna alla Homepage"
-			outcome="homepage" ajax="false" />
-	</div>
-
-
+	</h:form>
 </h:body>
 </html>
