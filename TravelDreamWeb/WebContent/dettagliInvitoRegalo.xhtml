@@ -61,12 +61,23 @@
 
 
 
-	<!-- BOTTONE CONFERMA ACCETTAZIONE -->
+	<!-- BOTTONE ACCETTA PROPOSTA -->
 
 	<div align="left" style="width: 180px;">
 		<h:form>
-			<h:commandButton value="Conferma accettazione" ajax="false"
-				action="#{invitaAmicoBean.creaPacchettoAmico()}" />
+			<h:commandButton value="Regala" action="#{invitaAmicoBean.regala()}"
+				ajax="false" />
+		</h:form>
+	</div>
+
+	<br />
+
+	<!-- BOTTONE RIFIUTA PROPOSTA -->
+
+	<div align="left" style="width: 180px;">
+		<h:form>
+			<h:commandButton value="Non regalare" ajax="false"
+				action="#{invitaAmicoBean.rifiutaPropostaPacchettoRegalo()}" />
 		</h:form>
 	</div>
 
@@ -78,7 +89,7 @@
 	<br />
 	<div align="left">
 		<h:button id="bottoneHome" value="Torna alla Homepage"
-			outcome="/homepage" ajax="false" />
+			outcome="homepage" ajax="false" />
 	</div>
 
 

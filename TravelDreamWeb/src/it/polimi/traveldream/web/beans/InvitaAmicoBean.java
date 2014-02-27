@@ -46,6 +46,8 @@ public class InvitaAmicoBean implements Serializable {
 	private Long idPacchettoPersonalizzato;
 	private PacchettoPersonalizzatoDTO pacchettoPersonalizzato;
 
+	private ComponenteDTO componenteSelezionato;
+
 	private ArrayList<InvitoDTO> invitiPacchetto = new ArrayList<InvitoDTO>();
 
 	private String statoInvito;
@@ -128,6 +130,21 @@ public class InvitaAmicoBean implements Serializable {
 	 */
 	public void setInvitiPacchetto(ArrayList<InvitoDTO> invitiPacchetto) {
 		this.invitiPacchetto = invitiPacchetto;
+	}
+
+	/**
+	 * @return the componenteSelezionato
+	 */
+	public ComponenteDTO getComponenteSelezionato() {
+		return componenteSelezionato;
+	}
+
+	/**
+	 * @param componenteSelezionato
+	 *            the componenteSelezionato to set
+	 */
+	public void setComponenteSelezionato(ComponenteDTO componenteSelezionato) {
+		this.componenteSelezionato = componenteSelezionato;
 	}
 
 	/**
@@ -355,61 +372,6 @@ public class InvitaAmicoBean implements Serializable {
 
 	}
 
-	public String mostraPropostaPacchettoRegalo() {
-
-		FacesContext context = FacesContext.getCurrentInstance();
-		HttpServletRequest request = (HttpServletRequest) context
-				.getExternalContext().getRequest();
-
-		try {
-
-			System.out.println("IDPP  " + idPacchettoPersonalizzato);
-
-			setPacchettoPersonalizzato(pacchettoPersRemoto
-					.findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato));
-
-			if ((pacchettoPersonalizzato.getStato()
-					.equalsIgnoreCase("giftlist"))) {
-
-				ArrayList<InvitoDTO> inviti = invitoremoto.findAll();
-
-				for (int i = 0; i < inviti.size(); i++) {
-
-					if ((inviti.get(i).getIdPacchettoPersonalizzato()
-							.equals(idPacchettoPersonalizzato))
-							&& (inviti.get(i).getEmailDestinatario()
-									.equalsIgnoreCase(mailDest))) {
-
-						setInvitoViaggio(inviti.get(i));
-
-						return "/dettagliInvitoViaggio";
-
-					}
-
-				}
-
-				context.addMessage(null, new FacesMessage("Invito non trovato"));
-
-				return "homepage";
-
-			} else {
-
-				context.addMessage(null, new FacesMessage(
-						"Errore stato pacchetto "));
-
-				return "homepage";
-
-			}
-
-		} catch (EJBException e) {
-
-			context.addMessage(null, new FacesMessage("Operazione fallita "));
-
-			return "homepage";
-
-		}
-	}
-
 	public String rifiutaPropostaPacchettoViaggio() {
 
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -429,28 +391,6 @@ public class InvitaAmicoBean implements Serializable {
 			return "homepage";
 
 		}
-	}
-
-	public String rifiutaPropostaPacchettoRegalo() {
-
-		FacesContext context = FacesContext.getCurrentInstance();
-		HttpServletRequest request = (HttpServletRequest) context
-				.getExternalContext().getRequest();
-
-		try {
-
-			context.addMessage(null, new FacesMessage("Proposta rifiutata"));
-
-			return "homepage";
-
-		} catch (EJBException e) {
-
-			context.addMessage(null, new FacesMessage("Operazione fallita "));
-
-			return "homepage";
-
-		}
-
 	}
 
 	public String accettaPropostaPacchettoViaggio() {
@@ -519,7 +459,113 @@ public class InvitaAmicoBean implements Serializable {
 
 	}
 
-	public String regalaComponente() {
+	public String mostraPropostaPacchettoRegalo() {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+
+		try {
+
+			System.out.println("IDPP  " + idPacchettoPersonalizzato);
+
+			setPacchettoPersonalizzato(pacchettoPersRemoto
+					.findByIdPacchettoPersonalizzato(idPacchettoPersonalizzato));
+
+			if (pacchettoPersonalizzato.getStato().equalsIgnoreCase("giftlist")) {
+
+				ArrayList<InvitoDTO> inviti = invitoremoto.findAll();
+
+				for (int i = 0; i < inviti.size(); i++) {
+
+					if ((inviti.get(i).getIdPacchettoPersonalizzato()
+							.equals(idPacchettoPersonalizzato))
+							&& (inviti.get(i).getEmailDestinatario()
+									.equalsIgnoreCase(mailDest))) {
+
+						if (inviti.get(i).getStato() == false) {
+
+							setInvitoViaggio(inviti.get(i));
+
+							return "/dettagliInvitoRegalo";
+
+						} else {
+
+							context.addMessage(null, new FacesMessage(
+									" Invito gia utilizzato"));
+
+							return "homepage";
+
+						}
+
+					}
+
+				}
+
+				context.addMessage(null, new FacesMessage("Invito non trovato"));
+
+				return "homepage";
+
+			} else {
+
+				context.addMessage(null, new FacesMessage(
+						"Errore stato pacchetto"));
+
+				return "homepage";
+
+			}
+
+		} catch (EJBException e) {
+
+			context.addMessage(null, new FacesMessage("Operazione fallita "));
+
+			return "homepage";
+
+		}
+	}
+
+	public String rifiutaPropostaPacchettoRegalo() {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+
+		try {
+
+			context.addMessage(null, new FacesMessage("Proposta rifiutata"));
+
+			return "homepage";
+
+		} catch (EJBException e) {
+
+			context.addMessage(null, new FacesMessage("Operazione fallita "));
+
+			return "homepage";
+
+		}
+	}
+
+	public String regala() {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context
+				.getExternalContext().getRequest();
+
+		try {
+
+			return "user/dettagliPacchettoInvitoRegalo";
+
+		} catch (EJBException e) {
+
+			context.addMessage(null, new FacesMessage("Operazione fallita "));
+
+			return "homepage";
+
+		}
+
+	}
+
+	public String confermaRegalo() {
 
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context
